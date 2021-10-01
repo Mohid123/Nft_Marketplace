@@ -1,0 +1,27 @@
+html,
+body {
+  @apply h-full;
+}
+
+body {
+  @apply bg-gray-100;
+  @apply text-gray-800;
+  @apply my-0 mx-auto;
+
+  &.dark {
+    @apply bg-primary;
+    @apply text-gray-50;
+
+    h1,h2,h3,h4,h5,h6{
+      @apply text-gray-50;
+    }
+  }
+}
+
+.main-container {
+  @apply flex flex-col items-center my-0 mx-auto sm:px-4;
+  @apply md:px-8;
+  @apply lg:px-10;
+
+  max-width: 1280px;
+}
