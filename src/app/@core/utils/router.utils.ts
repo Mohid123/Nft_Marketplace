@@ -3,6 +3,11 @@ export const ROUTER_UTILS = {
     base: {
       home: '',
       dashboard: 'dashboard',
+      wallet: 'wallet'
+    },
+    admin: {
+      root:'admin',
+      marketplace: 'marketplace'
     },
     auth: {
       root: 'auth',
