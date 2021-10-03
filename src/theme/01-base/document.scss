@@ -26,3 +26,18 @@ body {
   max-width: 1280px;
   min-width: 340px;
 }
+
+.gradient-border {
+  @apply relative h-full w-full bg-primary-light rounded-2xl p-3.5;
+}
+
+.gradient-border::before {
+  content: '';
+  @apply absolute rounded-2xl;
+  top: -2px;
+  left: -1px;
+  width: calc(100% + 3px);
+  height: calc(100% + 3px);
+  z-index: -2;
+  background-image: linear-gradient(109deg, #59C8D1 0%, #75F16D 100%);
+}

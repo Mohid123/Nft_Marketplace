@@ -7,7 +7,6 @@ import { NotFoundModule } from '@app/@shell/ui/not-found/not-found.module';
 import { FooterModule } from '../ui/footer/footer.module';
 import { HeaderModule } from '../ui/header/header.module';
 import { LayoutModule } from '../ui/layout/layout.module';
-import { CardModule } from '../ui/nft-card/card.module';
 import { NotFoundPage } from '../ui/not-found/not-found.page';
 import { NavModule } from './../ui/nav/nav.module';
 
@@ -57,7 +56,6 @@ const APP_ROUTES: Routes = [
     HeaderModule,
     LayoutModule,
     NotFoundModule,
-    CardModule
   ],
   exports: [
     RouterModule,
@@ -66,7 +64,6 @@ const APP_ROUTES: Routes = [
     NavModule,
     LayoutModule,
     NotFoundModule,
-    CardModule
   ],
 })
 export class WebShellModule {}

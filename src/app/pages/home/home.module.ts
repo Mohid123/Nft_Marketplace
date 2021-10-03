@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ROUTER_UTILS } from '@app/@core/utils/router.utils';
+import { CardModule } from './../../@shell/ui/nft-card/card.module';
 import { HomePage } from './home.page';
 import { WalletPage } from './wallet/wallet.page';
 
@@ -32,7 +33,8 @@ const childRoutes: Routes = [
   declarations: [HomePage],
   imports: [
     CommonModule,
-    RouterModule.forChild(childRoutes)
+    RouterModule.forChild(childRoutes),
+    CardModule,
   ],
 })
 export class HomeModule {}
