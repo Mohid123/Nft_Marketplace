@@ -19,6 +19,16 @@ const childRoutes: Routes = [
     },
   },
   {
+    path: 'home',
+    component: HomePage,
+    data: {
+      title: 'NFT Market Place',
+      description:
+        'NFT Market Place Description',
+      robots: 'index, follow',
+    },
+  },
+  {
     path: ROUTER_UTILS.config.base.wallet,
     component: WalletPage,
     data: {
