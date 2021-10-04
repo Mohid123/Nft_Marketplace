@@ -1,37 +1,32 @@
 <app-header></app-header>
-  <nz-sider class="text-white menu-sidebar"
-            nzCollapsible
-            nzWidth="256px"
-            nzBreakpoint="md"
-            [(nzCollapsed)]="isCollapsed"
-            [nzTrigger]="null">
-    <div class="sidebar-logo">
-        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
-        <h1>Ant Design Of Angular</h1>
-    </div>
-    <ul>
-      <li>
-        <ul>
-          <li>
-            <a routerLink="/welcome">Welcome</a>
-          </li>
-          <li>
-            <a>Monitor</a>
-          </li>
-          <li>
-            <a>Workplace</a>
-          </li>
-        </ul>
-      </li>
-      <li nzTitle="Form" nzIcon="form">
-        <ul>
-          <li>
-            <a>Basic Form</a>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </nz-sider>
+<div>
+  <div class="sidebar-logo">
+    <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
+    <h1>Ant Design Of Angular</h1>
+  </div>
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <a routerLink="/welcome">Welcome</a>
+        </li>
+        <li>
+          <a>Monitor</a>
+        </li>
+        <li>
+          <a>Workplace</a>
+        </li>
+      </ul>
+    </li>
+    <li nzTitle="Form" nzIcon="form">
+      <ul>
+        <li>
+          <a>Basic Form</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
 
 <div class="container flex-1">
   <ng-content></ng-content>
