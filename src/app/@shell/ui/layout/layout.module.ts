@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { FooterModule } from '../footer/footer.module';
 import { HeaderModule } from '../header/header.module';
 import { LayoutComponent } from './layout.component';
@@ -11,7 +10,6 @@ import { LayoutComponent } from './layout.component';
     CommonModule,
     HeaderModule,
     FooterModule,
-    NzLayoutModule
   ],
   exports: [LayoutComponent],
 })

@@ -1,0 +1,12 @@
+.menu-link {
+  @apply inline-block text-xs mx-2.5 hover:text-white text-gray-300 uppercase whitespace-nowrap opacity-50;
+}
+
+.active {
+  @apply opacity-100;
+}
+
+.menu-link:hover {
+  @apply active;
+}
+

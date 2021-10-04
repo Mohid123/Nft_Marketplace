@@ -2,12 +2,14 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard, NoAuthGuard } from '@app/@core/guards';
+import { ROLE_TYPE_UTILS } from '@app/@core/utils/role-type.utils';
 import { ROUTER_UTILS } from '@app/@core/utils/router.utils';
 import { NotFoundModule } from '@app/@shell/ui/not-found/not-found.module';
 import { FooterModule } from '../ui/footer/footer.module';
 import { HeaderModule } from '../ui/header/header.module';
 import { LayoutModule } from '../ui/layout/layout.module';
 import { NotFoundPage } from '../ui/not-found/not-found.page';
+import { RoleGuard } from './../../@core/guards/role.guard';
 import { NavModule } from './../ui/nav/nav.module';
 
 const APP_ROUTES: Routes = [
@@ -16,6 +18,15 @@ const APP_ROUTES: Routes = [
     loadChildren: async () =>
       (await import('@pages/auth/auth.module')).AuthModule,
     canLoad: [NoAuthGuard],
+  },
+  {
+    path: ROUTER_UTILS.config.admin.root,
+    loadChildren: async () =>
+      (await import('@pages/admin/admin.module')).AdminModule,
+    canActivate: [RoleGuard],
+    data: {
+      role: ROLE_TYPE_UTILS.admn,
+    },
   },
   {
     path: ROUTER_UTILS.config.base.home,
