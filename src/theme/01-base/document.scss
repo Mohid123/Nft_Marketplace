@@ -19,7 +19,7 @@ body {
 }
 
 .main-container {
-  @apply flex flex-col items-center my-0 mx-auto sm:px-4;
+  @apply flex flex-col items-center my-0 mx-auto sm:px-4 ;
   @apply md:px-8;
   @apply lg:px-10;
 
@@ -28,7 +28,7 @@ body {
 }
 
 .gradient-border {
-  @apply relative h-full w-full bg-primary-light rounded-2xl p-3.5;
+  @apply relative  w-full bg-primary-light rounded-2xl p-3.5;
 }
 
 .gradient-border::before {
