@@ -1,4 +1,4 @@
 export enum ROLE_TYPE_UTILS {
-  admn = 'admin',
+  admin = 'admin',
   user = 'user',
 };

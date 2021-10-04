@@ -32,8 +32,8 @@ body {
 }
 
 .gradient-border::before {
-  content: '';
   @apply absolute rounded-2xl;
+  content: '';
   top: -2px;
   left: -1px;
   width: calc(100% + 3px);

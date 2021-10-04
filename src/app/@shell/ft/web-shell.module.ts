@@ -25,7 +25,7 @@ const APP_ROUTES: Routes = [
       (await import('@pages/admin/admin.module')).AdminModule,
     canActivate: [RoleGuard],
     data: {
-      role: ROLE_TYPE_UTILS.admn,
+      role: ROLE_TYPE_UTILS.admin,
     },
   },
   {

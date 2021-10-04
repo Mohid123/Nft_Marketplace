@@ -1,35 +1,60 @@
-<app-header></app-header>
-<div>
-  <div class="sidebar-logo">
-    <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
-    <h1>Ant Design Of Angular</h1>
-  </div>
-  <ul>
-    <li>
-      <ul>
-        <li>
-          <a routerLink="/welcome">Welcome</a>
-        </li>
-        <li>
-          <a>Monitor</a>
-        </li>
-        <li>
-          <a>Workplace</a>
-        </li>
-      </ul>
-    </li>
-    <li nzTitle="Form" nzIcon="form">
-      <ul>
-        <li>
-          <a>Basic Form</a>
-        </li>
-      </ul>
-    </li>
-  </ul>
-</div>
+<div class="main">
+  <button class="z-10 block sm:hidden" style="position: absolute;" mat-icon-button *ngIf="sidenav.mode === 'over'"
+    (click)="sidenav.toggle()">
+    <mat-icon *ngIf="!sidenav.opened">
+      menu
+    </mat-icon>
+    <mat-icon *ngIf="sidenav.opened">
+      close
+    </mat-icon>
+  </button>
 
-<div class="container flex-1">
-  <ng-content></ng-content>
-</div>
+  <mat-sidenav-container class="h-screen">
+    <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
+      <div class="flex flex-col items-center justify-start h-full">
 
-<app-footer></app-footer>
+        <img class="avatar mat-elevation-z8" src="https://source.unsplash.com/c_GmwfHBDzk/200x200" />
+
+        <ul class="flex flex-col items-center h-full list-none">
+          <li class="relative inline-block">
+            <a class="menu-link op" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
+              [routerLink]="['/']">
+              <mat-icon>widgets</mat-icon>
+            </a>
+          </li>
+          <li class="relative inline-block">
+            <a class="menu-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
+              [routerLink]="['/wallet']">
+              <mat-icon>account_balance_wallet</mat-icon>
+            </a>
+          </li>
+          <li class="relative inline-block">
+            <a class="menu-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
+              [routerLink]="['/other']">
+              <mat-icon>wifi_tethering</mat-icon>
+            </a>
+          </li>
+          <li class="relative inline-block">
+            <a class="menu-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
+              [routerLink]="['/settings']">
+              <mat-icon>settings</mat-icon>
+
+            </a>
+          </li>
+
+          <li class="relative flex items-end flex-grow">
+            <button class="flex mt-auto menu-link" (click)="onClickSignOut()">
+              <mat-icon>logout</mat-icon>
+            </button>
+          </li>
+        </ul>
+
+
+      </div>
+
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <ng-content></ng-content>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

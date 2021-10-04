@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ROLE_TYPE_UTILS } from '@app/@core/utils/role-type.utils';
 import { AuthService } from '@app/pages/auth/services/auth.service';
 import { SeoService } from '@core/services/seo';
 import { ThemeService } from '@core/services/theme';
@@ -10,7 +11,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  isLoggedIn$!: Observable<boolean>;
+  isLoggedIn$: Observable<boolean> = this.authService.isLoggedIn$;
+  role$: Observable<ROLE_TYPE_UTILS> = this.authService.role$;
 
   constructor(
     private seoService: SeoService,
@@ -19,7 +21,6 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.isLoggedIn$ = this.authService.isLoggedIn$;
     this.runGlobalServices();
   }
 
