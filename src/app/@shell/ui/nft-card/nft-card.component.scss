@@ -26,3 +26,25 @@
 .border-gradient-green {
   border-image-source:  linear-gradient(to bottom,  #64F3FF  0%,#75F16D 100%);
 }
+
+.search-bg{
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  border-radius: 7px;
+  opacity: 0.08;
+}
+
+.search-btn {
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+border-radius: 10px;
+opacity: 0.07;
+}
+
+.bg-url {
+  background-image: url('../../../../assets/card/treading-url.png') ;
+background-repeat: no-repeat;
+background-size: 100% 100%;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: contain;
+}
