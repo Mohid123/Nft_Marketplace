@@ -8,7 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AuthService {
   isLoggedIn$ = new BehaviorSubject<boolean>(!!getItem(StorageItem.Auth));
-  role$ = new BehaviorSubject<ROLE_TYPE_UTILS>(ROLE_TYPE_UTILS.user);
+  role$ = new BehaviorSubject<ROLE_TYPE_UTILS>(ROLE_TYPE_UTILS.admin);
 
 
   get isLoggedIn(): boolean {
