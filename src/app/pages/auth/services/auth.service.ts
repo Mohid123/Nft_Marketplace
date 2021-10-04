@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { getItem, removeItem, setItem, StorageItem } from '@app/@core/utils';
+import { ROLE_TYPE_UTILS } from '@app/@core/utils/role-type.utils';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -7,6 +8,8 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AuthService {
   isLoggedIn$ = new BehaviorSubject<boolean>(!!getItem(StorageItem.Auth));
+  role$ = new BehaviorSubject<ROLE_TYPE_UTILS>(ROLE_TYPE_UTILS.user);
+
 
   get isLoggedIn(): boolean {
     return this.isLoggedIn$.getValue();

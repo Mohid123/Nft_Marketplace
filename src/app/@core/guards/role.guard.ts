@@ -1,33 +1,45 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AuthService } from './../../pages/auth/services/auth.service';
+import { ROLE_TYPE_UTILS } from './../utils/role-type.utils';
 
 @Injectable({
   providedIn: 'root',
 })
-export class RoleGuard implements CanActivate {
-  constructor(private router: Router) {}
+export class RoleGuard implements  CanActivate {
 
-  canActivate():
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
-    // const routeRoles = next.data.roles;
-    // const userRoles = [];
-    // const hasRole =
-    //   routeRoles &&
-    //   userRoles &&
-    //   routeRoles.some((routeRole) =>
-    //     userRoles.some((userRole) => routeRole === userRole.name),
-    //   );
 
-    // if (hasRole) {
-    //   return true;
-    // }
+  constructor(private authService: AuthService, private router: Router) { }
 
-    // this.router.navigate([`/${ROUTER_UTILS.config.errorResponse.notFound}`]);
-    // return false;
-    return true;
+  canActivate(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+
+
+    const url: string = state.url;
+    return this.checkUserLogin(next, url);
+  }
+
+  checkUserLogin(route: ActivatedRouteSnapshot, url: any): boolean {
+    if (this.authService.isLoggedIn$.getValue()) {
+
+      const userRole = this.authService.role$.getValue();
+      if(userRole == ROLE_TYPE_UTILS.admn) {
+        if (route.data.role && route.data.role.indexOf(userRole) === -1) {
+          this.router.navigate(['/']);
+          return false;
+        }
+      } else if(userRole == ROLE_TYPE_UTILS.user) {
+        if (route.data.role && route.data.role.indexOf(userRole) === -1) {
+          this.router.navigate(['/']);
+          return false;
+        }
+      }
+      return true;
+    }
+
+    this.router.navigate(['/home']);
+    return false;
   }
 }

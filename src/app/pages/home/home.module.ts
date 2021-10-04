@@ -4,12 +4,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { ROUTER_UTILS } from '@app/@core/utils/router.utils';
 import { CardModule } from './../../@shell/ui/nft-card/card.module';
 import { HomePage } from './home.page';
+import { MarketPlacePage } from './market-place/market-place.page';
 import { WalletPage } from './wallet/wallet.page';
 
 const childRoutes: Routes = [
   {
     path: '',
-    component: HomePage,
+    component: MarketPlacePage,
     data: {
       title: 'NFT Market Place',
       description:
@@ -30,7 +31,7 @@ const childRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [HomePage],
+  declarations: [HomePage, MarketPlacePage],
   imports: [
     CommonModule,
     RouterModule.forChild(childRoutes),

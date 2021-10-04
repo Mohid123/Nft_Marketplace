@@ -19,17 +19,17 @@
     <div class="flex items-center justify-end flex-grow bg-opacity-0 shadow-none hidde bg-blueGray-800">
       <ul class="flex flex-row items-center list-none lg:ml-auto">
         <li class="relative inline-block">
-          <a class="inline-block text-xs mx-2.5 text-white hover:text-gray-300 uppercase whitespace-nowrap">
+          <a class="menu-link op" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/']">
             MarketPlace
           </a>
         </li>
         <li class="relative inline-block">
-          <a class="inline-block text-xs mx-2.5 hover:text-white text-gray-300 uppercase whitespace-nowrap">
+          <a class="menu-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/wallet']">
             Wallet
           </a>
         </li>
         <li class="relative inline-block">
-          <a class="inline-block text-xs mx-2.5 hover:text-white text-gray-300 uppercase whitespace-nowrap">
+          <a class="menu-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/history']">
             trad History
           </a>
         </li>
