@@ -2,6 +2,7 @@ export const ROUTER_UTILS = {
   config: {
     base: {
       home: '',
+      detail: 'detail',
       dashboard: 'dashboard',
       wallet: 'wallet'
     },
