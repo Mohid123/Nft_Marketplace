@@ -3,6 +3,17 @@
   <div class="flex flex-wrap w-full h-full">
     <div class="order-1 w-full section-container md:order-1 md:w-2/3">
       <div class="status">
+        <div style="display: block;">
+          <canvas class="mb-32" baseChart width="816" height="300"
+            [datasets]="lineChartData"
+            [labels]="lineChartLabels"
+            [options]="lineChartOptions"
+            [colors]="lineChartColors"
+            [legend]="lineChartLegend"
+            [chartType]="lineChartType"
+            [plugins]="lineChartPlugins">
+          </canvas>
+        </div>
         <div class="section">
           <div class="listed">listed</div>
           <div class="sold">sold</div>

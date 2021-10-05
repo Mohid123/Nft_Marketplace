@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ChartsModule } from 'ng2-charts';
 import { AdminDashboardPage } from './admin-dashboard/admin-dashboard.page';
 import { AdminRoutingModule } from './admin-routing.module';
 
@@ -9,7 +10,8 @@ import { AdminRoutingModule } from './admin-routing.module';
   ],
   imports: [
     CommonModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    ChartsModule
   ]
 })
 export class AdminModule { }
