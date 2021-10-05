@@ -41,3 +41,23 @@ body {
   z-index: -2;
   background-image: linear-gradient(109deg, #59C8D1 0%, #75F16D 100%);
 }
+
+.gradient-border-filter {
+  position: relative;
+
+  border-radius: 1rem;
+  --tw-bg-opacity: 1;
+  background-color: rgba(49, 49, 77, var(--tw-bg-opacity));
+
+}
+
+.gradient-border-filter::before {
+  @apply absolute rounded-2xl;
+  content: '';
+  top: -2px;
+  left: -1px;
+  width: calc(100% + 3px);
+  height: calc(100% + 3px);
+  z-index: -2;
+  background-image: linear-gradient(109deg, #59C8D1 0%, #75F16D 100%);
+}

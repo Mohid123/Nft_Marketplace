@@ -1,1 +1,55 @@
-<p>market-place works!</p>
+<div class="main">
+
+
+  <!--top search bar with login button-->
+  <app-marketplace-search></app-marketplace-search>
+
+  <!--banner-->
+  <app-app-banner></app-app-banner>
+
+  <!--Filters-->
+  <div class="p-1 mx-4 ">
+    <div>
+      <h2 class="pt-1 mb-1 text-xl font-light tracking-widest text-gray-400 title-font">Marketplace</h2>
+      <div class="bottom-0 left-0 flex justify-between w-full pt-3 leading-none text-center ">
+        <span class="inline-flex items-center text-sm leading-none text-whit">
+          <button class="px-4 py-1 mr-3 text-xs tracking-wide text-white rounded-full h-7 btn-nft">
+            All Items
+          </button>
+          <button class="px-4 py-1 mr-3 text-xs tracking-wide text-white rounded-full h-7 btn-nft">
+            Membership Cards
+          </button>
+          <button class="px-4 py-1 mr-3 text-xs tracking-wide text-white rounded-full h-7 btn-nft">
+            Tickets
+          </button>
+        </span>
+        <span class="inline-flex items-center text-sm leading-none text-gray-400 gradient-border-filter ">
+          <button type="button "
+            class="inline-flex justify-center w-full px-4 py-1 text-sm font-medium text-white bg-transparent rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
+            id="menu-button" aria-expanded="true" aria-haspopup="true">
+            Filters
+            <!-- Heroicon name: solid/chevron-down -->
+            <svg class="w-5 h-5 ml-2 -mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+              aria-hidden="true">
+              <path fill-rule="evenodd"
+                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                clip-rule="evenodd" />
+            </svg>
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!--nft cards-->
+  <section class="text-gray-600 body-font">
+    <div class="container">
+      <div class="flex flex-wrap mt-6 -m-4">
+        <app-nft-card></app-nft-card>
+        <app-nft-card></app-nft-card>
+        <app-nft-card></app-nft-card>
+        <app-nft-card></app-nft-card>
+      </div>
+    </div>
+  </section>
+</div>

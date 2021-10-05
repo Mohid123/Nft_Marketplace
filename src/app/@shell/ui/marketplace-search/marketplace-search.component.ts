@@ -3,15 +3,14 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-market-place',
-  templateUrl: './market-place.page.html',
-  styleUrls: ['./market-place.page.scss']
+  selector: 'app-marketplace-search',
+  templateUrl: './marketplace-search.component.html',
+  styleUrls: ['./marketplace-search.component.scss']
 })
-export class MarketPlacePage implements OnInit {
+export class MarketplaceSearchComponent implements OnInit {
 
   constructor() { }
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   ngOnInit(): void {
   }
 

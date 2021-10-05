@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ROUTER_UTILS } from '@app/@core/utils/router.utils';
+import { AppBannerModule } from '@app/@shell/ui/app-banner/app-banner.module';
+import { MarketplaceSearchModule } from '@app/@shell/ui/marketplace-search/marketplace-search.module';
 import { CardModule } from './../../@shell/ui/nft-card/card.module';
 import { HomePage } from './home.page';
 import { MarketPlacePage } from './market-place/market-place.page';
@@ -46,6 +48,8 @@ const childRoutes: Routes = [
     CommonModule,
     RouterModule.forChild(childRoutes),
     CardModule,
+    MarketplaceSearchModule,
+    AppBannerModule
   ],
 })
 export class HomeModule {}
