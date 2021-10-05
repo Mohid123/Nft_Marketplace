@@ -14,6 +14,8 @@ export class AppComponent implements OnInit {
   isLoggedIn$: Observable<boolean> = this.authService.isLoggedIn$;
   role$: Observable<ROLE_TYPE_UTILS> = this.authService.role$;
 
+  roles = ROLE_TYPE_UTILS;
+
   constructor(
     private seoService: SeoService,
     private themeService: ThemeService,
