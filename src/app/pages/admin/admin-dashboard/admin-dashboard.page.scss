@@ -1,0 +1,23 @@
+.section-container{
+  @apply p-2 sm:py-3 sm:px-3;
+
+  min-height: 415px
+}
+.section{
+  @apply w-full h-full bg-white rounded-lg;
+}
+
+.status {
+  @apply relative h-full  rounded-lg;
+  background: transparent radial-gradient(closest-side at 50% 50%, #34237D 0%, #241858 100%) 0% 0% no-repeat padding-box;
+  background-size: auto 300px;
+  
+  .section {
+    @apply absolute bottom-0 w-full h-32 px-16 flex justify-between items-center bg-white;
+    .listed,
+    .sold,
+    .profit {
+      @apply h-16 w-32 mx-2;
+    }
+  }
+}

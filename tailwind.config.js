@@ -16,8 +16,8 @@ module.exports = {
       },
     },
     fontFamily: {
-      display: ['Oswald', 'sans-serif'],
-      body: ['Poppins', 'sans-serif'],
+      display: ['roboto', 'sans-serif'],
+      body: ['roboto', 'sans-serif'],
     },
     container: {
       center: true,
