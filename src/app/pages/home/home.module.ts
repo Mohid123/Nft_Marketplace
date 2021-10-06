@@ -3,7 +3,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ROUTER_UTILS } from '@app/@core/utils/router.utils';
 import { AppBannerModule } from '@app/@shell/ui/app-banner/app-banner.module';
+import { CardDetailsModule } from '@app/@shell/ui/card-details/card-details.module';
 import { MarketplaceSearchModule } from '@app/@shell/ui/marketplace-search/marketplace-search.module';
+import { LoggedInUserSearchModule } from './../../@shell/ui/logged-in-user-search/logged-in-user-search.module';
 import { CardModule } from './../../@shell/ui/nft-card/card.module';
 import { CardDetailPage } from './card-detail/card-detail.page';
 import { HomePage } from './home.page';
@@ -60,7 +62,12 @@ const childRoutes: Routes = [
     RouterModule.forChild(childRoutes),
     CardModule,
     MarketplaceSearchModule,
-    AppBannerModule
+    AppBannerModule,
+    LoggedInUserSearchModule,
+    CardDetailsModule
+
+
+
   ],
 })
 export class HomeModule {}
