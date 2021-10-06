@@ -56,7 +56,7 @@ const childRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [HomePage, MarketPlacePage, CardDetailPage],
+  declarations: [HomePage, MarketPlacePage, CardDetailPage, WalletPage],
   imports: [
     CommonModule,
     RouterModule.forChild(childRoutes),

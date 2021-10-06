@@ -1,1 +1,247 @@
-<p>wallet works!</p>
+<div class="main">
+  <app-logged-in-user-search></app-logged-in-user-search>
+  <section class="px-3 pb-10 pt-14">
+    <div class="flex flex-wrap object-none md:w-full flex-center md:max-w-full" style="
+    border-radius: 33px;">
+    <div class="md:flex-shrink-0">
+      <img src="../../../../assets/banner/collection-nft.png" alt="">
+    </div>
+    <!-- <img src="../../../../assets/banner/best-nft.png" alt=""> -->
+    <!-- <img src="../../../../assets/banner/collection-nft.png" alt="">
+    <img src="../../../../assets/banner/check-nft.png" alt=""> -->
+    </div>
+  </section>
+
+  <div class="px-7 pb-14">
+    <h2 class="mb-5 text-2xl font-light tracking-widest text-gray-400 title-font">My NFT Library</h2>
+    <div class="bottom-0 left-0 flex flex-wrap justify-between w-full pt-3 leading-none text-center ">
+      <span class="inline-flex items-center text-sm leading-none text-whit">
+        <button class="px-4 py-1 mr-3 text-xs tracking-wide text-white rounded-full h-7 btn-nft">
+          All Items
+        </button>
+        <button class="px-4 py-1 mr-3 text-xs tracking-wide text-white rounded-full membership-btn h-7 ">
+          Membership Cards
+        </button>
+        <button class="px-4 py-1 mr-3 text-xs tracking-wide text-white rounded-full h-7 tickets-btn">
+          Tickets
+        </button>
+      </span>
+      <span class="inline-flex items-center text-sm leading-none text-gray-400 gradient-border-filter ">
+        <button type="button "
+          class="inline-flex justify-center w-full px-4 py-1 text-sm font-medium text-white bg-transparent rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
+          id="menu-button" aria-expanded="true" aria-haspopup="true">
+          Filters
+          <!-- Heroicon name: solid/chevron-down -->
+          <svg class="w-5 h-5 ml-2 -mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+            aria-hidden="true">
+            <path fill-rule="evenodd"
+              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+              clip-rule="evenodd" />
+          </svg>
+        </button>
+      </span>
+    </div>
+  </div>
+
+  <section class="m-3 mb-24 ">
+    <div class="flex flex-wrap ">
+      <app-nft-card></app-nft-card>
+      <app-nft-card></app-nft-card>
+      <app-nft-card></app-nft-card>
+      <app-nft-card></app-nft-card>
+      <app-nft-card></app-nft-card>
+      <app-nft-card></app-nft-card>
+      <app-nft-card></app-nft-card>
+      <app-nft-card></app-nft-card>
+      <app-nft-card></app-nft-card>
+      <app-nft-card></app-nft-card>
+      <app-nft-card></app-nft-card>
+      <app-nft-card></app-nft-card>
+    </div>
+  </section>
+
+  <div class="p-1 mx-2 mt-10 mb-14">
+    <div class="flex justify-between pt-3 leading-none text-center ">
+      <span class="inline-flex items-center ml-4 text-sm leading-none text-gray-500">
+       Show 1-15/100
+      </span>
+      <span class="inline-flex items-center text-sm leading-none text-gray-400">
+        <button class="inline-flex items-center justify-center w-12 h-12 px-3 py-3 mr-2 font-bold bg-gray-200 bg-opacity-25 rounded-xl">
+          <svg xmlns="http://www.w3.org/2000/svg" width="17.618" height="11.75" viewBox="0 0 17.618 11.75"><defs><style>.a{fill:#fff;opacity:0.4;}</style></defs><path class="a" d="M14.265,11.477a.8.8,0,0,1,.006,1.126l-3.715,3.727H24.711a.8.8,0,0,1,0,1.591H10.556l3.721,3.727a.805.805,0,0,1-.006,1.126.792.792,0,0,1-1.12-.006L8.108,17.688h0a.893.893,0,0,1-.165-.251.759.759,0,0,1-.061-.306.8.8,0,0,1,.226-.557l5.043-5.079A.78.78,0,0,1,14.265,11.477Z" transform="translate(-7.882 -11.252)"/></svg>
+
+        </button>
+        <button class="inline-flex items-center justify-center w-12 h-12 px-3 py-3 mr-2 font-bold bg-gray-200 bg-opacity-25 rounded-xl">
+          <svg xmlns="http://www.w3.org/2000/svg" width="17.618" height="11.75" viewBox="0 0 17.618 11.75"><defs><style>.a{fill:#fff;}</style></defs><path class="a" d="M19.118,11.477a.8.8,0,0,0-.006,1.126l3.715,3.727H8.671a.8.8,0,0,0,0,1.591H22.826l-3.721,3.727a.805.805,0,0,0,.006,1.126.792.792,0,0,0,1.12-.006l5.043-5.079h0a.893.893,0,0,0,.165-.251.759.759,0,0,0,.061-.306.8.8,0,0,0-.226-.557l-5.043-5.079A.78.78,0,0,0,19.118,11.477Z" transform="translate(-7.882 -11.252)"/></svg>
+
+        </button>
+
+      </span>
+    </div>
+  </div>
+
+
+  <!-- <div class="flex items-center justify-center bg-gray-900">
+    <div class="col-span-12 ">
+      <div class="overflow-auto lg:overflow-visible ">
+        <table class="table w-full space-y-6 text-sm text-gray-400 border-separate">
+          <thead class="text-gray-500 bg-gray-800">
+            <tr>
+              <th class="p-3">Brand</th>
+              <th class="p-3 text-left">Category</th>
+              <th class="p-3 text-left">Price</th>
+              <th class="p-3 text-left">Status</th>
+              <th class="p-3 text-left">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="bg-gray-800">
+              <td class="p-3">
+                <div class="flex align-items-center">
+                  <img class="object-cover w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1613588718956-c2e80305bf61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=634&q=80" alt="unsplash image">
+                  <div class="ml-3">
+                    <div class="">Appple</div>
+                    <div class="text-gray-500">mail@rgmail.com</div>
+                  </div>
+                </div>
+              </td>
+              <td class="p-3">
+                Technology
+              </td>
+              <td class="p-3 font-bold">
+                200.00$
+              </td>
+              <td class="p-3">
+                <span class="px-2 bg-green-400 rounded-md text-gray-50">available</span>
+              </td>
+              <td class="p-3 ">
+                <a href="#" class="mr-2 text-gray-400 hover:text-gray-100">
+                  <i class="text-base material-icons-outlined">visibility</i>
+                </a>
+                <a href="#" class="mx-2 text-gray-400 hover:text-gray-100">
+                  <i class="text-base material-icons-outlined">edit</i>
+                </a>
+                <a href="#" class="ml-2 text-gray-400 hover:text-gray-100">
+                  <i class="text-base material-icons-round">delete_outline</i>
+                </a>
+              </td>
+            </tr>
+            <tr class="bg-gray-800">
+              <td class="p-3">
+                <div class="flex align-items-center">
+                  <img class="object-cover w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1423784346385-c1d4dac9893a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="unsplash image">
+                  <div class="ml-3">
+                    <div class="">Realme</div>
+                    <div class="text-gray-500">mail@rgmail.com</div>
+                  </div>
+                </div>
+              </td>
+              <td class="p-3">
+                Technology
+              </td>
+              <td class="p-3 font-bold">
+                200.00$
+              </td>
+              <td class="p-3">
+                <span class="px-2 bg-red-400 rounded-md text-gray-50">no stock</span>
+              </td>
+              <td class="p-3">
+                <a href="#" class="mr-2 text-gray-400 hover:text-gray-100">
+                  <i class="text-base material-icons-outlined">visibility</i>
+                </a>
+                <a href="#" class="mx-2 text-gray-400 hover:text-gray-100">
+                  <i class="text-base material-icons-outlined">edit</i>
+                </a>
+                <a href="#" class="ml-2 text-gray-400 hover:text-gray-100">
+                  <i class="text-base material-icons-round">delete_outline</i>
+                </a>
+              </td>
+            </tr>
+            <tr class="bg-gray-800">
+              <td class="p-3">
+                <div class="flex align-items-center">
+                  <img class="object-cover w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1600856209923-34372e319a5d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2135&q=80" alt="unsplash image">
+                  <div class="ml-3">
+                    <div class="">Samsung</div>
+                    <div class="text-gray-500">mail@rgmail.com</div>
+                  </div>
+                </div>
+              </td>
+              <td class="p-3">
+                Technology
+              </td>
+              <td class="p-3 font-bold">
+                200.00$
+              </td>
+              <td class="p-3">
+                <span class="px-2 bg-yellow-400 rounded-md text-gray-50">start sale</span>
+              </td>
+              <td class="p-3">
+                <a href="#" class="mr-2 text-gray-400 hover:text-gray-100">
+                  <i class="text-base material-icons-outlined">visibility</i>
+                </a>
+                <a href="#" class="mx-2 text-gray-400 hover:text-gray-100">
+                  <i class="text-base material-icons-outlined">edit</i>
+                </a>
+                <a href="#" class="ml-2 text-gray-400 hover:text-gray-100">
+                  <i class="text-base material-icons-round">delete_outline</i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div> -->
+
+
+  <!-- <table class="table w-full space-y-6 text-sm text-gray-400 border-separate">
+    <thead class="text-white bg-gray-800">
+      <tr>
+        <th class="p-3 text-left">Brand</th>
+        <th class="p-3 text-left">Category</th>
+        <th class="p-3 text-left">Price</th>
+        <th class="p-3 text-left">Status</th>
+        <th class="p-3 text-left">Action</th>
+        <th class="p-3 text-left">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="bg-gray-800">
+        <td class="p-3">
+          <div class="flex align-items-center">
+            <img class="object-cover w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1613588718956-c2e80305bf61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=634&q=80" alt="unsplash image">
+            <div class="ml-3">
+              <div class="">Appple</div>
+              <div class="text-gray-500">mail@rgmail.com</div>
+            </div>
+          </div>
+        </td>
+        <td class="p-3">
+          Technology
+        </td>
+        <td class="p-3 font-bold">
+          200.00$
+        </td>
+        <td class="p-3">
+          <span class="px-2 bg-green-400 rounded-md text-gray-50">available</span>
+        </td>
+        <td class="p-3 ">
+          <a href="#" class="mr-2 text-gray-400 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">visibility</i>
+          </a>
+          <a href="#" class="mx-2 text-gray-400 hover:text-gray-100">
+            <i class="text-base material-icons-outlined">edit</i>
+          </a>
+          <a href="#" class="ml-2 text-gray-400 hover:text-gray-100">
+            <i class="text-base material-icons-round">delete_outline</i>
+          </a>
+        </td>
+      </tr>
+
+    </tbody>
+  </table> -->
+
+</div>
+
+
+
