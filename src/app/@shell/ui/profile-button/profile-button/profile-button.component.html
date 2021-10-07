@@ -1,0 +1,19 @@
+<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu" class="profile-btn">
+  <img class="text-sm leading-4 rounded-lg w-11 w h-9" src="./assets/card/logout-user.png" alt="Joker Card"/>
+  <span class="pl-2"> Joker C.</span>
+  <mat-icon style="width: 16px;">more_vert</mat-icon>
+</button>
+<mat-menu #menu="matMenu" class="bg-primary-a mt-0.5" xPosition='before'>
+  <button mat-menu-item>
+    <mat-icon>dialpad</mat-icon>
+    <span>Redial</span>
+  </button>
+  <button mat-menu-item disabled>
+    <mat-icon>voicemail</mat-icon>
+    <span>Check voice mail</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>notifications_off</mat-icon>
+    <span>Disable alerts</span>
+  </button>
+</mat-menu>
