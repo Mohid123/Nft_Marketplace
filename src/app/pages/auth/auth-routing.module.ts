@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ROUTER_UTILS } from '@app/@core/utils/router.utils';
+import { AdminSignInPage } from './../admin/admin-dashboard/admin-sign-in/admin-sign-in.page';
 import { ForgotPasswordEmailSentPage } from './pages/forgot-password-email-sent/forgot-password-email-sent.page';
 import { ForgotPasswordPage } from './pages/forgot-password/forgot-password.page';
 import { PasswordResetFailedPage } from './pages/password-reset-failed/password-reset-failed.page';
@@ -16,6 +17,14 @@ const routes: Routes = [
   },
   {
     path: ROUTER_UTILS.config.auth.signUp,
+    component: SignUpPage,
+  },
+  {
+    path: ROUTER_UTILS.config.auth.adminSignIn,
+    component: AdminSignInPage,
+  },
+  {
+    path: ROUTER_UTILS.config.auth.adminSignUp,
     component: SignUpPage,
   },
   {

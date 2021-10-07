@@ -27,6 +27,25 @@ body {
   min-width: 340px;
 }
 
+.icon-btn {
+  svg {
+    @apply mx-auto;
+
+    path {
+      opacity: 0.3 !important;
+      fill: white;
+    }
+  }
+}
+
+.icon-btn.active {
+  svg {
+    path {
+      opacity: 1 !important;
+    }
+  }
+}
+
 .gradient-border {
   @apply relative  w-full bg-primary-light rounded-2xl p-3.5;
 }

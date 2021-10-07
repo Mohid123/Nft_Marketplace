@@ -1,15 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard, NoAuthGuard } from '@app/@core/guards';
-import { ROLE_TYPE_UTILS } from '@app/@core/utils/role-type.utils';
+import { NoAdminGuard, NoAuthGuard, UserGuard } from '@app/@core/guards';
 import { ROUTER_UTILS } from '@app/@core/utils/router.utils';
 import { NotFoundModule } from '@app/@shell/ui/not-found/not-found.module';
 import { FooterModule } from '../ui/footer/footer.module';
 import { HeaderModule } from '../ui/header/header.module';
 import { LayoutModule } from '../ui/layout/layout.module';
 import { NotFoundPage } from '../ui/not-found/not-found.page';
-import { RoleGuard } from './../../@core/guards/role.guard';
+import { AdminGuard } from './../../@core/guards/admin.guard';
 import { NavModule } from './../ui/nav/nav.module';
 
 const APP_ROUTES: Routes = [
@@ -23,33 +22,31 @@ const APP_ROUTES: Routes = [
     path: ROUTER_UTILS.config.admin.root,
     loadChildren: async () =>
       (await import('@pages/admin/admin.module')).AdminModule,
-    canActivate: [RoleGuard],
-    data: {
-      role: ROLE_TYPE_UTILS.admin,
-    },
+    canLoad: [AdminGuard],
   },
   {
     path: ROUTER_UTILS.config.base.home,
     loadChildren: async () =>
       (await import('@pages/home/home.module')).HomeModule,
+    canLoad: [NoAdminGuard],
   },
   {
     path: ROUTER_UTILS.config.base.dashboard,
     loadChildren: async () =>
       (await import('@pages/dashboard/dashboard.module')).DashboardModule,
-    canLoad: [AuthGuard],
+    canLoad: [UserGuard],
   },
   {
     path: ROUTER_UTILS.config.settings.root,
     loadChildren: async () =>
       (await import('@pages/settings/settings.module')).SettingsModule,
-    canLoad: [AuthGuard],
+    canLoad: [UserGuard],
   },
   {
     path: ROUTER_UTILS.config.user.root,
     loadChildren: async () =>
       (await import('@pages/user/user.module')).UserModule,
-    canLoad: [AuthGuard],
+    canLoad: [UserGuard],
   },
   {
     path: '**',

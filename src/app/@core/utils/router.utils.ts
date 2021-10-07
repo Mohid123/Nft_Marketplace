@@ -13,6 +13,8 @@ export const ROUTER_UTILS = {
     },
     auth: {
       root: 'auth',
+      adminSignIn: 'admin-sign-in',
+      adminSignUp: 'admin-sign-up',
       signIn: 'sign-in',
       signUp: 'sign-up',
       forgotPassword: 'forgot-password',

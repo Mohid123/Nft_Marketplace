@@ -15,6 +15,10 @@ export class AuthService {
     return this.isLoggedIn$.getValue();
   }
 
+  get role(): ROLE_TYPE_UTILS {
+    return this.role$.getValue();
+  }
+
   signIn(): void {
     const token = Array(4)
       .fill(0)
@@ -28,5 +32,6 @@ export class AuthService {
   signOut(): void {
     removeItem(StorageItem.Auth);
     this.isLoggedIn$.next(false);
+    this.role$.next(ROLE_TYPE_UTILS.noUser);
   }
 }
