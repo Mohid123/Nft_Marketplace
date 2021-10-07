@@ -4,7 +4,8 @@ export const ROUTER_UTILS = {
       home: '',
       detail: 'detail',
       dashboard: 'dashboard',
-      wallet: 'wallet'
+      wallet: 'wallet',
+      tradingHistory: 'trading-history'
     },
     admin: {
       root:'admin',

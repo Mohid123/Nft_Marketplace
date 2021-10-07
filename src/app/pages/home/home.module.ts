@@ -10,6 +10,7 @@ import { CardModule } from './../../@shell/ui/nft-card/card.module';
 import { CardDetailPage } from './card-detail/card-detail.page';
 import { HomePage } from './home.page';
 import { MarketPlacePage } from './market-place/market-place.page';
+import { TradingHistoryPage } from './trading-history/trading-history.page';
 import { WalletPage } from './wallet/wallet.page';
 
 const childRoutes: Routes = [
@@ -30,6 +31,16 @@ const childRoutes: Routes = [
       title: 'NFT Cart Detail',
       description:
         'NFT Cart Detail Description',
+      robots: 'index, follow',
+    },
+  },
+  {
+    path:  ROUTER_UTILS.config.base.tradingHistory,
+    component: TradingHistoryPage,
+    data: {
+      title: 'NFT Trading History',
+      description:
+        'NFT Trading History Description',
       robots: 'index, follow',
     },
   },
@@ -56,7 +67,7 @@ const childRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [HomePage, MarketPlacePage, CardDetailPage, WalletPage],
+  declarations: [HomePage, MarketPlacePage, CardDetailPage, WalletPage, TradingHistoryPage],
   imports: [
     CommonModule,
     RouterModule.forChild(childRoutes),
