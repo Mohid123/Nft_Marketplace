@@ -1,13 +1,19 @@
 .section-container{
   @apply p-2 sm:py-3 sm:px-3;
 
-  height: 415px;
+  min-height: 415px;
 }
 .section{
-  @apply w-full h-full bg-white rounded-lg;
+  @apply w-full h-full rounded-lg;
 }
 
-.status {
+svg {
+  path {
+    opacity: 1;
+  }
+}
+
+.chart-status {
   @apply relative h-full  rounded-lg;
   background: transparent radial-gradient(closest-side at 50% 50%, #34237D 0%, #241858 100%) 0% 0% no-repeat padding-box;
   background-size: auto 300px;
@@ -17,7 +23,99 @@
     .listed,
     .sold,
     .profit {
-      @apply h-16 w-32 mx-2;
+      @apply h-16 w-32 mx-2 flex flex-col justify-between;
+      p {
+        @apply opacity-25 text-base leading-5 font-bold;
+        color: #1F203E;
+      }
+      span {
+        @apply text-3xl font-bold;
+        color: #1F203E;
+      }
+    }
+  }
+}
+
+.status {
+
+  .available-nft,
+  .total-revenue,
+  .pending-for-sale {
+    @apply w-full rounded-xl flex items-center px-3 py-5 xl:px-7 xl:py-8;
+    height: 126px;
+
+    .icon {
+      @apply w-28 h-full;
+    }
+
+    .value {
+      @apply w-28;
+
+      p {
+        @apply text-white opacity-50 tracking-normal text-sm;
+      }
+      span {
+        @apply text-white font-medium text-2xl;
+      }
+    }
+
+    .graph-icon {
+      @apply bg-gray-500 h-16 w-16;
+    }
+  }
+
+  .available-nft {
+    background: transparent linear-gradient(107deg, #40DDFF 0%, #14BAE3 19%, #13B1E6 69%, #11AADF 82%, #0B98C5 100%) 0% 0% no-repeat padding-box;
+  }
+
+  .total-revenue {
+    background: transparent linear-gradient(107deg, #D6A1FF 0%, #BC64FF 19%, #9D33EC 69%, #8D16E8 82%, #7E09D6 100%) 0% 0% no-repeat padding-box;
+  }
+
+  .pending-for-sale {
+    background: transparent linear-gradient(107deg, #53DFA4 0%, #66EFB6 19%, #3ADC99 69%, #23D98E 82%, #19D185 100%) 0% 0% no-repeat padding-box;
+  }
+}
+
+.cards-container {
+  min-height: 500px;
+  .heading-section {
+    @apply flex h-auto justify-between items-center tracking-wide font-medium text-white;
+
+    .pagination {
+      @apply w-36 flex justify-between items-center;
+
+      button {
+        @apply h-8 w-9 rounded-md;
+        background: #2f304c;
+      }
+    }
+  }
+
+  .body-section {
+    @apply flex flex-wrap py-2;
+  }
+}
+
+
+.groups {
+  @apply h-full overflow-auto overflow-y-auto overflow-x-hidden pt-2.5;
+  height: 326px;
+  .group {
+    @apply flex mb-3 p-2 w-full border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-1 rounded-md;
+    height: 70px;
+
+    img {
+      @apply w-16 h-full object-cover rounded-md;
+    }
+
+    .name {
+      @apply text-white pt-1 px-3 font-medium;
+    }
+
+    .items {
+      @apply px-3;
+      color: #4e4f6c;
     }
   }
 }

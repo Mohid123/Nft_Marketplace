@@ -1,41 +1,86 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.page.html',
-  styleUrls: ['./admin-dashboard.page.scss']
+  styleUrls: ['./admin-dashboard.page.scss'],
 })
-export class AdminDashboardPage {
+export class AdminDashboardPage implements AfterViewInit {
+  @ViewChild('myCanvas')
+  canvas!: ElementRef;
 
   public lineChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-  ];
-  public lineChartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-  public lineChartOptions: (ChartOptions & { annotation: any }) = {
-    responsive: true,
-    annotation: null
-  };
-  public lineChartColors: Color[] = [
     {
-      borderColor: ["#80b6f4", "#94d973", "#fad874", "#f49080"],
-      backgroundColor:['red','green', 'blue'],//color of dots
-      borderWidth: 2, // dot size
-      // borderCapStyle: string,
-      // borderDash: number[],
-      // borderDashOffset: number,
-      // borderJoinStyle: string,
-      // pointBorderColor: string | string[],
-      // pointBackgroundColor: string | string[],
-      // pointBorderWidth: number | number[],
-      // pointRadius: number | number[],
-      // pointHitRadius: number | number[],
-      // pointStyle: string | string[],
+      data: [
+        50,45,65, 48, 62, 70, 75,81
+      ],
+      fill: false,
+      borderWidth: 7,
     },
   ];
+  public lineChartLabels: Label[] = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec'
+  ];
+  public lineChartOptions: ChartOptions & { annotation: any } = {
+    scales: {
+      xAxes: [
+        {
+          gridLines: {
+            display: false,
+          },
+        },
+      ],
+      yAxes: [
+        {
+          gridLines: {
+            display: false,
+          },
+          ticks: {
+            display: false, //this will remove only the label
+          },
+        },
+      ],
+    },
+    legend: {
+      display: false,
+    },
+    responsive: true,
+    annotation: null,
+  };
+
+  public lineChartColors: Color[] = [
+    {
+      backgroundColor: 'transparent',
+    },
+  ];
+
   public lineChartLegend = true;
-  public lineChartType:ChartType  = 'line';
+  public lineChartType: ChartType = 'line';
   public lineChartPlugins = [];
 
+  ngAfterViewInit() {
+    console.log('aksdjkasjd');
+    const gradient = this.canvas.nativeElement
+      .getContext('2d')
+      .createLinearGradient(100, 0, 220, 600);
+    gradient.addColorStop(0, '#0040ff');
+    gradient.addColorStop(0.2, '#bf00ff');
+    gradient.addColorStop(0.5, '#ffff35');
+    console.log('gradient:',gradient);
+    this.lineChartColors[0].backgroundColor = gradient;
+    this.lineChartColors[0].borderColor = gradient;
+  }
 }

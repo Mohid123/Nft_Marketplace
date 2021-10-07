@@ -1,3 +1,9 @@
+const primaryColors = {
+  light: '#31314d',
+  DEFAULT: '#1F203E',
+  dark: '#171830',
+};
+
 module.exports = {
   prefix: '',
   purge: {
@@ -8,12 +14,14 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: {
-          light: '#31314d',
-          DEFAULT: '#1F203E',
-          dark: '#171830',
-        },
+        primary: primaryColors,
       },
+      width: {
+        '35': '35%',
+        '38': '38%',
+        '62': '62%',
+        '65': '65%',
+      }
     },
     fontFamily: {
       display: ['roboto', 'sans-serif'],
@@ -30,7 +38,37 @@ module.exports = {
         current: 'currentColor',
       },
     },
+    linearBorderGradients: {
+      directions: {
+        // defaults to these values
+        dp: '109deg',
+        t: 'to top',
+        tr: 'to top right',
+        r: 'to right',
+        br: 'to bottom right',
+        b: 'to bottom',
+        bl: 'to bottom left',
+        l: 'to left',
+        tl: 'to top left',
+      },
+      colors: {
+        p: ['#59C8D1 0%', '#75F16D 100%'],
+      },
+      background: {
+        'bg': primaryColors.DEFAULT,
+        'bg-light': primaryColors.light,
+        'bg-dark': primaryColors.dark,
+      },
+      border: {
+        // defaults to these values (optional)
+        1: '1px',
+        2: '2px',
+        4: '4px',
+      },
+    },
   },
-  variants: {},
-  plugins: [],
+  variants: {
+    linearBorderGradients: ['responsive', 'hover', 'dark'], // defaults to ['responsive']
+  },
+  plugins: [require('tailwindcss-border-gradient-radius')],
 };

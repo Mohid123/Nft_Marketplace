@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { UserGuard } from '@app/@core/guards';
 import { ROUTER_UTILS } from '@app/@core/utils/router.utils';
 import { AppBannerModule } from '@app/@shell/ui/app-banner/app-banner.module';
 import { MarketplaceSearchModule } from '@app/@shell/ui/marketplace-search/marketplace-search.module';
@@ -30,6 +31,7 @@ const childRoutes: Routes = [
         'NFT Cart Detail Description',
       robots: 'index, follow',
     },
+    canActivate: [UserGuard]
   },
   {
     path: 'home',
@@ -40,6 +42,7 @@ const childRoutes: Routes = [
         'NFT Market Place Description',
       robots: 'index, follow',
     },
+    canActivate: [UserGuard]
   },
   {
     path: ROUTER_UTILS.config.base.wallet,
@@ -50,6 +53,7 @@ const childRoutes: Routes = [
         'NFT Wallet Description',
       robots: 'index, follow',
     },
+    canActivate: [UserGuard]
   },
 ];
 

@@ -1,0 +1,35 @@
+.main-container {
+  background: #171830 0% 0% no-repeat padding-box;
+  opacity: 78%;
+}
+
+.sign-in-model {
+  background-color: #132356;
+  height: 722px;
+  max-width: 631px;
+  position: relative;
+}
+
+.sign-in-model::after,
+.sign-in-model::before {
+  position: absolute;
+  content: "";
+  width: calc( 100% - 2px);
+  height: calc( 100% - 2px);
+  background-color: #ffffff;
+  z-index: -10;
+  border-radius: 30px;
+}
+
+.sign-in-model::after {
+  filter: blur(16px);
+  opacity: .08;
+}
+
+.btn-close {
+  @apply bg-white rounded-full opacity-50 m-3.5 hover:opacity-70;
+  padding: 1px;
+  svg {
+    color: #132356;
+  }
+}
