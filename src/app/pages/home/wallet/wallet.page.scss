@@ -6,17 +6,6 @@
   @apply relative w-full max-w-7xl p-7;
 }
 
-// .search-bg{
-//   background: #FFFFFF 0% 0% no-repeat padding-box;
-//   border-radius: 7px;
-//   opacity: 0.08;
-// }
-
-// .search-btn {
-//   background: #FFFFFF 0% 0% no-repeat padding-box;
-// border-radius: 10px;
-// opacity: 0.07;
-// }
 
 .membership-btn{
   background: transparent linear-gradient(106deg, #79D984 0%, #EF676C 100%) 0% 0% no-repeat padding-box;
@@ -28,6 +17,10 @@
 
 .btn-nft {
   background: transparent linear-gradient(109deg, #59C8D1 0%, #75F16D 100%) 0% 0% no-repeat padding-box;
+}
+
+.pagination-btn{
+  @apply inline-flex items-center justify-center w-12 h-12 px-3 py-3 font-bold bg-gray-200 bg-opacity-25 rounded-xl;
 }
 
 

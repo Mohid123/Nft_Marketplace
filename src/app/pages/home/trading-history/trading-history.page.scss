@@ -22,8 +22,18 @@
 table {
   border-collapse:separate;
   border-spacing: 0 16px;
+  text-align: center;
 
 }
+
+.pagination-btn{
+  @apply inline-flex items-center justify-center w-12 h-12 px-3 py-3 font-bold bg-gray-200 bg-opacity-25 rounded-xl;
+}
+
+// tr {
+//   text-align: center;
+// }
+
 
 
 

@@ -1,0 +1,11 @@
+.card-border{
+@apply rounded-2xl border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-2 mt-14  w-full mb-48;
+}
+
+@media (max-width: 640px) {
+  .resImg {
+    height: 362px !important;
+
+  }
+}
+
