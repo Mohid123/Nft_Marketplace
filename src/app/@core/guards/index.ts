@@ -1,3 +1,5 @@
-export { AuthGuard } from './auth.guard';
+export { AdminGuard } from './admin.guard';
+export { NoAdminGuard } from './no-admin.guard';
 export { NoAuthGuard } from './no-auth.guard';
-export { RoleGuard } from './role.guard';
+export { UserGuard } from './user.guard';
+

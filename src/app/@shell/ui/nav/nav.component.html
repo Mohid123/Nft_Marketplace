@@ -23,12 +23,12 @@
             MarketPlace
           </a>
         </li>
-        <li class="relative inline-block">
+        <li class="relative inline-block" *ngIf="isLogedIn$ | async">
           <a class="menu-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/wallet']">
             Wallet
           </a>
         </li>
-        <li class="relative inline-block">
+        <li class="relative inline-block" *ngIf="isLogedIn$ | async">
           <a class="menu-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/history']">
             trad History
           </a>

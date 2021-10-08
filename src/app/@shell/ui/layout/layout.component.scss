@@ -3,7 +3,8 @@
 }
 
 .main {
-  @apply relative w-full max-w-7xl;
+  @apply relative w-full;
+  max-width: 1440px;
 }
 
 mat-sidenav {
