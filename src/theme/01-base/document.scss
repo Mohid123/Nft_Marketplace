@@ -81,4 +81,8 @@ body {
   background-image: linear-gradient(109deg, #59C8D1 0%, #75F16D 100%);
 }
 
+.top-nav-social-icons {
+  @apply inline-block w-4 mr-1 text-gray-400 cursor-pointer fill-current hover:text-white;
+}
+
 
