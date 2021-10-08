@@ -6,17 +6,17 @@
   @apply relative w-full max-w-7xl p-7;
 }
 
-.search-bg{
-  background: #FFFFFF 0% 0% no-repeat padding-box;
-  border-radius: 7px;
-  opacity: 0.08;
-}
+// .search-bg{
+//   background: #FFFFFF 0% 0% no-repeat padding-box;
+//   border-radius: 7px;
+//   opacity: 0.08;
+// }
 
-.search-btn {
-  background: #FFFFFF 0% 0% no-repeat padding-box;
-border-radius: 10px;
-opacity: 0.07;
-}
+// .search-btn {
+//   background: #FFFFFF 0% 0% no-repeat padding-box;
+// border-radius: 10px;
+// opacity: 0.07;
+// }
 
 .membership-btn{
   background: transparent linear-gradient(106deg, #79D984 0%, #EF676C 100%) 0% 0% no-repeat padding-box;
@@ -34,24 +34,3 @@ opacity: 0.07;
 
 
 
-.table {
-  border-spacing: 0 15px;
-}
-
-i {
-  font-size: 1rem !important;
-}
-
-.table tr {
-  border-radius: 20px;
-}
-
-tr td:nth-child(n+6),
-tr th:nth-child(n+6) {
-  border-radius: 0 .625rem .625rem 0;
-}
-
-tr td:nth-child(1),
-tr th:nth-child(1) {
-  border-radius: .625rem 0 0 .625rem;
-}
