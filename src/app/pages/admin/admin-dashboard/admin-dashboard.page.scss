@@ -19,17 +19,17 @@ svg {
   background-size: auto 300px;
 
   .section {
-    @apply absolute bottom-0 w-full h-32 px-16 flex justify-between items-center bg-white;
+    @apply absolute bottom-0 w-full h-32 flex justify-center items-center bg-white;
     .listed,
     .sold,
     .profit {
-      @apply h-16 w-32 mx-2 flex flex-col justify-between;
+      @apply h-16 w-28 sm:w-32 mx-2 flex flex-col justify-between;
       p {
-        @apply opacity-25 text-base leading-5 font-bold;
+        @apply opacity-25 text-sm sm:text-base leading-5 font-bold;
         color: #1F203E;
       }
       span {
-        @apply text-3xl font-bold;
+        @apply text-xl sm:text-3xl font-bold;
         color: #1F203E;
       }
     }
@@ -41,7 +41,7 @@ svg {
   .available-nft,
   .total-revenue,
   .pending-for-sale {
-    @apply w-full rounded-xl flex items-center px-3 py-5 xl:px-7 xl:py-8;
+    @apply w-full rounded-xl flex items-center px-7 py-8;
     height: 126px;
 
     .icon {
@@ -52,7 +52,7 @@ svg {
       @apply w-28;
 
       p {
-        @apply text-white opacity-50 tracking-normal text-sm;
+        @apply text-white opacity-50 tracking-normal text-sm mb-2;
       }
       span {
         @apply text-white font-medium text-2xl;
@@ -60,7 +60,7 @@ svg {
     }
 
     .graph-icon {
-      @apply bg-gray-500 h-16 w-16;
+      @apply h-16 w-16 pt-4;
     }
   }
 
