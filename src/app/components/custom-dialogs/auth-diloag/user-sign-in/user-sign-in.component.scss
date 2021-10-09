@@ -1,35 +1,50 @@
-.main-container {
-  background: #171830 0% 0% no-repeat padding-box;
-  opacity: 78%;
+::ng-deep .user-sign-in-dialog-overlay {
+  height: auto;
+  min-height: 722px;
+  max-width: 631px !important;
 }
 
-.sign-in-model {
-  background-color: #132356;
-  height: 722px;
-  max-width: 631px;
-  position: relative;
-}
+ .sign-in-model {
+   @apply flex flex-col items-center px-0  sm:px-20;
 
-.sign-in-model::after,
-.sign-in-model::before {
-  position: absolute;
-  content: "";
-  width: calc( 100% - 2px);
-  height: calc( 100% - 2px);
-  background-color: #ffffff;
-  z-index: -10;
-  border-radius: 30px;
-}
-
-.sign-in-model::after {
-  filter: blur(16px);
-  opacity: .08;
-}
-
-.btn-close {
-  @apply bg-white rounded-full opacity-50 m-3.5 hover:opacity-70;
-  padding: 1px;
-  svg {
-    color: #132356;
+   .btn-close {
+    @apply absolute top-0 right-0 bg-white rounded-full opacity-50 m-3.5 hover:opacity-70;
+    padding: 1px;
+    svg {
+      color: #132356;
+    }
   }
-}
+
+  img {
+    @apply object-scale-down mt-6 sm:mt-6 md:mt-12;
+    width: 410px;
+    height: 90px;
+  }
+
+  h1 {
+    @apply capitalize my-12 text-3xl;
+    font-weight: 400;
+    span {
+      padding-bottom: 4px;
+      border-bottom: 2px solid #75F16D;
+    }
+  }
+
+  form {
+    @apply flex flex-col w-full;
+
+    label {
+      @apply px-3 py-4 text-lg;
+    }
+
+    input {
+      @apply px-9;
+    }
+
+    button {
+      @apply w-72 h-16 my-10 sm:my-14 self-center;
+    }
+
+  }
+
+ }

@@ -4,16 +4,8 @@
   <mat-icon style="width: 16px;">more_vert</mat-icon>
 </button>
 <mat-menu #menu="matMenu" class="bg-primary-a mt-0.5" xPosition='before'>
-  <button mat-menu-item>
-    <mat-icon>dialpad</mat-icon>
-    <span>Redial</span>
-  </button>
-  <button mat-menu-item disabled>
-    <mat-icon>voicemail</mat-icon>
-    <span>Check voice mail</span>
-  </button>
-  <button mat-menu-item>
-    <mat-icon>notifications_off</mat-icon>
-    <span>Disable alerts</span>
+  <button mat-menu-item (click)="signOut()">
+    <mat-icon>logout</mat-icon>
+    logout
   </button>
 </mat-menu>

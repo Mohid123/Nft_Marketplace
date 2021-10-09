@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthRoutingModule } from './auth-routing.module';
 import { ForgotPasswordPage } from './pages/forgot-password/forgot-password.page';
 import { PasswordResetFailedPage } from './pages/password-reset-failed/password-reset-failed.page';
@@ -17,6 +18,11 @@ import { SignUpPage } from './pages/sign-up/sign-up.page';
     PasswordResetSucceededPage,
     PasswordResetFailedPage,
   ],
-  imports: [CommonModule, AuthRoutingModule],
+  imports: [
+    CommonModule,
+    AuthRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
 })
 export class AuthModule {}

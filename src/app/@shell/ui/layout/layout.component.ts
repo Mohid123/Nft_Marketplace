@@ -41,7 +41,7 @@ export class LayoutComponent implements AfterViewInit {
   onClickSignOut(): void {
     this.authService.signOut();
 
-    const { root, signIn } = ROUTER_UTILS.config.auth;
-    this.router.navigate(['/', root, signIn]);
+    const { root, adminSignIn } = ROUTER_UTILS.config.auth;
+    this.router.navigate(['/', root, adminSignIn]);
   }
 }

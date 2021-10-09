@@ -11,7 +11,12 @@ export abstract class AsyncDialog<
   constructor(protected matDialog: MatDialog) {}
 
   // @ts-ignore
-  abstract async open(
+  abstract async openAdminSignIn(
+    data: DataType,
+  ): Promise<MatDialogRef<ComponentType, ReturnType>>;
+
+  // @ts-ignore
+  abstract async openUserSignIn(
     data: DataType,
   ): Promise<MatDialogRef<ComponentType, ReturnType>>;
 }

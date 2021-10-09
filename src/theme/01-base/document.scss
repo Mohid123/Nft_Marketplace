@@ -85,4 +85,21 @@ body {
   @apply inline-block w-4 mr-1 text-gray-400 cursor-pointer fill-current hover:text-white;
 }
 
+.action-dialog {
+  @apply relative flex flex-col w-full bg-primary-b rounded-none sm:rounded-3xl;
+  box-shadow: 0px 12px 26px 0px #59c8d10f;
 
+  mat-dialog-container {
+    position: relative;
+  }
+}
+
+input {
+  @apply h-16 bg-primary-d rounded-lg text-lg focus:outline-none px-4;
+}
+
+
+.primary-btn {
+  @apply px-5 py-1 rounded-full;
+  background: transparent linear-gradient(109deg, #59C8D1 0%, #75F16D 100%) 0% 0% no-repeat padding-box;
+}

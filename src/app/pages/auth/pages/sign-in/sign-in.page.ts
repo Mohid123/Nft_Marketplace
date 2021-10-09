@@ -1,27 +1,33 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ROUTER_UTILS } from '@app/@core/utils/router.utils';
-import { AuthService } from '../../services/auth.service';
+import { CustomDialogService } from './../../../../@core/services/custom-dialog/custom-dialog.service';
 
 @Component({
   templateUrl: './sign-in.page.html',
   styleUrls: ['./sign-in.page.scss'],
 })
-export class SignInPage {
+export class SignInPage implements OnInit , OnDestroy {
   returnUrl: string;
 
   constructor(
-    private router: Router,
     private activatedRoute: ActivatedRoute,
-    private authService: AuthService,
-  ) {
-    this.returnUrl =
-      this.activatedRoute.snapshot.queryParamMap.get('returnUrl') ||
-      `/${ROUTER_UTILS.config.base.home}`;
+    private customDialogService: CustomDialogService,
+  ) {}
+
+  ngOnInit(): void {
+    console.log('sign in page oninit:',);
+    if (
+      this.activatedRoute.snapshot.data.page ==
+      ROUTER_UTILS.config.auth.adminSignIn
+    ) {
+      this.customDialogService.ShowAdminSignInDialog();
+    } else {
+      this.customDialogService.ShowUserSignInDialog();
+    }
   }
 
-  onClickSignIn(): void {
-    this.authService.signIn();
-    this.router.navigate([this.returnUrl]);
+  ngOnDestroy():void {
+    console.log('sign in page  distroy:',);
   }
 }

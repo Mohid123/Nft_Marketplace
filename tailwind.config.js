@@ -16,6 +16,9 @@ module.exports = {
       colors: {
         'primary': primaryColors,
         'primary-a': '#2f304c',
+        'primary-b': '#132356',
+        'primary-c': '##4C5880',
+        'primary-d': '#f3f3f354',
       },
       width: {
         '35': '35%',

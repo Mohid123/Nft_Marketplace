@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -23,10 +24,18 @@ export class CustomDialogService {
 
   async ShowUserSignInDialog() {
     this.matDialog.closeAll();
-    this._mapDialogref = await this.authDialogService.open();
-    (await this._mapDialogref).afterClosed().subscribe((result) => {
-      console.log('Mat Dialog Results sign in:', result);
-    });
+    this._mapDialogref = await this.authDialogService.openUserSignIn();
+    // (await this._mapDialogref).afterClosed().subscribe((result) => {
+    //   console.log('Mat Dialog Results user sign in:', result);
+    // });
+  }
+
+  async ShowAdminSignInDialog() {
+    this.matDialog.closeAll();
+    this._mapDialogref = await this.authDialogService.openAdminSignIn();
+    // (await this._mapDialogref).afterClosed().subscribe((result) => {
+    //   console.log('Mat Dialog Results admin sign in:', result);
+    // });
   }
 
   closeDialogs() {
