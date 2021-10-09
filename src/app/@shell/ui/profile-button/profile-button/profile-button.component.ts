@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '@app/pages/auth/services/auth.service';
 
 @Component({
   selector: 'app-profile-button',
@@ -7,4 +8,13 @@ import { Component } from '@angular/core';
 })
 export class ProfileButtonComponent {
 
+  constructor(
+    private authService: AuthService,
+  ) {
+
+  }
+
+  signOut() {
+    this.authService.signOut();
+  }
 }

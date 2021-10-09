@@ -1,4 +1,4 @@
-<div class="main">
+<div class="relative w-full">
   <div class="absolute block w-full h-10 bg-primary-dark md:hidden" [ngClass]="sidenav.opened ? 'z-0' : 'z-10'">
   <button mat-icon-button *ngIf="sidenav.mode === 'over'"
     (click)="sidenav.toggle()">
@@ -11,7 +11,7 @@
   </button>
 </div>
 
-  <mat-sidenav-container class="h-auto overflow-auto">
+  <mat-sidenav-container class="h-screen overflow-auto">
     <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
       <div class="flex flex-col items-center justify-start h-full">
 
@@ -56,7 +56,9 @@
 
     </mat-sidenav>
     <mat-sidenav-content>
-      <ng-content></ng-content>
+      <div class="main">
+        <ng-content></ng-content>
+      </div>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>

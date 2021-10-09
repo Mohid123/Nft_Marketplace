@@ -1,5 +1,6 @@
 export enum StorageItem {
   Auth = 'App/auth',
+  role = 'App/role',
   Theme = 'App/theme',
 }
 
