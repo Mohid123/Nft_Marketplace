@@ -1,5 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable, OnDestroy } from '@angular/core';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 import { getItem, setItem, StorageItem } from '@app/@core/utils';
 import { fromEventPattern, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -15,7 +17,13 @@ export class ThemeService implements OnDestroy {
     '(prefers-color-scheme: dark)',
   );
 
-  constructor(@Inject(DOCUMENT) private document: Document) {}
+  constructor(
+    @Inject(DOCUMENT) private document: Document,
+    private domSanitizer: DomSanitizer,
+    private matIconRegistry: MatIconRegistry,
+  ) {
+    this.registerIcons();
+  }
 
   get systemTheme(): ThemeList.Light | ThemeList.Dark {
     return this.mediaQuery.matches ? ThemeList.Dark : ThemeList.Light;
@@ -86,6 +94,49 @@ export class ThemeService implements OnDestroy {
       const key: ThemeList = ThemeList[theme as keyof typeof ThemeList];
       this.document.body.classList.remove(key);
     }
+  }
+
+  registerIcons(): void {
+    this.matIconRegistry.addSvgIcon(
+      `admin-dashboard`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        '../assets/icons/admin-dashboard.svg',
+      ),
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      `market-place`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        '../assets/icons/market-place.svg',
+      ),
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      `setting-icon`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        '../assets/icons/setting.svg',
+      ),
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      `group-icon`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        '../assets/icons/group.svg',
+      ),
+    );
+    this.matIconRegistry.addSvgIcon(
+      `sale-icon`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        '../assets/icons/sale.svg',
+      ),
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      `logout-icon`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        '../assets/icons/logout.svg',
+      ),
+    );
   }
 
   ngOnDestroy(): void {

@@ -41,4 +41,12 @@ mat-sidenav {
     left: -16px;
     border-radius: 0 10px 10px 0;
   }
+
+  .menu-link.active {
+    background-color: #ffffff0f;
+
+    .mat-icon {
+      color: white;
+    }
+  }
 }

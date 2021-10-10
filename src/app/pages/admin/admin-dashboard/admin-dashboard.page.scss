@@ -92,7 +92,20 @@ svg {
   }
 
   .body-section {
-    @apply flex flex-wrap py-2 justify-center;
+    @apply py-2;
+
+    div {
+      @apply flex overflow-auto;
+
+      app-nft-card {
+        @apply p-2;
+      }
+
+      app-nft-card:first-child  {
+        @apply pl-0;
+     }
+
+    }
   }
 }
 

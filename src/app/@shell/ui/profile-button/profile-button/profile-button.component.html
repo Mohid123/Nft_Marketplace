@@ -1,11 +1,11 @@
 <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu" class="profile-btn">
   <img class="text-sm leading-4 rounded-lg w-11 w h-9" src="./assets/card/logout-user.png" alt="Joker Card"/>
-  <span class="pl-2"> Joker C.</span>
+  <span class="pl-2 text-white truncate"> Joker C.</span>
   <mat-icon style="width: 16px;">more_vert</mat-icon>
 </button>
 <mat-menu #menu="matMenu" class="bg-primary-a mt-0.5" xPosition='before'>
   <button mat-menu-item (click)="signOut()">
-    <mat-icon>logout</mat-icon>
+    <mat-icon class="text-white">logout</mat-icon>
     logout
   </button>
 </mat-menu>
