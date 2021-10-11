@@ -19,7 +19,8 @@
 
   border-style: solid;
 
-  border-image-source: linear-gradient(to bottom, #59C8D1 0%, #75F16D 100%);
+  //border-image-source: linear-gradient(to bottom, #59C8D1 0%, #75F16D 100%);
+  border-color: #74d8a1;
   border-image-slice: 20;
   border-image-repeat: stretch;
 
@@ -29,12 +30,13 @@
 .spacing-table td:first-child {
   border-left-width: 1px;
 
-  border-radius: 5px 0 0 5px;
+  border-radius: 12px 0 0 12px;
+
 }
 
 .spacing-table td:last-child {
   border-right-width: 1px;
-  border-radius: 0 5px 5px 0;
+  border-radius: 0 12px 12px 0;
 }
 
 .spacing-table thead {

@@ -31,7 +31,7 @@ export class AuthService {
       setItem(StorageItem.Auth, token);
       setItem(StorageItem.role, ROLE_TYPE_UTILS.user);
       this.isLoggedIn$.next(true);
-      this.role$.next(ROLE_TYPE_UTILS.admin);
+      this.role$.next(ROLE_TYPE_UTILS.user);
       resolve(true);
     });
   }
