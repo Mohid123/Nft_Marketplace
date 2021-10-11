@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ntf-panel": {
+    "nft-panel": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -23,7 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ntf-panel",
+            "outputPath": "dist/nft-panel",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -75,7 +75,7 @@
               "browserTarget": "test:build:production"
             },
             "development": {
-              "browserTarget": "ntf-panel:build:development"
+              "browserTarget": "nft-panel:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -99,42 +99,42 @@
         "e2e": {
           "builder": "@briebug/cypress-schematic:cypress",
           "options": {
-            "devServerTarget": "ntf-panel:serve",
+            "devServerTarget": "nft-panel:serve",
             "watch": true,
             "headless": false
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ntf-panel:serve:production"
+              "devServerTarget": "nft-panel:serve:production"
             }
           }
         },
         "cypress-run": {
           "builder": "@briebug/cypress-schematic:cypress",
           "options": {
-            "devServerTarget": "ntf-panel:serve"
+            "devServerTarget": "nft-panel:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ntf-panel:serve:production"
+              "devServerTarget": "nft-panel:serve:production"
             }
           }
         },
         "cypress-open": {
           "builder": "@briebug/cypress-schematic:cypress",
           "options": {
-            "devServerTarget": "ntf-panel:serve",
+            "devServerTarget": "nft-panel:serve",
             "watch": true,
             "headless": false
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ntf-panel:serve:production"
+              "devServerTarget": "nft-panel:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "ntf-panel"
+  "defaultProject": "nft-panel"
 }
