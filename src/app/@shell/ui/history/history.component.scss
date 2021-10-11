@@ -1,0 +1,52 @@
+.spacing-table {
+
+  font-size: 15px;
+  border-collapse: separate;
+  table-layout: fixed;
+  text-align: center;
+
+  border-spacing: 0 10px;
+  /* this is the ultimate fix */
+}
+
+.spacing-table th {
+  text-align: center;
+  padding: 5px 15px;
+}
+
+.spacing-table td {
+  border-width: 1px 0;
+
+  border-style: solid;
+
+  border-image-source: linear-gradient(to bottom, #59C8D1 0%, #75F16D 100%);
+  border-image-slice: 20;
+  border-image-repeat: stretch;
+
+  padding: 5px 15px;
+}
+
+.spacing-table td:first-child {
+  border-left-width: 1px;
+
+  border-radius: 5px 0 0 5px;
+}
+
+.spacing-table td:last-child {
+  border-right-width: 1px;
+  border-radius: 0 5px 5px 0;
+}
+
+.spacing-table thead {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.spacing-table tbody {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  border-spacing: 0 25px;
+  border-radius: 20px !important;
+}

@@ -5,6 +5,7 @@ import { UserGuard } from '@app/@core/guards';
 import { ROUTER_UTILS } from '@app/@core/utils/router.utils';
 import { AppBannerModule } from '@app/@shell/ui/app-banner/app-banner.module';
 import { CardDetailsModule } from '@app/@shell/ui/card-details/card-details.module';
+import { HistoryModule } from '@app/@shell/ui/history/history.module';
 import { MarketplaceSearchModule } from '@app/@shell/ui/marketplace-search/marketplace-search.module';
 import { LoggedInUserSearchModule } from './../../@shell/ui/logged-in-user-search/logged-in-user-search.module';
 import { CardModule } from './../../@shell/ui/nft-card/card.module';
@@ -79,7 +80,8 @@ const childRoutes: Routes = [
     MarketplaceSearchModule,
     AppBannerModule,
     LoggedInUserSearchModule,
-    CardDetailsModule
+    CardDetailsModule,
+    HistoryModule
 
 
 

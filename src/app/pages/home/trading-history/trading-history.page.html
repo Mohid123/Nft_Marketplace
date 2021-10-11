@@ -1,6 +1,6 @@
 <div class="main-container">
   <app-logged-in-user-search></app-logged-in-user-search>
-  <section class="pb-10 m-4 pt-14 lg:m-0 md:m-0">
+  <section class="pt-0 pb-0 m-4 md:pb-10 lg:pb-10 md:pt-14 lg:pt-14 lg:m-0 md:m-0">
     <div class=" md:w-full flex-center md:max-w-full">
     <div class="md:flex-shrink-0">
       <img src="../../../../assets/banner/check-nft.png" alt="banner" width="100%">
@@ -11,7 +11,7 @@
     </div>
   </section>
 
-  <div class="p-4 ld:p-0 md:p-0 pb-14 lg:pb-14 md:pb-14">
+  <div class="p-4 pb-0 ld:p-0 md:p-0 lg:pb-14 md:pb-14">
     <h2 class="mb-5 text-2xl font-light tracking-widest text-gray-400 title-font">Trading history</h2>
     <div class="bottom-0 left-0 flex flex-wrap justify-between w-full pt-3 leading-none text-center ">
       <span class="inline-flex items-center text-sm leading-none text-whit">
@@ -44,93 +44,15 @@
     </div>
   </div>
 
-
-
-
   <div class="w-full mb-8 overflow-hidden rounded-lg ">
     <div class="w-full overflow-x-auto">
-      <table class="w-full space-y-6 text-sm">
-        <thead class="font-light tracking-wider text-white ">
-          <tr>
-            <th>Token Id</th>
-            <th>Event</th>
-            <th>Price</th>
-            <th>From</th>
-            <th>To</th>
-            <th>Date Created</th>
-          </tr>
-        </thead>
-        <tbody >
-          <tr class="items-center h-24 bg-gray-800 " >
-            <td  style="color: #64F3FF">
-             976
-            </td>
-            <td >
-              Sale
-            </td>
-            <td >
-              € 1.77
-            </td>
-            <td >
-             0x9f30
-            </td>
-            <td >
-             dodos
-            </td>
-            <td >
-             10 days ago
-            </td>
+      <!--trading history re-useable-->
+      <app-history></app-history>
 
-          </tr >
-          <tr class="items-center h-24 bg-gray-800 " >
-            <td  style="color: #64F3FF">
-             976
-            </td>
-            <td >
-              Sale
-            </td>
-            <td >
-              € 1.77
-            </td>
-            <td>
-             0x9f30
-            </td>
-            <td>
-             dodos
-            </td>
-            <td>
-             10 days ago
-            </td>
-
-          </tr >
-          <tr class="items-center h-24 bg-gray-800" >
-            <td style="color: #64F3FF">
-             976
-            </td>
-            <td>
-              Sale
-            </td>
-            <td>
-              € 1.77
-            </td>
-            <td>
-             0x9f30
-            </td>
-            <td>
-             dodos
-            </td>
-            <td>
-             10 days ago
-            </td>
-
-          </tr >
-
-
-        </tbody>
-
-      </table>
     </div>
   </div>
+
+
 
 
 

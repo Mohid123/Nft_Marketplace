@@ -5,3 +5,12 @@
 .main {
   @apply relative w-full max-w-7xl p-7;
 }
+
+span {
+  @apply capitalize my-12 text-3xl;
+  font-weight: 400;
+  span {
+    padding-bottom: 4px;
+    border-bottom: 2px solid #75F16D;
+  }
+}

@@ -1,5 +1,5 @@
 .card-border{
-@apply rounded-2xl border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-2 mt-14  w-full mb-48;
+@apply rounded-2xl border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-2 md:mt-14 lg:mt-14 mt-2 w-full mb-14;
 }
 
 @media (max-width: 640px) {
