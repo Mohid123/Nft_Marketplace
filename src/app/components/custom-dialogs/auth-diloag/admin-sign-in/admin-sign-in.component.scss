@@ -1,11 +1,12 @@
 ::ng-deep .admin-sign-in-dialog-overlay {
+  @apply bg-white text-gray-900 rounded-3xl;
   height: auto;
-  min-height: 722px;
-  max-width: 631px !important;
+  min-height: 637px;
+  max-width: 512px !important;
 }
 
  .sign-in-model {
-   @apply flex flex-col items-center px-0  sm:px-20;
+   @apply flex flex-col items-center px-0  sm:px-12 h-full;
 
    .btn-close {
     @apply absolute top-0 right-0 bg-white rounded-full opacity-50 m-3.5 hover:opacity-70;
@@ -16,9 +17,8 @@
   }
 
   img {
-    @apply object-scale-down mt-6 sm:mt-6 md:mt-12;
-    width: 410px;
-    height: 90px;
+    @apply object-scale-down mt-6 sm:mt-6 md:mt-12 h-16;
+    width: 304;
   }
 
   h1 {
@@ -34,17 +34,35 @@
     @apply flex flex-col w-full;
 
     label {
-      @apply px-3 py-4 text-lg;
+      @apply py-4 text-lg;
     }
 
     input {
-      @apply px-9;
+      @apply h-12 px-9 bg-white border-t border-b border-l border-r border-gray-900;
     }
 
     button {
-      @apply w-72 h-16 my-10 sm:my-14 self-center;
+      @apply w-full h-12 my-10 sm:my-14 self-center text-white font-bold uppercase;
+      background: transparent linear-gradient(97deg, #3BC0F2 0%, #31D491 100%) 0% 0% no-repeat padding-box;
     }
 
   }
 
+ }
+
+ .language-container {
+   @apply flex justify-center items-center my-10;
+   font-size: 13px;
+   button {
+     @apply w-36 h-9 px-2 flex justify-around items-center text-white;
+     background: #31D491 0% 0% no-repeat padding-box;
+    }
+
+   mat-icon {
+     @apply h-3 w-3 text-xs;
+   }
+
+   span {
+     padding: 0 6px;
+   }
  }

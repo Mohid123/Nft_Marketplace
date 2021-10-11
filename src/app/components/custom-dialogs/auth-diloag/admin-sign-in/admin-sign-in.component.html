@@ -1,15 +1,15 @@
 <div class="sign-in-model">
   <div class="flex justify-end">
-    <button class="btn-close">
+    <!-- <button class="btn-close">
       <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
         <path fill-rule="evenodd"
           d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
           clip-rule="evenodd" />
       </svg>
-    </button>
+    </button> -->
   </div>
   <img src="./assets/logo/logo.png">
-  <h1 class=""><span>Sig</span>n in</h1>
+  <!-- <h1 class=""><span>Sig</span>n in</h1> -->
   <form  [formGroup]="loginForm" class="sign-in-form">
       <label for="email">email</label>
       <input type="email" formControlName="email">
@@ -24,8 +24,15 @@
 
 
     <button class="primary-btn" (click)="signInClick()">
-      Sign in
+      login
     </button>
 
   </form>
+  <div class="language-container">
+    <span>Select Language</span>
+    <button mat-icon-button aria-label="menu" class="w-16 primary-btn">
+      <span>Englis</span>
+      <span><mat-icon>arrow_drop_down</mat-icon></span>
+    </button>
+  </div>
 </div>
