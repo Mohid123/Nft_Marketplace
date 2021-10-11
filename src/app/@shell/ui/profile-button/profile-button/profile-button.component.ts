@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { ROUTER_UTILS } from '@app/@core/utils/router.utils';
 import { AuthService } from '@app/pages/auth/services/auth.service';
 
 @Component({
@@ -10,11 +12,15 @@ export class ProfileButtonComponent {
 
   constructor(
     private authService: AuthService,
+    private router: Router,
   ) {
 
   }
 
-  signOut() {
+  signOut():void {
     this.authService.signOut();
+
+    const { root, adminSignIn } = ROUTER_UTILS.config.auth;
+    this.router.navigate(['/', root, adminSignIn]);
   }
 }
