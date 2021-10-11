@@ -3,7 +3,7 @@ import { Directive } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 @Directive()
 // tslint:disable-next-line:directive-class-suffix
-export abstract class AsyncDialog<
+export abstract class AsyncAuthDialog<
   ComponentType,
   DataType = unknown,
   ReturnType = unknown,

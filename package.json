@@ -1,5 +1,5 @@
 {
-  "name": "ntf-panel",
+  "name": "nft-panel",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -13,7 +13,7 @@
     "test:e2e": "ng e2e",
     "test:coverage": "ng test --coverage",
     "lint": "ng lint",
-    "analyze": "webpack-bundle-analyzer dist/ntf-panel/stats.json"
+    "analyze": "webpack-bundle-analyzer dist/nft-panel/stats.json"
   },
   "dependencies": {
     "@angular/animations": "12.0.1",
