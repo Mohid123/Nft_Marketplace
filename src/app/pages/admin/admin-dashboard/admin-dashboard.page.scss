@@ -88,6 +88,10 @@ svg {
       button {
         @apply h-8 w-9 rounded-md bg-primary-a;
       }
+
+      span {
+        @apply font-medium;
+      }
     }
   }
 

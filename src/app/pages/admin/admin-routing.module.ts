@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ROUTER_UTILS } from '@app/@core/utils/router.utils';
 import { AdminDashboardPage } from './admin-dashboard/admin-dashboard.page';
+import { AdminGroupPage } from './admin-group/admin-group.page';
 import { AdminMarketPlacePage } from './market-place/admin-market-place.page';
 
 const routes: Routes = [
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path: ROUTER_UTILS.config.admin.marketplace,
     component: AdminMarketPlacePage,
+  },
+  {
+    path: ROUTER_UTILS.config.admin.groups,
+    component: AdminGroupPage,
   },
 ];
 

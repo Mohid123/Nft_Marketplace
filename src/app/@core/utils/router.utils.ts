@@ -9,6 +9,7 @@ export const ROUTER_UTILS = {
     },
     admin: {
       root:'admin',
+      groups:'groups',
       marketplace: 'market-place'
     },
     auth: {

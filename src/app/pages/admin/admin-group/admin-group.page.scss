@@ -22,13 +22,36 @@
   }
 }
 
-.cards-container {
-  @apply flex flex-wrap w-full h-auto justify-center;
+.groups-container {
+   @apply border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-1 rounded-xl mb-12;
 
-  app-nft-card {
-    @apply px-1;
-  }
-}
+   height: 470px;
+
+   th {
+     @apply px-10 h-10 text-left;
+   }
+
+   th:last-child {
+    @apply text-center;
+   }
+
+   tbody {
+     @apply overflow-auto ;
+     height: 420px;
+     tr {
+       @apply h-16;
+      border-top: 1px solid #ffffff3a;
+
+      td {
+        @apply px-10;
+      }
+
+      td:last-child {
+        @apply text-center;
+       }
+     }
+   }
+ }
 
 .pagination {
   @apply w-36 flex justify-between items-center;

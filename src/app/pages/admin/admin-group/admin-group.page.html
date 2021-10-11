@@ -1,8 +1,8 @@
 <div class="flex flex-col justify-start h-auto min-h-screen px-3 py-2 mt-10 mb-12 sm:px-6 xl:px-8 center">
   <div class="flex items-center justify-between w-full h-12 py-px">
-    <h1 class="h-auto m-0 text-2xl font-medium">NFT Marketplace</h1>
+    <h1 class="h-auto m-0 text-2xl font-medium">Groups</h1>
     <button class="w-40 h-full primary-btn">
-      Create New
+      New Group
     </button>
   </div>
   <div class="w-full">
@@ -38,21 +38,32 @@
         </button>
       </div>
     </div>
-    <div class="cards-container">
-      <app-nft-card></app-nft-card>
-      <app-nft-card></app-nft-card>
-      <app-nft-card></app-nft-card>
-      <app-nft-card></app-nft-card>
-      <app-nft-card></app-nft-card>
-      <app-nft-card></app-nft-card>
-      <app-nft-card></app-nft-card>
-      <app-nft-card></app-nft-card>
-      <app-nft-card></app-nft-card>
-      <app-nft-card></app-nft-card>
-      <app-nft-card></app-nft-card>
-      <app-nft-card></app-nft-card>
+    <div class="w-full bg-gray-400 groups-container">
+      <div class="w-full overflow-x-auto">
+        <table class="w-full space-y-6 text-sm">
+          <thead class="font-light tracking-wider text-white ">
+            <tr>
+              <th>Name</th>
+              <th>Item Count</th>
+              <th>Description</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody ><tr><td>Rock1</td><td >20</td><td >Best NFT Sports Group Out There</td><td ><mat-icon>delete</mat-icon></td>
+            </tr ><tr><td>Rock1</td><td >20</td><td >Best NFT Sports Group Out There</td><td ><mat-icon>delete</mat-icon></td>
+            </tr ><tr><td>Rock1</td><td >20</td><td >Best NFT Sports Group Out There</td><td ><mat-icon>delete</mat-icon></td>
+            </tr ><tr><td>Rock1</td><td >20</td><td >Best NFT Sports Group Out There</td><td ><mat-icon>delete</mat-icon></td>
+            </tr ><tr><td>Rock1</td><td >20</td><td >Best NFT Sports Group Out There</td><td ><mat-icon>delete</mat-icon></td>
+            </tr ><tr><td>Rock1</td><td >20</td><td >Best NFT Sports Group Out There</td><td ><mat-icon>delete</mat-icon></td>
+          </tbody>
+        </table>
+      </div>
     </div>
-    <div class="flex justify-end w-full">
+
+    <div class="flex justify-between w-full">
+      <div class="inline-flex items-center text-gray-500">
+        Show 1-15/100
+       </div>
       <div class="pagination">
         <button class="h-8 rounded-md icon-btn w-9 bg-primary-a">
           <svg xmlns="http://www.w3.org/2000/svg" width="17.618" height="11.75" viewBox="0 0 17.618 11.75">

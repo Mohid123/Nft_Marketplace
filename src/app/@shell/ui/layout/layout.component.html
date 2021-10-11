@@ -38,7 +38,7 @@
           </li>
           <li class="relative inline-block">
             <a class="menu-link icon-btn" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
-              [routerLink]="['/admin/group']">
+              [routerLink]="['/admin/groups']">
               <mat-icon>group_work</mat-icon>
             </a>
           </li>
@@ -63,6 +63,7 @@
     </mat-sidenav>
     <mat-sidenav-content>
       <div class="main">
+        <app-admin-header></app-admin-header>
         <ng-content></ng-content>
       </div>
     </mat-sidenav-content>
