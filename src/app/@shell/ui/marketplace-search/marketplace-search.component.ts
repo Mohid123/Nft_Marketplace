@@ -26,4 +26,6 @@ export class MarketplaceSearchComponent implements OnInit {
     this.customDialogService.ShowUserSignInDialog();
   }
 
+
+
 }
