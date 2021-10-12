@@ -26,4 +26,8 @@ export class MarketPlacePage implements OnInit {
     this.customDialogService.showCreateNFTOptionsDialog();
   }
 
+  priceModal(){
+    this.customDialogService.showCreateNFTStyleDialog();
+  }
+
 }
