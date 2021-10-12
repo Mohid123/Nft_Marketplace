@@ -1,13 +1,16 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl, FormGroup, Validators
+} from '@angular/forms';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 
 @Component({
-  selector: 'app-create-nft',
-  templateUrl: './create-nft.component.html',
-  styleUrls: ['./create-nft.component.scss'],
+  selector: 'app-create-membership',
+  templateUrl: './create-membership.component.html',
+  styleUrls: ['./create-membership.component.scss'],
 })
-export class CreateNFTComponent {
+export class CreateMembershipComponent {
   public createNft: FormGroup;
 
   constructor(
@@ -24,9 +27,6 @@ export class CreateNFTComponent {
     // this.passwordHide= true;
   }
 
-  nextClick():void{
-  this.customDialogService.showCreateNFTStyleDialog();
-}
   close(): void {
     this.customDialogService.closeDialogs();
   }

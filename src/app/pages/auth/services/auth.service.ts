@@ -9,7 +9,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AuthService {
   isLoggedIn$ = new BehaviorSubject<boolean>(!!getItem(StorageItem.Auth));
-  role$ = new BehaviorSubject<ROLE_TYPE_UTILS>((<ROLE_TYPE_UTILS>getItem(StorageItem.role)));
+  role$ = new BehaviorSubject<ROLE_TYPE_UTILS>((<ROLE_TYPE_UTILS>getItem(StorageItem.Role)));
 
   constructor(private router: Router) {}
 
@@ -29,9 +29,9 @@ export class AuthService {
         .join('-');
 
       setItem(StorageItem.Auth, token);
-      setItem(StorageItem.role, ROLE_TYPE_UTILS.user);
+      setItem(StorageItem.Role, ROLE_TYPE_UTILS.user);
       this.isLoggedIn$.next(true);
-      this.role$.next(ROLE_TYPE_UTILS.admin);
+      this.role$.next(ROLE_TYPE_UTILS.user);
       resolve(true);
     });
   }
@@ -44,7 +44,7 @@ export class AuthService {
         .join('-');
 
       setItem(StorageItem.Auth, token);
-      setItem(StorageItem.role, ROLE_TYPE_UTILS.admin);
+      setItem(StorageItem.Role, ROLE_TYPE_UTILS.admin);
       this.isLoggedIn$.next(true);
       this.role$.next(ROLE_TYPE_UTILS.admin);
       resolve(true);
@@ -53,6 +53,7 @@ export class AuthService {
 
   signOut(): void {
     removeItem(StorageItem.Auth);
+    removeItem(StorageItem.Key);
     this.isLoggedIn$.next(false);
     this.role$.next(ROLE_TYPE_UTILS.noUser);
   }

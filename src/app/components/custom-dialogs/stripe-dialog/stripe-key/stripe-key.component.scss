@@ -1,29 +1,31 @@
 ::ng-deep .strip-key-dialog-overlay {
   height: auto;
-  min-height: 584px;
+  min-height: 490px;
   max-width: 580px !important;
 }
 
- .group-model {
-   @apply flex flex-col items-center px-0  sm:px-16;
+.group-model {
+  @apply flex flex-col justify-start px-0 sm:px-16;
 
-   .btn-close {
+  .btn-close {
     @apply absolute top-0 right-0 bg-white rounded-full opacity-50 m-3.5 hover:opacity-70;
     padding: 1px;
+
     svg {
       color: #132356;
     }
   }
 
   img {
-    @apply object-scale-down mt-6 sm:mt-6 md:mt-12;
-    width: 410px;
-    height: 90px;
+    @apply object-scale-down mt-4 mb-4;
+    width: 145px;
+    height: 70px;
   }
 
   h1 {
-    @apply my-4 text-3xl self-start;
+    @apply my-4 mx-0 text-3xl self-start;
     font-weight: 400;
+
     span {
       padding-bottom: 4px;
       border-bottom: 2px solid #75F16D;
@@ -46,14 +48,14 @@
       height: 156px;
     }
 
-    p{
-      @apply px-2;
+    p {
+      @apply text-gray-400;
     }
 
     button {
-      @apply w-40 h-11 my-8 self-center;
+      @apply w-40 h-11 mb-5 self-center;
     }
 
   }
 
- }
+}

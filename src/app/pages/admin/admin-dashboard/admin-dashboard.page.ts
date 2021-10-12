@@ -1,4 +1,7 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
+import { getItem, StorageItem } from '@app/@core/utils';
+import { AuthService } from '@app/pages/auth/services/auth.service';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 
@@ -71,16 +74,27 @@ export class AdminDashboardPage implements AfterViewInit {
   public lineChartType: ChartType = 'line';
   public lineChartPlugins = [];
 
-  ngAfterViewInit() {
-    console.log('aksdjkasjd');
+  constructor(
+    private authService:AuthService,
+    private customDialogService:CustomDialogService,
+  ){
+
+  }
+
+  ngAfterViewInit(): void {
+    // console.log('aksdjkasjd');
     const gradient = this.canvas.nativeElement
       .getContext('2d')
       .createLinearGradient(100, 0, 220, 600);
     gradient.addColorStop(0, '#0040ff');
     gradient.addColorStop(0.2, '#bf00ff');
     gradient.addColorStop(0.5, '#ffff35');
-    console.log('gradient:',gradient);
+    // console.log('gradient:',gradient);
     this.lineChartColors[0].backgroundColor = gradient;
     this.lineChartColors[0].borderColor = gradient;
+
+    if(this.authService.isLoggedIn && !getItem(StorageItem.Key)) {
+      this.customDialogService.showStripeKeyDialog();
+    }
   }
 }

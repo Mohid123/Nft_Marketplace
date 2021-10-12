@@ -8,15 +8,19 @@
       </svg>
     </button>
   </div>
-  <h1><span>Cre</span>ate Group</h1>
+  <img src="./assets/logo/stripe-logo-blue.png">
+  <div class="flex justify-between my-6">
+    <h1><span>Ent</span>er Stripe Key</h1>
+    <button class="text-sm text-green-400">Help</button>
+  </div>
   <form [formGroup]="stripeForm" class="group-form">
-      <label for="key">Key</label>
-      <input type="text" formControlName="key">
+      <p class="mb-9">Enter Club stripe secret key to perform marketplace payments.</p>
+      <input class="mb-14" type="text" formControlName="key">
       <p class="error-msg error" *ngIf="stripeForm.controls.key.touched && stripeForm.controls.key.errors?.required">please enter key</p>
       <p class="error-msg error" *ngIf="stripeForm.controls.key.touched && stripeForm.controls.key.errors?.key">please enter valid key</p>
 
-    <button class="primary-btn" (click)="close()">
-      Add Group
+    <button class="primary-btn" (click)="addKey()">
+      Next
     </button>
 
   </form>

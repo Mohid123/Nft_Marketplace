@@ -16,8 +16,6 @@ export class HeaderComponent {
 
   onClickSignOut(): void {
     this.authService.signOut();
-
-    const { root, signIn } = ROUTER_UTILS.config.auth;
-    this.router.navigate(['/', root, signIn]);
+    this.router.navigate(['/']);
   }
 }
