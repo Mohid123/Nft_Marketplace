@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthDialogService } from '@app/components/custom-dialogs/auth-diloag/auth-dialog.service';
+import { CreateGroupService } from './../../../components/custom-dialogs/create-group-dialog/create-group.service';
 import { CreateNFTDiloagService } from './../../../components/custom-dialogs/create-ntf-diloag/create-nft-diloag.service';
+import { StripeDialogService } from './../../../components/custom-dialogs/stripe-dialog/stripe-dialog.service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +18,8 @@ export class CustomDialogService {
     protected router: Router,
     private authDialogService: AuthDialogService,
     private createNFTDiloagService: CreateNFTDiloagService,
+    private createGroupService: CreateGroupService,
+    private stripeDialogService: StripeDialogService,
     public matDialog: MatDialog
   ) {}
 
@@ -24,7 +28,7 @@ export class CustomDialogService {
   //   this.matDialog.open(UserSignInComponent);
   // }
 
-  async ShowUserSignInDialog() {
+  async showUserSignInDialog() {
     this.matDialog.closeAll();
     this._mapDialogref = await this.authDialogService.openUserSignIn();
     // (await this._mapDialogref).afterClosed().subscribe((result) => {
@@ -32,7 +36,7 @@ export class CustomDialogService {
     // });
   }
 
-  async ShowAdminSignInDialog() {
+  async showAdminSignInDialog() {
     this.matDialog.closeAll();
     this._mapDialogref = await this.authDialogService.openAdminSignIn();
     // (await this._mapDialogref).afterClosed().subscribe((result) => {
@@ -40,7 +44,7 @@ export class CustomDialogService {
     // });
   }
 
-  async ShowCreateNFTDialog() {
+  async showCreateNFTDialog() {
     this.matDialog.closeAll();
     this._mapDialogref = await this.createNFTDiloagService.openCreateNFTComponent();
     // (await this._mapDialogref).afterClosed().subscribe((result) => {
@@ -48,7 +52,7 @@ export class CustomDialogService {
     // });
   }
 
-  async ShowCreateNFTOptionsDialog() {
+  async showCreateNFTOptionsDialog() {
     this.matDialog.closeAll();
     this._mapDialogref = await this.createNFTDiloagService.openCreateNFTOptionsComponent();
     // (await this._mapDialogref).afterClosed().subscribe((result) => {
@@ -56,9 +60,33 @@ export class CustomDialogService {
     // });
   }
 
-  async ShowCreateNFTStyleDialog() {
+  async showCreateNFTStyleDialog() {
     this.matDialog.closeAll();
     this._mapDialogref = await this.createNFTDiloagService.openCreateNFTStyleComponent();
+    // (await this._mapDialogref).afterClosed().subscribe((result) => {
+    //   console.log('Mat Dialog Results admin sign in:', result);
+    // });
+  }
+
+  async showCreateGroupDialog() {
+    this.matDialog.closeAll();
+    this._mapDialogref = await this.createGroupService.openCreateGroup();
+    // (await this._mapDialogref).afterClosed().subscribe((result) => {
+    //   console.log('Mat Dialog Results admin sign in:', result);
+    // });
+  }
+
+  async showStripeKeyDialog() {
+    this.matDialog.closeAll();
+    this._mapDialogref = await this.stripeDialogService.openStripeKeyComponent();
+    // (await this._mapDialogref).afterClosed().subscribe((result) => {
+    //   console.log('Mat Dialog Results admin sign in:', result);
+    // });
+  }
+
+  async showStripePaymenDialog() {
+    this.matDialog.closeAll();
+    this._mapDialogref = await this.stripeDialogService.openStripePaymentComponent();
     // (await this._mapDialogref).afterClosed().subscribe((result) => {
     //   console.log('Mat Dialog Results admin sign in:', result);
     // });

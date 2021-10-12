@@ -21,9 +21,9 @@ export class SignInPage implements OnInit , OnDestroy {
       this.activatedRoute.snapshot.data.page ==
       ROUTER_UTILS.config.auth.adminSignIn
     ) {
-      this.customDialogService.ShowAdminSignInDialog();
+      this.customDialogService.showAdminSignInDialog();
     } else {
-      this.customDialogService.ShowUserSignInDialog();
+      this.customDialogService.showUserSignInDialog();
     }
   }
 

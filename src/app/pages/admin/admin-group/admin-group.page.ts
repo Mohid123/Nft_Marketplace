@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CustomDialogService } from './../../../@core/services/custom-dialog/custom-dialog.service';
 
 @Component({
   selector: 'app-admin-group',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminGroupPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private customDialogService:CustomDialogService,
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  newGroup() {
+    this.customDialogService.showCreateGroupDialog()
   }
 
 }

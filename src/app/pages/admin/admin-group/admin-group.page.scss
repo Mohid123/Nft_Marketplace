@@ -23,9 +23,9 @@
 }
 
 .groups-container {
-   @apply border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-1 rounded-xl mb-12;
+   @apply h-auto border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-1 rounded-xl mb-12;
 
-   height: 470px;
+   min-height: 400px;
 
    th {
      @apply px-10 h-10 text-left;
