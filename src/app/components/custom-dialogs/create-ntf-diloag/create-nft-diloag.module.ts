@@ -4,6 +4,7 @@ import { CreateNFTOptionsComponent } from './create-nft-options/create-nft-optio
 import { CreateNFTStyleComponent } from './create-nft-style/create-nft-style.component';
 import { CreateNFTComponent } from './create-nft/create-nft.component';
 import { CreateNFTMintingComponent } from './create-ntf-minting/create-nft-minting.component';
+import { CreateMembershipComponent } from './create-membership/create-membership.component';
 
 
 
@@ -13,6 +14,7 @@ import { CreateNFTMintingComponent } from './create-ntf-minting/create-nft-minti
     CreateNFTOptionsComponent,
     CreateNFTStyleComponent,
     CreateNFTMintingComponent,
+    CreateMembershipComponent,
   ],
   imports: [
     CommonModule
@@ -28,5 +30,8 @@ export class CreateNFTDiloagModule {
   }
   static getCreateNFTStyleComponent(): typeof CreateNFTStyleComponent {
     return CreateNFTStyleComponent;
+  }
+  static getCreateNFTMintingComponent(): typeof CreateNFTMintingComponent {
+    return CreateNFTMintingComponent;
   }
 }

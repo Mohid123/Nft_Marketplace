@@ -43,4 +43,14 @@ export class CreateNFTDiloagService extends AsyncCreateNFTDialog< CreateNFTCompo
       panelClass: ['create-nft-style-dialog-overlay', 'action-dialog'],
     });
   }
+
+  async openCreateNFTMintingComponent(): Promise<MatDialogRef<CreateNFTMintingComponent>> {
+    const { CreateNFTDiloagModule: CreateNFTDiloagModule } = await import(
+      './create-nft-diloag.module'
+    );
+    return this.matDialog.open(CreateNFTDiloagModule.getCreateNFTMintingComponent(), {
+      disableClose: true,
+      panelClass: ['create-nft-style-dialog-overlay', 'action-dialog'],
+    });
+  }
 }

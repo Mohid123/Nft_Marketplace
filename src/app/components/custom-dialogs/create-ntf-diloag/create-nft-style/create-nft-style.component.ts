@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 
 @Component({
   selector: 'app-create-nft-style',
   templateUrl: './create-nft-style.component.html',
   styleUrls: ['./create-nft-style.component.scss']
 })
-export class CreateNFTStyleComponent implements OnInit {
+export class CreateNFTStyleComponent {
 
-  constructor() { }
+  constructor(
+    private customDialogService: CustomDialogService,
+  ) { }
 
-  ngOnInit(): void {
+  close():void {
+    this.customDialogService.closeDialogs();
   }
-
 }

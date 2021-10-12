@@ -3,7 +3,6 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, ViewChild } from '@a
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { delay } from 'rxjs/operators';
-import { ROUTER_UTILS } from './../../../@core/utils/router.utils';
 import { AuthService } from './../../../pages/auth/services/auth.service';
 
 @Component({
@@ -40,8 +39,6 @@ export class LayoutComponent implements AfterViewInit {
 
   onClickSignOut(): void {
     this.authService.signOut();
-
-    const { root, adminSignIn } = ROUTER_UTILS.config.auth;
-    this.router.navigate(['/', root, adminSignIn]);
+    this.router.navigate(['/']);
   }
 }
