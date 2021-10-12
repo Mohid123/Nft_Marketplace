@@ -23,7 +23,7 @@ export class MarketplaceSearchComponent implements OnInit {
   }
 
   login() {
-    this.customDialogService.ShowUserSignInDialog();
+    this.customDialogService.showUserSignInDialog();
   }
 
 }
