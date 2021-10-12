@@ -155,3 +155,22 @@ svg {
   background-color: #34ABC5;
   background-image: linear-gradient(to bottom, #59C8D1 0%, #75F16D 100%);
 }
+
+
+.custom-scrollbar-css-y {
+  overflow-x: scroll;
+}
+/* scrollbar width */
+.custom-scrollbar-css-y::-webkit-scrollbar {
+  height: 7px;
+}
+/* scrollbar track */
+.custom-scrollbar-css-y::-webkit-scrollbar-track {
+  background: #eee;
+}
+/* scrollbar handle */
+.custom-scrollbar-css-y::-webkit-scrollbar-thumb {
+  border-radius: 1rem;
+  background-color: #34ABC5;
+  background-image: linear-gradient(to bottom, #59C8D1 0%, #75F16D 100%);
+}
