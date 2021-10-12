@@ -12,8 +12,8 @@
   <form [formGroup]="groupForm" class="group-form">
       <label for="name">Name</label>
       <input type="text" formControlName="name">
-      <p class="error-msg error" *ngIf="groupForm.controls.name.touched && groupForm.controls.name.errors?.required">please enter name address</p>
-      <p class="error-msg error" *ngIf="groupForm.controls.name.touched && groupForm.controls.name.errors?.name">please enter valid name address</p>
+      <p class="error-msg error" *ngIf="groupForm.controls.name.touched && groupForm.controls.name.errors?.required">please enter name</p>
+      <p class="error-msg error" *ngIf="groupForm.controls.name.touched && groupForm.controls.name.errors?.name">please enter valid name</p>
 
       <label class="floating-label" for="description">Description</label>
       <textarea type="text" formControlName="description"></textarea>
