@@ -5,7 +5,7 @@
 }
 
 
- .sign-in-model {
+ .create-nft-model {
    @apply flex flex-col  px-0  sm:px-20;
 
 
@@ -18,7 +18,7 @@
   }
 
   img {
-    @apply m-5 p-1 ;
+
     width: 68px;
     height: 68px;
 
@@ -33,8 +33,8 @@
     }
   }
 
-  button {
-    @apply w-44 h-11  sm:my-14 self-center;
+  .primary-btn {
+    @apply w-44 h-12  sm:my-14 self-center;
   }
 
   form {
@@ -49,12 +49,4 @@
 
   }
 
- }
-
- ul{
-   width: 79px;
-   height: 79px;
- }
- li {
-   margin:0px 5px;
  }

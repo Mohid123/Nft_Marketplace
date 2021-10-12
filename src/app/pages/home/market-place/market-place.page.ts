@@ -19,8 +19,11 @@ export class MarketPlacePage implements OnInit {
   }
 
   test(){
-    this.customDialogService.ShowCreateNFTDialog();
+    this.customDialogService.showCreateNFTDialog();
 
+  }
+  test2(){
+    this.customDialogService.showCreateNFTOptionsDialog();
   }
 
 }
