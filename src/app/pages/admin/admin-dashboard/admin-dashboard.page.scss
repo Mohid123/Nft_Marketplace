@@ -19,7 +19,7 @@ svg {
   background-size: auto 300px;
 
   .section {
-    @apply absolute bottom-0 w-full h-32 flex justify-center items-center bg-white;
+    @apply absolute bottom-0 w-full h-32 flex justify-around items-center bg-white;
     .listed,
     .sold,
     .profit {
@@ -134,4 +134,24 @@ svg {
       color: #4e4f6c;
     }
   }
+}
+
+
+/* Custom Scrollbar using CSS */
+.custom-scrollbar-css {
+  overflow-y: scroll;
+}
+/* scrollbar width */
+.custom-scrollbar-css::-webkit-scrollbar {
+  width: 7px;
+}
+/* scrollbar track */
+.custom-scrollbar-css::-webkit-scrollbar-track {
+  background: #eee;
+}
+/* scrollbar handle */
+.custom-scrollbar-css::-webkit-scrollbar-thumb {
+  border-radius: 1rem;
+  background-color: #34ABC5;
+  background-image: linear-gradient(to bottom, #59C8D1 0%, #75F16D 100%);
 }
