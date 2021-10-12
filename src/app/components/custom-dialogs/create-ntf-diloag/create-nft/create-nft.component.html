@@ -28,16 +28,47 @@
   </div>
   <div class="flex flex-col">
     <span class="text-xl">Select Logo</span><br>
-    <input type='file' class="border-2 border-gray-400 border-dashed " placeholder="Select logo to upload">
+    <div class="relative flex justify-between mt-4 mb-4 overflow-hidden border-2 border-gray-400 border-dashed rounded-lg">
+    <button
+      class="flex items-center justify-between w-full px-4 py-2 font-bold text-gray-400 bg-primary-d hover:bg-indigo-dark">
+      <div class="ml-2 font-medium text-gray-400">Select logo to Upload</div>
+      <div>
+        <svg
+          fill="#FFF"
+          height="28"
+          viewBox="0 0 24 24"
+          width="28"
+          xmlns="http://www.w3.org/2000/svg"
+          class="m-2">
+          <path d="M0 0h24v24H0z" fill="none" />
+          <path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z" />
+        </svg>
+      </div>
+    </button>
+    <input
+      class="absolute block opacity-0 cursor-pointer pin-r pin-t "
+      type="file"
+      name=""
+    />
+  </div>
   </div>
   <div class="flex items-center justify-between mt-4">
     <div class="inline-flex flex-col">
       <span class="text-xl">Select Logo</span><br>
-      <input type="email" class="w-44" placeholder="22/09/2021">
+      <input type="date" class="px-2 text-gray-400 w-44" >
     </div>
     <div class="inline-flex flex-col">
       <span class="text-xl">Select Logo</span><br>
-      <input type="email" class="w-44" placeholder="Rock">
+      <!-- <input type="email" class="w-44" placeholder="Rock"> -->
+      <label class="block text-left">
+
+        <select
+          class="block h-16 px-4 text-lg text-gray-400 rounded-lg bg-primary-d focus:outline-none w-44 form-select">
+          <option>Rock 1</option>
+          <option>Rock 2</option>
+        </select>
+      </label>
+
     </div>
   </div>
   <div class="flex flex-col mt-4">

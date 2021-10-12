@@ -19,10 +19,16 @@
 
   img {
 
+    @apply focus:ring;
     width: 68px;
     height: 68px;
 
   }
+  //
+
+  // select{
+  //   text-indent: 5px;
+  // }
 
   h1 {
     @apply capitalize my-12 text-3xl;
@@ -50,3 +56,16 @@
   }
 
  }
+
+ input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  border-radius: 4px;
+  margin-right: 2px;
+  opacity: 0.6;
+  filter: invert(0.8);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1
+}
+
