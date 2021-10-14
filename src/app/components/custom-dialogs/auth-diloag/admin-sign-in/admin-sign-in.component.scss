@@ -32,6 +32,9 @@
 
   form {
     @apply flex flex-col w-full;
+    p{
+      @apply text-red-400;
+    }
 
     label {
       @apply py-4 text-lg;
