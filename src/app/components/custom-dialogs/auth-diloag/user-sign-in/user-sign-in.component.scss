@@ -15,7 +15,7 @@
     }
   }
 
-  img {
+  .logo {
     @apply object-scale-down mt-6 sm:mt-6 md:mt-12;
     width: 410px;
     height: 90px;
@@ -32,6 +32,10 @@
 
   form {
     @apply flex flex-col w-full;
+
+    p{
+      @apply text-red-400
+    }
 
     label {
       @apply px-3 py-4 text-lg;

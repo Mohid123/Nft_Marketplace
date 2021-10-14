@@ -8,19 +8,28 @@
       </svg>
     </button>
   </div>
-  <img src="./assets/logo/logo.png">
+  <img class="logo" src="./assets/logo/logo.png">
   <h1 class=""><span>Sig</span>n in</h1>
   <form  [formGroup]="loginForm" class="sign-in-form">
-      <label for="email">email</label>
+      <label for="email" class="font-normal">Email</label>
       <input type="email" formControlName="email">
       <p class="error-msg error" *ngIf="loginForm.controls.email.touched && loginForm.controls.email.errors?.required">please enter email address</p>
       <p class="error-msg error" *ngIf="loginForm.controls.email.touched && loginForm.controls.email.errors?.email">please enter valid email address</p>
 
-      <label class="floating-label" for="password">password</label>
-      <input type="{{passwordHide ? 'password' : 'text'}}" formControlName="password">
-      <span class="icon password-hide-icon"></span>
+      <label class="font-normal floating-label" for="password">Password</label>
+
+      <div class="relative w-full text-gray-600 focus-within:text-white">
+        <span class="absolute inset-y-0 right-0 flex items-center pr-2 cursor-pointer">
+          <span  class="p-1 focus:outline-none focus:shadow-outline">
+            <img class="w-6 h-3 opacity-25" src="./assets/icons/show-pass.svg" alt="">
+          </span>
+        </span>
+        <input class="w-full" type="{{passwordHide ? 'password' : 'text'}}" formControlName="password">
+      </div>
       <p class="error-msg error" *ngIf="loginForm.controls.password.touched && loginForm.controls.password.errors?.required">please enter password</p>
       <p class="error-msg error" *ngIf="loginForm.controls.password.touched && loginForm.controls.password.errors?.minlength">password length should be greater than 5</p>
+    <br>
+
 
 
     <button class="primary-btn" (click)="signInClick()">
