@@ -175,3 +175,20 @@ svg {
   background-image: linear-gradient(to bottom, #59C8D1 0%, #75F16D 100%);
 }
 
+
+.coming-soon {
+  position: absolute;
+  right: 32%;
+  top: 40%;
+  font-size: 90px;
+  color: white;
+  text-shadow: 2px 2px 4px #000000;
+}
+
+@media (max-width: 640px) {
+  .coming-soon {
+    font-size: 24px !important;
+
+  }
+}
+

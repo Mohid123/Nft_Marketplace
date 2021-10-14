@@ -31,7 +31,7 @@
     <app-profile-button *ngIf="isLoggedIn$ |async; else signIn">
     </app-profile-button>
     <ng-template #signIn>
-      <button (click)="login()" class="items-center justify-between w-20 p-1 mt-4 text-white bg-green-500 hover:bg-green-600 md:p-3 lg:p-3 md:w-36 lg:w-36 rounded-xl focus:outline-none hover:bg-green-400 md:mt-0">Login
+      <button (click)="login()" class="items-center justify-between w-20 p-1 mt-4 text-white bg-green-500 md:p-3 lg:p-3 md:w-36 lg:w-36 rounded-xl focus:outline-none hover:bg-green-600 md:mt-0">Login
       </button>
   </ng-template>
   </div>
