@@ -19,16 +19,12 @@
 
   img {
 
-    @apply focus:ring;
+    @apply focus:ring p-1;
     width: 68px;
     height: 68px;
 
   }
-  //
 
-  // select{
-  //   text-indent: 5px;
-  // }
 
   h1 {
     @apply capitalize my-12 text-3xl;
@@ -50,9 +46,6 @@
       @apply px-3 py-4 text-lg;
     }
 
-
-
-
   }
 
  }
@@ -67,5 +60,27 @@
 
 input[type="date"]::-webkit-calendar-picker-indicator:hover {
   opacity: 1
+}
+
+[type=radio] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* IMAGE STYLES */
+[type=radio] + img {
+  cursor: pointer;
+}
+
+/* CHECKED STYLES */
+[type=radio]:checked + img  {
+  box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-image: linear-gradient(136deg, #41A6FF 0%, #46F3AC 100%);
+  border-image-slice: 1;
+  border-radius: 5px;
 }
 

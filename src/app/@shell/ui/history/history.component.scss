@@ -19,10 +19,11 @@
 
   border-style: solid;
 
-  //border-image-source: linear-gradient(to bottom, #59C8D1 0%, #75F16D 100%);
+  // border-image-source: linear-gradient(to bottom, #59C8D1 0%, #75F16D 100%);
   border-color: #74d8a1;
   border-image-slice: 20;
   border-image-repeat: stretch;
+  radius: 20px;
 
   padding: 5px 15px;
 }
@@ -51,4 +52,8 @@
   width: 100%;
   border-spacing: 0 25px;
   border-radius: 20px !important;
+}
+
+th{
+  font-weight: 400;
 }

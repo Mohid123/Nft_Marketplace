@@ -52,10 +52,10 @@ svg {
       @apply w-28;
 
       p {
-        @apply text-white opacity-50 tracking-normal text-sm mb-2;
+        @apply text-gray-100 tracking-wider text-sm mb-2;
       }
       span {
-        @apply text-white font-medium text-2xl;
+        @apply text-white font-medium text-2xl tracking-wide;
       }
     }
 
@@ -173,5 +173,22 @@ svg {
   border-radius: 1rem;
   background-color: #34ABC5;
   background-image: linear-gradient(to bottom, #59C8D1 0%, #75F16D 100%);
+}
+
+
+.coming-soon {
+  position: absolute;
+  right: 32%;
+  top: 40%;
+  font-size: 90px;
+  color: white;
+  text-shadow: 2px 2px 4px #000000;
+}
+
+@media (max-width: 640px) {
+  .coming-soon {
+    font-size: 24px !important;
+
+  }
 }
 

@@ -5,7 +5,7 @@
 
   .filter {
     @apply flex justify-around items-center flex-grow h-full;
-    border-left: 1px solid #ffffff3a;
+    border-left: 1px solid #afafaf3a;
     font-size: 9px;
 
     button {
@@ -23,12 +23,14 @@
 }
 
 .groups-container {
-   @apply h-auto border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-1 rounded-xl mb-12;
+   @apply  h-auto border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-1 rounded-xl mb-12;
 
    min-height: 400px;
-
+  table {
+    @apply bg-primary-e rounded-3xl
+  }
    th {
-     @apply px-10 h-10 text-left;
+     @apply px-10 h-12 text-left uppercase font-medium;
    }
 
    th:last-child {
@@ -39,8 +41,8 @@
      @apply overflow-auto ;
      height: 420px;
      tr {
-       @apply h-16;
-      border-top: 1px solid #ffffff3a;
+       @apply h-20;
+      border-top: 1px solid #aaaaaa2a;
 
       td {
         @apply px-10;
@@ -63,4 +65,12 @@
   span {
     @apply font-medium;
   }
+}
+
+.tooltip {
+  @apply invisible absolute;
+}
+
+.has-tooltip:hover .tooltip {
+  @apply visible z-50 ;
 }

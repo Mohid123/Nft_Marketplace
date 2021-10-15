@@ -2,15 +2,36 @@
   <div class="flex flex-col flex-wrap mx-auto md:items-center lg:items-center md:flex-row">
     <img class="flex-wrap w-36 md:w-42 lg:w-42 " src="./assets/logo/logo.png" alt="Joker Card" />
   <div class="justify-center flex-grow ">
+
+
     <div class="pt-2">
+<!--
       <input class="flex w-full px-5 mx-auto text-sm bg-gray-500 bg-opacity-25 rounded-lg h-11 md:w-2/3 lg:w-2/3 focus:bg-white md:h-14 lg:h-14 focus:outline-none "
-        type="search" name="search" placeholder="Search  NFT..."  />
+        type="search" name="search" placeholder="Search  NFT..."  /> -->
+
+        <!-- <div class="relative text-gray-600 focus-within:text-white">
+
+          <span class="absolute inset-y-0 right-0 flex items-center pr-2 cursor-pointer">
+            <span  class="p-1 focus:outline-none focus:shadow-outline">
+              <img class="w-6 h-3 opacity-25" src="./assets/icons/show-pass.svg" alt="">
+            </span>
+          </span>
+          <input class="flex w-full px-5 mx-auto text-sm bg-gray-500 bg-opacity-25 rounded-lg h-11 md:w-2/3 lg:w-2/3 focus:bg-white md:h-14 lg:h-14 focus:outline-none "
+            type="search" name="search" placeholder="Search  NFT..."  />
+        </div> -->
+        <div class="relative">
+         <input type="text" class="flex w-full px-5 mx-auto text-sm bg-gray-500 bg-opacity-25 rounded-lg h-11 md:w-2/3 lg:w-2/3 focus:bg-white md:h-14 lg:h-14 focus:outline-none" placeholder="Search NFT...">
+          <div class="absolute inset-y-0 md:inset-y-0 lg:inset-y-0 right-4 md:right-40 lg:right-40">  <span  class="p-1 focus:outline-none focus:shadow-outline">
+            <img class="w-10 h-3 " src="./assets/icons/search.svg" alt="">
+          </span>
+         </div>
+      </div>
     </div>
     </div>
     <app-profile-button *ngIf="isLoggedIn$ |async; else signIn">
     </app-profile-button>
     <ng-template #signIn>
-      <button (click)="login()" class="items-center justify-between w-20 p-1 mt-4 text-white bg-green-500 hover:bg-green-600 md:p-3 lg:p-3 md:w-36 lg:w-36 rounded-xl focus:outline-none hover:bg-green-400 md:mt-0">Login
+      <button (click)="login()" class="items-center justify-between w-20 p-1 mt-4 text-white bg-green-500 md:p-3 lg:p-3 md:w-36 lg:w-36 rounded-xl focus:outline-none hover:bg-green-600 md:mt-0">Login
       </button>
   </ng-template>
   </div>

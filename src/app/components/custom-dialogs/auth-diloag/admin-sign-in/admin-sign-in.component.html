@@ -8,16 +8,29 @@
       </svg>
     </button> -->
   </div>
-  <img src="./assets/logo/logo.png">
-  <!-- <h1 class=""><span>Sig</span>n in</h1> -->
+  <img class="logo" src="./assets/logo/logo.png">
   <form  [formGroup]="loginForm" class="sign-in-form">
-      <label for="email">email</label>
-      <input type="email" formControlName="email">
+      <label for="email" class="font-normal">Username</label>
+      <div class="relative w-full text-gray-600 focus-within:text-gray-800">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-2">
+          <span  class="p-1 focus:outline-none focus:shadow-outline">
+            <img class="w-4 h-4" src="../../../../../assets/icons/username.svg" alt="">
+          </span>
+        </span>
+        <input type="email" class="w-full" formControlName="email">
+      </div>
       <p class="error-msg error" *ngIf="loginForm.controls.email.touched && loginForm.controls.email.errors?.required">please enter email address</p>
       <p class="error-msg error" *ngIf="loginForm.controls.email.touched && loginForm.controls.email.errors?.email">please enter valid email address</p>
 
-      <label class="floating-label" for="password">password</label>
-      <input type="{{passwordHide ? 'password' : 'text'}}" formControlName="password">
+      <label class="font-normal floating-label" for="password">Password</label>
+      <div class="relative w-full text-gray-600 focus-within:text-gray-800">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-2">
+          <span  class="p-1 focus:outline-none focus:shadow-outline">
+            <img class="w-4 h-4" src="./assets/icons/password.svg" alt="">
+          </span>
+        </span>
+        <input class="w-full" type="{{passwordHide ? 'password' : 'text'}}" formControlName="password">
+      </div>
       <span class="icon password-hide-icon"></span>
       <p class="error-msg error" *ngIf="loginForm.controls.password.touched && loginForm.controls.password.errors?.required">please enter password</p>
       <p class="error-msg error" *ngIf="loginForm.controls.password.touched && loginForm.controls.password.errors?.minlength">password length should be greater than 5</p>
@@ -30,9 +43,10 @@
   </form>
   <div class="language-container">
     <span>Select Language</span>
-    <button mat-icon-button aria-label="menu" class="w-16 primary-btn">
-      <span>Englis</span>
-      <span><mat-icon>arrow_drop_down</mat-icon></span>
-    </button>
+    <select >
+    <option>English</option>
+    <option>Bulgarian</option>
+    <option>Spanish</option>
+  </select>
   </div>
 </div>

@@ -37,4 +37,8 @@ export class UserSignInComponent {
     })
   }
 
+  close(){
+    this.customDialogService.closeDialogs()
+  }
+
 }

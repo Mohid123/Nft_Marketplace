@@ -16,7 +16,7 @@
     }
   }
 
-  img {
+  .logo {
     @apply object-scale-down mt-6 sm:mt-6 md:mt-12 h-16;
     width: 304;
   }
@@ -32,6 +32,9 @@
 
   form {
     @apply flex flex-col w-full;
+    p{
+      @apply text-red-400;
+    }
 
     label {
       @apply py-4 text-lg;
@@ -42,8 +45,9 @@
     }
 
     button {
-      @apply w-full h-12 my-10 sm:my-14 self-center text-white font-bold uppercase;
+      @apply w-full h-12 my-10 sm:my-14 self-center text-white font-medium uppercase tracking-widest;
       background: transparent linear-gradient(97deg, #3BC0F2 0%, #31D491 100%) 0% 0% no-repeat padding-box;
+      box-shadow: 8px 9px 22px #3AC2E94A;
     }
 
   }
@@ -53,9 +57,12 @@
  .language-container {
    @apply flex justify-center items-center my-10;
    font-size: 13px;
-   button {
-     @apply w-36 h-9 px-2 flex justify-around items-center text-white;
+   select {
+     @apply w-36 h-9 px-2 flex justify-center items-center text-white rounded-3xl font-light  align-middle text-center;
      background: #31D491 0% 0% no-repeat padding-box;
+    }
+    option{
+      @apply mx-auto flex justify-center;
     }
 
    mat-icon {
