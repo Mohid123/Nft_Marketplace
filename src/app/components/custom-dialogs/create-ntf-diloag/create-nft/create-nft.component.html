@@ -13,7 +13,7 @@
       <h1 class=""><span>Cre</span>ate NFT</h1>
     </div>
     <div class="inline-flex">
-      <span class="text-green-500">Preview</span>
+      <span class="text-green-500 cursor-pointer">Preview</span>
     </div>
   </div>
   <div class="flex flex-col">
@@ -57,10 +57,10 @@
   </div>
   <div class="flex flex-col">
     <span class="text-xl">Select Logo</span><br>
-    <div class="relative flex justify-between mt-4 mb-4 overflow-hidden border-2 border-gray-400 border-dashed rounded-lg">
+    <div class="relative flex justify-between overflow-hidden border-2 border-gray-400 border-dashed rounded-lg">
     <button
       class="flex items-center justify-between w-full px-4 py-2 font-bold text-gray-400 bg-primary-d hover:bg-indigo-dark">
-      <div class="ml-2 font-medium text-gray-400">Select logo to Upload</div>
+      <div class="ml-2 font-light text-gray-400">Select logo to Upload</div>
       <div>
         <svg
           fill="#FFF"
@@ -84,15 +84,15 @@
   <div class="flex items-center justify-between mt-4">
     <div class="inline-flex flex-col">
       <span class="text-xl">Select Logo</span><br>
-      <input type="date" class="px-2 text-gray-400 w-44" >
+      <input type="date" class="px-2 font-light text-gray-400 w-44" >
     </div>
     <div class="inline-flex flex-col">
-      <span class="text-xl">Select Logo</span><br>
+      <span class="text-xl ">Select Logo</span><br>
       <!-- <input type="email" class="w-44" placeholder="Rock"> -->
       <label class="block text-left">
 
         <select
-          class="block h-16 px-4 text-lg text-gray-400 rounded-lg bg-primary-d focus:outline-none w-44 form-select">
+          class="block h-16 px-4 text-lg font-light text-gray-400 rounded-lg bg-primary-d focus:outline-none w-44 form-select">
           <option>Rock 1</option>
           <option>Rock 2</option>
         </select>
@@ -101,8 +101,8 @@
     </div>
   </div>
   <div class="flex flex-col mt-4">
-    <span class="text-xl">Enter Address</span><br>
-    <input type="email" placeholder="Building 76-A Block B South West, 79000">
+    <span class="text-xl ">Enter Address</span><br>
+    <input class="font-light" type="email" placeholder="Building 76-A Block B South West, 79000">
   </div>
   <button class="primary-btn" (click)="nextClick()">
     Next
