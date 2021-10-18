@@ -17,7 +17,7 @@ import { WalletPage } from './wallet/wallet.page';
 
 const childRoutes: Routes = [
   {
-    path: '',
+    path: ':clubName',
     component: MarketPlacePage,
     data: {
       title: 'NFT Market Place',
@@ -27,7 +27,7 @@ const childRoutes: Routes = [
     },
   },
   {
-    path:  ROUTER_UTILS.config.base.detail,
+    path: ':clubName/' + ROUTER_UTILS.config.base.detail + '/:nftId',
     component: CardDetailPage,
     data: {
       title: 'NFT Cart Detail',
@@ -38,7 +38,7 @@ const childRoutes: Routes = [
     canActivate: [UserGuard]
   },
   {
-    path:  ROUTER_UTILS.config.base.tradingHistory,
+    path: ':clubName/' +  ROUTER_UTILS.config.base.tradingHistory,
     component: TradingHistoryPage,
     data: {
       title: 'NFT Trading History',

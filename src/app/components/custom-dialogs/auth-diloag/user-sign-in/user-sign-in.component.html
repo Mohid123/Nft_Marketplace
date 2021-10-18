@@ -20,7 +20,7 @@
 
       <div class="relative w-full text-gray-600 focus-within:text-white">
         <span class="absolute inset-y-0 right-0 flex items-center pr-2 cursor-pointer">
-          <span  class="p-1 focus:outline-none focus:shadow-outline">
+          <span  class="p-1 focus:outline-none focus:shadow-outline" (click)="passwordShowHide()">
             <img class="w-6 h-3 opacity-25" src="./assets/icons/show-pass.svg" alt="">
           </span>
         </span>
@@ -32,7 +32,7 @@
 
 
 
-    <button class="primary-btn" (click)="signInClick()">
+    <button [disabled]="loginForm.invalid" class="primary-btn" (click)="signInClick()">
       Sign in
     </button>
 

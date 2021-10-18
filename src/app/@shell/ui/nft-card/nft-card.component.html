@@ -1,5 +1,5 @@
 <div class="card-border">
-  <a [routerLink]="['/detail']">
+  <a [routerLink]="['detail',nft.id]">
     <div class="nft-img">
       <img class="w-64 h-56" src="../../../../assets/card/TICKET.svg" alt="Joker Card" />
     </div>
@@ -19,7 +19,7 @@
       </div>
     </div>
     <span class="inline-flex text-gray-400">
-      #964
+      #{{nft.tokenId}}
     </span>
   </div>
   <div class="mb-3.5">
@@ -28,7 +28,7 @@
   <div class="flex items-center justify-between">
     <span class="inline-flex">
       <img src="./assets/coin/card-coin.svg" alt="">
-      <span class="ml-2 font-semibold">1.77</span>
+      <span class="ml-2 font-semibold">{{nft.price}}</span>
     </span>
     <button class="w-16 px-4 py-1 text-xs text-white rounded-full h-7 btn-nft">
       Active

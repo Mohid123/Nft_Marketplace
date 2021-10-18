@@ -4,6 +4,7 @@ import { AuthService } from '@app/pages/auth/services/auth.service';
 import { SeoService } from '@core/services/seo';
 import { ThemeService } from '@core/services/theme';
 import { Observable } from 'rxjs';
+import { RouteService } from './@core/services/route.service';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,10 @@ export class AppComponent implements OnInit {
     private seoService: SeoService,
     private themeService: ThemeService,
     private authService: AuthService,
-  ) {}
+    private routeService: RouteService,
+  ) {
+    this.routeService.listenToRouter();
+  }
 
   ngOnInit(): void {
     this.runGlobalServices();

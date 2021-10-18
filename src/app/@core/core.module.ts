@@ -12,7 +12,11 @@ import { JwtInterceptor, ServerErrorInterceptor } from './interceptors';
       useClass: ServerErrorInterceptor,
       multi: true,
     },
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    },
   ],
 })
 export class CoreModule {}
