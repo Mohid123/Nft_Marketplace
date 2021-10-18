@@ -49,9 +49,9 @@
   </div>
 
   <!--nft cards-->
-  <section class="mb-14 ">
+  <section class="flex flex-wrap justify-center mb-14 md:justify-around lg:justify-around ">
     <ng-container *ngIf="nftList && nftList.totalCount > 0">
-      <div *ngFor="let nftCard of nftList.data" class="flex flex-wrap justify-center md:justify-between lg:justify-between ">
+      <div *ngFor="let nftCard of nftList.data" class="">
         <app-nft-card [nft]="nftCard"></app-nft-card>
       </div>
     </ng-container>
