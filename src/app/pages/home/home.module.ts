@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UserGuard } from '@app/@core/guards';
+import { NoAdminGuard, UserGuard } from '@app/@core/guards';
 import { ROUTER_UTILS } from '@app/@core/utils/router.utils';
 import { AppBannerModule } from '@app/@shell/ui/app-banner/app-banner.module';
 import { CardDetailsModule } from '@app/@shell/ui/card-details/card-details.module';
@@ -17,33 +17,31 @@ import { WalletPage } from './wallet/wallet.page';
 
 const childRoutes: Routes = [
   {
-    path: ':clubName',
+    path: '',
     component: MarketPlacePage,
     data: {
       title: 'NFT Market Place',
-      description:
-        'NFT Market Place Description',
+      description: 'NFT Market Place Description',
       robots: 'index, follow',
     },
+    canActivate: [NoAdminGuard],
   },
   {
-    path: ':clubName/' + ROUTER_UTILS.config.base.detail + '/:nftId',
+    path: ROUTER_UTILS.config.base.detail + '/:nftId',
     component: CardDetailPage,
     data: {
       title: 'NFT Cart Detail',
-      description:
-        'NFT Cart Detail Description',
+      description: 'NFT Cart Detail Description',
       robots: 'index, follow',
     },
-    canActivate: [UserGuard]
+    canActivate: [UserGuard],
   },
   {
-    path: ':clubName/' +  ROUTER_UTILS.config.base.tradingHistory,
+    path: ROUTER_UTILS.config.base.tradingHistory,
     component: TradingHistoryPage,
     data: {
       title: 'NFT Trading History',
-      description:
-        'NFT Trading History Description',
+      description: 'NFT Trading History Description',
       robots: 'index, follow',
     },
   },
@@ -52,22 +50,20 @@ const childRoutes: Routes = [
     component: HomePage,
     data: {
       title: 'NFT Market Place',
-      description:
-        'NFT Market Place Description',
+      description: 'NFT Market Place Description',
       robots: 'index, follow',
     },
-    canActivate: [UserGuard]
+    canActivate: [UserGuard],
   },
   {
     path: ROUTER_UTILS.config.base.wallet,
     component: WalletPage,
     data: {
       title: 'NFT Walltet',
-      description:
-        'NFT Wallet Description',
+      description: 'NFT Wallet Description',
       robots: 'index, follow',
     },
-    canActivate: [UserGuard]
+    canActivate: [UserGuard],
   },
 ];
 

@@ -5,8 +5,9 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
-import { setItem, StorageItem } from '@app/@core/utils';
 import { CustomDialogService } from './../../../../@core/services/custom-dialog/custom-dialog.service';
+import { RouteService } from './../../../../@core/services/route.service';
+import { StripeService } from './../../../../@core/services/stripe.service';
 
 @Component({
   selector: 'app-stripe-key',
@@ -19,6 +20,8 @@ export class StripeKeyComponent {
   constructor(
     private customDialogService: CustomDialogService,
     private formBuilder: FormBuilder,
+    private stripeService: StripeService,
+    private routeService: RouteService,
   ) {
     this.stripeForm = this.formBuilder.group({
       key: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -26,7 +29,14 @@ export class StripeKeyComponent {
   }
 
   addKey(): void {
-    setItem(StorageItem.Key, this.stripeForm.controls.key.value);
+    const params = {
+      key: this.stripeForm.controls.key.value,
+      clubName: this.routeService.clubName
+    }
+
+    this.stripeService.addKey(params).subscribe(result=> {
+      console.log('asdasd',result)
+    });
     this.close();
   }
 

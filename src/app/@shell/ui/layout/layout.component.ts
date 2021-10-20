@@ -1,8 +1,11 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { AfterViewInit, ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
-import { delay } from 'rxjs/operators';
+import { ROUTER_UTILS } from '@app/@core/utils/router.utils';
+import { Subject } from 'rxjs';
+import { delay, distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { RouteService } from './../../../@core/services/route.service';
 import { AuthService } from './../../../pages/auth/services/auth.service';
 
 @Component({
@@ -11,15 +14,20 @@ import { AuthService } from './../../../pages/auth/services/auth.service';
   styleUrls: ['./layout.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LayoutComponent implements AfterViewInit {
+export class LayoutComponent implements AfterViewInit, OnDestroy {
+
+  destroy$ = new Subject();
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
   isCollapsed = false;
+  adminRouteUrl = ROUTER_UTILS.config.admin;
+  clubName = '';
 
   constructor(
     private authService: AuthService,
     private observer: BreakpointObserver,
     private router: Router,
+    private routeService: RouteService,
     ) {}
 
   ngAfterViewInit() {
@@ -35,10 +43,21 @@ export class LayoutComponent implements AfterViewInit {
           this.sidenav.open();
         }
       });
+
+      this.routeService.clubName$
+        .pipe(distinctUntilChanged(), takeUntil(this.destroy$))
+        .subscribe((clubName) => {
+          this.clubName = clubName;
+        });
   }
 
   onClickSignOut(): void {
     this.authService.signOut();
     this.router.navigate(['/']);
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.complete();
+    this.destroy$.unsubscribe();
   }
 }

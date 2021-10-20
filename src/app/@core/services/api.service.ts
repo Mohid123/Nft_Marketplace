@@ -1,17 +1,19 @@
+/* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environments/environment';
-import { Observable } from 'rxjs';
-
+import { Observable, of } from 'rxjs';
+import { catchError, map, retry } from 'rxjs/operators';
+import { ApiResponse, ErrorCode } from './../models/response.model';
 @Injectable({
   providedIn: 'root'
 })
-export class ApiService {
+export class ApiService<T> {
 
   constructor(
-    private http: HttpClient
+    protected http: HttpClient
   ) { }
 
   private setHeaders(): HttpHeaders {
@@ -24,50 +26,74 @@ export class ApiService {
     return new HttpHeaders(headersConfig);
   }
 
-  // private formatErrors(error: any) {
-  //   // if (error.status === 401) {
-  //   //   this.router.navigateByUrl('/logout');
-  //   // }
-  //   return error && error.messages || throwError(error);
-  //   //return error.error;
-  // }
-
-  get(path: string, params?: any): Observable<any> {
-    return this.http.get(`${environment.apiUrl}${path}`, { headers: this.setHeaders(), params });
-    // .pipe(catchError(error => this.formatErrors(error)));
+  public get(
+    path: string,
+    params?: any
+  ): Observable<ApiResponse<T>> {
+    // Add safe, URL encoded_page parameter
+    const options = {
+      params: new HttpParams({ fromString: this.objectToQueryString(params) }),
+      //observe: 'response',
+      headers: this.setHeaders()
+    };
+    return this.mapAndCatchError<T>(
+      this.http.get<ApiResponse<T>>(`${environment.apiUrl}${path}`, options)
+    );
   }
 
-  put(path: string, body: any = {}): Observable<any> {
-    return this.http.put(
-      `${environment.apiUrl}${path}`,
-      JSON.stringify(body),
-      { headers: this.setHeaders() }
-    )
-    // .pipe(catchError(error => this.formatErrors(error)));
+  public externalGet(
+    path: string,
+    params: any
+  ): Observable<any> {
+    const options: any = {
+      params: new HttpParams({ fromString: this.objectToQueryString(params) }),
+      responseType: 'text'
+    };
+    return this.http.get(`${path}`, options);
   }
 
-  post(path: string, body: any = {}, options: any = {}): Observable<any> {
-    if (options.responseType) {
-      return this.http.post(
+  public post(
+    path: string,
+    body: Object = {}
+  ): Observable<ApiResponse<T>> {
+    // Add safe, URL encoded_page parameter
+    const options = { headers: this.setHeaders() };
+    return this.mapAndCatchError<T>(
+      this.http.post<ApiResponse<T>>(
         `${environment.apiUrl}${path}`,
         JSON.stringify(body),
-        { responseType: options.responseType, headers: this.setHeaders() }
-      );
-    } else {
-      return this.http.post(
-        `${environment.apiUrl}${path}`,
-        JSON.stringify(body),
-        { headers: this.setHeaders() }
-      );
-      // .catch(error => error);
-    }
+        options
+      )
+    );
   }
 
-  delete(path:string): Observable<any> {
-    return this.http.delete(
-      `${environment.apiUrl}${path}`,
-      { headers: this.setHeaders() }
-    )
+  public put(
+    path: string,
+    body: Object = {}
+  ): Observable<ApiResponse<T>> {
+    // Add safe, URL encoded_page parameter
+    const options = { headers: this.setHeaders() };
+    return this.mapAndCatchError<T>(
+      this.http.put<ApiResponse<T>>(
+        `${environment.apiUrl}${path}`,
+        JSON.stringify(body),
+        options
+      )
+    );
+  }
+
+  public delete(
+    path: string,
+    body: Object = {}
+  ): Observable<ApiResponse<T>> {
+    // Add safe, URL encoded_page parameter
+    const options = {
+      headers: this.setHeaders(),
+      body: JSON.stringify(body)
+    };
+    return this.mapAndCatchError<T>(
+      this.http.delete<ApiResponse<T>>(`${environment.apiUrl}${path}`, options)
+    );
   }
 
   extrnalPost(path: string, body: any = {}, options: any = {}): Observable<any> {
@@ -85,5 +111,48 @@ export class ApiService {
       );
       // .catch(error => error);
     }
+  }
+
+  private objectToQueryString(obj: any): string {
+    const str = [];
+    for (const p in obj)
+      if (obj.hasOwnProperty(p)) {
+        str.push(encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]));
+      }
+    return str.join('&');
+  }
+
+  private mapAndCatchError<TData>(
+    response: Observable<any>
+  ): Observable<ApiResponse<TData>> {
+    return response.pipe(
+      retry(2),
+      map((r: ApiResponse<TData>) => {
+        const result = new ApiResponse<TData>();
+        Object.assign(result, r);
+        return result;
+      }),
+      catchError((err: HttpErrorResponse) => {
+        const result = new ApiResponse<TData>();
+        // if err.error is not ApiResponse<TData> e.g. connection issue
+        if (
+          err.error instanceof ErrorEvent ||
+          err.error instanceof ProgressEvent
+        ) {
+          result.errors.push({
+            code: ErrorCode.UnknownError,
+            text: 'Unknown error.'
+          });
+        } else {
+          result.errors.push({
+            code: err.status,
+            text: err.message,
+            error: err.error
+          });
+          // Object.assign(result, err.error)
+        }
+        return of(result);
+      })
+    );
   }
 }

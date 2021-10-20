@@ -11,7 +11,7 @@ export class ApiResponse<T> {
   constructor() {
     this.errors = [];
   }
-  status: string;
+  status: boolean;
   data: T;
   errors?: ApiError[] | any;
   getErrorsText(): string {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NFT } from '@app/@core/models/NFT.model';
-import { BaseResponse } from './../../../@core/models/BaseResponse.model';
+import { ApiResponse } from './../../../@core/models/response.model';
 import { NFTService } from './../../../@core/services/nft.service';
 
 @Component({
@@ -26,9 +26,9 @@ export class CardDetailPage  implements OnInit {
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   ngOnInit(): void {
-    this.nftService.getNft(this.nftId).subscribe((result: BaseResponse) => {
+    this.nftService.getNft(this.nftId).subscribe((result:ApiResponse<NFT>) => {
       if (result.status) {
-        this.nft = <NFT>result.data;
+        this.nft = result.data;
       }
     });
     // this.nftService.getNft('');

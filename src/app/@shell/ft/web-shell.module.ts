@@ -12,20 +12,25 @@ import { AdminGuard } from './../../@core/guards/admin.guard';
 import { NavModule } from './../ui/nav/nav.module';
 
 const APP_ROUTES: Routes = [
+  // {
+  //   path: ROUTER_UTILS.config.base.home,
+  //   component: NotFoundPage,
+  //   canActivate: [NoAdminGuard, UserGuard],
+  // },
   {
-    path: ROUTER_UTILS.config.auth.root,
+    path: ROUTER_UTILS.config.base.clubName + '/' + ROUTER_UTILS.config.auth.root,
     loadChildren: async () =>
       (await import('@pages/auth/auth.module')).AuthModule,
     canLoad: [NoAuthGuard],
   },
   {
-    path: ROUTER_UTILS.config.admin.root,
+    path: ROUTER_UTILS.config.base.clubName + '/' + ROUTER_UTILS.config.admin.root,
     loadChildren: async () =>
       (await import('@pages/admin/admin.module')).AdminModule,
     canLoad: [AdminGuard],
   },
   {
-    path: ROUTER_UTILS.config.base.home,
+    path: ROUTER_UTILS.config.base.clubName,
     loadChildren: async () =>
       (await import('@pages/home/home.module')).HomeModule,
     canLoad: [NoAdminGuard],

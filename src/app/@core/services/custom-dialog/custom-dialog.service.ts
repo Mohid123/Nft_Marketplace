@@ -28,17 +28,19 @@ export class CustomDialogService {
   //   this.matDialog.open(UserSignInComponent);
   // }
 
-  async showUserSignInDialog() {
+  async showUserSignInDialog(isPage = false) {
     this.matDialog.closeAll();
     this._mapDialogref = await this.authDialogService.openUserSignIn();
+    this._mapDialogref.componentInstance.isPage = isPage;
     // (await this._mapDialogref).afterClosed().subscribe((result) => {
     //   console.log('Mat Dialog Results user sign in:', result);
     // });
   }
 
-  async showAdminSignInDialog() {
+  async showAdminSignInDialog(isPage = false) {
     this.matDialog.closeAll();
     this._mapDialogref = await this.authDialogService.openAdminSignIn();
+    this._mapDialogref.componentInstance.isPage = isPage;
     // (await this._mapDialogref).afterClosed().subscribe((result) => {
     //   console.log('Mat Dialog Results admin sign in:', result);
     // });

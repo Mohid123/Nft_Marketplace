@@ -1,10 +1,10 @@
+import { ApiResponse } from './../../../@core/models/response.model';
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { take } from 'rxjs/operators';
-import { BaseResponse } from './../../../@core/models/BaseResponse.model';
 import { NFTList } from './../../../@core/models/NFTList.model';
 import { NFTService } from './../../../@core/services/nft.service';
 
@@ -40,12 +40,11 @@ export class MarketPlacePage implements OnInit {
 
   getNfts(): void {
     if (this._isLoading) return
-    this.nftService
-      .getAllNftsByClub(this.clubName, this._page++)
+    this.nftService.getAllNftsByClub(this.clubName, this._page++)
       .pipe(take(1))
-      .subscribe((result: BaseResponse) => {
+      .subscribe((result:ApiResponse<NFTList>) => {
         if (result.status) {
-          this.nftList = <NFTList>result.data;
+          this.nftList = result.data;
         }
         this._isLoading = false;
       });

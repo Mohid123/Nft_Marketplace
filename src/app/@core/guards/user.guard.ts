@@ -3,13 +3,18 @@ import { CanActivate, CanLoad, Route, Router, UrlSegment, UrlTree } from '@angul
 import { ROLE_TYPE_UTILS } from '@app/@core/utils/role-type.utils';
 import { Observable } from 'rxjs';
 import { AuthService } from './../../pages/auth/services/auth.service';
+import { RouteService } from './../services/route.service';
 import { ROUTER_UTILS } from './../utils/router.utils';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserGuard implements CanLoad, CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private routeService: RouteService,
+  ) {}
 
   canLoad(
     route: Route,
@@ -23,13 +28,13 @@ export class UserGuard implements CanLoad, CanActivate {
       const userRole = this.authService.role;
 
       if (userRole == ROLE_TYPE_UTILS.admin) {
-        this.router.navigate(['/', ROUTER_UTILS.config.admin.root]);
+        this.router.navigate([this.routeService.clubName || '/', ROUTER_UTILS.config.admin.root]);
         return false;
       }
 
       return true;
     } else {
-      this.router.navigate(['/', ROUTER_UTILS.config.auth.root,ROUTER_UTILS.config.auth.signIn]);
+      this.router.navigate([this.routeService.clubName || '/', ROUTER_UTILS.config.auth.root,ROUTER_UTILS.config.auth.signIn]);
       return false;
     }
   }
@@ -39,13 +44,13 @@ export class UserGuard implements CanLoad, CanActivate {
       const userRole = this.authService.role;
 
       if (userRole == ROLE_TYPE_UTILS.admin) {
-        this.router.navigate(['/', ROUTER_UTILS.config.admin.root]);
+        this.router.navigate([this.routeService.clubName || '/', ROUTER_UTILS.config.admin.root]);
         return false;
       }
 
       return true;
     } else {
-      this.router.navigate(['/', ROUTER_UTILS.config.auth.root, ROUTER_UTILS.config.auth.signIn]);
+      this.router.navigate([this.routeService.clubName || '/', ROUTER_UTILS.config.auth.root, ROUTER_UTILS.config.auth.signIn]);
       return false;
     }
   }

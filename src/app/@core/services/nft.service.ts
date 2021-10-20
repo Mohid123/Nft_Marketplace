@@ -1,16 +1,20 @@
+import { NFT } from '@app/@core/models/NFT.model';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { GetAllNftsByClub } from '../models/requests/getAllNftsByClub.model';
-import { BaseResponse } from './../models/BaseResponse.model';
 import { NFTList } from './../models/NFTList.model';
+import { ApiResponse } from './../models/response.model';
 import { RouterState } from './../models/routerState.model';
 import { ApiService } from './api.service';
+
+type nftApiData = NFT | NFTList;
 
 @Injectable({
   providedIn: 'root',
 })
-export class NFTService {
+export class NFTService extends ApiService<nftApiData> {
   private _nftList = new BehaviorSubject<NFTList>({
     totalCount: 0,
     data: [],
@@ -20,24 +24,25 @@ export class NFTService {
   private _routerState: RouterState;
 
   constructor(
-    private apiService: ApiService,
+    protected http: HttpClient,
   ) {
+    super(http);
   }
 
-  getAllNftsByClub(clubName: string, page: number): Observable<any> {
+  getAllNftsByClub(clubName: string, page: number) : Observable<ApiResponse<nftApiData>> {
     const param: GetAllNftsByClub = {
       clubName: clubName,
       offset: page ? environment.limit * page : 0,
       limit: environment.limit,
     };
 
-    return this.apiService.get('/nft/getAllNftsByClub', param);
+    return this.get('/nft/getAllNftsByClub', param);
   }
 
-  getNft(id: string): Observable<BaseResponse> {
-    const param: GetAllNftsByClub | any = {
+  getNft(id: string): Observable<ApiResponse<nftApiData>> {
+    const param: any = {
       id: id,
     };
-    return this.apiService.get('/nft/getNft/'+ param.id);
+    return this.get('/nft/getNft/'+ param.id);
   }
 }

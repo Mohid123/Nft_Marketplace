@@ -16,14 +16,13 @@ export class SignInPage implements OnInit , OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    console.log('sign in page oninit:',);
     if (
-      this.activatedRoute.snapshot.data.page ==
-      ROUTER_UTILS.config.auth.adminSignIn
+      (<string>this.activatedRoute.snapshot.data.page).includes(
+        ROUTER_UTILS.config.auth.adminSignIn)
     ) {
-      this.customDialogService.showAdminSignInDialog();
+      this.customDialogService.showAdminSignInDialog(true);
     } else {
-      this.customDialogService.showUserSignInDialog();
+      this.customDialogService.showUserSignInDialog(true);
     }
   }
 
