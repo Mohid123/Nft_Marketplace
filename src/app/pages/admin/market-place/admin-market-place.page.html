@@ -43,18 +43,11 @@
     </div>
 
     <div class="cards-container">
-      <app-nft-card></app-nft-card>
-      <app-nft-card></app-nft-card>
-      <app-nft-card></app-nft-card>
-      <app-nft-card></app-nft-card>
-      <app-nft-card></app-nft-card>
-      <app-nft-card></app-nft-card>
-      <app-nft-card></app-nft-card>
-      <app-nft-card></app-nft-card>
-      <app-nft-card></app-nft-card>
-      <app-nft-card></app-nft-card>
-      <app-nft-card></app-nft-card>
-      <app-nft-card></app-nft-card>
+      <ng-container *ngIf="nftList && nftList.totalCount > 0">
+        <ng-container *ngFor="let nftCard of nftList.data" class="">
+          <app-nft-card [nft]="nftCard"></app-nft-card>
+        </ng-container>
+      </ng-container>
     </div>
     <div class="flex justify-end w-full">
       <div class="pagination">

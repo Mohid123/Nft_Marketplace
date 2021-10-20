@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { GetAllNftsByClub } from '../models/requests/get-all-afts-by-club.model';
 import { ResponseGroupsByClub } from '../models/response-groups-by-club.model';
 import { environment } from './../../../environments/environment';
-import { GetAllNftsByClub } from './../models/requests/getAllNftsByClub.model';
 import { ApiResponse } from './../models/response.model';
 import { ApiService } from './api.service';
 

@@ -21,6 +21,10 @@ export class CreateGroupComponent {
     });
   }
 
+  addGroup():void {
+    // this.
+  }
+
   close():void {
     this.customDialogService.closeDialogs();
   }

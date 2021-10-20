@@ -10,69 +10,31 @@
     </tr>
   </thead>
   <tbody >
-    <tr class="items-center h-24 ">
-      <td  style="color: #64F3FF; " >
-       976
-      </td>
-      <td >
-        Sale
-      </td>
-      <td >
-        € 1.77
-      </td>
-      <td >
-       0x9f30
-      </td>
-      <td >
-       dodos
-      </td>
-      <td >
-       10 days ago
-      </td>
+    <ng-container *ngIf="responseEventByNFT?.totalCount > 0">
+      <ng-container *ngFor="let nftEvent of responseEventByNFT.data" class="">
+        <tr class="items-center h-24 ">
+          <td  style="color: #64F3FF; " >
+           {{nftEvent.tokenId}}
+          </td>
+          <td >
+            {{nftEvent.eventType}}
+          </td>
+          <td >
+            {{nftEvent.price}}
+          </td>
+          <td >
+           0x9f30
+          </td>
+          <td >
+           dodos
+          </td>
+          <td >
+           10 days ago
+          </td>
 
-    </tr>
-    <tr class="items-center h-24">
-      <td  style="color: #64F3FF;">
-       976
-      </td>
-      <td >
-        Sale
-      </td>
-      <td >
-        € 1.77
-      </td>
-      <td >
-       0x9f30
-      </td>
-      <td >
-       dodos
-      </td>
-      <td >
-       10 days ago
-      </td>
-
-    </tr>
-    <tr class="items-center h-24">
-      <td  style="color: #64F3FF;">
-       976
-      </td>
-      <td >
-        Sale
-      </td>
-      <td >
-        € 1.77
-      </td>
-      <td >
-       0x9f30
-      </td>
-      <td >
-       dodos
-      </td>
-      <td >
-       10 days ago
-      </td>
-
-    </tr>
+        </tr>
+      </ng-container>
+    </ng-container>
   </tbody>
 
 

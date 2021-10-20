@@ -46,6 +46,10 @@ export class AuthService extends ApiService<AuthApiData> {
     return this._isLoggedIn$.getValue();
   }
 
+  get loggedInUser(): LoggedInUser {
+    return this._loggedInUser$.getValue() || null;
+  }
+
   get role(): ROLE_TYPE_UTILS {
     return this._role$.getValue();
   }
