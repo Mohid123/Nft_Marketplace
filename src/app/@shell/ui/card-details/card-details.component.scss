@@ -37,11 +37,24 @@
 }
 
 
-.nftContract {
-  white-space: nowrap;
+// .nftContract {
+//   white-space: nowrap;
+//   width: 200px;
+//   overflow: hidden;
+//   text-overflow: ellipsis;
+// }
+
+.nftContract{
+  text-overflow:ellipsis;
   width: 200px;
+  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
+}
+
+.nftContract:hover{
+  text-overflow:clip;
+  width:auto;
+  white-space: normal;
 }
 
 
@@ -63,5 +76,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
+
 }
 
