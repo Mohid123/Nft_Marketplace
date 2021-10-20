@@ -52,12 +52,17 @@
               <th>Action</th>
             </tr>
           </thead>
-          <tbody ><tr><td>Rock1</td><td >20</td><td >Best NFT Sports Group Out There</td><td ><mat-icon><img class="cursor-pointer" src="./assets/icons/bin.svg" alt="delete"></mat-icon></td>
-            </tr ><tr><td>Rock1</td><td >20</td><td >Best NFT Sports Group Out There</td><td ><mat-icon><img class="cursor-pointer" src="./assets/icons/bin.svg" alt="delete"></mat-icon></td>
-            </tr ><tr><td>Rock1</td><td >20</td><td >Best NFT Sports Group Out There</td><td ><mat-icon><img class="cursor-pointer" src="./assets/icons/bin.svg" alt="delete"></mat-icon></td>
-            </tr ><tr><td>Rock1</td><td >20</td><td >Best NFT Sports Group Out There</td><td ><mat-icon><img class="cursor-pointer" src="./assets/icons/bin.svg" alt="delete"></mat-icon></td>
-            </tr ><tr><td>Rock1</td><td >20</td><td >Best NFT Sports Group Out There</td><td ><mat-icon><img class="cursor-pointer" src="./assets/icons/bin.svg" alt="delete"></mat-icon></td>
-            </tr ><tr><td>Rock1</td><td >20</td><td >Best NFT Sports Group Out There</td><td ><mat-icon><img class="cursor-pointer" src="./assets/icons/bin.svg" alt="delete"></mat-icon></td>
+          <tbody>
+            <ng-container *ngIf="groupsByClub?.totalCount > 0" >
+              <ng-container *ngFor="let group of groupsByClub.data" class="">
+                <tr>
+                  <td>{{group.name}}</td>
+                  <td >{{group.itemsCount}}</td>
+                  <td >{{group.description}}</td>
+                  <td><mat-icon><img class="cursor-pointer" src="./assets/icons/bin.svg" alt="delete"></mat-icon></td>
+                </tr >
+              </ng-container>
+            </ng-container>
           </tbody>
         </table>
       </div>

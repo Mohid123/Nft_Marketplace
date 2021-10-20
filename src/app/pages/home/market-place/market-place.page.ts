@@ -1,12 +1,12 @@
-import { ApiResponse } from './../../../@core/models/response.model';
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { take } from 'rxjs/operators';
 import { NFTList } from './../../../@core/models/NFTList.model';
+import { ApiResponse } from './../../../@core/models/response.model';
 import { NFTService } from './../../../@core/services/nft.service';
+import { RouteService } from './../../../@core/services/route.service';
 
 @Component({
   selector: 'app-market-place',
@@ -22,13 +22,13 @@ export class MarketPlacePage implements OnInit {
   private _isLoading:boolean;
 
   constructor(
-    private activatedRoute: ActivatedRoute,
     private customDialogService: CustomDialogService,
     private nftService: NFTService,
+    private routeService: RouteService,
   ) {
     this._page = 0;
     this._isLoading = false;
-    this.clubName = this.activatedRoute.snapshot.params.clubName;
+    this.clubName = this.routeService.clubName;
     this.getNfts();
   }
 
@@ -43,7 +43,7 @@ export class MarketPlacePage implements OnInit {
     this.nftService.getAllNftsByClub(this.clubName, this._page++)
       .pipe(take(1))
       .subscribe((result:ApiResponse<NFTList>) => {
-        if (result.status) {
+        if (!result.hasErrors()) {
           this.nftList = result.data;
         }
         this._isLoading = false;

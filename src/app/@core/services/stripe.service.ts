@@ -1,14 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { setItem, StorageItem } from '@app/@core/utils';
+import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { AddStripeKey } from '../models/requests/add-stripe-key.model';
+import { ResponseAddStripeKey } from '../models/response-add-stripe-key.model';
 import { ApiResponse } from './../models/response.model';
 import { ApiService } from './api.service';
 
+type StripeApiData = ResponseAddStripeKey | any;
 @Injectable({
   providedIn: 'root'
 })
-export class StripeService extends ApiService<any> {
+export class StripeService extends ApiService<StripeApiData> {
 
   constructor(
     protected http: HttpClient,
@@ -16,10 +20,12 @@ export class StripeService extends ApiService<any> {
     super(http);
   }
 
-  addKey(params) {
-    return this.post('/creator/validateAndSaveStripeSecretKey', params).pipe(tap((res:ApiResponse<any>)=> {
-      if(!res.hasErrors()) {
-        setItem(StorageItem.Key, params.key)
+  addKey(params: AddStripeKey):Observable<ApiResponse<StripeApiData>> {
+    return this.post('/creator/validateAndSaveStripeSecretKey', params).pipe(tap((res:ApiResponse<ResponseAddStripeKey>)=> {
+      if(!res.hasErrors() && res.data.isValid) {
+        setItem(StorageItem.Key, res.data.isValid);
+      } else {
+        alert('invalid key');
       }
     }))
   }

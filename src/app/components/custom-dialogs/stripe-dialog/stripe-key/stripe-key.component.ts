@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
+import { AddStripeKey } from '@app/@core/models/requests/add-stripe-key.model';
 import { CustomDialogService } from './../../../../@core/services/custom-dialog/custom-dialog.service';
 import { RouteService } from './../../../../@core/services/route.service';
 import { StripeService } from './../../../../@core/services/stripe.service';
@@ -29,15 +30,18 @@ export class StripeKeyComponent {
   }
 
   addKey(): void {
-    const params = {
+    const params: AddStripeKey = {
       key: this.stripeForm.controls.key.value,
-      clubName: this.routeService.clubName
-    }
+      clubName: this.routeService.clubName,
+    };
 
     this.stripeService.addKey(params).subscribe(result=> {
-      console.log('asdasd',result)
+      if(!result.hasErrors() && result.data.isValid) {
+        this.close();
+      } else {
+        alert('invalid key')
+      }
     });
-    this.close();
   }
 
   close(): void {
