@@ -8,7 +8,8 @@ import { AuthService } from '@app/pages/auth/services/auth.service';
   styleUrls: ['./profile-button.component.scss']
 })
 export class ProfileButtonComponent {
-
+  public userName: any
+  public profile: any
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -16,8 +17,14 @@ export class ProfileButtonComponent {
 
   }
 
+  ngOnInit(): void {
+    this.userName = JSON.parse(localStorage.getItem('App/user'))
+    this.profile = JSON.parse(localStorage.getItem('App/user'))
+  }
+
   signOut():void {
     this.authService.signOut();
     this.router.navigate(['/']);
   }
+
 }

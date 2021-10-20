@@ -8,7 +8,15 @@ import { NFT } from './../../../@core/models/NFT.model';
   styleUrls: ['./card-details.component.scss']
 })
 export class CardDetailsComponent {
+  public userName: any
+  public profilePic: any
 
   @Input() nft:NFT;
+
+  ngOnInit(): void {
+    this.userName = JSON.parse(localStorage.getItem('App/user'))
+    this.profilePic = JSON.parse(localStorage.getItem('App/user'))
+
+  }
 
 }

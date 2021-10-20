@@ -5,7 +5,7 @@
       <!-- Left Section -->
       <div class="flex-col md:flex lg:flex">
         <div class="p-6 md:p-0 lg:p-0 lg:pt-6 lg:pb-6 lg:pl-6">
-          <img src="./assets/card/Group 57316@2x.png" alt="nftmarketSearch" class="resImg" />
+          <img [src]="nft.serverCaptureFileUrl" alt="nftmarketSearch" class="resImg rounded-2xl" />
         </div>
         <div class="mb-6 ml-6">
           <p class="mt-6 inline mr-2.5 text-lg text-white opacity-50">
@@ -18,8 +18,9 @@
           <span class="text-lg text-white">ERC-721</span> <br /><br />
           <button
             class="inline-flex items-center justify-between px-3 bg-gray-400 bg-opacity-25 cursor-pointer rounded-xl md:mt-0 hover:bg-opacity-70 ">
-            <div class="flex items-start rounded nft-img">
+            <div class="flex items-start">
               <img class="w-6 h-10" src="./assets/icons/polygon-matic-logo.svg" alt="polygon" />
+
             </div>
             <a href="{{nft.transactionHashUrl}}" target=_blank
               class="ml-3 mr-3 text-sm leading-none text-gray-200 hover:text-gray-900">View on Polygon.</a>
@@ -33,9 +34,9 @@
           <div class="flex items-center justify-between">
             <button class="profileBtn">
               <div class="flex rounded">
-                <img class="w-10 h-10 rounded-full" src="./assets/card/owner.png" alt="Joker Card" />
+                <img class="w-10 h-10 rounded-full" [src]="profilePic.profilePicURL" alt="Joker Card" />
               </div>
-              <span class="ml-6 text-sm text-white">John D.</span>
+              <span class="ml-6 text-sm text-white">{{userName.fullName}}</span>
             </button>
             <div class="flex justify-between">
               <span class="text-lg text-gray-400 ">Token ID <span class="ml-3 text-white"> {{nft.tokenId}}</span></span>
