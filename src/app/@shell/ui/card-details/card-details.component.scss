@@ -2,10 +2,66 @@
 @apply rounded-2xl border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-2 md:mt-14 lg:mt-14 mt-2 w-full mb-14;
 }
 
+.buyNowBtn {
+  @apply text-white
+  hover:text-primary-c
+  md:w-10/12 lg:w-10/12 w-full
+  font-medium
+  mt-3.5
+  h-14
+  rounded-full
+  py-3;
+  background: transparent linear-gradient(96deg, #73BFD6 0%, #75F36B 100%) 0% 0% no-repeat padding-box;
+}
+
+.profileBtn {
+  @apply inline-flex
+  items-center
+  px-2
+  text-white
+  bg-opacity-25
+  h-14
+  w-44
+  rounded-xl;
+  background: #1F203E 0% 0% no-repeat padding-box;
+}
+
+
+.resImg {
+  width: 529px;
+  height: 538px;
+}
+
+.respDesc{
+  width: 507px
+}
+
+
+.nftContract {
+  white-space: nowrap;
+  width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+
 @media (max-width: 640px) {
   .resImg {
-    height: 362px !important;
+    height: 302px !important;
+    width: 362px !important;
 
+  }
+
+  .respDesc{
+    width: 100%;
+  }
+
+  .nftContract {
+    white-space: nowrap;
+    width: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 
