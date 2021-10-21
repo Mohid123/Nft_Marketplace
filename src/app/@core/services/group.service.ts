@@ -4,10 +4,11 @@ import { Observable } from 'rxjs';
 import { GetAllNftsByClub } from '../models/requests/get-all-afts-by-club.model';
 import { ResponseGroupsByClub } from '../models/response-groups-by-club.model';
 import { environment } from './../../../environments/environment';
+import { AddGroup } from './../models/requests/add-group.model';
 import { ApiResponse } from './../models/response.model';
 import { ApiService } from './api.service';
 
-type groupApiData = ResponseGroupsByClub;
+type groupApiData = ResponseGroupsByClub | AddGroup;
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,10 @@ export class GroupService extends ApiService<groupApiData> {
       limit: limit || environment.limit,
     };
     return this.get('/group/getAllGroupsByAppPackageId',param);
+  }
+
+  addGroups(param:AddGroup): Observable<ApiResponse<groupApiData>> {
+    return this.post('/group/addGroup',param);
   }
 
 }

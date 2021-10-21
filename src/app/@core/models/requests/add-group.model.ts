@@ -1,9 +1,9 @@
 export interface AddGroup {
   id?: string,
   name: string,
-  appPackageId?: string,
+  appPackageId: string,
   description: string,
-  coverImageUrl?: string,
+  coverImageUrl: string,
   coverBlurHash?: string,
   path?: string,
   itemsCount?: number
