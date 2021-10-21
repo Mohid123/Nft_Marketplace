@@ -12,99 +12,101 @@
     <div class="inline-flex">
       <h1 class=""><span>Cre</span>ate NFT</h1>
     </div>
+
     <div class="inline-flex">
       <span class="text-green-500 cursor-pointer">Preview</span>
     </div>
   </div>
-  <div class="flex flex-col">
-    <span class="text-xl">Select Ticket Style</span>
-    <li class="inline-flex justify-around my-4">
-      <ul>
-        <label>
-        <input type="radio" name="test" value="small" checked>
-        <img src="./assets/card/2.svg">
-      </label>
+
+  <form action="">
+    <div class="flex flex-col">
+      <span class="text-xl">Select Ticket Style</span>
+      <li class="inline-flex justify-around my-4">
+        <ul>
+          <label>
+          <input type="radio" name="test" value="small" checked [(ngModel)]="type" checked>
+          <img src="./assets/card/2.svg">
+        </label>
+        </ul>
+        <ul>
+          <label>
+          <input type="radio" name="test" value="small" [(ngModel)]="type">
+          <img src="./assets/card/2.svg">
+        </label>
       </ul>
-      <ul>
-        <label>
-        <input type="radio" name="test" value="small" checked>
-        <img src="./assets/card/2.svg">
-      </label>
-    </ul>
-      <ul>
-        <label>
-        <input type="radio" name="test" value="small" checked>
-        <img src="./assets/card/3.svg">
-      </label>
-    </ul>
-      <ul>
-        <label>
-        <input type="radio" name="test" value="small" checked>
-        <img src="./assets/card/4.svg">
-      </label>
-    </ul>
-      <ul>
-        <label>
-        <input type="radio" name="test" value="small" checked>
-        <img src="./assets/card/5.svg">
-      </label>
-    </ul>
-
-
-
-
-    </li>
-  </div>
-  <div class="flex flex-col">
-    <span class="text-xl">Select Logo</span><br>
-    <div class="relative flex justify-between overflow-hidden border-2 border-gray-400 border-dashed rounded-lg">
-    <button
-      class="flex items-center justify-between w-full px-4 py-2 font-bold text-gray-400 bg-primary-gray-100 hover:bg-indigo-dark">
-      <div class="ml-2 font-light text-gray-400">Select logo to Upload</div>
-      <div>
-        <svg
-          fill="#FFF"
-          height="28"
-          viewBox="0 0 24 24"
-          width="28"
-          xmlns="http://www.w3.org/2000/svg"
-          class="m-2">
-          <path d="M0 0h24v24H0z" fill="none" />
-          <path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z" />
-        </svg>
+        <ul>
+          <label>
+          <input type="radio" name="test" value="small" [(ngModel)]="type">
+          <img src="./assets/card/3.svg">
+        </label>
+      </ul>
+        <ul>
+          <label>
+          <input type="radio" name="test" value="small" [(ngModel)]="type">
+          <img src="./assets/card/4.svg">
+        </label>
+      </ul>
+        <ul>
+          <label>
+          <input type="radio" name="test" value="small" [(ngModel)]="type">
+          <img src="./assets/card/5.svg">
+        </label>
+      </ul>
+   </li>
+    </div>
+    <div class="flex flex-col">
+      <span class="text-xl">Select Logo</span><br>
+      <div class="relative flex justify-between overflow-hidden border-2 border-gray-400 border-dashed rounded-lg">
+      <button
+        class="flex items-center justify-between w-full px-4 py-2 font-bold text-gray-400 bg-primary-gray-100 hover:bg-indigo-dark">
+        <div class="ml-2 font-light text-gray-400">Select logo to Upload</div>
+        <div>
+          <svg
+            fill="#FFF"
+            height="28"
+            viewBox="0 0 24 24"
+            width="28"
+            xmlns="http://www.w3.org/2000/svg"
+            class="m-2">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z" />
+          </svg>
+        </div>
+      </button>
+      <input
+        class="absolute block opacity-0 cursor-pointer pin-r pin-t "
+        type="file"
+        name=""  accept="image/*"
+        (change)="onSelectFile($event)"
+      />
+    </div>
+    </div>
+    <div class="flex items-center justify-between mt-4">
+      <div class="inline-flex flex-col">
+        <span class="text-xl">Valid till</span><br>
+        <input type="date" class="px-2 font-light text-gray-400 w-44"  >
       </div>
+      <div class="inline-flex flex-col">
+        <span class="text-xl ">Select Group</span><br>
+        <!-- <input type="email" class="w-44" placeholder="Rock"> -->
+        <label class="block text-left">
+
+          <select
+            class="block h-16 px-4 text-lg font-light text-gray-400 rounded-lg bg-primary-gray-100 focus:outline-none w-44 form-select">
+            <option>Rock 1</option>
+            <option>Rock 2</option>
+          </select>
+        </label>
+
+      </div>
+    </div>
+    <div class="flex flex-col mt-4">
+      <span class="text-xl ">Enter Address</span><br>
+      <input class="font-light" type="email" placeholder="Building 76-A Block B South West, 79000">
+    </div>
+    <button class="primary-btn" (click)="addNft()">
+      Next
     </button>
-    <input
-      class="absolute block opacity-0 cursor-pointer pin-r pin-t "
-      type="file"
-      name=""
-    />
-  </div>
-  </div>
-  <div class="flex items-center justify-between mt-4">
-    <div class="inline-flex flex-col">
-      <span class="text-xl">Valid till</span><br>
-      <input type="date" class="px-2 font-light text-gray-400 w-44" >
-    </div>
-    <div class="inline-flex flex-col">
-      <span class="text-xl ">Select Group</span><br>
-      <!-- <input type="email" class="w-44" placeholder="Rock"> -->
-      <label class="block text-left">
 
-        <select
-          class="block h-16 px-4 text-lg font-light text-gray-400 rounded-lg bg-primary-gray-100 focus:outline-none w-44 form-select">
-          <option>Rock 1</option>
-          <option>Rock 2</option>
-        </select>
-      </label>
 
-    </div>
-  </div>
-  <div class="flex flex-col mt-4">
-    <span class="text-xl ">Enter Address</span><br>
-    <input class="font-light" type="email" placeholder="Building 76-A Block B South West, 79000">
-  </div>
-  <button class="primary-btn" (click)="nextClick()">
-    Next
-  </button>
-
+  </form>

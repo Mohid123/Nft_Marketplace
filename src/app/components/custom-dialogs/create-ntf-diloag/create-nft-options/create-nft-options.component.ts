@@ -22,7 +22,7 @@ export class CreateNFTOptionsComponent {
   ticketsClick():void {
 
     this.nftService.createNft = new NFT();
-    this.nftService.createNft.type = 'member';
+    this.nftService.createNft.type = this.type;
 
     console.log(this.type);
     this.customDialogService.showCreateNFTDialog()
