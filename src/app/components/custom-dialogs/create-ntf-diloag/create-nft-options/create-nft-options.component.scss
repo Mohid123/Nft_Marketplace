@@ -40,7 +40,7 @@
     @apply flex flex-col w-full;
 
     label {
-      @apply px-3 py-4 text-lg;
+      @apply px-3 py-2 text-lg;
     }
  }
 
@@ -60,4 +60,32 @@
   --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(3px + var(--tw-ring-offset-width)) rgb(19 35 86);
   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
 
+}
+
+label.radio {
+  cursor: pointer;
+}
+label.radio input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+label.radio span {
+
+  width: 384px;
+  height: 56px;
+  border: 2px solid #4C5880;
+  background-color: #4C5880;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border-radius: 8px;
+  text-align: center;
+
+}
+label.radio input:checked + span {
+  border-color: #6fff62;
 }

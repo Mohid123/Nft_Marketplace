@@ -75,4 +75,10 @@ export class NFTService extends ApiService<nftApiData> {
     };
     return this.get('/event/getEventByNftId/'+ param.id);
   }
+
+  addNft(params: NFT): Observable<ApiResponse<nftApiData>>{
+    return this.post('/nft/addNft', params)
+  }
+
+
 }

@@ -8,13 +8,22 @@ import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-di
 })
 export class CreateNFTOptionsComponent {
 
+  type: any
+
   constructor(
     private customDialogService: CustomDialogService,
-  ) { }
+
+  ) {
+
+  }
 
   ticketsClick():void {
+
+    console.log(this.type);
     this.customDialogService.showCreateNFTDialog()
   }
+
+
 
   close():void {
     this.customDialogService.closeDialogs();
