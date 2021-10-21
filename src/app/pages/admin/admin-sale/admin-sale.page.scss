@@ -1,5 +1,5 @@
 .filters {
-  @apply h-16 w-full rounded-lg bg-primary-e my-6 flex items-center flex-grow;
+  @apply h-16 w-full rounded-lg bg-primary-700 my-6 flex items-center flex-grow;
   max-width: 550px;
   border: 0.6px solid #FFFFFF9C;
 
@@ -27,7 +27,7 @@
 
    min-height: 400px;
    table {
-    @apply bg-primary-e rounded-3xl
+    @apply bg-primary-700 rounded-3xl
   }
    th {
      @apply px-10 h-12 text-left font-medium;
@@ -59,7 +59,7 @@
   @apply w-36 flex justify-between items-center;
 
   button {
-    @apply h-8 w-9 rounded-md bg-primary-a;
+    @apply h-8 w-9 rounded-md bg-primary-600;
   }
 
   span {

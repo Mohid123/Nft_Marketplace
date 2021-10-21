@@ -42,15 +42,14 @@ export class NFTService extends ApiService<nftApiData> {
     return this.get('/nft/getAllNftsByClub', param);
   }
 
-  getAllNftsByUser(clubName: string, userId,page: number) : Observable<ApiResponse<nftApiData>> {
+  getAllNftsByUser(clubName: string, userId:string ,page: number) : Observable<ApiResponse<nftApiData>> {
     const param: getNftsByUserId = {
       clubName: clubName,
       offset: page ? environment.limit * page : 0,
       limit: environment.limit,
-      userID: userId,
     };
 
-    return this.get('/nft/getNftsByUserId', param);
+    return this.get('/nft/getUserNftsByClub/'+ userId, param);
   }
 
   getAllNftsAdminPanel (clubName: string, page: number) : Observable<ApiResponse<nftApiData>> {

@@ -1,5 +1,5 @@
-/* eslint-disable @angular-eslint/no-empty-lifecycle-method */
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { NFT } from './../../../@core/models/NFT.model';
 
 @Component({
@@ -7,11 +7,14 @@ import { NFT } from './../../../@core/models/NFT.model';
   templateUrl: './card-details.component.html',
   styleUrls: ['./card-details.component.scss']
 })
-export class CardDetailsComponent {
+export class CardDetailsComponent implements OnInit {
   public userName: any
   public profilePic: any
 
   @Input() nft:NFT;
+  constructor(
+    private customDialogService: CustomDialogService,
+  ) { }
 
   ngOnInit(): void {
     this.userName = JSON.parse(localStorage.getItem('App/user'))
@@ -19,4 +22,7 @@ export class CardDetailsComponent {
 
   }
 
+  buyNow():void {
+    this.customDialogService.showStripePaymenDialog();
+  }
 }

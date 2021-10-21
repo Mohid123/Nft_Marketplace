@@ -10,24 +10,26 @@ import { ApiService } from './api.service';
 
 type StripeApiData = ResponseAddStripeKey | any;
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StripeService extends ApiService<StripeApiData> {
-
-  constructor(
-    protected http: HttpClient,
-  ) {
+  constructor(protected http: HttpClient) {
     super(http);
   }
 
-  addKey(params: AddStripeKey):Observable<ApiResponse<StripeApiData>> {
-    return this.post('/creator/validateAndSaveStripeSecretKey', params).pipe(tap((res:ApiResponse<ResponseAddStripeKey>)=> {
-      if(!res.hasErrors() && res.data.isValid) {
-        setItem(StorageItem.Key, res.data.isValid);
-      } else {
-        alert('invalid key');
-      }
-    }))
+  addKey(params: AddStripeKey): Observable<ApiResponse<StripeApiData>> {
+    return this.post('/creator/validateAndSaveStripeSecretKey', params).pipe(
+      tap((res: ApiResponse<ResponseAddStripeKey>) => {
+        if (!res.hasErrors() && res.data.isValid) {
+          setItem(StorageItem.Key, res.data.isValid);
+        } else {
+          alert('invalid key');
+        }
+      }),
+    );
   }
 
+  stripePay(params): Observable<ApiResponse<StripeApiData>> {
+    return this.post('/creator/validateAndSaveStripeSecretKey', params);
+  }
 }

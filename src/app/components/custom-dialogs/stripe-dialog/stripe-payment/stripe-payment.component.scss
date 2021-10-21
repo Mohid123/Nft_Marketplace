@@ -1,0 +1,73 @@
+::ng-deep .strip-payment-dialog-overlay {
+  @apply bg-white text-gray-900 rounded-3xl justify-center;
+  height: auto;
+  min-height: 723px;
+  max-width: 557px !important;
+}
+
+
+.strip-payment-model {
+  @apply flex flex-col items-center px-0  sm:px-12 h-full;
+
+  .btn-close {
+   @apply absolute top-0 right-0 bg-white rounded-full opacity-50 m-3.5 hover:opacity-70;
+   padding: 1px;
+   svg {
+     color: #132356;
+   }
+ }
+
+ img {
+   @apply object-scale-down;
+   width: 304;
+ }
+
+ h1 {
+   @apply capitalize my-12 text-3xl;
+   font-weight: 400;
+   span {
+     padding-bottom: 4px;
+     border-bottom: 2px solid #75F16D;
+   }
+ }
+
+ form {
+   @apply flex flex-col w-full;
+
+   label {
+     @apply w-full py-4 text-lg font-medium;
+   }
+
+   input {
+     @apply w-full px-9 mb-7 bg-primary-gray-50;
+   }
+
+   button {
+     @apply w-full h-16 text-xl mt-6 self-center text-white font-medium uppercase;
+     background: transparent linear-gradient(97deg, #3BC0F2 0%, #31D491 100%) 0% 0% no-repeat padding-box;
+   }
+
+ }
+
+}
+
+.language-container {
+  @apply flex justify-center items-center my-10;
+  font-size: 13px;
+  button {
+    @apply w-36 h-9 px-2 flex justify-around items-center text-white;
+    background: #31D491 0% 0% no-repeat padding-box;
+   }
+
+  mat-icon {
+    @apply h-3 w-3 text-xs;
+  }
+
+  span {
+    padding: 0 6px;
+  }
+}
+
+.price {
+  border-bottom: #f2f2f4 solid 1px ;
+}
