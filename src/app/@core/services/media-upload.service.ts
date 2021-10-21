@@ -16,8 +16,9 @@ export class MediaUploadService extends ApiService<uploadMedia> {
   }
 
   uploadMedia(folderName, file): Observable<ApiResponse<uploadMedia>>{
+
     const formData: FormData = new FormData();
-    formData.append('file', file);
+    formData.append('file', file, file.name);
     return this.post(`/media-upload/mediaFiles/${folderName}`, formData)
   }
 }

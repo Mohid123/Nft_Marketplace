@@ -24,31 +24,31 @@
       <li class="inline-flex justify-around my-4">
         <ul>
           <label>
-          <input type="radio" name="test" value="small" checked [(ngModel)]="type" checked>
+          <input type="radio" name="test" value="small" checked [(ngModel)]="type" [ngModelOptions]="{standalone: true}" checked>
           <img src="./assets/card/2.svg">
         </label>
         </ul>
         <ul>
           <label>
-          <input type="radio" name="test" value="small" [(ngModel)]="type">
+          <input type="radio" name="test" value="small" [(ngModel)]="type" [ngModelOptions]="{standalone: true}">
           <img src="./assets/card/2.svg">
         </label>
       </ul>
         <ul>
           <label>
-          <input type="radio" name="test" value="small" [(ngModel)]="type">
+          <input type="radio" name="test" value="small" [(ngModel)]="type" [ngModelOptions]="{standalone: true}">
           <img src="./assets/card/3.svg">
         </label>
       </ul>
         <ul>
           <label>
-          <input type="radio" name="test" value="small" [(ngModel)]="type">
+          <input type="radio" name="test" value="small" [(ngModel)]="type" [ngModelOptions]="{standalone: true}">
           <img src="./assets/card/4.svg">
         </label>
       </ul>
         <ul>
           <label>
-          <input type="radio" name="test" value="small" [(ngModel)]="type">
+          <input type="radio" name="test" value="small" [(ngModel)]="type" [ngModelOptions]="{standalone: true}">
           <img src="./assets/card/5.svg">
         </label>
       </ul>
@@ -84,17 +84,17 @@
     <div class="flex items-center justify-between mt-4">
       <div class="inline-flex flex-col">
         <span class="text-xl">Valid till</span><br>
-        <input type="date" class="px-2 font-light text-gray-400 w-44"  >
+        <input type="date" class="px-2 font-light text-gray-400 w-44" [(ngModel)]="date" [ngModelOptions]="{standalone: true}" >
       </div>
       <div class="inline-flex flex-col">
         <span class="text-xl ">Select Group</span><br>
         <!-- <input type="email" class="w-44" placeholder="Rock"> -->
         <label class="block text-left">
 
-          <select
+          <select [(ngModel)]="selectedValue" [ngModelOptions]="{standalone: true}"
             class="block h-16 px-4 text-lg font-light text-gray-400 rounded-lg bg-primary-gray-100 focus:outline-none w-44 form-select">
-            <option>Rock 1</option>
-            <option>Rock 2</option>
+            <option selected *ngFor="let group of groupsByClub.data" [ngValue]="group.id">{{group.name}}</option>
+            <!-- <option>Rock 2</option> -->
           </select>
         </label>
 
@@ -102,9 +102,9 @@
     </div>
     <div class="flex flex-col mt-4">
       <span class="text-xl ">Enter Address</span><br>
-      <input class="font-light" type="email" placeholder="Building 76-A Block B South West, 79000">
+      <input class="font-light" type="email" placeholder="Building 76-A Block B South West, 79000" [(ngModel)]="email" [ngModelOptions]="{standalone: true}">
     </div>
-    <button class="primary-btn" (click)="addNft()">
+    <button class="primary-btn" (click)="nextClick()">
       Next
     </button>
 
