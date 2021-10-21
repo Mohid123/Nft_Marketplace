@@ -1,7 +1,7 @@
 import { NFTCreator } from "./NFTCreater.model";
 import { NFTOwner } from "./NFTOwner.model";
 
-export interface NFT {
+export class NFT {
   itemId:               string;
   nftContract:          string;
   groupId:              string;

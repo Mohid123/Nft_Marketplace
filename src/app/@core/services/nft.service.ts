@@ -18,6 +18,9 @@ type nftApiData = NFT | NFTList | ResponseEventByNFT;
   providedIn: 'root',
 })
 export class NFTService extends ApiService<nftApiData> {
+
+  public createNft:NFT;
+
   private _nftList = new BehaviorSubject<NFTList>({
     totalCount: 0,
     data: [],
