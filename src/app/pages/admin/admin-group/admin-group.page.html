@@ -53,8 +53,7 @@
             </tr>
           </thead>
           <tbody>
-            <ng-container *ngIf="groupsByClub?.totalCount > 0" >
-              <ng-container *ngFor="let group of groupsByClub.data" class="">
+              <ng-container *ngFor="let group of (groups$ | async)" class="">
                 <tr>
                   <td>{{group.name}}</td>
                   <td >{{group.itemsCount}}</td>
@@ -62,7 +61,6 @@
                   <td><mat-icon><img class="cursor-pointer" src="./assets/icons/bin.svg" alt="delete"></mat-icon></td>
                 </tr >
               </ng-container>
-            </ng-container>
           </tbody>
         </table>
       </div>
