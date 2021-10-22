@@ -1,6 +1,6 @@
 <div class="main-container">
   <!--top search bar with login button-->
-  <app-marketplace-search></app-marketplace-search>
+  <app-marketplace-search (search)="search($event)"></app-marketplace-search>
 
   <!--banner-->
   <section class="pt-0 pb-0 m-4 md:pb-10 lg:pb-10 md:pt-14 lg:pt-14 lg:m-0 md:m-0">
@@ -44,7 +44,10 @@
             </svg>
           </button>
           <mat-menu #menu="matMenu" class="bg-primary-600 hover:bg-primary-400  mt-0.5 p-2" xPosition='before'>
-            <button class="my-2" mat-menu-item *ngFor="let group of (groups$ | async)">
+            <button (click)="filterBy(null)" class="my-2" mat-menu-item>
+              All
+            </button>
+            <button (click)="filterBy(group)" class="my-2" mat-menu-item *ngFor="let group of (groups$ | async)">
               {{group.name}}
             </button>
           </mat-menu>

@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { take } from 'rxjs/operators';
 import { environment } from './../../../../environments/environment.prod';
+import { Group } from './../../../@core/models/group.model';
 import { NFTList } from './../../../@core/models/NFTList.model';
 import { ApiResponse } from './../../../@core/models/response.model';
 import { GroupService } from './../../../@core/services/group.service';
@@ -26,6 +27,8 @@ export class MarketPlacePage implements OnInit {
   public page:number;
 
   public groups$ = this.groupService.groups$;
+  public filterGroup: Group;
+  public searchValu = '';
 
   constructor(
     private customDialogService: CustomDialogService,
@@ -48,7 +51,7 @@ export class MarketPlacePage implements OnInit {
 
   getNfts(): void {
     if (this._isLoading) return
-    this.nftService.getAllNftsByClub(this.clubName, this.page)
+    this.nftService.getAllNftsByClub(this.clubName, this.page,this.searchValu ,this.filterGroup?.id)
       .pipe(take(1))
       .subscribe((result:ApiResponse<NFTList>) => {
         if (!result.hasErrors()) {
@@ -78,5 +81,19 @@ export class MarketPlacePage implements OnInit {
 
   priceModal() {
     this.customDialogService.showCreateNFTStyleDialog();
+  }
+
+  filterBy (group:Group) :void {
+    this.page = 1;
+    this.filterGroup = group;
+    this.getNfts();
+    console.log('group:',group);
+
+  }
+
+  search(searchValu) {
+    this.searchValu = searchValu;
+    this.page = 1;
+    this.getNfts();
   }
 }

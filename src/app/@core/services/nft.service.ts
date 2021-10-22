@@ -38,24 +38,34 @@ export class NFTService extends ApiService<nftApiData> {
     super(http);
   }
 
-  getAllNftsByClub(clubName: string, page: number) : Observable<ApiResponse<nftApiData>> {
+  getAllNftsByClub(clubName: string, page: number, searchValue: string ,groupId?:string) : Observable<ApiResponse<nftApiData>> {
     page--;
     const param: GetAllNftsByClub = {
       clubName: clubName,
       offset: page ? environment.limit * page : 0,
       limit: environment.limit,
+      name: searchValue,
     };
+
+    if(groupId) {
+      param.groupID = groupId;
+    }
 
     return this.get('/nft/getAllNftsByClub', param);
   }
 
-  getAllNftsByUser(clubName: string, userId:string ,page: number) : Observable<ApiResponse<nftApiData>> {
+  getAllNftsByUser(clubName: string, userId:string ,page: number, searchValue: string ,groupId?:string) : Observable<ApiResponse<nftApiData>> {
     page--;
     const param: getNftsByUserId = {
       clubName: clubName,
       offset: page ? environment.limit * page : 0,
       limit: environment.limit,
+      name: searchValue,
     };
+
+    if(groupId) {
+      param.groupID = groupId;
+    }
 
     return this.get('/nft/getUserNftsByClub/'+ userId, param);
   }

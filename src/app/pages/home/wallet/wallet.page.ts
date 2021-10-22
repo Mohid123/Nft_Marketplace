@@ -27,6 +27,9 @@ export class WalletPage implements OnInit {
   public nftLimit = environment.limit ;
 
   private _isLoading: boolean;
+  public filterGroup: Group;
+
+  public searchValu = '';
 
   constructor(
     private authService: AuthService,
@@ -55,6 +58,8 @@ export class WalletPage implements OnInit {
         this.clubName,
         this.authService.loggedInUser.id,
         this.page,
+        this.searchValu,
+        this.filterGroup?.id,
       )
       .pipe(take(1))
       .subscribe((result: ApiResponse<NFTList>) => {
@@ -90,5 +95,19 @@ export class WalletPage implements OnInit {
         }
         this._isLoading = false;
       });
+  }
+
+  filterBy (group:Group) :void {
+    this.page = 1;
+    this.filterGroup = group;
+    this.getNfts();
+    console.log('group:',group);
+
+  }
+
+  search(searchValu) {
+    this.searchValu = searchValu;
+    this.page = 1;
+    this.getNfts();
   }
 }

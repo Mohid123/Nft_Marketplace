@@ -20,7 +20,7 @@
             type="search" name="search" placeholder="Search  NFT..."  />
         </div> -->
         <div class="relative">
-         <input type="text" class="flex w-full px-5 mx-auto text-sm bg-gray-500 bg-opacity-25 rounded-lg h-11 md:w-2/3 lg:w-2/3 focus:bg-white md:h-14 lg:h-14 focus:outline-none" placeholder="Search NFT...">
+         <input type="text" [formControl]="searchControl" class="flex w-full px-5 mx-auto text-sm bg-gray-500 bg-opacity-25 rounded-lg h-11 md:w-2/3 lg:w-2/3 focus:bg-white md:h-14 lg:h-14 focus:outline-none" placeholder="Search NFT...">
           <div class="absolute inset-y-0 md:inset-y-0 lg:inset-y-0 right-4 md:right-40 lg:right-40">  <span  class="p-1 focus:outline-none focus:shadow-outline">
             <img class="w-10 h-3 " src="./assets/icons/search.svg" alt="">
           </span>
