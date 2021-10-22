@@ -3,8 +3,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { take } from 'rxjs/operators';
+import { environment } from './../../../../environments/environment.prod';
 import { NFTList } from './../../../@core/models/NFTList.model';
 import { ApiResponse } from './../../../@core/models/response.model';
+import { GroupService } from './../../../@core/services/group.service';
 import { NFTService } from './../../../@core/services/nft.service';
 import { RouteService } from './../../../@core/services/route.service';
 
@@ -15,18 +17,23 @@ import { RouteService } from './../../../@core/services/route.service';
 })
 export class MarketPlacePage implements OnInit {
 
+  private _isLoading:boolean;
+
   public nftList: NFTList;
   public clubName: string;
+  public limit = 6 ;
+  public nftLimit = environment.limit ;
+  public page:number;
 
-  private _page:number;
-  private _isLoading:boolean;
+  public groups$ = this.groupService.groups$;
 
   constructor(
     private customDialogService: CustomDialogService,
+    private groupService: GroupService,
     private nftService: NFTService,
     private routeService: RouteService,
   ) {
-    this._page = 0;
+    this.page = 1;
     this._isLoading = false;
     this.clubName = this.routeService.clubName;
     this.getNfts();
@@ -35,12 +42,13 @@ export class MarketPlacePage implements OnInit {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   ngOnInit(): void {
     console.log('market palce:');
+    this.groupService.getAllGroupsByClub(this.clubName, 0, 0);
     // this.nftService.getNft('');
   }
 
   getNfts(): void {
     if (this._isLoading) return
-    this.nftService.getAllNftsByClub(this.clubName, this._page++)
+    this.nftService.getAllNftsByClub(this.clubName, this.page)
       .pipe(take(1))
       .subscribe((result:ApiResponse<NFTList>) => {
         if (!result.hasErrors()) {
@@ -48,6 +56,16 @@ export class MarketPlacePage implements OnInit {
         }
         this._isLoading = false;
       });
+  }
+
+  next():void {
+    this.page++;
+    this.getNfts();
+  }
+
+  previous():void {
+    this.page--;
+    this.getNfts();
   }
 
   test() {

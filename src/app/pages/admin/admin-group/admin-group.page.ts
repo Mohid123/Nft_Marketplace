@@ -1,8 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ResponseGroupsByClub } from '@app/@core/models/response-groups-by-club.model';
 import { Subject } from 'rxjs';
-import { distinctUntilChanged, take, takeUntil } from 'rxjs/operators';
-import { ApiResponse } from './../../../@core/models/response.model';
+import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { CustomDialogService } from './../../../@core/services/custom-dialog/custom-dialog.service';
 import { GroupService } from './../../../@core/services/group.service';
 import { RouteService } from './../../../@core/services/route.service';
@@ -16,12 +14,12 @@ export class AdminGroupPage implements OnInit, OnDestroy {
 
   destroy$ = new Subject();
 
-  public clubName: string;
-  public limit = 6 ;
-
   private _page:number;
   private _isLoading:boolean;
-  public groupsByClub: ResponseGroupsByClub;
+
+  public clubName: string;
+  public groups$ = this.groupService.groups$;
+  public limit = 6 ;
 
   constructor(
     private customDialogService: CustomDialogService,
@@ -38,14 +36,7 @@ export class AdminGroupPage implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     if (this._isLoading) return
-    this.groupService.getAllGroupsByClub(this.clubName, this._page++, this.limit)
-      .pipe(take(1))
-      .subscribe((result:ApiResponse<ResponseGroupsByClub>) => {
-        if (!result.hasErrors()) {
-          this.groupsByClub = result.data;
-        }
-        this._isLoading = false;
-      });
+      this.groupService.getAllGroupsByClub(this.clubName, this._page++, this.limit);
   }
 
   newGroup() {

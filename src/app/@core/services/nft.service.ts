@@ -33,6 +33,7 @@ export class NFTService extends ApiService<nftApiData> {
   }
 
   getAllNftsByClub(clubName: string, page: number) : Observable<ApiResponse<nftApiData>> {
+    page--;
     const param: GetAllNftsByClub = {
       clubName: clubName,
       offset: page ? environment.limit * page : 0,
@@ -43,6 +44,7 @@ export class NFTService extends ApiService<nftApiData> {
   }
 
   getAllNftsByUser(clubName: string, userId:string ,page: number) : Observable<ApiResponse<nftApiData>> {
+    page--;
     const param: getNftsByUserId = {
       clubName: clubName,
       offset: page ? environment.limit * page : 0,
