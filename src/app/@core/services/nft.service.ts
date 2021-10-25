@@ -98,22 +98,25 @@ export class NFTService extends ApiService<nftApiData> {
     return this.post('/nft/addNft', params)
   }
 
-  // uploadImage(folderName, MediaFile){
-  //   return new Promise<void>((resolve, reject)=>{
+  uploadImage(folderName, MediaFile){
+    return new Promise<void>((resolve, reject)=>{
 
-  //     this._mediaUplaod.uploadMedia('Image', MediaFile).subscribe((uploadImage: any)=>{
-  //       this.createNft.serverCaptureFileUrl = uploadImage.url;
-  //       console.log('++++++thi',this.createNft)
-  //       this.addNft(this.createNft).pipe(take(1)).subscribe((data:any)=>{
-  //         console.log('++++++D',data)
-  //         resolve(data)
-  //       }, error=> {
-  //         console.log('++++++E',error)
-  //         reject(error)
-  //       })
-  //     })
-  //   })
-  // }
+      this._mediaUplaod.uploadMedia('Image', MediaFile).subscribe((uploadImage: any)=>{
+        this.createNft.serverCaptureFileUrl = uploadImage.url;
+        console.log('++++++thi',this.createNft)
+        this.addNft(this.createNft).subscribe((data:any)=>{
+          console.log(data)
+        })
+        // this.addNft(this.createNft).pipe(take(1)).subscribe((data:any)=>{
+        //   console.log('++++++D',data)
+        //   resolve(data)
+        // }, error=> {
+        //   console.log('++++++E',error)
+        //   reject(error)
+        // })
+      })
+    })
+  }
 
 
 }

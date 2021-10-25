@@ -6,6 +6,17 @@
   @apply relative w-full max-w-7xl p-7;
 }
 
+.cards-container {
+  @apply flex flex-wrap w-full h-auto justify-center;
+
+  app-nft-card {
+    margin: 0px 9px;
+  }
+}
+
+.filter-btn{
+  @apply inline-flex justify-center w-full px-4 py-1 text-sm font-medium text-white bg-transparent rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-offset-green-400 focus:ring-green-400;
+}
 
 .membership-btn{
   background: transparent linear-gradient(106deg, #79D984 0%, #EF676C 100%) 0% 0% no-repeat padding-box;
@@ -20,7 +31,7 @@
 }
 
 .pagination-btn{
-  @apply inline-flex items-center justify-center w-12 h-12 px-3 py-3 font-bold bg-gray-200 bg-opacity-25 rounded-xl;
+  @apply inline-flex items-center justify-center w-12 h-12 px-3 py-3 font-bold bg-gray-500 bg-opacity-25 rounded-xl hover:bg-primary-400 focus:bg-primary-400;
 }
 
 
