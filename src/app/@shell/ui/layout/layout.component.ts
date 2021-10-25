@@ -53,7 +53,7 @@ export class LayoutComponent implements AfterViewInit, OnDestroy {
 
   onClickSignOut(): void {
     this.authService.signOut();
-    this.router.navigate(['/']);
+    this.router.navigate(['auth','admin-sign-in']);
   }
 
   ngOnDestroy(): void {
