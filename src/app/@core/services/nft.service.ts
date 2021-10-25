@@ -103,17 +103,12 @@ export class NFTService extends ApiService<nftApiData> {
 
       this._mediaUplaod.uploadMedia('Image', MediaFile).subscribe((uploadImage: any)=>{
         this.createNft.serverCaptureFileUrl = uploadImage.url;
+        console.log(uploadImage.url)
         console.log('++++++thi',this.createNft)
         this.addNft(this.createNft).subscribe((data:any)=>{
           console.log(data)
         })
-        // this.addNft(this.createNft).pipe(take(1)).subscribe((data:any)=>{
-        //   console.log('++++++D',data)
-        //   resolve(data)
-        // }, error=> {
-        //   console.log('++++++E',error)
-        //   reject(error)
-        // })
+
       })
     })
   }

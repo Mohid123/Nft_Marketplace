@@ -121,4 +121,10 @@ export class CreateNFTComponent {
   close(): void {
     this.customDialogService.closeDialogs();
   }
+
+  addImage(){
+    this.nftService.uploadImage('Logo', this.file ).then((data)=>{
+          console.log('uploaded')
+       })
+      }
 }
