@@ -12,7 +12,7 @@ import { ResponseEventByNFT } from './../models/response-events-by-nft.model';
 import { ApiResponse } from './../models/response.model';
 import { RouterState } from './../models/routerState.model';
 import { ApiService } from './api.service';
-import { MediaUploadService } from './media-upload.service';
+import { MediaService } from './media.service';
 
 type nftApiData = NFT | NFTList | ResponseEventByNFT | MediaUpload ;
 
@@ -33,7 +33,7 @@ export class NFTService extends ApiService<nftApiData> {
 
   constructor(
     protected http: HttpClient,
-    private _mediaUplaod: MediaUploadService
+    private mediaService: MediaService
   ) {
     super(http);
   }
@@ -98,25 +98,30 @@ export class NFTService extends ApiService<nftApiData> {
     return this.post('/nft/addNft', params)
   }
 
-  uploadImage(folderName, MediaFile){
-    return new Promise<void>((resolve, reject)=>{
-
-      this._mediaUplaod.uploadMedia('Image', MediaFile).subscribe((uploadImage: any)=>{
-        this.createNft.serverCaptureFileUrl = uploadImage.url;
-        console.log('++++++thi',this.createNft)
-        this.addNft(this.createNft).subscribe((data:any)=>{
-          console.log(data)
-        })
-        // this.addNft(this.createNft).pipe(take(1)).subscribe((data:any)=>{
-        //   console.log('++++++D',data)
-        //   resolve(data)
-        // }, error=> {
-        //   console.log('++++++E',error)
-        //   reject(error)
-        // })
-      })
+  upload(folderName, MediaFile) {
+    this.http.post(`${environment.apiUrl}/media-upload/mediaFiles/`+folderName, MediaFile)
+    .subscribe(res => {
+      console.log(res);
+      alert('Uploaded Successfully.');
     })
   }
+
+  // uploadImage(folderName, MediaFile){
+  //   return new Promise<void>((resolve, reject)=>{
+
+  //     this._mediaUplaod.uploadMedia('Image', MediaFile).subscribe((uploadImage: any)=>{
+  //       this.createNft.serverCaptureFileUrl = uploadImage.url;
+  //       console.log('++++++thi',this.createNft)
+  //       this.addNft(this.createNft).pipe(take(1)).subscribe((data:any)=>{
+  //         console.log('++++++D',data)
+  //         resolve(data)
+  //       }, error=> {
+  //         console.log('++++++E',error)
+  //         reject(error)
+  //       })
+  //     })
+  //   })
+  // }
 
 
 }

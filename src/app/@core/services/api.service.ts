@@ -7,6 +7,13 @@ import { environment } from '@environments/environment';
 import { Observable, of } from 'rxjs';
 import { catchError, map, retry } from 'rxjs/operators';
 import { ApiResponse, ErrorCode } from './../models/response.model';
+
+const headersConfig = {
+  'LOCALE': 'en',
+  'Accept': 'application/json',
+  'access-control-allow-origin': '*'
+};
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,13 +24,18 @@ export class ApiService<T> {
   ) { }
 
   private setHeaders(): HttpHeaders {
-    const headersConfig = {
+    const header = {
+      ...headersConfig,
       'Content-Type': 'application/json',
-      'LOCALE': 'en',
-      'Accept': 'application/json',
-      'access-control-allow-origin': '*'
     };
-    return new HttpHeaders(headersConfig);
+    return new HttpHeaders(header);
+  }
+
+  private setHeadersForMedia(): HttpHeaders {
+    const header = {
+      ...headersConfig,
+    };
+    return new HttpHeaders(header);
   }
 
   public get(
@@ -63,6 +75,19 @@ export class ApiService<T> {
         `${environment.apiUrl}${path}`,
         JSON.stringify(body),
         options
+      )
+    );
+  }
+
+  public postMedia(
+    path: string,
+    body: any = {}
+  ): Observable<ApiResponse<T>> {
+    // Add safe, URL encoded_page parameter
+    return this.mapAndCatchError<T>(
+      this.http.post<ApiResponse<T>>(
+        `${environment.apiUrl}${path}`,
+        body
       )
     );
   }

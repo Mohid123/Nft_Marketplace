@@ -1,11 +1,11 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Group } from '@app/@core/models/group.model';
 import { NFT } from '@app/@core/models/NFT.model';
 import { ResponseGroupsByClub } from '@app/@core/models/response-groups-by-club.model';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { GroupService } from '@app/@core/services/group.service';
-import { MediaUploadService } from '@app/@core/services/media-upload.service';
+import { MediaService } from '@app/@core/services/media.service';
 import { NFTService } from '@app/@core/services/nft.service';
 import { RouteService } from '@app/@core/services/route.service';
 import { Subject } from 'rxjs';
@@ -43,17 +43,20 @@ export class CreateNFTComponent {
     private customDialogService: CustomDialogService,
     private formBuilder: FormBuilder,
     private cf: ChangeDetectorRef,
-    private mediaUpload: MediaUploadService,
+    private mediaService: MediaService,
     private nftService: NFTService,
     private groupService: GroupService,
     private routeService: RouteService,
   ) {
+    // this.createNft = this.formBuilder.group({
+    //   email: new FormControl('', [Validators.required, Validators.email]),
+    //   password: new FormControl('', [
+    //     Validators.required,
+    //     Validators.minLength(6),
+    //   ]),
+    // });
     this.createNft = this.formBuilder.group({
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [
-        Validators.required,
-        Validators.minLength(6),
-      ]),
+      file: new FormControl(''),
     });
 
 
@@ -89,7 +92,10 @@ export class CreateNFTComponent {
         this.cf.detectChanges();
       }
       event.target.value = '';
-
+      this.createNft.patchValue( {
+        file : this.file
+      })
+      this.addNft();
     }
   }
 
@@ -113,11 +119,19 @@ export class CreateNFTComponent {
   // });
 }
 
-// addNft(){
-//   this.nftService.uploadImage('Logo', this.file ).then((data)=>{
-//     console.log('uploaded')
-//   })
-// }
+addNft(){
+
+       // Create form data
+       const formData = new FormData();
+       formData.append('file', this.createNft.get('file').value);
+       console.log('form data:',formData);
+
+  // this.nftService.upload('nft-img',formData);
+  console.log('img:',this.file);
+  // this.nftService.uploadImage('Logo', this.file ).then((data)=>{
+  //   console.log('uploaded')
+  // })
+}
   close(): void {
     this.customDialogService.closeDialogs();
   }

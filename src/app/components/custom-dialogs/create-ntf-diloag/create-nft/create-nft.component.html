@@ -93,7 +93,7 @@
 
           <select [(ngModel)]="selectedValue" [ngModelOptions]="{standalone: true}"
             class="block h-16 px-4 text-lg font-light text-gray-400 rounded-lg bg-primary-gray-100 focus:outline-none w-44 form-select">
-            <option selected *ngFor="let group of groupsByClub.data" [ngValue]="group.id">{{group.name}}</option>
+            <option selected *ngFor="let group of (groups$ | async)" [ngValue]="group.id">{{group.name}}</option>
             <!-- <option>Rock 2</option> -->
           </select>
         </label>

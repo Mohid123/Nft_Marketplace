@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AddStripeKey } from '../models/requests/add-stripe-key.model';
 import { ResponseAddStripeKey } from '../models/response-add-stripe-key.model';
+import { BuyNFT } from './../models/requests/buy-nft.model';
 import { ApiResponse } from './../models/response.model';
 import { ApiService } from './api.service';
 
@@ -29,7 +30,7 @@ export class StripeService extends ApiService<StripeApiData> {
     );
   }
 
-  stripePay(params): Observable<ApiResponse<StripeApiData>> {
+  stripePay(params:BuyNFT): Observable<ApiResponse<StripeApiData>> {
     return this.post('/creator/validateAndSaveStripeSecretKey', params);
   }
 }

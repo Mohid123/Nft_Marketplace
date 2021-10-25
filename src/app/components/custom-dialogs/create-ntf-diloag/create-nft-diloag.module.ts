@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateMembershipComponent } from './create-membership/create-membership.component';
 import { CreateNFTOptionsComponent } from './create-nft-options/create-nft-options.component';
 import { CreateNFTStyleComponent } from './create-nft-style/create-nft-style.component';
@@ -18,7 +18,9 @@ import { CreateNFTMintingComponent } from './create-ntf-minting/create-nft-minti
     CreateMembershipComponent,
   ],
   imports: [
-    CommonModule, FormsModule
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class CreateNFTDiloagModule {
