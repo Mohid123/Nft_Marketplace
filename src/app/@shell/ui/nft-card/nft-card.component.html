@@ -1,14 +1,14 @@
 <div class="card-border">
   <a [routerLink]="['/',clubName,'detail',nft.id]">
     <div class="nft-img">
-      <img class="w-64 h-56" src="../../../../assets/card/TICKET.svg" alt="Joker Card" />
+      <img class="w-64 h-56" [src]="nft.serverCaptureFileUrl" alt="Joker Card" />
     </div>
   </a>
   <div class="flex items-center justify-between">
     <div class="inline-flex">
       <div class="flex justify-start h-9">
         <span class="inline-flex items-center py-1 text-sm leading-none text-gray-400 ">
-          NFT Seller
+         {{nft.type}}
 
         </span>
         <span class="inline-flex items-center text-sm text-gray-400">
@@ -23,7 +23,7 @@
     </span>
   </div>
   <div class="mb-3.5">
-    <span class="pt-1 text-lg tracking-widest text-white ">King Card</span>
+    <span class="pt-1 text-lg tracking-widest text-white ">{{nft.name}}</span>
   </div>
   <div class="flex items-center justify-between">
     <span class="inline-flex">
