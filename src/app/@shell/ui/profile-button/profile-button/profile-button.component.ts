@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@app/pages/auth/services/auth.service';
+import { RouteService } from './../../../../@core/services/route.service';
 
 @Component({
   selector: 'app-profile-button',
@@ -13,6 +14,7 @@ export class ProfileButtonComponent {
   constructor(
     private authService: AuthService,
     private router: Router,
+    private routeService: RouteService,
   ) {
 
   }
@@ -24,7 +26,7 @@ export class ProfileButtonComponent {
 
   signOut():void {
     this.authService.signOut();
-    this.router.navigate(['/']);
+    this.router.navigate([this.routeService.clubName]);
   }
 
 }

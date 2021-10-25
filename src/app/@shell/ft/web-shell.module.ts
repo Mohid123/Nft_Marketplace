@@ -12,51 +12,56 @@ import { AdminGuard } from './../../@core/guards/admin.guard';
 import { NavModule } from './../ui/nav/nav.module';
 
 const APP_ROUTES: Routes = [
-  // {
-  //   path: ROUTER_UTILS.config.base.home,
-  //   component: NotFoundPage,
-  //   canActivate: [NoAdminGuard, UserGuard],
-  // },
   {
-    path: ROUTER_UTILS.config.base.clubName + '/' + ROUTER_UTILS.config.auth.root,
-    loadChildren: async () =>
-      (await import('@pages/auth/auth.module')).AuthModule,
+    path: ROUTER_UTILS.config.base.home,
+    component: NotFoundPage,
+  },
+  {
+    path:
+      ROUTER_UTILS.config.base.clubName + '/' + ROUTER_UTILS.config.auth.root,
+    loadChildren: () =>
+      import('@pages/auth/auth.module').then((m) => m.AuthModule),
     canLoad: [NoAuthGuard],
   },
   {
-    path: ROUTER_UTILS.config.base.clubName + '/' + ROUTER_UTILS.config.admin.root,
-    loadChildren: async () =>
-      (await import('@pages/admin/admin.module')).AdminModule,
+    path:
+      ROUTER_UTILS.config.base.clubName + '/' + ROUTER_UTILS.config.admin.root,
+    loadChildren: () =>
+      import('@pages/admin/admin.module').then((m) => m.AdminModule),
     canLoad: [AdminGuard],
   },
   {
     path: ROUTER_UTILS.config.base.clubName,
-    loadChildren: async () =>
-      (await import('@pages/home/home.module')).HomeModule,
+    loadChildren: () =>
+      import('@pages/home/home.module').then((m) => m.HomeModule),
     canLoad: [NoAdminGuard],
   },
   {
     path: ROUTER_UTILS.config.base.dashboard,
-    loadChildren: async () =>
-      (await import('@pages/dashboard/dashboard.module')).DashboardModule,
+    loadChildren: () =>
+      import('@pages/dashboard/dashboard.module').then(
+        (m) => m.DashboardModule,
+      ),
     canLoad: [UserGuard],
   },
   {
     path: ROUTER_UTILS.config.settings.root,
-    loadChildren: async () =>
-      (await import('@pages/settings/settings.module')).SettingsModule,
+    loadChildren: () =>
+      import('@pages/settings/settings.module').then((m) => m.SettingsModule),
     canLoad: [UserGuard],
   },
   {
     path: ROUTER_UTILS.config.user.root,
-    loadChildren: async () =>
-      (await import('@pages/user/user.module')).UserModule,
+    loadChildren: () =>
+      import('@pages/user/user.module').then((m) => m.UserModule),
     canLoad: [UserGuard],
   },
   {
     path: '**',
-    loadChildren: async () =>
-      (await import('@shell/ui/not-found/not-found.module')).NotFoundModule,
+    loadChildren: () =>
+      import('@shell/ui/not-found/not-found.module').then(
+        (m) => m.NotFoundModule,
+      ),
     component: NotFoundPage,
   },
 ];
@@ -64,7 +69,7 @@ const APP_ROUTES: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forRoot(APP_ROUTES),
+    RouterModule.forRoot(APP_ROUTES,{ useHash: true }),
     FooterModule,
     HeaderModule,
     LayoutModule,
