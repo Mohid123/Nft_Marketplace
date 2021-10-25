@@ -32,6 +32,7 @@ export class GroupService extends ApiService<groupApiData> {
   }
 
   getAllGroupsByClub(clubName: string, page: number, limit?: number): void {
+    debugger
     this.limit = limit;
     const param: GetAllNftsByClub = {
       clubName: clubName,
@@ -69,6 +70,10 @@ export class GroupService extends ApiService<groupApiData> {
         }
       }
     }));;
+  }
+
+  deleteGroups(id){
+    return this.get(`/group/deleteGroupById/${id}`);
   }
 
 }

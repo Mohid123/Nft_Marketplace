@@ -58,7 +58,7 @@
                   <td>{{group.name}}</td>
                   <td >{{group.itemsCount}}</td>
                   <td >{{group.description}}</td>
-                  <td><mat-icon><img class="cursor-pointer" src="./assets/icons/bin.svg" alt="delete"></mat-icon></td>
+                  <td><mat-icon (click)="deleteGroup(group)"><img class="cursor-pointer" src="./assets/icons/bin.svg" alt="delete"></mat-icon></td>
                 </tr >
               </ng-container>
           </tbody>

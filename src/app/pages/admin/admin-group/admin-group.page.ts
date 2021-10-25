@@ -38,6 +38,11 @@ export class AdminGroupPage implements OnInit, OnDestroy {
     if (this._isLoading) return
       this.groupService.getAllGroupsByClub(this.clubName, this._page++, this.limit);
   }
+  deleteGroup(group){
+    this.groupService.deleteGroups(group.id).subscribe(data=>{
+      console.log('Delete success')
+    });
+  }
 
   newGroup() {
     this.customDialogService.showCreateGroupDialog();
