@@ -33,4 +33,5 @@ export class NFT {
   creator?:             NFTCreator;
   id:                   string;
   ownerData?:           NFTOwner;
+  serverBlurHash?:       string;
 }

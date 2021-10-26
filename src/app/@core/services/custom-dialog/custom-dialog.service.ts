@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { NFT } from '@app/@core/models/NFT.model';
 import { AuthDialogService } from '@app/components/custom-dialogs/auth-diloag/auth-dialog.service';
 import { CreateGroupService } from './../../../components/custom-dialogs/create-group-dialog/create-group.service';
 import { CreateNFTDiloagService } from './../../../components/custom-dialogs/create-ntf-diloag/create-nft-diloag.service';
@@ -86,9 +87,10 @@ export class CustomDialogService {
     // });
   }
 
-  async showStripePaymenDialog() {
+  async showStripePaymenDialog(nft:NFT) {
     this.matDialog.closeAll();
     this._mapDialogref = await this.stripeDialogService.openStripePaymentComponent();
+    this._mapDialogref.componentInstance.nft = nft;
     // (await this._mapDialogref).afterClosed().subscribe((result) => {
     //   console.log('Mat Dialog Results admin sign in:', result);
     // });

@@ -43,17 +43,17 @@ export class CreateGroupComponent {
     const node = document.getElementById('group-img');
     htmlToImage
       .toPng(node, {
-        canvasWidth: 150,
-        canvasHeight: 136,
-        width: 150,
-        height: 136,
+        canvasWidth: 186,
+        canvasHeight: 162,
+        width: 186,
+        height: 162,
         quality: 1,
         pixelRatio: 1,
         skipAutoScale: false,
-        style: {
-          display: 'block',
-          transform: 'rotate(41.3deg)',
-        }
+        // style: {
+        //   display: 'block',
+        //   transform: 'rotate(41.3deg)',
+        // }
       })
       .then((dataUrl) => {
         // const img = new Image();
@@ -66,8 +66,6 @@ export class CreateGroupComponent {
           ),
         });
         this.imgFormData.append('file', this.groupForm.get('file').value);
-
-
         this.mediaService.uploadMedia('group', this.imgFormData).pipe(take(1),
             exhaustMap((res: ApiResponse<ResponseAddGroupMedia>) => {
               if(!res.hasErrors()) {

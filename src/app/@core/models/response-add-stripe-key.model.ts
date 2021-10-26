@@ -1,3 +1,3 @@
-export interface ResponseAddStripeKey {
+export interface ResponseStripeStatus {
   isValid: boolean
 }

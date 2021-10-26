@@ -6,6 +6,8 @@ import {
   Validators
 } from '@angular/forms';
 import { AddStripeKey } from '@app/@core/models/requests/add-stripe-key.model';
+import { ResponseStripeStatus } from '@app/@core/models/response-add-stripe-key.model';
+import { ApiResponse } from './../../../../@core/models/response.model';
 import { CustomDialogService } from './../../../../@core/services/custom-dialog/custom-dialog.service';
 import { RouteService } from './../../../../@core/services/route.service';
 import { StripeService } from './../../../../@core/services/stripe.service';
@@ -35,7 +37,7 @@ export class StripeKeyComponent {
       clubName: this.routeService.clubName,
     };
 
-    this.stripeService.addKey(params).subscribe(result=> {
+    this.stripeService.addKey(params).subscribe((result:ApiResponse<ResponseStripeStatus>)=> {
       if(!result.hasErrors() && result.data.isValid) {
         this.close();
       } else {
