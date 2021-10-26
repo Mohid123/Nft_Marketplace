@@ -12,7 +12,7 @@ import { ResponseEventByNFT } from './../models/response-events-by-nft.model';
 import { ApiResponse } from './../models/response.model';
 import { RouterState } from './../models/routerState.model';
 import { ApiService } from './api.service';
-import { MediaUploadService } from './media-upload.service';
+import { MediaService } from './media.service';
 
 type nftApiData = NFT | NFTList | ResponseEventByNFT | MediaUpload ;
 
@@ -33,7 +33,7 @@ export class NFTService extends ApiService<nftApiData> {
 
   constructor(
     protected http: HttpClient,
-    private _mediaUplaod: MediaUploadService
+    private mediaService: MediaService
   ) {
     super(http);
   }
@@ -97,21 +97,4 @@ export class NFTService extends ApiService<nftApiData> {
   addNft(params: NFT): Observable<ApiResponse<nftApiData>>{
     return this.post('/nft/addNft', params)
   }
-
-  uploadImage(folderName, MediaFile){
-    return new Promise<void>((resolve, reject)=>{
-
-      this._mediaUplaod.uploadMedia('Image', MediaFile).subscribe((uploadImage: any)=>{
-        this.createNft.serverCaptureFileUrl = uploadImage.url;
-        console.log(uploadImage.url)
-        console.log('++++++thi',this.createNft)
-        this.addNft(this.createNft).subscribe((data:any)=>{
-          console.log(data)
-        })
-
-      })
-    })
-  }
-
-
 }

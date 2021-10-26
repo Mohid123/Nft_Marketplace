@@ -22,7 +22,7 @@ export class ThemeService implements OnDestroy {
     private domSanitizer: DomSanitizer,
     private matIconRegistry: MatIconRegistry,
   ) {
-    this.registerIcons();
+    // this.registerIcons();
   }
 
   get systemTheme(): ThemeList.Light | ThemeList.Dark {

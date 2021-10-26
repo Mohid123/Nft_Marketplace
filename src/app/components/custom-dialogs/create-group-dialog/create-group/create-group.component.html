@@ -22,9 +22,16 @@
       <p class="error-msg error" *ngIf="groupForm.controls.description.touched && groupForm.controls.description.errors?.minlength">description length should be greater than 5</p>
 
 
-    <button class="primary-btn" (click)="addGroup(); close()">
+    <button class="primary-btn" (click)="addGroup()">
       Add Group
     </button>
-
+    <div style="position: absolute;z-index: -10000;">
+      <div id="group-img" style="display: none; position: relative;top: 0;width: 300px;text-align: center;right: 0;height: 136px;overflow: hidden;">
+        <div style="background-color: #ddcd3d;transform: rotate(41.3deg);top: 25px;width: 300px;position: absolute;right: -64px;height: 52px;font-weight: 400;font-size: 32px;">
+          {{groupForm.controls.name.value}}
+        </div>
+      </div>
+    </div>
+    <!-- <div id="group-view" style="width: 73px;height: 64px"></div> -->
   </form>
 </div>
