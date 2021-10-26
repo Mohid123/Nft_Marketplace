@@ -23,6 +23,6 @@ export class CardDetailsComponent implements OnInit {
   }
 
   buyNow():void {
-    this.customDialogService.showStripePaymenDialog();
+    this.customDialogService.showStripePaymenDialog(this.nft);
   }
 }

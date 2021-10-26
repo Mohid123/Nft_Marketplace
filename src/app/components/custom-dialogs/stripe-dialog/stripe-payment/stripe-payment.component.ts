@@ -38,11 +38,12 @@ export class StripePaymentComponent  {
   }
 
   payNowClick(): void {
+
     const param: BuyNFT = {
       card : {
-        number: this.stripeForm.controls.cardNo.value,
-        expMonth: this.stripeForm.controls.validity.value,
-        expYear: this.stripeForm.controls.validity.value,
+        number: this.stripeForm.controls.cardNo.value.toString(),
+        expMonth: +this.stripeForm.controls.validity.value.substring(0, 2),
+        expYear: +this.stripeForm.controls.validity.value.substring(3, 5),
         cvc: +this.stripeForm.controls.cvv.value
       },
       payment : this.nft.price,
@@ -52,12 +53,12 @@ export class StripePaymentComponent  {
       clubUserId : this.authService.loggedInUser.clubUserId,
     };
 
-    this.stripeService.stripePay(param).pipe(take(1)).subscribe((res:ApiResponse<any>)=> {
+    this.stripeService.stripePay(param).pipe(take(1)).subscribe((res:ApiResponse<NFT>)=> {
       if(!res.hasErrors()) {
         console.log('success:',res);
         this.close();
       } else {
-        alert('error :' + res.errors[0]?.error?.message);
+        alert('error :');
       }
     });
   }

@@ -29,7 +29,7 @@ export class WalletPage implements OnInit {
   private _isLoading: boolean;
   public filterGroup: Group;
 
-  public searchValu = '';
+  public searchValue = '';
 
   constructor(
     private authService: AuthService,
@@ -58,7 +58,7 @@ export class WalletPage implements OnInit {
         this.clubName,
         this.authService.loggedInUser.id,
         this.page,
-        this.searchValu,
+        this.searchValue,
         this.filterGroup?.id,
       )
       .pipe(take(1))
@@ -105,8 +105,8 @@ export class WalletPage implements OnInit {
 
   }
 
-  search(searchValu) {
-    this.searchValu = searchValu;
+  search(searchValue): void {
+    this.searchValue = searchValue;
     this.page = 1;
     this.getNfts();
   }
