@@ -60,7 +60,7 @@
   <div class="cards-container">
     <ng-container *ngIf="nftList && nftList.totalCount > 0">
       <ng-container *ngFor="let nftCard of nftList.data" class="">
-        <app-nft-card [nft]="nftCard"></app-nft-card>
+        <app-nft-card [nft]="nftCard" ></app-nft-card>
       </ng-container>
     </ng-container>
   </div>

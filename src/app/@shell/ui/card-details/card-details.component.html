@@ -39,11 +39,11 @@
               <span class="ml-6 text-sm text-white">{{userName.fullName}}</span>
             </button>
             <div class="flex justify-between">
-              <span class="text-lg text-gray-400 ">Token ID <span class="ml-3 text-white"> {{nft.tokenId}}</span></span>
+              <span class="text-lg text-gray-400 ">Token ID <a href="{{nft.transactionHashUrl}}" class="ml-3 text-white"> #{{nft.tokenId}}</a></span>
             </div>
           </div>
           <p class="mt-6 mb-6 text-3xl font-medium tracking-wider text-white">
-            Deep Thoughts Art
+           {{nft.name}}
           </p>
           <div class="flex items-center justify-start">
             <div class="mt-0">

@@ -65,6 +65,7 @@ export class AdminSignInComponent implements OnInit {
     } else {
           alert(res?.errors[0]?.error?.message);
         }
+        this.customDialogService.closeDialogs();
       });
     }
 

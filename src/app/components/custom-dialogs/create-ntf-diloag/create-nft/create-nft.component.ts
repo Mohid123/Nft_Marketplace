@@ -23,6 +23,8 @@ import { distinctUntilChanged, exhaustMap, take, takeUntil } from 'rxjs/operator
 export class CreateNFTComponent {
   group: Group
 
+
+
   public createNft: FormGroup;
   public imgFormData = new FormData();
   type: any;
@@ -152,10 +154,10 @@ addNft() : void{
     const node = document.getElementById('bg-image');
     htmlToImage
       .toPng(node, {
-        canvasWidth: 529,
-        canvasHeight: 487,
-        width: 529,
-        height: 487,
+        canvasWidth: 252,
+        canvasHeight: 233,
+        width: 252,
+        height: 233,
         quality: 1,
         pixelRatio: 1,
         skipAutoScale: false,

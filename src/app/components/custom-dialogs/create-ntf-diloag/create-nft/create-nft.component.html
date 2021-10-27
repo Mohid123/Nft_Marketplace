@@ -18,8 +18,8 @@
     </div>
   </div>
 
-  <div id="bg-image" style="width: 529px; height: 487px;" >
-    <img id="showImage" alt="NFT-Image" style="width: 529px; height: 487px;" >
+  <div id="bg-image" >
+    <img id="showImage" alt="NFT-Image" style="width: 252px; height: 233px;" >
     <img style="position: absolute;
     top: 28%;
     left: 28%;" src={{url}} alt="">
@@ -128,7 +128,7 @@ left: 27%;">
 
           <select formControlName="selectedValue"
             class="block h-16 px-4 text-lg font-light text-gray-400 rounded-lg bg-primary-gray-100 focus:outline-none w-44 form-select">
-            <option selected *ngFor="let group of (groups$ | async)" [ngValue]="group.id && group.name">{{group.name}}</option>
+            <option selected *ngFor="let group of (groups$ | async)" [ngValue]="group.id && group.name ">{{group.name}}</option>
             <!-- <option>Rock 2</option> -->
           </select>
         </label>

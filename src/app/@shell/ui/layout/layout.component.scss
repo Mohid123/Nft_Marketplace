@@ -13,9 +13,6 @@ mat-sidenav {
   width: 120px;
   background: #2F3157;
 
-  img{
-    @apply w-10 h-10 object-scale-down rounded-xl m-5;
-  }
 
   .menu-link {
     @apply block p-3 h-12 w-12 m-5 rounded-xl;

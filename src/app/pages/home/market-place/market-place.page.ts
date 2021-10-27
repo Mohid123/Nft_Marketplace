@@ -11,12 +11,14 @@ import { GroupService } from './../../../@core/services/group.service';
 import { NFTService } from './../../../@core/services/nft.service';
 import { RouteService } from './../../../@core/services/route.service';
 
+
 @Component({
   selector: 'app-market-place',
   templateUrl: './market-place.page.html',
   styleUrls: ['./market-place.page.scss'],
 })
 export class MarketPlacePage implements OnInit {
+
 
   private _isLoading:boolean;
 
