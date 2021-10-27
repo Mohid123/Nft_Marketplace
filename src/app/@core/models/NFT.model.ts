@@ -12,8 +12,8 @@ export class NFT {
   name?:                 string;
   description?:          string;
   type?:                 string;
-  forSale?:              boolean;
-  freezeNft?:            boolean;
+  forSale:              boolean;
+  freezeNft:            boolean;
   metaDataURL?:          string;
   path?:                 string;
   serverCaptureFileUrl: string;
