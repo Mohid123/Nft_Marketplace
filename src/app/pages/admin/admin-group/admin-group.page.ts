@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Subject } from 'rxjs';
 import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { CustomDialogService } from './../../../@core/services/custom-dialog/custom-dialog.service';
@@ -25,6 +26,7 @@ export class AdminGroupPage implements OnInit, OnDestroy {
     private customDialogService: CustomDialogService,
     private groupService: GroupService,
     private routeService: RouteService,
+    private spinner: NgxSpinnerService
   ) {
     this._page = 0;
     this._isLoading = false;
@@ -34,13 +36,31 @@ export class AdminGroupPage implements OnInit, OnDestroy {
     });;
   }
 
-  ngOnInit(): void {
-    if (this._isLoading) return
-      this.groupService.getAllGroupsByClub(this.clubName, this._page++, this.limit);
+  ngOnInit(): void
+  {
+
+      this.spinner.show();
+      this.getGroup();
+
+
   }
+
+  getGroup(){
+    if (this._isLoading) return
+    this.groupService.getAllGroupsByClub(this.clubName, this._page++, this.limit);
+      setTimeout(() => {
+      this.spinner.hide();
+      }, 500);
+  }
+
   deleteGroup(group){
+    this.spinner.show();
     this.groupService.deleteGroups(group.id).subscribe(data=>{
-      console.log('Delete success')
+      setTimeout(()=>{
+        this.spinner.hide();
+        this.getGroup();
+
+      })
     });
   }
 

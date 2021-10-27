@@ -11,6 +11,7 @@ import { NotFoundPage } from '../ui/not-found/not-found.page';
 import { AdminGuard } from './../../@core/guards/admin.guard';
 import { NavModule } from './../ui/nav/nav.module';
 
+
 const APP_ROUTES: Routes = [
   {
     path: ROUTER_UTILS.config.base.home,
@@ -74,7 +75,11 @@ const APP_ROUTES: Routes = [
     HeaderModule,
     LayoutModule,
     NotFoundModule,
+
+
+
   ],
+
   exports: [
     RouterModule,
     FooterModule,

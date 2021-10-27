@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { take } from 'rxjs/operators';
 import { NFTList } from './../../../@core/models/NFTList.model';
 import { ApiResponse } from './../../../@core/models/response.model';
@@ -23,6 +24,7 @@ export class AdminMarketPlacePage implements OnInit {
     private customDialogService: CustomDialogService,
     private nftService: NFTService,
     private routeService: RouteService,
+    private spinner: NgxSpinnerService
   ) {
     this._page = 0;
     this._isLoading = false;
@@ -32,6 +34,7 @@ export class AdminMarketPlacePage implements OnInit {
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   ngOnInit(): void {
+    this.spinner.show();
     console.log('market palce:');
     // this.nftService.getNft('');
   }
@@ -42,10 +45,15 @@ export class AdminMarketPlacePage implements OnInit {
       .pipe(take(1))
       .subscribe((result:ApiResponse<NFTList>) => {
         console.log('res:',result);
+        setTimeout(() => {
+          this.spinner.hide();
+          }, 500);
         if (!result.hasErrors()) {
           this.nftList = result.data;
         }
         this._isLoading = false;
+
+
       });
   }
 
