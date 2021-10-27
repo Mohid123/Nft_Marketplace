@@ -18,6 +18,7 @@ export class CreateNFTStyleComponent {
   }
 
   save() {
+    // this.nftService.createNft = new NFT();
 
     this.nftService.addNft(this.nftService.createNft).pipe(take(1)).subscribe(res=> {
       console.log('res:',res);

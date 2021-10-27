@@ -2,18 +2,15 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Group } from '@app/@core/models/group.model';
 import { NFT } from '@app/@core/models/NFT.model';
-import { ResponseAddGroupMedia } from '@app/@core/models/response-add-media.model';
 import { ResponseGroupsByClub } from '@app/@core/models/response-groups-by-club.model';
-import { ApiResponse } from '@app/@core/models/response.model';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { GroupService } from '@app/@core/services/group.service';
 import { MediaService } from '@app/@core/services/media.service';
 import { NFTService } from '@app/@core/services/nft.service';
 import { RouteService } from '@app/@core/services/route.service';
 import { AuthService } from '@app/pages/auth/services/auth.service';
-import * as htmlToImage from 'html-to-image';
-import { of, Subject } from 'rxjs';
-import { distinctUntilChanged, exhaustMap, take, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-nft',
@@ -118,15 +115,12 @@ export class CreateNFTComponent {
 
   nextClick():void{
     this.nftService.createNft = new NFT();
+    this.createNft.patchValue( {
+      file : this.file,
+      type: this.type,
+      selectedValue: this.selectedValue,
 
-
-    this.nftService.createNft.serverCaptureFileUrl = this.file;
-    this.nftService.createNft.createdAt = this.date;
-    this.nftService.createNft.groupId = this.selectedValue;
-    this.nftService.createNft.type = this.type;
-
-
-
+    })
   this.customDialogService.showCreateNFTStyleDialog();
   // this.nftService.addNft(this.nftService.createNft).pipe(take(1)).subscribe(res=> {
   //   console.log('res:',res);
@@ -151,56 +145,56 @@ addNft() : void{
   }
 
   addImage() : void {
-    const node = document.getElementById('bg-image');
-    htmlToImage
-      .toPng(node, {
-        canvasWidth: 252,
-        canvasHeight: 233,
-        width: 252,
-        height: 233,
-        quality: 1,
-        pixelRatio: 1,
-        skipAutoScale: false,
-        // style: {
-        //   display: 'block',
-        //   transform: 'rotate(41.3deg)',
-        // }
-      })
-      .then((dataUrl) => {
-        this.createNft.patchValue({
-          file: this.mediaService.dataURLtoFile(
-            dataUrl,
-            this.createNft.controls.date.value + '.png',
-          ),
-        });
-        this.imgFormData.append('file', this.createNft.get('file').value);
-        this.mediaService.uploadMedia('group', this.imgFormData).pipe(take(1),
-            exhaustMap((res: ApiResponse<ResponseAddGroupMedia>) => {
-              if(!res.hasErrors()) {
-                const param: NFT = {
-                  type: this.nftService.createNft.type,
-                  createdAt: this.createNft.controls.date.value,
-                  groupId: this.createNft.controls.selectedValue.value,
-                  appPackageId: this.authService.loggedInUser?.appPackageId,
-                  serverCaptureFileUrl: res.data.url,
-                };
-                return this.nftService.addNft(param);
-              } else {
-                return of(null);
-              }
-            }),
-          ).subscribe((res:any) => {
-            if (res !== null) {
-              this.close();
-            } else {
-              alert('error :' + res.errors[0]?.error?.message);
-            }
-            console.log('res:', res);
-          });
-      })
-      .catch((error) => {
-        console.error('oops, something went wrong!', error);
-      });
+    // const node = document.getElementById('bg-image');
+    // htmlToImage
+    //   .toPng(node, {
+    //     canvasWidth: 252,
+    //     canvasHeight: 233,
+    //     width: 252,
+    //     height: 233,
+    //     quality: 1,
+    //     pixelRatio: 1,
+    //     skipAutoScale: false,
+    //     // style: {
+    //     //   display: 'block',
+    //     //   transform: 'rotate(41.3deg)',
+    //     // }
+    //   })
+    //   .then((dataUrl) => {
+    //     this.createNft.patchValue({
+    //       file: this.mediaService.dataURLtoFile(
+    //         dataUrl,
+    //         this.createNft.controls.date.value + '.png',
+    //       ),
+    //     });
+    //     this.imgFormData.append('file', this.createNft.get('file').value);
+    //     this.mediaService.uploadMedia('group', this.imgFormData).pipe(take(1),
+    //         exhaustMap((res: ApiResponse<ResponseAddGroupMedia>) => {
+    //           if(!res.hasErrors()) {
+    //             const param: NFT = {
+    //               type: this.nftService.createNft.type,
+    //               createdAt: this.createNft.controls.date.value,
+    //               groupId: this.createNft.controls.selectedValue.value,
+    //               appPackageId: this.authService.loggedInUser?.appPackageId,
+    //               serverCaptureFileUrl: res.data.url,
+    //             };
+    //             return this.nftService.addNft(param);
+    //           } else {
+    //             return of(null);
+    //           }
+    //         }),
+    //       ).subscribe((res:any) => {
+    //         if (res !== null) {
+    //           this.close();
+    //         } else {
+    //           alert('error :' + res.errors[0]?.error?.message);
+    //         }
+    //         console.log('res:', res);
+    //       });
+    //   })
+    //   .catch((error) => {
+    //     console.error('oops, something went wrong!', error);
+    //   });
 
       }
 
