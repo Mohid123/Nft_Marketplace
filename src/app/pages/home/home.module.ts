@@ -36,7 +36,7 @@ const childRoutes: Routes = [
       description: 'NFT Cart Detail Description',
       robots: 'index, follow',
     },
-    canActivate: [UserGuard],
+    // canActivate: [NoAdminGuard],
   },
   {
     path: ROUTER_UTILS.config.base.tradingHistory,

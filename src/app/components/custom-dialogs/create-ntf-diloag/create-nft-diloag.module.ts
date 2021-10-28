@@ -31,6 +31,9 @@ export class CreateNFTDiloagModule {
   static getCreateNFTOptionsComponent(): typeof CreateNFTOptionsComponent {
     return CreateNFTOptionsComponent;
   }
+  static getCreateMembershipComponent(): typeof CreateMembershipComponent {
+    return CreateMembershipComponent;
+  }
   static getCreateNFTStyleComponent(): typeof CreateNFTStyleComponent {
     return CreateNFTStyleComponent;
   }

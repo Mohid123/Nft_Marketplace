@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Group } from '@app/@core/models/group.model';
 import { NFT } from '@app/@core/models/NFT.model';
 import { ResponseGroupsByClub } from '@app/@core/models/response-groups-by-club.model';
@@ -9,6 +9,7 @@ import { MediaService } from '@app/@core/services/media.service';
 import { NFTService } from '@app/@core/services/nft.service';
 import { RouteService } from '@app/@core/services/route.service';
 import { AuthService } from '@app/pages/auth/services/auth.service';
+import * as htmlToImage from 'html-to-image';
 import { Subject } from 'rxjs';
 import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
@@ -18,10 +19,10 @@ import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
   styleUrls: ['./create-nft.component.scss'],
 })
 export class CreateNFTComponent {
-  group: Group
 
+  public group: Group;
 
-
+  public imageSrc: any;
   public createNft: FormGroup;
   public imgFormData = new FormData();
   type: any;
@@ -32,13 +33,11 @@ export class CreateNFTComponent {
   public format: string;
   public url: string;
 
-
   public clubName: string;
-  public limit = 6 ;
+  public limit = 6;
 
-
-  private _page:number;
-  private _isLoading:boolean;
+  private _page: number;
+  private _isLoading: boolean;
   public groupsByClub: ResponseGroupsByClub;
   public groups$ = this.groupService.groups$;
 
@@ -52,162 +51,109 @@ export class CreateNFTComponent {
     private nftService: NFTService,
     private groupService: GroupService,
     private routeService: RouteService,
-    private authService: AuthService
+    private authService: AuthService,
   ) {
-    // this.createNft = this.formBuilder.group({
-    //   email: new FormControl('', [Validators.required, Validators.email]),
-    //   password: new FormControl('', [
-    //     Validators.required,
-    //     Validators.minLength(6),
-    //   ]),
-    // });
     this.createNft = this.formBuilder.group({
+      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      description: new FormControl('', [Validators.required]),
       file: new FormControl(''),
-      date: new FormControl(''),
-      address: new FormControl(''),
-      selectedValue: new FormControl(''),
-      type: this.nftService.createNft.type
+      img: new FormControl(''),
+      date: ['', [Validators.required]],
+      address: ['', [Validators.required, Validators.maxLength(32)]],
+      group: [null, [Validators.required]]
     });
 
+    this.routeService.clubName$
+      .pipe(distinctUntilChanged(), takeUntil(this.destroy$))
+      .subscribe((clubName) => {
+        this.clubName = clubName;
+      });
 
-    this.routeService.clubName$.pipe(distinctUntilChanged(), takeUntil(this.destroy$))
-    .subscribe((clubName) => {
-      this.clubName = clubName;
-    });;
-
-
-    // this.passwordHide= true;
   }
 
   ngOnInit(): void {
-    if (this._isLoading) return
-    this.groupService.getAllGroupsByClub(this.clubName, this._page++, this.limit);
+    if (this._isLoading) return;
+    this.groupService.getAllGroupsByClub(
+      this.clubName,
+      this._page++,
+      this.limit,
+    );
   }
 
   onSelectFile(event): void {
-    this.file = event.target.files && event.target.files[0];
-    console.log(this.file)
-    if (this.file) {
-    const reader = new FileReader();
-      reader.readAsDataURL(this.file);
-      if (this.file.type.indexOf('image') > -1) {
-        this.format = 'image';
-
+    if (event.target.files && event.target.files[0]) {
+      this.file = event.target.files[0];
+      if (event.target.files && event.target.files[0]) {
+        const reader = new FileReader();
+        reader.onload = (e: any) => {
+          this.imageSrc = e.target.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
       }
-      // else if (this.file.type.indexOf('video') > -1) {
-      //   this.format = 'video';
-      // }
-      reader.onload = (event) => {
-        this.url = (<FileReader>event.target).result as string;
-        this.cf.detectChanges();
-      }
-      event.target.value = '';
-      this.createNft.patchValue( {
-        file : this.file
-      })
-      this.addNft();
     }
   }
 
-  // addMedia() {
-  //   this.mediaUpload.post
-  // }
+  nextClick(): void {
+    const node = document.getElementById('bg-image');
+    htmlToImage
+      .toPng(node, {
+        canvasWidth: 529,
+        canvasHeight: 480,
+        width: 529,
+        height: 480,
+        quality: 1,
+        pixelRatio: 1,
+        skipAutoScale: false,
+        style: {
+          display: 'block'
+        }
+      })
+      .then((dataUrl) => {
+        // const img = new Image();
+        // img.src = dataUrl;
+        // document.getElementById('view-img').appendChild(img);
+        this.createNft.patchValue({
+          file: this.mediaService.dataURLtoFile(
+            dataUrl,
+            this.createNft.controls.address.value + '.png',
+          ),
+        });
+        console.log('asdasd:');
+        this.imgFormData.append('file', this.createNft.get('file').value);
 
-  nextClick():void{
-    this.nftService.createNft = new NFT();
-    this.createNft.patchValue( {
-      file : this.file,
-      type: this.type,
-      selectedValue: this.selectedValue,
+        const form: NFT = {
+          type : 'Ticket',
+          forSale: true,
+          freezeNft:true,
+          serverCaptureFileUrl:'',
+          name : this.createNft.controls.name.value,
+          description : this.createNft.controls.description.value,
+          groupId: this.createNft.controls.group.value.id,
+          userId: this.authService.loggedInUser.id,
+          clubUserId: this.authService.loggedInUser.clubUserId,
+          appPackageId: this.authService.loggedInUser.appPackageId,
+        }
+        console.log('asdasdasd:',this.imgFormData);
+        this.customDialogService.showCreateNFTStyleDialog(this.imgFormData,form);
+      })
+      .catch((error) => {
+        console.error('oops, something went wrong!', error);
+      });
+  }
 
-    })
-  this.customDialogService.showCreateNFTStyleDialog();
-  // this.nftService.addNft(this.nftService.createNft).pipe(take(1)).subscribe(res=> {
-  //   console.log('res:',res);
-  // });
-}
-
-addNft() : void{
-
-       // Create form data
-       const formData = new FormData();
-       formData.append('file', this.createNft.get('file').value);
-       console.log('form data:',formData);
-
-  // this.nftService.upload('nft-img',formData);
-  console.log('img:',this.file);
-  // this.nftService.uploadImage('Logo', this.file ).then((data)=>{
-  //   console.log('uploaded')
-  // })
-}
   close(): void {
     this.customDialogService.closeDialogs();
   }
 
-  addImage() : void {
-    // const node = document.getElementById('bg-image');
-    // htmlToImage
-    //   .toPng(node, {
-    //     canvasWidth: 252,
-    //     canvasHeight: 233,
-    //     width: 252,
-    //     height: 233,
-    //     quality: 1,
-    //     pixelRatio: 1,
-    //     skipAutoScale: false,
-    //     // style: {
-    //     //   display: 'block',
-    //     //   transform: 'rotate(41.3deg)',
-    //     // }
-    //   })
-    //   .then((dataUrl) => {
-    //     this.createNft.patchValue({
-    //       file: this.mediaService.dataURLtoFile(
-    //         dataUrl,
-    //         this.createNft.controls.date.value + '.png',
-    //       ),
-    //     });
-    //     this.imgFormData.append('file', this.createNft.get('file').value);
-    //     this.mediaService.uploadMedia('group', this.imgFormData).pipe(take(1),
-    //         exhaustMap((res: ApiResponse<ResponseAddGroupMedia>) => {
-    //           if(!res.hasErrors()) {
-    //             const param: NFT = {
-    //               type: this.nftService.createNft.type,
-    //               createdAt: this.createNft.controls.date.value,
-    //               groupId: this.createNft.controls.selectedValue.value,
-    //               appPackageId: this.authService.loggedInUser?.appPackageId,
-    //               serverCaptureFileUrl: res.data.url,
-    //             };
-    //             return this.nftService.addNft(param);
-    //           } else {
-    //             return of(null);
-    //           }
-    //         }),
-    //       ).subscribe((res:any) => {
-    //         if (res !== null) {
-    //           this.close();
-    //         } else {
-    //           alert('error :' + res.errors[0]?.error?.message);
-    //         }
-    //         console.log('res:', res);
-    //       });
-    //   })
-    //   .catch((error) => {
-    //     console.error('oops, something went wrong!', error);
-    //   });
-
-      }
-
   // Click on each image and display each individually on background div
-  showImageInDiv() : void {
-    const select = <HTMLImageElement>document.querySelector('#bg-image');
+  setBackground(): void {
+    // const select = <HTMLImageElement>document.querySelector('#bg-image');
     const tick = <HTMLImageElement>document.querySelector('#showImage');
-    Array.from(document.querySelectorAll('#ticket')).forEach(image => {
-      image.addEventListener('click', event => {
-        select.style.display = 'block';
+    Array.from(document.querySelectorAll('#ticket')).forEach((image) => {
+      image.addEventListener('click', (event) => {
+        // select.style.display = 'block';
         tick.src = (event.target as HTMLImageElement).src;
-      })
-    })
+      });
+    });
   }
-
 }
