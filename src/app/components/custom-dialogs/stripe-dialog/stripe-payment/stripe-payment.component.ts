@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { NFT } from '@app/@core/models/NFT.model';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { AuthService } from '@app/pages/auth/services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
 import { BuyNFT } from './../../../../@core/models/requests/buy-nft.model';
 import { ApiResponse } from './../../../../@core/models/response.model';
@@ -25,6 +26,7 @@ export class StripePaymentComponent  {
     private customDialogService: CustomDialogService,
     private formBuilder: FormBuilder,
     private stripeService: StripeService,
+    private toastr: ToastrService,
   ) {
     this.stripeForm = this.formBuilder.group({
       cardNo: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -58,7 +60,7 @@ export class StripePaymentComponent  {
         console.log('success:',res);
         this.close();
       } else {
-        alert('error :');
+        this.toastr.warning(res.errors[0]?.error?.message, 'Error!');
       }
     });
   }

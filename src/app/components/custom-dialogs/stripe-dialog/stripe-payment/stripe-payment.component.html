@@ -20,7 +20,7 @@
   <!-- <h1 class=""><span>Sig</span>n in</h1> -->
   <form  [formGroup]="stripeForm" class="strip-payment-form">
       <label class="floating-label" for="cardNo">Card no</label>
-      <input type="number" formControlName="cardNo">
+      <input type="number" formControlName="cardNo" maxlength="16" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
       <span class="icon cardNo-hide-icon"></span>
       <p class="error-msg error" *ngIf="stripeForm.controls.cardNo.touched && stripeForm.controls.cardNo.errors?.required">please enter card no</p>
       <p class="error-msg error" *ngIf="stripeForm.controls.cardNo.touched && stripeForm.controls.cardNo.errors?.minlength">card no length should be greater than 3</p>
@@ -28,17 +28,16 @@
       <div class="flex flex-row">
         <div class="w-2/4 pr-4">
           <label class="floating-label" for="validity">Validity</label>
-          <input type="text" formControlName="validity" placeholder="MM/YY">
+          <input type="date" formControlName="validity" >
           <p class="error-msg error"
-            *ngIf="stripeForm.controls.validity.touched && stripeForm.controls.validity.errors?.required">please enter
-            card no</p>
+            *ngIf="stripeForm.controls.validity.touched && stripeForm.controls.validity.errors?.required">please select valid date</p>
           <p class="error-msg error"
             *ngIf="stripeForm.controls.validity.touched && stripeForm.controls.validity.errors?.minlength">card no
             length should be greater than 3</p>
         </div>
         <div class="w-2/4 pl-4">
           <label class="floating-label" for="cvv">CVV</label>
-          <input type="password" formControlName="cvv">
+          <input type="number" formControlName="cvv"  maxlength="4" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
           <span class="icon cvv-hide-icon"></span>
           <p class="error-msg error"
             *ngIf="stripeForm.controls.cvv.touched && stripeForm.controls.cvv.errors?.required">please enter CVV</p>
