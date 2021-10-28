@@ -22,14 +22,14 @@
           <td >
             {{nftEvent.price}}
           </td>
-          <td >
-           0x9f30
+          <td class="truncate">
+          {{nftEvent.from}}
+          </td>
+          <td class="truncate">
+          {{nftEvent.to}}
           </td>
           <td >
-           dodos
-          </td>
-          <td >
-           10 days ago
+            {{calculateDiff(nftEvent.createdAt)}} days ago
           </td>
 
         </tr>

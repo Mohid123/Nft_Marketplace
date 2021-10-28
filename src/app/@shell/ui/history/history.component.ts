@@ -10,4 +10,11 @@ export class HistoryComponent {
 
   @Input() responseEventByNFT:ResponseEventByNFT;
 
+  calculateDiff(createdAt){
+    const currentDate = new Date();
+    createdAt = new Date(createdAt);
+
+     return Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(createdAt.getFullYear(), createdAt.getMonth(), createdAt.getDate()) ) /(1000 * 60 * 60 * 24));
+   }
+
 }
