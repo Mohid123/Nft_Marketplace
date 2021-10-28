@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { AddStripeKey } from '@app/@core/models/requests/add-stripe-key.model';
 import { ResponseStripeStatus } from '@app/@core/models/response-add-stripe-key.model';
+import { ToastrService } from 'ngx-toastr';
 import { ApiResponse } from './../../../../@core/models/response.model';
 import { CustomDialogService } from './../../../../@core/services/custom-dialog/custom-dialog.service';
 import { RouteService } from './../../../../@core/services/route.service';
@@ -25,6 +26,7 @@ export class StripeKeyComponent {
     private formBuilder: FormBuilder,
     private stripeService: StripeService,
     private routeService: RouteService,
+    private toastr: ToastrService
   ) {
     this.stripeForm = this.formBuilder.group({
       key: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -41,7 +43,7 @@ export class StripeKeyComponent {
       if(!result.hasErrors() && result.data.isValid) {
         this.close();
       } else {
-        alert('invalid key')
+    this.toastr.warning('Please enter valid stripe key.', 'Invalid!')
       }
     });
   }

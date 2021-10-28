@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
 import { AuthCredentials } from './../../../../@core/models/auth-credentials.model';
 import { ApiResponse } from './../../../../@core/models/response.model';
@@ -28,6 +29,7 @@ export class UserSignInComponent {
     private formBuilder: FormBuilder,
     private router: Router,
     private routeService: RouteService,
+    private toastr: ToastrService
   ) {
     this.routeService.clubName$.pipe(take(1)).subscribe((clubName) => {
       this.clubName = clubName;
@@ -53,12 +55,15 @@ export class UserSignInComponent {
       .pipe(take(1))
       .subscribe((res:ApiResponse<SignInResponse>) => {
         if (!res.hasErrors()) {
+          this.toastr.success(`You're logged in.`, 'Welcome!')
           this.customDialogService.closeDialogs();
           if(this.isPage) {
             this.router.navigate(['/'+this.clubName])
+
           }
         } else {
-          alert(res?.errors[0]?.error?.message);
+          // alert(res?.errors[0]?.error?.message);
+          this.toastr.warning(res?.errors[0]?.error?.message, 'Invalid!' )
         }
       });
   }

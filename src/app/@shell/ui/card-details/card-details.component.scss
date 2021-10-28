@@ -80,3 +80,22 @@
 
 }
 
+
+
+
+
+#fileName span {
+  white-space: nowrap;
+  overflow: hidden;
+  display:inline-block;
+}
+#fileName span:first-child {
+  width: 60px;
+  text-overflow: ellipsis;
+}
+#fileName span + span {
+  width: 35px;
+  direction:rtl;
+  text-align:right;
+}
+

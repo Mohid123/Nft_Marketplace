@@ -1,5 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { CustomDialogService } from './../../../@core/services/custom-dialog/custom-dialog.service';
@@ -26,7 +27,9 @@ export class AdminGroupPage implements OnInit, OnDestroy {
     private customDialogService: CustomDialogService,
     private groupService: GroupService,
     private routeService: RouteService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private toastr: ToastrService,
+    private cf: ChangeDetectorRef
   ) {
     this._page = 0;
     this._isLoading = false;
@@ -56,11 +59,13 @@ export class AdminGroupPage implements OnInit, OnDestroy {
   deleteGroup(group){
     this.spinner.show();
     this.groupService.deleteGroups(group.id).subscribe(data=>{
+      this.cf.detectChanges();
+      this.toastr.success('Group successfully deleted.', 'Success!');
       setTimeout(()=>{
         this.spinner.hide();
-        this.getGroup();
-
       })
+      this.getGroup();
+
     });
   }
 

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NFT } from '@app/@core/models/NFT.model';
 import { setItem, StorageItem } from '@app/@core/utils';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
 import { AddStripeKey } from '../models/requests/add-stripe-key.model';
@@ -15,7 +16,9 @@ type StripeApiData = ResponseStripeStatus | NFT;
   providedIn: 'root',
 })
 export class StripeService extends ApiService<StripeApiData> {
-  constructor(protected http: HttpClient) {
+  constructor(protected http: HttpClient,
+    private toastr: ToastrService,
+    ) {
     super(http);
   }
 
@@ -26,7 +29,7 @@ export class StripeService extends ApiService<StripeApiData> {
         if (!res.hasErrors() && res.data.isValid) {
           setItem(StorageItem.Key, res.data.isValid);
         } else {
-          alert('invalid key');
+          console.log('invalid key');
         }
       }),
     );

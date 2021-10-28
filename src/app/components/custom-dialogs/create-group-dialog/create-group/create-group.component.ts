@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ResponseAddGroupMedia } from '@app/@core/models/response-add-media.model';
 import { MediaService } from '@app/@core/services/media.service';
 import { AuthService } from '@app/pages/auth/services/auth.service';
 import * as htmlToImage from 'html-to-image';
+import { ToastrService } from 'ngx-toastr';
 import { of } from 'rxjs';
 import { exhaustMap, take } from 'rxjs/operators';
 import { AddGroup } from './../../../../@core/models/requests/add-group.model';
@@ -31,6 +32,8 @@ export class CreateGroupComponent {
     private groupService: GroupService,
     private mediaService: MediaService,
     protected http: HttpClient,
+    private toastr: ToastrService,
+    private cf: ChangeDetectorRef
   ) {
     this.groupForm = this.formBuilder.group({
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -82,9 +85,13 @@ export class CreateGroupComponent {
             }),
           ).subscribe((res:any) => {
             if (res !== null) {
+              this.cf.detectChanges();
               this.close();
+              this.toastr.success('New group successfully added.', 'Success!');
+
             } else {
-              alert('error :' + res.errors[0]?.error?.message);
+              this.toastr.warning(res.errors[0]?.error?.message, 'Error!');
+              // alert('error :' + res.errors[0]?.error?.message);
             }
             console.log('res:', res);
           });

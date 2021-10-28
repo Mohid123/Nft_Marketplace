@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '@app/pages/auth/services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
 import { AuthCredentials } from './../../../../@core/models/auth-credentials.model';
 import { ApiResponse } from './../../../../@core/models/response.model';
@@ -29,6 +30,7 @@ export class AdminSignInComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private routeService: RouteService,
+    private toastr: ToastrService
   ) {
     this.loginForm = this.formBuilder.group({
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -58,12 +60,14 @@ export class AdminSignInComponent implements OnInit {
   .pipe(take(1))
   .subscribe((res:ApiResponse<SignInResponse>) => {
     if (!res.hasErrors()) {
+      this.toastr.success(`You're logged in as Admin.`, 'Welcome!')
       this.customDialogService.closeDialogs();
       if(this.isPage) {
         this.router.navigate(['/'+this.clubName + '/' +ROUTER_UTILS.config.admin.root])
       }
     } else {
-          alert(res?.errors[0]?.error?.message);
+          // alert(res?.errors[0]?.error?.message);
+          this.toastr.warning(res?.errors[0]?.error?.message, 'Invalid!' )
         }
         this.customDialogService.closeDialogs();
       });

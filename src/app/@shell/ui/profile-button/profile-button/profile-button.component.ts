@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@app/pages/auth/services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 import { RouteService } from './../../../../@core/services/route.service';
 
 @Component({
@@ -15,6 +16,7 @@ export class ProfileButtonComponent {
     private authService: AuthService,
     private router: Router,
     private routeService: RouteService,
+    private toastr: ToastrService
   ) {
 
   }
@@ -26,6 +28,7 @@ export class ProfileButtonComponent {
 
   signOut():void {
     this.authService.signOut();
+    this.toastr.success(`You've logged out.`, 'Logout!')
     this.router.navigate([this.routeService.clubName]);
   }
 

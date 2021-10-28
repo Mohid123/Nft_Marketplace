@@ -8,10 +8,12 @@
           <img [src]="nft.serverCaptureFileUrl" alt="nftmarketSearch" class="resImg rounded-2xl" />
         </div>
         <div class="mb-6 ml-6">
-          <p class="mt-6 inline mr-2.5 text-lg text-white opacity-50">
+          <span class="mt-6 inline-flex mr-2.5 text-lg text-white opacity-50">
             Contract Address
-          </p>
-          <p class="text-lg text-white nftContract">{{nft.nftContract}}</p>
+          </span>
+
+          <div class="inline-flex" id="fileName"><span >{{nft.nftContract}}</span><span>{{nft.nftContract}}</span>
+          </div><br>
           <p class="inline mt-6 text-lg text-white opacity-50 mr-7">
             Token Address
           </p>

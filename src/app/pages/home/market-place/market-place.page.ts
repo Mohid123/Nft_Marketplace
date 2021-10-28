@@ -2,6 +2,7 @@
 /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
 import { Component, OnInit } from '@angular/core';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { take } from 'rxjs/operators';
 import { environment } from './../../../../environments/environment.prod';
 import { Group } from './../../../@core/models/group.model';
@@ -37,6 +38,7 @@ export class MarketPlacePage implements OnInit {
     private groupService: GroupService,
     private nftService: NFTService,
     private routeService: RouteService,
+    private spinner: NgxSpinnerService,
   ) {
     this.page = 1;
     this._isLoading = false;
@@ -46,6 +48,12 @@ export class MarketPlacePage implements OnInit {
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   ngOnInit(): void {
+    this.spinner.show();
+
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 1000);
     console.log('market palce:');
     this.groupService.getAllGroupsByClub(this.clubName, 0, 0);
     // this.nftService.getNft('');

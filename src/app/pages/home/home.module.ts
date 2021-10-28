@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { MatMenuModule } from '@angular/material/menu';
 import { RouterModule, Routes } from '@angular/router';
 import { NoAdminGuard, UserGuard } from '@app/@core/guards';
@@ -8,6 +8,7 @@ import { AppBannerModule } from '@app/@shell/ui/app-banner/app-banner.module';
 import { CardDetailsModule } from '@app/@shell/ui/card-details/card-details.module';
 import { HistoryModule } from '@app/@shell/ui/history/history.module';
 import { MarketplaceSearchModule } from '@app/@shell/ui/marketplace-search/marketplace-search.module';
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoggedInUserSearchModule } from './../../@shell/ui/logged-in-user-search/logged-in-user-search.module';
 import { CardModule } from './../../@shell/ui/nft-card/card.module';
 import { CardDetailPage } from './card-detail/card-detail.page';
@@ -79,7 +80,10 @@ const childRoutes: Routes = [
     LoggedInUserSearchModule,
     CardDetailsModule,
     HistoryModule,
-    MatMenuModule
+    MatMenuModule,
+    NgxSpinnerModule,
+      // BrowserAnimationsModule,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class HomeModule {}
