@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --base-href=/",
+    "build": "ng build",
     "build:stats": "ng build --stats-json",
     "build:prod": "npm run build --prod --aot",
     "serve:prod": "http-server dist/nft-panel",

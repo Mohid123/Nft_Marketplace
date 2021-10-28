@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ExtraOptions, RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { NoAdminGuard, NoAuthGuard, UserGuard } from '@app/@core/guards';
 import { ROUTER_UTILS } from '@app/@core/utils/router.utils';
 import { NotFoundModule } from '@app/@shell/ui/not-found/not-found.module';
@@ -67,15 +67,10 @@ const APP_ROUTES: Routes = [
   },
 ];
 
-const config: ExtraOptions = {
-  useHash: true,
-  scrollPositionRestoration: 'enabled'
-};
-
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forRoot(APP_ROUTES, config),
+    RouterModule.forRoot(APP_ROUTES, { useHash: true }),
     FooterModule,
     HeaderModule,
     LayoutModule,
