@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AsyncCreateNFTDialog } from './async-create-nft-dialog';
+import { CreateMembershipComponent } from './create-membership/create-membership.component';
 import { CreateNFTOptionsComponent } from './create-nft-options/create-nft-options.component';
 import { CreateNFTStyleComponent } from './create-nft-style/create-nft-style.component';
 import { CreateNFTComponent } from './create-nft/create-nft.component';
@@ -9,7 +10,7 @@ import { CreateNFTMintingComponent } from './create-ntf-minting/create-nft-minti
 @Injectable({
   providedIn: 'root',
 })
-export class CreateNFTDiloagService extends AsyncCreateNFTDialog< CreateNFTComponent | CreateNFTOptionsComponent | CreateNFTStyleComponent | CreateNFTMintingComponent> {
+export class CreateNFTDiloagService extends AsyncCreateNFTDialog< CreateNFTComponent | CreateMembershipComponent | CreateNFTOptionsComponent | CreateNFTStyleComponent | CreateNFTMintingComponent> {
   constructor(protected matDialog: MatDialog) {
     super(matDialog);
   }
@@ -19,6 +20,16 @@ export class CreateNFTDiloagService extends AsyncCreateNFTDialog< CreateNFTCompo
       './create-nft-diloag.module'
     );
     return this.matDialog.open(CreateNFTDiloagModule.getCreateNFTComponent(), {
+      disableClose: true,
+      panelClass: ['create-nft-dialog-overlay', 'action-dialog'],
+    });
+  }
+
+  async openCreateMembershipComponent(): Promise<MatDialogRef<CreateMembershipComponent>> {
+    const { CreateNFTDiloagModule: CreateNFTDiloagModule } = await import(
+      './create-nft-diloag.module'
+    );
+    return this.matDialog.open(CreateNFTDiloagModule.getCreateMembershipComponent(), {
       disableClose: true,
       panelClass: ['create-nft-dialog-overlay', 'action-dialog'],
     });

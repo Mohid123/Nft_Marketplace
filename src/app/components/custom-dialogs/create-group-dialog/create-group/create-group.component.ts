@@ -33,13 +33,15 @@ export class CreateGroupComponent {
     protected http: HttpClient,
   ) {
     this.groupForm = this.formBuilder.group({
-      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      description: new FormControl('', [ Validators.required, Validators.minLength(6) ]),
+      name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(7)]),
+      description: new FormControl('', [ Validators.required, Validators.minLength(3), Validators.maxLength(100) ]),
       file: new FormControl(''),
     });
   }
 
   addGroup():void {
+    console.log('this.:',this.groupForm);
+    return;
     const node = document.getElementById('group-img');
     htmlToImage
       .toPng(node, {
@@ -86,7 +88,6 @@ export class CreateGroupComponent {
             } else {
               alert('error :' + res.errors[0]?.error?.message);
             }
-            console.log('res:', res);
           });
       })
       .catch((error) => {

@@ -82,7 +82,7 @@ export class MarketPlacePage implements OnInit {
   }
 
   priceModal() {
-    this.customDialogService.showCreateNFTStyleDialog();
+    // this.customDialogService.showCreateNFTStyleDialog();
   }
 
   filterBy (group:Group) :void {

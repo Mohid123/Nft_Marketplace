@@ -16,6 +16,11 @@ export abstract class AsyncCreateNFTDialog<
   ): Promise<MatDialogRef<ComponentType, ReturnType>>;
 
   // @ts-ignore
+  abstract async openCreateMembershipComponent(
+    data: DataType,
+  ): Promise<MatDialogRef<ComponentType, ReturnType>>;
+
+  // @ts-ignore
   abstract async openCreateNFTOptionsComponent(
     data: DataType,
   ): Promise<MatDialogRef<ComponentType, ReturnType>>;
