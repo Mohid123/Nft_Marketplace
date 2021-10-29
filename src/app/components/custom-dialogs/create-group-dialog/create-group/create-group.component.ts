@@ -43,8 +43,8 @@ export class CreateGroupComponent {
   }
 
   addGroup():void {
-    console.log('this.:',this.groupForm);
-    return;
+    // console.log('this.:',this.groupForm);
+    // return;
     const node = document.getElementById('group-img');
     htmlToImage
       .toPng(node, {
