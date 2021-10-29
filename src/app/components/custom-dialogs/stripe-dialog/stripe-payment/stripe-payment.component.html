@@ -12,7 +12,7 @@
     <img class="object-center" src="./assets/logo/stripe-logo-blue.png">
   </div>
   <div class="mt-6 rounded-2xl w-28 h-28">
-    <img class="object-center" src="./assets/card/Group 57316.png">
+    <img class="object-center" *ngIf="nft?.serverCaptureFileUrl" [src]="nft?.serverCaptureFileUrl">
   </div>
   <div class="w-full price">
     <p style="width:fit-content;" class="pb-5 mx-auto mt-2 font-bold min-w-min">€ {{nft.price}}</p>
@@ -28,7 +28,10 @@
       <div class="flex flex-row">
         <div class="w-2/4 pr-4">
           <label class="floating-label" for="validity">Validity</label>
-          <input type="date" formControlName="validity" >
+
+          <input type="text" formControlName="validity" maxlength="5" placeholder="MM/YY"
+          (keyup)="isDateValid()" id="dated">
+
           <p class="error-msg error"
             *ngIf="stripeForm.controls.validity.touched && stripeForm.controls.validity.errors?.required">please select valid date</p>
           <p class="error-msg error"
@@ -36,11 +39,11 @@
             length should be greater than 3</p>
         </div>
         <div class="w-2/4 pl-4">
-          <label class="floating-label" for="cvv">CVV</label>
+          <label class="floating-label" for="cvv">CVC</label>
           <input type="number" formControlName="cvv"  maxlength="4" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
           <span class="icon cvv-hide-icon"></span>
           <p class="error-msg error"
-            *ngIf="stripeForm.controls.cvv.touched && stripeForm.controls.cvv.errors?.required">please enter CVV</p>
+            *ngIf="stripeForm.controls.cvv.touched && stripeForm.controls.cvv.errors?.required">please enter CVC</p>
           <p class="error-msg error"
             *ngIf="stripeForm.controls.cvv.touched && stripeForm.controls.cvv.errors?.minlength">CVV length should be
             greater than 3</p>

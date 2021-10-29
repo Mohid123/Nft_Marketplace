@@ -64,4 +64,11 @@ export class StripePaymentComponent  {
       }
     });
   }
+
+  isDateValid() {
+    const date = <HTMLInputElement>document.getElementById('dated');
+    date.value = date.value.replace(/^(\d\d)(\d)$/g,'$1/$2').replace(/^(\d\d\/\d\d)(\d+)$/g,'$1/$2').replace(/[^\d\/]/g,'')
+  }
+
+
 }
