@@ -5,6 +5,8 @@ export enum StorageItem {
   Role = 'App/role',
   Key = 'App/key',
   Club = 'App/club',
+  ActiveClub = 'App/activeClub',
+  LastRole = 'App/lastRole',
   Theme = 'App/theme',
 }
 
