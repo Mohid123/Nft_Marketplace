@@ -66,6 +66,8 @@ export class AuthService extends ApiService<AuthApiData> {
           setItem(StorageItem.User, result?.data?.user || null);
           setItem(StorageItem.LoggedInUser, result?.data?.loggedInUser || null);
           setItem(StorageItem.JwtToken, result?.data?.nftJwtToken?.access_token || null);
+          setItem(StorageItem.ActiveClub, params.clubName);
+          setItem(StorageItem.LastRole, ROLE_TYPE_UTILS.user);
           this._isLoggedIn$.next(true);
           this._user$.next(result?.data?.user || null);
           this._loggedInUser$.next(result?.data?.loggedInUser || null);
@@ -84,6 +86,8 @@ export class AuthService extends ApiService<AuthApiData> {
           setItem(StorageItem.User, result?.data?.user || null);
           setItem(StorageItem.LoggedInUser, result?.data?.loggedInUser || null);
           setItem(StorageItem.JwtToken, result?.data?.nftJwtToken?.access_token || null);
+          setItem(StorageItem.ActiveClub, params.clubName);
+          setItem(StorageItem.LastRole, ROLE_TYPE_UTILS.admin);
           this._isLoggedIn$.next(true);
           this._user$.next(result?.data?.user || null);
           this._loggedInUser$.next(result?.data?.loggedInUser || null);
@@ -93,12 +97,27 @@ export class AuthService extends ApiService<AuthApiData> {
     );
   }
 
+  clubChanged(newClub:string):void {
+    const activeClub = getItem(StorageItem.ActiveClub);
+    if(activeClub == newClub) {
+      setItem(StorageItem.Role, getItem(StorageItem.ActiveClub));
+      this._role$.next(<ROLE_TYPE_UTILS>getItem(StorageItem.LastRole));
+      this._isLoggedIn$.next(true);
+    } else {
+      removeItem(StorageItem.Role);
+      this._role$.next(ROLE_TYPE_UTILS.noUser);
+      this._isLoggedIn$.next(false);
+    }
+  }
+
   signOut(): void {
     removeItem(StorageItem.Key);
     removeItem(StorageItem.Role);
     removeItem(StorageItem.User);
     removeItem(StorageItem.LoggedInUser);
     removeItem(StorageItem.JwtToken);
+    removeItem(StorageItem.ActiveClub);
+    removeItem(StorageItem.LastRole);
     this._isLoggedIn$.next(false);
     this._user$.next(null);
     this._loggedInUser$.next(null);

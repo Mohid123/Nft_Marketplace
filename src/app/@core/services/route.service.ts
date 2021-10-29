@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivationStart, NavigationEnd, Router } from '@angular/router';
 import { getItem, setItem, StorageItem } from '@app/@core/utils';
+import { AuthService } from '@app/pages/auth/services/auth.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { debounce, distinctUntilChanged, filter } from 'rxjs/operators';
 import { RouterState } from './../models/routerState.model';
@@ -24,10 +25,12 @@ export class RouteService {
   public readonly clubName$: Observable<string>= this._clubName$.asObservable();
 
   constructor(
+    private authService: AuthService,
     private router: Router,
   ) {
     this.clubName$.pipe(distinctUntilChanged()).subscribe(clubName => {
       console.log('club name:',clubName);
+      this.authService.clubChanged(clubName);
       setItem(StorageItem.Club, clubName);
     })
   }
