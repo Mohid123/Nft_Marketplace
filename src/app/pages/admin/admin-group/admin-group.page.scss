@@ -23,11 +23,11 @@
 }
 
 .groups-container {
-   @apply  h-auto border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-1 rounded-xl mb-12;
+   @apply bg-primary-700 h-auto border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-1 rounded-xl mb-12;
 
    min-height: 400px;
   table {
-    @apply bg-primary-700 rounded-3xl
+    @apply rounded-3xl
   }
    th {
      @apply px-10 h-12 text-left uppercase font-medium;
@@ -39,7 +39,6 @@
 
    tbody {
      @apply overflow-auto ;
-     height: 420px;
      tr {
        @apply h-20;
       border-top: 1px solid #aaaaaa2a;

@@ -30,8 +30,17 @@
       <img src="./assets/coin/card-coin.svg" alt="">
       <span class="ml-2 font-semibold">{{nft.price}}</span>
     </span>
-    <button class="px-4 py-1 text-xs text-white rounded-full w-18 h-7 btn-nft">
-      Buy Now
-    </button>
+    <ng-container *ngIf="nft?.nftStatus">
+      <ng-container *ngIf="nft.nftStatus === 'Active'; else nftButton">
+        <button (click)="buyNow()" class="px-4 py-1 text-xs text-white rounded-full w-18 h-7 btn-nft">
+          Buy Now
+        </button>
+      </ng-container>
+      <ng-template #nftButton>
+        <button class="px-4 py-1 text-xs text-white rounded-full w-18 h-7 btn-nft {{nft.nftStatus}}">
+          {{nft.nftStatus}}
+        </button>
+      </ng-template>
+    </ng-container>
   </div>
 </div>

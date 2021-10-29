@@ -67,8 +67,8 @@
             </tr>
           </thead>
           <tbody>
-              <ng-container *ngFor="let group of (groups$ | async)" class="">
-                <tr>
+              <ng-container *ngFor="let group of (groups$ | async);last as isLast" class="">
+                <tr [ngStyle]="{'border-bottom': isLast ? '1px solid #aaaaaa2a' : 'none' }">
                   <td>{{group.name}}</td>
                   <td >{{group.itemsCount}}</td>
                   <td >{{group.description}}</td>

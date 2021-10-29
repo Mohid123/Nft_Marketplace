@@ -18,6 +18,9 @@ import { RouteService } from './../../../@core/services/route.service';
   styleUrls: ['./wallet.page.scss'],
 })
 export class WalletPage implements OnInit {
+
+  public type = '';
+
   public nftList: NFTList;
   public clubName: string;
   public groups: Group[];
@@ -68,6 +71,7 @@ export class WalletPage implements OnInit {
         this.page,
         this.searchValue,
         this.filterGroup?.id,
+        this.type
       )
       .pipe(take(1))
       .subscribe((result: ApiResponse<NFTList>) => {
@@ -115,6 +119,12 @@ export class WalletPage implements OnInit {
 
   search(searchValue): void {
     this.searchValue = searchValue;
+    this.page = 1;
+    this.getNfts();
+  }
+
+  setType(type:string) {
+    this.type = type;
     this.page = 1;
     this.getNfts();
   }

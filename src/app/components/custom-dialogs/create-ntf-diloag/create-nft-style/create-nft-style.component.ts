@@ -20,7 +20,7 @@ export class CreateNFTStyleComponent {
   @Input() nftForm: NFT;
 
   price: any;
-  copy: any;
+  copy: number;
 
   constructor(
     private customDialogService: CustomDialogService,
@@ -40,7 +40,7 @@ export class CreateNFTStyleComponent {
               this.nftForm.serverCaptureFileUrl = res.data.url,
               this.nftForm.path = res.data.url,
               this.nftForm.price = this.price;
-              this.nftForm.numberOfCopies = this.copy;
+              this.nftForm.numberOfCopies = +this.copy;
               return this.nftService.addNft(this.nftForm);
           } else {
             return of(null);

@@ -5,14 +5,14 @@
       <!-- Left Section -->
       <div class="flex-col md:flex lg:flex">
         <div class="p-6 md:p-0 lg:p-0 lg:pt-6 lg:pb-6 lg:pl-6">
-          <img [src]="nft.serverCaptureFileUrl" alt="nftmarketSearch" class="resImg rounded-2xl" />
+          <img *ngIf="nft?.serverCaptureFileUrl" [src]="nft?.serverCaptureFileUrl" alt="nftmarketSearch" class="resImg rounded-2xl" />
         </div>
         <div class="mb-6 ml-6">
           <span class="mt-6 inline-flex mr-2.5 text-lg text-white opacity-50">
             Contract Address
           </span>
 
-          <div class="inline-flex" id="fileName"><span >{{nft.nftContract}}</span><span>{{nft.nftContract}}</span>
+          <div class="inline-flex" id="fileName"><span >{{nft?.nftContract}}</span><span>{{nft?.nftContract}}</span>
           </div><br>
           <p class="inline mt-6 text-lg text-white opacity-50 mr-7">
             Token Address
@@ -24,7 +24,7 @@
               <img class="w-6 h-10" src="./assets/icons/polygon-matic-logo.svg" alt="polygon" />
 
             </div>
-            <a href="{{nft.transactionHashUrl}}" target=_blank
+            <a href="{{nft?.transactionHashUrl}}" target=_blank
               class="ml-3 mr-3 text-sm leading-none text-gray-200 hover:text-gray-900">View on Polygon.</a>
             <img class="w-4 h-10" src="./assets/icons/exit-top-right.svg" alt="polygon" />
           </button>
@@ -36,16 +36,16 @@
           <div class="flex items-center justify-between">
             <button class="profileBtn">
               <div class="flex rounded">
-                <img class="w-10 h-10 rounded-full" [src]="profilePic.profilePicURL" alt="Joker Card" />
+                <img class="w-10 h-10 rounded-full" [src]="profilePic?.profilePicURL" alt="Joker Card" />
               </div>
-              <span class="ml-6 text-sm text-white">{{userName.fullName}}</span>
+              <span class="ml-6 text-sm text-white">{{userName?.fullName}}</span>
             </button>
             <div class="flex justify-between">
-              <span class="text-lg text-gray-400 ">Token ID <a href="{{nft.transactionHashUrl}}" class="ml-3 text-white"  target=_blank> #{{nft.tokenId}}</a></span>
+              <span class="text-lg text-gray-400 ">Token ID <a href="{{nft?.transactionHashUrl}}" class="ml-3 text-white"  target=_blank> #{{nft?.tokenId}}</a></span>
             </div>
           </div>
           <p class="mt-6 mb-6 text-3xl font-medium tracking-wider text-white">
-           {{nft.name}}
+           {{nft?.name}}
           </p>
           <div class="flex items-center justify-start">
             <div class="mt-0">
@@ -72,16 +72,25 @@
           </div>
           <p class="mt-6 mb-2 text-lg text-gray-400">Price</p>
           <div class="flex items-center justify-start mb-5">
-            <span class="text-2xl font-semibold tracking-widest text-white">€ {{nft.price}}</span>
+            <span class="text-2xl font-semibold tracking-widest text-white">€ {{nft?.price}}</span>
             <!-- <span class="ml-3 text-sm text-white opacity-50">32.44 USD</span> -->
           </div>
           <p class="text-lg text-gray-400">Description</p>
           <div class="text-base text-justify text-white lg:mr-20 respDesc">
-            {{nft.description}}
+            {{nft?.description}}
           </div>
-          <button class="buyNowBtn" (click)="buyNow()" >
-            Buy Now
-          </button>
+          <ng-container *ngIf="nft?.nftStatus">
+            <ng-container *ngIf="nft.nftStatus === 'Active'; else nftButton">
+              <button (click)="buyNow()" class="buyNowBtn">
+                Buy Now
+              </button>
+            </ng-container>
+            <ng-template #nftButton>
+              <button class="buyNowBtn {{nft.nftStatus}}">
+                {{nft.nftStatus}}
+              </button>
+            </ng-template>
+          </ng-container>
         </div>
       </div>
     </div>

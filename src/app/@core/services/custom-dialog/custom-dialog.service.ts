@@ -4,6 +4,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { NFT } from '@app/@core/models/NFT.model';
 import { AuthDialogService } from '@app/components/custom-dialogs/auth-diloag/auth-dialog.service';
+import { AuthService } from '@app/pages/auth/services/auth.service';
 import { CreateGroupService } from './../../../components/custom-dialogs/create-group-dialog/create-group.service';
 import { CreateNFTDiloagService } from './../../../components/custom-dialogs/create-ntf-diloag/create-nft-diloag.service';
 import { StripeDialogService } from './../../../components/custom-dialogs/stripe-dialog/stripe-dialog.service';
@@ -17,6 +18,7 @@ export class CustomDialogService {
 
   constructor(
     protected router: Router,
+    private authService: AuthService,
     private authDialogService: AuthDialogService,
     private createNFTDiloagService: CreateNFTDiloagService,
     private createGroupService: CreateGroupService,
@@ -98,12 +100,16 @@ export class CustomDialogService {
   }
 
   async showStripePaymenDialog(nft:NFT) {
+    if(this.authService.isLoggedIn) {
     this.matDialog.closeAll();
     this._mapDialogref = await this.stripeDialogService.openStripePaymentComponent();
     this._mapDialogref.componentInstance.nft = nft;
     // (await this._mapDialogref).afterClosed().subscribe((result) => {
     //   console.log('Mat Dialog Results admin sign in:', result);
     // });
+    } else {
+      this.showUserSignInDialog();
+    }
   }
 
   closeDialogs() {

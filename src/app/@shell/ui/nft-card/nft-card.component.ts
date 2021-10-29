@@ -1,5 +1,6 @@
 import { Component, Input, OnDestroy } from '@angular/core';
 import { NFT } from '@app/@core/models/NFT.model';
+import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { Subject } from 'rxjs';
 import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { RouteService } from './../../../@core/services/route.service';
@@ -18,10 +19,15 @@ export class NftCardComponent implements OnDestroy {
 
   constructor(
     private routeService: RouteService,
+    private customDialogService: CustomDialogService,
   ) {
     this.routeService.clubName$.pipe(distinctUntilChanged(),takeUntil(this.destroy$)).subscribe((clubName) => {
       this.clubName = clubName;
     });
+  }
+
+  buyNow():void {
+    this.customDialogService.showStripePaymenDialog(this.nft);
   }
 
 

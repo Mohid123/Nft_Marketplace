@@ -22,6 +22,7 @@ export class MarketPlacePage implements OnInit {
 
 
   private _isLoading:boolean;
+  public type = '';
 
   public nftList: NFTList;
   public clubName: string;
@@ -61,7 +62,7 @@ export class MarketPlacePage implements OnInit {
 
   getNfts(): void {
     if (this._isLoading) return
-    this.nftService.getAllNftsByClub(this.clubName, this.page,this.searchValu ,this.filterGroup?.id)
+    this.nftService.getAllNftsByClub(this.clubName, this.page,this.searchValu ,this.filterGroup?.id, this.type)
       .pipe(take(1))
       .subscribe((result:ApiResponse<NFTList>) => {
         if (!result.hasErrors()) {
@@ -103,6 +104,12 @@ export class MarketPlacePage implements OnInit {
 
   search(searchValu) {
     this.searchValu = searchValu;
+    this.page = 1;
+    this.getNfts();
+  }
+
+  setType(type:string) {
+    this.type = type;
     this.page = 1;
     this.getNfts();
   }
