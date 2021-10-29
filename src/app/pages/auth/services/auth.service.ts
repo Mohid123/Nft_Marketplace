@@ -70,6 +70,7 @@ export class AuthService extends ApiService<AuthApiData> {
           this._user$.next(result?.data?.user || null);
           this._loggedInUser$.next(result?.data?.loggedInUser || null);
           this._role$.next(ROLE_TYPE_UTILS.user);
+          location.reload();
         }
       }),
     );

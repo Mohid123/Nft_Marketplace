@@ -10,6 +10,7 @@ import { NFT } from './../../../@core/models/NFT.model';
 export class CardDetailsComponent implements OnInit {
   public userName: any
   public profilePic: any
+  public loggedInUser: any;
 
   @Input() nft:NFT;
   constructor(
@@ -19,6 +20,7 @@ export class CardDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.userName = JSON.parse(localStorage.getItem('App/user'))
     this.profilePic = JSON.parse(localStorage.getItem('App/user'))
+    this.loggedInUser = JSON.parse(localStorage.getItem('App/loggedInUser'))
     //for test
     // let num = 0;
     // setInterval(() => {

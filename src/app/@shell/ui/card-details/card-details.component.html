@@ -26,7 +26,9 @@
             </div>
             <a href="{{nft?.transactionHashUrl}}" target=_blank
               class="ml-3 mr-3 text-sm leading-none text-gray-200 hover:text-gray-900">View on Polygon.</a>
-            <img class="w-4 h-10" src="./assets/icons/exit-top-right.svg" alt="polygon" />
+              <a href="{{nft?.transactionHashUrl}}" target=_blank
+              class=""><img class="w-4 h-10" src="./assets/icons/exit-top-right.svg" alt="polygon" /></a>
+
           </button>
         </div>
       </div>
@@ -34,7 +36,7 @@
       <div class="m-4 lg:flex md:flex md:m-0 lg:m-0">
         <div class="mt-10 lg:ml-11 md:ml-5">
           <div class="flex items-center justify-between">
-            <button class="profileBtn">
+            <button *ngIf="this.loggedInUser" class="profileBtn">
               <div class="flex rounded">
                 <img class="w-10 h-10 rounded-full" [src]="profilePic?.profilePicURL" alt="Joker Card" />
               </div>
