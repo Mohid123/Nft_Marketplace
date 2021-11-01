@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { MediaService } from '@app/@core/services/media.service';
+import { ToastrService } from 'ngx-toastr';
 import { of } from 'rxjs';
 import { exhaustMap, take } from 'rxjs/operators';
 import { Group } from '../../../../@core/models/group.model';
@@ -26,6 +27,7 @@ export class CreateNFTStyleComponent {
     private customDialogService: CustomDialogService,
     private nftService: NFTService,
     private mediaService: MediaService,
+    private toastr: ToastrService
   ) {
   }
 
@@ -51,7 +53,8 @@ export class CreateNFTStyleComponent {
         if (res !== null) {
           this.close();
         } else {
-          alert('error :' + res.errors[0]?.error?.message);
+          // alert('error :' + res.errors[0]?.error?.message);
+          this.toastr.warning(res?.errors[0]?.error?.message, 'Error!' )
         }
         console.log('res:', res);
       });

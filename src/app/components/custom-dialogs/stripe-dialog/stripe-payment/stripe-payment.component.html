@@ -24,7 +24,6 @@
       <span class="icon cardNo-hide-icon"></span>
       <p class="error-msg error" *ngIf="stripeForm.controls.cardNo.touched && stripeForm.controls.cardNo.errors?.required">please enter card no</p>
       <p class="error-msg error" *ngIf="stripeForm.controls.cardNo.touched && stripeForm.controls.cardNo.errors?.minlength">card no length should be greater than 3</p>
-
       <div class="flex flex-row">
         <div class="w-2/4 pr-4">
           <label class="floating-label" for="validity">Validity</label>

@@ -79,6 +79,7 @@ export class CreateGroupComponent {
                   coverImageUrl: res.data.url,
                 };
                 return this.groupService.addGroups(param);
+
               } else {
                 return of(null);
               }
@@ -96,7 +97,7 @@ export class CreateGroupComponent {
           });
       })
       .catch((error) => {
-        console.error('oops, something went wrong!', error);
+        this.toastr.warning(error, 'Error!');
       });
 
   }
