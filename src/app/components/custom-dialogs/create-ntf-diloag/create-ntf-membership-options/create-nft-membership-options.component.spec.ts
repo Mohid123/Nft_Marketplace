@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CreateNTFMintingComponent } from './create-nft-minting.component';
+import { CreateNTFMintingComponent } from './create-nft-membership-options.component';
 
 
 describe('CreateNTFMintingComponent', () => {

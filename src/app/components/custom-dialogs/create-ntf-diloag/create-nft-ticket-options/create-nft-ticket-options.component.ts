@@ -3,16 +3,16 @@ import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-di
 import { MediaService } from '@app/@core/services/media.service';
 import { of } from 'rxjs';
 import { exhaustMap, take } from 'rxjs/operators';
-import { Group } from './../../../../@core/models/group.model';
-import { NFT } from './../../../../@core/models/NFT.model';
-import { ResponseAddGroupMedia } from './../../../../@core/models/response-add-media.model';
-import { ApiResponse } from './../../../../@core/models/response.model';
-import { NFTService } from './../../../../@core/services/nft.service';
+import { Group } from '../../../../@core/models/group.model';
+import { NFT } from '../../../../@core/models/NFT.model';
+import { ResponseAddGroupMedia } from '../../../../@core/models/response-add-media.model';
+import { ApiResponse } from '../../../../@core/models/response.model';
+import { NFTService } from '../../../../@core/services/nft.service';
 
 @Component({
-  selector: 'app-create-nft-style',
-  templateUrl: './create-nft-style.component.html',
-  styleUrls: ['./create-nft-style.component.scss'],
+  selector: 'app-create-nft-ticket-options',
+  templateUrl: './create-nft-ticket-options.component.html',
+  styleUrls: ['./create-nft-ticket-options.component.scss'],
 })
 export class CreateNFTStyleComponent {
   @Input() img: FormData;

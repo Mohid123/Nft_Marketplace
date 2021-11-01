@@ -3,18 +3,16 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateMembershipComponent } from './create-membership/create-membership.component';
 import { CreateNFTOptionsComponent } from './create-nft-options/create-nft-options.component';
-import { CreateNFTStyleComponent } from './create-nft-style/create-nft-style.component';
-import { CreateNFTComponent } from './create-nft/create-nft.component';
-import { CreateNFTMintingComponent } from './create-ntf-minting/create-nft-minting.component';
-
-
+import { CreateNFTStyleComponent as CreateNFTticketOptionsComponent } from './create-nft-ticket-options/create-nft-ticket-options.component';
+import { CreateNFTticketComponent } from './create-nft-ticket/create-nft-ticket.component';
+import { CreateNFTMembershipOptionsComponent } from './create-ntf-membership-options/create-nft-membership-options.component';
 
 @NgModule({
   declarations: [
-    CreateNFTComponent,
+    CreateNFTticketComponent,
     CreateNFTOptionsComponent,
-    CreateNFTStyleComponent,
-    CreateNFTMintingComponent,
+    CreateNFTticketOptionsComponent,
+    CreateNFTMembershipOptionsComponent,
     CreateMembershipComponent,
   ],
   imports: [
@@ -25,8 +23,8 @@ import { CreateNFTMintingComponent } from './create-ntf-minting/create-nft-minti
 })
 export class CreateNFTDiloagModule {
 
-  static getCreateNFTComponent(): typeof CreateNFTComponent {
-    return CreateNFTComponent;
+  static getCreateNFTticketComponent(): typeof CreateNFTticketComponent {
+    return CreateNFTticketComponent;
   }
   static getCreateNFTOptionsComponent(): typeof CreateNFTOptionsComponent {
     return CreateNFTOptionsComponent;
@@ -34,10 +32,10 @@ export class CreateNFTDiloagModule {
   static getCreateMembershipComponent(): typeof CreateMembershipComponent {
     return CreateMembershipComponent;
   }
-  static getCreateNFTStyleComponent(): typeof CreateNFTStyleComponent {
-    return CreateNFTStyleComponent;
+  static getCreateNFTticketOptionsComponent(): typeof CreateNFTticketOptionsComponent {
+    return CreateNFTticketOptionsComponent;
   }
-  static getCreateNFTMintingComponent(): typeof CreateNFTMintingComponent {
-    return CreateNFTMintingComponent;
+  static getCreateNFTMembershipOptionsComponent(): typeof CreateNFTMembershipOptionsComponent {
+    return CreateNFTMembershipOptionsComponent;
   }
 }

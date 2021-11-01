@@ -14,11 +14,11 @@ import { Subject } from 'rxjs';
 import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-create-nft',
-  templateUrl: './create-nft.component.html',
-  styleUrls: ['./create-nft.component.scss'],
+  selector: 'app-create-nft-ticket',
+  templateUrl: './create-nft-ticket.component.html',
+  styleUrls: ['./create-nft-ticket.component.scss'],
 })
-export class CreateNFTComponent {
+export class CreateNFTticketComponent {
 
   public group: Group;
 
@@ -134,7 +134,7 @@ export class CreateNFTComponent {
           appPackageId: this.authService.loggedInUser.appPackageId,
         }
         console.log('asdasdasd:',this.imgFormData);
-        this.customDialogService.showCreateNFTStyleDialog(this.imgFormData,form);
+        this.customDialogService.showCreateNFTticketOptionsDialog(this.imgFormData,form);
       })
       .catch((error) => {
         console.error('oops, something went wrong!', error);

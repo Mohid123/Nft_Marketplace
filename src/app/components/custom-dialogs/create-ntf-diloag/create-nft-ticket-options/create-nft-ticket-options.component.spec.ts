@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CreateNTFStyleComponent } from './create-nft-style.component';
+import { CreateNTFStyleComponent } from './create-nft-ticket-options.component';
 
 
 describe('CreateNTFStyleComponent', () => {

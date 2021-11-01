@@ -18,12 +18,10 @@ export class CreateNFTOptionsComponent {
 
   ticketsClick():void {
     if(this.type == "Tickets")
-      this.customDialogService.showCreateNFTDialog();
+      this.customDialogService.showCreateNFTticketDialog();
     else
       this.customDialogService.showCreateMembership();
   }
-
-
 
   close():void {
     this.customDialogService.closeDialogs();

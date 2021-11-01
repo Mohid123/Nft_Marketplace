@@ -83,7 +83,7 @@ export class MarketPlacePage implements OnInit {
   }
 
   test() {
-    this.customDialogService.showCreateNFTDialog();
+    this.customDialogService.showCreateNFTticketDialog();
   }
 
   test2() {

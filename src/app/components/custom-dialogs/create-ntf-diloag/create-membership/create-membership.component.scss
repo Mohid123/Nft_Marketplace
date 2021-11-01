@@ -1,51 +1,100 @@
-// ::ng-deep .create-nft-dialog-overlay {
-//   height: auto;
-//   min-height: 722px;
-//   max-width: 631px !important;
-// }
+::ng-deep .create-nft-membership-dialog-overlay {
+  height: auto;
+  min-height: 722px;
+  max-width: 631px !important;
+}
 
 
-// .create-nft-model {
-//   @apply flex flex-col px-0 sm:px-20;
+ .create-nft-model {
+   @apply flex flex-col;
 
 
-//   .btn-close {
-//     @apply absolute top-0 right-0 bg-white rounded-full opacity-50 m-3.5 hover:opacity-70;
-//     padding: 1px;
+   .btn-close {
+    @apply absolute top-0 right-0 bg-white rounded-full opacity-50 m-3.5 hover:opacity-70;
+    padding: 1px;
+    svg {
+      color: #132356;
+    }
+  }
 
-//     svg {
-//       color: #132356;
-//     }
-//   }
+  img {
 
-//   img {
+    @apply focus:ring p-1;
+    // width: 68px;
+    height: 68px;
 
-//     width: 68px;
-//     height: 68px;
+  }
 
-//   }
 
-//   h1 {
-//     @apply capitalize my-12 text-3xl;
-//     font-weight: 400;
+  h1 {
+    @apply capitalize mt-6 mb-10 text-3xl;
+    font-weight: 400;
+    span {
+      padding-bottom: 4px;
+      border-bottom: 2px solid #75F16D;
+    }
+  }
 
-//     span {
-//       padding-bottom: 4px;
-//       border-bottom: 2px solid #75F16D;
-//     }
-//   }
+  .primary-btn {
+    @apply w-44 h-12  sm:my-14 self-center;
+  }
 
-//   .primary-btn {
-//     @apply w-44 h-12 sm: my-14 self-center;
-//   }
+  .card-bg {
+    label {
+      @apply m-0 p-0;
+    }
+  }
 
-//   form {
-//     @apply flex flex-col w-full;
+  form {
+    @apply flex flex-col w-full;
+    label {
+      @apply px-3 py-4 text-lg;
+    }
 
-//     label {
-//       @apply px-3 py-4 text-lg;
-//     }
+  }
 
-//   }
+ }
 
-// }
+ input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  border-radius: 4px;
+  margin-right: 2px;
+  opacity: 0.6;
+  filter: invert(0.8);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1
+}
+
+[type=radio] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* IMAGE STYLES */
+[type=radio] + img {
+  cursor: pointer;
+}
+
+/* CHECKED STYLES */
+[type=radio]:checked + img  {
+  box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-image: linear-gradient(136deg, #41A6FF 0%, #46F3AC 100%);
+  border-image-slice: 1;
+  border-radius: 5px;
+}
+
+#bg-image {
+  p{
+    margin: 12px;
+  }
+}
+
+.error-msg {
+  padding: 8px 0;
+}
