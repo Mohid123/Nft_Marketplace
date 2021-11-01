@@ -20,17 +20,21 @@
   <div id="view-img"></div>
 
   <div id="bg-image" class="relative p-0 text-2xl" style="display: block; width: 529px; height: 479px;">
-    <img id="showImage" src="./assets/card/1A.svg" alt="NFT-Image" style="width: 529px; height: 482px; padding: 0;">
+    <img id="showImage" src="./assets/card/membership 1a.svg" alt="NFT-Image" style="width: 529px; height: 482px; padding: 0;">
     <img *ngIf="createNft.controls?.group?.value?.coverImageUrl" class="absolute top-0 right-0" [src]="createNft.controls?.group?.value?.coverImageUrl" style="height: 135px;padding: 0;">
       <img class="absolute object-scale-down object-left-top w-full h-20 max-w-sm px-16 py-0 top-8 left-6 max-h-24" *ngIf="imageSrc" [src]="imageSrc">
     <div>
       <div class="absolute w-96 top-52 left-9" >
         <p>Membership ID</p>
         <p style="font-size: 30px;font-weight: 400;">{{createNft.controls.membershipId.value}}</p>
+
       </div>
       <div class="absolute text-center w-96 left-9" style="top: 340px;">
         <p style="width: 28px;" class="absolute text-xs">VALID THRU</p>
-        <p style="font-size: 28px;letter-spacing: 1.4px;font-weight: 400;opacity: 0.8;overflow: hidden;position: absolute;left: 40px;">{{createNft.controls.date.value}}</p>
+        <p style="font-size: 28px;letter-spacing: 1.4px;font-weight: 400;opacity: 0.8;overflow: hidden;position: absolute;left: 40px;">{{createNft.controls.date.value | date:'M/yy' }}</p>
+      </div>
+      <div class="absolute text-right w-96 left-15" style="top: 340px; left:439px;">
+        <qr-code value={{createNft.controls.membershipId.value}} size="60" errorCorrectionLevel="M" margin="2"></qr-code>
       </div>
     </div>
   </div>
@@ -43,31 +47,31 @@
         <ul>
           <label>
             <input type="radio" name="test" value="small">
-            <img id="ticket" src="./assets/card/1A.svg" (click)="setBackground()">
+            <img id="ticket" src="./assets/card/membership 1a.svg" (click)="setBackground()">
           </label>
         </ul>
         <ul>
           <label>
             <input type="radio" name="test" value="small">
-            <img id="ticket" src="./assets/card/2A.svg" (click)="setBackground()">
+            <img id="ticket" src="./assets/card/membership 2a.svg" (click)="setBackground()">
           </label>
         </ul>
         <ul>
           <label>
             <input type="radio" name="test" value="small">
-            <img id="ticket" src="./assets/card/3A.svg" (click)="setBackground()">
+            <img id="ticket" src="./assets/card/membership 3a.svg" (click)="setBackground()">
           </label>
         </ul>
         <ul>
           <label>
             <input type="radio" name="test">
-            <img id="ticket" src="./assets/card/4A.svg" (click)="setBackground()">
+            <img id="ticket" src="./assets/card/membership 4a.svg" (click)="setBackground()">
           </label>
         </ul>
         <ul>
           <label>
             <input type="radio" name="test" value="small">
-            <img id="ticket" src="./assets/card/5A.svg" (click)="setBackground()">
+            <img id="ticket" src="./assets/card/membership 5a.svg" (click)="setBackground()">
           </label>
         </ul>
       </li>
@@ -118,7 +122,7 @@
     <div class="flex items-center justify-between mt-4">
      <div class="flex justify-between">
       <div style="margin-right: 60px;" class="inline-flex flex-col">
-        <span class="text-xl">VALID THRU</span><br>
+        <span class="text-xl">Valid Till</span><br>
         <input type="date" class="px-2 font-light text-gray-400 w-44" formControlName="date" >
         <p class="error-msg error" *ngIf="createNft.controls.date.touched && createNft.controls.date.errors?.required">please select date</p>
       </div>
@@ -140,7 +144,7 @@
     </div>
     <div class="flex flex-col mt-4">
       <span class="text-xl ">Membership ID</span><br>
-      <input class="font-light" type="text" maxlength="16" placeholder="1234 5678 9012 3046" formControlName="membershipId">
+      <input class="font-light" type="number" maxlength="16" placeholder="1234 5678 9012 3046" formControlName="membershipId" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
       <p class="error-msg error" *ngIf="createNft.controls.membershipId.touched && createNft.controls.membershipId.errors?.required">please enter membership ID</p>
       <p class="error-msg error" *ngIf="createNft.controls.description.touched && createNft.controls.description.errors?.minlength">membership ID should be {{createNft.controls.name.errors?.minlength.requiredLength}} numbers </p>
     </div>

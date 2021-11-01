@@ -152,7 +152,7 @@ export class CreateNFTticketComponent {
     const select = <HTMLImageElement>document.querySelector('#bg-image');
     const tick = <HTMLImageElement>document.querySelector('#showImage');
     tick.src = (event.target as HTMLImageElement).src;
-    select.style.display = 'block';
+    // select.style.display = 'block';
   }
 
 

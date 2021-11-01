@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { QrCodeModule } from 'ng-qrcode';
 import { CreateMembershipComponent } from './create-membership/create-membership.component';
 import { CreateNFTOptionsComponent } from './create-nft-options/create-nft-options.component';
 import { CreateNFTStyleComponent as CreateNFTticketOptionsComponent } from './create-nft-ticket-options/create-nft-ticket-options.component';
@@ -19,6 +20,7 @@ import { CreateNFTMembershipOptionsComponent } from './create-ntf-membership-opt
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    QrCodeModule
   ]
 })
 export class CreateNFTDiloagModule {

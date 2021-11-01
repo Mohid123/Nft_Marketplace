@@ -8,6 +8,7 @@ import { AppBannerModule } from '@app/@shell/ui/app-banner/app-banner.module';
 import { CardDetailsModule } from '@app/@shell/ui/card-details/card-details.module';
 import { HistoryModule } from '@app/@shell/ui/history/history.module';
 import { MarketplaceSearchModule } from '@app/@shell/ui/marketplace-search/marketplace-search.module';
+import { QrCodeModule } from 'ng-qrcode';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoggedInUserSearchModule } from './../../@shell/ui/logged-in-user-search/logged-in-user-search.module';
 import { CardModule } from './../../@shell/ui/nft-card/card.module';
@@ -82,6 +83,7 @@ const childRoutes: Routes = [
     HistoryModule,
     MatMenuModule,
     NgxSpinnerModule,
+    QrCodeModule
       // BrowserAnimationsModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

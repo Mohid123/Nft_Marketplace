@@ -146,14 +146,12 @@ export class CreateMembershipComponent {
   }
 
   // Click on each image and display each individually on background div
-  setBackground(): void {
-    // const select = <HTMLImageElement>document.querySelector('#bg-image');
+  setBackground() {
+    const select = <HTMLImageElement>document.querySelector('#bg-image');
     const tick = <HTMLImageElement>document.querySelector('#showImage');
-    Array.from(document.querySelectorAll('#ticket')).forEach((image) => {
-      image.addEventListener('click', (event) => {
-        // select.style.display = 'block';
-        tick.src = (event.target as HTMLImageElement).src;
-      });
-    });
+    tick.src = (event.target as HTMLImageElement).src;
+    select.style.display = 'block';
   }
+
+
 }

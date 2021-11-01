@@ -1,4 +1,5 @@
 import { Component, Input, OnDestroy } from '@angular/core';
+import { LoggedInUser } from '@app/@core/models/logged-in-user.model';
 import { NFT } from '@app/@core/models/NFT.model';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { ROLE_TYPE_UTILS } from '@app/@core/utils/role-type.utils';
@@ -21,6 +22,7 @@ export class NftCardComponent implements OnDestroy {
   public clubName: string;
 
   isLoggedIn$: Observable<boolean> = this.authService.isLoggedIn$;
+  loggedInUser$: Observable<LoggedInUser> = this.authService.loggedInUser$;
   role$: Observable<ROLE_TYPE_UTILS> = this.authService.role$;
 
   constructor(

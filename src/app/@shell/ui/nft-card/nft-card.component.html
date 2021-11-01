@@ -36,6 +36,11 @@
          Active
         </button>
       </ng-container>
+      <ng-container  *ngIf="(loggedInUser$ | async) && (role$ | async) === roles.user && nft?.nftStatus === 'Active'; else nftButton" >
+        <button (click)="buyNow()" class="px-4 py-1 text-xs text-white rounded-full w-18 h-7 btn-nft" >
+         Buy Now
+        </button>
+      </ng-container>
       <!-- <ng-container *ngIf="(isLoggedIn$ | async ) && (role$ | async) === roles.user && nft?.nftStatus === 'Active'; else nftButton">
         <button (click)="buyNow()" class="px-4 py-1 text-xs text-white rounded-full w-18 h-7 btn-nft">
           Buy Now
