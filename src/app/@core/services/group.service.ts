@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
 import { GetAllNftsByClub } from '../models/requests/get-all-afts-by-club.model';
@@ -27,6 +28,7 @@ export class GroupService extends ApiService<groupApiData> {
 
   constructor(
     protected http: HttpClient,
+    protected toastrService: ToastrService,
   ) {
     super(http);
   }
@@ -43,6 +45,8 @@ export class GroupService extends ApiService<groupApiData> {
       if (!result.hasErrors()) {
         this._totalCount$.next(result.data.totalCount)
         this._groups$.next(result.data?.data);
+      } else {
+        this.toastrService.error(result?.errors[0]?.error?.message)
       }
     })).subscribe();
   }
@@ -54,7 +58,11 @@ export class GroupService extends ApiService<groupApiData> {
       offset: page ? (this.limit || environment.limit) * page : 0,
       limit: this.limit || environment.limit,
     };
-    return this.get('/group/getUsersGroupsByAppPackageId/' + userId,param);
+    return this.get('/group/getUsersGroupsByAppPackageId/' + userId,param).pipe(take(1),tap((result:ApiResponse<groupApiData>)=> {
+      if (result.hasErrors()) {
+        this.toastrService.error(result?.errors[0]?.error?.message)
+      }
+    }));
   }
 
   addGroups(param:AddGroup): Observable<ApiResponse<groupApiData>> {
@@ -67,12 +75,18 @@ export class GroupService extends ApiService<groupApiData> {
           console.log('result.data.data:',result.data.data);
           this._groups$.next([...group,...result.data.data])
         }
+      } else {
+        this.toastrService.error(result?.errors[0]?.error?.message)
       }
-    }));;
+    }));
   }
 
-  deleteGroups(id){
-    return this.get(`/group/deleteGroupById/${id}`);
+  deleteGroups(id) {
+    return this.get(`/group/deleteGroupById/${id}`).pipe(take(1),tap((result:ApiResponse<any>)=> {
+      if (result.hasErrors()) {
+        this.toastrService.error(result?.errors[0]?.error?.message)
+      }
+    }));
   }
 
 }
