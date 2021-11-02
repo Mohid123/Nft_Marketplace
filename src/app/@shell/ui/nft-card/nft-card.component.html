@@ -31,26 +31,15 @@
       <span class="ml-2 font-semibold">{{nft.price}}</span>
     </span>
     <ng-container *ngIf="nft?.nftStatus">
-      <ng-container  *ngIf="(isLoggedIn$ | async) && (role$ | async) === roles.admin && nft?.nftStatus === 'Active'; else nftButton" >
-        <button (click)="buyNow()" class="px-4 py-1 text-xs text-white rounded-full w-18 h-7 btn-nft" >
-         Active
-        </button>
-      </ng-container>
-      <ng-container  *ngIf="(loggedInUser$ | async) && (role$ | async) === roles.user && nft?.nftStatus === 'Active'; else nftButton" >
-        <button (click)="buyNow()" class="px-4 py-1 text-xs text-white rounded-full w-18 h-7 btn-nft" >
-         Buy Now
-        </button>
-      </ng-container>
-      <!-- <ng-container *ngIf="(isLoggedIn$ | async ) && (role$ | async) === roles.user && nft?.nftStatus === 'Active'; else nftButton">
-        <button (click)="buyNow()" class="px-4 py-1 text-xs text-white rounded-full w-18 h-7 btn-nft">
-          Buy Now
-        </button>
-      </ng-container> -->
-
-      <ng-template #nftButton>
-        <button class="px-4 py-1 text-xs text-white rounded-full w-18 h-7 btn-nft {{nft.nftStatus}}">
+      <ng-container  *ngIf="(role$ | async) === roles.admin || nft?.nftStatus !== 'Active'; else nftButton" >
+        <button class="px-4 py-1 text-xs text-white rounded-full w-18 h-7 btn-nft" >
           {{nft.nftStatus}}
         </button>
+      </ng-container>
+      <ng-template #nftButton>
+        <button (click)="buyNow()" class="px-4 py-1 text-xs text-white rounded-full w-18 h-7 btn-nft" >
+          Buy Now
+         </button>
       </ng-template>
     </ng-container>
   </div>

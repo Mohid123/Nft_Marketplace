@@ -99,7 +99,7 @@ export class AuthService extends ApiService<AuthApiData> {
 
   clubChanged(newClub:string):void {
     const activeClub = getItem(StorageItem.ActiveClub);
-    if(activeClub == newClub) {
+    if(activeClub && activeClub == newClub) {
       setItem(StorageItem.Role, getItem(StorageItem.ActiveClub));
       this._role$.next(<ROLE_TYPE_UTILS>getItem(StorageItem.LastRole));
       this._isLoggedIn$.next(true);

@@ -20,7 +20,6 @@ import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 })
 export class CreateNFTticketComponent {
 
-
   msg: string
   public group: Group;
 
@@ -71,6 +70,8 @@ export class CreateNFTticketComponent {
         this.clubName = clubName;
       });
 
+    if(this.nftService.createNftForm)
+    this.createNft = this.nftService.createNftForm;
   }
 
   ngOnInit(): void {
@@ -96,21 +97,7 @@ export class CreateNFTticketComponent {
   }
 
   nextClick(): void {
-    const node = document.getElementById('bg-image');
-    htmlToImage
-      .toPng(node, {
-        canvasWidth: 529,
-        canvasHeight: 480,
-        width: 529,
-        height: 480,
-        quality: 1,
-        pixelRatio: 1,
-        skipAutoScale: false,
-        style: {
-          display: 'block'
-        }
-      })
-      .then((dataUrl) => {
+   this.createPreviewImg().then((dataUrl) => {
         // const img = new Image();
         // img.src = dataUrl;
         // document.getElementById('view-img').appendChild(img);
@@ -120,7 +107,6 @@ export class CreateNFTticketComponent {
             this.createNft.controls.address.value + '.png',
           ),
         });
-        console.log('asdasd:');
         this.imgFormData.append('file', this.createNft.get('file').value);
 
         const form: NFT = {
@@ -135,12 +121,30 @@ export class CreateNFTticketComponent {
           clubUserId: this.authService.loggedInUser.clubUserId,
           appPackageId: this.authService.loggedInUser.appPackageId,
         }
-        console.log('asdasdasd:',this.imgFormData);
-        this.customDialogService.showCreateNFTticketOptionsDialog(this.imgFormData,form);
+        this.nftService.createNFT = form;
+        this.nftService.createNFTImg = this.imgFormData;
+        this.customDialogService.showCreateNFTticketOptionsDialog();
       })
       .catch((error) => {
         console.error('oops, something went wrong!', error);
       });
+  }
+
+  createPreviewImg():Promise<any> {
+    const node = document.getElementById('bg-image');
+    return htmlToImage
+      .toPng(node, {
+        canvasWidth: 529,
+        canvasHeight: 480,
+        width: 529,
+        height: 480,
+        quality: 1,
+        pixelRatio: 1,
+        skipAutoScale: false,
+        style: {
+          display: 'block'
+        }
+      })
   }
 
   close(): void {
@@ -148,12 +152,18 @@ export class CreateNFTticketComponent {
   }
 
   // Click on each image and display each individually on background div
-  setBackground() {
+  setBackground():void {
     const select = <HTMLImageElement>document.querySelector('#bg-image');
     const tick = <HTMLImageElement>document.querySelector('#showImage');
     tick.src = (event.target as HTMLImageElement).src;
     // select.style.display = 'block';
   }
 
+  preview(): void {
+    this.createPreviewImg().then((dataUrl) => {
+      this.nftService.createNftForm = this.createNft;
+      this.customDialogService.showCreateNFTticketPreviewDialog(dataUrl);
+    });
+  }
 
 }

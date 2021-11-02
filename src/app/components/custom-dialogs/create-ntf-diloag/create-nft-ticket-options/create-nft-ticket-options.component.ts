@@ -16,9 +16,9 @@ import { NFTService } from '../../../../@core/services/nft.service';
   styleUrls: ['./create-nft-ticket-options.component.scss'],
 })
 export class CreateNFTStyleComponent {
-  @Input() img: FormData;
   @Input() group: Group;
-  @Input() nftForm: NFT;
+  img: FormData;
+  nftForm: NFT;
 
   price: any;
   copy: number;
@@ -29,6 +29,8 @@ export class CreateNFTStyleComponent {
     private mediaService: MediaService,
     private toastr: ToastrService
   ) {
+    this.img = this.nftService.createNFTImg;
+    this.nftForm = this.nftService.createNFT;
   }
 
   save():void {

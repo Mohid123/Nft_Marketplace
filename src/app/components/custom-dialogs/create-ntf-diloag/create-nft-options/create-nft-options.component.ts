@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { NFT } from '@app/@core/models/NFT.model';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
+import { NFTService } from '@app/@core/services/nft.service';
 
 @Component({
   selector: 'app-create-nft-options',
@@ -11,12 +13,16 @@ export class CreateNFTOptionsComponent {
   type: any
 
   constructor(
-    private customDialogService: CustomDialogService
+    private nftService: NFTService,
+    private customDialogService: CustomDialogService,
   ) {
 
   }
 
   ticketsClick():void {
+    this.nftService.createNFT = new NFT();
+    this.nftService.createNFTImg = null;
+    this.nftService.createNftForm = null;
     if(this.type == "Tickets")
       this.customDialogService.showCreateNFTticketDialog();
     else

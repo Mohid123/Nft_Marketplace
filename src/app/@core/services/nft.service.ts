@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { NFT } from '@app/@core/models/NFT.model';
 import { environment } from '@environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -25,9 +26,15 @@ export class NFTService extends ApiService<nftApiData> {
     totalCount: 0,
     data: [],
   });
+
+  public createNFTImg = new FormData();
+  public createNFT:NFT = new NFT();
+  public createNftForm:FormGroup;
+
   public readonly nftList$: Observable<NFTList> = this._nftList.asObservable();
 
   private _routerState: RouterState;
+
 
   constructor(
     protected http: HttpClient,

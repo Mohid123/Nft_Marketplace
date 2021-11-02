@@ -7,6 +7,7 @@ import { CreateNFTOptionsComponent } from './create-nft-options/create-nft-optio
 import { CreateNFTStyleComponent as CreateNFTticketOptionsComponent } from './create-nft-ticket-options/create-nft-ticket-options.component';
 import { CreateNFTticketComponent } from './create-nft-ticket/create-nft-ticket.component';
 import { CreateNFTMembershipOptionsComponent } from './create-ntf-membership-options/create-nft-membership-options.component';
+import { TicketPreviewComponent } from './ticket-preview/ticket-preview.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { CreateNFTMembershipOptionsComponent } from './create-ntf-membership-opt
     CreateNFTticketOptionsComponent,
     CreateNFTMembershipOptionsComponent,
     CreateMembershipComponent,
+    TicketPreviewComponent,
   ],
   imports: [
     CommonModule,
@@ -27,6 +29,9 @@ export class CreateNFTDiloagModule {
 
   static getCreateNFTticketComponent(): typeof CreateNFTticketComponent {
     return CreateNFTticketComponent;
+  }
+  static getCreateNFTticketPreviewComponent(): typeof TicketPreviewComponent {
+    return TicketPreviewComponent;
   }
   static getCreateNFTOptionsComponent(): typeof CreateNFTOptionsComponent {
     return CreateNFTOptionsComponent;

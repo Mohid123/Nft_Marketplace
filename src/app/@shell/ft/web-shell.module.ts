@@ -70,7 +70,7 @@ const APP_ROUTES: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forRoot(APP_ROUTES, { useHash: true }),
+    RouterModule.forRoot(APP_ROUTES),
     FooterModule,
     HeaderModule,
     LayoutModule,

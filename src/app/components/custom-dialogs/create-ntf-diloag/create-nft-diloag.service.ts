@@ -6,62 +6,111 @@ import { CreateNFTOptionsComponent } from './create-nft-options/create-nft-optio
 import { CreateNFTStyleComponent } from './create-nft-ticket-options/create-nft-ticket-options.component';
 import { CreateNFTticketComponent } from './create-nft-ticket/create-nft-ticket.component';
 import { CreateNFTMembershipOptionsComponent } from './create-ntf-membership-options/create-nft-membership-options.component';
+import { TicketPreviewComponent } from './ticket-preview/ticket-preview.component';
 
 @Injectable({
   providedIn: 'root',
 })
-export class CreateNFTDiloagService extends AsyncCreateNFTDialog< CreateNFTticketComponent | CreateMembershipComponent | CreateNFTOptionsComponent | CreateNFTStyleComponent | CreateNFTMembershipOptionsComponent> {
+export class CreateNFTDiloagService extends AsyncCreateNFTDialog<
+  | CreateNFTticketComponent
+  | CreateMembershipComponent
+  | CreateNFTOptionsComponent
+  | CreateNFTStyleComponent
+  | CreateNFTMembershipOptionsComponent
+  | TicketPreviewComponent
+> {
+
   constructor(protected matDialog: MatDialog) {
     super(matDialog);
   }
 
-  async openCreateNFTticketComponent(): Promise<MatDialogRef<CreateNFTticketComponent>> {
+  async openCreateNFTticketComponent(): Promise<
+    MatDialogRef<CreateNFTticketComponent>
+  > {
     const { CreateNFTDiloagModule: CreateNFTDiloagModule } = await import(
       './create-nft-diloag.module'
     );
-    return this.matDialog.open(CreateNFTDiloagModule.getCreateNFTticketComponent(), {
-      disableClose: true,
-      panelClass: ['create-nft-dialog-overlay', 'action-dialog'],
-    });
+    return this.matDialog.open(
+      CreateNFTDiloagModule.getCreateNFTticketComponent(),
+      {
+        disableClose: true,
+        panelClass: ['create-nft-dialog-overlay', 'action-dialog'],
+      },
+    );
   }
 
-  async openCreateMembershipComponent(): Promise<MatDialogRef<CreateMembershipComponent>> {
+  async openCreateNFTticketPreviewComponent(): Promise<
+    MatDialogRef<TicketPreviewComponent>
+  > {
     const { CreateNFTDiloagModule: CreateNFTDiloagModule } = await import(
       './create-nft-diloag.module'
     );
-    return this.matDialog.open(CreateNFTDiloagModule.getCreateMembershipComponent(), {
-      disableClose: true,
-      panelClass: ['create-nft-membership-dialog-overlay', 'action-dialog'],
-    });
+    return this.matDialog.open(
+      CreateNFTDiloagModule.getCreateNFTticketPreviewComponent(),
+      {
+        disableClose: true,
+        panelClass: ['create-nft-ticket-preview', 'action-dialog'],
+      },
+    );
   }
 
-  async openCreateNFTOptionsComponent(): Promise<MatDialogRef<CreateNFTOptionsComponent>> {
+  async openCreateMembershipComponent(): Promise<
+    MatDialogRef<CreateMembershipComponent>
+  > {
     const { CreateNFTDiloagModule: CreateNFTDiloagModule } = await import(
       './create-nft-diloag.module'
     );
-    return this.matDialog.open(CreateNFTDiloagModule.getCreateNFTOptionsComponent(), {
-      disableClose: true,
-      panelClass: ['create-nft-options-dialog-overlay', 'action-dialog'],
-    });
+    return this.matDialog.open(
+      CreateNFTDiloagModule.getCreateMembershipComponent(),
+      {
+        disableClose: true,
+        panelClass: ['create-nft-membership-dialog-overlay', 'action-dialog'],
+      },
+    );
   }
 
-  async openCreateNFTticketOptionsComponent(): Promise<MatDialogRef<CreateNFTStyleComponent>> {
+  async openCreateNFTOptionsComponent(): Promise<
+    MatDialogRef<CreateNFTOptionsComponent>
+  > {
     const { CreateNFTDiloagModule: CreateNFTDiloagModule } = await import(
       './create-nft-diloag.module'
     );
-    return this.matDialog.open(CreateNFTDiloagModule.getCreateNFTticketOptionsComponent(), {
-      disableClose: true,
-      panelClass: ['create-nft-style-dialog-overlay', 'action-dialog'],
-    });
+    return this.matDialog.open(
+      CreateNFTDiloagModule.getCreateNFTOptionsComponent(),
+      {
+        disableClose: true,
+        panelClass: ['create-nft-options-dialog-overlay', 'action-dialog'],
+      },
+    );
   }
 
-  async openCreateNFTMembershipOptionsComponent(): Promise<MatDialogRef<CreateNFTMembershipOptionsComponent>> {
+  async openCreateNFTticketOptionsComponent(): Promise<
+    MatDialogRef<CreateNFTStyleComponent>
+  > {
     const { CreateNFTDiloagModule: CreateNFTDiloagModule } = await import(
       './create-nft-diloag.module'
     );
-    return this.matDialog.open(CreateNFTDiloagModule.getCreateNFTMembershipOptionsComponent(), {
-      disableClose: true,
-      panelClass: ['create-nft-style-dialog-overlay', 'action-dialog'],
-    });
+    return this.matDialog.open(
+      CreateNFTDiloagModule.getCreateNFTticketOptionsComponent(),
+      {
+        disableClose: true,
+        panelClass: ['create-nft-style-dialog-overlay', 'action-dialog'],
+      },
+    );
+  }
+
+  async openCreateNFTMembershipOptionsComponent(): Promise<
+    MatDialogRef<CreateNFTMembershipOptionsComponent>
+  > {
+    const { CreateNFTDiloagModule: CreateNFTDiloagModule } = await import(
+      './create-nft-diloag.module'
+    );
+    return this.matDialog.open(
+      CreateNFTDiloagModule.getCreateNFTMembershipOptionsComponent(),
+      {
+        disableClose: true,
+        panelClass: ['create-nft-style-dialog-overlay', 'action-dialog'],
+      },
+    );
   }
 }

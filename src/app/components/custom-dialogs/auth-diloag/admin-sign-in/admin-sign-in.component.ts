@@ -14,10 +14,9 @@ import { ROUTER_UTILS } from './../../../../@core/utils/router.utils';
 @Component({
   selector: 'app-admin-sign-in',
   templateUrl: './admin-sign-in.component.html',
-  styleUrls: ['./admin-sign-in.component.scss']
+  styleUrls: ['./admin-sign-in.component.scss'],
 })
 export class AdminSignInComponent implements OnInit {
-
   @Input() isPage: boolean;
 
   public loginForm: FormGroup;
@@ -30,7 +29,7 @@ export class AdminSignInComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private routeService: RouteService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
   ) {
     this.loginForm = this.formBuilder.group({
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -55,22 +54,23 @@ export class AdminSignInComponent implements OnInit {
       clubName: this.clubName,
     };
 
-  this.authService
-  .adminSignIn(params)
-  .pipe(take(1))
-  .subscribe((res:ApiResponse<SignInResponse>) => {
-    if (!res.hasErrors()) {
-      this.toastr.success(`You're logged in as Admin.`, 'Welcome!')
-      this.customDialogService.closeDialogs();
-      if(this.isPage) {
-        this.router.navigate(['/'+this.clubName + '/' +ROUTER_UTILS.config.admin.root])
-      }
-    } else {
+    this.authService
+      .adminSignIn(params)
+      .pipe(take(1))
+      .subscribe((res: ApiResponse<SignInResponse>) => {
+        if (!res.hasErrors()) {
+          this.toastr.success(`You're logged in as Admin.`, 'Welcome!')
+          if (this.isPage) {
+            this.router.navigate([
+              '/' + this.clubName + '/' + ROUTER_UTILS.config.admin.root,
+            ]).then(() => {
+              this.customDialogService.closeDialogs();
+            });
+          }
+        } else {
           // alert(res?.errors[0]?.error?.message);
-          this.toastr.warning(res?.errors[0]?.error?.message, 'Invalid!' )
+          this.toastr.warning(res?.errors[0]?.error?.message, 'Invalid!');
         }
-        this.customDialogService.closeDialogs();
       });
-    }
-
+  }
 }

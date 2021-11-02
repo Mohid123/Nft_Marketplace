@@ -73,11 +73,18 @@ export class CustomDialogService {
     // });
   }
 
-  async showCreateNFTticketOptionsDialog(img:FormData,form:NFT) {
+  async showCreateNFTticketOptionsDialog() {
     this.matDialog.closeAll();
     this._mapDialogref = await this.createNFTDiloagService.openCreateNFTticketOptionsComponent();
+    // (await this._mapDialogref).afterClosed().subscribe((result) => {
+    //   console.log('Mat Dialog Results admin sign in:', result);
+    // });
+  }
+
+  async showCreateNFTticketPreviewDialog(img) {
+    this.matDialog.closeAll();
+    this._mapDialogref = await this.createNFTDiloagService.openCreateNFTticketPreviewComponent();
     this._mapDialogref.componentInstance.img = img;
-    this._mapDialogref.componentInstance.nftForm = form;
     // (await this._mapDialogref).afterClosed().subscribe((result) => {
     //   console.log('Mat Dialog Results admin sign in:', result);
     // });
