@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NoAdminGuard, NoAuthGuard, UserGuard } from '@app/@core/guards';
+import { NoAuthGuard, UserGuard } from '@app/@core/guards';
 import { ROUTER_UTILS } from '@app/@core/utils/router.utils';
 import { NotFoundModule } from '@app/@shell/ui/not-found/not-found.module';
 import { FooterModule } from '../ui/footer/footer.module';
@@ -35,7 +35,6 @@ const APP_ROUTES: Routes = [
     path: ROUTER_UTILS.config.base.clubName,
     loadChildren: () =>
       import('@pages/home/home.module').then((m) => m.HomeModule),
-    canLoad: [NoAdminGuard],
   },
   {
     path: ROUTER_UTILS.config.base.dashboard,

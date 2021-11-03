@@ -39,7 +39,8 @@ export class MarketplaceSearchComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.formCtrlSub.unsubscribe();
+    if(this.formCtrlSub)
+      this.formCtrlSub.unsubscribe();
   }
 
 

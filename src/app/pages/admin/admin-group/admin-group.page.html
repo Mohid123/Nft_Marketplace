@@ -1,3 +1,4 @@
+<app-admin-header (search)="search($event)"></app-admin-header>
 <ngx-spinner
   bdColor="#171830"
   size="medium"
@@ -81,41 +82,83 @@
     </div>
 
     <div class="flex justify-between w-full">
-      <div class="inline-flex items-center text-gray-500">
-        Show 1-15/100
+      <div *ngIf="(totalCount$ | async) as totalCount ; else noItems" class="inline-flex items-center text-gray-500">
+        Show {{ page === 1 ? 1 : (page-1) * limit }}-{{ page * limit < totalCount ? (page * limit) : totalCount }}/{{totalCount}}
        </div>
+       <ng-template #noItems>
+         <div class="inline-flex items-center text-gray-500">
+           Show 0/0
+         </div>
+       </ng-template>
       <div class="pagination">
-        <button class="h-8 rounded-md icon-btn w-9 bg-primary-600">
-          <svg xmlns="http://www.w3.org/2000/svg" width="17.618" height="11.75" viewBox="0 0 17.618 11.75">
-            <defs>
-              <style>
-                .a {
-                  fill: #fff;
-                  opacity: 0.4;
-                }
-              </style>
-            </defs>
-            <path class="a"
-              d="M14.265,11.477a.8.8,0,0,1,.006,1.126l-3.715,3.727H24.711a.8.8,0,0,1,0,1.591H10.556l3.721,3.727a.805.805,0,0,1-.006,1.126.792.792,0,0,1-1.12-.006L8.108,17.688h0a.893.893,0,0,1-.165-.251.759.759,0,0,1-.061-.306.8.8,0,0,1,.226-.557l5.043-5.079A.78.78,0,0,1,14.265,11.477Z"
-              transform="translate(-7.882 -11.252)" />
-          </svg>
+        <ng-container *ngIf="(totalCount$ | async) as totalCount  ; else noPage">
+          <ng-container *ngIf="totalCount > limit  ; else noPage">
+            <button [disabled]="page < 2" class="h-8 rounded-md icon-btn w-9 bg-primary-600" (click)="previous()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="17.618" height="11.75" viewBox="0 0 17.618 11.75">
+                <defs>
+                  <style>
+                    .a {
+                      fill: #fff;
+                      opacity: 0.4;
+                    }
+                  </style>
+                </defs>
+                <path class="a"
+                  d="M14.265,11.477a.8.8,0,0,1,.006,1.126l-3.715,3.727H24.711a.8.8,0,0,1,0,1.591H10.556l3.721,3.727a.805.805,0,0,1-.006,1.126.792.792,0,0,1-1.12-.006L8.108,17.688h0a.893.893,0,0,1-.165-.251.759.759,0,0,1-.061-.306.8.8,0,0,1,.226-.557l5.043-5.079A.78.78,0,0,1,14.265,11.477Z"
+                  transform="translate(-7.882 -11.252)" />
+              </svg>
 
-        </button>
-        <span>1/8</span>
-        <button class="icon-btn active">
-          <svg xmlns="http://www.w3.org/2000/svg" width="17.618" height="11.75" viewBox="0 0 17.618 11.75">
-            <defs>
-              <style>
-                .a {
-                  fill: #fff;
-                }
-              </style>
-            </defs>
-            <path class="a"
-              d="M19.118,11.477a.8.8,0,0,0-.006,1.126l3.715,3.727H8.671a.8.8,0,0,0,0,1.591H22.826l-3.721,3.727a.805.805,0,0,0,.006,1.126.792.792,0,0,0,1.12-.006l5.043-5.079h0a.893.893,0,0,0,.165-.251.759.759,0,0,0,.061-.306.8.8,0,0,0-.226-.557l-5.043-5.079A.78.78,0,0,0,19.118,11.477Z"
-              transform="translate(-7.882 -11.252)" />
-          </svg>
-        </button>
+            </button>
+            <span>1/{{ (totalCount  / limit + (0.4)) | number:'1.0-0' }}</span>
+            <button [disabled]="totalCount <= page * limit" class="icon-btn active" (click)="next()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="17.618" height="11.75" viewBox="0 0 17.618 11.75">
+                <defs>
+                  <style>
+                    .a {
+                      fill: #fff;
+                    }
+                  </style>
+                </defs>
+                <path class="a"
+                  d="M19.118,11.477a.8.8,0,0,0-.006,1.126l3.715,3.727H8.671a.8.8,0,0,0,0,1.591H22.826l-3.721,3.727a.805.805,0,0,0,.006,1.126.792.792,0,0,0,1.12-.006l5.043-5.079h0a.893.893,0,0,0,.165-.251.759.759,0,0,0,.061-.306.8.8,0,0,0-.226-.557l-5.043-5.079A.78.78,0,0,0,19.118,11.477Z"
+                  transform="translate(-7.882 -11.252)" />
+              </svg>
+            </button>
+          </ng-container>
+        </ng-container>
+        <ng-template #noPage >
+          <button disabled class="h-8 rounded-md icon-btn w-9 bg-primary-600" >
+            <svg xmlns="http://www.w3.org/2000/svg" width="17.618" height="11.75" viewBox="0 0 17.618 11.75">
+              <defs>
+                <style>
+                  .a {
+                    fill: #fff;
+                    opacity: 0.4;
+                  }
+                </style>
+              </defs>
+              <path class="a"
+                d="M14.265,11.477a.8.8,0,0,1,.006,1.126l-3.715,3.727H24.711a.8.8,0,0,1,0,1.591H10.556l3.721,3.727a.805.805,0,0,1-.006,1.126.792.792,0,0,1-1.12-.006L8.108,17.688h0a.893.893,0,0,1-.165-.251.759.759,0,0,1-.061-.306.8.8,0,0,1,.226-.557l5.043-5.079A.78.78,0,0,1,14.265,11.477Z"
+                transform="translate(-7.882 -11.252)" />
+            </svg>
+
+          </button>
+          <span>1/1</span>
+          <button disabled class="icon-btn active">
+            <svg xmlns="http://www.w3.org/2000/svg" width="17.618" height="11.75" viewBox="0 0 17.618 11.75">
+              <defs>
+                <style>
+                  .a {
+                    fill: #fff;
+                  }
+                </style>
+              </defs>
+              <path class="a"
+                d="M19.118,11.477a.8.8,0,0,0-.006,1.126l3.715,3.727H8.671a.8.8,0,0,0,0,1.591H22.826l-3.721,3.727a.805.805,0,0,0,.006,1.126.792.792,0,0,0,1.12-.006l5.043-5.079h0a.893.893,0,0,0,.165-.251.759.759,0,0,0,.061-.306.8.8,0,0,0-.226-.557l-5.043-5.079A.78.78,0,0,0,19.118,11.477Z"
+                transform="translate(-7.882 -11.252)" />
+            </svg>
+          </button>
+        </ng-template>
       </div>
     </div>
   </div>

@@ -30,3 +30,7 @@ button[disabled] {
   background-color: rgb(153, 153, 153) !important;
   background: rgb(153, 153, 153) !important;
 }
+
+mat-dialog-container {
+  position: relative;
+}

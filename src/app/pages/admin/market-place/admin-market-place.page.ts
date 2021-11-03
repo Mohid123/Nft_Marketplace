@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
+import { environment } from '@environments/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { take } from 'rxjs/operators';
 import { NFTList } from './../../../@core/models/NFTList.model';
@@ -17,8 +18,12 @@ export class AdminMarketPlacePage implements OnInit {
   public nftList: NFTList;
   public clubName: string;
 
-  private _page:number;
   private _isLoading:boolean;
+
+  public limit = environment.limit  ;
+  public nftLimit = environment.limit ;
+  public page:number;
+  public searchValu = '';
 
   constructor(
     private customDialogService: CustomDialogService,
@@ -26,7 +31,7 @@ export class AdminMarketPlacePage implements OnInit {
     private routeService: RouteService,
     private spinner: NgxSpinnerService
   ) {
-    this._page = 0;
+    this.page = 1;
     this._isLoading = false;
     this.clubName = this.routeService.clubName;
     this.getNfts();
@@ -41,7 +46,7 @@ export class AdminMarketPlacePage implements OnInit {
 
   getNfts(): void {
     if (this._isLoading) return
-    this.nftService.getAllNftsAdminPanel(this.clubName, this._page++)
+    this.nftService.getAllNftsAdminPanel(this.clubName, this.page, this.searchValu )
       .pipe(take(1))
       .subscribe((result:ApiResponse<NFTList>) => {
         console.log('res:',result);
@@ -52,12 +57,27 @@ export class AdminMarketPlacePage implements OnInit {
           this.nftList = result.data;
         }
         this._isLoading = false;
-
-
       });
   }
 
   createNFT():void {
     this.customDialogService.showCreateNFTOptionsDialog();
   }
+
+  search(searchValu) {
+    this.searchValu = searchValu;
+    this.page = 1;
+    this.getNfts();
+  }
+
+  next():void {
+    this.page++;
+    this.getNfts();
+  }
+
+  previous():void {
+    this.page--;
+    this.getNfts();
+  }
+
 }

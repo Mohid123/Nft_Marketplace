@@ -1,4 +1,4 @@
-<app-layout *ngIf="(isLoggedIn$ | async) && (role$ | async) === roles.admin; else notAuthorized">
+<app-layout *ngIf="(isAdminPanel$ | async) && (isLoggedIn$ | async) && (role$ | async) === roles.admin; else notAuthorized">
   <router-outlet></router-outlet>
 </app-layout>
 
