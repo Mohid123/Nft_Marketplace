@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
+import { take, tap } from 'rxjs/operators';
 import { MediaUpload } from '../models/requests/media-upload.model';
 import { ResponseAddGroupMedia as ResponseAddMedia } from '../models/response-add-media.model';
 import { ApiResponse } from '../models/response.model';
@@ -16,12 +18,17 @@ export class MediaService extends ApiService<uploadMedia> {
   maxWidth = 73; // Max width for the image
   maxHeight = 64;    // Max height for the image
 
-  constructor( protected http: HttpClient) {
+  constructor( protected http: HttpClient,
+    protected toastrService: ToastrService) {
     super(http);
   }
 
   uploadMedia(folderName: string, file:FormData): Observable<ApiResponse<uploadMedia>>{
-    return this.postMedia(`/media-upload/mediaFiles/${folderName}`, file)
+    return this.postMedia(`/media-upload/mediaFiles/${folderName}`, file).pipe(take(1),tap((result:ApiResponse<uploadMedia>)=>{
+      if (result.hasErrors()) {
+        this.toastrService.error(result?.errors[0]?.error?.message)
+      }
+    }))
   }
 
   convertToImg (singlefile :string, fileName:string) :Promise<File | null> {

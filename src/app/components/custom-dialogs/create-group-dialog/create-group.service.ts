@@ -16,7 +16,7 @@ export class CreateGroupService extends AsyncGroupDialog< CreateGroupComponent> 
       './create-group-dialog.module'
     );
     return this.matDialog.open(CreateGroupDialogModule.getCreateGroupComponent(), {
-      disableClose: true,
+      disableClose: false,
       panelClass: ['create-group-dialog-overlay', 'action-dialog'],
     });
   }

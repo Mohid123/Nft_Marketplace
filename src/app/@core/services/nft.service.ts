@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { NFT } from '@app/@core/models/NFT.model';
 import { environment } from '@environments/environment';
+import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { take, tap } from 'rxjs/operators';
 import { GetAllNftsByClub } from '../models/requests/get-all-afts-by-club.model';
 import { getNftsByUserId } from '../models/requests/get-nfts-by-user.model';
 import { getNftsForAdmin } from '../models/requests/get-nfts-for-admin.model';
@@ -38,7 +40,8 @@ export class NFTService extends ApiService<nftApiData> {
 
   constructor(
     protected http: HttpClient,
-    private mediaService: MediaService
+    private mediaService: MediaService,
+    protected toastrService: ToastrService
   ) {
     super(http);
   }
@@ -56,8 +59,11 @@ export class NFTService extends ApiService<nftApiData> {
     if(groupId) {
       param.groupID = groupId;
     }
-
-    return this.get('/nft/getAllNftsByClub', param);
+     return this.get('/nft/getAllNftsByClub', param).pipe(take(1),tap((result:ApiResponse<nftApiData>)=>{
+      if (result.hasErrors()) {
+        this.toastrService.error(result?.errors[0]?.error?.message)
+      }
+    }));
   }
 
   getAllNftsByUser(clubName: string, userId:string ,page: number, searchValue: string ,groupId?:string,type?:string) : Observable<ApiResponse<nftApiData>> {
@@ -74,7 +80,11 @@ export class NFTService extends ApiService<nftApiData> {
       param.groupID = groupId;
     }
 
-    return this.get('/nft/getUserNftsByClub/'+ userId, param);
+    return this.get('/nft/getUserNftsByClub/'+ userId, param).pipe(take(1),tap((result:ApiResponse<nftApiData>)=>{
+      if (result.hasErrors()) {
+        this.toastrService.error(result?.errors[0]?.error?.message)
+      }
+    }));;
   }
 
   getAllNftsAdminPanel (clubName: string, page: number) : Observable<ApiResponse<nftApiData>> {
@@ -84,24 +94,40 @@ export class NFTService extends ApiService<nftApiData> {
       limit: environment.limit,
     };
 
-    return this.get('/nft/getNftsByAppPackageIdForAdminPanel', param);
+    return this.get('/nft/getNftsByAppPackageIdForAdminPanel', param).pipe(take(1),tap((result:ApiResponse<nftApiData>)=>{
+      if (result.hasErrors()) {
+        this.toastrService.error(result?.errors[0]?.error?.message)
+      }
+    }));;
   }
 
   getNft(id: string): Observable<ApiResponse<nftApiData>> {
     const param: any = {
       id: id,
     };
-    return this.get('/nft/getNft/'+ param.id);
+    return this.get('/nft/getNft/'+ param.id).pipe(take(1),tap((result:ApiResponse<nftApiData>)=>{
+      if (result.hasErrors()) {
+        this.toastrService.error(result?.errors[0]?.error?.message)
+      }
+    }));;
   }
 
   getEventsByNft(id: string): Observable<ApiResponse<nftApiData>> {
     const param: any = {
       id: id,
     };
-    return this.get('/event/getEventByNftId/'+ param.id);
+    return this.get('/event/getEventByNftId/'+ param.id).pipe(take(1),tap((result:ApiResponse<nftApiData>)=>{
+      if (result.hasErrors()) {
+        this.toastrService.error(result?.errors[0]?.error?.message)
+      }
+    }));
   }
 
   addNft(params: NFT): Observable<ApiResponse<nftApiData>>{
-    return this.post('/nft/addNft', params)
+    return this.post('/nft/addNft', params).pipe(take(1),tap((result:ApiResponse<nftApiData>)=>{
+      if (result.hasErrors()) {
+        this.toastrService.error(result?.errors[0]?.error?.message)
+      }
+    }));
   }
 }
