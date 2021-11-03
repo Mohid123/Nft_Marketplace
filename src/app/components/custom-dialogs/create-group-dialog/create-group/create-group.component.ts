@@ -4,11 +4,13 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ResponseAddGroupMedia } from '@app/@core/models/response-add-media.model';
 import { MediaService } from '@app/@core/services/media.service';
+import { RouteService } from '@app/@core/services/route.service';
 import { AuthService } from '@app/pages/auth/services/auth.service';
 import * as htmlToImage from 'html-to-image';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { of } from 'rxjs';
-import { exhaustMap, take } from 'rxjs/operators';
+import { of, Subject } from 'rxjs';
+import { distinctUntilChanged, exhaustMap, take, takeUntil } from 'rxjs/operators';
 import { AddGroup } from './../../../../@core/models/requests/add-group.model';
 import { ApiResponse } from './../../../../@core/models/response.model';
 import { CustomDialogService } from './../../../../@core/services/custom-dialog/custom-dialog.service';
@@ -21,9 +23,16 @@ import { GroupService } from './../../../../@core/services/group.service';
   styleUrls: ['./create-group.component.scss']
 })
 export class CreateGroupComponent {
-
+  destroy$ = new Subject();
   public groupForm: FormGroup;
   public imgFormData = new FormData();
+
+  private _page:number;
+  private _isLoading:boolean;
+  public clubName: string;
+  public groups$ = this.groupService.groups$;
+  public limit = 6 ;
+
 
   constructor(
     private authService: AuthService,
@@ -33,16 +42,26 @@ export class CreateGroupComponent {
     private mediaService: MediaService,
     protected http: HttpClient,
     private toastr: ToastrService,
-    private cf: ChangeDetectorRef
+    private cf: ChangeDetectorRef,
+    private spinner: NgxSpinnerService,
+    private routeService: RouteService
   ) {
     this.groupForm = this.formBuilder.group({
       name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(7)]),
       description: new FormControl('', [ Validators.required, Validators.minLength(3), Validators.maxLength(100) ]),
       file: new FormControl(''),
     });
+
+    this._page = 0;
+    this._isLoading = false;
+    this.routeService.clubName$.pipe(distinctUntilChanged(), takeUntil(this.destroy$))
+    .subscribe((clubName) => {
+      this.clubName = clubName;
+    });;
   }
 
   addGroup():void {
+
     const node = document.getElementById('group-img');
     htmlToImage
       .toPng(node, {
@@ -86,9 +105,18 @@ export class CreateGroupComponent {
             }),
           ).subscribe((res:any) => {
             if (res !== null) {
+              this.spinner.show()
               this.cf.detectChanges();
               this.close();
+
               this.toastr.success('New group successfully added.', 'Success!');
+
+
+                this.groupService.getAllGroupsByClub(this.clubName, this._page++, this.limit);
+                  setTimeout(() => {
+                  this.spinner.hide();
+                  }, 500);
+
 
             } else {
               this.toastr.warning(res.errors[0]?.error?.message, 'Error!');
@@ -101,6 +129,9 @@ export class CreateGroupComponent {
       });
 
   }
+
+
+
 
   close():void {
     this.customDialogService.closeDialogs();

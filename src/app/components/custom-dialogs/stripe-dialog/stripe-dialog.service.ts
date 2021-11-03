@@ -18,7 +18,7 @@ export class StripeDialogService extends AsyncStripeDialog< StripeKeyComponent |
       './stripe-dialog.module'
     );
     return this.matDialog.open(StripeDialogModule.getStripeKeyComponent(), {
-      disableClose: true,
+      disableClose: false,
       panelClass: ['strip-key-dialog-overlay', 'action-dialog'],
     });
   }
@@ -28,7 +28,7 @@ export class StripeDialogService extends AsyncStripeDialog< StripeKeyComponent |
       './stripe-dialog.module'
     );
     return this.matDialog.open(StripeDialogModule.getStripePaymentComponent(), {
-      disableClose: true,
+      disableClose: false,
       panelClass: ['strip-payment-dialog-overlay', 'action-dialog'],
     });
   }

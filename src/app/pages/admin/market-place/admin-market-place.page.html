@@ -1,3 +1,4 @@
+<app-admin-header (search)="search($event)"></app-admin-header>
 <ngx-spinner
   bdColor="#171830"
   size="medium"
@@ -56,7 +57,7 @@
       </div>
     </div>
 
-    <div class="cards-container">
+    <div class="cards-container" style="min-height: 360px;">
       <ng-container *ngIf="nftList && nftList.totalCount > 0">
         <ng-container *ngFor="let nftCard of nftList.data" class="">
           <app-nft-card [nft]="nftCard"></app-nft-card>
@@ -65,7 +66,7 @@
     </div>
     <div class="flex justify-end w-full">
       <div class="pagination">
-        <button class="h-8 rounded-md icon-btn w-9 bg-primary-600">
+        <button [disabled]="page < 2" class="h-8 rounded-md icon-btn w-9 bg-primary-600" (click)="previous()">
           <svg xmlns="http://www.w3.org/2000/svg" width="17.618" height="11.75" viewBox="0 0 17.618 11.75">
             <defs>
               <style>
@@ -81,8 +82,14 @@
           </svg>
 
         </button>
-        <span>1/8</span>
-        <button class="icon-btn active">
+        <ng-container *ngIf="nftList?.totalCount > limit  ; else noPage">
+          <span>{{ page }} / {{ (nftList?.totalCount  / limit) + (0.4) | number:'1.0-0' }}</span>
+        </ng-container>
+        <ng-template #noPage >
+          <span>1/1</span>
+        </ng-template>
+
+        <button [disabled]="(nftList?.totalCount / limit) <= page" class="icon-btn active"  (click)="next()">
           <svg xmlns="http://www.w3.org/2000/svg" width="17.618" height="11.75" viewBox="0 0 17.618 11.75">
             <defs>
               <style>

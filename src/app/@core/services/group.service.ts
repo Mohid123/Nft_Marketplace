@@ -33,12 +33,14 @@ export class GroupService extends ApiService<groupApiData> {
     super(http);
   }
 
-  getAllGroupsByClub(clubName: string, page: number, limit?: number): void {
+  getAllGroupsByClub(clubName: string, page: number, limit?: number,searchValue?: string): void {
+    page--;
     this.limit = limit;
     const param: GetAllNftsByClub = {
       clubName: clubName,
       offset: page ? (this.limit || environment.limit) * page : 0,
       limit: this.limit || environment.limit,
+      name: searchValue,
     };
     this.get('/group/getAllGroupsByAppPackageId',param)
     .pipe(take(1),tap((result:ApiResponse<ResponseGroupsByClub>)=> {
@@ -66,14 +68,12 @@ export class GroupService extends ApiService<groupApiData> {
   }
 
   addGroups(param:AddGroup): Observable<ApiResponse<groupApiData>> {
-    return this.post('/group/addGroup',param).pipe(tap((result:ApiResponse<ResponseGroupsByClub>)=> {
+    return this.post('/group/addGroup',param).pipe(tap((result:ApiResponse<Group>)=> {
       if (!result.hasErrors()) {
-        this._totalCount$.next(result.data.totalCount);
+        this._totalCount$.next(this._totalCount$.getValue()+1);
         if(this._groups$.getValue().length < this.limit) {
           const group: Array<Group> = this._groups$.getValue();
-          console.log('group:',group);
-          console.log('result.data.data:',result.data.data);
-          this._groups$.next([...group,...result.data.data])
+          this._groups$.next([result.data,...group])
         }
       } else {
         this.toastrService.error(result?.errors[0]?.error?.message)

@@ -14,7 +14,8 @@
       <ng-container *ngFor="let nftEvent of responseEventByNFT.data">
         <tr class="items-center h-24 ">
           <td  style="color: #64F3FF; " >
-           {{nftEvent.tokenId}}
+
+           <a href="{{nftEvent?.transactionUrl}}" target=_blank> {{nftEvent?.tokenId}}</a>
           </td>
           <td >
             {{nftEvent.eventType}}

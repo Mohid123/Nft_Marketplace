@@ -9,6 +9,7 @@ import { ResponseEventByNFT } from './../../../@core/models/response-events-by-n
 export class HistoryComponent {
 
   @Input() responseEventByNFT:ResponseEventByNFT;
+  // @Input() nft:NFT;
 
   calculateDiff(createdAt){
     const currentDate = new Date();

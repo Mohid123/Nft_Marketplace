@@ -17,7 +17,7 @@ export class AuthDialogService extends AsyncAuthDialog<UserSignInComponent | Adm
       './../auth-diloag/auth-diloag.module'
     );
     return this.matDialog.open(AuthDialogModule.getUserSignInComponent(), {
-      disableClose: true,
+      disableClose: false,
       panelClass: ['user-sign-in-dialog-overlay', 'action-dialog'],
     });
   }

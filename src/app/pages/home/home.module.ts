@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { MatMenuModule } from '@angular/material/menu';
 import { RouterModule, Routes } from '@angular/router';
-import { NoAdminGuard, UserGuard } from '@app/@core/guards';
+import { UserGuard } from '@app/@core/guards';
 import { ROUTER_UTILS } from '@app/@core/utils/router.utils';
 import { AppBannerModule } from '@app/@shell/ui/app-banner/app-banner.module';
 import { CardDetailsModule } from '@app/@shell/ui/card-details/card-details.module';
@@ -10,6 +10,7 @@ import { HistoryModule } from '@app/@shell/ui/history/history.module';
 import { MarketplaceSearchModule } from '@app/@shell/ui/marketplace-search/marketplace-search.module';
 import { QrCodeModule } from 'ng-qrcode';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { AuthGuard } from './../../@core/guards/auth.guard';
 import { LoggedInUserSearchModule } from './../../@shell/ui/logged-in-user-search/logged-in-user-search.module';
 import { CardModule } from './../../@shell/ui/nft-card/card.module';
 import { CardDetailPage } from './card-detail/card-detail.page';
@@ -26,8 +27,7 @@ const childRoutes: Routes = [
       title: 'NFT Market Place',
       description: 'NFT Market Place Description',
       robots: 'index, follow',
-    },
-    canActivate: [NoAdminGuard],
+    }
   },
   {
     path: ROUTER_UTILS.config.base.detail + '/:nftId',
@@ -66,7 +66,7 @@ const childRoutes: Routes = [
       description: 'NFT Wallet Description',
       robots: 'index, follow',
     },
-    canActivate: [UserGuard],
+    canLoad: [AuthGuard],
   },
 ];
 

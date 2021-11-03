@@ -33,7 +33,7 @@ export class CreateNFTDiloagService extends AsyncCreateNFTDialog<
     return this.matDialog.open(
       CreateNFTDiloagModule.getCreateNFTticketComponent(),
       {
-        disableClose: true,
+        disableClose: false,
         panelClass: ['create-nft-dialog-overlay', 'action-dialog'],
       },
     );
@@ -48,7 +48,7 @@ export class CreateNFTDiloagService extends AsyncCreateNFTDialog<
     return this.matDialog.open(
       CreateNFTDiloagModule.getCreateNFTticketPreviewComponent(),
       {
-        disableClose: true,
+        disableClose: false,
         panelClass: ['create-nft-ticket-preview', 'action-dialog'],
       },
     );
@@ -63,7 +63,7 @@ export class CreateNFTDiloagService extends AsyncCreateNFTDialog<
     return this.matDialog.open(
       CreateNFTDiloagModule.getCreateMembershipComponent(),
       {
-        disableClose: true,
+        disableClose: false,
         panelClass: ['create-nft-membership-dialog-overlay', 'action-dialog'],
       },
     );
@@ -78,7 +78,7 @@ export class CreateNFTDiloagService extends AsyncCreateNFTDialog<
     return this.matDialog.open(
       CreateNFTDiloagModule.getCreateNFTOptionsComponent(),
       {
-        disableClose: true,
+        disableClose: false,
         panelClass: ['create-nft-options-dialog-overlay', 'action-dialog'],
       },
     );
@@ -93,7 +93,7 @@ export class CreateNFTDiloagService extends AsyncCreateNFTDialog<
     return this.matDialog.open(
       CreateNFTDiloagModule.getCreateNFTticketOptionsComponent(),
       {
-        disableClose: true,
+        disableClose: false,
         panelClass: ['create-nft-style-dialog-overlay', 'action-dialog'],
       },
     );
@@ -108,7 +108,7 @@ export class CreateNFTDiloagService extends AsyncCreateNFTDialog<
     return this.matDialog.open(
       CreateNFTDiloagModule.getCreateNFTMembershipOptionsComponent(),
       {
-        disableClose: true,
+        disableClose: false,
         panelClass: ['create-nft-style-dialog-overlay', 'action-dialog'],
       },
     );

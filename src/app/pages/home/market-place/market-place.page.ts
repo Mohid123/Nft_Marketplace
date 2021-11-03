@@ -43,8 +43,11 @@ export class MarketPlacePage implements OnInit {
   ) {
     this.page = 1;
     this._isLoading = false;
-    this.clubName = this.routeService.clubName;
-    this.getNfts();
+    this.routeService.clubName$.subscribe((clubName) => {
+      this.clubName = clubName;
+      if(this.clubName)
+        this.getNfts();
+    });
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function

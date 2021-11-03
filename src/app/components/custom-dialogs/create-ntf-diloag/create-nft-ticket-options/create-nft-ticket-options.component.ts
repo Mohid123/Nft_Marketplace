@@ -43,7 +43,7 @@ export class CreateNFTStyleComponent {
           if (!res.hasErrors()) {
               this.nftForm.serverCaptureFileUrl = res.data.url,
               this.nftForm.path = res.data.path,
-              this.nftForm.price = this.price;
+              this.nftForm.price = String(this.price);
               this.nftForm.numberOfCopies = +this.copy;
               return this.nftService.addNft(this.nftForm);
           } else {
