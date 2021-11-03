@@ -3,7 +3,7 @@
     <!-- <input class="flex w-full h-12 px-5 text-sm bg-gray-500 bg-opacity-25 rounded-lg focus:bg-white focus:outline-none"
     type="search" name="search" placeholder="Search"  /> -->
     <div class="relative">
-      <input type="text" class="flex w-full h-12 px-5 text-sm bg-gray-500 bg-opacity-25 rounded-lg focus:bg-white focus:outline-none focus:text-black" placeholder="Search...">
+      <input [formControl]="searchControl" type="text" class="flex w-full h-12 px-5 text-sm bg-gray-500 bg-opacity-25 rounded-lg focus:bg-white focus:outline-none focus:text-black" placeholder="Search...">
        <div class="absolute inset-y-0 flex items-center right-4 md:right-4 lg:right-4 ">  <span  class=" focus:outline-none focus:shadow-outline">
          <img class="h-4" src="./assets/icons/search.svg" alt="">
        </span>

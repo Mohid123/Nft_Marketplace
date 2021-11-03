@@ -24,6 +24,7 @@ export class NftCardComponent implements OnDestroy {
   isLoggedIn$: Observable<boolean> = this.authService.isLoggedIn$;
   loggedInUser$: Observable<LoggedInUser> = this.authService.loggedInUser$;
   role$: Observable<ROLE_TYPE_UTILS> = this.authService.role$;
+  isAdminPanel$: Observable<boolean> = this.routeService.isAdminPanel$;
 
   constructor(
     private routeService: RouteService,

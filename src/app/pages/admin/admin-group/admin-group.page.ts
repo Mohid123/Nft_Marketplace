@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
@@ -12,16 +12,19 @@ import { RouteService } from './../../../@core/services/route.service';
   templateUrl: './admin-group.page.html',
   styleUrls: ['./admin-group.page.scss'],
 })
-export class AdminGroupPage implements OnInit, OnDestroy {
+export class AdminGroupPage implements OnDestroy {
 
   destroy$ = new Subject();
 
-  private _page:number;
   private _isLoading:boolean;
 
   public clubName: string;
   public groups$ = this.groupService.groups$;
+  public totalCount$ = this.groupService.totalCount$;
   public limit = 6 ;
+
+  public page:number;
+  public searchValu = '';
 
   constructor(
     private customDialogService: CustomDialogService,
@@ -31,26 +34,19 @@ export class AdminGroupPage implements OnInit, OnDestroy {
     private toastr: ToastrService,
     private cf: ChangeDetectorRef
   ) {
-    this._page = 0;
+    this.page = 1;
     this._isLoading = false;
+    this.spinner.show();
     this.routeService.clubName$.pipe(distinctUntilChanged(), takeUntil(this.destroy$))
     .subscribe((clubName) => {
       this.clubName = clubName;
-    });;
-  }
-
-  ngOnInit(): void
-  {
-
-      this.spinner.show();
       this.getGroup();
-
-
+    });
   }
 
-  getGroup(){
+  getGroup(): void {
     if (this._isLoading) return
-    this.groupService.getAllGroupsByClub(this.clubName, this._page++, this.limit);
+    this.groupService.getAllGroupsByClub(this.clubName, this.page, this.limit,this.searchValu);
       setTimeout(() => {
       this.spinner.hide();
       }, 500);
@@ -58,19 +54,37 @@ export class AdminGroupPage implements OnInit, OnDestroy {
 
   deleteGroup(group){
     this.spinner.show();
-    this.groupService.deleteGroups(group.id).subscribe(data=>{
-      this.cf.detectChanges();
-      this.toastr.success('Group successfully deleted.', 'Success!');
-      setTimeout(()=>{
-        this.spinner.hide();
-      })
-      this.getGroup();
-
+    this.groupService.deleteGroups(group.id).subscribe((data) => {
+      if (!data.hasErrors()) {
+        this.cf.detectChanges();
+        this.toastr.success('Group successfully deleted.', 'Success!');
+        this.getGroup();
+        setTimeout(() => {
+          this.spinner.hide();
+        });
+      }
     });
   }
 
-  newGroup() {
+  newGroup(): void {
     this.customDialogService.showCreateGroupDialog();
+  }
+
+  search(searchValu):void {
+    this.searchValu = searchValu;
+    this.page = 1;
+    console.log('lajkdlkasj:',searchValu);
+    this.getGroup();
+  }
+
+  next():void {
+    this.page++;
+    this.getGroup();
+  }
+
+  previous():void {
+    this.page--;
+    this.getGroup();
   }
 
   ngOnDestroy(): void {

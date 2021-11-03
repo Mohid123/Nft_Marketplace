@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
-import { getItem, StorageItem } from '@app/@core/utils';
 import { AuthService } from '@app/pages/auth/services/auth.service';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
@@ -93,8 +92,5 @@ export class AdminDashboardPage implements AfterViewInit {
     this.lineChartColors[0].backgroundColor = gradient;
     this.lineChartColors[0].borderColor = gradient;
 
-    if(this.authService.isLoggedIn && !getItem(StorageItem.Key)) {
-      this.customDialogService.showStripeKeyDialog();
-    }
   }
 }

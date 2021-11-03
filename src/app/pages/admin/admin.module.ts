@@ -5,6 +5,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { ChartsModule } from 'ng2-charts';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
+import { AdminHeaderModule } from './../../@shell/ui/admin-header/admin-header.module';
 import { CardModule } from './../../@shell/ui/nft-card/card.module';
 import { AdminDashboardPage } from './admin-dashboard/admin-dashboard.page';
 import { AdminGroupPage } from './admin-group/admin-group.page';
@@ -22,6 +23,7 @@ import { AdminMarketPlacePage } from './market-place/admin-market-place.page';
   imports: [
     CommonModule,
     AdminRoutingModule,
+    AdminHeaderModule,
     ChartsModule,
     CardModule,
     MatIconModule,
