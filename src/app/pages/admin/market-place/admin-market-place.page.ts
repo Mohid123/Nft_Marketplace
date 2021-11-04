@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TooltipPosition } from '@angular/material/tooltip';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { environment } from '@environments/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -24,6 +25,9 @@ export class AdminMarketPlacePage implements OnInit {
   public nftLimit = environment.limit ;
   public page:number;
   public searchValu = '';
+
+  positionOptions: TooltipPosition[] = ['below', 'above', 'left', 'right'];
+
 
   constructor(
     private customDialogService: CustomDialogService,
