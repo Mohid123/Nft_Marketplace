@@ -35,7 +35,7 @@ export class CreateNFTticketComponent {
   public url: string;
 
   public clubName: string;
-  public limit = 6;
+  public limit = 100;
 
   private _page: number;
   private _isLoading: boolean;

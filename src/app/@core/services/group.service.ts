@@ -40,7 +40,7 @@ export class GroupService extends ApiService<groupApiData> {
       clubName: clubName,
       offset: page ? (this.limit || environment.limit) * page : 0,
       limit: this.limit || environment.limit,
-      name: searchValue,
+      name: searchValue || '',
     };
     this.get('/group/getAllGroupsByAppPackageId',param)
     .pipe(take(1),tap((result:ApiResponse<ResponseGroupsByClub>)=> {
