@@ -8,7 +8,7 @@
       </svg>
     </button> -->
   </div>
-  <img style="max-height: 90px;" class="logo object-scale-down" [alt]="(Creator$ | async)?.displayName" [src]="(Creator$ | async)?.coverImageURL">
+  <img style="max-height: 90px;" class="object-scale-down logo" [alt]="(Creator$ | async)?.displayName" [src]="(Creator$ | async)?.profileImageURL">
   <form  [formGroup]="loginForm" class="sign-in-form">
       <label for="email" class="font-normal">Username</label>
       <div class="relative w-full text-gray-600 focus-within:text-gray-800">
