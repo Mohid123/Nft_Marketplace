@@ -39,13 +39,13 @@ export class AdminMarketPlacePage implements OnInit {
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   ngOnInit(): void {
-    this.spinner.show();
     console.log('market palce:');
     // this.nftService.getNft('');
   }
 
   getNfts(): void {
     if (this._isLoading) return
+    this.spinner.show();
     this.nftService.getAllNftsAdminPanel(this.clubName, this.page, this.searchValu )
       .pipe(take(1))
       .subscribe((result:ApiResponse<NFTList>) => {

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CreatorService } from '@app/@core/services/creator.service';
 import { AuthService } from '@app/pages/auth/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
@@ -23,8 +24,11 @@ export class AdminSignInComponent implements OnInit {
   public passwordHide: boolean;
   public clubName: string;
 
+  public Creator$ = this.creatorService.Creator$;
+
   constructor(
     private authService: AuthService,
+    private creatorService: CreatorService,
     private customDialogService: CustomDialogService,
     private formBuilder: FormBuilder,
     private router: Router,

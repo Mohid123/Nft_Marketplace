@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NoAuthGuard, UserGuard } from '@app/@core/guards';
+import { CreatorResolver } from '@app/@core/services/creator-resolver.service';
 import { ROUTER_UTILS } from '@app/@core/utils/router.utils';
 import { NotFoundModule } from '@app/@shell/ui/not-found/not-found.module';
 import { FooterModule } from '../ui/footer/footer.module';
@@ -18,23 +19,27 @@ const APP_ROUTES: Routes = [
     component: NotFoundPage,
   },
   {
-    path:
-      ROUTER_UTILS.config.base.clubName + '/' + ROUTER_UTILS.config.auth.root,
-    loadChildren: () =>
-      import('@pages/auth/auth.module').then((m) => m.AuthModule),
-    canLoad: [NoAuthGuard],
-  },
-  {
-    path:
-      ROUTER_UTILS.config.base.clubName + '/' + ROUTER_UTILS.config.admin.root,
-    loadChildren: () =>
-      import('@pages/admin/admin.module').then((m) => m.AdminModule),
-    canLoad: [AdminGuard],
-  },
-  {
     path: ROUTER_UTILS.config.base.clubName,
-    loadChildren: () =>
-      import('@pages/home/home.module').then((m) => m.HomeModule),
+    resolve: { creator : CreatorResolver},
+    children: [
+      {
+        path: ROUTER_UTILS.config.auth.root,
+        loadChildren: () =>
+          import('@pages/auth/auth.module').then((m) => m.AuthModule),
+        canLoad: [NoAuthGuard],
+      },
+      {
+        path: ROUTER_UTILS.config.admin.root,
+        loadChildren: () =>
+          import('@pages/admin/admin.module').then((m) => m.AdminModule),
+        canLoad: [AdminGuard],
+      },
+      {
+        path: '' ,
+        loadChildren: () =>
+          import('@pages/home/home.module').then((m) => m.HomeModule),
+      },
+    ]
   },
   {
     path: ROUTER_UTILS.config.base.dashboard,
@@ -74,11 +79,7 @@ const APP_ROUTES: Routes = [
     HeaderModule,
     LayoutModule,
     NotFoundModule,
-
-
-
   ],
-
   exports: [
     RouterModule,
     FooterModule,
@@ -87,5 +88,8 @@ const APP_ROUTES: Routes = [
     LayoutModule,
     NotFoundModule,
   ],
+  providers: [
+    CreatorResolver
+  ]
 })
 export class WebShellModule {}
