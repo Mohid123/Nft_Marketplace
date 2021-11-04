@@ -2,6 +2,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
+import { CreatorService } from '@app/@core/services/creator.service';
 import { ROUTER_UTILS } from '@app/@core/utils/router.utils';
 import { Subject } from 'rxjs';
 import { delay, distinctUntilChanged, takeUntil } from 'rxjs/operators';
@@ -23,8 +24,11 @@ export class LayoutComponent implements AfterViewInit, OnDestroy {
   adminRouteUrl = ROUTER_UTILS.config.admin;
   clubName = '';
 
+  creator$ = this.creatorService.Creator$;
+
   constructor(
     private authService: AuthService,
+    private creatorService: CreatorService,
     private observer: BreakpointObserver,
     private router: Router,
     private routeService: RouteService,

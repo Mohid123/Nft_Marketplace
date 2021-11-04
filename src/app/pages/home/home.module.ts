@@ -66,7 +66,7 @@ const childRoutes: Routes = [
       description: 'NFT Wallet Description',
       robots: 'index, follow',
     },
-    canLoad: [AuthGuard],
+    canActivate: [AuthGuard],
   },
 ];
 

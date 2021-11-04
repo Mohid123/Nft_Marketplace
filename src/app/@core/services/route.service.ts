@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivationStart, NavigationEnd, Router } from '@angular/router';
 import { getItem, setItem, StorageItem } from '@app/@core/utils';
 import { AuthService } from '@app/pages/auth/services/auth.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { debounce, distinctUntilChanged, filter } from 'rxjs/operators';
 import { RouterState } from './../models/routerState.model';
@@ -30,13 +31,19 @@ export class RouteService {
 
   constructor(
     private authService: AuthService,
+    private spinnerService: NgxSpinnerService,
     private router: Router,
   ) {
     this.clubName$.pipe(distinctUntilChanged()).subscribe(clubName => {
       console.log('club name:',clubName);
       this.authService.clubChanged(clubName);
       setItem(StorageItem.Club, clubName);
-    })
+    });
+
+    // this.navEnd$.subscribe(()=> {
+    //   console.log('navEnda:');
+    //   this.spinnerService.hide();
+    // })
   }
 
   get routerState(): RouterState {
@@ -53,10 +60,17 @@ export class RouteService {
 
  listenToRouter():void {
    console.log('this.rout:',this.router);
-    this.router.events.pipe(
+  //  this.router.events
+  //    .pipe(filter((event) => event instanceof ActivationStart))
+  //    .subscribe((event: any) => {
+  //      console.log('ActivationStart:');
+  //     });
+
+      this.router.events.pipe(
         filter((event) => event instanceof ActivationStart),
         debounce(() => this.navEnd$)
-      ).subscribe((event: any) => {
+        ).subscribe((event: any) => {
+        this.spinnerService.show();
         let route = event.snapshot;
         const path: any[] = [];
         const { params, queryParams, data } = route;
@@ -84,6 +98,7 @@ export class RouteService {
           data,
           path: path.reverse().join('/'),
         });
+        this.spinnerService.hide();
       });
   }
 }
