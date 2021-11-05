@@ -2,6 +2,7 @@
 /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { CreatorService } from '@app/@core/services/creator.service';
 import { AuthService } from '@app/pages/auth/services/auth.service';
 import { Observable, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
@@ -18,12 +19,14 @@ export class MarketplaceSearchComponent implements OnInit, OnDestroy {
   public searchStr = '';
 
   isLoggedIn$: Observable<boolean> = this.authService.isLoggedIn$;
+  creator$ = this.creatorService.Creator$;
 
   searchControl = new FormControl();
   formCtrlSub: Subscription;
 
   constructor(
     private authService: AuthService,
+    private creatorService: CreatorService,
     private customDialogService: CustomDialogService,
   ) { }
 

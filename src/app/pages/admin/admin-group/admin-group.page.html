@@ -1,12 +1,5 @@
 <app-admin-header (search)="search($event)"></app-admin-header>
-<ngx-spinner
-  bdColor="#171830"
-  size="medium"
-  color="#fff"
-  type="ball-scale-multiple"
->
-  <p style="font-size: 20px; color: white">Nodechain...</p>
-</ngx-spinner>
+
 <div class="flex flex-col justify-start h-auto min-h-screen px-3 py-2 mt-10 mb-12 sm:px-6 xl:px-8 center">
   <div class="flex items-center justify-between w-full h-12 py-px">
     <h1 class="h-auto m-0 text-2xl font-medium">Groups</h1>
@@ -16,8 +9,8 @@
   </div>
   <div class="w-full">
     <div class="mt-6 has-tooltip">
-      <span class="p-1 -mt-10 text-4xl text-red-500 rounded shadow-lg bg-primary-400 tooltip"> <span style="color: #73BFD6 ">Coming </span> <span style="color: #75F36B">Soon...</span></span>
-      <div class="filters ">
+      <!-- <span class="p-1 -mt-10 text-4xl text-red-500 rounded shadow-lg bg-primary-400 tooltip"> <span style="color: #73BFD6 ">Coming </span> <span style="color: #75F36B">Soon...</span></span> -->
+      <div class="opacity-25 filters" matTooltip="Coming soon.." matTooltipClass="tooltips" matTooltipPosition="right" >
         <div class="filter">
           <button mat-icon-button aria-label="menu">
             <span><mat-icon>filter_alt</mat-icon></span>

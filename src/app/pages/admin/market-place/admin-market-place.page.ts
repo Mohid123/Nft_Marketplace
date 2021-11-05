@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TooltipPosition } from '@angular/material/tooltip';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { environment } from '@environments/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -25,6 +26,9 @@ export class AdminMarketPlacePage implements OnInit {
   public page:number;
   public searchValu = '';
 
+  positionOptions: TooltipPosition[] = ['below', 'above', 'left', 'right'];
+
+
   constructor(
     private customDialogService: CustomDialogService,
     private nftService: NFTService,
@@ -39,13 +43,13 @@ export class AdminMarketPlacePage implements OnInit {
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   ngOnInit(): void {
-    this.spinner.show();
     console.log('market palce:');
     // this.nftService.getNft('');
   }
 
   getNfts(): void {
     if (this._isLoading) return
+    this.spinner.show();
     this.nftService.getAllNftsAdminPanel(this.clubName, this.page, this.searchValu )
       .pipe(take(1))
       .subscribe((result:ApiResponse<NFTList>) => {

@@ -51,4 +51,10 @@
   @apply visible z-50 ;
 }
 
+::ng-deep .mat-tooltip.tooltips {
+  background-color: #32354e !important;
+  font-size: 24px !important;
+}
+
+
 

@@ -27,11 +27,13 @@ export class CreateGroupComponent {
   public groupForm: FormGroup;
   public imgFormData = new FormData();
 
-  private _page:number;
+
   private _isLoading:boolean;
   public clubName: string;
   public groups$ = this.groupService.groups$;
   public limit = 6 ;
+  public page:number;
+  public searchValu = '';
 
 
   constructor(
@@ -52,12 +54,22 @@ export class CreateGroupComponent {
       file: new FormControl(''),
     });
 
-    this._page = 0;
+    this.page = 1;
     this._isLoading = false;
     this.routeService.clubName$.pipe(distinctUntilChanged(), takeUntil(this.destroy$))
     .subscribe((clubName) => {
       this.clubName = clubName;
+      this.getGroup();
     });;
+  }
+
+
+  getGroup(): void {
+    if (this._isLoading) return
+    this.groupService.getAllGroupsByClub(this.clubName, this.page, this.limit,this.searchValu);
+      setTimeout(() => {
+      this.spinner.hide();
+      }, 500);
   }
 
   addGroup():void {
@@ -108,16 +120,8 @@ export class CreateGroupComponent {
               this.spinner.show()
               this.cf.detectChanges();
               this.close();
-
               this.toastr.success('New group successfully added.', 'Success!');
-
-
-                this.groupService.getAllGroupsByClub(this.clubName, this._page++, this.limit);
-                  setTimeout(() => {
-                  this.spinner.hide();
-                  }, 500);
-
-
+              this.getGroup()
             } else {
               this.toastr.warning(res.errors[0]?.error?.message, 'Error!');
               // alert('error :' + res.errors[0]?.error?.message);

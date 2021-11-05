@@ -7,6 +7,7 @@ import { AuthDialogService } from '@app/components/custom-dialogs/auth-diloag/au
 import { AuthService } from '@app/pages/auth/services/auth.service';
 import { CreateGroupService } from './../../../components/custom-dialogs/create-group-dialog/create-group.service';
 import { CreateNFTDiloagService } from './../../../components/custom-dialogs/create-ntf-diloag/create-nft-diloag.service';
+import { LoadingDialogService } from './../../../components/custom-dialogs/loading-dialog/loading-dialog/loading-dialog.service';
 import { StripeDialogService } from './../../../components/custom-dialogs/stripe-dialog/stripe-dialog.service';
 
 @Injectable({
@@ -22,6 +23,7 @@ export class CustomDialogService {
     private authDialogService: AuthDialogService,
     private createNFTDiloagService: CreateNFTDiloagService,
     private createGroupService: CreateGroupService,
+    private loadingDialogService: LoadingDialogService,
     private stripeDialogService: StripeDialogService,
     public matDialog: MatDialog
   ) {}
@@ -117,6 +119,11 @@ export class CustomDialogService {
     } else {
       this.showUserSignInDialog();
     }
+  }
+
+  async showLoadingDialog() {
+    this.matDialog.closeAll();
+    this._mapDialogref = await this.loadingDialogService.getLoadingDialogComponent();
   }
 
   closeDialogs() {

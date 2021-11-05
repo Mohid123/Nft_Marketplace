@@ -62,16 +62,17 @@ export class AuthService extends ApiService<AuthApiData> {
     return this.post('/auth/loginForNftPanel', params).pipe(
       tap((result: ApiResponse<SignInResponse>) => {
         if (!result.hasErrors()) {
-          setItem(StorageItem.Role, ROLE_TYPE_UTILS.user);
+          const role = result?.data?.user.admin ? ROLE_TYPE_UTILS.admin : ROLE_TYPE_UTILS.user;
+          setItem(StorageItem.Role, role);
           setItem(StorageItem.User, result?.data?.user || null);
           setItem(StorageItem.LoggedInUser, result?.data?.loggedInUser || null);
           setItem(StorageItem.JwtToken, result?.data?.nftJwtToken?.access_token || null);
           setItem(StorageItem.ActiveClub, params.clubName);
-          setItem(StorageItem.LastRole, ROLE_TYPE_UTILS.user);
+          setItem(StorageItem.LastRole,role);
           this._isLoggedIn$.next(true);
           this._user$.next(result?.data?.user || null);
           this._loggedInUser$.next(result?.data?.loggedInUser || null);
-          this._role$.next(ROLE_TYPE_UTILS.user);
+          this._role$.next(role);
           location.reload();
         }
       }),

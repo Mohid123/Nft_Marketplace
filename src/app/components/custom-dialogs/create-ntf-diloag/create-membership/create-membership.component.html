@@ -127,10 +127,10 @@
         <p class="error-msg error" *ngIf="createNft.controls.date.touched && createNft.controls.date.errors?.required">please select date</p>
       </div>
       <div class="inline-flex flex-col">
-        <span class="text-xl" style="padding: 0 12px;">Select Group </span><br>
+        <span class="text-xl" >Select Group </span><br>
         <label class="block text-left" style="padding-top: 0; padding-bottom: 0;">
           <select formControlName="group"
-            class="block h-16 px-4 text-lg font-light text-gray-400 rounded-lg bg-primary-gray-100 focus:outline-none w-44 form-select">
+            class="block h-16 text-lg font-light text-gray-400 rounded-lg bg-primary-gray-100 focus:outline-none w-44 form-select">
             <option [ngValue]="null" disabled>Select Group</option>
             <option *ngFor="let group of (groups$ | async)" [ngValue]="group">
               {{group.name}}

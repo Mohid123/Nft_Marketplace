@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { NFT } from './../../../@core/models/NFT.model';
 
 @Component({
@@ -15,9 +16,17 @@ export class CardDetailsComponent implements OnInit {
   @Input() nft:NFT;
   constructor(
     private customDialogService: CustomDialogService,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit(): void {
+
+    this.spinner.show();
+
+    setTimeout(() => {
+
+      this.spinner.hide();
+    }, 1000);
     this.userName = JSON.parse(localStorage.getItem('App/user'))
     this.profilePic = JSON.parse(localStorage.getItem('App/user'))
     this.loggedInUser = JSON.parse(localStorage.getItem('App/loggedInUser'))
