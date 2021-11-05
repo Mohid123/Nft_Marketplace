@@ -24,7 +24,7 @@
   </div>
 
 
-  <button class="primary-btn" (click)="save()">
+  <button class="primary-btn" [disabled]="!price || !copy || price === 0 || copy === 0" (click)="save()">
     Minting
   </button>
 </div>

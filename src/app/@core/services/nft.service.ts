@@ -2,15 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { NFT } from '@app/@core/models/NFT.model';
+import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { environment } from '@environments/environment';
 import { ToastrService } from 'ngx-toastr';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { take, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { exhaustMap, take, tap } from 'rxjs/operators';
 import { GetAllNftsByClub } from '../models/requests/get-all-afts-by-club.model';
 import { getNftsByUserId } from '../models/requests/get-nfts-by-user.model';
 import { getNftsForAdmin } from '../models/requests/get-nfts-for-admin.model';
 import { NFTList } from './../models/NFTList.model';
 import { MediaUpload } from './../models/requests/media-upload.model';
+import { ResponseAddGroupMedia } from './../models/response-add-media.model';
 import { ResponseEventByNFT } from './../models/response-events-by-nft.model';
 import { ApiResponse } from './../models/response.model';
 import { RouterState } from './../models/routerState.model';
@@ -39,11 +41,40 @@ export class NFTService extends ApiService<nftApiData> {
 
 
   constructor(
+    protected customDialogService: CustomDialogService,
     protected http: HttpClient,
     private mediaService: MediaService,
     protected toastrService: ToastrService
   ) {
     super(http);
+  }
+
+  requestCreateNFT(nftForm,img):void {
+    this.customDialogService.showLoadingDialog();
+    this.mediaService
+      .uploadMedia('nft', img)
+      .pipe(
+        take(1),
+        exhaustMap((res: ApiResponse<ResponseAddGroupMedia>) => {
+          console.log('res:',res);
+          if (!res.hasErrors()) {
+              nftForm.serverCaptureFileUrl = res.data.url;
+              nftForm.path = res.data.path;
+              return this.addNft(nftForm);
+            } else {
+            return of(null);
+          }
+        }),
+      )
+      .subscribe((res: any) => {
+        console.log('res:', res);
+        if (res == null) {
+          this.toastrService.warning(res?.errors[0]?.error?.message, 'Error!' )
+        }
+    });
+    setTimeout(() => {
+      this.customDialogService.closeDialogs();
+    }, 3000);
   }
 
   getAllNftsByClub(clubName: string, page: number, searchValue: string ,groupId?:string, type?:string) : Observable<ApiResponse<nftApiData>> {
@@ -127,6 +158,7 @@ export class NFTService extends ApiService<nftApiData> {
 
   addNft(params: NFT): Observable<ApiResponse<nftApiData>>{
     return this.post('/nft/addNft', params).pipe(take(1),tap((result:ApiResponse<nftApiData>)=>{
+      this.customDialogService.showLoadingDialog();
       if (result.hasErrors()) {
         this.toastrService.error(result?.errors[0]?.error?.message)
       }

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NFT } from '@app/@core/models/NFT.model';
+import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { setItem, StorageItem } from '@app/@core/utils';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
@@ -17,6 +18,7 @@ type StripeApiData = ResponseStripeStatus | NFT;
 })
 export class StripeService extends ApiService<StripeApiData> {
   constructor(protected http: HttpClient,
+    private customDialogService: CustomDialogService,
     private toastr: ToastrService,
     ) {
     super(http);
@@ -33,6 +35,20 @@ export class StripeService extends ApiService<StripeApiData> {
         }
       }),
     );
+  }
+
+  purchaseNFT(params:BuyNFT): void {
+    this.customDialogService.showLoadingDialog();
+    this.stripePay(params).pipe(take(1)).subscribe((res:ApiResponse<NFT>)=> {
+      if(!res.hasErrors()) {
+        console.log('success:',res);
+      } else {
+        this.toastr.warning(res.errors[0]?.error?.message, 'Error!');
+      }
+    });
+    setTimeout(() => {
+      this.customDialogService.closeDialogs();
+    }, 3000);
   }
 
   stripePay(params:BuyNFT): Observable<ApiResponse<StripeApiData>> {

@@ -4,9 +4,7 @@ import { NFT } from '@app/@core/models/NFT.model';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { AuthService } from '@app/pages/auth/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
-import { take } from 'rxjs/operators';
 import { BuyNFT } from './../../../../@core/models/requests/buy-nft.model';
-import { ApiResponse } from './../../../../@core/models/response.model';
 import { StripeService } from './../../../../@core/services/stripe.service';
 
 @Component({
@@ -55,14 +53,8 @@ export class StripePaymentComponent  {
       clubUserId : this.authService.loggedInUser.clubUserId,
     };
 
-    this.stripeService.stripePay(param).pipe(take(1)).subscribe((res:ApiResponse<NFT>)=> {
-      if(!res.hasErrors()) {
-        console.log('success:',res);
-        this.close();
-      } else {
-        this.toastr.warning(res.errors[0]?.error?.message, 'Error!');
-      }
-    });
+    this.stripeService.purchaseNFT(param);
+    this.close();
   }
 
   isDateValid() {
