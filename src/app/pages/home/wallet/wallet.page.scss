@@ -15,23 +15,31 @@
 }
 
 .filter-btn{
-  @apply inline-flex justify-center w-full px-4 py-1 text-sm font-medium text-white bg-transparent rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-offset-green-400 focus:ring-green-400;
+  @apply inline-flex justify-center w-full px-4 py-1 text-sm font-medium text-white bg-gradient-to-r focus:from-green-400 focus:to-red-400 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-offset-green-400 focus:ring-green-400;
+}
+.all-item {
+  // background: transparent linear-gradient(109deg, #59C8D1 0%, #75F16D 100%) 0% 0% no-repeat padding-box;
+ @apply px-4 py-1 mr-3 text-xs tracking-wide text-white rounded-full md:h-7 lg:h-7 h-11 bg-gradient-to-r from-blue-300 to-green-400 hover:from-green-400 hover:to-blue-500 focus:from-blue-600 focus:to-green-700
 }
 
+
+
 .membership-btn{
-  background: transparent linear-gradient(106deg, #79D984 0%, #EF676C 100%) 0% 0% no-repeat padding-box;
+  // background: transparent linear-gradient(106deg, #79D984 0%, #EF676C 100%) 0% 0% no-repeat padding-box;
+  @apply px-4 py-1 mr-3 text-xs tracking-wide text-white rounded-full bg-gradient-to-r from-green-400 to-red-400 hover:from-green-500 hover:to-red-500 focus:from-green-600 focus:to-red-600 md:h-7 lg:h-7 h-11
 }
 
 .tickets-btn{
-  background: transparent linear-gradient(108deg, #D94E66 0%, #D48D31 100%) 0% 0% no-repeat padding-box;
-}
-
-.btn-nft {
-  background: transparent linear-gradient(109deg, #59C8D1 0%, #75F16D 100%) 0% 0% no-repeat padding-box;
+  // background: transparent linear-gradient(108deg, #D94E66 0%, #D48D31 100%) 0% 0% no-repeat padding-box;
+  @apply px-4 py-1 mr-3 text-xs tracking-wide text-white rounded-full md:h-7 lg:h-7 h-11 bg-gradient-to-r from-red-500 to-yellow-300 hover:from-red-600 hover:to-yellow-500 focus:from-red-700 focus:to-yellow-500
 }
 
 .pagination-btn{
   @apply inline-flex items-center justify-center w-12 h-12 px-3 py-3 font-bold bg-gray-500 bg-opacity-25 rounded-xl hover:bg-primary-400 focus:bg-primary-400;
+}
+
+.groups{
+  @apply my-2 rounded-md bg-gradient-to-r from-blue-300 to-green-500  hover:from-blue-500 hover:to-green-400;
 }
 
 

@@ -23,13 +23,13 @@
     <h2 class="mb-5 text-2xl font-light tracking-widest text-gray-400 title-font">My NFT Library</h2>
     <div class="bottom-0 left-0 flex flex-wrap justify-between w-full pt-3 leading-none text-center ">
       <span class="inline-flex items-center text-sm leading-none text-whit">
-        <button (click)="setType('')" class="px-4 py-1 mr-3 text-xs tracking-wide text-white rounded-full md:h-7 lg:h-7 h-11 btn-nft">
+        <button (click)="setType('')" class="all-item">
           All Items
         </button>
-        <button (click)="setType('Membership')" class="px-4 py-1 mr-3 text-xs tracking-wide text-white rounded-full membership-btn md:h-7 lg:h-7 h-11 ">
+        <button (click)="setType('Membership')" class="membership-btn">
           Membership Cards
         </button>
-        <button (click)="setType('Ticket')" class="px-4 py-1 mr-3 text-xs tracking-wide text-white rounded-full md:h-7 lg:h-7 h-11 tickets-btn">
+        <button (click)="setType('Ticket')" class="tickets-btn">
           Tickets
         </button>
       </span>
@@ -48,10 +48,10 @@
             </svg>
           </button>
           <mat-menu #menu="matMenu" class="bg-primary-600  mt-0.5 p-2" xPosition='before'>
-            <button (click)="filterBy(null)" class="my-2 hover:bg-primary-400" mat-menu-item>
+            <button (click)="filterBy(null)" class="groups" mat-menu-item>
               All
             </button>
-            <button (click)="filterBy(group)" class="my-2 hover:bg-primary-400" mat-menu-item *ngFor="let group of groups">
+            <button (click)="filterBy(group)" class="groups" mat-menu-item *ngFor="let group of groups">
               {{group.name}}
             </button>
           </mat-menu>

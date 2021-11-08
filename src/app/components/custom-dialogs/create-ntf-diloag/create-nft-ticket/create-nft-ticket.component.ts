@@ -19,7 +19,7 @@ import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
   styleUrls: ['./create-nft-ticket.component.scss'],
 })
 export class CreateNFTticketComponent {
-
+  img: FormData;
   msg: string
   public group: Group;
 
@@ -71,6 +71,7 @@ export class CreateNFTticketComponent {
       });
 
     if(this.nftService.createNftForm)
+
     this.createNft = this.nftService.createNftForm;
   }
 
@@ -100,7 +101,7 @@ export class CreateNFTticketComponent {
    this.createPreviewImg().then((dataUrl) => {
         // const img = new Image();
         // img.src = dataUrl;
-        // document.getElementById('view-img').appendChild(img);
+        // document.getElementById('showImage').appendChild(img);
         this.createNft.patchValue({
           file: this.mediaService.dataURLtoFile(
             dataUrl,
@@ -120,6 +121,7 @@ export class CreateNFTticketComponent {
           userId: this.authService.loggedInUser.id,
           clubUserId: this.authService.loggedInUser.clubUserId,
           appPackageId: this.authService.loggedInUser.appPackageId,
+
         }
         this.nftService.createNFT = form;
         this.nftService.createNFTImg = this.imgFormData;
@@ -132,6 +134,7 @@ export class CreateNFTticketComponent {
 
   createPreviewImg():Promise<any> {
     const node = document.getElementById('bg-image');
+
     return htmlToImage
       .toPng(node, {
         canvasWidth: 529,
@@ -145,23 +148,28 @@ export class CreateNFTticketComponent {
           display: 'block'
         }
       })
-  }
+ }
 
   close(): void {
     this.customDialogService.closeDialogs();
   }
 
   // Click on each image and display each individually on background div
+
   setBackground():void {
+
     const select = <HTMLImageElement>document.querySelector('#bg-image');
     const tick = <HTMLImageElement>document.querySelector('#showImage');
     tick.src = (event.target as HTMLImageElement).src;
-    // select.style.display = 'block';
+
+    // select.style.border = '1px solid red';
   }
 
   preview(): void {
     this.createPreviewImg().then((dataUrl) => {
+      debugger
       this.nftService.createNftForm = this.createNft;
+
       this.customDialogService.showCreateNFTticketPreviewDialog(dataUrl);
     });
   }

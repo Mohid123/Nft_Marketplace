@@ -71,7 +71,11 @@ export class NFTService extends ApiService<nftApiData> {
         if (res == null) {
           this.toastrService.warning(res?.errors[0]?.error?.message, 'Error!' )
         }
+        else {
+          this.customDialogService.closeDialogs();
+        }
     });
+
     setTimeout(() => {
       this.customDialogService.closeDialogs();
     }, 3000);

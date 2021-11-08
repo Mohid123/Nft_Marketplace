@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { AuthService } from '@app/pages/auth/services/auth.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { take } from 'rxjs/operators';
 import { environment } from './../../../../environments/environment.prod';
 import { Group } from './../../../@core/models/group.model';
@@ -37,7 +38,7 @@ export class WalletPage implements OnInit {
   constructor(
     private authService: AuthService,
     private customDialogService: CustomDialogService,
-    // private spinner: NgxSpinnerService,
+    private spinner: NgxSpinnerService,
     private groupService: GroupService,
     private nftService: NFTService,
     private routeService: RouteService,
@@ -51,12 +52,12 @@ export class WalletPage implements OnInit {
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   ngOnInit(): void {
-    // this.spinner.show();
+    this.spinner.show();
 
-    // setTimeout(() => {
-    //   /** spinner ends after 5 seconds */
-    //   this.spinner.hide();
-    // }, 1000);
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 1000);
     console.log('market palce:');
     // this.nftService.getNft('');
   }
