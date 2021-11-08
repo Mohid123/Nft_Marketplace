@@ -10,6 +10,7 @@ import { NFTService } from '@app/@core/services/nft.service';
 export class TicketPreviewComponent implements OnInit {
 
   @Input() img: any;
+  @Input() isTicket: any;
 
   constructor(
     private customDialogService: CustomDialogService,
@@ -21,7 +22,8 @@ export class TicketPreviewComponent implements OnInit {
   }
 
   close():void {
-    this.customDialogService.showCreateNFTticketDialog();
+    if (this.isTicket) this.customDialogService.showCreateNFTticketDialog();
+    else this.customDialogService.showCreateMembership();
   }
 
 }

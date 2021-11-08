@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Group } from '@app/@core/models/group.model';
 import { NFT } from '@app/@core/models/NFT.model';
@@ -18,8 +18,8 @@ import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
   templateUrl: './create-nft-ticket.component.html',
   styleUrls: ['./create-nft-ticket.component.scss'],
 })
-export class CreateNFTticketComponent {
-  img: FormData;
+export class CreateNFTticketComponent implements OnInit, AfterViewInit {
+
   msg: string
   public group: Group;
 
@@ -39,6 +39,8 @@ export class CreateNFTticketComponent {
 
   private _page: number;
   private _isLoading: boolean;
+  private _lastBgImg: string;
+
   public groupsByClub: ResponseGroupsByClub;
   public groups$ = this.groupService.groups$;
 
@@ -59,6 +61,7 @@ export class CreateNFTticketComponent {
       description: new FormControl('', [Validators.required]),
       file: new FormControl(''),
       img: new FormControl(''),
+      bgImg: new FormControl(''),
       date: ['', [Validators.required]],
       address: ['', [Validators.required, Validators.maxLength(32)]],
       group: [null, [Validators.required]]
@@ -70,9 +73,12 @@ export class CreateNFTticketComponent {
         this.clubName = clubName;
       });
 
-    if(this.nftService.createNftForm)
-
-    this.createNft = this.nftService.createNftForm;
+    if (this.nftService.createNftForm) {
+      this.createNft = this.nftService.createNftForm;
+      this.imageSrc = this.nftService?.createNftForm?.controls?.img?.value;
+      this._lastBgImg = this.createNft.controls?.bgImg?.value;
+      this.nftService.createNftForm = null;
+    }
   }
 
   ngOnInit(): void {
@@ -84,6 +90,10 @@ export class CreateNFTticketComponent {
     );
   }
 
+  ngAfterViewInit():void {
+    this.setBackground(this._lastBgImg);
+  }
+
   onSelectFile(event): void {
     if (event.target.files && event.target.files[0]) {
       this.file = event.target.files[0];
@@ -91,6 +101,10 @@ export class CreateNFTticketComponent {
         const reader = new FileReader();
         reader.onload = (e: any) => {
           this.imageSrc = e.target.result;
+
+          this.createNft.patchValue({
+            img: this.imageSrc,
+          });
         };
         reader.readAsDataURL(event.target.files[0]);
       }
@@ -155,22 +169,20 @@ export class CreateNFTticketComponent {
   }
 
   // Click on each image and display each individually on background div
-
-  setBackground():void {
-
+  setBackground(src?):void {
     const select = <HTMLImageElement>document.querySelector('#bg-image');
     const tick = <HTMLImageElement>document.querySelector('#showImage');
     tick.src = (event.target as HTMLImageElement).src;
-
-    // select.style.border = '1px solid red';
+    this.createNft.patchValue({
+      bgImg: tick.src,
+    });
+    // select.style.display = 'block';
   }
 
   preview(): void {
     this.createPreviewImg().then((dataUrl) => {
-      debugger
       this.nftService.createNftForm = this.createNft;
-
-      this.customDialogService.showCreateNFTticketPreviewDialog(dataUrl);
+      this.customDialogService.showCreateNFTticketPreviewDialog(dataUrl,true);
     });
   }
 

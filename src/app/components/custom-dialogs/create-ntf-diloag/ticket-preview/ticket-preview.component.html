@@ -11,7 +11,10 @@
   </div>
   <div class="flex items-center justify-between">
     <div class="inline-flex">
-      <h1 class=""><span>Cre</span>ate NFT</h1>
+      <h1 *ngIf="isTicket; else Membership" class="font-medium text-3xl"><span>Tic</span>ket Preview</h1>
+      <ng-template #Membership>
+        <h1 class="font-medium text-3xl"><span>Membersh</span>ip Card Preview</h1>
+      </ng-template>
     </div>
   </div>
   <img alt [src]="img">

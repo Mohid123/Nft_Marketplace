@@ -4,7 +4,7 @@
   color="#fff"
   type="ball-scale-multiple"
 >
-  <p style="font-size: 20px; color: white">Nodechain...</p>
+  <p style="font-size: 20px; color: white">{{(creator$ | async)?.displayName}}...</p>
 </ngx-spinner>
 <app-layout *ngIf="(isAdminPanel$ | async) && (isLoggedIn$ | async) && (role$ | async) === roles.admin; else notAuthorized">
   <router-outlet></router-outlet>

@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
   isLoggedIn$: Observable<boolean> = this.authService.isLoggedIn$;
   role$: Observable<ROLE_TYPE_UTILS> = this.authService.role$;
   isAdminPanel$: Observable<boolean> = this.routeService.isAdminPanel$;
+  creator$ = this.creatorService.Creator$;
 
   roles = ROLE_TYPE_UTILS;
 
