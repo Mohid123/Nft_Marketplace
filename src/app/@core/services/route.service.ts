@@ -40,10 +40,11 @@ export class RouteService {
       setItem(StorageItem.Club, clubName);
     });
 
-    // this.navEnd$.subscribe(()=> {
-    //   console.log('navEnda:');
-    //   this.spinnerService.hide();
-    // })
+    this.navEnd$.subscribe((data:NavigationEnd)=> {
+      if(data.id === 1 && data.url == "/")
+        this.router.navigate(['/noderon'])
+      // this.spinnerService.hide();
+    })
   }
 
   get routerState(): RouterState {
