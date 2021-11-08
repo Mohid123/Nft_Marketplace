@@ -24,8 +24,7 @@
   }
 
   h1 {
-    @apply capitalize my-12 text-3xl;
-    font-weight: 400;
+    @apply capitalize my-12;
     span {
       padding-bottom: 4px;
       border-bottom: 2px solid #75F16D;

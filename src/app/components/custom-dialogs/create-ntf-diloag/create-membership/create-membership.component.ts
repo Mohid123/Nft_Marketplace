@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Group } from '@app/@core/models/group.model';
 import { NFT } from '@app/@core/models/NFT.model';
@@ -18,7 +18,7 @@ import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
   templateUrl: './create-membership.component.html',
   styleUrls: ['./create-membership.component.scss'],
 })
-export class CreateMembershipComponent {
+export class CreateMembershipComponent implements OnInit, AfterViewInit {
 
   public group: Group;
 
@@ -34,10 +34,12 @@ export class CreateMembershipComponent {
   public url: string;
 
   public clubName: string;
-  public limit = 6;
+  public limit = 100;
 
   private _page: number;
   private _isLoading: boolean;
+  private _lastBgImg: string;
+
   public groupsByClub: ResponseGroupsByClub;
   public groups$ = this.groupService.groups$;
 
@@ -58,6 +60,7 @@ export class CreateMembershipComponent {
       description: new FormControl('', [Validators.required]),
       file: new FormControl(''),
       img: new FormControl(''),
+      bgImg: new FormControl(''),
       date: ['', [Validators.required]],
       membershipId: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(16)]],
       group: [null, [Validators.required]]
@@ -69,6 +72,12 @@ export class CreateMembershipComponent {
         this.clubName = clubName;
       });
 
+    if(this.nftService.createNftForm){
+      this.createNft = this.nftService.createNftForm;
+      this.imageSrc = this.nftService?.createNftForm?.controls?.img?.value;
+      this._lastBgImg = this.createNft.controls?.bgImg?.value;
+      this.nftService.createNftForm = null;
+    }
   }
 
   ngOnInit(): void {
@@ -80,6 +89,10 @@ export class CreateMembershipComponent {
     );
   }
 
+  ngAfterViewInit():void {
+    this.setBackground(this._lastBgImg);
+  }
+
   onSelectFile(event): void {
     if (event.target.files && event.target.files[0]) {
       this.file = event.target.files[0];
@@ -87,6 +100,10 @@ export class CreateMembershipComponent {
         const reader = new FileReader();
         reader.onload = (e: any) => {
           this.imageSrc = e.target.result;
+
+          this.createNft.patchValue({
+            img: this.imageSrc,
+          });
         };
         reader.readAsDataURL(event.target.files[0]);
       }
@@ -94,31 +111,16 @@ export class CreateMembershipComponent {
   }
 
   nextClick(): void {
-    const node = document.getElementById('bg-image');
-    htmlToImage
-      .toPng(node, {
-        canvasWidth: 529,
-        canvasHeight: 480,
-        width: 529,
-        height: 480,
-        quality: 1,
-        pixelRatio: 1,
-        skipAutoScale: false,
-        style: {
-          display: 'block'
-        }
-      })
-      .then((dataUrl) => {
-        const img = new Image();
-        img.src = dataUrl;
-        document.getElementById('view-img').appendChild(img);
+    this.createPreviewImg().then((dataUrl) => {
+        // const img = new Image();
+        // img.src = dataUrl;
+        // document.getElementById('view-img').appendChild(img);
         this.createNft.patchValue({
           file: this.mediaService.dataURLtoFile(
             dataUrl,
-            this.createNft.controls.address.value + '.png',
+            this.createNft.controls.membershipId.value + '.png',
           ),
         });
-        console.log('asdasd:');
         this.imgFormData.append('file', this.createNft.get('file').value);
 
         const form: NFT = {
@@ -133,12 +135,30 @@ export class CreateMembershipComponent {
           clubUserId: this.authService.loggedInUser.clubUserId,
           appPackageId: this.authService.loggedInUser.appPackageId,
         }
-        console.log('asdasdasd:',this.imgFormData);
-        // this.customDialogService.showCreateNFTticketOptionsDialog(this.imgFormData,form);
+        this.nftService.createNFT = form;
+        this.nftService.createNFTImg = this.imgFormData;
+        this.customDialogService.showCreateNFTMembershipOptionsDialog();
       })
       .catch((error) => {
         console.error('oops, something went wrong!', error);
       });
+  }
+
+  createPreviewImg():Promise<any> {
+    const node = document.getElementById('bg-image');
+    return htmlToImage
+      .toPng(node, {
+        canvasWidth: 529,
+        canvasHeight: 480,
+        width: 529,
+        height: 480,
+        quality: 1,
+        pixelRatio: 1,
+        skipAutoScale: false,
+        style: {
+          display: 'block'
+        }
+      })
   }
 
   close(): void {
@@ -146,11 +166,21 @@ export class CreateMembershipComponent {
   }
 
   // Click on each image and display each individually on background div
-  setBackground() {
+  setBackground(src?) {
     const select = <HTMLImageElement>document.querySelector('#bg-image');
     const tick = <HTMLImageElement>document.querySelector('#showImage');
-    tick.src = (event.target as HTMLImageElement).src;
-    select.style.display = 'block';
+    tick.src = src || (event.target as HTMLImageElement).src;
+    this.createNft.patchValue({
+      bgImg: tick.src,
+    });
+    // select.style.display = 'block';
+  }
+
+  preview(): void {
+    this.createPreviewImg().then((dataUrl) => {
+      this.nftService.createNftForm = this.createNft;
+      this.customDialogService.showCreateNFTticketPreviewDialog(dataUrl,false);
+    });
   }
 
 

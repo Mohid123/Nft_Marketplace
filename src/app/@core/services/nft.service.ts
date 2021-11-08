@@ -50,7 +50,7 @@ export class NFTService extends ApiService<nftApiData> {
   }
 
   requestCreateNFT(nftForm,img):void {
-    this.customDialogService.showLoadingDialog();
+    this.customDialogService.showLoadingDialog('Minting In Process');
     this.mediaService
       .uploadMedia('nft', img)
       .pipe(
@@ -77,12 +77,12 @@ export class NFTService extends ApiService<nftApiData> {
     }, 3000);
   }
 
-  getAllNftsByClub(clubName: string, page: number, searchValue: string ,groupId?:string, type?:string) : Observable<ApiResponse<nftApiData>> {
+  getAllNftsByClub(clubName: string, page: number, limit: number ,searchValue: string ,groupId?:string, type?:string) : Observable<ApiResponse<nftApiData>> {
     page--;
     const param: GetAllNftsByClub = {
       clubName: clubName,
-      offset: page ? environment.limit * page : 0,
-      limit: environment.limit,
+      offset: page ? limit * page : 0,
+      limit: limit,
       name: searchValue,
       type: type,
     };
@@ -158,7 +158,6 @@ export class NFTService extends ApiService<nftApiData> {
 
   addNft(params: NFT): Observable<ApiResponse<nftApiData>>{
     return this.post('/nft/addNft', params).pipe(take(1),tap((result:ApiResponse<nftApiData>)=>{
-      this.customDialogService.showLoadingDialog();
       if (result.hasErrors()) {
         this.toastrService.error(result?.errors[0]?.error?.message)
       }

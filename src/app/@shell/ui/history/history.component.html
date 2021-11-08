@@ -30,7 +30,7 @@
           {{nftEvent.to}}
           </td>
           <td >
-            {{calculateDiff(nftEvent.createdAt)}} days ago
+            {{nftEvent.createdAt | timeAgo}}
           </td>
 
         </tr>

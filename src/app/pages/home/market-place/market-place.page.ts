@@ -1,16 +1,17 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { take } from 'rxjs/operators';
-import { environment } from './../../../../environments/environment.prod';
+import { Subject } from 'rxjs';
+import { distinctUntilChanged, take, takeUntil } from 'rxjs/operators';
 import { Group } from './../../../@core/models/group.model';
 import { NFTList } from './../../../@core/models/NFTList.model';
 import { ApiResponse } from './../../../@core/models/response.model';
 import { GroupService } from './../../../@core/services/group.service';
 import { NFTService } from './../../../@core/services/nft.service';
 import { RouteService } from './../../../@core/services/route.service';
+import { StripeService } from './../../../@core/services/stripe.service';
 
 
 @Component({
@@ -18,8 +19,9 @@ import { RouteService } from './../../../@core/services/route.service';
   templateUrl: './market-place.page.html',
   styleUrls: ['./market-place.page.scss'],
 })
-export class MarketPlacePage implements OnInit {
+export class MarketPlacePage implements OnInit ,OnDestroy {
 
+  destroy$ = new Subject();
 
   private _isLoading:boolean;
   public type = '';
@@ -27,7 +29,7 @@ export class MarketPlacePage implements OnInit {
   public nftList: NFTList;
   public clubName: string;
   public limit = 6 ;
-  public nftLimit = environment.limit ;
+  public nftLimit = 12 ;
   public page:number;
 
   public groups$ = this.groupService.groups$;
@@ -40,12 +42,18 @@ export class MarketPlacePage implements OnInit {
     private nftService: NFTService,
     private routeService: RouteService,
     private spinner: NgxSpinnerService,
+    private stripeService: StripeService,
   ) {
     this.page = 1;
     this._isLoading = false;
-    this.routeService.clubName$.subscribe((clubName) => {
+    this.routeService.clubName$.pipe(takeUntil(this.destroy$)).subscribe((clubName) => {
       this.clubName = clubName;
       if(this.clubName)
+        this.getNfts();
+    });
+
+    this.stripeService.purchaseSuccess$.pipe(distinctUntilChanged(),takeUntil(this.destroy$)).subscribe((nftId) => {
+      if(nftId && this.clubName)
         this.getNfts();
     });
   }
@@ -65,7 +73,7 @@ export class MarketPlacePage implements OnInit {
 
   getNfts(): void {
     if (this._isLoading) return
-    this.nftService.getAllNftsByClub(this.clubName, this.page,this.searchValu ,this.filterGroup?.id, this.type)
+    this.nftService.getAllNftsByClub(this.clubName, this.page, this.nftLimit ,this.searchValu ,this.filterGroup?.id, this.type)
       .pipe(take(1))
       .subscribe((result:ApiResponse<NFTList>) => {
         if (!result.hasErrors()) {
@@ -115,5 +123,10 @@ export class MarketPlacePage implements OnInit {
     this.type = type;
     this.page = 1;
     this.getNfts();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.complete();
+    this.destroy$.unsubscribe();
   }
 }

@@ -4,7 +4,7 @@ import { NFT } from '@app/@core/models/NFT.model';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { setItem, StorageItem } from '@app/@core/utils';
 import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
 import { AddStripeKey } from '../models/requests/add-stripe-key.model';
 import { ResponseStripeStatus } from '../models/response-add-stripe-key.model';
@@ -17,6 +17,12 @@ type StripeApiData = ResponseStripeStatus | NFT;
   providedIn: 'root',
 })
 export class StripeService extends ApiService<StripeApiData> {
+
+  private _purchaseSuccess$ = new BehaviorSubject<string>(null);
+  public readonly purchaseSuccess$: Observable<string> =
+    this._purchaseSuccess$.asObservable();
+
+
   constructor(protected http: HttpClient,
     private customDialogService: CustomDialogService,
     private toastr: ToastrService,
@@ -38,9 +44,10 @@ export class StripeService extends ApiService<StripeApiData> {
   }
 
   purchaseNFT(params:BuyNFT): void {
-    this.customDialogService.showLoadingDialog();
+    this.customDialogService.showLoadingDialog('Transferring In Process');
     this.stripePay(params).pipe(take(1)).subscribe((res:ApiResponse<NFT>)=> {
       if(!res.hasErrors()) {
+        this._purchaseSuccess$.next(params.nftId)
         console.log('success:',res);
       } else {
         this.toastr.warning(res.errors[0]?.error?.message, 'Error!');

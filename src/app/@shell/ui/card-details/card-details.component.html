@@ -1,12 +1,3 @@
-<ngx-spinner
-  bdColor="#171830"
-  size="medium"
-  color="#fff"
-  type="ball-scale-multiple"
->
-  <p style="font-size: 20px; color: white">Nodechain...</p>
-</ngx-spinner>
-
 <div class="justify-center card-border">
   <div class="flex"
     style="background-image: url(./assets/card/bg-card.png); background-repeat: no-repeat;  background-size: 100% 100%;">
@@ -90,7 +81,7 @@
           <div class="text-base text-justify text-white lg:mr-20 respDesc">
             {{nft?.description}}
           </div>
-          <ng-container *ngIf="nft?.nftStatus">
+          <ng-container *ngIf="nft?.nftStatus && nft?.nftStatus !== 'Sold'">
             <ng-container *ngIf="nft.nftStatus === 'Active'; else nftButton">
               <button (click)="buyNow()" class="buyNowBtn">
                 Buy Now

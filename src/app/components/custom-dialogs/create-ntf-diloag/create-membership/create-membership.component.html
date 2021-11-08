@@ -14,12 +14,12 @@
     </div>
 
     <div class="inline-flex">
-      <span class="text-green-500 cursor-pointer">Preview</span>
+      <span (click)="preview()" class="text-green-500 cursor-pointer">Preview</span>
     </div>
   </div>
-  <div id="view-img"></div>
+  <!-- <div id="view-img"></div> -->
 
-  <div id="bg-image" class="relative p-0 text-2xl" style="display: block; width: 529px; height: 479px;">
+  <div id="bg-image" class="relative p-0 text-2xl" style="display: none; width: 529px; height: 479px;">
     <img id="showImage" src="./assets/card/membership 1a.svg" alt="NFT-Image" style="width: 529px; height: 482px; padding: 0;">
     <img *ngIf="createNft.controls?.group?.value?.coverImageUrl" class="absolute top-0 right-1" [src]="createNft.controls?.group?.value?.coverImageUrl" style="height: 135px;padding: 0;">
       <img class="absolute object-scale-down object-left-top w-full h-20 max-w-sm px-16 py-0 top-8 left-6 max-h-24" *ngIf="imageSrc" [src]="imageSrc">
