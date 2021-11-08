@@ -172,7 +172,7 @@ export class CreateNFTticketComponent implements OnInit, AfterViewInit {
   setBackground(src?):void {
     const select = <HTMLImageElement>document.querySelector('#bg-image');
     const tick = <HTMLImageElement>document.querySelector('#showImage');
-    tick.src = (event.target as HTMLImageElement).src;
+    tick.src = src || (event.target as HTMLImageElement).src;
     this.createNft.patchValue({
       bgImg: tick.src,
     });

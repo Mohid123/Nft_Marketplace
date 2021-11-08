@@ -63,6 +63,12 @@ export class WalletPage implements OnInit {
   }
 
   getNfts(): void {
+    this.spinner.show();
+
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 1000);
     if (this._isLoading) return;
     this.nftService
       .getAllNftsByUser(
