@@ -26,7 +26,7 @@
     <div>
       <div style="position: absolute;top: 200px;left: 50px;width: 250px; ">
         <p>Date</p>
-        <p style="font-size: 30px;font-weight: 400;">{{createNft.controls.date.value}}</p>
+        <p style="font-size: 30px;font-weight: 400;">{{createNft.controls.date.value | date:'dd - M - yyyy'}}</p>
       </div>
       <div style="position: absolute;top: 200px;left: 340px; width: 150px;">
         <p>Ticket</p>
@@ -123,7 +123,7 @@
      <div class="flex justify-between">
       <div style="margin-right: 60px;" class="inline-flex flex-col">
         <span class="text-xl">Select Date</span><br>
-        <input type="date" class="px-2 font-light text-gray-400 w-44" formControlName="date" >
+        <input type="date" class="px-2 font-light text-gray-400 w-44" formControlName="date" placeholder="dd-mm-yyyy" >
         <p class="error-msg error" *ngIf="createNft.controls.date.touched && createNft.controls.date.errors?.required">please select date</p>
       </div>
       <div class="inline-flex flex-col">

@@ -86,6 +86,14 @@ label.radio span {
   text-align: center;
 
 }
+// label.radio input:checked + span {
+//   @apply border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-2
+// }
+
 label.radio input:checked + span {
-  border-color: #6fff62;
+  @apply border-gradient-dp-p-bg-light gradient-border-2;
+  background: linear-gradient( to right, #4C5880, #4C5880 ), linear-gradient(
+109deg, #59C8D1 0%, #75F16D 100%);
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
 }
