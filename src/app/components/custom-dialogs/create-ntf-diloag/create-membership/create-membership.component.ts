@@ -124,7 +124,7 @@ export class CreateMembershipComponent implements OnInit, AfterViewInit {
         this.imgFormData.append('file', this.createNft.get('file').value);
 
         const form: NFT = {
-          type : 'Membership',
+          type : 'Membership Card',
           forSale: true,
           freezeNft:true,
           serverCaptureFileUrl:'',

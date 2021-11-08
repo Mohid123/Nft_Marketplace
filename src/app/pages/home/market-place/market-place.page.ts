@@ -72,6 +72,12 @@ export class MarketPlacePage implements OnInit ,OnDestroy {
   }
 
   getNfts(): void {
+    this.spinner.show();
+
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 1000);
     if (this._isLoading) return
     this.nftService.getAllNftsByClub(this.clubName, this.page, this.nftLimit ,this.searchValu ,this.filterGroup?.id, this.type)
       .pipe(take(1))
@@ -84,6 +90,7 @@ export class MarketPlacePage implements OnInit ,OnDestroy {
   }
 
   next():void {
+
     this.page++;
     this.getNfts();
   }
@@ -106,6 +113,7 @@ export class MarketPlacePage implements OnInit ,OnDestroy {
   }
 
   filterBy (group:Group) :void {
+
     this.page = 1;
     this.filterGroup = group;
     this.getNfts();

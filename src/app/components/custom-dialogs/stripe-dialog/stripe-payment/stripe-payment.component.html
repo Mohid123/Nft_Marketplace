@@ -20,7 +20,7 @@
   <!-- <h1 class=""><span>Sig</span>n in</h1> -->
   <form  [formGroup]="stripeForm" class="strip-payment-form">
       <label class="floating-label" for="cardNo">Card no</label>
-      <input type="number" formControlName="cardNo" maxlength="16" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+      <input type="number" formControlName="cardNo" maxlength="16" placeholder="************1234" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
       <span class="icon cardNo-hide-icon"></span>
       <p class="error-msg error" *ngIf="stripeForm.controls.cardNo.touched && stripeForm.controls.cardNo.errors?.required">please enter card no</p>
       <p class="error-msg error" *ngIf="stripeForm.controls.cardNo.touched && stripeForm.controls.cardNo.errors?.minlength">card no length should be greater than 3</p>
@@ -39,7 +39,7 @@
         </div>
         <div class="w-2/4 pl-4">
           <label class="floating-label" for="cvv">CVC</label>
-          <input type="number" formControlName="cvv"  maxlength="4" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+          <input type="number" formControlName="cvv" placeholder="123" maxlength="4" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
           <span class="icon cvv-hide-icon"></span>
           <p class="error-msg error"
             *ngIf="stripeForm.controls.cvv.touched && stripeForm.controls.cvv.errors?.required">please enter CVC</p>
