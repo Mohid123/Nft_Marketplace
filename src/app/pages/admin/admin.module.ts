@@ -12,6 +12,7 @@ import { AdminDashboardPage } from './admin-dashboard/admin-dashboard.page';
 import { AdminGroupPage } from './admin-group/admin-group.page';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminSalePage } from './admin-sale/admin-sale.page';
+import { AdminSettingPage } from './admin-setting/admin-setting.page';
 import { AdminMarketPlacePage } from './market-place/admin-market-place.page';
 
 @NgModule({
@@ -19,7 +20,8 @@ import { AdminMarketPlacePage } from './market-place/admin-market-place.page';
     AdminDashboardPage,
     AdminMarketPlacePage,
     AdminGroupPage,
-    AdminSalePage
+    AdminSalePage,
+    AdminSettingPage
   ],
   imports: [
     CommonModule,
