@@ -12,7 +12,8 @@ export const ROUTER_UTILS = {
       root:'admin',
       groups:'groups',
       marketplace: 'market-place',
-      sale:'sale'
+      sale:'sale',
+      setting: 'setting'
     },
     auth: {
       root: 'auth',
