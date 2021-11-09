@@ -95,15 +95,19 @@ export class CreateNFTticketComponent implements OnInit, AfterViewInit {
   }
 
   onSelectFile(event): void {
+
     if (event.target.files && event.target.files[0]) {
       this.file = event.target.files[0];
+      console.log(this.file)
       if (event.target.files && event.target.files[0]) {
         const reader = new FileReader();
         reader.onload = (e: any) => {
           this.imageSrc = e.target.result;
+          console.log(this.imageSrc)
 
           this.createNft.patchValue({
             img: this.imageSrc,
+
           });
         };
         reader.readAsDataURL(event.target.files[0]);
@@ -172,7 +176,7 @@ export class CreateNFTticketComponent implements OnInit, AfterViewInit {
   setBackground(src?):void {
     const select = <HTMLImageElement>document.querySelector('#bg-image');
     const tick = <HTMLImageElement>document.querySelector('#showImage');
-    tick.src = src || (event.target as HTMLImageElement).src;
+    tick.src = src || (event.target as HTMLImageElement).src || '../../../../../assets/card/1A.svg';
     this.createNft.patchValue({
       bgImg: tick.src,
     });
