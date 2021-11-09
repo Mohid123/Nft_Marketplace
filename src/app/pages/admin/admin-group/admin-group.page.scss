@@ -1,5 +1,5 @@
 .filters {
-  @apply h-16 w-full rounded-lg bg-primary-e my-6 flex items-center flex-grow;
+  @apply h-16 w-full rounded-lg bg-primary-700 my-6 flex items-center flex-grow;
   max-width: 550px;
   border: 0.6px solid #FFFFFF9C;
 
@@ -23,11 +23,11 @@
 }
 
 .groups-container {
-   @apply  h-auto border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-1 rounded-xl mb-12;
+   @apply bg-primary-700 h-auto border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-1 rounded-xl mb-12;
 
    min-height: 400px;
   table {
-    @apply bg-primary-e rounded-3xl
+    @apply rounded-3xl
   }
    th {
      @apply px-10 h-12 text-left uppercase font-medium;
@@ -39,7 +39,6 @@
 
    tbody {
      @apply overflow-auto ;
-     height: 420px;
      tr {
        @apply h-20;
       border-top: 1px solid #aaaaaa2a;
@@ -59,7 +58,7 @@
   @apply w-36 flex justify-between items-center;
 
   button {
-    @apply h-8 w-9 rounded-md bg-primary-a;
+    @apply h-8 w-9 rounded-md bg-primary-600;
   }
 
   span {
@@ -74,3 +73,9 @@
 .has-tooltip:hover .tooltip {
   @apply visible z-50 ;
 }
+
+::ng-deep .mat-tooltip.tooltips {
+  background-color: #32354e !important;
+  font-size: 24px !important;
+}
+

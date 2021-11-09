@@ -1,4 +1,4 @@
-<div class="w-full bg-primary-dark">
+<div class="w-full bg-primary-900">
   <nav
   class="flex-wrap justify-between py-3.5 main-container navbar-expand-lg">
   <div class="flex flex-wrap items-center justify-between w-full mx-auto">
@@ -19,12 +19,12 @@
     <div class="flex items-center justify-end flex-grow bg-opacity-0 shadow-none hidde bg-blueGray-800">
       <ul class="flex flex-row items-center list-none lg:ml-auto">
         <li class="relative inline-block">
-          <a class="menu-link op" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/']">
+          <a class="menu-link op" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }" [routerLink]="[clubName]">
             MarketPlace
           </a>
         </li>
         <li class="relative inline-block" *ngIf="isLogedIn$ | async">
-          <a class="menu-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/wallet']">
+          <a class="menu-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }" [routerLink]="[clubName,routeUrl.config.base.wallet]">
             Wallet
           </a>
         </li>

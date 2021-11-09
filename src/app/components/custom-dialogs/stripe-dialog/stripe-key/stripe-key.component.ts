@@ -5,8 +5,13 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
-import { setItem, StorageItem } from '@app/@core/utils';
+import { AddStripeKey } from '@app/@core/models/requests/add-stripe-key.model';
+import { ResponseStripeStatus } from '@app/@core/models/response-add-stripe-key.model';
+import { ToastrService } from 'ngx-toastr';
+import { ApiResponse } from './../../../../@core/models/response.model';
 import { CustomDialogService } from './../../../../@core/services/custom-dialog/custom-dialog.service';
+import { RouteService } from './../../../../@core/services/route.service';
+import { StripeService } from './../../../../@core/services/stripe.service';
 
 @Component({
   selector: 'app-stripe-key',
@@ -19,6 +24,9 @@ export class StripeKeyComponent {
   constructor(
     private customDialogService: CustomDialogService,
     private formBuilder: FormBuilder,
+    private stripeService: StripeService,
+    private routeService: RouteService,
+    private toastr: ToastrService
   ) {
     this.stripeForm = this.formBuilder.group({
       key: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -26,8 +34,18 @@ export class StripeKeyComponent {
   }
 
   addKey(): void {
-    setItem(StorageItem.Key, this.stripeForm.controls.key.value);
-    this.close();
+    const params: AddStripeKey = {
+      key: this.stripeForm.controls.key.value,
+      clubName: this.routeService.clubName,
+    };
+
+    this.stripeService.addKey(params).subscribe((result:ApiResponse<ResponseStripeStatus>)=> {
+      if(!result.hasErrors() && result.data.isValid) {
+        this.close();
+      } else {
+    this.toastr.warning('Please enter valid stripe key.', 'Invalid!')
+      }
+    });
   }
 
   close(): void {

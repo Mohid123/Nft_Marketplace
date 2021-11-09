@@ -1,16 +1,21 @@
 import { Injectable } from '@angular/core';
-import { CanLoad, Route, Router, UrlSegment, UrlTree } from '@angular/router';
+import { CanActivate, CanLoad, Route, Router, UrlSegment, UrlTree } from '@angular/router';
 import { ROLE_TYPE_UTILS } from '@app/@core/utils/role-type.utils';
 import { ROUTER_UTILS } from '@app/@core/utils/router.utils';
 import { AuthService } from '@app/pages/auth/services/auth.service';
 import { Observable } from 'rxjs';
+import { RouteService } from './../services/route.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class NoAdminGuard implements CanLoad {
+export class NoAdminGuard implements CanLoad , CanActivate {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private routeService: RouteService,
+  ) { }
 
   canLoad(
     route: Route,
@@ -19,7 +24,10 @@ export class NoAdminGuard implements CanLoad {
 
       if (this.authService.isLoggedIn) {
         if (userRole == ROLE_TYPE_UTILS.admin) {
-          this.router.navigate(['/', ROUTER_UTILS.config.admin.root]);
+          this.router.navigate([
+            this.routeService.clubName || '/',
+            ROUTER_UTILS.config.admin.root,
+          ]);
           return false;
         }
 
@@ -27,5 +35,23 @@ export class NoAdminGuard implements CanLoad {
       } else {
         return true;
       }
+  }
+
+  canActivate() {
+    const userRole = this.authService.role;
+
+    if (this.authService.isLoggedIn) {
+      if (userRole == ROLE_TYPE_UTILS.admin) {
+        this.router.navigate([
+          this.routeService.clubName || '/',
+          ROUTER_UTILS.config.admin.root,
+        ]);
+        return false;
+      }
+
+      return true;
+    } else {
+      return true;
+    }
   }
 }

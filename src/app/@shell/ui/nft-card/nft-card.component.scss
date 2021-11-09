@@ -14,6 +14,12 @@
 .btn-nft {
   background: transparent linear-gradient(109deg, #59C8D1 0%, #75F16D 100%) 0% 0% no-repeat padding-box;
 }
+.btn-nft.Minted {
+  background: transparent linear-gradient(109deg, #C67BFF 0%, #C5E857 100%) 0% 0% no-repeat padding-box;
+}
+.btn-nft.Draft {
+  background: #B2B2B2 0% 0% no-repeat padding-box;
+}
 
 
 
@@ -32,6 +38,15 @@ background-size: contain;
   height: 358px;
   width: 281px;
   border: 3px solid transparent;
+
+}
+
+.trun{
+
+    width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
 }
 

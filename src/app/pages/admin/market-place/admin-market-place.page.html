@@ -1,3 +1,5 @@
+<app-admin-header (search)="search($event)"></app-admin-header>
+
 <div class="flex flex-col justify-start h-auto min-h-screen px-3 py-2 mt-10 mb-12 sm:px-6 xl:px-8 center">
   <div class="flex items-center justify-between w-full h-12 py-px">
     <h1 class="h-auto m-0 text-2xl font-medium">NFT Marketplace</h1>
@@ -5,10 +7,12 @@
       <span class="mr-1 text-xl">+</span>  Create New
     </button>
   </div>
-  <div class="w-full ">
+
+
+  <div class="w-full "  >
     <div class="mt-6 has-tooltip">
-      <span class="p-1 -mt-10 text-4xl text-red-500 rounded shadow-lg bg-primary-c tooltip"> <span style="color: #73BFD6 ">Coming </span> <span style="color: #75F36B">Soon...</span></span>
-      <div class="filters ">
+      <!-- <span class="p-1 -mt-10 text-4xl text-red-500 rounded shadow-lg bg-primary-400 tooltip"> <span style="color: #73BFD6 ">Coming </span> <span style="color: #75F36B">Soon...</span></span> -->
+      <div class="opacity-25 filters"   matTooltip="Coming soon.." matTooltipClass="tooltips" matTooltipPosition="right">
         <div class="filter">
           <button mat-icon-button aria-label="menu">
             <span><mat-icon>filter_alt</mat-icon></span>
@@ -18,47 +22,46 @@
         <div class="filter">
           <button mat-icon-button aria-label="menu" class="w-16">
             <span>Status</span>
-            <span><mat-icon>arrow_drop_down</mat-icon></span>
+            <span class="material-icons">
+              arrow_drop_down
+              </span>
           </button>
         </div>
         <div class="filter">
           <button mat-icon-button aria-label="menu" class="w-16">
             <span>Price</span>
-            <span><mat-icon>arrow_drop_down</mat-icon></span>
+            <span class="material-icons">
+              arrow_drop_down
+              </span>
           </button>
         </div>
         <div class="filter">
           <button mat-icon-button aria-label="menu" class="w-16">
             <span>Token ID</span>
-            <span><mat-icon>arrow_drop_down</mat-icon></span>
+            <span class="material-icons">
+              arrow_drop_down
+              </span>
           </button>
         </div>
         <div class="filter">
           <button mat-icon-button aria-label="menu">
             <span><mat-icon>restart_alt</mat-icon></span>
-            <span class="px-px sm:px-2">Restart Filter</span>
+            <span class="px-px sm:px-2">Reset Filter</span>
           </button>
         </div>
       </div>
     </div>
 
-    <div class="cards-container">
-      <app-nft-card></app-nft-card>
-      <app-nft-card></app-nft-card>
-      <app-nft-card></app-nft-card>
-      <app-nft-card></app-nft-card>
-      <app-nft-card></app-nft-card>
-      <app-nft-card></app-nft-card>
-      <app-nft-card></app-nft-card>
-      <app-nft-card></app-nft-card>
-      <app-nft-card></app-nft-card>
-      <app-nft-card></app-nft-card>
-      <app-nft-card></app-nft-card>
-      <app-nft-card></app-nft-card>
+    <div class="cards-container" style="min-height: 360px;">
+      <ng-container *ngIf="nftList && nftList.totalCount > 0">
+        <ng-container *ngFor="let nftCard of nftList.data" class="">
+          <app-nft-card [nft]="nftCard"></app-nft-card>
+        </ng-container>
+      </ng-container>
     </div>
     <div class="flex justify-end w-full">
       <div class="pagination">
-        <button class="h-8 rounded-md icon-btn w-9 bg-primary-a">
+        <button [disabled]="page < 2" class="h-8 rounded-md icon-btn w-9 bg-primary-600" (click)="previous()">
           <svg xmlns="http://www.w3.org/2000/svg" width="17.618" height="11.75" viewBox="0 0 17.618 11.75">
             <defs>
               <style>
@@ -74,8 +77,14 @@
           </svg>
 
         </button>
-        <span>1/8</span>
-        <button class="icon-btn active">
+        <ng-container *ngIf="nftList?.totalCount > limit  ; else noPage">
+          <span>{{ page }} / {{ (nftList?.totalCount  / limit) + (0.4) | number:'1.0-0' }}</span>
+        </ng-container>
+        <ng-template #noPage >
+          <span>1/1</span>
+        </ng-template>
+
+        <button [disabled]="(nftList?.totalCount / limit) <= page" class="icon-btn active"  (click)="next()">
           <svg xmlns="http://www.w3.org/2000/svg" width="17.618" height="11.75" viewBox="0 0 17.618 11.75">
             <defs>
               <style>

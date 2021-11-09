@@ -13,15 +13,29 @@
       <h1 class=""><span>Cre</span>ate NFT</h1>
     </div>
   </div>
-  <div class="flex justify-center mt-3">
-    <button class=" focus:ring rounded-xl bg-primary-c w-96 h-14"><span><img class="inline-block"
-          src="./assets/icons/coupon.svg" alt=""></span> Membership</button>
-  </div>
-  <div class="flex justify-center mt-3">
-    <button class="focus:ring rounded-xl bg-primary-c w-96 h-14"><span><img class="inline-block"
-          src="./assets/icons/Subtraction 5.svg" alt=""></span> Tickets</button>
-  </div>
-  <button class="primary-btn" (click)="ticketsClick()">
-    Next
-  </button>
+  <form class="group-form">
+    <div class="flex justify-center mt-3">
+      <label class="radio ">
+        <input type="radio" name="gender" class="focus:ring rounded-xl bg-primary-400 w-96 h-14" value="Membership" [(ngModel)]="type">
+        <span><img class="items-center inline-block mr-2"
+          src="./assets/icons/Subtraction 5.svg" alt="">  Membership</span>
+      </label>
+    </div>
+    <div class="flex justify-center ">
+      <label class="radio">
+        <input  type="radio" name="gender" value="Tickets" [(ngModel)]="type">
+        <span><img class="inline-block mr-2"
+          src="./assets/icons/coupon.svg" alt="">  Tickets</span>
+      </label>
+    </div>
+    <!-- <div class="flex justify-center mt-3">
+      <button class="focus:ring rounded-xl bg-primary-400 w-96 h-14"><span><img class="inline-block"
+            src="./assets/icons/Subtraction 5.svg" alt=""></span> Tickets</button>
+    </div> -->
+
+    <button class="primary-btn" (click)="ticketsClick(); ">
+      Next
+    </button>
+  </form>
+
 </div>

@@ -1,4 +1,4 @@
-<table class="m-4 spacing-table md:m-0 lg:m-0">
+<table class="m-4 spacing-table md:m-0 lg:m-0 ">
   <thead class="tracking-wider text-white ">
     <tr class="items-center text-center" >
       <th >Token Id</th>
@@ -10,69 +10,32 @@
     </tr>
   </thead>
   <tbody >
-    <tr class="items-center h-24 ">
-      <td  style="color: #64F3FF; " >
-       976
-      </td>
-      <td >
-        Sale
-      </td>
-      <td >
-        € 1.77
-      </td>
-      <td >
-       0x9f30
-      </td>
-      <td >
-       dodos
-      </td>
-      <td >
-       10 days ago
-      </td>
+    <ng-container *ngIf="responseEventByNFT?.totalCount > 0">
+      <ng-container *ngFor="let nftEvent of responseEventByNFT.data">
+        <tr class="items-center h-24 ">
+          <td  style="color: #64F3FF; " >
 
-    </tr>
-    <tr class="items-center h-24">
-      <td  style="color: #64F3FF;">
-       976
-      </td>
-      <td >
-        Sale
-      </td>
-      <td >
-        € 1.77
-      </td>
-      <td >
-       0x9f30
-      </td>
-      <td >
-       dodos
-      </td>
-      <td >
-       10 days ago
-      </td>
+           <a href="{{nftEvent?.transactionUrl}}" target=_blank> {{nftEvent?.tokenId}}</a>
+          </td>
+          <td >
+            {{nftEvent.eventType}}
+          </td>
+          <td >
+            {{nftEvent.price}}
+          </td>
+          <td class="truncate">
+          {{nftEvent.from}}
+          </td>
+          <td class="truncate">
+          {{nftEvent.to}}
+          </td>
+          <td >
+            {{nftEvent.createdAt | timeAgo}}
+          </td>
 
-    </tr>
-    <tr class="items-center h-24">
-      <td  style="color: #64F3FF;">
-       976
-      </td>
-      <td >
-        Sale
-      </td>
-      <td >
-        € 1.77
-      </td>
-      <td >
-       0x9f30
-      </td>
-      <td >
-       dodos
-      </td>
-      <td >
-       10 days ago
-      </td>
-
-    </tr>
+        </tr>
+      </ng-container>
+    </ng-container>
   </tbody>
 
 

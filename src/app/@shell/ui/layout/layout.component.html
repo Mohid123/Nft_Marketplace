@@ -1,5 +1,5 @@
 <div class="relative w-full">
-  <div class="absolute block w-full h-10 bg-primary-dark md:hidden" [ngClass]="sidenav.opened ? 'z-0' : 'z-10'">
+  <div class="absolute block w-full h-10 bg-primary-900 md:hidden" [ngClass]="sidenav.opened ? 'z-0' : 'z-10'">
   <button mat-icon-button *ngIf="sidenav.mode === 'over'"
     (click)="sidenav.toggle()">
     <mat-icon *ngIf="!sidenav.opened">
@@ -15,36 +15,36 @@
     <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
       <div class="flex flex-col items-center justify-start h-full">
 
-        <img class="avatar mat-elevation-z8" src="https://source.unsplash.com/c_GmwfHBDzk/200x200" />
+        <img style="max-height: 42px; max-width: 42px;" class="object-scale-down avatar mat-elevation-z8 rounded-xl" [src]="(creator$ | async)?.profileImageURL" />
 
-        <ul class="flex flex-col items-center h-full list-none">
+        <ul class="flex flex-col items-center h-full mt-8 list-none">
           <li class="relative inline-block">
             <a class="menu-link icon-btn op" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
-              [routerLink]="['/admin']">
-              <mat-icon svgIcon="admin-dashboard"></mat-icon>
+              [routerLink]="[clubName,adminRouteUrl.root]">
+              <mat-icon><img src="../../../../assets/icons/admin-dashboard.svg" alt=""></mat-icon>
             </a>
           </li>
           <li class="relative inline-block">
             <a class="menu-link icon-btn" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
-              [routerLink]="['/admin/market-place']">
-              <mat-icon svgIcon="market-place"></mat-icon>
+              [routerLink]="[clubName,adminRouteUrl.root,adminRouteUrl.marketplace]">
+              <mat-icon><img src="../../../../assets/icons/market-place.svg" alt=""></mat-icon>
             </a>
           </li>
           <li class="relative inline-block">
             <a class="menu-link icon-btn" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
-              [routerLink]="['/admin/sale']">
-              <mat-icon svgIcon="sale-icon"></mat-icon>
+              [routerLink]="[clubName,adminRouteUrl.root,adminRouteUrl.sale]">
+              <mat-icon><img src="../../../../assets/icons/sale.svg" alt=""></mat-icon>
             </a>
           </li>
           <li class="relative inline-block">
             <a class="menu-link icon-btn" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
-              [routerLink]="['/admin/groups']">
-              <mat-icon>group_work</mat-icon>
+              [routerLink]="[clubName,adminRouteUrl.root,adminRouteUrl.groups]">
+              <mat-icon><img src="../../../../assets/icons/group.svg" alt=""></mat-icon>
             </a>
           </li>
           <!-- <li class="relative inline-block">
             <a class="menu-link icon-btn" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
-              [routerLink]="['/settings']">
+              [routerLink]="['/']">
               <mat-icon>settings</mat-icon>
 
             </a>
@@ -52,7 +52,7 @@
 
           <li class="relative flex items-end flex-grow">
             <button class="flex mt-auto menu-link" (click)="onClickSignOut()">
-              <mat-icon>logout</mat-icon>
+              <mat-icon><img src="../../../../assets/icons/logout.svg" alt=""></mat-icon>
             </button>
           </li>
         </ul>
@@ -63,7 +63,6 @@
     </mat-sidenav>
     <mat-sidenav-content>
       <div class="main">
-        <app-admin-header></app-admin-header>
         <ng-content></ng-content>
       </div>
     </mat-sidenav-content>

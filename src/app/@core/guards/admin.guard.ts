@@ -3,6 +3,7 @@ import { CanLoad, Route, Router, UrlSegment, UrlTree } from '@angular/router';
 import { ROLE_TYPE_UTILS } from '@app/@core/utils/role-type.utils';
 import { Observable } from 'rxjs';
 import { AuthService } from './../../pages/auth/services/auth.service';
+import { RouteService } from './../services/route.service';
 import { ROUTER_UTILS } from './../utils/router.utils';
 
 @Injectable({
@@ -10,7 +11,11 @@ import { ROUTER_UTILS } from './../utils/router.utils';
 })
 export class AdminGuard implements CanLoad {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private routeService: RouteService,
+  ) { }
 
   canLoad(
     route: Route,
@@ -20,13 +25,20 @@ export class AdminGuard implements CanLoad {
         const userRole = this.authService.role;
 
         if (userRole == ROLE_TYPE_UTILS.user) {
-          this.router.navigate(['/']);
+          this.router.navigate([
+            this.routeService.clubName || '/',
+            ROUTER_UTILS.config.admin.root,
+          ]);
           return false;
         }
 
         return true;
       } else {
-        this.router.navigate(['/',  ROUTER_UTILS.config.auth.root ,ROUTER_UTILS.config.auth.adminSignIn]);
+        this.router.navigate([
+          this.routeService.clubName || '/',
+          ROUTER_UTILS.config.auth.root,
+          ROUTER_UTILS.config.auth.adminSignIn,
+        ]);
         return false;
       }
   }

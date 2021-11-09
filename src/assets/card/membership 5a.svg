@@ -1,0 +1,33 @@
+<svg id="membership_5a" data-name="membership 5a" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="231.925" height="215.119" viewBox="0 0 231.925 215.119">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.084" y1="1" x2="1.392" y2="-0.196" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#cc4747"/>
+      <stop offset="1" stop-color="#8576ef"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.99" y1="0.48" x2="-1.037" y2="0.56" gradientUnits="objectBoundingBox">
+      <stop offset="0"/>
+      <stop offset="0.258" stop-color="#020202"/>
+      <stop offset="0.38" stop-color="#090909"/>
+      <stop offset="0.474" stop-color="#161616"/>
+      <stop offset="0.553" stop-color="#282828"/>
+      <stop offset="0.622" stop-color="#404040"/>
+      <stop offset="0.686" stop-color="#5e5e5e"/>
+      <stop offset="0.744" stop-color="#818181"/>
+      <stop offset="0.799" stop-color="#aaa"/>
+      <stop offset="0.849" stop-color="#d6d6d6"/>
+      <stop offset="0.887" stop-color="#fff"/>
+    </linearGradient>
+  </defs>
+  <g id="Group_57423" data-name="Group 57423" transform="translate(0 0)">
+    <g id="Group_57260" data-name="Group 57260">
+      <g id="card" transform="translate(231.925 0) rotate(90)">
+        <g id="Group_261" data-name="Group 261" transform="translate(0 0)">
+          <g id="Group_251" data-name="Group 251">
+            <rect id="Rectangle_78" data-name="Rectangle 78" width="215.119" height="231.925" rx="8" fill="url(#linear-gradient)"/>
+            <path id="Path_273" data-name="Path 273" d="M151.266,0H0L79.629,230.626h71.636c4.544,0,8.229-6.339,8.229-14.163V14.161C159.495,6.337,155.809,0,151.266,0Z" transform="translate(55.622 0)" fill="url(#linear-gradient-2)" style="mix-blend-mode: screen;isolation: isolate"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

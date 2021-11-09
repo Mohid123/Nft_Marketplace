@@ -1,15 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-admin-header',
   templateUrl: './admin-header.component.html',
   styleUrls: ['./admin-header.component.scss']
 })
-export class AdminHeaderComponent implements OnInit {
+export class AdminHeaderComponent implements OnInit, OnDestroy {
 
-  constructor() { }
+  @Output() search = new EventEmitter();
+  public searchStr = '';
+
+  searchControl = new FormControl();
+  formCtrlSub: Subscription;
 
   ngOnInit(): void {
+    this.formCtrlSub = this.searchControl.valueChanges.pipe(debounceTime(1000))
+      .subscribe(newValue => {
+        this.search.emit(newValue);
+      });
+  }
+
+  ngOnDestroy(): void {
+    if(this.formCtrlSub)
+      this.formCtrlSub.unsubscribe();
   }
 
 }

@@ -1,7 +1,13 @@
 export enum StorageItem {
-  Auth = 'App/auth',
+  User = 'App/user',
+  LoggedInUser = 'App/loggedInUser',
+  JwtToken = 'App/jwtToken',
   Role = 'App/role',
   Key = 'App/key',
+  Club = 'App/club',
+  ActiveClub = 'App/activeClub',
+  LastRole = 'App/lastRole',
+  Creator = 'App/creator',
   Theme = 'App/theme',
 }
 

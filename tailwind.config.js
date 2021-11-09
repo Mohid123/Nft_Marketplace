@@ -15,11 +15,15 @@ module.exports = {
     extend: {
       colors: {
         'primary': primaryColors,
-        'primary-a': '#2f304c',
-        'primary-b': '#132356',
-        'primary-c': '#4C5880',
-        'primary-d': '#f3f3f354',
-        'primary-e': '#292a4d'
+        'primary-400': '#4C5880',
+        'primary-500': '#132356',
+        'primary-600': '#2f304c',
+        'primary-650': '#31314d',
+        'primary-700': '#292a4d',
+        'primary-800': '#1F203E',
+        'primary-900': '#171830',
+        'primary-gray-50': '#f2f2f4',
+        'primary-gray-100': '#f3f3f354',
       },
       width: {
         '35': '35%',

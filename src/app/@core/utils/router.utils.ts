@@ -2,6 +2,7 @@ export const ROUTER_UTILS = {
   config: {
     base: {
       home: '',
+      clubName: ':clubName',
       detail: 'detail',
       dashboard: 'dashboard',
       wallet: 'wallet',

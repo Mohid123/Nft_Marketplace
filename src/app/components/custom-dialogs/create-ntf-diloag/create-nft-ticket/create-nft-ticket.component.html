@@ -1,0 +1,155 @@
+<div class="create-nft-model">
+  <div class="flex justify-end">
+    <button class="btn-close" (click)="close()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd"
+          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+          clip-rule="evenodd" />
+      </svg>
+    </button>
+  </div>
+  <div class="flex items-center justify-between px-0 sm:px-20">
+    <div class="inline-flex">
+      <h1 class=""><span>Cre</span>ate NFT</h1>
+    </div>
+
+    <div class="inline-flex">
+      <span (click)="preview()" class="text-green-500 cursor-pointer">Preview</span>
+    </div>
+  </div>
+  <!-- <div id="view-img"></div> -->
+
+  <div id="bg-image" class="relative p-0 text-2xl" style="display: none; width: 529px; height: 479px;">
+    <img id="showImage" src="./assets/card/1A.svg" alt="{{createNft.controls.group?.value?.name}}" style="width: 529px; height: 482px; padding: 0;">
+    <img *ngIf="createNft.controls?.group?.value?.coverImageUrl" class="absolute top-0 right-0" [src]="createNft.controls?.group?.value?.coverImageUrl" style="height: 135px;padding: 0;">
+      <img class="absolute object-scale-down w-full h-20 px-16 py-0 top-16" *ngIf="imageSrc" [src]="imageSrc">
+    <div>
+      <div style="position: absolute;top: 200px;left: 50px;width: 250px; ">
+        <p>Date</p>
+        <p style="font-size: 30px;font-weight: 400;">{{createNft.controls.date.value | date:'dd - M - yyyy'}}</p>
+      </div>
+      <div style="position: absolute;top: 200px;left: 340px; width: 150px;">
+        <p>Ticket</p>
+        <p class="truncate" style="font-size: 30px;font-weight: 400;">{{createNft.controls.group?.value?.name}}</p>
+      </div>
+      <div style="position: absolute;top: 340px;left: 90px;width: 340px;text-align: center;">
+        <p style="font-size: 28px;letter-spacing: 1.4px;font-weight: 400;opacity: 0.8;overflow: hidden;">{{createNft.controls.address.value}}</p>
+      </div>
+    </div>
+  </div>
+
+
+  <form action="" [formGroup]="createNft" class="px-0 overflow-y-auto sm:px-20 custom-scrollbar-css">
+    <div class="flex flex-col">
+      <span class="text-xl">Select Ticket Style</span>
+      <li class="inline-flex justify-around my-4 card-bg">
+        <ul>
+          <label>
+            <input id="checked" type="radio" name="test" value="small"  >
+            <img id="ticket" src="./assets/card/1A.svg" (click)="setBackground()" >
+          </label>
+        </ul>
+        <ul>
+          <label>
+            <input id="checked" type="radio" name="test" value="small" >
+            <img id="ticket" src="./assets/card/2A.svg" (click)="setBackground()">
+          </label>
+        </ul>
+        <ul>
+          <label>
+            <input id="checked" type="radio" name="test" value="small" >
+            <img id="ticket" src="./assets/card/3A.svg" (click)="setBackground()">
+          </label>
+        </ul>
+        <ul>
+          <label>
+            <input id="checked" type="radio" name="test" value="small" >
+            <img id="ticket" src="./assets/card/4A.svg" (click)="setBackground()">
+          </label>
+        </ul>
+        <ul>
+          <label>
+            <input id="checked" type="radio" name="test" value="small" >
+            <img id="ticket" src="./assets/card/5A.svg" (click)="setBackground()">
+          </label>
+        </ul>
+      </li>
+
+    </div>
+    <div class="flex flex-col">
+      <span class="text-xl">Select Logo</span><br>
+      <div class="relative flex justify-between overflow-hidden border-2 border-gray-400 border-dashed rounded-lg">
+      <button
+        class="flex items-center justify-between w-full px-4 py-2 font-bold text-gray-400 bg-primary-gray-100 hover:bg-indigo-dark">
+        <div class="ml-2 font-light text-gray-400">Select logo to Upload</div>
+        <div>
+          <svg
+            fill="#FFF"
+            height="28"
+            viewBox="0 0 24 24"
+            width="28"
+            xmlns="http://www.w3.org/2000/svg"
+            class="m-2">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z" />
+          </svg>
+        </div>
+      </button>
+      <input
+        class="absolute block opacity-0 cursor-pointer pin-r pin-t "
+        type="file"
+        name=""  accept="image/*"
+        (change)="onSelectFile($event)"
+      />
+    </div>
+    </div>
+    <div class="flex flex-col pt-3">
+      <span class="text-xl">Name</span><br>
+      <div class="relative flex flex-col justify-between overflow-hidden rounded-lg">
+      <input class="w-full px-2 font-light text-gray-400" type="text" name="name" formControlName="name"/>
+      <p class="error-msg error" *ngIf="createNft.controls.name.touched && createNft.controls.name.errors?.required">please enter name</p>
+      <p class="error-msg error" *ngIf="createNft.controls.name.touched && createNft.controls.name.errors?.minlength">name should be greater than or equal to {{createNft.controls.name.errors?.minlength.requiredLength}} character </p>
+    </div>
+    </div>
+    <div class="flex flex-col pt-3">
+      <span class="text-xl">Description</span><br>
+      <div class="relative flex flex-col justify-between overflow-hidden rounded-lg">
+      <input class="w-full px-2 font-light text-gray-400" type="text" name="description" formControlName="description"/>
+      <p class="error-msg error" *ngIf="createNft.controls.description.touched && createNft.controls.description.errors?.required">please enter description</p>
+      <p class="error-msg error" *ngIf="createNft.controls.description.touched && createNft.controls.description.errors?.minlength">description should be greater than or equal to {{createNft.controls.name.errors?.minlength.requiredLength}} character </p>
+    </div>
+    </div>
+    <div class="flex items-center justify-between mt-4">
+     <div class="flex justify-between">
+      <div style="margin-right: 60px;" class="inline-flex flex-col">
+        <span class="text-xl">Select Date</span><br>
+        <input type="date" class="px-2 font-light text-gray-400 w-44" formControlName="date" placeholder="dd-mm-yyyy" >
+        <p class="error-msg error" *ngIf="createNft.controls.date.touched && createNft.controls.date.errors?.required">please select date</p>
+      </div>
+      <div class="inline-flex flex-col">
+        <span class="text-xl" style="padding: 0 12px;">Select Group </span><br>
+        <label class="block text-left" style="padding-top: 0; padding-bottom: 0;">
+          <select formControlName="group"
+            class="block h-16 px-4 text-lg font-light text-gray-400 rounded-lg bg-primary-gray-100 focus:outline-none w-44 form-select">
+            <option [ngValue]="null" disabled>Select Group</option>
+            <option *ngFor="let group of (groups$ | async)" [ngValue]="group">
+              {{group.name}}
+            </option>
+            <!-- <option>Rock 2</option> -->
+          </select>
+        </label>
+        <p class="error-msg error" *ngIf="createNft.controls.group.touched && createNft.controls.group.errors?.required">please select group</p>
+      </div>
+     </div>
+    </div>
+    <div class="flex flex-col mt-4">
+      <span class="text-xl ">Enter Address</span><br>
+      <input class="font-light" type="text" maxlength="32" placeholder="Building 76-A Block B South West, 79000" formControlName="address">
+      <p class="error-msg error" *ngIf="createNft.controls.address.touched && createNft.controls.address.errors?.required">please enter address</p>
+    </div>
+    <button class="primary-btn" [disabled]="!createNft.valid" (click)="nextClick();">
+      Next
+    </button>
+
+
+  </form>

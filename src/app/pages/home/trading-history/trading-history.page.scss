@@ -6,32 +6,30 @@
   @apply relative w-full max-w-7xl p-7;
 }
 
+.filter-btn{
+  @apply inline-flex justify-center w-full px-4 py-1 text-sm font-medium text-white bg-gradient-to-r focus:from-blue-400 focus:to-green-400 rounded-full shadow-sm ;
+}
+.all-item {
+ @apply px-4 py-1 text-xs tracking-wide text-white md:h-7 lg:h-7 h-11 bg-gradient-to-r focus:from-blue-400 focus:to-green-400 rounded-full shadow-sm focus:outline-none
+}
+
+
+
 .membership-btn{
-  background: transparent linear-gradient(106deg, #79D984 0%, #EF676C 100%) 0% 0% no-repeat padding-box;
+  @apply px-4 py-1  text-xs tracking-wide text-white rounded-full bg-gradient-to-r focus:from-blue-400 focus:to-green-400 rounded-full md:h-7 lg:h-7 h-11
 }
 
 .tickets-btn{
-  background: transparent linear-gradient(108deg, #D94E66 0%, #D48D31 100%) 0% 0% no-repeat padding-box;
+ @apply px-4 py-1  text-xs tracking-wide text-white rounded-full md:h-7 lg:h-7 h-11 bg-gradient-to-r focus:from-blue-400 focus:to-green-400 rounded-full
 }
-
-.btn-nft {
-  background: transparent linear-gradient(109deg, #59C8D1 0%, #75F16D 100%) 0% 0% no-repeat padding-box;
-}
-
-
-// table {
-//   border-collapse:separate;
-//   border-spacing: 0 16px;
-//   text-align: center;
-//   box-sizing: border-box
-
-
-// }
 
 .pagination-btn{
-  @apply inline-flex items-center justify-center w-12 h-12 px-3 py-3 font-bold bg-gray-200 bg-opacity-25 rounded-xl;
+  @apply inline-flex items-center justify-center w-12 h-12 px-3 py-3 font-bold bg-gray-500 bg-opacity-25 rounded-xl hover:bg-primary-400 focus:bg-primary-400;
 }
 
+.pagination-btn{
+  @apply inline-flex items-center justify-center w-12 h-12 px-3 py-3 font-bold bg-gray-400 bg-opacity-25 rounded-xl hover:bg-primary-400 focus:bg-primary-400;
+}
 
 
 

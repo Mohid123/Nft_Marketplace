@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProfileButtonModule } from '../profile-button/profile-button.module';
 import { AdminHeaderComponent } from './admin-header/admin-header.component';
 
@@ -11,7 +12,9 @@ import { AdminHeaderComponent } from './admin-header/admin-header.component';
   ],
   imports: [
     CommonModule,
-    ProfileButtonModule
+    ProfileButtonModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     AdminHeaderComponent,

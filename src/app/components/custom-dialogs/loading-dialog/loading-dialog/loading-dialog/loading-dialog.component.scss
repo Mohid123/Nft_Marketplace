@@ -1,0 +1,26 @@
+::ng-deep .loading-dialog-overlay {
+  height: auto;
+  min-height: 413px;
+  max-width: 522px !important;
+  display: flex;
+  justify-content: center;
+}
+
+:host {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-close {
+  @apply absolute top-0 right-0 bg-white rounded-full opacity-50 m-3.5 hover:opacity-70;
+  padding: 1px;
+  svg {
+    color: #132356;
+  }
+}
+
+.loading-dialog-model {
+  height: 294px;
+  width: 234px;
+  background-image: url('/assets/loding.gif');
+}

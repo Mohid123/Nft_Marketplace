@@ -6,6 +6,11 @@ import { UserRoutingModule } from './user-routing.module';
 
 @NgModule({
   declarations: [MyProfilePage, OverviewPage],
-  imports: [CommonModule, UserRoutingModule],
+  imports: [
+      CommonModule,
+      // NgxSpinnerModule,
+      // BrowserAnimationsModule,
+     UserRoutingModule],
+    //  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class UserModule {}

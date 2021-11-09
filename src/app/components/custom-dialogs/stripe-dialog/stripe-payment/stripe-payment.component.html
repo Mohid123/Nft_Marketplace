@@ -1,1 +1,57 @@
-<p>stripe-payment works!</p>
+<div class="strip-payment-model">
+  <div class="flex justify-end">
+    <button class="btn-close"  (click)="close()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd"
+          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+          clip-rule="evenodd" />
+      </svg>
+    </button>
+  </div>
+  <div class="h-16 mt-0 .center">
+    <img class="object-center" src="./assets/logo/stripe-logo-blue.png">
+  </div>
+  <div class="mt-6 rounded-2xl w-28 h-28">
+    <img class="object-center" *ngIf="nft?.serverCaptureFileUrl" [src]="nft?.serverCaptureFileUrl">
+  </div>
+  <div class="w-full price">
+    <p style="width:fit-content;" class="pb-5 mx-auto mt-2 font-bold min-w-min">€ {{nft.price}}</p>
+  </div>
+  <!-- <h1 class=""><span>Sig</span>n in</h1> -->
+  <form  [formGroup]="stripeForm" class="strip-payment-form">
+      <label class="floating-label" for="cardNo">Card no</label>
+      <input type="number" formControlName="cardNo" maxlength="16" placeholder="************1234" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+      <span class="icon cardNo-hide-icon"></span>
+      <p class="error-msg error" *ngIf="stripeForm.controls.cardNo.touched && stripeForm.controls.cardNo.errors?.required">please enter card no</p>
+      <p class="error-msg error" *ngIf="stripeForm.controls.cardNo.touched && stripeForm.controls.cardNo.errors?.minlength">card no length should be greater than 3</p>
+      <div class="flex flex-row">
+        <div class="w-2/4 pr-4">
+          <label class="floating-label" for="validity">Validity</label>
+
+          <input type="text" formControlName="validity" maxlength="5" placeholder="e.g 01/22"
+          (keyup)="isDateValid()" id="dated">
+
+          <p class="error-msg error"
+            *ngIf="stripeForm.controls.validity.touched && stripeForm.controls.validity.errors?.required">please select valid date</p>
+          <p class="error-msg error"
+            *ngIf="stripeForm.controls.validity.touched && stripeForm.controls.validity.errors?.minlength">card no
+            length should be greater than 3</p>
+        </div>
+        <div class="w-2/4 pl-4">
+          <label class="floating-label" for="cvv">CVC</label>
+          <input type="number" formControlName="cvv" placeholder="123" maxlength="4" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+          <span class="icon cvv-hide-icon"></span>
+          <p class="error-msg error"
+            *ngIf="stripeForm.controls.cvv.touched && stripeForm.controls.cvv.errors?.required">please enter CVC</p>
+          <p class="error-msg error"
+            *ngIf="stripeForm.controls.cvv.touched && stripeForm.controls.cvv.errors?.minlength">CVV length should be
+            greater than 3</p>
+        </div>
+      </div>
+
+    <button class="primary-btn" (click)="payNowClick()">
+      Pay Now
+    </button>
+
+  </form>
+</div>

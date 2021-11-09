@@ -1,14 +1,21 @@
 <div class="card-border">
-  <a [routerLink]="['/detail']">
+  <ng-container *ngIf="(isAdminPanel$ | async);else cardDetails">
     <div class="nft-img">
-      <img class="w-64 h-56" src="../../../../assets/card/TICKET.svg" alt="Joker Card" />
+      <img *ngIf="nft?.serverCaptureFileUrl" class="w-64 h-56" [src]="nft.serverCaptureFileUrl" alt="Joker Card" />
     </div>
-  </a>
+  </ng-container>
+  <ng-template #cardDetails>
+    <a [routerLink]="['/',clubName,'detail',nft.id]">
+      <div class="nft-img">
+        <img *ngIf="nft?.serverCaptureFileUrl" class="w-64 h-56" [src]="nft.serverCaptureFileUrl" alt="Joker Card" />
+      </div>
+    </a>
+  </ng-template>
   <div class="flex items-center justify-between">
     <div class="inline-flex">
       <div class="flex justify-start h-9">
         <span class="inline-flex items-center py-1 text-sm leading-none text-gray-400 ">
-          NFT Seller
+         {{nft.type}}
 
         </span>
         <span class="inline-flex items-center text-sm text-gray-400">
@@ -19,19 +26,33 @@
       </div>
     </div>
     <span class="inline-flex text-gray-400">
-      #964
+      #{{nft.tokenId}}
     </span>
   </div>
-  <div class="mb-3.5">
-    <span class="pt-1 text-lg tracking-widest text-white ">King Card</span>
+  <div class="mb-2">
+    <p class="w-2 pt-1 text-lg tracking-widest text-white trun">{{nft.name}}</p>
   </div>
   <div class="flex items-center justify-between">
     <span class="inline-flex">
       <img src="./assets/coin/card-coin.svg" alt="">
-      <span class="ml-2 font-semibold">1.77</span>
+      <span class="ml-2 font-semibold">{{nft.price}}</span>
     </span>
-    <button class="w-16 px-4 py-1 text-xs text-white rounded-full h-7 btn-nft">
-      Active
-    </button>
+    <ng-container *ngIf="nft?.nftStatus && (isAdminPanel$ | async)">
+      <button class="px-4 py-1 text-xs text-white rounded-full w-18 h-7 btn-nft" >
+        {{nft.nftStatus}}
+      </button>
+    </ng-container>
+    <ng-container *ngIf="nft?.nftStatus && nft?.nftStatus !== 'Sold' && (isAdminPanel$ | async) === false">
+      <ng-container  *ngIf="nft?.nftStatus !== 'Active'; else nftButton" >
+        <button class="px-4 py-1 text-xs text-white rounded-full w-18 h-7 btn-nft" >
+          {{nft.nftStatus}}
+        </button>
+      </ng-container>
+      <ng-template #nftButton>
+        <button (click)="buyNow()" class="px-4 py-1 text-xs text-white rounded-full w-18 h-7 btn-nft" >
+          Buy Now
+         </button>
+      </ng-template>
+    </ng-container>
   </div>
 </div>

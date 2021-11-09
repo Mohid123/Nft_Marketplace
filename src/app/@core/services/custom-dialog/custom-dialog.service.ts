@@ -2,9 +2,12 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { NFT } from '@app/@core/models/NFT.model';
 import { AuthDialogService } from '@app/components/custom-dialogs/auth-diloag/auth-dialog.service';
+import { AuthService } from '@app/pages/auth/services/auth.service';
 import { CreateGroupService } from './../../../components/custom-dialogs/create-group-dialog/create-group.service';
 import { CreateNFTDiloagService } from './../../../components/custom-dialogs/create-ntf-diloag/create-nft-diloag.service';
+import { LoadingDialogService } from './../../../components/custom-dialogs/loading-dialog/loading-dialog/loading-dialog.service';
 import { StripeDialogService } from './../../../components/custom-dialogs/stripe-dialog/stripe-dialog.service';
 
 @Injectable({
@@ -16,9 +19,11 @@ export class CustomDialogService {
 
   constructor(
     protected router: Router,
+    private authService: AuthService,
     private authDialogService: AuthDialogService,
     private createNFTDiloagService: CreateNFTDiloagService,
     private createGroupService: CreateGroupService,
+    private loadingDialogService: LoadingDialogService,
     private stripeDialogService: StripeDialogService,
     public matDialog: MatDialog
   ) {}
@@ -28,25 +33,35 @@ export class CustomDialogService {
   //   this.matDialog.open(UserSignInComponent);
   // }
 
-  async showUserSignInDialog() {
+  async showUserSignInDialog(isPage = false) {
     this.matDialog.closeAll();
     this._mapDialogref = await this.authDialogService.openUserSignIn();
+    this._mapDialogref.componentInstance.isPage = isPage;
     // (await this._mapDialogref).afterClosed().subscribe((result) => {
     //   console.log('Mat Dialog Results user sign in:', result);
     // });
   }
 
-  async showAdminSignInDialog() {
+  async showAdminSignInDialog(isPage = false) {
     this.matDialog.closeAll();
     this._mapDialogref = await this.authDialogService.openAdminSignIn();
+    this._mapDialogref.componentInstance.isPage = isPage;
     // (await this._mapDialogref).afterClosed().subscribe((result) => {
     //   console.log('Mat Dialog Results admin sign in:', result);
     // });
   }
 
-  async showCreateNFTDialog() {
+  async showCreateNFTticketDialog() {
     this.matDialog.closeAll();
-    this._mapDialogref = await this.createNFTDiloagService.openCreateNFTComponent();
+    this._mapDialogref = await this.createNFTDiloagService.openCreateNFTticketComponent();
+    // (await this._mapDialogref).afterClosed().subscribe((result) => {
+    //   console.log('Mat Dialog Results admin sign in:', result);
+    // });
+  }
+
+  async showCreateMembership() {
+    this.matDialog.closeAll();
+    this._mapDialogref = await this.createNFTDiloagService.openCreateMembershipComponent();
     // (await this._mapDialogref).afterClosed().subscribe((result) => {
     //   console.log('Mat Dialog Results admin sign in:', result);
     // });
@@ -60,9 +75,27 @@ export class CustomDialogService {
     // });
   }
 
-  async showCreateNFTStyleDialog() {
+  async showCreateNFTticketOptionsDialog() {
     this.matDialog.closeAll();
-    this._mapDialogref = await this.createNFTDiloagService.openCreateNFTStyleComponent();
+    this._mapDialogref = await this.createNFTDiloagService.openCreateNFTticketOptionsComponent();
+    // (await this._mapDialogref).afterClosed().subscribe((result) => {
+    //   console.log('Mat Dialog Results admin sign in:', result);
+    // });
+  }
+
+  async showCreateNFTMembershipOptionsDialog() {
+    this.matDialog.closeAll();
+    this._mapDialogref = await this.createNFTDiloagService.openCreateNFTMembershipOptionsComponent();
+    // (await this._mapDialogref).afterClosed().subscribe((result) => {
+    //   console.log('Mat Dialog Results admin sign in:', result);
+    // });
+  }
+
+  async showCreateNFTticketPreviewDialog(img,isTicket) {
+    this.matDialog.closeAll();
+    this._mapDialogref = await this.createNFTDiloagService.openCreateNFTticketPreviewComponent();
+    this._mapDialogref.componentInstance.img = img;
+    this._mapDialogref.componentInstance.isTicket = isTicket;
     // (await this._mapDialogref).afterClosed().subscribe((result) => {
     //   console.log('Mat Dialog Results admin sign in:', result);
     // });
@@ -84,12 +117,23 @@ export class CustomDialogService {
     // });
   }
 
-  async showStripePaymenDialog() {
+  async showStripePaymenDialog(nft:NFT) {
+    if(this.authService.isLoggedIn) {
     this.matDialog.closeAll();
     this._mapDialogref = await this.stripeDialogService.openStripePaymentComponent();
+    this._mapDialogref.componentInstance.nft = nft;
     // (await this._mapDialogref).afterClosed().subscribe((result) => {
     //   console.log('Mat Dialog Results admin sign in:', result);
     // });
+    } else {
+      this.showUserSignInDialog();
+    }
+  }
+
+  async showLoadingDialog(status) {
+    this.matDialog.closeAll();
+    this._mapDialogref = await this.loadingDialogService.getLoadingDialogComponent();
+    this._mapDialogref.componentInstance.status = status;
   }
 
   closeDialogs() {

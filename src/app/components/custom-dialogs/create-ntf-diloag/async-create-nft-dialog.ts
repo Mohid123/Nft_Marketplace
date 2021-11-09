@@ -11,7 +11,17 @@ export abstract class AsyncCreateNFTDialog<
   constructor(protected matDialog: MatDialog) {}
 
   // @ts-ignore
-  abstract async openCreateNFTComponent(
+  abstract async openCreateNFTticketComponent(
+    data: DataType,
+  ): Promise<MatDialogRef<ComponentType, ReturnType>>;
+
+  // @ts-ignore
+  abstract async openCreateNFTticketPreviewComponent(
+    data: DataType,
+  ): Promise<MatDialogRef<ComponentType, ReturnType>>;
+
+  // @ts-ignore
+  abstract async openCreateMembershipComponent(
     data: DataType,
   ): Promise<MatDialogRef<ComponentType, ReturnType>>;
 
@@ -21,12 +31,12 @@ export abstract class AsyncCreateNFTDialog<
   ): Promise<MatDialogRef<ComponentType, ReturnType>>;
 
   // @ts-ignore
-  abstract async openCreateNFTStyleComponent(
+  abstract async openCreateNFTticketOptionsComponent(
     data: DataType,
   ): Promise<MatDialogRef<ComponentType, ReturnType>>;
 
   // @ts-ignore
-  abstract async openCreateNFTMintingComponent(
+  abstract async openCreateNFTMembershipOptionsComponent(
     data: DataType,
   ): Promise<MatDialogRef<ComponentType, ReturnType>>;
 }

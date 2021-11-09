@@ -31,7 +31,9 @@
             "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
-              "src/theme/styles.scss"
+              "src/theme/styles.scss",
+
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           },
