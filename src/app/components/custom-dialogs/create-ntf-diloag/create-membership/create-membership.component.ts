@@ -40,6 +40,8 @@ export class CreateMembershipComponent implements OnInit, AfterViewInit {
   private _isLoading: boolean;
   private _lastBgImg: string;
 
+
+
   public groupsByClub: ResponseGroupsByClub;
   public groups$ = this.groupService.groups$;
 
@@ -76,6 +78,8 @@ export class CreateMembershipComponent implements OnInit, AfterViewInit {
       this.createNft = this.nftService.createNftForm;
       this.imageSrc = this.nftService?.createNftForm?.controls?.img?.value;
       this._lastBgImg = this.createNft.controls?.bgImg?.value;
+
+
       this.nftService.createNftForm = null;
     }
   }
@@ -167,13 +171,15 @@ export class CreateMembershipComponent implements OnInit, AfterViewInit {
 
   // Click on each image and display each individually on background div
   setBackground(src?) {
-    const select = <HTMLImageElement>document.querySelector('#bg-image');
+    const select = <HTMLImageElement>document.querySelector('#bg-image')
     const tick = <HTMLImageElement>document.querySelector('#showImage');
-    tick.src = src || (event.target as HTMLImageElement).src;
+
+
+     tick.src = src || (event.target as HTMLImageElement).src || '../../../../../assets/card/membership 1a.svg';
     this.createNft.patchValue({
       bgImg: tick.src,
     });
-    // select.style.display = 'block';
+    // select.style.background = 'block';
   }
 
   preview(): void {
