@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TooltipPosition } from '@angular/material/tooltip';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { environment } from '@environments/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { take } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { distinctUntilChanged, take, takeUntil } from 'rxjs/operators';
 import { NFTList } from './../../../@core/models/NFTList.model';
 import { ApiResponse } from './../../../@core/models/response.model';
 import { NFTService } from './../../../@core/services/nft.service';
@@ -14,8 +15,9 @@ import { RouteService } from './../../../@core/services/route.service';
   templateUrl: './admin-market-place.page.html',
   styleUrls: ['./admin-market-place.page.scss'],
 })
-export class AdminMarketPlacePage implements OnInit {
+export class AdminMarketPlacePage implements OnInit ,OnDestroy {
 
+  destroy$ = new Subject();
   public nftList: NFTList;
   public clubName: string;
 
@@ -39,6 +41,11 @@ export class AdminMarketPlacePage implements OnInit {
     this._isLoading = false;
     this.clubName = this.routeService.clubName;
     this.getNfts();
+
+    this.nftService.cardCreatedSuccess$.pipe(distinctUntilChanged(),takeUntil(this.destroy$)).subscribe((nftId) => {
+      if(nftId && this.clubName)
+        this.getNfts();
+    });
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -82,6 +89,11 @@ export class AdminMarketPlacePage implements OnInit {
   previous():void {
     this.page--;
     this.getNfts();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.complete();
+    this.destroy$.unsubscribe();
   }
 
 }
