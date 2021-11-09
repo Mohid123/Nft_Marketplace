@@ -26,6 +26,10 @@ type nftApiData = NFT | NFTList | ResponseEventByNFT | MediaUpload ;
 })
 export class NFTService extends ApiService<nftApiData> {
 
+  private _cardCreatedSuccess$ = new BehaviorSubject<string>(null);
+  public readonly cardCreatedSuccess$: Observable<string> =
+    this._cardCreatedSuccess$.asObservable();
+
   private _nftList = new BehaviorSubject<NFTList>({
     totalCount: 0,
     data: [],
@@ -164,6 +168,9 @@ export class NFTService extends ApiService<nftApiData> {
     return this.post('/nft/addNft', params).pipe(take(1),tap((result:ApiResponse<nftApiData>)=>{
       if (result.hasErrors()) {
         this.toastrService.error(result?.errors[0]?.error?.message)
+      } else {
+        if(result?.data)
+          this._cardCreatedSuccess$.next((<NFT>result?.data)?.id);
       }
     }));
   }
