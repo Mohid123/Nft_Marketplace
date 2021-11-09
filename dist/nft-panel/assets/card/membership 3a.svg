@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="231.925" height="215.119" viewBox="0 0 231.925 215.119">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.084" y1="1" x2="1.392" y2="-0.196" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#f5ee97"/>
+      <stop offset="1" stop-color="#d225c1"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.99" y1="0.48" x2="-1.037" y2="0.56" gradientUnits="objectBoundingBox">
+      <stop offset="0"/>
+      <stop offset="0.258" stop-color="#020202"/>
+      <stop offset="0.38" stop-color="#090909"/>
+      <stop offset="0.474" stop-color="#161616"/>
+      <stop offset="0.553" stop-color="#282828"/>
+      <stop offset="0.622" stop-color="#404040"/>
+      <stop offset="0.686" stop-color="#5e5e5e"/>
+      <stop offset="0.744" stop-color="#818181"/>
+      <stop offset="0.799" stop-color="#aaa"/>
+      <stop offset="0.849" stop-color="#d6d6d6"/>
+      <stop offset="0.887" stop-color="#fff"/>
+    </linearGradient>
+  </defs>
+  <g id="membership_3a" data-name="membership 3a" transform="translate(0 -0.002)">
+    <g id="Group_57455" data-name="Group 57455" transform="translate(0)">
+      <rect id="Rectangle_78" data-name="Rectangle 78" width="215.119" height="231.925" rx="8" transform="translate(231.925 0.002) rotate(90)" fill="url(#linear-gradient)"/>
+    </g>
+    <g id="Group_57460" data-name="Group 57460" transform="translate(0.001 55.624)">
+      <path id="Path_273" data-name="Path 273" d="M151.268,0H0L79.631,231.924h71.637c4.544,0,8.229-6.375,8.229-14.242V14.24C159.5,6.373,155.811,0,151.268,0Z" transform="translate(231.924 0) rotate(90)" fill="url(#linear-gradient-2)" style="mix-blend-mode: screen;isolation: isolate"/>
+    </g>
+  </g>
+</svg>
