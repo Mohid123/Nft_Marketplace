@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { NFT } from '@app/@core/models/NFT.model';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { setItem, StorageItem } from '@app/@core/utils';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
@@ -26,6 +27,7 @@ export class StripeService extends ApiService<StripeApiData> {
   constructor(protected http: HttpClient,
     private customDialogService: CustomDialogService,
     private toastr: ToastrService,
+    private spinner: NgxSpinnerService
     ) {
     super(http);
   }
@@ -44,18 +46,20 @@ export class StripeService extends ApiService<StripeApiData> {
   }
 
   purchaseNFT(params:BuyNFT): void {
-
+    this.spinner.show();
     this.stripePay(params).pipe(take(1)).subscribe((res:ApiResponse<NFT>)=> {
-      if(!res.hasErrors()) {
-        this.customDialogService.showLoadingDialog('Transferring In Process');
+     if(!res.hasErrors()) {
+       this.customDialogService.showLoadingDialog('Transferring In Process');
         setTimeout(() => {
           this.customDialogService.closeDialogs();
         }, 3000);
+
         this._purchaseSuccess$.next(params.nftId)
         console.log('success:',res);
       } else {
         this.toastr.warning(res.errors[0]?.error?.message, 'Error!');
       }
+      this.spinner.hide();
     });
     // setTimeout(() => {
     //   this.customDialogService.closeDialogs();

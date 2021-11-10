@@ -100,4 +100,27 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
 }
 
 
+.custom-scrollbar-css {
+  height: 500px;
+}
+/* Custom Scrollbar using CSS */
+.custom-scrollbar-css {
+  overflow-y: scroll;
+}
+/* scrollbar width */
+.custom-scrollbar-css::-webkit-scrollbar {
+  width: 7px;
+}
+/* scrollbar track */
+.custom-scrollbar-css::-webkit-scrollbar-track {
+  background: #132356;
+}
+/* scrollbar handle */
+.custom-scrollbar-css::-webkit-scrollbar-thumb {
+  border-radius: 1rem;
+  background-color: #34ABC5;
+  background-image: linear-gradient(to top, #3ABFF3 0%, #75F16D 100%);
+}
+
+
 
