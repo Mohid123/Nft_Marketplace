@@ -22,7 +22,7 @@
   <div id="bg-image" class="relative p-0 text-2xl" style="display: none; width: 529px; height: 479px;">
     <img id="showImage" src="./assets/card/1A.svg" alt="{{createNft.controls.group?.value?.name}}" style="width: 529px; height: 482px; padding: 0;">
     <img *ngIf="createNft.controls?.group?.value?.coverImageUrl" class="absolute top-0 right-0" [src]="createNft.controls?.group?.value?.coverImageUrl" style="height: 135px;padding: 0;">
-      <img class="absolute object-scale-down w-full h-20 px-16 py-0 top-16" *ngIf="imageSrc" [src]="imageSrc">
+      <img class="absolute object-scale-down w-9/12 h-20 px-16 py-0 top-16" style="margin-left: 12.5%;" *ngIf="imageSrc" [src]="imageSrc">
     <div>
       <div style="position: absolute;top: 200px;left: 50px;width: 250px; ">
         <p>Date</p>

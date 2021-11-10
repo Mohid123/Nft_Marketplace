@@ -2,10 +2,12 @@
 /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CreatorService } from '@app/@core/services/creator.service';
+import { RouteService } from '@app/@core/services/route.service';
 import { AuthService } from '@app/pages/auth/services/auth.service';
-import { Observable, Subscription } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { Observable, Subject, Subscription } from 'rxjs';
+import { debounceTime, takeUntil } from 'rxjs/operators';
 import { CustomDialogService } from './../../../@core/services/custom-dialog/custom-dialog.service';
 
 @Component({
@@ -15,8 +17,11 @@ import { CustomDialogService } from './../../../@core/services/custom-dialog/cus
 })
 export class MarketplaceSearchComponent implements OnInit, OnDestroy {
 
+  destroy$ = new Subject();
+
   @Output() search = new EventEmitter();
   public searchStr = '';
+  public clubName: string;
 
   isLoggedIn$: Observable<boolean> = this.authService.isLoggedIn$;
   creator$ = this.creatorService.Creator$;
@@ -28,7 +33,13 @@ export class MarketplaceSearchComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private creatorService: CreatorService,
     private customDialogService: CustomDialogService,
-  ) { }
+    private routeService: RouteService,
+    private router: Router,
+  ) {
+    this.routeService.clubName$.pipe(takeUntil(this.destroy$)).subscribe((clubName) => {
+      this.clubName = clubName;
+    });
+   }
 
   ngOnInit(): void {
     this.formCtrlSub = this.searchControl.valueChanges.pipe(debounceTime(1000))
@@ -42,8 +53,14 @@ export class MarketplaceSearchComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.destroy$.complete();
+    this.destroy$.unsubscribe();
     if(this.formCtrlSub)
       this.formCtrlSub.unsubscribe();
+  }
+
+  gotoHome() {
+    this.router.navigate([this.clubName]);
   }
 
 

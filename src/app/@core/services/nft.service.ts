@@ -105,6 +105,19 @@ export class NFTService extends ApiService<nftApiData> {
     }));
   }
 
+  getRecentSoldNfts(page: number, limit: number) : Observable<ApiResponse<nftApiData>> {
+    page--;
+    const param = {
+      offset: page ? limit * page : 0,
+      limit: limit,
+    };
+     return this.get('/nft/getRecentSoldNfts', param).pipe(take(1),tap((result:ApiResponse<nftApiData>)=>{
+      if (result.hasErrors()) {
+        this.toastrService.error(result?.errors[0]?.error?.message)
+      }
+    }));
+  }
+
   getAllNftsByUser(clubName: string, userId:string ,page: number, searchValue: string ,groupId?:string,type?:string) : Observable<ApiResponse<nftApiData>> {
     page--;
     const param: getNftsByUserId = {
