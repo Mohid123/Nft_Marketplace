@@ -15,7 +15,7 @@
     <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
       <div class="flex flex-col items-center justify-start h-full">
 
-        <img style="max-height: 42px; max-width: 42px;" class="object-scale-down avatar mat-elevation-z8 rounded-xl" [src]="(creator$ | async)?.profileImageURL" />
+        <img [routerLink]="[clubName,adminRouteUrl.root]" style="max-height: 42px; max-width: 42px;" class="object-scale-down cursor-pointer avatar mat-elevation-z8 rounded-xl" [src]="(creator$ | async)?.profileImageURL" />
 
         <ul class="flex flex-col items-center h-full mt-8 list-none">
           <li class="relative inline-block">
