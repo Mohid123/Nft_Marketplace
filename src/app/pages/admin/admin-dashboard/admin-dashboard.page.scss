@@ -115,7 +115,7 @@ svg {
 
 
 .groups {
-  @apply h-full overflow-auto overflow-y-auto overflow-x-hidden pt-2.5;
+  @apply h-full pt-2.5;
   height: 326px;
   .group {
     @apply flex mb-3 p-2 w-full border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-1 rounded-md;

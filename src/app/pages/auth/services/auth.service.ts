@@ -117,8 +117,8 @@ export class AuthService extends ApiService<AuthApiData> {
     removeItem(StorageItem.User);
     removeItem(StorageItem.LoggedInUser);
     removeItem(StorageItem.JwtToken);
-    removeItem(StorageItem.ActiveClub);
     removeItem(StorageItem.LastRole);
+    removeItem(StorageItem.CreatorStats);
     this._isLoggedIn$.next(false);
     this._user$.next(null);
     this._loggedInUser$.next(null);

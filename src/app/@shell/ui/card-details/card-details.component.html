@@ -81,16 +81,21 @@
           <div class="text-base text-justify text-white lg:mr-20 respDesc">
             {{nft?.description}}
           </div>
-          <ng-container *ngIf="nft?.nftStatus && nft?.nftStatus !== 'Sold'">
-            <ng-container *ngIf="nft.nftStatus === 'Active'; else nftButton">
-              <button (click)="buyNow()" class="buyNowBtn">
-                Buy Now
+          <ng-container *ngIf="nft?.nftStatus && (isAdminPanel$ | async)">
+            <button class="buyNowBtn" >
+              {{nft.nftStatus}}
+            </button>
+          </ng-container>
+          <ng-container *ngIf="nft?.nftStatus && nft?.nftStatus !== 'Sold' && (isAdminPanel$ | async) === false">
+            <ng-container  *ngIf="nft?.nftStatus !== 'Active'; else nftButton" >
+              <button class="buyNowBtn" >
+                {{nft.nftStatus}}
               </button>
             </ng-container>
             <ng-template #nftButton>
-              <button class="buyNowBtn {{nft.nftStatus}}">
-                {{nft.nftStatus}}
-              </button>
+              <button (click)="buyNow()" class="buyNowBtn" >
+                Buy Now
+               </button>
             </ng-template>
           </ng-container>
         </div>

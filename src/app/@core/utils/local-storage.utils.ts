@@ -8,6 +8,7 @@ export enum StorageItem {
   ActiveClub = 'App/activeClub',
   LastRole = 'App/lastRole',
   Creator = 'App/creator',
+  CreatorStats = 'App/creatorStats',
   Theme = 'App/theme',
 }
 

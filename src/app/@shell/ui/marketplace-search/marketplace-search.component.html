@@ -1,6 +1,6 @@
 <div class="items-center p-4 mt-0 text-gray-600 md:mt-8 lg:mt-8 md:p-0 lg:p-0">
   <div class="flex flex-col flex-wrap mx-auto md:items-center lg:items-center md:flex-row">
-  <img style="max-height: 64px; width: auto;" class="flex-wrap object-scale-down w-36 md:w-42 lg:w-42 rounded-xl" [src]="(creator$ | async)?.profileImageURL" alt="" />
+  <img (click)="gotoHome()" style="max-height: 64px; width: auto;" class="flex-wrap object-scale-down w-36 md:w-42 lg:w-42 rounded-xl" [src]="(creator$ | async)?.profileImageURL" alt="" />
   <div class="justify-center flex-grow ">
     <div class="pt-2">
         <div class="relative">

@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
+import { RouteService } from '@app/@core/services/route.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Observable } from 'rxjs';
 import { NFT } from './../../../@core/models/NFT.model';
 
 @Component({
@@ -9,14 +11,18 @@ import { NFT } from './../../../@core/models/NFT.model';
   styleUrls: ['./card-details.component.scss']
 })
 export class CardDetailsComponent implements OnInit {
+
+  isAdminPanel$: Observable<boolean> = this.routeService.isAdminPanel$;
   public userName: any
   public profilePic: any
   public loggedInUser: any;
 
+
   @Input() nft:NFT;
   constructor(
     private customDialogService: CustomDialogService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private routeService: RouteService,
   ) { }
 
   ngOnInit(): void {
