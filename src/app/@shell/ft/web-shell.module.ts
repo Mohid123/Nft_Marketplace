@@ -32,7 +32,7 @@ const APP_ROUTES: Routes = [
         path: ROUTER_UTILS.config.admin.root,
         loadChildren: () =>
           import('@pages/admin/admin.module').then((m) => m.AdminModule),
-        canLoad: [AdminGuard],
+        canActivate: [AdminGuard],
       },
       {
         path: '' ,

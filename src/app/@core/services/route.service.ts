@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivationStart, NavigationEnd, Router } from '@angular/router';
+import { ActivationStart, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterEvent } from '@angular/router';
 import { getItem, setItem, StorageItem } from '@app/@core/utils';
 import { AuthService } from '@app/pages/auth/services/auth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -40,11 +40,33 @@ export class RouteService {
       setItem(StorageItem.Club, clubName);
     });
 
-    this.navEnd$.subscribe((data:NavigationEnd)=> {
-      if(data.id === 1 && data.url == "/")
-        this.router.navigate(['/noderon'])
-      // this.spinnerService.hide();
-    })
+    router.events.subscribe((event: RouterEvent) => {
+      if (event instanceof NavigationStart) {
+        this.spinnerService.show('main');
+        if (event.id === 1 && event.url == '/') {
+          this.router.navigate(['/noderon']);
+        }
+      }
+
+      if (event instanceof NavigationEnd) {
+       this.hideLoader();
+      }
+
+      if (event instanceof NavigationCancel) {
+        if(event.id > 1) {
+         this.hideLoader();
+        }
+      }
+      if (event instanceof NavigationError) {
+       this.hideLoader();
+      }
+    });
+  }
+
+  hideLoader(): void {
+    setTimeout(() => {
+      this.spinnerService.hide('main');
+    }, 500);
   }
 
   get routerState(): RouterState {
@@ -60,18 +82,10 @@ export class RouteService {
   }
 
  listenToRouter():void {
-   console.log('this.rout:',this.router);
-  //  this.router.events
-  //    .pipe(filter((event) => event instanceof ActivationStart))
-  //    .subscribe((event: any) => {
-  //      console.log('ActivationStart:');
-  //     });
-
       this.router.events.pipe(
         filter((event) => event instanceof ActivationStart),
         debounce(() => this.navEnd$)
         ).subscribe((event: any) => {
-        this.spinnerService.show();
         let route = event.snapshot;
         const path: any[] = [];
         const { params, queryParams, data } = route;
@@ -99,7 +113,6 @@ export class RouteService {
           data,
           path: path.reverse().join('/'),
         });
-        this.spinnerService.hide();
       });
   }
 }

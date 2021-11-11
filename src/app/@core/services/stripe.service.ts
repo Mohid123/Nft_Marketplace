@@ -46,7 +46,7 @@ export class StripeService extends ApiService<StripeApiData> {
   }
 
   purchaseNFT(params:BuyNFT): void {
-    this.spinner.show();
+    this.spinner.show('main');
     this.stripePay(params).pipe(take(1)).subscribe((res:ApiResponse<NFT>)=> {
      if(!res.hasErrors()) {
        this.customDialogService.showLoadingDialog('Transferring In Process');
@@ -59,7 +59,7 @@ export class StripeService extends ApiService<StripeApiData> {
       } else {
         this.toastr.warning(res.errors[0]?.error?.message, 'Error!');
       }
-      this.spinner.hide();
+      this.spinner.hide('main');
     });
     // setTimeout(() => {
     //   this.customDialogService.closeDialogs();
