@@ -107,7 +107,6 @@ export class CreateGroupComponent {
                   coverImageUrl: res.data.url,
                 };
                 return this.groupService.addGroups(param);
-
               } else {
                 return of(null);
               }
@@ -121,8 +120,8 @@ export class CreateGroupComponent {
             } else {
               this.toastr.warning(res.errors[0]?.error?.message, 'Error!');
               // alert('error :' + res.errors[0]?.error?.message);
-              this.spinner.hide('main');
             }
+            this.spinner.hide('main');
           });
       })
       .catch((error) => {

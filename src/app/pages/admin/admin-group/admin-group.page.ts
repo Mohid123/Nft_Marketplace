@@ -17,7 +17,7 @@ export class AdminGroupPage implements OnDestroy {
   creator$ = this.creatorService.Creator$;
   destroy$ = new Subject();
 
-  public isLoading:boolean;
+  public isLoading$ = this.groupService.isLoading$;
 
   public clubName: string;
   public groups$ = this.groupService.groups$;
@@ -36,7 +36,6 @@ export class AdminGroupPage implements OnDestroy {
     private cf: ChangeDetectorRef
   ) {
     this.page = 1;
-    this.isLoading = false;
     this.routeService.clubName$.pipe(distinctUntilChanged(), takeUntil(this.destroy$))
     .subscribe((clubName) => {
       this.clubName = clubName;
@@ -45,8 +44,6 @@ export class AdminGroupPage implements OnDestroy {
   }
 
   getGroup(): void {
-    if (this.isLoading) return
-    this.isLoading = true;
     this.groupService.getAllGroupsByClub(this.clubName, this.page, this.limit,this.searchValu);
   }
 
