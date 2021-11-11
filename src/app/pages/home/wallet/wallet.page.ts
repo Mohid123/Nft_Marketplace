@@ -53,22 +53,13 @@ export class WalletPage implements OnInit {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   ngOnInit(): void {
     this.spinner.show();
-
-    setTimeout(() => {
-      /** spinner ends after 5 seconds */
+      setTimeout(() => {
       this.spinner.hide();
     }, 1000);
-    console.log('market palce:');
-    // this.nftService.getNft('');
   }
 
   getNfts(): void {
     this.spinner.show();
-
-    setTimeout(() => {
-      /** spinner ends after 5 seconds */
-      this.spinner.hide();
-    }, 1000);
     if (this._isLoading) return;
     this.nftService
       .getAllNftsByUser(
@@ -84,6 +75,7 @@ export class WalletPage implements OnInit {
         if (!result.hasErrors()) {
           this.nftList = result.data;
         }
+        this.spinner.hide();
         this._isLoading = false;
       });
   }

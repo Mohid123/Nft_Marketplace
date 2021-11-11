@@ -61,12 +61,10 @@ export class AdminMarketPlacePage implements OnInit ,OnDestroy {
       .pipe(take(1))
       .subscribe((result:ApiResponse<NFTList>) => {
         console.log('res:',result);
-        setTimeout(() => {
-          this.spinner.hide();
-          }, 500);
         if (!result.hasErrors()) {
           this.nftList = result.data;
         }
+        this.spinner.hide();
         this._isLoading = false;
       });
   }

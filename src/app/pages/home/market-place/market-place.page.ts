@@ -61,23 +61,15 @@ export class MarketPlacePage implements OnInit ,OnDestroy {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   ngOnInit(): void {
     this.spinner.show();
-
-    setTimeout(() => {
-      /** spinner ends after 5 seconds */
-      this.spinner.hide();
+      setTimeout(() => {
+        this.spinner.hide();
     }, 1000);
     console.log('market palce:');
     this.groupService.getAllGroupsByClub(this.clubName, 0, 0);
-    // this.nftService.getNft('');
   }
 
   getNfts(): void {
     this.spinner.show();
-
-    setTimeout(() => {
-      /** spinner ends after 5 seconds */
-      this.spinner.hide();
-    }, 1000);
     if (this._isLoading) return
     this.nftService.getAllNftsByClub(this.clubName, this.page, this.nftLimit ,this.searchValu ,this.filterGroup?.id, this.type)
       .pipe(take(1))
@@ -85,6 +77,7 @@ export class MarketPlacePage implements OnInit ,OnDestroy {
         if (!result.hasErrors()) {
           this.nftList = result.data;
         }
+        this.spinner.hide();
         this._isLoading = false;
       });
   }
