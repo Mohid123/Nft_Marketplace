@@ -4,6 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { NFT } from '@app/@core/models/NFT.model';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { environment } from '@environments/environment';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { exhaustMap, take, tap } from 'rxjs/operators';
@@ -48,13 +49,14 @@ export class NFTService extends ApiService<nftApiData> {
     protected customDialogService: CustomDialogService,
     protected http: HttpClient,
     private mediaService: MediaService,
-    protected toastrService: ToastrService
+    protected toastrService: ToastrService,
+    private spinner: NgxSpinnerService
   ) {
     super(http);
   }
 
   requestCreateNFT(nftForm,img):void {
-    this.customDialogService.showLoadingDialog('Minting In Process');
+    this.spinner.show('main');
     this.mediaService
       .uploadMedia('nft', img)
       .pipe(
@@ -62,6 +64,7 @@ export class NFTService extends ApiService<nftApiData> {
         exhaustMap((res: ApiResponse<ResponseAddGroupMedia>) => {
           console.log('res:',res);
           if (!res.hasErrors()) {
+
               nftForm.serverCaptureFileUrl = res.data.url;
               nftForm.path = res.data.path;
               return this.addNft(nftForm);
@@ -78,6 +81,7 @@ export class NFTService extends ApiService<nftApiData> {
         else {
           this.customDialogService.closeDialogs();
         }
+        this.spinner.hide('main');
     });
 
     setTimeout(() => {
@@ -183,6 +187,10 @@ export class NFTService extends ApiService<nftApiData> {
         this.toastrService.error(result?.errors[0]?.error?.message)
       } else {
         if(result?.data)
+        this.customDialogService.showLoadingDialog('Minting In Process');
+            setTimeout(() => {
+              this.customDialogService.closeDialogs();
+            }, 3000);
           this._cardCreatedSuccess$.next((<NFT>result?.data)?.id);
       }
     }));
