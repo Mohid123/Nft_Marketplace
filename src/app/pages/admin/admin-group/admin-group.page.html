@@ -120,7 +120,10 @@
               <th>Action</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="relative">
+            <ngx-spinner name="admin-market" [fullScreen]="false" [showSpinner]="isLoading" bdColor="#171830" size="medium" color="#fff" type="ball-scale-multiple">
+              <p style="font-size: 20px; color: white">{{(creator$ | async)?.displayName}}...</p>
+            </ngx-spinner>
               <ng-container *ngFor="let group of (groups$ | async);last as isLast" class="">
                 <tr [ngStyle]="{'border-bottom': isLast ? '1px solid #aaaaaa2a' : 'none' }">
                   <td>{{group.name}}</td>
