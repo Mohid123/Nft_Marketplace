@@ -54,7 +54,7 @@ export class StripePaymentComponent  {
     };
 
     this.stripeService.purchaseNFT(param);
-    this.close();
+    // this.close();
   }
 
   isDateValid() {

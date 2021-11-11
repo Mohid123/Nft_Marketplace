@@ -58,6 +58,7 @@ export class StripeService extends ApiService<StripeApiData> {
         console.log('success:',res);
       } else {
         this.toastr.warning(res.errors[0]?.error?.message, 'Error!');
+
       }
       this.spinner.hide('main');
     });
