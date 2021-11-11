@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TooltipPosition } from '@angular/material/tooltip';
+import { CreatorService } from '@app/@core/services/creator.service';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { environment } from '@environments/environment';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { Subject } from 'rxjs';
 import { distinctUntilChanged, take, takeUntil } from 'rxjs/operators';
 import { NFTList } from './../../../@core/models/NFTList.model';
@@ -17,11 +17,12 @@ import { RouteService } from './../../../@core/services/route.service';
 })
 export class AdminMarketPlacePage implements OnInit ,OnDestroy {
 
+  creator$ = this.creatorService.Creator$;
   destroy$ = new Subject();
   public nftList: NFTList;
   public clubName: string;
 
-  private _isLoading:boolean;
+  public isLoading:boolean;
 
   public limit = environment.limit  ;
   public nftLimit = environment.limit ;
@@ -33,12 +34,12 @@ export class AdminMarketPlacePage implements OnInit ,OnDestroy {
 
   constructor(
     private customDialogService: CustomDialogService,
+    private creatorService: CreatorService,
     private nftService: NFTService,
     private routeService: RouteService,
-    private spinner: NgxSpinnerService
   ) {
     this.page = 1;
-    this._isLoading = false;
+    this.isLoading = false;
     this.clubName = this.routeService.clubName;
     this.getNfts();
 
@@ -55,17 +56,15 @@ export class AdminMarketPlacePage implements OnInit ,OnDestroy {
   }
 
   getNfts(): void {
-    if (this._isLoading) return
-    this.spinner.show();
+    if (this.isLoading) return
+    this.isLoading = true;
     this.nftService.getAllNftsAdminPanel(this.clubName, this.page, this.searchValu )
       .pipe(take(1))
       .subscribe((result:ApiResponse<NFTList>) => {
-        console.log('res:',result);
         if (!result.hasErrors()) {
           this.nftList = result.data;
         }
-        this.spinner.hide();
-        this._isLoading = false;
+        this.isLoading = false;
       });
   }
 

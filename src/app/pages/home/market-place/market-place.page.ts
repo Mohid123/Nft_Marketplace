@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { CreatorService } from '@app/@core/services/creator.service';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { Subject } from 'rxjs';
 import { distinctUntilChanged, take, takeUntil } from 'rxjs/operators';
 import { Group } from './../../../@core/models/group.model';
@@ -21,9 +21,10 @@ import { StripeService } from './../../../@core/services/stripe.service';
 })
 export class MarketPlacePage implements OnInit ,OnDestroy {
 
+  creator$ = this.creatorService.Creator$;
   destroy$ = new Subject();
 
-  private _isLoading:boolean;
+  public isLoading:boolean;
   public type = '';
 
   public nftList: NFTList;
@@ -38,14 +39,14 @@ export class MarketPlacePage implements OnInit ,OnDestroy {
 
   constructor(
     private customDialogService: CustomDialogService,
+    private creatorService: CreatorService,
     private groupService: GroupService,
     private nftService: NFTService,
     private routeService: RouteService,
-    private spinner: NgxSpinnerService,
     private stripeService: StripeService,
   ) {
     this.page = 1;
-    this._isLoading = false;
+    this.isLoading = false;
     this.routeService.clubName$.pipe(takeUntil(this.destroy$)).subscribe((clubName) => {
       this.clubName = clubName;
       if(this.clubName)
@@ -60,30 +61,23 @@ export class MarketPlacePage implements OnInit ,OnDestroy {
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   ngOnInit(): void {
-    this.spinner.show();
-      setTimeout(() => {
-        this.spinner.hide();
-    }, 1000);
-    console.log('market palce:');
     this.groupService.getAllGroupsByClub(this.clubName, 0, 0);
   }
 
   getNfts(): void {
-    this.spinner.show();
-    if (this._isLoading) return
+    if (this.isLoading) return
+    this.isLoading = true;
     this.nftService.getAllNftsByClub(this.clubName, this.page, this.nftLimit ,this.searchValu ,this.filterGroup?.id, this.type)
       .pipe(take(1))
       .subscribe((result:ApiResponse<NFTList>) => {
         if (!result.hasErrors()) {
           this.nftList = result.data;
         }
-        this.spinner.hide();
-        this._isLoading = false;
+        this.isLoading = false;
       });
   }
 
   next():void {
-
     this.page++;
     this.getNfts();
   }
@@ -93,34 +87,19 @@ export class MarketPlacePage implements OnInit ,OnDestroy {
     this.getNfts();
   }
 
-  test() {
-    this.customDialogService.showCreateNFTticketDialog();
-  }
-
-  test2() {
-    this.customDialogService.showCreateNFTOptionsDialog();
-  }
-
-  priceModal() {
-    // this.customDialogService.showCreateNFTStyleDialog();
-  }
-
   filterBy (group:Group) :void {
-
     this.page = 1;
     this.filterGroup = group;
     this.getNfts();
-    console.log('group:',group);
-
   }
 
-  search(searchValu) {
+  search(searchValu: string): void {
     this.searchValu = searchValu;
     this.page = 1;
     this.getNfts();
   }
 
-  setType(type:string) {
+  setType(type:string): void {
     this.type = type;
     this.page = 1;
     this.getNfts();

@@ -26,13 +26,6 @@ export class CardDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
-    this.spinner.show();
-
-    setTimeout(() => {
-
-      this.spinner.hide();
-    }, 2000);
     this.userName = JSON.parse(localStorage.getItem('App/user'))
     this.profilePic = JSON.parse(localStorage.getItem('App/user'))
     this.loggedInUser = JSON.parse(localStorage.getItem('App/loggedInUser'))
