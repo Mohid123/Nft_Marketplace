@@ -15,7 +15,7 @@
   </div>
   <div class="flex flex-col">
     <span class="text-xl">Price</span><br>
-    <input type='number' placeholder="500" [(ngModel)]="price">
+    <input type='number' placeholder="500" [(ngModel)]="price" maxlength="6" placeholder="999999" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
   </div>
 
   <div class="flex flex-col">
