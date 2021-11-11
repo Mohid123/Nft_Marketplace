@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
+import { Component } from '@angular/core';
+import { CreatorService } from '@app/@core/services/creator.service';
 import { AuthService } from '@app/pages/auth/services/auth.service';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { take } from 'rxjs/operators';
 import { environment } from './../../../../environments/environment.prod';
 import { Group } from './../../../@core/models/group.model';
@@ -17,7 +16,9 @@ import { RouteService } from './../../../@core/services/route.service';
   templateUrl: './wallet.page.html',
   styleUrls: ['./wallet.page.scss'],
 })
-export class WalletPage implements OnInit {
+export class WalletPage {
+
+  creator$ = this.creatorService.Creator$;
 
   public type = '';
 
@@ -30,37 +31,28 @@ export class WalletPage implements OnInit {
   public page:number;
   public nftLimit = environment.limit ;
 
-  private _isLoading: boolean;
+  public isLoading: boolean;
   public filterGroup: Group;
 
   public searchValue = '';
 
   constructor(
     private authService: AuthService,
-    private customDialogService: CustomDialogService,
-    private spinner: NgxSpinnerService,
+    private creatorService: CreatorService,
     private groupService: GroupService,
     private nftService: NFTService,
     private routeService: RouteService,
   ) {
     this.page = 1;
-    this._isLoading = false;
+    this.isLoading = false;
     this.clubName = this.routeService.clubName;
     this.getGroups();
     this.getNfts();
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  ngOnInit(): void {
-    this.spinner.show();
-      setTimeout(() => {
-      this.spinner.hide();
-    }, 1000);
-  }
-
   getNfts(): void {
-    this.spinner.show();
-    if (this._isLoading) return;
+    if (this.isLoading) return;
+    this.isLoading = true;
     this.nftService
       .getAllNftsByUser(
         this.clubName,
@@ -75,8 +67,7 @@ export class WalletPage implements OnInit {
         if (!result.hasErrors()) {
           this.nftList = result.data;
         }
-        this.spinner.hide();
-        this._isLoading = false;
+        this.isLoading = false;
       });
   }
 
@@ -103,7 +94,6 @@ export class WalletPage implements OnInit {
           this.totalCount = result.data.totalCount;
           this.groups = result.data?.data;
         }
-        this._isLoading = false;
       });
   }
 
@@ -111,17 +101,15 @@ export class WalletPage implements OnInit {
     this.page = 1;
     this.filterGroup = group;
     this.getNfts();
-    console.log('group:',group);
-
   }
 
-  search(searchValue): void {
+  search(searchValue: string): void {
     this.searchValue = searchValue;
     this.page = 1;
     this.getNfts();
   }
 
-  setType(type:string) {
+  setType(type:string): void {
     this.type = type;
     this.page = 1;
     this.getNfts();

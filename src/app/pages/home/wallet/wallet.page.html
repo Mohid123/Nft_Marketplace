@@ -61,7 +61,18 @@
   </div>
 
   <!--Cards-->
-  <div class="cards-container">
+  <div class="relative cards-container">
+    <ngx-spinner
+      [fullScreen]="false"
+      [showSpinner]="isLoading"
+      [show]="isLoading"
+      bdColor="#171830"
+      size="medium"
+      color="#fff"
+      type="ball-scale-multiple">
+      <p style="font-size: 20px; color: white">{{(creator$ | async)?.displayName}}...</p>
+    </ngx-spinner>
+
     <ng-container *ngIf="nftList && nftList.totalCount > 0">
       <ng-container *ngFor="let nftCard of nftList.data" class="">
         <app-nft-card [nft]="nftCard"></app-nft-card>
