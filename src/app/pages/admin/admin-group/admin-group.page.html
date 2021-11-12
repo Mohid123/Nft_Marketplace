@@ -17,24 +17,24 @@
           </button>
         </div>
         <div class="filter">
-          <button mat-icon-button aria-label="menu" class="w-16" mat-icon-button [matMenuTriggerFor]="statusMenu" >
-            <span>Status</span>
+          <button mat-icon-button aria-label="menu" class="w-16" mat-icon-button [matMenuTriggerFor]="itemCountMenu" >
+            <span>Item Count</span>
             <span class="material-icons">
               arrow_drop_down
               </span>
           </button>
         </div>
         <div class="filter">
-          <button mat-icon-button aria-label="menu" class="w-16" [matMenuTriggerFor]="priceMenu" >
-            <span>Price</span>
+          <button mat-icon-button aria-label="menu" class="w-16" [matMenuTriggerFor]="nameMenu" >
+            <span>Name</span>
             <span class="material-icons">
               arrow_drop_down
               </span>
           </button>
         </div>
         <div class="filter">
-          <button mat-icon-button aria-label="menu" class="w-16" [matMenuTriggerFor]="tokenId">
-            <span>Token ID</span>
+          <button mat-icon-button aria-label="menu" class="w-16" [matMenuTriggerFor]="groups">
+            <span>Groups</span>
             <span class="material-icons">
               arrow_drop_down
               </span>
@@ -47,63 +47,37 @@
           </button>
         </div>
 
-          <!--status menu-->
-        <mat-menu #statusMenu="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md" xPosition='after'>
+          <!--Item count menu-->
+        <mat-menu #itemCountMenu="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md" xPosition='after'>
           <button class="dropdown" mat-menu-item>
-           Draft
+           Maximum
           </button>
           <button  class="dropdown" mat-menu-item>
-          Active
+          Minimum
           </button>
         </mat-menu>
 
-         <!--price menu-->
-        <mat-menu #priceMenu="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md text-sm mat-menu" xPosition='after'>
-          Range from
+         <!--Name menu-->
+        <mat-menu #nameMenu="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md text-sm mat-menu" xPosition='after'>
+          Sort by
           <button class="dropdown" mat-menu-item>
-            €1 - €100
+            A - Z
           </button>
           <button  class="dropdown" mat-menu-item>
-            €100 - €200
+            Z - A
           </button>
-          <button  class="dropdown" mat-menu-item>
-            €200 - €300
-          </button>
-          <button  class="dropdown" mat-menu-item>
-            €300 - €400
-          </button>
-          <button  class="dropdown" mat-menu-item>
-            €400 - €500
-          </button>
-          <button  class="dropdown" mat-menu-item>
-            €500 - €600
-          </button>
-          <button  class="dropdown" mat-menu-item>
-            €600 - €700
-          </button>
-          <button class="dropdown" mat-menu-item>
-            €700 - €800
-          </button>
-          <button class="dropdown" mat-menu-item>
-            €800 - €900
-          </button>
-          <button  class="dropdown" mat-menu-item>
-            €900 - €1000
-          </button>
-          <button  class="dropdown" mat-menu-item>
-            €1000 +
-          </button>
+
 
         </mat-menu>
 
-           <!--TokenId menu-->
-           <mat-menu #tokenId="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md text-sm" xPosition='after'>
+           <!--Groups menu-->
+           <mat-menu #groups="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md text-sm" xPosition='after'>
              Sort by
             <button class="dropdown" mat-menu-item>
-             Ascending
+              A - Z
             </button>
             <button  class="dropdown" mat-menu-item>
-            Descending
+              Z - A
             </button>
           </mat-menu>
 

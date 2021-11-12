@@ -11,15 +11,15 @@
 
   <div class="w-full "  >
     <div class="mt-6 has-tooltip">
-       <div class="opacity-25 filters"   matTooltip="Coming soon.." matTooltipClass="tooltips" matTooltipPosition="right">
+      <div class="filters">
         <div class="filter">
-          <button mat-icon-button aria-label="menu">
+          <button mat-icon-button aria-label="statusMenu">
             <span><mat-icon>filter_alt</mat-icon></span>
             <span class="px-px sm:px-2">Filter</span>
           </button>
         </div>
         <div class="filter">
-          <button mat-icon-button aria-label="menu" class="w-16">
+          <button mat-icon-button aria-label="menu" class="w-16" mat-icon-button [matMenuTriggerFor]="statusMenu" >
             <span>Status</span>
             <span class="material-icons">
               arrow_drop_down
@@ -27,7 +27,7 @@
           </button>
         </div>
         <div class="filter">
-          <button mat-icon-button aria-label="menu" class="w-16">
+          <button mat-icon-button aria-label="menu" class="w-16" [matMenuTriggerFor]="priceMenu" >
             <span>Price</span>
             <span class="material-icons">
               arrow_drop_down
@@ -35,7 +35,7 @@
           </button>
         </div>
         <div class="filter">
-          <button mat-icon-button aria-label="menu" class="w-16">
+          <button mat-icon-button aria-label="menu" class="w-16" [matMenuTriggerFor]="tokenId">
             <span>Token ID</span>
             <span class="material-icons">
               arrow_drop_down
@@ -45,9 +45,70 @@
         <div class="filter">
           <button mat-icon-button aria-label="menu">
             <span><mat-icon>restart_alt</mat-icon></span>
-            <span class="px-px sm:px-2">Reset Filter</span>
+            <span class="px-px sm:px-2">Restart Filter</span>
           </button>
         </div>
+
+          <!--status menu-->
+        <mat-menu #statusMenu="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md" xPosition='after'>
+          <button class="dropdown" mat-menu-item>
+           Draft
+          </button>
+          <button  class="dropdown" mat-menu-item>
+          Active
+          </button>
+        </mat-menu>
+
+         <!--price menu-->
+        <mat-menu #priceMenu="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md text-sm mat-menu" xPosition='after'>
+          Range from
+          <button class="dropdown" mat-menu-item>
+            €1 - €100
+          </button>
+          <button  class="dropdown" mat-menu-item>
+            €100 - €200
+          </button>
+          <button  class="dropdown" mat-menu-item>
+            €200 - €300
+          </button>
+          <button  class="dropdown" mat-menu-item>
+            €300 - €400
+          </button>
+          <button  class="dropdown" mat-menu-item>
+            €400 - €500
+          </button>
+          <button  class="dropdown" mat-menu-item>
+            €500 - €600
+          </button>
+          <button  class="dropdown" mat-menu-item>
+            €600 - €700
+          </button>
+          <button class="dropdown" mat-menu-item>
+            €700 - €800
+          </button>
+          <button class="dropdown" mat-menu-item>
+            €800 - €900
+          </button>
+          <button  class="dropdown" mat-menu-item>
+            €900 - €1000
+          </button>
+          <button  class="dropdown" mat-menu-item>
+            €1000 +
+          </button>
+
+        </mat-menu>
+
+           <!--TokenId menu-->
+           <mat-menu #tokenId="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md text-sm" xPosition='after'>
+             Sort by
+            <button class="dropdown" mat-menu-item>
+             Ascending
+            </button>
+            <button  class="dropdown" mat-menu-item>
+            Descending
+            </button>
+          </mat-menu>
+
       </div>
     </div>
 
