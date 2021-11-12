@@ -8,6 +8,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { exhaustMap, take, tap } from 'rxjs/operators';
+import { IsMembershipIdExists } from '../models/is-membership-id-exists.model';
 import { GetAllNftsByClub } from '../models/requests/get-all-afts-by-club.model';
 import { getNftsByUserId } from '../models/requests/get-nfts-by-user.model';
 import { getNftsForAdmin } from '../models/requests/get-nfts-for-admin.model';
@@ -20,7 +21,7 @@ import { RouterState } from './../models/routerState.model';
 import { ApiService } from './api.service';
 import { MediaService } from './media.service';
 
-type nftApiData = NFT | NFTList | ResponseEventByNFT | MediaUpload ;
+type nftApiData = NFT | NFTList | ResponseEventByNFT | MediaUpload | IsMembershipIdExists ;
 
 @Injectable({
   providedIn: 'root',
@@ -64,7 +65,6 @@ export class NFTService extends ApiService<nftApiData> {
         exhaustMap((res: ApiResponse<ResponseAddGroupMedia>) => {
           console.log('res:',res);
           if (!res.hasErrors()) {
-
               nftForm.serverCaptureFileUrl = res.data.url;
               nftForm.path = res.data.path;
               return this.addNft(nftForm);
@@ -179,6 +179,10 @@ export class NFTService extends ApiService<nftApiData> {
         this.toastrService.error(result?.errors[0]?.error?.message)
       }
     }));
+  }
+
+  isMembershipIDExists(params: { appPackageId:string,membershipId:string}): Observable<ApiResponse<nftApiData>> {
+    return this.post('/nft/isMembershipIDExists', params);
   }
 
   addNft(params: NFT): Observable<ApiResponse<nftApiData>>{

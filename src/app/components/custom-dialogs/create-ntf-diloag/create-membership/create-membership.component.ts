@@ -10,8 +10,11 @@ import { NFTService } from '@app/@core/services/nft.service';
 import { RouteService } from '@app/@core/services/route.service';
 import { AuthService } from '@app/pages/auth/services/auth.service';
 import * as htmlToImage from 'html-to-image';
+import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { IsMembershipIdExists } from './../../../../@core/models/is-membership-id-exists.model';
+import { ApiResponse } from './../../../../@core/models/response.model';
 
 @Component({
   selector: 'app-create-membership',
@@ -56,6 +59,7 @@ export class CreateMembershipComponent implements OnInit, AfterViewInit {
     private groupService: GroupService,
     private routeService: RouteService,
     private authService: AuthService,
+    private toastr: ToastrService,
   ) {
     this.createNft = this.formBuilder.group({
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -115,38 +119,49 @@ export class CreateMembershipComponent implements OnInit, AfterViewInit {
   }
 
   nextClick(): void {
-    this.createPreviewImg().then((dataUrl) => {
-        // const img = new Image();
-        // img.src = dataUrl;
-        // document.getElementById('view-img').appendChild(img);
-        this.createNft.patchValue({
-          file: this.mediaService.dataURLtoFile(
-            dataUrl,
-            this.createNft.controls.membershipId.value + '.png',
-          ),
-        });
-        this.imgFormData.append('file', this.createNft.get('file').value);
+    const params = {
+      appPackageId: this.authService.loggedInUser.appPackageId,
+      membershipId: this.createNft.controls.membershipId.value,
+    };
 
-        const form: NFT = {
-          type : 'Membership Card',
-          forSale: true,
-          freezeNft:true,
-          serverCaptureFileUrl:'',
-          name : this.createNft.controls.name.value,
-          description : this.createNft.controls.description.value,
-          groupId: this.createNft.controls.group.value.id,
-          userId: this.authService.loggedInUser.id,
-          clubUserId: this.authService.loggedInUser.clubUserId,
-          appPackageId: this.authService.loggedInUser.appPackageId,
-          membershipId:  this.createNft.controls.membershipId.value,
-        }
-        this.nftService.createNFT = form;
-        this.nftService.createNFTImg = this.imgFormData;
-        this.customDialogService.showCreateNFTMembershipOptionsDialog();
-      })
-      .catch((error) => {
-        console.error('oops, something went wrong!', error);
-      });
+    this.nftService.isMembershipIDExists(params).subscribe((result:ApiResponse<IsMembershipIdExists>)=> {
+      if(!result.hasErrors() && result.data.response  == false ) {
+        this.createPreviewImg().then((dataUrl) => {
+          // const img = new Image();
+          // img.src = dataUrl;
+          // document.getElementById('view-img').appendChild(img);
+          this.createNft.patchValue({
+            file: this.mediaService.dataURLtoFile(
+              dataUrl,
+              this.createNft.controls.membershipId.value + '.png',
+            ),
+          });
+          this.imgFormData.append('file', this.createNft.get('file').value);
+
+          const form: NFT = {
+            type : 'Membership Card',
+            forSale: true,
+            freezeNft:true,
+            serverCaptureFileUrl:'',
+            name : this.createNft.controls.name.value,
+            description : this.createNft.controls.description.value,
+            groupId: this.createNft.controls.group.value.id,
+            userId: this.authService.loggedInUser.id,
+            clubUserId: this.authService.loggedInUser.clubUserId,
+            appPackageId: this.authService.loggedInUser.appPackageId,
+            membershipId:  this.createNft.controls.membershipId.value,
+          }
+          this.nftService.createNFT = form;
+          this.nftService.createNFTImg = this.imgFormData;
+          this.customDialogService.showCreateNFTMembershipOptionsDialog();
+        })
+        .catch((error) => {
+          console.error('oops, something went wrong!', error);
+        });
+      } else {
+        this.toastr.error('Membership ID Exists','Create NFT Membership')
+      }
+    })
   }
 
   createPreviewImg():Promise<any> {

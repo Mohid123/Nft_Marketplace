@@ -62,7 +62,7 @@ export class AuthService extends ApiService<AuthApiData> {
     return getItem(StorageItem.JwtToken)?.toString() || '';
   }
 
-  userSignIn(params: AuthCredentials): Observable<ApiResponse<SignInResponse>> {
+  userSignIn(params: AuthCredentials,adminCheck:boolean): Observable<ApiResponse<SignInResponse>> {
     return this.post('/auth/loginForNftPanel', params).pipe(
       tap((result: ApiResponse<SignInResponse>) => {
         if (!result.hasErrors()) {
@@ -77,7 +77,11 @@ export class AuthService extends ApiService<AuthApiData> {
           this._user$.next(result?.data?.user || null);
           this._loggedInUser$.next(result?.data?.loggedInUser || null);
           this._role$.next(role);
-          location.reload();
+          if(adminCheck && result?.data?.user?.admin) {
+            this.router.navigate(['/'+ params.clubName + '/admin'])
+          } else {
+            location.reload();
+          }
         }
       }),
     );
