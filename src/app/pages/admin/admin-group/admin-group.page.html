@@ -139,7 +139,7 @@
               </svg>
 
             </button>
-            <span>1/{{ (totalCount  / limit + (0.4)) | number:'1.0-0' }}</span>
+            <span>{{page}}/{{ (totalCount  / limit + (0.4)) | number:'1.0-0' }}</span>
             <button [disabled]="totalCount <= page * limit" class="icon-btn active" (click)="next()">
               <svg xmlns="http://www.w3.org/2000/svg" width="17.618" height="11.75" viewBox="0 0 17.618 11.75">
                 <defs>
