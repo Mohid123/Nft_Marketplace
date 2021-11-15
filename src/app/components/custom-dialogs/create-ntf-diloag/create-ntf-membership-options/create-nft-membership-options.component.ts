@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { NFTService } from '@app/@core/services/nft.service';
 import { ToastrService } from 'ngx-toastr';
@@ -16,20 +17,34 @@ export class CreateNFTMembershipOptionsComponent  {
   img: FormData;
   nftForm: NFT;
 
+  public createNft: FormGroup;
+
   price: any;
 
   constructor(
     private customDialogService: CustomDialogService,
     private nftService: NFTService,
     private mediaService: MediaService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private formBuilder: FormBuilder,
   ) {
+
+    this.createNft = this.formBuilder.group({
+      price: new FormControl('', [Validators.required, Validators.max(999999)]),
+      // mint: [false, Validators.requiredTrue],
+      // sale: [false, Validators.requiredTrue],
+
+
+    });
     this.img = this.nftService.createNFTImg;
     this.nftForm = this.nftService.createNFT;
   }
 
+
+
   save():void {
-    this.nftForm.price = String(this.price);
+    this.nftForm.price = this.createNft.controls.price.value;
+    // this.createNft = this.nftService.createNftForm;
     this.nftForm.numberOfCopies = 1;
     this.nftService.requestCreateNFT(this.nftForm,this.img);
   }

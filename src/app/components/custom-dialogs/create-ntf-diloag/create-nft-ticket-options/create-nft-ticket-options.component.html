@@ -13,18 +13,43 @@
       <h1 class=""><span>Cre</span>ate NFT</h1>
     </div>
   </div>
+
+<form action="" [formGroup]="createNft">
   <div class="flex flex-col">
     <span class="text-xl">Price</span><br>
-    <input type='number' placeholder="500" [(ngModel)]="price" maxlength="6" placeholder="999999" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+    <input type='number' name="price" formControlName="price" placeholder="999999" >
+    <p class="error-msg error" *ngIf="createNft.controls.price.touched && createNft.controls.price.errors?.required">please enter price</p>
+    <div *ngIf="createNft.controls['price'].hasError('max')">
+      Maximum required length of price digits is 6
+    </div>
   </div>
 
   <div class="flex flex-col">
     <span class="text-xl">No. of Copies</span><br>
-    <input type='number' placeholder="1" [(ngModel)]="copy">
+    <input type='number' placeholder="1" formControlName="copies" name="copies">
+    <p class="error-msg error" *ngIf="createNft.controls.copies.touched && createNft.controls.copies.errors?.required">please enter no of copies</p>
+    <!-- <div *ngIf="createNft.controls['copies'].hasError('max')">
+      Maximum required length of price digits is 100
+    </div> -->
   </div>
 
+  <div class="mt-5">
+    <input type="checkbox" class="h-3 mr-2" id="instantMint" name="instantMint" value="mint" >
+    <label for="Instant Mint"> Instant Mint</label><br>
+  </div>
+  <div class="mt-3">
+    <input type="checkbox" class="h-3 mr-2" id="sale" name="sale" value="sale" >
+    <label for="Sale"> Sale</label><br>
+  </div>
+</form>
 
-  <button class="primary-btn" [disabled]="!price || !copy || price === 0 || copy === 0" (click)="save()">
+
+
+
+  <!-- <button class="primary-btn" [disabled]="!price || !copy || price === 0 || copy === 0" (click)="save()">
+    Minting
+  </button> -->
+  <button class="primary-btn" [disabled]="!createNft.valid" (click)="save()">
     Minting
   </button>
 </div>
