@@ -1,150 +1,228 @@
-<div style="filter: brightness(100%); filter: blur(8px);">
-<app-admin-header ></app-admin-header>
-<div class="flex flex-col justify-start h-auto min-h-screen px-3 py-2 mt-10 mb-12 sm:px-6 xl:px-8 center">
+<div>
+  <app-admin-header></app-admin-header>
+  <div class="flex flex-col justify-start h-auto min-h-screen px-3 py-2 mt-10 mb-12 sm:px-6 xl:px-8 center">
 
-  <div class="flex items-center justify-between w-full h-12 py-px">
-    <h1 class="h-auto m-0 text-2xl font-medium">Sale</h1>
+    <div class="flex items-center justify-between w-full h-12 py-px">
+      <h1 class="h-auto m-0 text-2xl font-medium">Sale</h1>
 
-  </div>
-  <div class="w-full">
-    <div class="filters">
-      <div class="filter">
-        <button mat-icon-button aria-label="menu">
-          <span><mat-icon>filter_alt</mat-icon></span>
-          <span class="px-px sm:px-2">Filter</span>
-        </button>
-      </div>
-      <div class="filter">
-        <button mat-icon-button aria-label="menu" class="w-16">
-          <span>Status</span>
-          <span><mat-icon style="height: 13px;">arrow_drop_down</mat-icon></span>
-        </button>
-      </div>
-      <div class="filter">
-        <button mat-icon-button aria-label="menu" class="w-16">
-          <span>Price</span>
-          <span class="material-icons">
-            arrow_drop_down
-            </span>
-        </button>
-      </div>
-      <div class="filter">
-        <button mat-icon-button aria-label="menu" class="w-16">
-          <span>Token ID</span>
-          <span class="material-icons">
-            arrow_drop_down
-            </span>
-        </button>
-      </div>
-      <div class="filter">
-        <button mat-icon-button aria-label="menu">
-          <span><mat-icon>restart_alt</mat-icon></span>
-          <span class="px-px sm:px-2">Restart Filter</span>
-        </button>
-      </div>
     </div>
-    <div class="w-full bg-gray-400 groups-container">
-      <div class="w-full overflow-x-auto">
-        <table class="w-full space-y-6 text-sm">
-          <thead class="font-light tracking-wider text-white ">
-            <tr>
-              <th>TOKEN ID</th>
-              <th>TYPE</th>
-              <th>PRICE</th>
-              <th>DATE CREATED</th>
-              <th>STATUS</th>
-            </tr>
-          </thead>
-          <tbody ><tr><td>964</td><td >Ticket</td><td >€ 50</td><td >24-09-2021</td>
-            <td>
-              <button class="h-6 px-4 font-light text-white bg-green-500 rounded-full ">
-                Active
+    <div class="w-full">
+      <div class="mt-6">
+        <div class="filters">
+          <div class="filter">
+            <button mat-icon-button aria-label="statusMenu">
+              <span><mat-icon>filter_alt</mat-icon></span>
+              <span class="px-px sm:px-2">Filter</span>
+            </button>
+          </div>
+          <div class="filter">
+            <button mat-icon-button aria-label="menu" class="w-16" mat-icon-button [matMenuTriggerFor]="statusMenu" >
+              <span>Status</span>
+              <span class="material-icons">
+                arrow_drop_down
+                </span>
+            </button>
+          </div>
+          <div class="filter">
+            <button mat-icon-button aria-label="menu" class="w-16" [matMenuTriggerFor]="priceMenu" >
+              <span>Price</span>
+              <span class="material-icons">
+                arrow_drop_down
+                </span>
+            </button>
+          </div>
+          <div class="filter">
+            <button mat-icon-button aria-label="menu" class="w-16" [matMenuTriggerFor]="tokenId">
+              <span>Token ID</span>
+              <span class="material-icons">
+                arrow_drop_down
+                </span>
+            </button>
+          </div>
+          <div class="filter">
+            <button mat-icon-button aria-label="menu">
+              <span><mat-icon>restart_alt</mat-icon></span>
+              <span class="px-px sm:px-2">Restart Filter</span>
+            </button>
+          </div>
+
+            <!--status menu-->
+            <mat-menu #statusMenu="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md" xPosition='after' >
+              <button class="dropdown" mat-menu-item *ngFor="let status of nftStatus">
+               {{status.name}}
               </button>
-            </td>
-            </tr ><tr><td>965</td><td >Ticket</td><td >€ 50</td><td >24-09-2021</td>
-              <td>
-                <button class="h-6 px-4 font-light text-white bg-yellow-500 rounded-full ">
-                  Active
-                </button>
-              </td>
-            </tr ><tr><td>964</td><td >Ticket</td><td >€ 52</td><td >24-09-2021</td>
-              <td>
-                <button class="h-6 px-4 font-light text-white bg-red-500 rounded-full ">
-                  Active
-                </button>
-              </td>
-            </tr ><tr><td>964</td><td >Ticket</td><td >€ 50</td><td >24-09-2021</td>
-              <td>
-                <button class="h-6 px-4 font-light text-white bg-indigo-200 rounded-full ">
-                  Active
-                </button>
-              </td>
-            </tr ><tr><td>964</td><td >Membership</td><td >€ 50</td><td >24-09-2021</td>
-              <td>
-                <button class="h-6 px-4 font-light text-white bg-gray-300 rounded-full ">
-                  Active
-                </button>
-              </td>
-            </tr ><tr><td>964</td><td >Membership</td><td >€ 53</td><td >24-09-2021</td>
-              <td>
-                <button class="h-6 px-4 font-light text-white bg-green-500 rounded-full ">
-                  Active
-                </button>
-              </td>
-          </tbody>
-        </table>
+            </mat-menu>
+
+           <!--price menu-->
+           <mat-menu #priceMenu="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md text-sm mat-menu" xPosition='after'>
+            Range from
+            <button class="dropdown" mat-menu-item *ngFor="let range of priceRange" >
+             {{range.from}}
+            </button>
+          </mat-menu>
+
+             <!--TokenId menu-->
+             <mat-menu #tokenId="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md text-sm" xPosition='after'>
+              Sort by
+              <button class="dropdown" mat-menu-item *ngFor="let item of orderBy" >
+               {{item.order}}
+              </button>
+           </mat-menu>
+
+        </div>
       </div>
+      <div class="w-full bg-gray-400 groups-container">
+        <div class="w-full overflow-x-auto">
+          <table class="w-full space-y-6 text-sm">
+            <thead class="font-light tracking-wider text-white ">
+              <tr>
+                <th>TOKEN ID</th>
+                <th>TYPE</th>
+                <th>PRICE</th>
+                <th>DATE CREATED</th>
+                <th>STATUS</th>
+              </tr>
+            </thead>
+            <tbody class="relative">
+              <ng-container *ngFor="let nft of nftList.data;last as isLast" class="">
+                <tr [ngStyle]="{'border-bottom': isLast ? '1px solid #aaaaaa2a' : 'none' }">
+                  <td>{{nft.tokenId}}</td>
+                  <td>{{nft.type || 0}}</td>
+                  <td>€{{nft.price}}</td>
+                  <td>{{nft.createdAt  | date: 'dd-MM-yyyy'}}</td>
+                  <td>
+                    <button class="inline-flex items-center justify-center w-24 h-6 px-4 font-light text-white bg-green-500 rounded-full  {{nft?.nftStatus | lowercase}}" mat-icon-button [matMenuTriggerFor]="changeStatus" aria-label="menu">
+                      {{nft?.nftStatus}}
+                      <svg class="w-5 h-5 ml-2 -mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                      aria-hidden="true">
+                      <path fill-rule="evenodd"
+                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                        clip-rule="evenodd" />
+                    </svg>
+
+                    </button>
+                    <mat-menu #changeStatus="matMenu" class="bg-primary-500 mt-0.5 mb-6 p-2 w-68 text-center " xPosition='before'>
+                      <span class="text-sm">Change status</span>
+                      <div class="flex items-center mt-4 justify-items-center">
+                        <button type="checkbox" class="items-center h-6 px-4 m-1 text-sm font-light text-white bg-gray-300 rounded-full justify-items-center" >
+                            Minted
+                          </button>
+                          <button class="items-center h-6 px-4 m-1 text-sm font-light text-white bg-green-500 rounded-full justify-items-center">
+                            Active
+                          </button>
+                        </div>
+                    </mat-menu>
+
+                  </td>
+                </tr>
+              </ng-container>
+              <ngx-spinner name="admin-market" [fullScreen]="false" [showSpinner]="isLoading" bdColor="#171830"
+                size="medium" color="#fff" type="ball-scale-multiple">
+                <p style="font-size: 20px; color: white">{{(creator$ | async)?.displayName}}...</p>
+              </ngx-spinner>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="flex justify-between w-full">
+        <div *ngIf="nftList && nftList.totalCount > 0 ; else noItems"
+          class="inline-flex items-center text-gray-500">
+          Show
+          {{ page === 1 ? 1 : (page-1) * limit }}-{{ page * limit < nftList.totalCount ? (page * limit) : nftList.totalCount }}/{{nftList.totalCount}}
+        </div>
+        <ng-template #noItems>
+          <div class="inline-flex items-center text-gray-500">
+            Show 0/0
+          </div>
+        </ng-template>
+        <div class="pagination">
+          <ng-container *ngIf="nftList && nftList.totalCount > 0  ; else noPage">
+            <ng-container *ngIf="nftList.totalCount > limit  ; else noPage">
+              <button [disabled]="page < 2" class="h-8 rounded-md icon-btn w-9 bg-primary-600"
+                (click)="previous()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17.618" height="11.75"
+                  viewBox="0 0 17.618 11.75">
+                  <defs>
+                    <style>
+                      .a {
+                        fill: #fff;
+                        opacity: 0.4;
+                      }
+                    </style>
+                  </defs>
+                  <path class="a"
+                    d="M14.265,11.477a.8.8,0,0,1,.006,1.126l-3.715,3.727H24.711a.8.8,0,0,1,0,1.591H10.556l3.721,3.727a.805.805,0,0,1-.006,1.126.792.792,0,0,1-1.12-.006L8.108,17.688h0a.893.893,0,0,1-.165-.251.759.759,0,0,1-.061-.306.8.8,0,0,1,.226-.557l5.043-5.079A.78.78,0,0,1,14.265,11.477Z"
+                    transform="translate(-7.882 -11.252)" />
+                </svg>
+
+              </button>
+              <span>{{page}}/{{ (nftList.totalCount  / limit + (0.4)) | number:'1.0-0' }}</span>
+              <button [disabled]="nftList.totalCount <= page * limit" class="icon-btn active"
+                (click)="next()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17.618" height="11.75"
+                  viewBox="0 0 17.618 11.75">
+                  <defs>
+                    <style>
+                      .a {
+                        fill: #fff;
+                      }
+                    </style>
+                  </defs>
+                  <path class="a"
+                    d="M19.118,11.477a.8.8,0,0,0-.006,1.126l3.715,3.727H8.671a.8.8,0,0,0,0,1.591H22.826l-3.721,3.727a.805.805,0,0,0,.006,1.126.792.792,0,0,0,1.12-.006l5.043-5.079h0a.893.893,0,0,0,.165-.251.759.759,0,0,0,.061-.306.8.8,0,0,0-.226-.557l-5.043-5.079A.78.78,0,0,0,19.118,11.477Z"
+                    transform="translate(-7.882 -11.252)" />
+                </svg>
+              </button>
+            </ng-container>
+          </ng-container>
+          <ng-template #noPage>
+            <button disabled class="h-8 rounded-md icon-btn w-9 bg-primary-600">
+              <svg xmlns="http://www.w3.org/2000/svg" width="17.618" height="11.75"
+                viewBox="0 0 17.618 11.75">
+                <defs>
+                  <style>
+                    .a {
+                      fill: #fff;
+                      opacity: 0.4;
+                    }
+                  </style>
+                </defs>
+                <path class="a"
+                  d="M14.265,11.477a.8.8,0,0,1,.006,1.126l-3.715,3.727H24.711a.8.8,0,0,1,0,1.591H10.556l3.721,3.727a.805.805,0,0,1-.006,1.126.792.792,0,0,1-1.12-.006L8.108,17.688h0a.893.893,0,0,1-.165-.251.759.759,0,0,1-.061-.306.8.8,0,0,1,.226-.557l5.043-5.079A.78.78,0,0,1,14.265,11.477Z"
+                  transform="translate(-7.882 -11.252)" />
+              </svg>
+            </button>
+              <span>1/1</span>
+            <button disabled class="icon-btn active">
+              <svg xmlns="http://www.w3.org/2000/svg" width="17.618" height="11.75"
+              viewBox="0 0 17.618 11.75">
+              <defs>
+                <style>
+                  .a {
+                    fill: #fff;
+                    opacity: 0.4;
+                  }
+                </style>
+              </defs>
+              <path class="a"
+                d="M14.265,11.477a.8.8,0,0,1,.006,1.126l-3.715,3.727H24.711a.8.8,0,0,1,0,1.591H10.556l3.721,3.727a.805.805,0,0,1-.006,1.126.792.792,0,0,1-1.12-.006L8.108,17.688h0a.893.893,0,0,1-.165-.251.759.759,0,0,1-.061-.306.8.8,0,0,1,.226-.557l5.043-5.079A.78.78,0,0,1,14.265,11.477Z"
+                transform="translate(-7.882 -11.252)" />
+            </svg>
+            </button>
+          </ng-template>
+          </div>
     </div>
-
-    <div class="flex justify-between w-full">
-      <div class="inline-flex items-center text-gray-500">
-        Show 1-15/100
-       </div>
-      <div class="pagination">
-        <button class="h-8 rounded-md icon-btn w-9 bg-primary-600">
-          <svg xmlns="http://www.w3.org/2000/svg" width="17.618" height="11.75" viewBox="0 0 17.618 11.75">
-            <defs>
-              <style>
-                .a {
-                  fill: #fff;
-                  opacity: 0.4;
-                }
-              </style>
-            </defs>
-            <path class="a"
-              d="M14.265,11.477a.8.8,0,0,1,.006,1.126l-3.715,3.727H24.711a.8.8,0,0,1,0,1.591H10.556l3.721,3.727a.805.805,0,0,1-.006,1.126.792.792,0,0,1-1.12-.006L8.108,17.688h0a.893.893,0,0,1-.165-.251.759.759,0,0,1-.061-.306.8.8,0,0,1,.226-.557l5.043-5.079A.78.78,0,0,1,14.265,11.477Z"
-              transform="translate(-7.882 -11.252)" />
-          </svg>
-
-        </button>
-        <span>1/8</span>
-        <button class="icon-btn active">
-          <svg xmlns="http://www.w3.org/2000/svg" width="17.618" height="11.75" viewBox="0 0 17.618 11.75">
-            <defs>
-              <style>
-                .a {
-                  fill: #fff;
-                }
-              </style>
-            </defs>
-            <path class="a"
-              d="M19.118,11.477a.8.8,0,0,0-.006,1.126l3.715,3.727H8.671a.8.8,0,0,0,0,1.591H22.826l-3.721,3.727a.805.805,0,0,0,.006,1.126.792.792,0,0,0,1.12-.006l5.043-5.079h0a.893.893,0,0,0,.165-.251.759.759,0,0,0,.061-.306.8.8,0,0,0-.226-.557l-5.043-5.079A.78.78,0,0,0,19.118,11.477Z"
-              transform="translate(-7.882 -11.252)" />
-          </svg>
-        </button>
-      </div>
     </div>
   </div>
-</div>
 
 
 
 </div>
-
-<div class="flex justify-center ">
+<!-- style="filter: brightness(100%); filter: blur(8px);" -->
+<!-- <div class="flex justify-center ">
   <div><h1
     class="coming-soon" style="">
     <span>Coming Soon...</span>
     </h1></div>
-</div>
-
+</div> -->

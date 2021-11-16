@@ -9,7 +9,7 @@
   </div>
   <div class="w-full">
     <div class="mt-6 has-tooltip">
-      <div class="opacity-25 filters" matTooltip="Coming soon.." matTooltipClass="tooltips" matTooltipPosition="right" >
+      <div class=" filters" >
         <div class="filter">
           <button mat-icon-button aria-label="statusMenu">
             <span><mat-icon>filter_alt</mat-icon></span>
@@ -17,29 +17,29 @@
           </button>
         </div>
         <div class="filter">
-          <button mat-icon-button aria-label="menu" class="w-16" mat-icon-button [matMenuTriggerFor]="statusMenu" >
-            <span>Status</span>
+          <button mat-icon-button aria-label="menu" class="w-20" mat-icon-button [matMenuTriggerFor]="itemCountMenu" >
+            <span>Item Count</span>
             <span class="material-icons">
               arrow_drop_down
               </span>
           </button>
         </div>
         <div class="filter">
-          <button mat-icon-button aria-label="menu" class="w-16" [matMenuTriggerFor]="priceMenu" >
-            <span>Price</span>
+          <button mat-icon-button aria-label="menu" class="w-16" [matMenuTriggerFor]="nameMenu" >
+            <span>Name</span>
             <span class="material-icons">
               arrow_drop_down
               </span>
           </button>
         </div>
-        <div class="filter">
-          <button mat-icon-button aria-label="menu" class="w-16" [matMenuTriggerFor]="tokenId">
-            <span>Token ID</span>
+        <!-- <div class="filter">
+          <button mat-icon-button aria-label="menu" class="w-16" [matMenuTriggerFor]="groups">
+            <span>Groups</span>
             <span class="material-icons">
               arrow_drop_down
               </span>
           </button>
-        </div>
+        </div> -->
         <div class="filter">
           <button mat-icon-button aria-label="menu">
             <span><mat-icon>restart_alt</mat-icon></span>
@@ -47,65 +47,21 @@
           </button>
         </div>
 
-          <!--status menu-->
-        <mat-menu #statusMenu="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md" xPosition='after'>
-          <button class="dropdown" mat-menu-item>
-           Draft
-          </button>
-          <button  class="dropdown" mat-menu-item>
-          Active
-          </button>
-        </mat-menu>
-
-         <!--price menu-->
-        <mat-menu #priceMenu="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md text-sm mat-menu" xPosition='after'>
-          Range from
-          <button class="dropdown" mat-menu-item>
-            €1 - €100
-          </button>
-          <button  class="dropdown" mat-menu-item>
-            €100 - €200
-          </button>
-          <button  class="dropdown" mat-menu-item>
-            €200 - €300
-          </button>
-          <button  class="dropdown" mat-menu-item>
-            €300 - €400
-          </button>
-          <button  class="dropdown" mat-menu-item>
-            €400 - €500
-          </button>
-          <button  class="dropdown" mat-menu-item>
-            €500 - €600
-          </button>
-          <button  class="dropdown" mat-menu-item>
-            €600 - €700
-          </button>
-          <button class="dropdown" mat-menu-item>
-            €700 - €800
-          </button>
-          <button class="dropdown" mat-menu-item>
-            €800 - €900
-          </button>
-          <button  class="dropdown" mat-menu-item>
-            €900 - €1000
-          </button>
-          <button  class="dropdown" mat-menu-item>
-            €1000 +
+          <!--Item count menu-->
+        <mat-menu #itemCountMenu="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md" xPosition='after'>
+          <button class="dropdown" mat-menu-item *ngFor="let sort of orderBy">
+          {{sort.sortBy}}
           </button>
 
         </mat-menu>
 
-           <!--TokenId menu-->
-           <mat-menu #tokenId="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md text-sm" xPosition='after'>
-             Sort by
-            <button class="dropdown" mat-menu-item>
-             Ascending
-            </button>
-            <button  class="dropdown" mat-menu-item>
-            Descending
-            </button>
-          </mat-menu>
+         <!--Name menu-->
+        <mat-menu #nameMenu="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md text-sm mat-menu" xPosition='after'>
+          Sort by
+          <button class="dropdown" mat-menu-item *ngFor="let sort of order">
+            {{sort.sortBy}}
+          </button>
+         </mat-menu>
 
       </div>
     </div>
@@ -165,7 +121,7 @@
               </svg>
 
             </button>
-            <span>1/{{ (totalCount  / limit + (0.4)) | number:'1.0-0' }}</span>
+            <span>{{page}}/{{ (totalCount  / limit + (0.4)) | number:'1.0-0' }}</span>
             <button [disabled]="totalCount <= page * limit" class="icon-btn active" (click)="next()">
               <svg xmlns="http://www.w3.org/2000/svg" width="17.618" height="11.75" viewBox="0 0 17.618 11.75">
                 <defs>

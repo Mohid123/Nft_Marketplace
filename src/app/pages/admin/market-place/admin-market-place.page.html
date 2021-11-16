@@ -11,15 +11,15 @@
 
   <div class="w-full "  >
     <div class="mt-6 has-tooltip">
-       <div class="opacity-25 filters"   matTooltip="Coming soon.." matTooltipClass="tooltips" matTooltipPosition="right">
+      <div class="filters">
         <div class="filter">
-          <button mat-icon-button aria-label="menu">
+          <button mat-icon-button aria-label="statusMenu">
             <span><mat-icon>filter_alt</mat-icon></span>
             <span class="px-px sm:px-2">Filter</span>
           </button>
         </div>
         <div class="filter">
-          <button mat-icon-button aria-label="menu" class="w-16">
+          <button mat-icon-button aria-label="menu" class="w-16" mat-icon-button [matMenuTriggerFor]="statusMenu" >
             <span>Status</span>
             <span class="material-icons">
               arrow_drop_down
@@ -27,7 +27,7 @@
           </button>
         </div>
         <div class="filter">
-          <button mat-icon-button aria-label="menu" class="w-16">
+          <button mat-icon-button aria-label="menu" class="w-16" [matMenuTriggerFor]="priceMenu" >
             <span>Price</span>
             <span class="material-icons">
               arrow_drop_down
@@ -35,8 +35,16 @@
           </button>
         </div>
         <div class="filter">
-          <button mat-icon-button aria-label="menu" class="w-16">
+          <button mat-icon-button aria-label="menu" class="w-16" [matMenuTriggerFor]="tokenId">
             <span>Token ID</span>
+            <span class="material-icons">
+              arrow_drop_down
+              </span>
+          </button>
+        </div>
+        <div class="filter">
+          <button mat-icon-button aria-label="menu" class="w-16" [matMenuTriggerFor]="type">
+            <span>Type</span>
             <span class="material-icons">
               arrow_drop_down
               </span>
@@ -45,9 +53,41 @@
         <div class="filter">
           <button mat-icon-button aria-label="menu">
             <span><mat-icon>restart_alt</mat-icon></span>
-            <span class="px-px sm:px-2">Reset Filter</span>
+            <span class="px-px sm:px-2">Restart Filter</span>
           </button>
         </div>
+
+          <!--status menu-->
+        <mat-menu #statusMenu="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md" xPosition='after' >
+          <button class="dropdown" mat-menu-item *ngFor="let status of nftStatus">
+           {{status.name}}
+          </button>
+        </mat-menu>
+
+         <!--price menu-->
+        <mat-menu #priceMenu="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md text-sm mat-menu" xPosition='after'>
+          Range from
+          <button class="dropdown" mat-menu-item *ngFor="let range of priceRange"  >
+           {{range.from}}
+          </button>
+        </mat-menu>
+
+           <!--TokenId menu-->
+           <mat-menu #tokenId="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md text-sm" xPosition='after'>
+             Sort by
+             <button class="dropdown" mat-menu-item *ngFor="let item of orderBy" >
+              {{item.order}}
+             </button>
+          </mat-menu>
+
+          <!--type-->
+           <mat-menu #type="matMenu" class="bg-primary-600 mt-0.5 p-2 w-48 rounded-md text-sm" xPosition='after'>
+             Sort by
+             <button class="dropdown" mat-menu-item *ngFor="let type of types" >
+              {{type.type}}
+             </button>
+          </mat-menu>
+
       </div>
     </div>
 

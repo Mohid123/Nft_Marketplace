@@ -109,12 +109,18 @@ export class NFTService extends ApiService<nftApiData> {
     }));
   }
 
-  getRecentSoldNfts(page: number, limit: number) : Observable<ApiResponse<nftApiData>> {
+  getRecentSoldNfts(page: number, limit: number, groupId?:string, type?:string) : Observable<ApiResponse<nftApiData>> {
     page--;
-    const param = {
+    const param:any = {
       offset: page ? limit * page : 0,
       limit: limit,
+      type: type,
     };
+    // name: searchValue,
+
+    if(groupId) {
+      param.groupID = groupId;
+    }
      return this.get('/nft/getRecentSoldNfts', param).pipe(take(1),tap((result:ApiResponse<nftApiData>)=>{
       if (result.hasErrors()) {
         this.toastrService.error(result?.errors[0]?.error?.message)
@@ -175,6 +181,25 @@ export class NFTService extends ApiService<nftApiData> {
       id: id,
     };
     return this.get('/event/getEventByNftId/'+ param.id).pipe(take(1),tap((result:ApiResponse<nftApiData>)=>{
+      if (result.hasErrors()) {
+        this.toastrService.error(result?.errors[0]?.error?.message)
+      }
+    }));
+  }
+
+  getEventsByUser(id: string,page: number, limit: number ,groupId?:string, type?:string): Observable<ApiResponse<nftApiData>> {
+    page--;
+    const param:any = {
+      offset: page ? limit * page : 0,
+      limit: limit,
+      type: type,
+    };
+    // name: searchValue,
+
+    if(groupId) {
+      param.groupID = groupId;
+    }
+    return this.get('/event/getEventByUserId/'+ id,param).pipe(take(1),tap((result:ApiResponse<nftApiData>)=>{
       if (result.hasErrors()) {
         this.toastrService.error(result?.errors[0]?.error?.message)
       }
