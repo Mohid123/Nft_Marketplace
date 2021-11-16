@@ -96,6 +96,15 @@ export class AdminMarketPlacePage implements OnInit ,OnDestroy {
     }
   ]
 
+  types = [
+    {
+      type: 'Ticket'
+    },
+    {
+      type: 'Membership Card'
+    }
+  ]
+
 
   positionOptions: TooltipPosition[] = ['below', 'above', 'left', 'right'];
 
