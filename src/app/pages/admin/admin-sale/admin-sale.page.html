@@ -128,9 +128,28 @@
                   <td>€{{nft.price}}</td>
                   <td>{{nft.createdAt  | date: 'dd-MM-yyyy'}}</td>
                   <td>
-                    <button class="h-6 px-4 font-light text-white bg-yellow-500 rounded-full "  >
+                    <button class="inline-flex items-center justify-center w-24 h-6 px-4 font-light text-white bg-green-500 rounded-full  {{nft?.nftStatus | lowercase}}" mat-icon-button [matMenuTriggerFor]="changeStatus" aria-label="menu">
                       {{nft?.nftStatus}}
+                      <svg class="w-5 h-5 ml-2 -mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                      aria-hidden="true">
+                      <path fill-rule="evenodd"
+                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                        clip-rule="evenodd" />
+                    </svg>
+
                     </button>
+                    <mat-menu #changeStatus="matMenu" class="bg-primary-500 mt-0.5 mb-6 p-2 w-68 text-center " xPosition='before'>
+                      <span class="text-sm">Change status</span>
+                      <div class="flex items-center mt-4 justify-items-center">
+                        <button type="checkbox" class="items-center h-6 px-4 m-1 text-sm font-light text-white bg-gray-300 rounded-full justify-items-center" >
+                            Minted
+                          </button>
+                          <button class="items-center h-6 px-4 m-1 text-sm font-light text-white bg-green-500 rounded-full justify-items-center">
+                            Active
+                          </button>
+                        </div>
+                    </mat-menu>
+
                   </td>
                 </tr>
               </ng-container>
