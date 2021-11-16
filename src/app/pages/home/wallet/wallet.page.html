@@ -2,15 +2,13 @@
   <app-marketplace-search (search)="search($event)"></app-marketplace-search>
   <section class="pt-0 pb-0 m-4 md:pb-10 lg:pb-10 md:pt-14 lg:pt-14 lg:m-0 md:m-0">
     <div class="md:w-full flex-center md:max-w-full">
-    <div class="md:flex-shrink-0">
-      <img src="../../../../assets/banner/collection-nft.png" alt="banner" width="100%">
-    </div>
-    <!-- <img src="../../../../assets/banner/best-nft.png" alt=""> -->
-    <!-- <img src="../../../../assets/banner/collection-nft.png" alt="">
-    <img src="../../../../assets/banner/check-nft.png" alt=""> -->
+      <div class="md:flex-shrink-0">
+        <img src="../../../../assets/banner/collection-nft.png" alt="banner" width="100%">
+      </div>
     </div>
   </section>
 
+  <!--filters-->
   <div class="p-4 ld:p-0 md:p-0 pb-14 lg:pb-14 md:pb-14">
     <h2 class="mb-5 text-2xl font-light tracking-widest text-gray-400 title-font">My NFT Library</h2>
     <div class="bottom-0 left-0 flex flex-wrap justify-between w-full pt-3 leading-none text-center ">
@@ -21,22 +19,24 @@
           </button>
         </span>
 
-        <span class="ml-3 border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-2 rounded-2xl ">
+        <span
+          class="ml-3 border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-2 rounded-2xl ">
           <button (click)="setType('Membership Card')" class="membership-btn">
             Membership Cards
           </button>
         </span>
 
-        <span class="ml-3 border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-2 rounded-2xl ">
+        <span
+          class="ml-3 border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-2 rounded-2xl ">
           <button (click)="setType('Ticket')" class="tickets-btn">
             Tickets
           </button>
         </span>
-   </span>
+      </span>
       <div class="mt-3 md:mt-0 lg:mt-0">
-        <span class="inline-flex items-center text-sm leading-none text-gray-400 border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-2 rounded-3xl ">
-          <button type="button " mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu"
-            class="filter-btn"
+        <span
+          class="inline-flex items-center text-sm leading-none text-gray-400 border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-2 rounded-3xl ">
+          <button type="button " mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu" class="filter-btn"
             id="menu-button" aria-expanded="true" aria-haspopup="true">
             Filters
             <!-- Heroicon name: solid/chevron-down -->
@@ -62,14 +62,8 @@
 
   <!--Cards-->
   <div class="relative cards-container">
-    <ngx-spinner
-      [fullScreen]="false"
-      [showSpinner]="isLoading"
-      [show]="isLoading"
-      bdColor="#171830"
-      size="medium"
-      color="#fff"
-      type="ball-scale-multiple">
+    <ngx-spinner [fullScreen]="false" [showSpinner]="isLoading" [show]="isLoading" bdColor="#171830" size="medium"
+      color="#fff" type="ball-scale-multiple">
       <p style="font-size: 20px; color: white">{{(creator$ | async)?.displayName}}...</p>
     </ngx-spinner>
 
@@ -83,27 +77,46 @@
   <div class="w-full px-12 mb-14 ld:px-0 md:px-0">
     <div class="flex justify-between pt-3 mt-10 ">
       <div *ngIf="nftList?.totalCount > 0; else noItems" class="inline-flex items-center text-sm text-gray-500">
-        Show {{ page === 1 ? 1 : (page-1) * nftLimit }}-{{ page * nftLimit < nftList?.totalCount ? (page * nftLimit) : nftList?.totalCount }}/{{nftList?.totalCount}}
-      </div>
-      <ng-template #noItems >
-        Show 0/0
-      </ng-template>
-      <div class="inline-flex items-center text-sm text-gray-400">
-        <button [disabled]="page < 2" class="pagination-btn" (click)="previous()">
-          <svg xmlns="http://www.w3.org/2000/svg" width="17.618" height="11.75" viewBox="0 0 17.618 11.75"><defs><style>.a{fill:#fff;}</style></defs><path class="a" d="M14.265,11.477a.8.8,0,0,1,.006,1.126l-3.715,3.727H24.711a.8.8,0,0,1,0,1.591H10.556l3.721,3.727a.805.805,0,0,1-.006,1.126.792.792,0,0,1-1.12-.006L8.108,17.688h0a.893.893,0,0,1-.165-.251.759.759,0,0,1-.061-.306.8.8,0,0,1,.226-.557l5.043-5.079A.78.78,0,0,1,14.265,11.477Z" transform="translate(-7.882 -11.252)"/></svg>
-        </button>
-        <button [disabled]="nftList?.totalCount <= page * nftLimit"  class="ml-2 pagination-btn" (click)="next()">
-          <svg xmlns="http://www.w3.org/2000/svg" width="17.618" height="11.75" viewBox="0 0 17.618 11.75"><defs><style>.a{fill:#fff;}</style></defs><path class="a" d="M19.118,11.477a.8.8,0,0,0-.006,1.126l3.715,3.727H8.671a.8.8,0,0,0,0,1.591H22.826l-3.721,3.727a.805.805,0,0,0,.006,1.126.792.792,0,0,0,1.12-.006l5.043-5.079h0a.893.893,0,0,0,.165-.251.759.759,0,0,0,.061-.306.8.8,0,0,0-.226-.557l-5.043-5.079A.78.78,0,0,0,19.118,11.477Z" transform="translate(-7.882 -11.252)"/></svg>
-       </button>
+        Show {{ page === 1 ? 1 : (page-1) * nftLimit }}-{{ page * nftLimit < nftList?.totalCount ? (page * nftLimit) :
+          nftList?.totalCount }}/{{nftList?.totalCount}} </div>
+          <ng-template #noItems>
+            Show 0/0
+          </ng-template>
+          <div class="inline-flex items-center text-sm text-gray-400">
+            <button [disabled]="page < 2" class="pagination-btn" (click)="previous()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="17.618" height="11.75" viewBox="0 0 17.618 11.75">
+                <defs>
+                  <style>
+                    .a {
+                      fill: #fff;
+                    }
+                  </style>
+                </defs>
+                <path class="a"
+                  d="M14.265,11.477a.8.8,0,0,1,.006,1.126l-3.715,3.727H24.711a.8.8,0,0,1,0,1.591H10.556l3.721,3.727a.805.805,0,0,1-.006,1.126.792.792,0,0,1-1.12-.006L8.108,17.688h0a.893.893,0,0,1-.165-.251.759.759,0,0,1-.061-.306.8.8,0,0,1,.226-.557l5.043-5.079A.78.78,0,0,1,14.265,11.477Z"
+                  transform="translate(-7.882 -11.252)" />
+              </svg>
+            </button>
+            <button [disabled]="nftList?.totalCount <= page * nftLimit" class="ml-2 pagination-btn" (click)="next()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="17.618" height="11.75" viewBox="0 0 17.618 11.75">
+                <defs>
+                  <style>
+                    .a {
+                      fill: #fff;
+                    }
+                  </style>
+                </defs>
+                <path class="a"
+                  d="M19.118,11.477a.8.8,0,0,0-.006,1.126l3.715,3.727H8.671a.8.8,0,0,0,0,1.591H22.826l-3.721,3.727a.805.805,0,0,0,.006,1.126.792.792,0,0,0,1.12-.006l5.043-5.079h0a.893.893,0,0,0,.165-.251.759.759,0,0,0,.061-.306.8.8,0,0,0-.226-.557l-5.043-5.079A.78.78,0,0,0,19.118,11.477Z"
+                  transform="translate(-7.882 -11.252)" />
+              </svg>
+            </button>
 
+          </div>
       </div>
     </div>
+
+
+
+
   </div>
-
-
-
-
-</div>
-
-
-

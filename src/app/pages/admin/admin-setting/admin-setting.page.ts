@@ -14,8 +14,10 @@ export class AdminSettingPage implements OnInit {
   public creator$ = this.creatorService.Creator$;
 
   public settingForm: FormGroup;
-  public file: any;
-  public imageSrc: any;
+  public profileImage: any;
+  public profileImageSrc: any;
+  public coverImage: any;
+  public coverImageSrc: any;
 
   constructor(
     private creatorService: CreatorService,
@@ -38,13 +40,29 @@ export class AdminSettingPage implements OnInit {
     console.log(this.settingForm)
   }
 
-  onSelectFile(event): void {
+  onSelectProfile(event): void {
     if (event.target.files && event.target.files[0]) {
-      this.file = event.target.files[0];
+      this.profileImage = event.target.files[0];
       if (event.target.files && event.target.files[0]) {
         const reader = new FileReader();
         reader.onload = (e: any) => {
-          this.imageSrc = e.target.result;
+          this.profileImageSrc = e.target.result;
+
+          // this.createNft.patchValue({
+          //   img: this.imageSrc,
+          // });
+        };
+        reader.readAsDataURL(event.target.files[0]);
+      }
+    }
+  }
+  onSelectCover(event): void {
+    if (event.target.files && event.target.files[0]) {
+      this.coverImage = event.target.files[0];
+      if (event.target.files && event.target.files[0]) {
+        const reader = new FileReader();
+        reader.onload = (e: any) => {
+          this.coverImageSrc = e.target.result;
 
           // this.createNft.patchValue({
           //   img: this.imageSrc,

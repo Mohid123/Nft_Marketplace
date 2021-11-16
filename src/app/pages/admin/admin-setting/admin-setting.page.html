@@ -14,27 +14,25 @@
                   <span class="text-xl">Profile Picture</span><br>
                   <div class="field">
                     <button>
-                      <ng-container *ngIf="!file; else show">
+                      <ng-container *ngIf="!profileImage; else profileImageFileName">
                         <div class="ml-2 font-light text-gray-400">Select Profile Picture to Uplaod</div>
                     </ng-container>
-                    <ng-template #show>
-                      <div class="ml-2 font-light text-gray-400">{{file.name}}</div>
+                    <ng-template #profileImageFileName>
+                      <div class="ml-2 font-light text-gray-400">{{profileImage.name}}</div>
                     </ng-template>
                       <img src="../../../../assets/icons/Icon feather-upload.svg" class="p-4" alt="">
-
-
                     </button>
                     <input class="absolute block opacity-0 cursor-pointer pin-r pin-t " type="file" name=""
-                      accept="image/*" (change)="onSelectFile($event)"/>
+                      accept="image/*" (change)="onSelectProfile($event)"/>
                   </div>
                 </div>
                 <div class="border-4 rounded-md">
-                  <ng-container *ngIf="!file; else showImage">
-                    <img class="preview" src="../../../../assets/logo/stripe-logo-blue.png" alt="">
+                  <ng-container *ngIf="!profileImage; else pImage">
+                    <img class="preview" [src]="((creator$ | async)?.profileImageURL) || ''" alt="">
 
                 </ng-container>
-                <ng-template #showImage>
-                  <img class="preview" src={{imageSrc}} alt="">
+                <ng-template #pImage>
+                  <img class="preview" src={{profileImageSrc}} alt="">
                 </ng-template>
 
                 </div>
@@ -44,15 +42,27 @@
                   <span class="text-xl">Cover Photo</span><br>
                   <div class="field">
                     <button>
-                      <div class="ml-2 font-light text-gray-300">Select Cover Photo to Upload</div>
+                      <ng-container *ngIf="!coverImage; else coverImageFileName">
+                        <div class="ml-2 font-light text-gray-400">Select Cover Picture to Uplaod</div>
+                    </ng-container>
+                    <ng-template #coverImageFileName>
+                      <div class="ml-2 font-light text-gray-400">{{coverImage.name}}</div>
+                    </ng-template>
+                      <!-- <div class="ml-2 font-light text-gray-300">Select Cover Photo to Upload</div> -->
                       <img src="../../../../assets/icons/Icon feather-upload.svg" class="p-4" alt="">
                     </button>
                     <input class="absolute block opacity-0 cursor-pointer pin-r pin-t " type="file" name=""
-                      accept="image/*" />
+                      accept="image/*" (change)="onSelectCover($event)"/>
                   </div>
                 </div>
                 <div class="border-4 rounded-md">
-                  <img class="preview" src="../../../../assets/logo/stripe-logo-blue.png" alt="">
+                  <ng-container *ngIf="!coverImage; else cImage">
+                    <img class="preview" [src]="((creator$ | async)?.coverImageURL) || ''" alt="">
+
+                </ng-container>
+                <ng-template #cImage>
+                  <img class="preview" src={{coverImageSrc}} alt="">
+                </ng-template>
                 </div>
               </div>
               <div class="flex flex-col pt-5">

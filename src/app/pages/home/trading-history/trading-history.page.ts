@@ -50,6 +50,7 @@ export class TradingHistoryPage implements OnInit, OnDestroy {
   }
 
   getEvetns():void {
+
     this.nftService.getEventsByUser(this.authService.loggedInUser.id,this.page, this.eventLimit ,this.filterGroup?.id, this.type).pipe(take(1)).subscribe((result:ApiResponse<ResponseEventByNFT>) => {
       if (!result.hasErrors()) {
         this.responseEventByNFT = result.data;

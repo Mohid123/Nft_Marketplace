@@ -20,6 +20,7 @@ import { AuthService } from './../../auth/services/auth.service';
 export class AdminSalePage implements OnInit, OnDestroy {
 
   creator$ = this.creatorService.Creator$;
+  public isLoading$ = this.groupService.isLoading$;
   destroy$ = new Subject();
 
   public clubName: string;
@@ -34,6 +35,57 @@ export class AdminSalePage implements OnInit, OnDestroy {
 
   public isLoading:boolean;
   public type = '';
+  priceRange = [
+    {
+      from:  '€1 - €100',
+    },
+    {
+      from: '€100 - €200',
+    },
+    {
+      from: '€200 - €300',
+    },
+    {
+      from: '€300 - €400',
+    },
+    {
+      from: '€400 - €500',
+    },
+    {
+      from: '€500 - €600',
+    },
+    {
+      from: '€600 - €700',
+    },
+    {
+      from: '€700 - €800',
+    },
+    {
+      from: '€800 - €900',
+    },
+    {
+      from: '€900 - €1000',
+    },
+  ]
+
+  orderBy = [
+    {
+      order: 'Ascending',
+    },
+    {
+      order: 'Descending',
+    }
+  ]
+
+  nftStatus = [
+    {
+      name: 'Active',
+    },
+    {
+      name: 'Draft',
+    },
+
+  ]
 
   constructor(
     private authService: AuthService,

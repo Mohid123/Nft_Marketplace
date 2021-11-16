@@ -47,64 +47,27 @@
           </div>
 
             <!--status menu-->
-          <mat-menu #statusMenu="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md" xPosition='after'>
-            <button class="dropdown" mat-menu-item>
-             Draft
-            </button>
-            <button  class="dropdown" mat-menu-item>
-            Active
-            </button>
-          </mat-menu>
+            <mat-menu #statusMenu="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md" xPosition='after' >
+              <button class="dropdown" mat-menu-item *ngFor="let status of nftStatus">
+               {{status.name}}
+              </button>
+            </mat-menu>
 
            <!--price menu-->
-          <mat-menu #priceMenu="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md text-sm mat-menu" xPosition='after'>
+           <mat-menu #priceMenu="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md text-sm mat-menu" xPosition='after'>
             Range from
-            <button class="dropdown" mat-menu-item>
-              €1 - €100
+            <button class="dropdown" mat-menu-item *ngFor="let range of priceRange" >
+             {{range.from}}
             </button>
-            <button  class="dropdown" mat-menu-item>
-              €100 - €200
-            </button>
-            <button  class="dropdown" mat-menu-item>
-              €200 - €300
-            </button>
-            <button  class="dropdown" mat-menu-item>
-              €300 - €400
-            </button>
-            <button  class="dropdown" mat-menu-item>
-              €400 - €500
-            </button>
-            <button  class="dropdown" mat-menu-item>
-              €500 - €600
-            </button>
-            <button  class="dropdown" mat-menu-item>
-              €600 - €700
-            </button>
-            <button class="dropdown" mat-menu-item>
-              €700 - €800
-            </button>
-            <button class="dropdown" mat-menu-item>
-              €800 - €900
-            </button>
-            <button  class="dropdown" mat-menu-item>
-              €900 - €1000
-            </button>
-            <button  class="dropdown" mat-menu-item>
-              €1000 +
-            </button>
-
           </mat-menu>
 
              <!--TokenId menu-->
              <mat-menu #tokenId="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md text-sm" xPosition='after'>
-               Sort by
-              <button class="dropdown" mat-menu-item>
-               Ascending
+              Sort by
+              <button class="dropdown" mat-menu-item *ngFor="let item of orderBy" >
+               {{item.order}}
               </button>
-              <button  class="dropdown" mat-menu-item>
-              Descending
-              </button>
-            </mat-menu>
+           </mat-menu>
 
         </div>
       </div>
@@ -232,18 +195,20 @@
             </button>
               <span>1/1</span>
             <button disabled class="icon-btn active">
-              <svg xmlns="http://www.w3.org/2000/svg" width="17.618" height="11.75" viewBox="0 0 17.618 11.75">
-                <defs>
-                  <style>
-                    .a {
-                      fill: #fff;
-                    }
-                  </style>
-                </defs>
-                <path class="a"
-                  d="M19.118,11.477a.8.8,0,0,0-.006,1.126l3.715,3.727H8.671a.8.8,0,0,0,0,1.591H22.826l-3.721,3.727a.805.805,0,0,0,.006,1.126.792.792,0,0,0,1.12-.006l5.043-5.079h0a.893.893,0,0,0,.165-.251.759.759,0,0,0,.061-.306.8.8,0,0,0-.226-.557l-5.043-5.079A.78.78,0,0,0,19.118,11.477Z"
-                  transform="translate(-7.882 -11.252)" />
-              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="17.618" height="11.75"
+              viewBox="0 0 17.618 11.75">
+              <defs>
+                <style>
+                  .a {
+                    fill: #fff;
+                    opacity: 0.4;
+                  }
+                </style>
+              </defs>
+              <path class="a"
+                d="M14.265,11.477a.8.8,0,0,1,.006,1.126l-3.715,3.727H24.711a.8.8,0,0,1,0,1.591H10.556l3.721,3.727a.805.805,0,0,1-.006,1.126.792.792,0,0,1-1.12-.006L8.108,17.688h0a.893.893,0,0,1-.165-.251.759.759,0,0,1-.061-.306.8.8,0,0,1,.226-.557l5.043-5.079A.78.78,0,0,1,14.265,11.477Z"
+                transform="translate(-7.882 -11.252)" />
+            </svg>
             </button>
           </ng-template>
           </div>

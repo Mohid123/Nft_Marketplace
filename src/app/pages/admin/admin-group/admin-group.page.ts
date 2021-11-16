@@ -27,6 +27,24 @@ export class AdminGroupPage implements OnDestroy {
   public page:number;
   public searchValu = '';
 
+  orderBy = [
+    {
+      sortBy: 'Maximum'
+    },
+    {
+      sortBy: 'Minimum'
+    }
+  ]
+
+  order = [
+    {
+      sortBy: 'A - Z'
+    },
+    {
+      sortBy: 'Z - A'
+    }
+  ]
+
   constructor(
     private customDialogService: CustomDialogService,
     private creatorService: CreatorService,

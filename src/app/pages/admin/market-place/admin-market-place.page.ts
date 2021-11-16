@@ -29,6 +29,74 @@ export class AdminMarketPlacePage implements OnInit ,OnDestroy {
   public page:number;
   public searchValu = '';
 
+  nftStatus = [
+    {
+      name: 'Active',
+    },
+    {
+      name: 'Draft',
+    },
+    {
+      name: 'Sold',
+    },
+    {
+      name: 'Resale',
+    },
+    {
+      name: 'Transfering',
+    },
+    {
+      name: 'Minting',
+    },
+    {
+      name: 'Minted',
+    }
+  ]
+
+
+  priceRange = [
+    {
+      from:  '€1 - €100',
+    },
+    {
+      from: '€100 - €200',
+    },
+    {
+      from: '€200 - €300',
+    },
+    {
+      from: '€300 - €400',
+    },
+    {
+      from: '€400 - €500',
+    },
+    {
+      from: '€500 - €600',
+    },
+    {
+      from: '€600 - €700',
+    },
+    {
+      from: '€700 - €800',
+    },
+    {
+      from: '€800 - €900',
+    },
+    {
+      from: '€900 - €1000',
+    },
+  ]
+
+  orderBy = [
+    {
+      order: 'Ascending',
+    },
+    {
+      order: 'Descending',
+    }
+  ]
+
+
   positionOptions: TooltipPosition[] = ['below', 'above', 'left', 'right'];
 
 
