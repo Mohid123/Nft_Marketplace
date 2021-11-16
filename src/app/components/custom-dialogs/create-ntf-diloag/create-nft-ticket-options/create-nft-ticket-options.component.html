@@ -24,7 +24,7 @@
     </div>
   </div>
 
-  <div class="flex flex-col">
+  <div class="flex flex-col mt-6">
     <span class="text-xl">No. of Copies</span><br>
     <input type='number' placeholder="1" formControlName="copies" name="copies">
     <p class="error-msg error" *ngIf="createNft.controls.copies.touched && createNft.controls.copies.errors?.required">please enter no of copies</p>
@@ -32,23 +32,19 @@
       Maximum required length of price digits is 100
     </div> -->
   </div>
-
-  <div class="mt-5">
-    <input type="checkbox" class="h-3 mr-2" id="instantMint" name="instantMint" value="mint" >
-    <label for="Instant Mint"> Instant Mint</label><br>
-  </div>
-  <div class="mt-3">
-    <input type="checkbox" class="h-3 mr-2" id="sale" name="sale" value="sale" >
-    <label for="Sale"> Sale</label><br>
+  <div>
+    <div class="chkbox">
+      <input id="one" type="checkbox">
+      <span class="check"></span>
+      <label for="one"> Instant Mint</label>
+    </div>
+    <div class="chkbox">
+      <input id="two" type="checkbox">
+      <span class="check"></span>
+      <label for="two"> Sale</label>
+    </div>
   </div>
 </form>
-
-
-
-
-  <!-- <button class="primary-btn" [disabled]="!price || !copy || price === 0 || copy === 0" (click)="save()">
-    Minting
-  </button> -->
   <button class="primary-btn" [disabled]="!createNft.valid" (click)="save()">
     Minting
   </button>
