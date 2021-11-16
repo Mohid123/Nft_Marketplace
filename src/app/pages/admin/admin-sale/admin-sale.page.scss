@@ -23,7 +23,7 @@
 }
 
 .groups-container {
-   @apply h-auto border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-1 rounded-xl mb-12;
+   @apply bg-primary-700 h-auto border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-1 rounded-xl mb-12;
 
    min-height: 400px;
    table {
