@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { CreatorService } from '@app/@core/services/creator.service';
 
 @Component({
   selector: 'app-admin-setting',
@@ -9,11 +10,17 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   styleUrls: ['./admin-setting.page.scss']
 })
 export class AdminSettingPage implements OnInit {
+
+  public creator$ = this.creatorService.Creator$;
+
   public settingForm: FormGroup;
   public file: any;
   public imageSrc: any;
-  constructor(  private formBuilder: FormBuilder) {
 
+  constructor(
+    private creatorService: CreatorService,
+    private formBuilder: FormBuilder,
+  ) {
     this.settingForm = this.formBuilder.group({
       description: new FormControl('', [Validators.required]),
       key: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -27,7 +34,7 @@ export class AdminSettingPage implements OnInit {
   ngOnInit(): void {
   }
 
-  saveSetting(){
+  saveSetting():void {
     console.log(this.settingForm)
   }
 

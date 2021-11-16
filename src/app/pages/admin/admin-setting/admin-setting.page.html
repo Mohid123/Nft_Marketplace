@@ -84,18 +84,17 @@
             <div class="details-container" style=" ">
               <h6 class=""><span>Old De</span>tails</h6>
               <div class="top-0 left-0 realtive">
-                <img class="relative top-0 left-0 object-cover w-full h-32" src="../../../../assets/banner/best-nft.png" alt="">
+                <img class="relative top-0 left-0 object-cover w-full h-32" [src]="((creator$ | async)?.coverImageURL) || ''" alt="">
                 <div class="absolute " style=" top: 410px;" >
                   <img class="inline object-cover w-12 h-12 ml-4 rounded-full"
-                    src="https://images.pexels.com/photos/2589653/pexels-photo-2589653.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+                    [src]="((creator$ | async)?.profileImageURL) || ''"
                     alt="Profile image" />
                 </div>
               </div>
               <div class="mt-8">
                 <span class="text-md">Description</span><br>
                 <p class="mt-2 text-sm text-gray-400">
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula egt dolor. Aenean
-                  massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+                  {{(creator$ | async)?.description}}
                 </p>
               </div>
             </div>
