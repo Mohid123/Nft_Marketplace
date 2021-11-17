@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
@@ -11,6 +11,7 @@ import { debounceTime } from 'rxjs/operators';
 export class AdminHeaderComponent implements OnInit, OnDestroy {
 
   @Output() search = new EventEmitter();
+  @Input() hideSearch:boolean;
   public searchStr = '';
 
   searchControl = new FormControl();
