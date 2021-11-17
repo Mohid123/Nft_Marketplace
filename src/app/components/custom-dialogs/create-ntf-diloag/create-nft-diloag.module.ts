@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { QrCodeModule } from 'ng-qrcode';
+import { MaxLengthModule } from './../../../@core/directives/max-length/max-length.module';
 import { CreateMembershipComponent } from './create-membership/create-membership.component';
 import { CreateNFTOptionsComponent } from './create-nft-options/create-nft-options.component';
 import { CreateNFTStyleComponent as CreateNFTticketOptionsComponent } from './create-nft-ticket-options/create-nft-ticket-options.component';
@@ -22,7 +23,8 @@ import { TicketPreviewComponent } from './ticket-preview/ticket-preview.componen
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    QrCodeModule
+    QrCodeModule,
+    MaxLengthModule,
   ]
 })
 export class CreateNFTDiloagModule {

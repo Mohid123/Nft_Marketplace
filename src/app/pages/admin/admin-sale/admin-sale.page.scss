@@ -89,3 +89,14 @@
 }
 
 
+.sold {
+  @apply bg-red-500;
+}
+
+.minted{
+  @apply bg-gray-300;
+}
+
+.active {
+  @apply bg-green-500;
+}

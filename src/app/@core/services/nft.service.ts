@@ -176,6 +176,17 @@ export class NFTService extends ApiService<nftApiData> {
     }));;
   }
 
+  updateNft(id: string,status): Observable<ApiResponse<nftApiData>> {
+    const param: any = {
+      nftStatus: status
+    };
+    return this.post('/nft/updateNft/'+ id, param).pipe(take(1),tap((result:ApiResponse<nftApiData>)=>{
+      if (result.hasErrors()) {
+        this.toastrService.error(result?.errors[0]?.error?.message)
+      }
+    }));
+  }
+
   getEventsByNft(id: string): Observable<ApiResponse<nftApiData>> {
     const param: any = {
       id: id,

@@ -5,6 +5,7 @@ import { NFTService } from '@app/@core/services/nft.service';
 import { Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 import { Group } from './../../../@core/models/group.model';
+import { NFT } from './../../../@core/models/NFT.model';
 import { NFTList } from './../../../@core/models/NFTList.model';
 import { ApiResponse } from './../../../@core/models/response.model';
 import { CreatorService } from './../../../@core/services/creator.service';
@@ -139,6 +140,14 @@ export class AdminSalePage implements OnInit, OnDestroy {
     this.page = 1;
     this.filterGroup = group;
     this.getSoldNFTs();
+  }
+
+  updateStatus(id:string, status:string):void {
+    this.nftService.updateNft(id,status).pipe(take(1)).subscribe((result:ApiResponse<NFT>) => {
+      if (!result.hasErrors()) {
+        this.getSoldNFTs();
+      }
+    });
   }
 
   ngOnDestroy(): void {

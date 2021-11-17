@@ -17,29 +17,27 @@
 <form action="" [formGroup]="createNft">
   <div class="flex flex-col">
     <span class="text-xl">Price</span><br>
-    <input type='number' name="price" formControlName="price" maxlength="6" placeholder="999999" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+    <input type='number' name="price" formControlName="price" appMaxLength maxlength="6" placeholder="999999">
     <p class="error-msg error" *ngIf="createNft.controls.price.touched && createNft.controls.price.errors?.required">please enter price</p>
-    <div *ngIf="createNft.controls['price'].hasError('max')">
-      Maximum required length of price digits is 6
-    </div>
+    <p class="error-msg error" *ngIf="createNft.controls.price.touched && createNft.controls.price.errors?.min">price must be greater then or equal to {{createNft.controls.price.errors?.min?.min}} </p>
+    <p class="error-msg error" *ngIf="createNft.controls.price.touched && createNft.controls.price.errors?.max">price must be less then or equal to {{createNft.controls.price.errors?.max?.max}} </p>
   </div>
 
   <div class="flex flex-col mt-6">
     <span class="text-xl">No. of Copies</span><br>
-    <input type='number' placeholder="1" formControlName="copies" name="copies">
+    <input type='number' placeholder="1" formControlName="copies" appMaxLength maxlength="3" name="copies">
     <p class="error-msg error" *ngIf="createNft.controls.copies.touched && createNft.controls.copies.errors?.required">please enter no of copies</p>
-    <!-- <div *ngIf="createNft.controls['copies'].hasError('max')">
-      Maximum required length of price digits is 100
-    </div> -->
+    <p class="error-msg error" *ngIf="createNft.controls.copies.touched && createNft.controls.copies.errors?.min">copies must be greater then or equal to {{createNft.controls.copies.errors?.min?.min}} </p>
+    <p class="error-msg error" *ngIf="createNft.controls.copies.touched && createNft.controls.copies.errors?.max">copies must be less then or equal to {{createNft.controls.copies.errors?.max?.max}} </p>
   </div>
   <div>
     <div class="chkbox">
-      <input id="one" type="checkbox">
+      <input id="one" type="checkbox" formControlName="mint">
       <span class="check"></span>
       <label for="one"> Instant Mint</label>
     </div>
     <div class="chkbox">
-      <input id="two" type="checkbox">
+      <input id="two" type="checkbox" formControlName="sale">
       <span class="check"></span>
       <label for="two"> Sale</label>
     </div>
