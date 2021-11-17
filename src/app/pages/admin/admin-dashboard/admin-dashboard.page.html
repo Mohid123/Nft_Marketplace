@@ -1,4 +1,4 @@
-<div style="filter: brightness(100%); filter: blur(8px);">
+<!-- <div style="filter: brightness(100%); filter: blur(8px);"> -->
 <app-admin-header></app-admin-header>
 <div class="h-auto min-h-screen p-1 mt-10 center md:p-3 xl:p-5 md:mt-0">
   <div class="flex flex-wrap w-full pb-28">
@@ -35,13 +35,14 @@
     </div>
     <div class="order-2 w-full section-container lg:order-2 xl:w-35 lg:w-2/5 ">
       <div class="flex flex-col justify-between section status">
+        <ng-container *ngIf="(creatorStats$ | async) as creatorStats">
         <div class="available-nft">
           <div class="icon">
             <img class="" src="./assets/icons/network.svg"/>
           </div>
           <div class="value">
             <p>Available NFT</p>
-            <span>15000</span>
+            <span>{{creatorStats?.yearlyStats?.totalNftListed}}</span>
           </div>
           <div class="graph-icon">
             <img class="" src="./assets/icons/growth.png"/>
@@ -53,7 +54,7 @@
           </div>
           <div class="value">
             <p>Total Revenue</p>
-            <span>€ 9.5K</span>
+            <span>€ {{creatorStats?.yearlyStats?.soldNft}}</span>
           </div>
           <div class="graph-icon">
             <img class="" src="./assets/icons/growth.png"/>
@@ -65,12 +66,13 @@
           </div>
           <div class="value">
             <p>Pending For Sale</p>
-            <span>2.5 K</span>
+            <span>{{creatorStats?.yearlyStats?.profit}}</span>
           </div>
           <div class="graph-icon">
             <img class="" src="./assets/icons/growth.png"/>
           </div>
         </div>
+        </ng-container>
       </div>
     </div>
     <div class="order-3 w-full p-5 section-container lg:order-4 xl:w-35 lg:w-2/5 " style="height: 440px;">
@@ -147,11 +149,11 @@
 </div>
 
 
-</div>
+<!-- </div>
 
 <div class="flex justify-center ">
   <div><h1
     class="coming-soon" style="">
     <span>Coming Soon...</span>
     </h1></div>
-</div>
+</div> -->

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { getItem, setItem } from '@app/@core/utils';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { take, tap } from 'rxjs/operators';
 import { Creator } from '../models/creator.model';
 import { CreatorStats } from './../models/creator-stats.mode';
 import { ApiResponse } from './../models/response.model';
@@ -34,9 +34,9 @@ export class CreatorService extends ApiService<creatorData> {
     super(http);
   }
 
-  getCreator(clubName: string): Observable<ApiResponse<Creator> | Creator> {
+  getCreator(clubName: string, forceUpdate: boolean = false): Observable<ApiResponse<Creator> | Creator> {
     const creator: CreatorInStore = <CreatorInStore>getItem(StorageItem.Creator);
-    if (creator?.club == clubName) {
+    if (!forceUpdate && creator?.club == clubName) {
       console.log('creatoraaa:',creator);
       this._Creator$.next(creator.data)
       return of(creator.data);
@@ -81,4 +81,16 @@ export class CreatorService extends ApiService<creatorData> {
       );
     }
   }
+
+  updateCreator(clubName:string, param: Creator): Observable<ApiResponse<Creator> | Creator> {
+      return this.post('/creator/updateCreator', param).pipe(
+        tap((result: ApiResponse<Creator>) => {
+          console.log('result:', result);
+          if (!result.hasErrors()) {
+            this.getCreator(clubName, true).pipe(take(1)).subscribe();
+          }
+        }),
+      );
+  }
+
 }

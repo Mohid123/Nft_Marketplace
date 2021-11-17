@@ -36,20 +36,19 @@ export class AdminDashboardPage implements AfterViewInit {
   public lineChartData: ChartDataSets[] = [
     {
       data: [
-        50,45,65, 48, 62, 70, 75,81
       ],
       fill: false,
       borderWidth: 7,
     },
   ];
   public lineChartLabels: Label[] = [
-    'January',
-    'February',
-    'March',
-    'April',
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
     'May',
-    'June',
-    'July',
+    'Jun',
+    'Jul',
     'Aug',
     'Sep',
     'Oct',
@@ -116,6 +115,12 @@ export class AdminDashboardPage implements AfterViewInit {
         });
       }
     });
+
+    this.creatorStats$.subscribe(status=> {
+      status.monthlyStats.forEach(stats => {
+        this.lineChartData[0].data.push(stats.profit);
+      })
+    })
   }
 
   ngAfterViewInit(): void {
