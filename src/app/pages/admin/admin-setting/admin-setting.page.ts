@@ -1,7 +1,7 @@
 /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CreatorService } from '@app/@core/services/creator.service';
 import { RouteService } from '@app/@core/services/route.service';
 import { ToastrService } from 'ngx-toastr';
@@ -47,7 +47,7 @@ export class AdminSettingPage implements OnInit, OnDestroy {
   ) {
     this.isLoading = false;
     this.settingForm = this.formBuilder.group({
-      description: new FormControl(''),
+      description: new FormControl('',[Validators.required]),
       key: new FormControl(''),
       profileImg: new FormControl(''),
       coverImg: new FormControl(''),
