@@ -5,7 +5,11 @@
   </div>
   <div class="w-full">
     <div class="w-full mt-6 groups-container">
-      <div class="w-full overflow-x-auto">
+      <div class="relative w-full overflow-x-auto">
+        <ngx-spinner name="admin-market" [fullScreen]="false" [showSpinner]="isLoading" bdColor="#171830" size="medium"
+          color="#fff" type="ball-scale-multiple">
+          <p style="font-size: 20px; color: white">{{(creator$ | async)?.displayName}}...</p>
+        </ngx-spinner>
         <div class="inline-flex m-8">
           <div class="flex" style=" width: 590px;" class="mx-2">
             <form action="" style="width: inherit;" [formGroup]="settingForm">
