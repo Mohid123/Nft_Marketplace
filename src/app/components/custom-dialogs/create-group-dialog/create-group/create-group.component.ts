@@ -67,13 +67,10 @@ export class CreateGroupComponent {
   getGroup(): void {
     if (this._isLoading) return
     this.groupService.getAllGroupsByClub(this.clubName, this.page, this.limit,this.searchValu);
-      setTimeout(() => {
-      this.spinner.hide();
-      }, 500);
   }
 
   addGroup():void {
-
+    this.spinner.show('main');
     const node = document.getElementById('group-img');
     htmlToImage
       .toPng(node, {
@@ -110,14 +107,12 @@ export class CreateGroupComponent {
                   coverImageUrl: res.data.url,
                 };
                 return this.groupService.addGroups(param);
-
               } else {
                 return of(null);
               }
             }),
           ).subscribe((res:any) => {
             if (res !== null) {
-              this.spinner.show()
               this.cf.detectChanges();
               this.close();
               this.toastr.success('New group successfully added.', 'Success!');
@@ -126,6 +121,7 @@ export class CreateGroupComponent {
               this.toastr.warning(res.errors[0]?.error?.message, 'Error!');
               // alert('error :' + res.errors[0]?.error?.message);
             }
+            this.spinner.hide('main');
           });
       })
       .catch((error) => {

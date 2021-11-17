@@ -36,7 +36,7 @@
   }
 
   .primary-btn {
-    @apply w-44 h-12  sm:my-14 self-center;
+    @apply w-44 p-3  sm:my-14 self-center;
   }
 
   .card-bg {
@@ -48,7 +48,7 @@
   form {
     @apply flex flex-col w-full;
     label {
-      @apply px-3 py-4 text-lg;
+      @apply  py-4 text-lg;
     }
 
   }
@@ -104,4 +104,26 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+.custom-scrollbar-css {
+  height: 500px;
+}
+/* Custom Scrollbar using CSS */
+.custom-scrollbar-css {
+  overflow-y: scroll;
+}
+/* scrollbar width */
+.custom-scrollbar-css::-webkit-scrollbar {
+  width: 7px;
+}
+/* scrollbar track */
+.custom-scrollbar-css::-webkit-scrollbar-track {
+  background: #132356;
+}
+/* scrollbar handle */
+.custom-scrollbar-css::-webkit-scrollbar-thumb {
+  border-radius: 1rem;
+  background-color: #34ABC5;
+  background-image: linear-gradient(to top, #3ABFF3 0%, #75F16D 100%);
 }

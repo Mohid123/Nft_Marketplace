@@ -4,9 +4,11 @@ import { FormGroup } from '@angular/forms';
 import { NFT } from '@app/@core/models/NFT.model';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { environment } from '@environments/environment';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { exhaustMap, take, tap } from 'rxjs/operators';
+import { IsMembershipIdExists } from '../models/is-membership-id-exists.model';
 import { GetAllNftsByClub } from '../models/requests/get-all-afts-by-club.model';
 import { getNftsByUserId } from '../models/requests/get-nfts-by-user.model';
 import { getNftsForAdmin } from '../models/requests/get-nfts-for-admin.model';
@@ -19,7 +21,7 @@ import { RouterState } from './../models/routerState.model';
 import { ApiService } from './api.service';
 import { MediaService } from './media.service';
 
-type nftApiData = NFT | NFTList | ResponseEventByNFT | MediaUpload ;
+type nftApiData = NFT | NFTList | ResponseEventByNFT | MediaUpload | IsMembershipIdExists ;
 
 @Injectable({
   providedIn: 'root',
@@ -48,13 +50,14 @@ export class NFTService extends ApiService<nftApiData> {
     protected customDialogService: CustomDialogService,
     protected http: HttpClient,
     private mediaService: MediaService,
-    protected toastrService: ToastrService
+    protected toastrService: ToastrService,
+    private spinner: NgxSpinnerService
   ) {
     super(http);
   }
 
   requestCreateNFT(nftForm,img):void {
-    this.customDialogService.showLoadingDialog('Minting In Process');
+    this.spinner.show('main');
     this.mediaService
       .uploadMedia('nft', img)
       .pipe(
@@ -78,6 +81,7 @@ export class NFTService extends ApiService<nftApiData> {
         else {
           this.customDialogService.closeDialogs();
         }
+        this.spinner.hide('main');
     });
 
     setTimeout(() => {
@@ -99,6 +103,25 @@ export class NFTService extends ApiService<nftApiData> {
       param.groupID = groupId;
     }
      return this.get('/nft/getAllNftsByClub', param).pipe(take(1),tap((result:ApiResponse<nftApiData>)=>{
+      if (result.hasErrors()) {
+        this.toastrService.error(result?.errors[0]?.error?.message)
+      }
+    }));
+  }
+
+  getRecentSoldNfts(page: number, limit: number, groupId?:string, type?:string) : Observable<ApiResponse<nftApiData>> {
+    page--;
+    const param:any = {
+      offset: page ? limit * page : 0,
+      limit: limit,
+      type: type,
+    };
+    // name: searchValue,
+
+    if(groupId) {
+      param.groupID = groupId;
+    }
+     return this.get('/nft/getRecentSoldNfts', param).pipe(take(1),tap((result:ApiResponse<nftApiData>)=>{
       if (result.hasErrors()) {
         this.toastrService.error(result?.errors[0]?.error?.message)
       }
@@ -153,6 +176,17 @@ export class NFTService extends ApiService<nftApiData> {
     }));;
   }
 
+  updateNft(id: string,status): Observable<ApiResponse<nftApiData>> {
+    const param: any = {
+      nftStatus: status
+    };
+    return this.post('/nft/updateNft/'+ id, param).pipe(take(1),tap((result:ApiResponse<nftApiData>)=>{
+      if (result.hasErrors()) {
+        this.toastrService.error(result?.errors[0]?.error?.message)
+      }
+    }));
+  }
+
   getEventsByNft(id: string): Observable<ApiResponse<nftApiData>> {
     const param: any = {
       id: id,
@@ -164,12 +198,39 @@ export class NFTService extends ApiService<nftApiData> {
     }));
   }
 
+  getEventsByUser(id: string,page: number, limit: number ,groupId?:string, type?:string): Observable<ApiResponse<nftApiData>> {
+    page--;
+    const param:any = {
+      offset: page ? limit * page : 0,
+      limit: limit,
+      type: type,
+    };
+    // name: searchValue,
+
+    if(groupId) {
+      param.groupID = groupId;
+    }
+    return this.get('/event/getEventByUserId/'+ id,param).pipe(take(1),tap((result:ApiResponse<nftApiData>)=>{
+      if (result.hasErrors()) {
+        this.toastrService.error(result?.errors[0]?.error?.message)
+      }
+    }));
+  }
+
+  isMembershipIDExists(params: { appPackageId:string,membershipId:string}): Observable<ApiResponse<nftApiData>> {
+    return this.post('/nft/isMembershipIDExists', params);
+  }
+
   addNft(params: NFT): Observable<ApiResponse<nftApiData>>{
     return this.post('/nft/addNft', params).pipe(take(1),tap((result:ApiResponse<nftApiData>)=>{
       if (result.hasErrors()) {
         this.toastrService.error(result?.errors[0]?.error?.message)
       } else {
         if(result?.data)
+        this.customDialogService.showLoadingDialog('Minting In Process');
+            setTimeout(() => {
+              this.customDialogService.closeDialogs();
+            }, 3000);
           this._cardCreatedSuccess$.next((<NFT>result?.data)?.id);
       }
     }));

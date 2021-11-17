@@ -26,8 +26,8 @@
    @apply bg-primary-700 h-auto border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-1 rounded-xl mb-12;
 
    min-height: 400px;
-  table {
-    @apply rounded-3xl
+   table {
+    @apply bg-primary-700 rounded-3xl
   }
    th {
      @apply px-10 h-12 text-left uppercase font-medium;
@@ -78,4 +78,10 @@
   background-color: #32354e !important;
   font-size: 24px !important;
 }
+
+.dropdown{
+  @apply my-1 rounded-md border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-1 text-center;
+}
+
+
 

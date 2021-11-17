@@ -9,44 +9,60 @@
   </div>
   <div class="w-full">
     <div class="mt-6 has-tooltip">
-      <!-- <span class="p-1 -mt-10 text-4xl text-red-500 rounded shadow-lg bg-primary-400 tooltip"> <span style="color: #73BFD6 ">Coming </span> <span style="color: #75F36B">Soon...</span></span> -->
-      <div class="opacity-25 filters" matTooltip="Coming soon.." matTooltipClass="tooltips" matTooltipPosition="right" >
+      <div class=" filters" >
         <div class="filter">
-          <button mat-icon-button aria-label="menu">
+          <button mat-icon-button aria-label="statusMenu">
             <span><mat-icon>filter_alt</mat-icon></span>
             <span class="px-px sm:px-2">Filter</span>
           </button>
         </div>
         <div class="filter">
-          <button mat-icon-button aria-label="menu" class="w-16">
-            <span>Status</span>
+          <button mat-icon-button aria-label="menu" class="w-20" mat-icon-button [matMenuTriggerFor]="itemCountMenu" >
+            <span>Item Count</span>
             <span class="material-icons">
               arrow_drop_down
               </span>
           </button>
         </div>
         <div class="filter">
-          <button mat-icon-button aria-label="menu" class="w-16">
-            <span>Price</span>
+          <button mat-icon-button aria-label="menu" class="w-16" [matMenuTriggerFor]="nameMenu" >
+            <span>Name</span>
             <span class="material-icons">
               arrow_drop_down
               </span>
           </button>
         </div>
-        <div class="filter">
-          <button mat-icon-button aria-label="menu" class="w-16">
-            <span>Token ID</span>
+        <!-- <div class="filter">
+          <button mat-icon-button aria-label="menu" class="w-16" [matMenuTriggerFor]="groups">
+            <span>Groups</span>
             <span class="material-icons">
               arrow_drop_down
               </span>
           </button>
-        </div>
+        </div> -->
         <div class="filter">
           <button mat-icon-button aria-label="menu">
             <span><mat-icon>restart_alt</mat-icon></span>
             <span class="px-px sm:px-2">Restart Filter</span>
           </button>
         </div>
+
+          <!--Item count menu-->
+        <mat-menu #itemCountMenu="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md" xPosition='after'>
+          <button class="dropdown" mat-menu-item *ngFor="let sort of orderBy">
+          {{sort.sortBy}}
+          </button>
+
+        </mat-menu>
+
+         <!--Name menu-->
+        <mat-menu #nameMenu="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md text-sm mat-menu" xPosition='after'>
+          Sort by
+          <button class="dropdown" mat-menu-item *ngFor="let sort of order">
+            {{sort.sortBy}}
+          </button>
+         </mat-menu>
+
       </div>
     </div>
     <div class="w-full bg-gray-400 groups-container">
@@ -60,7 +76,10 @@
               <th>Action</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="relative">
+            <ngx-spinner name="admin-market" [fullScreen]="false" [showSpinner]="isLoading$ | async" bdColor="#171830" size="medium" color="#fff" type="ball-scale-multiple">
+              <p style="font-size: 20px; color: white">{{(creator$ | async)?.displayName}}...</p>
+            </ngx-spinner>
               <ng-container *ngFor="let group of (groups$ | async);last as isLast" class="">
                 <tr [ngStyle]="{'border-bottom': isLast ? '1px solid #aaaaaa2a' : 'none' }">
                   <td>{{group.name}}</td>
@@ -102,7 +121,7 @@
               </svg>
 
             </button>
-            <span>1/{{ (totalCount  / limit + (0.4)) | number:'1.0-0' }}</span>
+            <span>{{page}}/{{ (totalCount  / limit + (0.4)) | number:'1.0-0' }}</span>
             <button [disabled]="totalCount <= page * limit" class="icon-btn active" (click)="next()">
               <svg xmlns="http://www.w3.org/2000/svg" width="17.618" height="11.75" viewBox="0 0 17.618 11.75">
                 <defs>

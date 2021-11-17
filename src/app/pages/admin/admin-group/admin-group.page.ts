@@ -1,8 +1,8 @@
 import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { CreatorService } from './../../../@core/services/creator.service';
 import { CustomDialogService } from './../../../@core/services/custom-dialog/custom-dialog.service';
 import { GroupService } from './../../../@core/services/group.service';
 import { RouteService } from './../../../@core/services/route.service';
@@ -14,9 +14,10 @@ import { RouteService } from './../../../@core/services/route.service';
 })
 export class AdminGroupPage implements OnDestroy {
 
+  creator$ = this.creatorService.Creator$;
   destroy$ = new Subject();
 
-  private _isLoading:boolean;
+  public isLoading$ = this.groupService.isLoading$;
 
   public clubName: string;
   public groups$ = this.groupService.groups$;
@@ -26,17 +27,33 @@ export class AdminGroupPage implements OnDestroy {
   public page:number;
   public searchValu = '';
 
+  orderBy = [
+    {
+      sortBy: 'Maximum'
+    },
+    {
+      sortBy: 'Minimum'
+    }
+  ]
+
+  order = [
+    {
+      sortBy: 'A - Z'
+    },
+    {
+      sortBy: 'Z - A'
+    }
+  ]
+
   constructor(
     private customDialogService: CustomDialogService,
+    private creatorService: CreatorService,
     private groupService: GroupService,
     private routeService: RouteService,
-    private spinner: NgxSpinnerService,
     private toastr: ToastrService,
     private cf: ChangeDetectorRef
   ) {
     this.page = 1;
-    this._isLoading = false;
-    this.spinner.show();
     this.routeService.clubName$.pipe(distinctUntilChanged(), takeUntil(this.destroy$))
     .subscribe((clubName) => {
       this.clubName = clubName;
@@ -45,23 +62,15 @@ export class AdminGroupPage implements OnDestroy {
   }
 
   getGroup(): void {
-    if (this._isLoading) return
     this.groupService.getAllGroupsByClub(this.clubName, this.page, this.limit,this.searchValu);
-      setTimeout(() => {
-      this.spinner.hide();
-      }, 500);
   }
 
-  deleteGroup(group){
-    this.spinner.show();
+  deleteGroup(group):void {
     this.groupService.deleteGroups(group.id).subscribe((data) => {
       if (!data.hasErrors()) {
         this.cf.detectChanges();
         this.toastr.success('Group successfully deleted.', 'Success!');
         this.getGroup();
-        setTimeout(() => {
-          this.spinner.hide();
-        });
       }
     });
   }
@@ -70,10 +79,9 @@ export class AdminGroupPage implements OnDestroy {
     this.customDialogService.showCreateGroupDialog();
   }
 
-  search(searchValu):void {
-    this.searchValu = searchValu;
+  search(searchValue:string):void {
+    this.searchValu = searchValue;
     this.page = 1;
-    console.log('lajkdlkasj:',searchValu);
     this.getGroup();
   }
 

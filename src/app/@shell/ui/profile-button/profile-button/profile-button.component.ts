@@ -10,8 +10,9 @@ import { RouteService } from './../../../../@core/services/route.service';
   styleUrls: ['./profile-button.component.scss']
 })
 export class ProfileButtonComponent {
-  public userName: any
-  public profile: any
+
+  public user$ = this.authService.user$;
+
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -21,15 +22,11 @@ export class ProfileButtonComponent {
 
   }
 
-  ngOnInit(): void {
-    this.userName = JSON.parse(localStorage.getItem('App/user'))
-    this.profile = JSON.parse(localStorage.getItem('App/user'))
-  }
-
   signOut():void {
-    this.authService.signOut();
+    this.router.navigate([this.routeService.clubName]).then(()=> {
+      this.authService.signOut();
+    });
     this.toastr.success(`You've logged out.`, 'Logout!')
-    this.router.navigate([this.routeService.clubName]);
   }
 
 }

@@ -8,21 +8,33 @@
       <div class="w-full overflow-x-auto">
         <div class="inline-flex m-8">
           <div class="flex" style=" width: 590px;" class="mx-2">
-            <form action="" style="width: inherit;">
+            <form action="" style="width: inherit;" [formGroup]="settingForm">
               <div class="flex justify-self-start">
                 <div class="flex-1">
                   <span class="text-xl">Profile Picture</span><br>
                   <div class="field">
                     <button>
-                      <div class="ml-2 font-light text-gray-300">Select Profile Picture to Upload</div>
+                      <ng-container *ngIf="!profileImage; else profileImageFileName">
+                        <div class="ml-2 font-light text-gray-400">Select Profile Picture to Uplaod</div>
+                    </ng-container>
+                    <ng-template #profileImageFileName>
+                      <div class="ml-2 font-light text-gray-400">{{profileImage.name}}</div>
+                    </ng-template>
                       <img src="../../../../assets/icons/Icon feather-upload.svg" class="p-4" alt="">
                     </button>
                     <input class="absolute block opacity-0 cursor-pointer pin-r pin-t " type="file" name=""
-                      accept="image/*" />
+                      accept="image/*" (change)="onSelectProfile($event)"/>
                   </div>
                 </div>
                 <div class="border-4 rounded-md">
-                  <img class="preview" src="../../../../assets/logo/stripe-logo-blue.png" alt="">
+                  <ng-container *ngIf="!profileImage; else pImage">
+                    <img class="preview" [src]="((creator$ | async)?.profileImageURL) || ''" alt="">
+
+                </ng-container>
+                <ng-template #pImage>
+                  <img class="preview" src={{profileImageSrc}} alt="">
+                </ng-template>
+
                 </div>
               </div>
               <div class="flex pt-5 justify-self-start">
@@ -30,15 +42,27 @@
                   <span class="text-xl">Cover Photo</span><br>
                   <div class="field">
                     <button>
-                      <div class="ml-2 font-light text-gray-300">Select Cover Photo to Upload</div>
+                      <ng-container *ngIf="!coverImage; else coverImageFileName">
+                        <div class="ml-2 font-light text-gray-400">Select Cover Picture to Uplaod</div>
+                    </ng-container>
+                    <ng-template #coverImageFileName>
+                      <div class="ml-2 font-light text-gray-400">{{coverImage.name}}</div>
+                    </ng-template>
+                      <!-- <div class="ml-2 font-light text-gray-300">Select Cover Photo to Upload</div> -->
                       <img src="../../../../assets/icons/Icon feather-upload.svg" class="p-4" alt="">
                     </button>
                     <input class="absolute block opacity-0 cursor-pointer pin-r pin-t " type="file" name=""
-                      accept="image/*" />
+                      accept="image/*" (change)="onSelectCover($event)"/>
                   </div>
                 </div>
                 <div class="border-4 rounded-md">
-                  <img class="preview" src="../../../../assets/logo/stripe-logo-blue.png" alt="">
+                  <ng-container *ngIf="!coverImage; else cImage">
+                    <img class="preview" [src]="((creator$ | async)?.coverImageURL) || ''" alt="">
+
+                </ng-container>
+                <ng-template #cImage>
+                  <img class="preview" src={{coverImageSrc}} alt="">
+                </ng-template>
                 </div>
               </div>
               <div class="flex flex-col pt-5">
@@ -47,17 +71,20 @@
                   <textarea rows="10" cols="100" class="w-full h-40 p-4 font-light text-gray-300" type="textarea"
                     name="description" formControlName="description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula egt dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
             </textarea>
+            <p class="error-msg error" *ngIf="settingForm.controls.description.touched && settingForm.controls.description.errors?.required">please enter brief description</p>
                 </div>
               </div>
               <div class="flex flex-col pt-5">
                 <span class="text-xl">Stripe Key</span><br>
                 <div class="relative flex flex-col justify-between overflow-hidden rounded-lg">
                   <input class="w-full h-12 font-light text-gray-300" type="text" placeholder="123456789"
-                    name="description" formControlName="description">
+                    name="key" formControlName="key">
+                    <p class="error-msg error" *ngIf="settingForm.controls.key.touched && settingForm.controls.key.errors?.required">please enter key</p>
+      <p class="error-msg error" *ngIf="settingForm.controls.key.touched && settingForm.controls.key.errors?.key">please enter valid key</p>
                   </div>
               </div>
               <div class="flex flex-row-reverse">
-                <button class="py-2 mt-8 px-7 primary-btn">
+                <button class="py-2 mt-8 px-7 primary-btn" [disabled]="!settingForm.valid" (click)="saveSetting()">
                   Save Setting
                 </button>
               </div>
@@ -67,18 +94,17 @@
             <div class="details-container" style=" ">
               <h6 class=""><span>Old De</span>tails</h6>
               <div class="top-0 left-0 realtive">
-                <img class="relative top-0 left-0 object-cover w-full h-32" src="../../../../assets/banner/best-nft.png" alt="">
+                <img class="relative top-0 left-0 object-cover w-full h-32" [src]="((creator$ | async)?.coverImageURL) || ''" alt="">
                 <div class="absolute " style=" top: 410px;" >
                   <img class="inline object-cover w-12 h-12 ml-4 rounded-full"
-                    src="https://images.pexels.com/photos/2589653/pexels-photo-2589653.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+                    [src]="((creator$ | async)?.profileImageURL) || ''"
                     alt="Profile image" />
                 </div>
               </div>
               <div class="mt-8">
                 <span class="text-md">Description</span><br>
                 <p class="mt-2 text-sm text-gray-400">
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula egt dolor. Aenean
-                  massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+                  {{(creator$ | async)?.description}}
                 </p>
               </div>
             </div>

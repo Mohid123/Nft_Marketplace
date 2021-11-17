@@ -1,8 +1,16 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { CreatorService } from '@app/@core/services/creator.service';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
+import { GroupService } from '@app/@core/services/group.service';
+import { NFTService } from '@app/@core/services/nft.service';
+import { RouteService } from '@app/@core/services/route.service';
 import { AuthService } from '@app/pages/auth/services/auth.service';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
+import { Subject } from 'rxjs';
+import { take, takeUntil } from 'rxjs/operators';
+import { NFTList } from './../../../@core/models/NFTList.model';
+import { ApiResponse } from './../../../@core/models/response.model';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -10,8 +18,20 @@ import { Color, Label } from 'ng2-charts';
   styleUrls: ['./admin-dashboard.page.scss'],
 })
 export class AdminDashboardPage implements AfterViewInit {
+
+  destroy$ = new Subject();
+
   @ViewChild('myCanvas')
   canvas!: ElementRef;
+
+  public creatorStats$ = this.creatorService.CreatorStats$;
+  public groups$ = this.groupService.groups$;
+
+  private _isLoading:boolean;
+  public nftList: NFTList;
+  public clubName: string;
+  public nftLimit = 12 ;
+  public page:number;
 
   public lineChartData: ChartDataSets[] = [
     {
@@ -76,11 +96,31 @@ export class AdminDashboardPage implements AfterViewInit {
   constructor(
     private authService:AuthService,
     private customDialogService:CustomDialogService,
+    private creatorService: CreatorService,
+    private groupService: GroupService,
+    private nftService: NFTService,
+    private routeService: RouteService,
   ){
-
+    this.page = 1;
+    this._isLoading = false;
+    this.routeService.clubName$.pipe(takeUntil(this.destroy$)).subscribe((clubName) => {
+      this.clubName = clubName;
+      if(this.clubName) {
+        this.nftService.getRecentSoldNfts(this.page, this.nftLimit)
+        .pipe(take(1))
+        .subscribe((result:ApiResponse<NFTList>) => {
+          if (!result.hasErrors()) {
+            this.nftList = result.data;
+          }
+          this._isLoading = false;
+        });
+      }
+    });
   }
 
   ngAfterViewInit(): void {
+    this.creatorService.getCreatorStats(this.routeService.clubName).pipe(takeUntil(this.destroy$)).subscribe();
+    this.groupService.getAllGroupsByClub(this.clubName, 1, 4);
     // console.log('aksdjkasjd');
     const gradient = this.canvas.nativeElement
       .getContext('2d')

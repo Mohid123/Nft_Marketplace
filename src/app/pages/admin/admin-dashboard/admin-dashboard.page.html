@@ -16,18 +16,20 @@
         </canvas>
         </div>
         <div class="section">
+          <ng-container *ngIf="(creatorStats$ | async) as creatorStats">
           <div class="listed">
             <p>Total NFT Listed</p>
-            <span>650</span>
+            <span>{{creatorStats?.yearlyStats?.totalNftListed}}</span>
           </div>
           <div class="sold">
             <p>Total NFT Sold</p>
-            <span>500</span>
+            <span>{{creatorStats?.yearlyStats?.soldNft}}</span>
           </div>
           <div class="profit">
             <p>Sold NFT Profit</p>
-            <span>€ 500</span>
+            <span>€ {{creatorStats?.yearlyStats?.profit}}</span>
           </div>
+        </ng-container>
         </div>
       </div>
     </div>
@@ -74,49 +76,16 @@
     <div class="order-3 w-full p-5 section-container lg:order-4 xl:w-35 lg:w-2/5 " style="height: 440px;">
       <div class="p-5 section rounded-xl bg-primary-light" id="container1" >
         <p class="tracking-wide font-medium text-white py-2.5">NFT Groups</p>
-      <div class="pr-4 groups custom-scrollbar-css" id="container2">
-        <div class="group">
-          <img src="./assets/card/logout-user.png" alt="">
-          <div>
-            <p class="name">John Doe</p>
-            <p class="items">32 Items</p>
+      <div class="overflow-hidden groups" id="container2">
+        <ng-container *ngFor="let group of (groups$ | async)">
+          <div class="group">
+            <img [src]="group.coverImageUrl" alt="">
+            <div>
+              <p class="name">{{group.name}}</p>
+              <p class="items">{{group.itemsCount}} Items</p>
+            </div>
           </div>
-        </div>
-        <div class="group">
-          <img src="./assets//card/treading-url.png" alt="">
-          <div>
-            <p class="name">John Doe</p>
-            <p class="items">32 Items</p>
-          </div>
-        </div>
-        <div class="group">
-          <img src="./assets/card/Group 57316@2x.png" alt="">
-          <div>
-            <p class="name">John Doe</p>
-            <p class="items">32 Items</p>
-          </div>
-        </div>
-        <div class="group">
-          <img src="./assets/card/logout-user.png" alt="">
-          <div>
-            <p class="name">John Doe</p>
-            <p class="items">32 Items</p>
-          </div>
-        </div>
-        <div class="group">
-          <img src="./assets//card/treading-url.png" alt="">
-          <div>
-            <p class="name">John Doe</p>
-            <p class="items">32 Items</p>
-          </div>
-        </div>
-        <div class="group">
-          <img src="./assets/card/Group 57316@2x.png" alt="">
-          <div>
-            <p class="name">John Doe</p>
-            <p class="items">32 Items</p>
-          </div>
-        </div>
+        </ng-container>
       </div>
       </div>
     </div>
@@ -163,13 +132,11 @@
           </div>
           <div class="body-section ">
             <div class="custom-scrollbar-css-y">
-              <!-- <app-nft-card></app-nft-card>
-              <app-nft-card></app-nft-card>
-              <app-nft-card></app-nft-card>
-              <app-nft-card></app-nft-card>
-              <app-nft-card></app-nft-card>
-              <app-nft-card></app-nft-card>
-              <app-nft-card></app-nft-card> -->
+              <ng-container *ngIf="nftList && nftList.totalCount > 0">
+                <ng-container *ngFor="let nftCard of nftList.data" class="">
+                  <app-nft-card [nft]="nftCard"></app-nft-card>
+                </ng-container>
+              </ng-container>
             </div>
           </div>
         </div>

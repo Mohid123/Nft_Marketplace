@@ -54,11 +54,15 @@ export class AuthService extends ApiService<AuthApiData> {
     return this._role$.getValue();
   }
 
+  get user(): User {
+    return this._user$.getValue();
+  }
+
   get JwtToken(): string {
     return getItem(StorageItem.JwtToken)?.toString() || '';
   }
 
-  userSignIn(params: AuthCredentials): Observable<ApiResponse<SignInResponse>> {
+  userSignIn(params: AuthCredentials,adminCheck:boolean): Observable<ApiResponse<SignInResponse>> {
     return this.post('/auth/loginForNftPanel', params).pipe(
       tap((result: ApiResponse<SignInResponse>) => {
         if (!result.hasErrors()) {
@@ -73,7 +77,11 @@ export class AuthService extends ApiService<AuthApiData> {
           this._user$.next(result?.data?.user || null);
           this._loggedInUser$.next(result?.data?.loggedInUser || null);
           this._role$.next(role);
-          location.reload();
+          if(adminCheck && result?.data?.user?.admin) {
+            this.router.navigate(['/'+ params.clubName + '/admin'])
+          } else {
+            location.reload();
+          }
         }
       }),
     );
@@ -103,7 +111,8 @@ export class AuthService extends ApiService<AuthApiData> {
     if(activeClub && activeClub == newClub) {
       setItem(StorageItem.Role, getItem(StorageItem.ActiveClub));
       this._role$.next(<ROLE_TYPE_UTILS>getItem(StorageItem.LastRole));
-      this._isLoggedIn$.next(true);
+      if(this.user)
+        this._isLoggedIn$.next(true);
     } else {
       removeItem(StorageItem.Role);
       this._role$.next(ROLE_TYPE_UTILS.noUser);
@@ -113,12 +122,14 @@ export class AuthService extends ApiService<AuthApiData> {
 
   signOut(): void {
     removeItem(StorageItem.Key);
-    removeItem(StorageItem.Role);
-    removeItem(StorageItem.User);
-    removeItem(StorageItem.LoggedInUser);
-    removeItem(StorageItem.JwtToken);
-    removeItem(StorageItem.ActiveClub);
-    removeItem(StorageItem.LastRole);
+    removeItem(StorageItem.CreatorStats);
+
+    setItem(StorageItem.Role, ROLE_TYPE_UTILS.noUser);
+    setItem(StorageItem.User, null);
+    setItem(StorageItem.LoggedInUser, null);
+    setItem(StorageItem.JwtToken, null);
+    setItem(StorageItem.LastRole, null);
+
     this._isLoggedIn$.next(false);
     this._user$.next(null);
     this._loggedInUser$.next(null);

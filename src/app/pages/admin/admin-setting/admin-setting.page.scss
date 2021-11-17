@@ -15,12 +15,13 @@ h6 {
 }
 
 .preview {
-  @apply object-contain w-24 h-24;
+  @apply object-cover w-24 h-24;
 }
 
 .details-container {
   @apply bg-primary-dark border-gradient-dp-p-bg-dark  gradient-border-1 rounded-xl mb-12 px-4 py-5 mt-6 ;
   min-height: 358px;
+  width: 508px;
 }
 
 .field {

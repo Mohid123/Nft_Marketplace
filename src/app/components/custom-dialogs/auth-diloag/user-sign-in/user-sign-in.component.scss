@@ -1,6 +1,6 @@
 ::ng-deep .user-sign-in-dialog-overlay {
   height: auto;
-  min-height: 722px;
+  min-height: 596px;
   max-width: 631px !important;
 }
 
@@ -16,13 +16,13 @@
   }
 
   .logo {
-    @apply object-scale-down mt-6 sm:mt-6 md:mt-12;
+    @apply object-scale-down mt-6 sm:mt-6 md:mt-2;
     // width: 410px;
     height: 90px;
   }
 
   h1 {
-    @apply capitalize my-12 text-3xl;
+    @apply capitalize my-5 text-3xl;
     font-weight: 400;
     span {
       padding-bottom: 4px;
@@ -46,7 +46,7 @@
     }
 
     button {
-      @apply w-72 h-16 my-10 sm:my-14 self-center;
+      @apply w-72 h-16 my-10 sm:my-3 self-center;
     }
 
   }

@@ -33,10 +33,11 @@ export class CustomDialogService {
   //   this.matDialog.open(UserSignInComponent);
   // }
 
-  async showUserSignInDialog(isPage = false) {
+  async showUserSignInDialog(isPage = false,page?:string) {
     this.matDialog.closeAll();
     this._mapDialogref = await this.authDialogService.openUserSignIn();
     this._mapDialogref.componentInstance.isPage = isPage;
+    this._mapDialogref.componentInstance.page = page;
     // (await this._mapDialogref).afterClosed().subscribe((result) => {
     //   console.log('Mat Dialog Results user sign in:', result);
     // });

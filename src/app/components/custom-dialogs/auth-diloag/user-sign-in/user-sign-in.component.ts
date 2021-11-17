@@ -19,6 +19,7 @@ import { AuthService } from './../../../../pages/auth/services/auth.service';
 export class UserSignInComponent {
 
   @Input() isPage: boolean;
+  @Input() page: string;
 
   public loginForm: FormGroup;
   public passwordHide: boolean;
@@ -55,7 +56,7 @@ export class UserSignInComponent {
       clubName: this.clubName,
     };
     this.authService
-      .userSignIn(params)
+      .userSignIn(params,this.page == 'market-page')
       .pipe(take(1))
       .subscribe((res:ApiResponse<SignInResponse>) => {
         if (!res.hasErrors()) {
@@ -63,7 +64,6 @@ export class UserSignInComponent {
           this.customDialogService.closeDialogs();
           if(this.isPage) {
             this.router.navigate(['/'+this.clubName])
-
           }
         } else {
           // alert(res?.errors[0]?.error?.message);

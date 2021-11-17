@@ -18,6 +18,9 @@ type groupApiData = ResponseGroupsByClub | AddGroup;
 })
 export class GroupService extends ApiService<groupApiData> {
 
+  private _isLoading$ = new BehaviorSubject<boolean>(false);
+  public readonly isLoading$: Observable<boolean> = this._isLoading$.asObservable();
+
   private _totalCount$ = new BehaviorSubject<number>(0);
   public readonly totalCount$: Observable<number> = this._totalCount$.asObservable();
 
@@ -34,6 +37,7 @@ export class GroupService extends ApiService<groupApiData> {
   }
 
   getAllGroupsByClub(clubName: string, page: number, limit?: number,searchValue?: string): void {
+    this._isLoading$.next(true)
     page--;
     this.limit = limit;
     const param: GetAllNftsByClub = {
@@ -44,6 +48,7 @@ export class GroupService extends ApiService<groupApiData> {
     };
     this.get('/group/getAllGroupsByAppPackageId',param)
     .pipe(take(1),tap((result:ApiResponse<ResponseGroupsByClub>)=> {
+      this._isLoading$.next(false)
       if (!result.hasErrors()) {
         this._totalCount$.next(result.data.totalCount)
         this._groups$.next(result.data?.data);
