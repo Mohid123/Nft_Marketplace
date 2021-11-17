@@ -133,6 +133,10 @@ export class AdminSettingPage implements OnInit, OnDestroy {
   }
 
   saveChagesToServer():void {
+    if(this.settingForm.controls?.description?.value?.length > 0) {
+      this.creator.description = this.settingForm.controls?.description?.value;
+    }
+
     this.creatorService.updateCreator(this.routeService.clubName, this.creator).subscribe((res :ApiResponse<Creator>)=> {
       this.isLoading = false;
       this.settingForm.reset();
