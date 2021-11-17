@@ -1,5 +1,5 @@
 <div>
-  <app-admin-header></app-admin-header>
+  <app-admin-header [hideSearch]="true"></app-admin-header>
   <div class="flex flex-col justify-start h-auto min-h-screen px-3 py-2 mt-10 mb-12 sm:px-6 xl:px-8 center">
 
     <div class="flex items-center justify-between w-full h-12 py-px">
@@ -42,7 +42,7 @@
           <div class="filter">
             <button mat-icon-button aria-label="menu">
               <span><mat-icon>restart_alt</mat-icon></span>
-              <span class="px-px sm:px-2">Restart Filter</span>
+              <span class="px-px sm:px-2">Reset Filter</span>
             </button>
           </div>
 
@@ -86,7 +86,7 @@
             <tbody class="relative">
               <ng-container *ngFor="let nft of nftList?.data;last as isLast" class="">
                 <tr [ngStyle]="{'border-bottom': isLast ? '1px solid #aaaaaa2a' : 'none' }">
-                  <td>{{nft.tokenId}}</td>
+                  <td><a href="{{nft.transactionHashUrl}}" target=_blank> {{nft.tokenId}}</a></td>
                   <td>{{nft.type || 0}}</td>
                   <td>€{{nft.price}}</td>
                   <td>{{nft.createdAt  | date: 'dd-MM-yyyy'}}</td>
