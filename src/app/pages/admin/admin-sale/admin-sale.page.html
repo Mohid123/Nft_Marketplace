@@ -86,7 +86,7 @@
             <tbody class="relative">
               <ng-container *ngFor="let nft of nftList?.data;last as isLast" class="">
                 <tr [ngStyle]="{'border-bottom': isLast ? '1px solid #aaaaaa2a' : 'none' }">
-                  <td>{{nft.tokenId}}</td>
+                  <td><a href="{{nft.transactionHashUrl}}" target=_blank> {{nft.tokenId}}</a></td>
                   <td>{{nft.type || 0}}</td>
                   <td>€{{nft.price}}</td>
                   <td>{{nft.createdAt  | date: 'dd-MM-yyyy'}}</td>
