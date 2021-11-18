@@ -48,7 +48,7 @@ export class CreateGroupComponent {
   ) {
     this.groupForm = this.formBuilder.group({
       name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(7)]),
-      description: new FormControl('', [ Validators.required, Validators.minLength(3), Validators.maxLength(100) ]),
+      description: new FormControl('', [ Validators.required, Validators.minLength(15), Validators.maxLength(25) ]),
       file: new FormControl(''),
     });
 

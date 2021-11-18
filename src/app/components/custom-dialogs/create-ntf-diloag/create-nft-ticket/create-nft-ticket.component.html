@@ -80,12 +80,12 @@
       <span class="text-xl">Select Logo</span><br>
       <div class="relative flex justify-between overflow-hidden border-2 border-gray-400 border-dashed rounded-lg">
       <button
-        class="flex items-center justify-between w-full px-4 py-2 font-bold text-gray-400 bg-primary-gray-100 hover:bg-indigo-dark">
+        class="flex items-center justify-between w-full px-4 py-2 font-bold bg-primary-gray-100 hover:bg-indigo-dark">
         <ng-container *ngIf="!file; else show">
             <div class="ml-2 font-light text-gray-400">Select Logo to Upload</div>
         </ng-container>
         <ng-template #show>
-          <div class="ml-2 font-light text-gray-400">{{file.name}}</div>
+          <div class="ml-2 font-light ">{{file.name}}</div>
         </ng-template>
       <div>
           <svg
@@ -111,7 +111,7 @@
     <div class="flex flex-col pt-3">
       <span class="text-xl">Name</span><br>
       <div class="relative flex flex-col justify-between overflow-hidden rounded-lg">
-      <input class="w-full px-2 font-light text-gray-400" type="text" name="name" formControlName="name"/>
+      <input class="w-full px-2 font-light" placeholder="John Doe" type="text" name="name" formControlName="name"/>
       <p class="error-msg error" *ngIf="createNft.controls.name.touched && createNft.controls.name.errors?.required">please enter name</p>
       <p class="error-msg error" *ngIf="createNft.controls.name.touched && createNft.controls.name.errors?.minlength">name should be greater than or equal to {{createNft.controls.name.errors?.minlength.requiredLength}} character </p>
     </div>
@@ -119,9 +119,9 @@
     <div class="flex flex-col pt-3">
       <span class="text-xl">Description</span><br>
       <div class="relative flex flex-col justify-between overflow-hidden rounded-lg">
-      <input class="w-full px-2 font-light text-gray-400" type="text" name="description" formControlName="description"/>
+      <input class="w-full px-2 font-light " placeholder="I love NFT's" type="text" name="description" formControlName="description" maxlength="25"/>
       <p class="error-msg error" *ngIf="createNft.controls.description.touched && createNft.controls.description.errors?.required">please enter description</p>
-      <p class="error-msg error" *ngIf="createNft.controls.description.touched && createNft.controls.description.errors?.minlength">description should be greater than or equal to {{createNft.controls.name.errors?.minlength.requiredLength}} character </p>
+      <p class="error-msg error" *ngIf="createNft.controls.description.touched && createNft.controls.description.errors?.minlength">description should be greater than or equal to {{createNft.controls.description.errors?.minlength.requiredLength}} character </p>
     </div>
     </div>
     <div class="flex items-center justify-between mt-4">
@@ -140,7 +140,6 @@
             <option *ngFor="let group of (groups$ | async)" [ngValue]="group">
               {{group.name}}
             </option>
-            <!-- <option>Rock 2</option> -->
           </select>
         </label>
         <p class="error-msg error" *ngIf="createNft.controls.group.touched && createNft.controls.group.errors?.required">please select group</p>
