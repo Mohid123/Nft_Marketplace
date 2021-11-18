@@ -42,7 +42,8 @@
           <button type="button " mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu"
             class="filter-btn"
             id="menu-button" aria-expanded="true" aria-haspopup="true">
-            Filters
+            <ng-container *ngIf="!filterGroup; else showGroups">Filters</ng-container>
+            <ng-template #showGroups>{{filterGroup.name}}</ng-template>
             <!-- Heroicon name: solid/chevron-down -->
             <svg class="w-5 h-5 ml-2 -mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
               aria-hidden="true">
@@ -53,10 +54,10 @@
           </button>
 
           <mat-menu #menu="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 " xPosition='before'>
-            <button (click)="filterBy(null)" class="groups" mat-menu-item>
+            <button (click)="filterBy(null)" class="dropdown" mat-menu-item>
               All
             </button>
-            <button (click)="filterBy(group)" class="groups" mat-menu-item *ngFor="let group of (groups$ | async)">
+            <button (click)="filterBy(group)" class="dropdown" mat-menu-item *ngFor="let group of (groups$ | async)">
               {{group.name}}
             </button>
 

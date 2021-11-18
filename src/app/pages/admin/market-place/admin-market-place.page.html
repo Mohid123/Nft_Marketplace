@@ -106,12 +106,12 @@
       <ngx-spinner name="admin-market" [fullScreen]="false" [showSpinner]="isLoading" bdColor="#171830" size="medium" color="#fff" type="ball-scale-multiple">
         <p style="font-size: 20px; color: white">{{(creator$ | async)?.displayName}}...</p>
       </ngx-spinner>
-      <ng-container *ngIf="nftList && nftList.totalCount > 0">
+      <ng-container *ngIf="nftList && nftList.totalCount > 0;">
         <ng-container *ngFor="let nftCard of nftList.data" class="">
           <app-nft-card [nft]="nftCard"></app-nft-card>
-        </ng-container>
+         </ng-container>
       </ng-container>
-    </div>
+     </div>
     <div class="flex justify-end w-full">
       <div class="pagination">
         <button [disabled]="page < 2" class="h-8 rounded-md icon-btn w-9 bg-primary-600" (click)="previous()">

@@ -31,6 +31,10 @@
   @apply inline-flex items-center justify-center w-12 h-12 px-3 py-3 font-bold bg-gray-400 bg-opacity-25 rounded-xl hover:bg-primary-400 focus:bg-primary-400;
 }
 
+.dropdown{
+  @apply my-1 rounded-md border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-1 text-center;
+}
+
 
 
 
