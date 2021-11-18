@@ -26,8 +26,8 @@ mat-sidenav {
   .menu-link:hover{
     background-color: #ffffff0f;
 
-    .mat-icon {
-      color: white;
+    .mat-icon:hover {
+      color: white !important;
     }
   }
 
@@ -42,8 +42,10 @@ mat-sidenav {
   .menu-link.active {
     background-color: #ffffff0f;
 
-    .mat-icon {
-      color: white;
+     .mat-icon {
+      color: white !important;
     }
   }
 }
+
+
