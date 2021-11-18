@@ -20,7 +20,7 @@
         </div>
         <div class="filter">
           <button mat-icon-button aria-label="menu" class="w-16" mat-icon-button [matMenuTriggerFor]="statusMenu" >
-            <span *ngIf="!filterStatus; else showStatus">Status</span>
+            <ng-container *ngIf="!filterStatus; else showStatus">Status</ng-container>
             <ng-template #showStatus>{{filterStatus}}</ng-template>
             <span class="material-icons">
               arrow_drop_down
@@ -29,7 +29,7 @@
         </div>
         <div class="filter">
           <button mat-icon-button aria-label="menu" class="w-16" [matMenuTriggerFor]="priceMenu" >
-            <span *ngIf="!filterPrice; else showPrice">Price</span>
+            <ng-container *ngIf="!filterPrice; else showPrice">Price</ng-container>
             <ng-template #showPrice>{{filterPrice}}</ng-template>
             <span class="material-icons">
               arrow_drop_down
@@ -38,7 +38,7 @@
         </div>
         <div class="filter">
           <button mat-icon-button aria-label="menu" class="w-16" [matMenuTriggerFor]="tokenId">
-            <span *ngIf="!filterSort; else showTokenID">Token ID</span>
+            <ng-container *ngIf="!filterSort; else showTokenID">Token ID</ng-container>
             <ng-template #showTokenID>{{filterSort}}</ng-template>
             <span class="material-icons">
               arrow_drop_down
@@ -47,7 +47,7 @@
         </div>
         <div class="filter">
           <button mat-icon-button aria-label="menu" class="w-16" [matMenuTriggerFor]="type">
-            <span *ngIf="!filterType; else showType">Type</span>
+            <ng-container *ngIf="!filterType; else showType">Type</ng-container>
             <ng-template #showType>{{filterType}}</ng-template>
             <span class="material-icons">
               arrow_drop_down

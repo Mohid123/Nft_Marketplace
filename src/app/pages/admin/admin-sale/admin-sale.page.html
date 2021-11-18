@@ -17,15 +17,17 @@
           </div>
           <div class="filter">
             <button mat-icon-button aria-label="menu" class="w-16" mat-icon-button [matMenuTriggerFor]="statusMenu" >
-              <span>Status</span>
+              <ng-container *ngIf="!filterStatus; else showStatus">Status</ng-container>
+              <ng-template #showStatus>{{filterStatus}}</ng-template>
               <span class="material-icons">
                 arrow_drop_down
                 </span>
             </button>
           </div>
           <div class="filter">
-            <button mat-icon-button aria-label="menu" class="w-16" [matMenuTriggerFor]="priceMenu" >
-              <span>Price</span>
+            <button mat-icon-button aria-label="menu" class="w-16" [matMenuTriggerFor]="priceMenu">
+              <ng-container *ngIf="!filterPrice; else showPrice">Price</ng-container>
+              <ng-template #showPrice>{{filterPrice}}</ng-template>
               <span class="material-icons">
                 arrow_drop_down
                 </span>
@@ -33,7 +35,8 @@
           </div>
           <div class="filter">
             <button mat-icon-button aria-label="menu" class="w-16" [matMenuTriggerFor]="tokenId">
-              <span>Token ID</span>
+              <ng-container *ngIf="!filterSort; else showTokenID">Token ID</ng-container>
+              <ng-template #showTokenID>{{filterSort}}</ng-template>
               <span class="material-icons">
                 arrow_drop_down
                 </span>

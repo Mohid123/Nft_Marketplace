@@ -18,7 +18,8 @@
         </div>
         <div class="filter">
           <button mat-icon-button aria-label="menu" class="w-20" mat-icon-button [matMenuTriggerFor]="itemCountMenu" >
-            <span>Item Count</span>
+            <ng-container *ngIf="!filterItemCount; else showItemCount">Item Count</ng-container>
+            <ng-template #showItemCount>{{filterItemCount}}</ng-template>
             <span class="material-icons">
               arrow_drop_down
               </span>
@@ -26,7 +27,8 @@
         </div>
         <div class="filter">
           <button mat-icon-button aria-label="menu" class="w-16" [matMenuTriggerFor]="nameMenu" >
-            <span>Name</span>
+            <ng-container *ngIf="!filterName; else showName">Name</ng-container>
+            <ng-template #showName>{{filterName}}</ng-template>
             <span class="material-icons">
               arrow_drop_down
               </span>
