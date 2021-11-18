@@ -58,7 +58,7 @@ export class CreateNFTticketComponent implements OnInit, AfterViewInit {
   ) {
     this.createNft = this.formBuilder.group({
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      description: new FormControl('', [Validators.required]),
+      description: new FormControl('', [Validators.required, Validators.minLength(15), Validators.maxLength(25)]),
       file: new FormControl(''),
       img: new FormControl(''),
       bgImg: new FormControl(''),
