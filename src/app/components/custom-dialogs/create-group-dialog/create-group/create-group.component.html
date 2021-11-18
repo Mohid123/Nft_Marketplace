@@ -24,7 +24,7 @@
       <p class="error-msg error" *ngIf="groupForm.controls.name.touched && groupForm.controls.name.errors?.minlength">name should be greater than or equal to {{groupForm.controls.name.errors?.minlength.requiredLength}} character </p>
 
       <label class="floating-label" for="description">Description</label>
-      <textarea type="text" formControlName="description"></textarea>
+      <textarea type="text" formControlName="description" maxlength="25"></textarea>
       <span class="icon description-hide-icon"></span>
       <p class="error-msg error" *ngIf="groupForm.controls.description.touched && groupForm.controls.description.errors?.required">please enter description</p>
       <p class="error-msg error" *ngIf="groupForm.controls.name.touched && groupForm.controls.description.errors?.minlength">description should be greater than or equal to {{groupForm.controls.description.errors?.minlength.requiredLength}} character </p>
