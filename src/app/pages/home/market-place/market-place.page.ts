@@ -61,7 +61,10 @@ export class MarketPlacePage implements OnInit ,OnDestroy {
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   ngOnInit(): void {
-    this.groupService.getAllGroupsByClub(this.clubName, 0, 0);
+    const param = {
+      limit: this.limit
+    }
+    this.groupService.getAllGroupsByClub(this.clubName, 0, param);
   }
 
   getNfts(): void {

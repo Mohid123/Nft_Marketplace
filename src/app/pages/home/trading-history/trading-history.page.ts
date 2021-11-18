@@ -46,7 +46,10 @@ export class TradingHistoryPage implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.groupService.getAllGroupsByClub(this.clubName, 0, 0);
+    const param = {
+      limit: this.limit
+    }
+    this.groupService.getAllGroupsByClub(this.clubName, 0, param);
   }
 
   getEvetns():void {

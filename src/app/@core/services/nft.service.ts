@@ -11,7 +11,6 @@ import { exhaustMap, take, tap } from 'rxjs/operators';
 import { IsMembershipIdExists } from '../models/is-membership-id-exists.model';
 import { GetAllNftsByClub } from '../models/requests/get-all-afts-by-club.model';
 import { getNftsByUserId } from '../models/requests/get-nfts-by-user.model';
-import { getNftsForAdmin } from '../models/requests/get-nfts-for-admin.model';
 import { NFTList } from './../models/NFTList.model';
 import { MediaUpload } from './../models/requests/media-upload.model';
 import { ResponseAddGroupMedia } from './../models/response-add-media.model';
@@ -128,6 +127,29 @@ export class NFTService extends ApiService<nftApiData> {
     }));
   }
 
+  getPendingForSaleNfts(page: number, limit: number, data: {
+    nftStatus : string,
+    price  : string,
+    tokenId  : string,
+  }) : Observable<ApiResponse<nftApiData>> {
+
+    page--;
+    const param:any = {
+      offset: page ? limit * page : 0,
+      limit: limit
+    };
+
+    if(data.nftStatus) param.nftStatus = data.nftStatus;
+    if(data.price) param.price = data.price;
+    if(data.tokenId) param.tokenId = data.tokenId;
+    console.log('paaaaaaaaaa:',param);
+    return this.get('/nft/getPendingForSaleNfts', param).pipe(take(1),tap((result:ApiResponse<nftApiData>)=>{
+      if (result.hasErrors()) {
+        this.toastrService.error(result?.errors[0]?.error?.message)
+      }
+    }));
+  }
+
   getAllNftsByUser(clubName: string, userId:string ,page: number, searchValue: string ,groupId?:string,type?:string) : Observable<ApiResponse<nftApiData>> {
     page--;
     const param: getNftsByUserId = {
@@ -149,14 +171,24 @@ export class NFTService extends ApiService<nftApiData> {
     }));;
   }
 
-  getAllNftsAdminPanel (clubName: string, page: number, searchValue: string) : Observable<ApiResponse<nftApiData>> {
+  getAllNftsAdminPanel (clubName: string, page: number, searchValue: string, data: {
+    nftStatus : string,
+    price  : string,
+    tokenId  : string,
+    type  : string,
+  }) : Observable<ApiResponse<nftApiData>> {
     page--;
-    const param: getNftsForAdmin = {
+    const param: any = {
       clubName: clubName,
       offset: page ? environment.limit * page : 0,
       limit: environment.limit,
       name: searchValue,
     };
+
+    if(data.nftStatus) param.nftStatus = data.nftStatus;
+    if(data.price) param.price = data.price;
+    if(data.tokenId) param.tokenId = data.tokenId;
+    if(data.type) param.type = data.type;
 
     return this.get('/nft/getNftsByAppPackageIdForAdminPanel', param).pipe(take(1),tap((result:ApiResponse<nftApiData>)=>{
       if (result.hasErrors()) {

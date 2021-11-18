@@ -22,12 +22,14 @@ export class AdminGroupPage implements OnDestroy {
   public clubName: string;
   public groups$ = this.groupService.groups$;
   public totalCount$ = this.groupService.totalCount$;
+  public filterItemCount: string;
+  public filterName: string;
   public limit = 6 ;
 
   public page:number;
   public searchValu = '';
 
-  orderBy = [
+  itemCount = [
     {
       sortBy: 'Maximum'
     },
@@ -36,7 +38,7 @@ export class AdminGroupPage implements OnDestroy {
     }
   ]
 
-  order = [
+  name = [
     {
       sortBy: 'A - Z'
     },
@@ -53,16 +55,21 @@ export class AdminGroupPage implements OnDestroy {
     private toastr: ToastrService,
     private cf: ChangeDetectorRef
   ) {
-    this.page = 1;
     this.routeService.clubName$.pipe(distinctUntilChanged(), takeUntil(this.destroy$))
     .subscribe((clubName) => {
       this.clubName = clubName;
-      this.getGroup();
+      this.resetFilters();
     });
   }
 
   getGroup(): void {
-    this.groupService.getAllGroupsByClub(this.clubName, this.page, this.limit,this.searchValu);
+    const param = {
+      filterItemCount : this.filterItemCount,
+      filterName  : this.filterName,
+      limit: this.limit,
+      searchValue: this.searchValu
+    }
+    this.groupService.getAllGroupsByClub(this.clubName, this.page, param);
   }
 
   deleteGroup(group):void {
@@ -82,6 +89,25 @@ export class AdminGroupPage implements OnDestroy {
   search(searchValue:string):void {
     this.searchValu = searchValue;
     this.page = 1;
+    this.getGroup();
+  }
+
+  filterByItemCount(data: string):void {
+    this.page = 1;
+    this.filterItemCount = data;
+    this.getGroup();
+  }
+
+  filterByName(data: string):void {
+    this.page = 1;
+    this.filterName = data;
+    this.getGroup();
+  }
+
+  resetFilters():void {
+    this.page = 1;
+    this.filterItemCount = '';
+    this.filterName = '';
     this.getGroup();
   }
 

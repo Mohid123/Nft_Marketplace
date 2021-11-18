@@ -40,7 +40,7 @@
             </button>
           </div>
           <div class="filter">
-            <button mat-icon-button aria-label="menu">
+            <button (click)="resetFilters()" mat-icon-button aria-label="menu">
               <span><mat-icon>restart_alt</mat-icon></span>
               <span class="px-px sm:px-2">Reset Filter</span>
             </button>
@@ -48,25 +48,31 @@
 
             <!--status menu-->
             <mat-menu #statusMenu="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md" xPosition='after' >
-              <button class="dropdown" mat-menu-item *ngFor="let status of nftStatus">
-               {{status.name}}
-              </button>
+              <ng-container *ngFor="let status of nftStatus">
+                <button (click)="filterByStatus(status.name)" class="dropdown" mat-menu-item>
+                  {{status.name}}
+                </button>
+              </ng-container>
             </mat-menu>
 
            <!--price menu-->
            <mat-menu #priceMenu="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md text-sm mat-menu" xPosition='after'>
             Range from
-            <button class="dropdown" mat-menu-item *ngFor="let range of priceRange" >
-             {{range.from}}
-            </button>
+            <ng-container *ngFor="let range of priceRange">
+              <button (click)="filterByPrice(range.to ? range.from + ' - ' + range.to : range.from)" class="dropdown" mat-menu-item>
+                {{range.to ? '€' + range.from + '-€' + range.to: range.from}}
+              </button>
+            </ng-container>
           </mat-menu>
 
              <!--TokenId menu-->
              <mat-menu #tokenId="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md text-sm" xPosition='after'>
               Sort by
-              <button class="dropdown" mat-menu-item *ngFor="let item of orderBy" >
-               {{item.order}}
-              </button>
+              <ng-container *ngFor="let item of orderBy">
+                <button (click)="filterBySort(item.order)" class="dropdown" mat-menu-item>
+                  {{item.order}}
+                </button>
+              </ng-container>
            </mat-menu>
 
         </div>
@@ -210,12 +216,11 @@
                 <style>
                   .a {
                     fill: #fff;
-                    opacity: 0.4;
                   }
                 </style>
               </defs>
               <path class="a"
-                d="M14.265,11.477a.8.8,0,0,1,.006,1.126l-3.715,3.727H24.711a.8.8,0,0,1,0,1.591H10.556l3.721,3.727a.805.805,0,0,1-.006,1.126.792.792,0,0,1-1.12-.006L8.108,17.688h0a.893.893,0,0,1-.165-.251.759.759,0,0,1-.061-.306.8.8,0,0,1,.226-.557l5.043-5.079A.78.78,0,0,1,14.265,11.477Z"
+                d="M19.118,11.477a.8.8,0,0,0-.006,1.126l3.715,3.727H8.671a.8.8,0,0,0,0,1.591H22.826l-3.721,3.727a.805.805,0,0,0,.006,1.126.792.792,0,0,0,1.12-.006l5.043-5.079h0a.893.893,0,0,0,.165-.251.759.759,0,0,0,.061-.306.8.8,0,0,0-.226-.557l-5.043-5.079A.78.78,0,0,0,19.118,11.477Z"
                 transform="translate(-7.882 -11.252)" />
             </svg>
             </button>

@@ -90,10 +90,13 @@ export class CreateMembershipComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     if (this._isLoading) return;
+    const param = {
+      limit: this.limit
+    }
     this.groupService.getAllGroupsByClub(
       this.clubName,
       this._page++,
-      this.limit,
+      param
     );
   }
 

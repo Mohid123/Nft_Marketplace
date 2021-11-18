@@ -41,7 +41,7 @@
           </button>
         </div> -->
         <div class="filter">
-          <button mat-icon-button aria-label="menu">
+          <button (click)="resetFilters()" mat-icon-button aria-label="menu">
             <span><mat-icon>restart_alt</mat-icon></span>
             <span class="px-px sm:px-2">Reset Filter</span>
           </button>
@@ -49,18 +49,22 @@
 
           <!--Item count menu-->
         <mat-menu #itemCountMenu="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md" xPosition='after'>
-          <button class="dropdown" mat-menu-item *ngFor="let sort of orderBy">
-          {{sort.sortBy}}
-          </button>
+          <ng-container *ngFor="let sort of itemCount">
+            <button (click)="filterByItemCount(sort.sortBy)" class="dropdown" mat-menu-item>
+              {{sort.sortBy}}
+            </button>
+          </ng-container>
 
         </mat-menu>
 
          <!--Name menu-->
         <mat-menu #nameMenu="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md text-sm mat-menu" xPosition='after'>
           Sort by
-          <button class="dropdown" mat-menu-item *ngFor="let sort of order">
-            {{sort.sortBy}}
-          </button>
+          <ng-container *ngFor="let sort of name">
+            <button (click)="filterByName(sort.sortBy)" class="dropdown" mat-menu-item>
+              {{sort.sortBy}}
+            </button>
+          </ng-container>
          </mat-menu>
 
       </div>

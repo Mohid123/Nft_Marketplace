@@ -30,7 +30,7 @@ export class AdminDashboardPage implements AfterViewInit {
   private _isLoading:boolean;
   public nftList: NFTList;
   public clubName: string;
-  public nftLimit = 12 ;
+  public nftLimit = 10 ;
   public page:number;
 
   public lineChartData: ChartDataSets[] = [
@@ -124,8 +124,11 @@ export class AdminDashboardPage implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    const param = {
+      limit: 4
+    }
     this.creatorService.getCreatorStats(this.routeService.clubName).pipe(takeUntil(this.destroy$)).subscribe();
-    this.groupService.getAllGroupsByClub(this.clubName, 1, 4);
+    this.groupService.getAllGroupsByClub(this.clubName, 1, param);
     // console.log('aksdjkasjd');
     const gradient = this.canvas.nativeElement
       .getContext('2d')
