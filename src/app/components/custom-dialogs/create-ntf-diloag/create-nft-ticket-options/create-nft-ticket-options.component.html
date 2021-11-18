@@ -25,7 +25,7 @@
 
   <div class="flex flex-col mt-6">
     <span class="text-xl">No. of Copies</span><br>
-    <input type='number' placeholder="1" formControlName="copies" appMaxLength maxlength="3" name="copies">
+    <input type='number' placeholder="999999" formControlName="copies" appMaxLength maxlength="6" name="copies">
     <p class="error-msg error" *ngIf="createNft.controls.copies.touched && createNft.controls.copies.errors?.required">please enter no of copies</p>
     <p class="error-msg error" *ngIf="createNft.controls.copies.touched && createNft.controls.copies.errors?.min">copies must be greater then or equal to {{createNft.controls.copies.errors?.min?.min}} </p>
     <p class="error-msg error" *ngIf="createNft.controls.copies.touched && createNft.controls.copies.errors?.max">copies must be less then or equal to {{createNft.controls.copies.errors?.max?.max}} </p>

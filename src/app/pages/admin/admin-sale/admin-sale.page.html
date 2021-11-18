@@ -60,7 +60,7 @@
             Range from
             <ng-container *ngFor="let range of priceRange">
               <button (click)="filterByPrice(range.to ? range.from + ' - ' + range.to : range.from)" class="dropdown" mat-menu-item>
-                {{range.to ? '€' + range.from + '-€' + range.to: range.from}}
+                {{range.to ? '€' + range.from + ' - €' + range.to: range.from}}
               </button>
             </ng-container>
           </mat-menu>

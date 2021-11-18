@@ -20,7 +20,8 @@
         </div>
         <div class="filter">
           <button mat-icon-button aria-label="menu" class="w-16" mat-icon-button [matMenuTriggerFor]="statusMenu" >
-            <span>Status</span>
+            <span *ngIf="!filterStatus; else showStatus">Status</span>
+            <ng-template #showStatus>{{filterStatus}}</ng-template>
             <span class="material-icons">
               arrow_drop_down
               </span>
@@ -28,7 +29,8 @@
         </div>
         <div class="filter">
           <button mat-icon-button aria-label="menu" class="w-16" [matMenuTriggerFor]="priceMenu" >
-            <span>Price</span>
+            <span *ngIf="!filterPrice; else showPrice">Price</span>
+            <ng-template #showPrice>{{filterPrice}}</ng-template>
             <span class="material-icons">
               arrow_drop_down
               </span>
@@ -36,7 +38,8 @@
         </div>
         <div class="filter">
           <button mat-icon-button aria-label="menu" class="w-16" [matMenuTriggerFor]="tokenId">
-            <span>Token ID</span>
+            <span *ngIf="!filterSort; else showTokenID">Token ID</span>
+            <ng-template #showTokenID>{{filterSort}}</ng-template>
             <span class="material-icons">
               arrow_drop_down
               </span>
@@ -44,7 +47,8 @@
         </div>
         <div class="filter">
           <button mat-icon-button aria-label="menu" class="w-16" [matMenuTriggerFor]="type">
-            <span>Type</span>
+            <span *ngIf="!filterType; else showType">Type</span>
+            <ng-template #showType>{{filterType}}</ng-template>
             <span class="material-icons">
               arrow_drop_down
               </span>
@@ -58,8 +62,8 @@
         </div>
 
           <!--status menu-->
-        <mat-menu #statusMenu="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md" xPosition='after' >
-          <ng-container *ngFor="let status of nftStatus">
+        <mat-menu #statusMenu="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md" xPosition='after'  >
+          <ng-container *ngFor="let status of nftStatus" >
             <button (click)="filterByStatus(status.name)" class="dropdown" mat-menu-item>
               {{status.name}}
             </button>
@@ -71,7 +75,7 @@
           Range from
           <ng-container *ngFor="let range of priceRange">
             <button (click)="filterByPrice(range.to ? range.from + ' - ' + range.to : range.from)" class="dropdown" mat-menu-item>
-              {{range.to ? '€' + range.from + '-€' + range.to: range.from}}
+              {{range.to ? '€' + range.from + ' - €' + range.to: range.from}}
             </button>
           </ng-container>
         </mat-menu>
@@ -133,7 +137,7 @@
           <span>1/1</span>
         </ng-template>
 
-        <button [disabled]="(nftList?.totalCount / limit) <= page" class="icon-btn active"  (click)="next()">
+        <button [disabled]="(nftList?.totalCount / limit) <= page" class="icon-btn "  (click)="next()">
           <svg xmlns="http://www.w3.org/2000/svg" width="17.618" height="11.75" viewBox="0 0 17.618 11.75">
             <defs>
               <style>
