@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/no-empty-lifecycle-method */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TooltipPosition } from '@angular/material/tooltip';
 import { CreatorService } from '@app/@core/services/creator.service';
@@ -154,7 +155,7 @@ export class AdminMarketPlacePage implements OnInit ,OnDestroy {
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   ngOnInit(): void {
-    console.log('market palce:');
+    // console.log('market palce:');
     // this.nftService.getNft('');
   }
 

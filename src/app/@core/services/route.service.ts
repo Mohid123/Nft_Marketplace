@@ -35,7 +35,7 @@ export class RouteService {
     private router: Router,
   ) {
     this.clubName$.pipe(distinctUntilChanged()).subscribe(clubName => {
-      console.log('club name:',clubName);
+      // console.log('club name:',clubName);
       this.authService.clubChanged(clubName);
       setItem(StorageItem.Club, clubName);
     });

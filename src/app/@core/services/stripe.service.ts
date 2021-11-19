@@ -39,7 +39,7 @@ export class StripeService extends ApiService<StripeApiData> {
         if (!res.hasErrors() && res.data.isValid) {
           setItem(StorageItem.Key, res.data.isValid);
         } else {
-          console.log('invalid key');
+          // console.log('invalid key');
         }
       }),
     );
@@ -55,7 +55,7 @@ export class StripeService extends ApiService<StripeApiData> {
         }, 3000);
 
         this._purchaseSuccess$.next(params.nftId)
-        console.log('success:',res);
+
       } else {
         this.toastr.warning(res.errors[0]?.error?.message, 'Error!');
 

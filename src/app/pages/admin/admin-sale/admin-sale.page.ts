@@ -140,9 +140,9 @@ export class AdminSalePage implements OnInit, OnDestroy {
     this.isLoading = true
     console.log('this.filterPrice:',this.filterPrice);
     console.log('params:',params);
-    this.nftService.getPendingForSaleNfts(this.page, this.NftLimit ,params).pipe(take(1))
+    this.nftService.getPendingForSaleNfts(this.clubName,this.page, this.NftLimit ,params).pipe(take(1))
     .subscribe((result:ApiResponse<NFTList>) => {
-      console.log('result.dataresult.data:',result.data);
+      // console.log('result.dataresult.data:',result.data);
       if (!result.hasErrors()) {
         this.nftList = result.data;
       }

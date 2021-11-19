@@ -62,7 +62,7 @@ export class NFTService extends ApiService<nftApiData> {
       .pipe(
         take(1),
         exhaustMap((res: ApiResponse<ResponseAddGroupMedia>) => {
-          console.log('res:',res);
+          // console.log('res:',res);
           if (!res.hasErrors()) {
               nftForm.serverCaptureFileUrl = res.data.url;
               nftForm.path = res.data.path;
@@ -73,7 +73,7 @@ export class NFTService extends ApiService<nftApiData> {
         }),
       )
       .subscribe((res: any) => {
-        console.log('res:', res);
+        // console.log('res:', res);
         if (res == null) {
           this.toastrService.warning(res?.errors[0]?.error?.message, 'Error!' )
         }
@@ -129,7 +129,7 @@ export class NFTService extends ApiService<nftApiData> {
     }));
   }
 
-  getPendingForSaleNfts(page: number, limit: number, data: {
+  getPendingForSaleNfts(clubName:string,page: number, limit: number, data: {
     nftStatus : string,
     price  : string,
     tokenId  : string,
@@ -137,6 +137,7 @@ export class NFTService extends ApiService<nftApiData> {
 
     page--;
     const param:any = {
+      clubName: clubName ,
       offset: page ? limit * page : 0,
       limit: limit
     };
@@ -144,7 +145,7 @@ export class NFTService extends ApiService<nftApiData> {
     if(data.nftStatus) param.nftStatus = data.nftStatus;
     if(data.price) param.price = data.price;
     if(data.tokenId) param.tokenId = data.tokenId;
-    console.log('paaaaaaaaaa:',param);
+    // console.log('paaaaaaaaaa:',param);
     return this.get('/nft/getPendingForSaleNfts', param).pipe(take(1),tap((result:ApiResponse<nftApiData>)=>{
       if (result.hasErrors()) {
         this.toastrService.error(result?.errors[0]?.error?.message)
@@ -237,7 +238,7 @@ export class NFTService extends ApiService<nftApiData> {
     const param:any = {
       offset: page ? limit * page : 0,
       limit: limit,
-      type: type,
+      eventType: type,
     };
     // name: searchValue,
 

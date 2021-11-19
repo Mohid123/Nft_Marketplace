@@ -173,7 +173,8 @@ export class AdminDashboardPage implements AfterViewInit {
 
   ngAfterViewInit(): void {
     const param = {
-      limit: 4
+      limit: 4,
+      filterItemCount: 'Maximum'
     }
     this.creatorService.getCreatorStats(this.routeService.clubName).pipe(takeUntil(this.destroy$)).subscribe();
     this.groupService.getAllGroupsByClub(this.clubName, 1, param);
