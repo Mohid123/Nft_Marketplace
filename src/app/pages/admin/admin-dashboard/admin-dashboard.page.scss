@@ -175,3 +175,7 @@ svg {
   @apply my-1 rounded-md border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-1 text-center;
 }
 
+.profile-btn {
+  @apply flex items-center justify-center h-12 p-1.5  absolute right-0;
+  width: 133px;
+}
