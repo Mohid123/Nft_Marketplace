@@ -29,6 +29,7 @@ button:disabled,
 button[disabled] {
   background-color: rgb(153, 153, 153) !important;
   background: rgb(153, 153, 153) !important;
+  cursor: default;
 }
 
 mat-dialog-container {

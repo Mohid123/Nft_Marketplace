@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CreatorService } from '@app/@core/services/creator.service';
 import { AuthService } from '@app/pages/auth/services/auth.service';
 import { take } from 'rxjs/operators';
@@ -16,9 +16,9 @@ import { RouteService } from './../../../@core/services/route.service';
   templateUrl: './wallet.page.html',
   styleUrls: ['./wallet.page.scss'],
 })
-export class WalletPage {
-
+export class WalletPage implements OnInit {
   creator$ = this.creatorService.Creator$;
+  groups$ = this.groupService.groups$;
 
   public type = '';
 
@@ -27,14 +27,20 @@ export class WalletPage {
   public groups: Group[];
   public totalCount: number;
 
-  public limit = 6 ;
-  public page:number;
-  public nftLimit = environment.limit ;
+  public limit = 6;
+  public page: number;
+  public nftLimit = environment.limit;
 
   public isLoading: boolean;
   public filterGroup: Group;
 
   public searchValue = '';
+
+  filterButtons = [
+    { text: '', isClicked: true },
+    { text: 'Membership Card', isClicked: false },
+    { text: 'Ticket', isClicked: false },
+  ]
 
   constructor(
     private authService: AuthService,
@@ -50,6 +56,13 @@ export class WalletPage {
     this.getNfts();
   }
 
+  ngOnInit(): void {
+    const param = {
+      limit: this.limit,
+    };
+    this.groupService.getAllGroupsByClub(this.clubName, 0, param);
+  }
+
   getNfts(): void {
     if (this.isLoading) return;
     this.isLoading = true;
@@ -60,7 +73,7 @@ export class WalletPage {
         this.page,
         this.searchValue,
         this.filterGroup?.id,
-        this.type
+        this.type,
       )
       .pipe(take(1))
       .subscribe((result: ApiResponse<NFTList>) => {
@@ -71,12 +84,19 @@ export class WalletPage {
       });
   }
 
+  setActive(button: any): void {
+    for(const but of this.filterButtons) {
+      but.isClicked = false;
+    }
+     button.isClicked = true;
+  }
+
   next():void {
     this.page++;
     this.getNfts();
   }
 
-  previous():void {
+  previous(): void {
     this.page--;
     this.getNfts();
   }
@@ -97,7 +117,7 @@ export class WalletPage {
       });
   }
 
-  filterBy (group:Group) :void {
+  filterBy(group: Group): void {
     this.page = 1;
     this.filterGroup = group;
     this.getNfts();
@@ -109,7 +129,7 @@ export class WalletPage {
     this.getNfts();
   }
 
-  setType(type:string): void {
+  setType(type: string): void {
     this.type = type;
     this.page = 1;
     this.getNfts();

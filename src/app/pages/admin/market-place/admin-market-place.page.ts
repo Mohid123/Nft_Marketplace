@@ -28,6 +28,10 @@ export class AdminMarketPlacePage implements OnInit ,OnDestroy {
   public nftLimit = environment.limit ;
   public page:number;
   public searchValu = '';
+  public filterType: string;
+  public filterStatus: string;
+  public filterPrice: string;
+  public filterSort: string;
 
   nftStatus = [
     {
@@ -43,47 +47,69 @@ export class AdminMarketPlacePage implements OnInit ,OnDestroy {
       name: 'Resale',
     },
     {
-      name: 'Transfering',
+      name: 'Transferring',
     },
     {
       name: 'Minting',
     },
     {
       name: 'Minted',
-    }
+    },
+    {
+      name: 'Error',
+    },
+    {
+      name: 'All',
+    },
   ]
 
 
   priceRange = [
     {
-      from:  '€1 - €100',
+      from: '1',
+      to: '100'
     },
     {
-      from: '€100 - €200',
+      from: '101',
+      to: '200'
     },
     {
-      from: '€200 - €300',
+      from: '201',
+      to: '300'
     },
     {
-      from: '€300 - €400',
+      from: '301',
+      to: '400'
     },
     {
-      from: '€400 - €500',
+      from: '401',
+      to: '500'
     },
     {
-      from: '€500 - €600',
+      from: '501',
+      to: '600'
     },
     {
-      from: '€600 - €700',
+      from: '601',
+      to: '700'
     },
     {
-      from: '€700 - €800',
+      from: '701',
+      to: '800'
     },
     {
-      from: '€800 - €900',
+      from: '801',
+      to: '900'
     },
     {
-      from: '€900 - €1000',
+      from: '901',
+      to: '1000'
+    },
+    {
+      from: '+1000'
+    },
+    {
+      from: 'All',
     },
   ]
 
@@ -134,8 +160,14 @@ export class AdminMarketPlacePage implements OnInit ,OnDestroy {
 
   getNfts(): void {
     if (this.isLoading) return
+    const params: any = {
+      nftStatus: this.filterStatus,
+      price: this.filterPrice,
+      tokenId: this.filterSort,
+      type: this.filterType
+    }
     this.isLoading = true;
-    this.nftService.getAllNftsAdminPanel(this.clubName, this.page, this.searchValu )
+    this.nftService.getAllNftsAdminPanel(this.clubName, this.page, this.searchValu , params)
       .pipe(take(1))
       .subscribe((result:ApiResponse<NFTList>) => {
         if (!result.hasErrors()) {
@@ -152,6 +184,39 @@ export class AdminMarketPlacePage implements OnInit ,OnDestroy {
   search(searchValu) {
     this.searchValu = searchValu;
     this.page = 1;
+    this.getNfts();
+  }
+
+  filterByPrice(price: string):void {
+    this.page = 1;
+    this.filterPrice = price;
+    this.getNfts();
+  }
+
+  filterByStatus(status: string):void {
+    this.page = 1;
+    this.filterStatus = status;
+    this.getNfts();
+  }
+
+  filterBySort(sort: string):void {
+    this.page = 1;
+    this.filterSort = sort;
+    this.getNfts();
+  }
+
+  filterByType(sort: string):void {
+    this.page = 1;
+    this.filterType = sort;
+    this.getNfts();
+  }
+
+  resetFilters():void {
+    this.page = 1;
+    this.filterStatus = '';
+    this.filterPrice = '';
+    this.filterSort = '';
+    this.filterType = '';
     this.getNfts();
   }
 

@@ -36,16 +36,26 @@ export class GroupService extends ApiService<groupApiData> {
     super(http);
   }
 
-  getAllGroupsByClub(clubName: string, page: number, limit?: number,searchValue?: string): void {
+  getAllGroupsByClub(clubName: string, page: number,
+    data?: {
+      filterItemCount?: string,
+      filterName?: string,
+      limit?: number,
+      searchValue?: string
+    }): void {
     this._isLoading$.next(true)
     page--;
-    this.limit = limit;
-    const param: GetAllNftsByClub = {
+    this.limit = data.limit;
+    const param: any = {
       clubName: clubName,
       offset: page ? (this.limit || environment.limit) * page : 0,
       limit: this.limit || environment.limit,
-      name: searchValue || '',
     };
+
+    if(data.filterItemCount) param.itemsCount = data.filterItemCount;
+    if(data.filterName) param.Name = data.filterName.toString();
+    if(data.searchValue) param.name = data.searchValue;
+
     this.get('/group/getAllGroupsByAppPackageId',param)
     .pipe(take(1),tap((result:ApiResponse<ResponseGroupsByClub>)=> {
       this._isLoading$.next(false)
@@ -80,8 +90,6 @@ export class GroupService extends ApiService<groupApiData> {
           const group: Array<Group> = this._groups$.getValue();
           this._groups$.next([result.data,...group])
         }
-      } else {
-        this.toastrService.error(result?.errors[0]?.error?.message)
       }
     }));
   }

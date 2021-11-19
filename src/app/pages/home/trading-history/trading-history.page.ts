@@ -29,6 +29,11 @@ export class TradingHistoryPage implements OnInit, OnDestroy {
 
   public isLoading:boolean;
   public type = '';
+  filterButtons = [
+    { text: '', isClicked: true },
+    { text: 'Membership Card', isClicked: false },
+    { text: 'Ticket', isClicked: false },
+  ]
 
   constructor(
     private authService: AuthService,
@@ -46,7 +51,17 @@ export class TradingHistoryPage implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.groupService.getAllGroupsByClub(this.clubName, 0, 0);
+    const param = {
+      limit: this.limit
+    }
+    this.groupService.getAllGroupsByClub(this.clubName, 0, param);
+  }
+
+  setActive(button: any): void {
+    for(const but of this.filterButtons) {
+      but.isClicked = false;
+    }
+     button.isClicked = true;
   }
 
   getEvetns():void {

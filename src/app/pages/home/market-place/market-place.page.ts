@@ -37,6 +37,12 @@ export class MarketPlacePage implements OnInit ,OnDestroy {
   public filterGroup: Group;
   public searchValu = '';
 
+  filterButtons = [
+    { text: '', isClicked: true },
+    { text: 'Membership Card', isClicked: false },
+    { text: 'Ticket', isClicked: false },
+  ]
+
   constructor(
     private customDialogService: CustomDialogService,
     private creatorService: CreatorService,
@@ -61,8 +67,19 @@ export class MarketPlacePage implements OnInit ,OnDestroy {
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   ngOnInit(): void {
-    this.groupService.getAllGroupsByClub(this.clubName, 0, 0);
+    const param = {
+      limit: this.limit
+    }
+    this.groupService.getAllGroupsByClub(this.clubName, 0, param);
   }
+
+  setActive(button: any): void {
+    for(const but of this.filterButtons) {
+      but.isClicked = false;
+    }
+     button.isClicked = true;
+  }
+
 
   getNfts(): void {
     if (this.isLoading) return
@@ -100,6 +117,7 @@ export class MarketPlacePage implements OnInit ,OnDestroy {
   }
 
   setType(type:string): void {
+
     this.type = type;
     this.page = 1;
     this.getNfts();

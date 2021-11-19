@@ -7,8 +7,8 @@ import { RouteService } from '@app/@core/services/route.service';
 import { AuthService } from '@app/pages/auth/services/auth.service';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
-import { Subject } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
+import { interval, Subject } from 'rxjs';
+import { take, takeUntil, takeWhile, tap } from 'rxjs/operators';
 import { NFTList } from './../../../@core/models/NFTList.model';
 import { ApiResponse } from './../../../@core/models/response.model';
 
@@ -22,6 +22,7 @@ export class AdminDashboardPage implements AfterViewInit {
   destroy$ = new Subject();
 
   @ViewChild('myCanvas')
+
   canvas!: ElementRef;
 
   public creatorStats$ = this.creatorService.CreatorStats$;
@@ -30,26 +31,69 @@ export class AdminDashboardPage implements AfterViewInit {
   private _isLoading:boolean;
   public nftList: NFTList;
   public clubName: string;
-  public nftLimit = 12 ;
+  public nftLimit = 10 ;
   public page:number;
+  public monthIndex:number;
 
   public lineChartData: ChartDataSets[] = [
     {
       data: [
-        50,45,65, 48, 62, 70, 75,81
       ],
       fill: false,
       borderWidth: 7,
     },
   ];
+
+  months = [
+    {
+      name: 'All',
+    },
+    {
+      name: 'January',
+    },
+    {
+      name: 'February',
+    },
+    {
+      name: 'March',
+    },
+    {
+      name: 'April',
+    },
+    {
+      name: 'May',
+    },
+    {
+      name: 'June',
+    },
+    {
+      name: 'July',
+    },
+    {
+      name: 'August',
+    },
+    {
+      name: 'September',
+    },
+    {
+      name: 'October',
+    },
+    {
+      name: 'November',
+    },
+    {
+      name: 'December',
+    },
+
+  ]
   public lineChartLabels: Label[] = [
-    'January',
-    'February',
-    'March',
-    'April',
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
     'May',
-    'June',
-    'July',
+    'Jun',
+    'Jul',
     'Aug',
     'Sep',
     'Oct',
@@ -93,6 +137,8 @@ export class AdminDashboardPage implements AfterViewInit {
   public lineChartType: ChartType = 'line';
   public lineChartPlugins = [];
 
+
+
   constructor(
     private authService:AuthService,
     private customDialogService:CustomDialogService,
@@ -101,12 +147,13 @@ export class AdminDashboardPage implements AfterViewInit {
     private nftService: NFTService,
     private routeService: RouteService,
   ){
+    this.monthIndex = 0;
     this.page = 1;
     this._isLoading = false;
     this.routeService.clubName$.pipe(takeUntil(this.destroy$)).subscribe((clubName) => {
       this.clubName = clubName;
       if(this.clubName) {
-        this.nftService.getRecentSoldNfts(this.page, this.nftLimit)
+        this.nftService.getRecentSoldNfts(this.clubName,this.page, this.nftLimit)
         .pipe(take(1))
         .subscribe((result:ApiResponse<NFTList>) => {
           if (!result.hasErrors()) {
@@ -116,11 +163,20 @@ export class AdminDashboardPage implements AfterViewInit {
         });
       }
     });
+
+    this.creatorStats$.subscribe(status=> {
+      status.monthlyStats.forEach(stats => {
+        this.lineChartData[0].data.push(stats.profit);
+      })
+    })
   }
 
   ngAfterViewInit(): void {
+    const param = {
+      limit: 4
+    }
     this.creatorService.getCreatorStats(this.routeService.clubName).pipe(takeUntil(this.destroy$)).subscribe();
-    this.groupService.getAllGroupsByClub(this.clubName, 1, 4);
+    this.groupService.getAllGroupsByClub(this.clubName, 1, param);
     // console.log('aksdjkasjd');
     const gradient = this.canvas.nativeElement
       .getContext('2d')
@@ -133,4 +189,35 @@ export class AdminDashboardPage implements AfterViewInit {
     this.lineChartColors[0].borderColor = gradient;
 
   }
+
+  scrollLeft(el: Element) {
+    const animTimeMs = 400;
+    const pixelsToMove = 315;
+    const stepArray = [0.001, 0.021, 0.136, 0.341, 0.341, 0.136, 0.021, 0.001];
+    interval(animTimeMs / 8)
+      .pipe(
+        takeWhile((value) => value < 8),
+        tap((value) => (el.scrollLeft -= pixelsToMove * stepArray[value]))
+      )
+      .subscribe();
+  }
+
+  scrollRight(el: Element) {
+    const animTimeMs = 400;
+    const pixelsToMove = 315;
+    const stepArray = [0.001, 0.021, 0.136, 0.341, 0.341, 0.136, 0.021, 0.001];
+    interval(animTimeMs / 8)
+      .pipe(
+        takeWhile((value) => value < 8),
+        tap((value) => (el.scrollLeft += pixelsToMove * stepArray[value]))
+      )
+      .subscribe();
+  }
+
+  chartStatus(index):void {
+    this.monthIndex = index
+  }
+
+
+
 }

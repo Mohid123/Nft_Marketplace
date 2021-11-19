@@ -13,7 +13,7 @@
     <h2 class="mb-5 text-2xl font-light tracking-widest text-gray-400 title-font">Marketplace</h2>
     <div class="bottom-0 left-0 flex flex-wrap justify-between w-full pt-3 leading-none text-center ">
       <span class="inline-flex items-center text-sm leading-none ">
-        <span class="border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-2 rounded-2xl ">
+        <!-- <span class="border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-2 rounded-2xl ">
           <button (click)="setType('')" class="all-item ">
             All Items
           </button>
@@ -31,15 +31,19 @@
           <button (click)="setType('Ticket')" class="tickets-btn">
             Tickets
           </button>
-        </span>
+        </span> -->
+        <button mat-button *ngFor="let button of filterButtons" class="items-center px-3 py-2 mx-1 tracking-wide text-white align-middle rounded-full text-md border-gradient-dp-p-bg-dark hover:border-gradient-tl-p-bg-light gradient-border-2"[ngClass]="{'active': button.isClicked}" (click)="setActive(button); setType(button.text)">
+          {{ button.text || 'All Items' }}
+      </button>
       </span>
       <div class="mt-3 md:mt-0 lg:mt-0">
         <span
           class="inline-flex items-center text-sm leading-none text-gray-400 border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-2 rounded-3xl">
           <button type="button " mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu" class="filter-btn"
             id="menu-button" aria-expanded="true" aria-haspopup="true">
-            Filters
-            <!-- Heroicon name: solid/chevron-down -->
+            <ng-container *ngIf="!filterGroup; else showGroups">Filters</ng-container>
+            <ng-template #showGroups>{{filterGroup.name}}</ng-template>
+
             <svg class="w-5 h-5 ml-2 -mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
               aria-hidden="true">
               <path fill-rule="evenodd"
@@ -49,10 +53,10 @@
           </button>
 
           <mat-menu #menu="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 " xPosition='before'>
-            <button (click)="filterBy(null)" class="groups" mat-menu-item>
+            <button (click)="filterBy(null)" class="dropdown" mat-menu-item>
               All
             </button>
-            <button (click)="filterBy(group)" class="groups" mat-menu-item *ngFor="let group of (groups$ | async)">
+            <button (click)="filterBy(group)" class="dropdown" mat-menu-item *ngFor="let group of (groups$ | async)">
               {{group.name}}
             </button>
 

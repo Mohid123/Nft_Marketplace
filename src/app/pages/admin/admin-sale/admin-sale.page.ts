@@ -33,39 +33,58 @@ export class AdminSalePage implements OnInit, OnDestroy {
 
   public groups$ = this.groupService.groups$;
   public filterGroup: Group;
+  public filterStatus: string;
+  public filterPrice: string;
+  public filterSort: string;
 
   public isLoading:boolean;
   public type = '';
   priceRange = [
     {
-      from:  '€1 - €100',
+      from: '1',
+      to: '100'
     },
     {
-      from: '€100 - €200',
+      from: '101',
+      to: '200'
     },
     {
-      from: '€200 - €300',
+      from: '201',
+      to: '300'
     },
     {
-      from: '€300 - €400',
+      from: '301',
+      to: '400'
     },
     {
-      from: '€400 - €500',
+      from: '401',
+      to: '500'
     },
     {
-      from: '€500 - €600',
+      from: '501',
+      to: '600'
     },
     {
-      from: '€600 - €700',
+      from: '601',
+      to: '700'
     },
     {
-      from: '€700 - €800',
+      from: '701',
+      to: '800'
     },
     {
-      from: '€800 - €900',
+      from: '801',
+      to: '900'
     },
     {
-      from: '€900 - €1000',
+      from: '901',
+      to: '1000'
+    },
+    {
+      from: '+1000'
+    },
+    {
+      from: 'All',
     },
   ]
 
@@ -80,12 +99,14 @@ export class AdminSalePage implements OnInit, OnDestroy {
 
   nftStatus = [
     {
-      name: 'Active',
+      name: 'All',
+    },
+    {
+      name: 'Minted',
     },
     {
       name: 'Draft',
     },
-
   ]
 
   constructor(
@@ -95,21 +116,31 @@ export class AdminSalePage implements OnInit, OnDestroy {
     private nftService: NFTService,
     private routeService: RouteService,
   ) {
-    this.page = 1;
     this.isLoading = false;
     this.routeService.clubName$.pipe(takeUntil(this.destroy$)).subscribe((clubName) => {
       this.clubName = clubName;
       if(this.clubName)
-        this.getSoldNFTs();
+        this.resetFilters();
     });
   }
 
   ngOnInit(): void {
-    this.groupService.getAllGroupsByClub(this.clubName, 0, 0);
+    const param = {
+      limit: this.limit
+    }
+    this.groupService.getAllGroupsByClub(this.clubName, 0, param);
   }
 
-  getSoldNFTs():void {
-    this.nftService.getRecentSoldNfts(this.page, this.NftLimit ,this.filterGroup?.id, this.type).pipe(take(1))
+  getPendingForSaleNfts():void {
+    const params: any = {
+      nftStatus: this.filterStatus,
+      price: this.filterPrice,
+      tokenId: this.filterSort,
+    }
+    this.isLoading = true
+    console.log('this.filterPrice:',this.filterPrice);
+    console.log('params:',params);
+    this.nftService.getPendingForSaleNfts(this.page, this.NftLimit ,params).pipe(take(1))
     .subscribe((result:ApiResponse<NFTList>) => {
       console.log('result.dataresult.data:',result.data);
       if (!result.hasErrors()) {
@@ -123,29 +154,56 @@ export class AdminSalePage implements OnInit, OnDestroy {
   setType(type:string): void {
     this.type = type;
     this.page = 1;
-    this.getSoldNFTs();
+    this.getPendingForSaleNfts();
   }
 
   next():void {
     this.page++;
-    this.getSoldNFTs();
+    this.getPendingForSaleNfts();
   }
 
   previous():void {
     this.page--;
-    this.getSoldNFTs();
+    this.getPendingForSaleNfts();
   }
 
   filterBy (group:Group) :void {
     this.page = 1;
     this.filterGroup = group;
-    this.getSoldNFTs();
+    this.getPendingForSaleNfts();
+  }
+
+  filterByStatus(status: string):void {
+    this.page = 1;
+    this.filterStatus = status;
+    this.getPendingForSaleNfts();
+  }
+
+  filterByPrice(price: string):void {
+    this.page = 1;
+    this.filterPrice = price;
+    console.log('this.filterPrice:',this.filterPrice);
+    this.getPendingForSaleNfts();
+  }
+
+  filterBySort(sort: string):void {
+    this.page = 1;
+    this.filterSort = sort;
+    this.getPendingForSaleNfts();
+  }
+
+  resetFilters():void {
+    this.page = 1;
+    this.filterStatus = '';
+    this.filterPrice = '';
+    this.filterSort = '';
+    this.getPendingForSaleNfts();
   }
 
   updateStatus(id:string, status:string):void {
     this.nftService.updateNft(id,status).pipe(take(1)).subscribe((result:ApiResponse<NFT>) => {
       if (!result.hasErrors()) {
-        this.getSoldNFTs();
+        this.getPendingForSaleNfts();
       }
     });
   }

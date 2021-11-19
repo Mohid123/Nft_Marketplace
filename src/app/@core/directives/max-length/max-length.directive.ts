@@ -11,7 +11,12 @@ export class MaxLengthDirective {
   onKeydown(event) : void {
     const value = event.target.value;
     const maxLength = parseInt(this.maxlength);
-    if (value.length > maxLength -1) {
+    if (
+        event?.key !== 'Backspace' &&
+        event?.key !== 'Delete' &&
+        event?.key !== 'ArrowLeft' &&
+        event?.key !== 'ArrowRight' &&
+        value.length > maxLength -1) {
       event.preventDefault();
       event.stopPropagation();
     }

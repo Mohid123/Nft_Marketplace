@@ -33,8 +33,6 @@ export class CreateGroupComponent {
   public groups$ = this.groupService.groups$;
   public limit = 6 ;
   public page:number;
-  public searchValu = '';
-
 
   constructor(
     private authService: AuthService,
@@ -50,7 +48,7 @@ export class CreateGroupComponent {
   ) {
     this.groupForm = this.formBuilder.group({
       name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(7)]),
-      description: new FormControl('', [ Validators.required, Validators.minLength(3), Validators.maxLength(100) ]),
+      description: new FormControl('', [ Validators.required, Validators.minLength(15), Validators.maxLength(25) ]),
       file: new FormControl(''),
     });
 
@@ -66,7 +64,10 @@ export class CreateGroupComponent {
 
   getGroup(): void {
     if (this._isLoading) return
-    this.groupService.getAllGroupsByClub(this.clubName, this.page, this.limit,this.searchValu);
+    const param = {
+      limit: this.limit
+    }
+    this.groupService.getAllGroupsByClub(this.clubName, this.page, param);
   }
 
   addGroup():void {
@@ -112,16 +113,17 @@ export class CreateGroupComponent {
               }
             }),
           ).subscribe((res:any) => {
-            if (res !== null) {
+            this.spinner.hide('main');
+            if (res !== null && !res.hasErrors()) {
               this.cf.detectChanges();
-              this.close();
               this.toastr.success('New group successfully added.', 'Success!');
               this.getGroup()
+              this.close();
             } else {
-              this.toastr.warning(res.errors[0]?.error?.message, 'Error!');
+              this.imgFormData = new FormData();
+              this.toastr.error(res.errors[0]?.error?.message, 'Error!');
               // alert('error :' + res.errors[0]?.error?.message);
             }
-            this.spinner.hide('main');
           });
       })
       .catch((error) => {

@@ -18,7 +18,8 @@
         </div>
         <div class="filter">
           <button mat-icon-button aria-label="menu" class="w-20" mat-icon-button [matMenuTriggerFor]="itemCountMenu" >
-            <span>Item Count</span>
+            <ng-container *ngIf="!filterItemCount; else showItemCount">Item Count</ng-container>
+            <ng-template #showItemCount>{{filterItemCount}}</ng-template>
             <span class="material-icons">
               arrow_drop_down
               </span>
@@ -26,7 +27,8 @@
         </div>
         <div class="filter">
           <button mat-icon-button aria-label="menu" class="w-16" [matMenuTriggerFor]="nameMenu" >
-            <span>Name</span>
+            <ng-container *ngIf="!filterName; else showName">Name</ng-container>
+            <ng-template #showName>{{filterName}}</ng-template>
             <span class="material-icons">
               arrow_drop_down
               </span>
@@ -41,7 +43,7 @@
           </button>
         </div> -->
         <div class="filter">
-          <button mat-icon-button aria-label="menu">
+          <button (click)="resetFilters()" mat-icon-button aria-label="menu">
             <span><mat-icon>restart_alt</mat-icon></span>
             <span class="px-px sm:px-2">Reset Filter</span>
           </button>
@@ -49,25 +51,29 @@
 
           <!--Item count menu-->
         <mat-menu #itemCountMenu="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md" xPosition='after'>
-          <button class="dropdown" mat-menu-item *ngFor="let sort of orderBy">
-          {{sort.sortBy}}
-          </button>
+          <ng-container *ngFor="let sort of itemCount">
+            <button (click)="filterByItemCount(sort.sortBy)" class="dropdown" mat-menu-item>
+              {{sort.sortBy}}
+            </button>
+          </ng-container>
 
         </mat-menu>
 
          <!--Name menu-->
         <mat-menu #nameMenu="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md text-sm mat-menu" xPosition='after'>
           Sort by
-          <button class="dropdown" mat-menu-item *ngFor="let sort of order">
-            {{sort.sortBy}}
-          </button>
+          <ng-container *ngFor="let sort of name">
+            <button (click)="filterByName(sort.sortBy)" class="dropdown" mat-menu-item>
+              {{sort.sortBy}}
+            </button>
+          </ng-container>
          </mat-menu>
 
       </div>
     </div>
     <div class="w-full bg-gray-400 groups-container">
       <div class="w-full overflow-x-auto ">
-        <table class="w-full space-y-6 text-sm ">
+        <table class="w-full space-y-6 text-sm" [style.min-height]="((isLoading$ | async) === false && (groups$ | async).length === 0) ? '420px' : null">
           <thead class="font-light tracking-wider text-white ">
             <tr>
               <th>Name</th>
@@ -88,6 +94,8 @@
                   <td><mat-icon (click)="deleteGroup(group)"><img class="cursor-pointer" src="./assets/icons/bin.svg" alt="delete"></mat-icon></td>
                 </tr >
               </ng-container>
+              <p *ngIf="(isLoading$ | async) === false && (groups$ | async).length === 0"
+              class="absolute w-full text-center" style="top: 40%;">No Rocord Found</p>
           </tbody>
         </table>
       </div>
@@ -122,7 +130,7 @@
 
             </button>
             <span>{{page}}/{{ (totalCount  / limit + (0.4)) | number:'1.0-0' }}</span>
-            <button [disabled]="totalCount <= page * limit" class="icon-btn active" (click)="next()">
+            <button [disabled]="totalCount <= page * limit" class="icon-btn " (click)="next()">
               <svg xmlns="http://www.w3.org/2000/svg" width="17.618" height="11.75" viewBox="0 0 17.618 11.75">
                 <defs>
                   <style>

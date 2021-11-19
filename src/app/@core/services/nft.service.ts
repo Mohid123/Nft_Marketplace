@@ -11,7 +11,6 @@ import { exhaustMap, take, tap } from 'rxjs/operators';
 import { IsMembershipIdExists } from '../models/is-membership-id-exists.model';
 import { GetAllNftsByClub } from '../models/requests/get-all-afts-by-club.model';
 import { getNftsByUserId } from '../models/requests/get-nfts-by-user.model';
-import { getNftsForAdmin } from '../models/requests/get-nfts-for-admin.model';
 import { NFTList } from './../models/NFTList.model';
 import { MediaUpload } from './../models/requests/media-upload.model';
 import { ResponseAddGroupMedia } from './../models/response-add-media.model';
@@ -109,19 +108,44 @@ export class NFTService extends ApiService<nftApiData> {
     }));
   }
 
-  getRecentSoldNfts(page: number, limit: number, groupId?:string, type?:string) : Observable<ApiResponse<nftApiData>> {
+  getRecentSoldNfts(clubName:string, page: number, limit: number, groupId?:string, type?:string) : Observable<ApiResponse<nftApiData>> {
     page--;
     const param:any = {
+      clubName: clubName ,
       offset: page ? limit * page : 0,
       limit: limit,
-      type: type,
     };
+
+    if(type) param.type = type;
     // name: searchValue,
 
     if(groupId) {
       param.groupID = groupId;
     }
      return this.get('/nft/getRecentSoldNfts', param).pipe(take(1),tap((result:ApiResponse<nftApiData>)=>{
+      if (result.hasErrors()) {
+        this.toastrService.error(result?.errors[0]?.error?.message)
+      }
+    }));
+  }
+
+  getPendingForSaleNfts(page: number, limit: number, data: {
+    nftStatus : string,
+    price  : string,
+    tokenId  : string,
+  }) : Observable<ApiResponse<nftApiData>> {
+
+    page--;
+    const param:any = {
+      offset: page ? limit * page : 0,
+      limit: limit
+    };
+
+    if(data.nftStatus) param.nftStatus = data.nftStatus;
+    if(data.price) param.price = data.price;
+    if(data.tokenId) param.tokenId = data.tokenId;
+    console.log('paaaaaaaaaa:',param);
+    return this.get('/nft/getPendingForSaleNfts', param).pipe(take(1),tap((result:ApiResponse<nftApiData>)=>{
       if (result.hasErrors()) {
         this.toastrService.error(result?.errors[0]?.error?.message)
       }
@@ -149,14 +173,24 @@ export class NFTService extends ApiService<nftApiData> {
     }));;
   }
 
-  getAllNftsAdminPanel (clubName: string, page: number, searchValue: string) : Observable<ApiResponse<nftApiData>> {
+  getAllNftsAdminPanel (clubName: string, page: number, searchValue: string, data: {
+    nftStatus : string,
+    price  : string,
+    tokenId  : string,
+    type  : string,
+  }) : Observable<ApiResponse<nftApiData>> {
     page--;
-    const param: getNftsForAdmin = {
+    const param: any = {
       clubName: clubName,
       offset: page ? environment.limit * page : 0,
       limit: environment.limit,
       name: searchValue,
     };
+
+    if(data.nftStatus) param.nftStatus = data.nftStatus;
+    if(data.price) param.price = data.price;
+    if(data.tokenId) param.tokenId = data.tokenId;
+    if(data.type) param.type = data.type;
 
     return this.get('/nft/getNftsByAppPackageIdForAdminPanel', param).pipe(take(1),tap((result:ApiResponse<nftApiData>)=>{
       if (result.hasErrors()) {
@@ -226,12 +260,15 @@ export class NFTService extends ApiService<nftApiData> {
       if (result.hasErrors()) {
         this.toastrService.error(result?.errors[0]?.error?.message)
       } else {
-        if(result?.data)
-        this.customDialogService.showLoadingDialog('Minting In Process');
+        if (result?.data) {
+          if (params.freezeNft) {
+            this.customDialogService.showLoadingDialog('Minting In Process');
             setTimeout(() => {
               this.customDialogService.closeDialogs();
             }, 3000);
+          }
           this._cardCreatedSuccess$.next((<NFT>result?.data)?.id);
+        }
       }
     }));
   }

@@ -25,7 +25,7 @@ export class ServerErrorInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
-        if ([401, 403].includes(error.status)) {
+        if ([401, 403].includes(error.status) && !request.url.includes('group/addGroup')) {
           this.router.navigate([this.routeService.clubName || '/', ROUTER_UTILS.config.auth.root,ROUTER_UTILS.config.auth.signIn]);
           return throwError(error);
         } else if (error.status === 500) {

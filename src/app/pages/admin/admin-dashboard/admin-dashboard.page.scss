@@ -83,7 +83,7 @@ svg {
     @apply flex h-auto justify-between items-center tracking-wide font-medium text-white;
 
     .pagination {
-      @apply w-36 flex justify-between items-center;
+      @apply w-20 flex justify-between items-center;
 
       button {
         @apply h-8 w-9 rounded-md bg-primary-600;
@@ -137,43 +137,22 @@ svg {
 }
 
 
-/* Custom Scrollbar using CSS */
-.custom-scrollbar-css {
-  overflow-y: scroll;
-}
-/* scrollbar width */
-.custom-scrollbar-css::-webkit-scrollbar {
-  width: 7px;
-}
-/* scrollbar track */
-.custom-scrollbar-css::-webkit-scrollbar-track {
-  background: #eee;
-}
-/* scrollbar handle */
-.custom-scrollbar-css::-webkit-scrollbar-thumb {
-  border-radius: 1rem;
-  background-color: #34ABC5;
-  background-image: linear-gradient(to bottom, #59C8D1 0%, #75F16D 100%);
-}
-
 
 .custom-scrollbar-css-y {
   overflow-x: scroll;
 }
 /* scrollbar width */
 .custom-scrollbar-css-y::-webkit-scrollbar {
-  height: 7px;
+  height: 3px;
 }
 /* scrollbar track */
-.custom-scrollbar-css-y::-webkit-scrollbar-track {
-  background: #eee;
-}
+
 /* scrollbar handle */
-.custom-scrollbar-css-y::-webkit-scrollbar-thumb {
-  border-radius: 1rem;
-  background-color: #34ABC5;
-  background-image: linear-gradient(to bottom, #59C8D1 0%, #75F16D 100%);
-}
+// .custom-scrollbar-css-y::-webkit-scrollbar-thumb {
+//   border-radius: 1rem;
+//   background-color: #34ABC5;
+//   background-image: linear-gradient(to top, #3ABFF3 0%, #75F16D 100%);
+// }
 
 
 .coming-soon {
@@ -192,3 +171,15 @@ svg {
   }
 }
 
+.dropdown{
+  @apply my-1 rounded-md border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-1 text-center;
+}
+
+.stats-btn {
+  @apply flex items-center justify-end h-12 p-1.5  absolute right-0 mt-4;
+  width: 133px;
+}
+.nft-label {
+  @apply flex items-center justify-center h-12 p-1.5  absolute left-0 pl-2 mt-4 mr-2 tracking-wide text-white font-medium ;
+  width: 133px;
+}
