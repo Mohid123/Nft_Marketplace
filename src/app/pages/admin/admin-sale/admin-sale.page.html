@@ -134,8 +134,10 @@
                   </td>
                 </tr>
               </ng-container>
-              <p *ngIf="!isLoading && !nftList?.data || nftList.data.length === 0"
-                class="absolute w-full text-center" style="top: 40%;">No Rocord Found</p>
+                <div *ngIf="!isLoading && !nftList?.data || nftList.data.length === 0" class="absolute w-full text-center" style="top: 40%;">
+                  <h3>No Record Found</h3>
+                  <p>It seems we can't find any results.</p>
+                </div>
               <ngx-spinner name="admin-market" [fullScreen]="false" [showSpinner]="isLoading" bdColor="#171830"
                 size="medium" color="#fff" type="ball-scale-multiple">
                 <p style="font-size: 20px; color: white">{{(creator$ | async)?.displayName}}...</p>
