@@ -129,7 +129,7 @@ export class NFTService extends ApiService<nftApiData> {
     }));
   }
 
-  getPendingForSaleNfts(page: number, limit: number, data: {
+  getPendingForSaleNfts(clubName:string,page: number, limit: number, data: {
     nftStatus : string,
     price  : string,
     tokenId  : string,
@@ -137,6 +137,7 @@ export class NFTService extends ApiService<nftApiData> {
 
     page--;
     const param:any = {
+      clubName: clubName ,
       offset: page ? limit * page : 0,
       limit: limit
     };
@@ -237,7 +238,7 @@ export class NFTService extends ApiService<nftApiData> {
     const param:any = {
       offset: page ? limit * page : 0,
       limit: limit,
-      type: type,
+      eventType: type,
     };
     // name: searchValue,
 

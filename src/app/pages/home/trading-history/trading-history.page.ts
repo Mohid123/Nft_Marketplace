@@ -30,9 +30,10 @@ export class TradingHistoryPage implements OnInit, OnDestroy {
   public isLoading:boolean;
   public type = '';
   filterButtons = [
-    { text: '', isClicked: true },
-    { text: 'Membership Card', isClicked: false },
-    { text: 'Ticket', isClicked: false },
+    { text: 'All', isClicked: true },
+    { text: 'Minted', isClicked: false },
+    { text: 'Sale', isClicked: false },
+    { text: 'Transfer', isClicked: false },
   ]
 
   constructor(
