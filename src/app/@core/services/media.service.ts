@@ -32,14 +32,14 @@ export class MediaService extends ApiService<uploadMedia> {
   }
 
   convertToImg (singlefile :string, fileName:string) :Promise<File | null> {
-    console.log('si:',singlefile);
-    console.log('fi:',fileName);
+    // console.log('si:',singlefile);
+    // console.log('fi:',fileName);
     return new Promise<File>((resolve) => {
       const canvas: HTMLCanvasElement = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
       const img = new Image();
       img.src = singlefile;
-      console.log('img:',img);
+      // console.log('img:',img);
       img.onload = () => {
         canvas.width = 72;
         canvas.height = 64;

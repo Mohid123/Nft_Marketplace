@@ -37,7 +37,7 @@ export class CreatorService extends ApiService<creatorData> {
   getCreator(clubName: string, forceUpdate: boolean = false): Observable<ApiResponse<Creator> | Creator> {
     const creator: CreatorInStore = <CreatorInStore>getItem(StorageItem.Creator);
     if (!forceUpdate && creator?.club == clubName) {
-      console.log('creatoraaa:',creator);
+      // console.log('creatoraaa:',creator);
       this._Creator$.next(creator.data)
       return of(creator.data);
     } else {
@@ -46,7 +46,7 @@ export class CreatorService extends ApiService<creatorData> {
       };
       return this.get('/creator/searchCreatorByName', param).pipe(
         tap((result: ApiResponse<Creator>) => {
-          console.log('result:', result);
+          // console.log('result:', result);
           if (!result.hasErrors()) {
             const param: any = {
               club: clubName,
@@ -63,7 +63,7 @@ export class CreatorService extends ApiService<creatorData> {
   getCreatorStats(clubName: string): Observable<ApiResponse<creatorData> | CreatorStats> {
     const creatorStats: CreatorStatsInStore = <CreatorStatsInStore>getItem(StorageItem.CreatorStats);
     if (creatorStats?.club == clubName) {
-      console.log('creatoraaa:',creatorStats);
+      // console.log('creatoraaa:',creatorStats);
       this._CreatorStats$.next(creatorStats.data)
       return of(creatorStats.data);
     } else {
@@ -85,7 +85,7 @@ export class CreatorService extends ApiService<creatorData> {
   updateCreator(clubName:string, param: Creator): Observable<ApiResponse<Creator> | Creator> {
       return this.post('/creator/updateCreator', param).pipe(
         tap((result: ApiResponse<Creator>) => {
-          console.log('result:', result);
+          // console.log('result:', result);
           if (!result.hasErrors()) {
             this.getCreator(clubName, true).pipe(take(1)).subscribe();
           }

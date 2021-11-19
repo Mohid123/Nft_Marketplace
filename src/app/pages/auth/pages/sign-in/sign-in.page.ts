@@ -32,6 +32,6 @@ export class SignInPage implements OnInit , OnDestroy {
   }
 
   ngOnDestroy():void {
-    console.log('sign in page  distroy:',);
+    // console.log('sign in page  distroy:',);
   }
 }

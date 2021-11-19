@@ -101,12 +101,12 @@ export class CreateNFTticketComponent implements OnInit, AfterViewInit {
 
     if (event.target.files && event.target.files[0]) {
       this.file = event.target.files[0];
-      console.log(this.file)
+
       if (event.target.files && event.target.files[0]) {
         const reader = new FileReader();
         reader.onload = (e: any) => {
           this.imageSrc = e.target.result;
-          console.log(this.imageSrc)
+
 
           this.createNft.patchValue({
             img: this.imageSrc,
