@@ -54,7 +54,7 @@
   </div>
 
   <!--nft cards-->
-  <div class="relative cards-container">
+  <div class="relative cards-container" style="min-height: 360px;">
     <ngx-spinner
       [fullScreen]="false"
       [showSpinner]="isLoading"
@@ -65,8 +65,9 @@
       type="ball-scale-multiple">
       <p style="font-size: 20px; color: white">{{(creator$ | async)?.displayName}}...</p>
     </ngx-spinner>
-
-    <ng-container *ngIf="nftList && nftList.totalCount > 0">
+    <p *ngIf="!isLoading && (!nftList || nftList?.totalCount === 0)"
+    class="absolute w-full text-center" style="top: 40%;">No Rocord Found</p>
+    <ng-container *ngIf="nftList?.totalCount > 0">
       <ng-container *ngFor="let nftCard of nftList.data" class="">
         <app-nft-card [nft]="nftCard" ></app-nft-card>
       </ng-container>

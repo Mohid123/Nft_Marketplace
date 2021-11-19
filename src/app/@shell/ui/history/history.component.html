@@ -9,7 +9,9 @@
       <th>Date Created</th>
     </tr>
   </thead>
-  <tbody >
+  <tbody class="relative" style="min-height: 360px">
+    <p *ngIf="(!responseEventByNFT || responseEventByNFT?.totalCount === 0)"
+    class="absolute w-full text-center" style="top: 40%;">No Rocord Found</p>
     <ng-container *ngIf="responseEventByNFT?.totalCount > 0">
       <ng-container *ngFor="let nftEvent of responseEventByNFT.data">
         <tr class="items-center h-24 ">

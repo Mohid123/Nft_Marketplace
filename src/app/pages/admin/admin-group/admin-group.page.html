@@ -73,7 +73,7 @@
     </div>
     <div class="w-full bg-gray-400 groups-container">
       <div class="w-full overflow-x-auto ">
-        <table class="w-full space-y-6 text-sm ">
+        <table class="w-full space-y-6 text-sm" style="min-height: 420px;">
           <thead class="font-light tracking-wider text-white ">
             <tr>
               <th>Name</th>
@@ -94,6 +94,8 @@
                   <td><mat-icon (click)="deleteGroup(group)"><img class="cursor-pointer" src="./assets/icons/bin.svg" alt="delete"></mat-icon></td>
                 </tr >
               </ng-container>
+              <p *ngIf="(isLoading$ | async) === false && (groups$ | async).length === 0"
+              class="absolute w-full text-center" style="top: 40%;">No Rocord Found</p>
           </tbody>
         </table>
       </div>
