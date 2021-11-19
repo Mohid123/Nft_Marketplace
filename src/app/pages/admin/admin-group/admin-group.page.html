@@ -73,7 +73,7 @@
     </div>
     <div class="w-full bg-gray-400 groups-container">
       <div class="w-full overflow-x-auto ">
-        <table class="w-full space-y-6 text-sm" style="min-height: 420px;">
+        <table class="w-full space-y-6 text-sm" [style.min-height]="((isLoading$ | async) === false && (groups$ | async).length === 0) ? '420px' : null">
           <thead class="font-light tracking-wider text-white ">
             <tr>
               <th>Name</th>
