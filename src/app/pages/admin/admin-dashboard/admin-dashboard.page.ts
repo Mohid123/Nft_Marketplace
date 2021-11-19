@@ -23,8 +23,6 @@ export class AdminDashboardPage implements AfterViewInit {
 
   @ViewChild('myCanvas')
 
-
-
   canvas!: ElementRef;
 
   public creatorStats$ = this.creatorService.CreatorStats$;
@@ -35,6 +33,7 @@ export class AdminDashboardPage implements AfterViewInit {
   public clubName: string;
   public nftLimit = 10 ;
   public page:number;
+  public monthIndex:number;
 
   public lineChartData: ChartDataSets[] = [
     {
@@ -46,6 +45,9 @@ export class AdminDashboardPage implements AfterViewInit {
   ];
 
   months = [
+    {
+      name: 'All',
+    },
     {
       name: 'January',
     },
@@ -145,6 +147,7 @@ export class AdminDashboardPage implements AfterViewInit {
     private nftService: NFTService,
     private routeService: RouteService,
   ){
+    this.monthIndex = 0;
     this.page = 1;
     this._isLoading = false;
     this.routeService.clubName$.pipe(takeUntil(this.destroy$)).subscribe((clubName) => {
@@ -209,6 +212,10 @@ export class AdminDashboardPage implements AfterViewInit {
         tap((value) => (el.scrollLeft += pixelsToMove * stepArray[value]))
       )
       .subscribe();
+  }
+
+  chartStatus(index):void {
+    this.monthIndex = index
   }
 
 

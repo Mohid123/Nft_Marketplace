@@ -15,9 +15,11 @@
 
           <mat-menu #statusMenu="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md" xPosition='after' >
             Stats of
-            <button class="dropdown" mat-menu-item *ngFor="let month of months">
-             {{month.name}}
-            </button>
+            <ng-container *ngFor="let month of months;let i = index">
+              <button (click)="chartStatus(i)" class="dropdown" mat-menu-item >
+                {{month.name}}
+              </button>
+            </ng-container>
           </mat-menu>
           <canvas #myCanvas class="px-16 py-6 mb-32" baseChart width="816" height="300"
           [datasets]="lineChartData"
@@ -30,20 +32,34 @@
         </canvas>
         </div>
         <div class="section">
-          <ng-container *ngIf="(creatorStats$ | async) as creatorStats">
-          <div class="listed">
-            <p>Total NFT Listed</p>
-            <span>{{creatorStats?.yearlyStats?.totalNftListed}}</span>
-          </div>
-          <div class="sold">
-            <p>Total NFT Sold</p>
-            <span>{{creatorStats?.yearlyStats?.soldNft}}</span>
-          </div>
-          <div class="profit">
-            <p>Sold NFT Profit</p>
-            <span>€ {{creatorStats?.yearlyStats?.profit}}</span>
-          </div>
-        </ng-container>
+          <ng-container *ngIf="monthIndex === 0 && (creatorStats$ | async) as creatorStats">
+            <div class="listed">
+              <p>Total NFT Listed</p>
+              <span>{{creatorStats?.yearlyStats?.totalNftListed}}</span>
+            </div>
+            <div class="sold">
+              <p>Total NFT Sold</p>
+              <span>{{creatorStats?.yearlyStats?.soldNft}}</span>
+            </div>
+            <div class="profit">
+              <p>Sold NFT Profit</p>
+              <span>€ {{creatorStats?.yearlyStats?.profit}}</span>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="monthIndex > 0 &&(creatorStats$ | async) as creatorStats">
+            <div class="listed">
+              <p>Total NFT Listed</p>
+              <span>{{creatorStats?.monthlyStats[monthIndex-1]?.totalNftListed}}</span>
+            </div>
+            <div class="sold">
+              <p>Total NFT Sold</p>
+              <span>{{creatorStats?.monthlyStats[monthIndex-1]?.soldNft}}</span>
+            </div>
+            <div class="profit">
+              <p>Sold NFT Profit</p>
+              <span>€ {{creatorStats?.monthlyStats[monthIndex-1]?.profit}}</span>
+            </div>
+          </ng-container>
         </div>
       </div>
     </div>
