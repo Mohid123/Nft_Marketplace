@@ -55,7 +55,7 @@
             <button (click)="filterBy(null)" class="dropdown" mat-menu-item>
               All
             </button>
-            <button (click)="filterBy(group)" class="dropdown" mat-menu-item *ngFor="let group of groups">
+            <button (click)="filterBy(group)" class="dropdown" mat-menu-item *ngFor="let group of (groups$ | async)">
               {{group.name}}
             </button>
           </mat-menu>

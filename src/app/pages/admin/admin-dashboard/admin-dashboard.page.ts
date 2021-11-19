@@ -145,7 +145,7 @@ export class AdminDashboardPage implements AfterViewInit {
     this.routeService.clubName$.pipe(takeUntil(this.destroy$)).subscribe((clubName) => {
       this.clubName = clubName;
       if(this.clubName) {
-        this.nftService.getRecentSoldNfts(this.page, this.nftLimit)
+        this.nftService.getRecentSoldNfts(this.clubName,this.page, this.nftLimit)
         .pipe(take(1))
         .subscribe((result:ApiResponse<NFTList>) => {
           if (!result.hasErrors()) {

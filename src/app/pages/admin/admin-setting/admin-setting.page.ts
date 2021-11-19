@@ -55,6 +55,8 @@ export class AdminSettingPage implements OnInit, OnDestroy {
 
     this.creator$.subscribe((creator) => {
       this.creator = creator;
+      this.settingForm.controls.key.setValue(this.creator.stripeSecretKey);
+      this.settingForm.controls.description.setValue(this.creator.description);
     });
   }
 
@@ -62,7 +64,7 @@ export class AdminSettingPage implements OnInit, OnDestroy {
 
   saveSetting(): void {
     this.isLoading = true;
-    if (this.settingForm.controls?.key?.value.length > 0) {
+    if (this.settingForm.controls?.key?.value.length > 0 && this.creator.stripeSecretKey !== this.settingForm.controls?.key?.value) {
       this.updateKey();
     } else if(this.profileImage) {
       this.updateProfilePic();

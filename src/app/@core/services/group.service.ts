@@ -53,7 +53,7 @@ export class GroupService extends ApiService<groupApiData> {
     };
 
     if(data.filterItemCount) param.itemsCount = data.filterItemCount;
-    if(data.filterName) param.Name = data.filterName;
+    if(data.filterName) param.Name = data.filterName.toString();
     if(data.searchValue) param.name = data.searchValue;
 
     this.get('/group/getAllGroupsByAppPackageId',param)

@@ -108,13 +108,15 @@ export class NFTService extends ApiService<nftApiData> {
     }));
   }
 
-  getRecentSoldNfts(page: number, limit: number, groupId?:string, type?:string) : Observable<ApiResponse<nftApiData>> {
+  getRecentSoldNfts(clubName:string, page: number, limit: number, groupId?:string, type?:string) : Observable<ApiResponse<nftApiData>> {
     page--;
     const param:any = {
+      clubName: clubName ,
       offset: page ? limit * page : 0,
       limit: limit,
-      type: type,
     };
+
+    if(type) param.type = type;
     // name: searchValue,
 
     if(groupId) {
@@ -258,12 +260,15 @@ export class NFTService extends ApiService<nftApiData> {
       if (result.hasErrors()) {
         this.toastrService.error(result?.errors[0]?.error?.message)
       } else {
-        if(result?.data)
-        this.customDialogService.showLoadingDialog('Minting In Process');
+        if (result?.data) {
+          if (params.freezeNft) {
+            this.customDialogService.showLoadingDialog('Minting In Process');
             setTimeout(() => {
               this.customDialogService.closeDialogs();
             }, 3000);
+          }
           this._cardCreatedSuccess$.next((<NFT>result?.data)?.id);
+        }
       }
     }));
   }
