@@ -72,12 +72,12 @@ export class MarketPlacePage implements OnInit ,OnDestroy {
     }
     this.groupService.getAllGroupsByClub(this.clubName, 0, param);
   }
+
   setActive(button: any): void {
     for(const but of this.filterButtons) {
       but.isClicked = false;
     }
-
-    button.isClicked = true;
+     button.isClicked = true;
   }
 
 

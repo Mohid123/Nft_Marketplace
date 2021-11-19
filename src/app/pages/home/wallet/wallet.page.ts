@@ -36,6 +36,12 @@ export class WalletPage {
 
   public searchValue = '';
 
+  filterButtons = [
+    { text: '', isClicked: true },
+    { text: 'Membership Card', isClicked: false },
+    { text: 'Ticket', isClicked: false },
+  ]
+
   constructor(
     private authService: AuthService,
     private creatorService: CreatorService,
@@ -69,6 +75,13 @@ export class WalletPage {
         }
         this.isLoading = false;
       });
+  }
+
+  setActive(button: any): void {
+    for(const but of this.filterButtons) {
+      but.isClicked = false;
+    }
+     button.isClicked = true;
   }
 
   next():void {
