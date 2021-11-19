@@ -83,7 +83,7 @@ svg {
     @apply flex h-auto justify-between items-center tracking-wide font-medium text-white;
 
     .pagination {
-      @apply w-36 flex justify-between items-center;
+      @apply w-20 flex justify-between items-center;
 
       button {
         @apply h-8 w-9 rounded-md bg-primary-600;
@@ -148,11 +148,11 @@ svg {
 /* scrollbar track */
 
 /* scrollbar handle */
-.custom-scrollbar-css-y::-webkit-scrollbar-thumb {
-  border-radius: 1rem;
-  background-color: #34ABC5;
-  background-image: linear-gradient(to top, #3ABFF3 0%, #75F16D 100%);
-}
+// .custom-scrollbar-css-y::-webkit-scrollbar-thumb {
+//   border-radius: 1rem;
+//   background-color: #34ABC5;
+//   background-image: linear-gradient(to top, #3ABFF3 0%, #75F16D 100%);
+// }
 
 
 .coming-soon {

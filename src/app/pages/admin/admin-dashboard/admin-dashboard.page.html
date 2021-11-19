@@ -105,15 +105,15 @@
       </div>
       </div>
     </div>
-    <div class="order-4 w-full section-container lg:order-3 xl:w-65 lg:w-3/5 ">
+    <div class="order-4 w-full section-container lg:order-3 xl:w-65 lg:w-3/5 " >
       <div class="section ">
-        <div class="cards-container ">
+        <div  class="cards-container ">
           <div class="heading-section">
             <div>
               <p>Recently Sold NFT</p>
             </div>
             <div class="pagination">
-              <button class="h-8 rounded-md icon-btn w-9 bg-primary-600">
+              <button class="h-8 rounded-md icon-btn w-9 bg-primary-600" (click)="scrollLeft(list)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="17.618" height="11.75" viewBox="0 0 17.618 11.75">
                   <defs>
                     <style>
@@ -129,8 +129,8 @@
                 </svg>
 
               </button>
-              <span>1/8</span>
-              <button class="icon-btn ">
+              <!-- <span>1/8</span> -->
+              <button class="icon-btn " (click)="scrollRight(list)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="17.618" height="11.75" viewBox="0 0 17.618 11.75">
                   <defs>
                     <style>
@@ -146,10 +146,10 @@
               </button>
             </div>
           </div>
-          <div class="body-section ">
-            <div class="custom-scrollbar-css-y">
+          <div  class="body-section ">
+            <div #list class="custom-scrollbar-css-y">
               <ng-container *ngIf="nftList && nftList.totalCount > 0">
-                <ng-container *ngFor="let nftCard of nftList.data" class="">
+                <ng-container  *ngFor="let nftCard of nftList.data" class="">
                   <app-nft-card [nft]="nftCard"></app-nft-card>
                 </ng-container>
               </ng-container>

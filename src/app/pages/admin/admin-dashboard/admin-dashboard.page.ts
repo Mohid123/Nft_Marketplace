@@ -7,8 +7,8 @@ import { RouteService } from '@app/@core/services/route.service';
 import { AuthService } from '@app/pages/auth/services/auth.service';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
-import { Subject } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
+import { interval, Subject } from 'rxjs';
+import { take, takeUntil, takeWhile, tap } from 'rxjs/operators';
 import { NFTList } from './../../../@core/models/NFTList.model';
 import { ApiResponse } from './../../../@core/models/response.model';
 
@@ -22,6 +22,9 @@ export class AdminDashboardPage implements AfterViewInit {
   destroy$ = new Subject();
 
   @ViewChild('myCanvas')
+
+
+
   canvas!: ElementRef;
 
   public creatorStats$ = this.creatorService.CreatorStats$;
@@ -132,6 +135,8 @@ export class AdminDashboardPage implements AfterViewInit {
   public lineChartType: ChartType = 'line';
   public lineChartPlugins = [];
 
+
+
   constructor(
     private authService:AuthService,
     private customDialogService:CustomDialogService,
@@ -181,4 +186,31 @@ export class AdminDashboardPage implements AfterViewInit {
     this.lineChartColors[0].borderColor = gradient;
 
   }
+
+  scrollLeft(el: Element) {
+    const animTimeMs = 400;
+    const pixelsToMove = 315;
+    const stepArray = [0.001, 0.021, 0.136, 0.341, 0.341, 0.136, 0.021, 0.001];
+    interval(animTimeMs / 8)
+      .pipe(
+        takeWhile((value) => value < 8),
+        tap((value) => (el.scrollLeft -= pixelsToMove * stepArray[value]))
+      )
+      .subscribe();
+  }
+
+  scrollRight(el: Element) {
+    const animTimeMs = 400;
+    const pixelsToMove = 315;
+    const stepArray = [0.001, 0.021, 0.136, 0.341, 0.341, 0.136, 0.021, 0.001];
+    interval(animTimeMs / 8)
+      .pipe(
+        takeWhile((value) => value < 8),
+        tap((value) => (el.scrollLeft += pixelsToMove * stepArray[value]))
+      )
+      .subscribe();
+  }
+
+
+
 }
