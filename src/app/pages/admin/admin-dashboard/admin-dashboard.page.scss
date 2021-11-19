@@ -175,7 +175,11 @@ svg {
   @apply my-1 rounded-md border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-1 text-center;
 }
 
-.profile-btn {
-  @apply flex items-center justify-center h-12 p-1.5  absolute right-0;
+.stats-btn {
+  @apply flex items-center justify-end h-12 p-1.5  absolute right-0 mt-4;
+  width: 133px;
+}
+.nft-label {
+  @apply flex items-center justify-center h-12 p-1.5  absolute left-0 pl-2 mt-4 mr-2 tracking-wide text-white font-medium ;
   width: 133px;
 }
