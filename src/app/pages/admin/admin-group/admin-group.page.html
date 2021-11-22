@@ -50,7 +50,7 @@
         </div>
 
           <!--Item count menu-->
-        <mat-menu #itemCountMenu="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md" xPosition='after'>
+        <mat-menu #itemCountMenu="matMenu" class="bg-primary-600 mt-0.5 p-3 w-32 rounded-md" xPosition='after'>
           <ng-container *ngFor="let sort of itemCount">
             <button (click)="filterByItemCount(sort.sortBy)" class="dropdown" mat-menu-item>
               {{sort.sortBy}}
@@ -60,7 +60,7 @@
         </mat-menu>
 
          <!--Name menu-->
-        <mat-menu #nameMenu="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md text-sm mat-menu" xPosition='after'>
+        <mat-menu #nameMenu="matMenu" class="bg-primary-600 mt-0.5 p-3 w-32 rounded-md text-sm mat-menu" xPosition='after'>
           Sort by
           <ng-container *ngFor="let sort of name">
             <button (click)="filterByName(sort.sortBy)" class="dropdown" mat-menu-item>
@@ -94,8 +94,11 @@
                   <td><mat-icon (click)="deleteGroup(group)"><img class="cursor-pointer" src="./assets/icons/bin.svg" alt="delete"></mat-icon></td>
                 </tr >
               </ng-container>
-              <p *ngIf="(isLoading$ | async) === false && (groups$ | async).length === 0"
-              class="absolute w-full text-center" style="top: 40%;">No Rocord Found</p>
+
+              <div *ngIf="(isLoading$ | async) === false && (groups$ | async).length === 0"  class="absolute w-full text-center" style="top: 40%;">
+                <h3>No Record Found</h3>
+                <p>It seems we can't find any results.</p>
+              </div>
           </tbody>
         </table>
       </div>

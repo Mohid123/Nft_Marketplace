@@ -36,6 +36,9 @@ export class AdminMarketPlacePage implements OnInit ,OnDestroy {
 
   nftStatus = [
     {
+      name: 'All',
+    },
+    {
       name: 'Active',
     },
     {
@@ -44,9 +47,9 @@ export class AdminMarketPlacePage implements OnInit ,OnDestroy {
     {
       name: 'Sold',
     },
-    {
-      name: 'Resale',
-    },
+    // {
+    //   name: 'Resale',
+    // },
     {
       name: 'Transferring',
     },
@@ -56,16 +59,17 @@ export class AdminMarketPlacePage implements OnInit ,OnDestroy {
     {
       name: 'Minted',
     },
-    {
-      name: 'Error',
-    },
-    {
-      name: 'All',
-    },
+    // {
+    //   name: 'Error',
+    // },
+
   ]
 
 
   priceRange = [
+    {
+      from: 'All',
+    },
     {
       from: '1',
       to: '100'
@@ -109,9 +113,7 @@ export class AdminMarketPlacePage implements OnInit ,OnDestroy {
     {
       from: '+1000'
     },
-    {
-      from: 'All',
-    },
+
   ]
 
   orderBy = [

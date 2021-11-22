@@ -50,7 +50,7 @@
           </div>
 
             <!--status menu-->
-            <mat-menu #statusMenu="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md" xPosition='after' >
+            <mat-menu #statusMenu="matMenu" class="bg-primary-600 mt-0.5 p-3 w-32 rounded-md" xPosition='after' >
               <ng-container *ngFor="let status of nftStatus">
                 <button (click)="filterByStatus(status.name)" class="dropdown" mat-menu-item>
                   {{status.name}}
@@ -59,7 +59,7 @@
             </mat-menu>
 
            <!--price menu-->
-           <mat-menu #priceMenu="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md text-sm mat-menu" xPosition='after'>
+           <mat-menu #priceMenu="matMenu" class="bg-primary-600 mt-0.5 p-3 rounded-md text-sm mat-menu" xPosition='after'>
             Range from
             <ng-container *ngFor="let range of priceRange">
               <button (click)="filterByPrice(range.to ? range.from + ' - ' + range.to : range.from)" class="dropdown" mat-menu-item>
@@ -69,7 +69,7 @@
           </mat-menu>
 
              <!--TokenId menu-->
-             <mat-menu #tokenId="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 rounded-md text-sm" xPosition='after'>
+             <mat-menu #tokenId="matMenu" class="bg-primary-600 mt-0.5 p-3 rounded-md text-sm" xPosition='after'>
               Sort by
               <ng-container *ngFor="let item of orderBy">
                 <button (click)="filterBySort(item.order)" class="dropdown" mat-menu-item>

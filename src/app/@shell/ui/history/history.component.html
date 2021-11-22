@@ -10,8 +10,11 @@
     </tr>
   </thead>
   <tbody class="relative" style="min-height: 360px">
-    <p *ngIf="(!responseEventByNFT || responseEventByNFT?.totalCount === 0)"
-    class="absolute w-full text-center" style="top: 40%;">No Rocord Found</p>
+
+    <div *ngIf="(!responseEventByNFT || responseEventByNFT?.totalCount === 0)"  class="absolute w-full text-center" style="top: 40%;">
+      <h3>No Record Found</h3>
+      <p>It seems we can't find any results.</p>
+    </div>
     <ng-container *ngIf="responseEventByNFT?.totalCount > 0">
       <ng-container *ngFor="let nftEvent of responseEventByNFT.data">
         <tr class="items-center h-24 ">

@@ -41,6 +41,9 @@ export class AdminSalePage implements OnInit, OnDestroy {
   public type = '';
   priceRange = [
     {
+      from: 'All',
+    },
+    {
       from: '1',
       to: '100'
     },
@@ -83,9 +86,7 @@ export class AdminSalePage implements OnInit, OnDestroy {
     {
       from: '+1000'
     },
-    {
-      from: 'All',
-    },
+
   ]
 
   orderBy = [
