@@ -33,6 +33,7 @@ export class AdminSettingPage implements OnInit, OnDestroy {
   public coverImageSrc: any;
 
   public isLoading: boolean;
+  description: any;
 
 
   public creator: Creator;
