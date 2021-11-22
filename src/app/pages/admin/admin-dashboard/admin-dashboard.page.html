@@ -106,8 +106,8 @@
         <p class="tracking-wide font-medium text-white py-2.5">NFT Groups</p>
       <div class="overflow-hidden groups" id="container2">
         <ng-container *ngFor="let group of (groups$ | async)">
-          <div class="group">
-            <img [src]="group.coverImageUrl" alt="">
+          <div class="group ">
+            <img class="bg-image" [src]="group.coverImageUrl" alt="">
             <div>
               <p class="name">{{group.name}}</p>
               <p class="items">{{group.itemsCount}} Items</p>
