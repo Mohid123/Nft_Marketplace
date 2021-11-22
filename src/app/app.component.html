@@ -1,4 +1,4 @@
-<ngx-spinner
+<!-- <ngx-spinner
   name="main"
   bdColor="#171830"
   size="medium"
@@ -6,7 +6,7 @@
   type="ball-scale-multiple"
 >
   <p style="font-size: 20px; color: white">{{(creator$ | async)?.displayName}}...</p>
-</ngx-spinner>
+</ngx-spinner> -->
 <app-layout *ngIf="(isAdminPanel$ | async) && (isLoggedIn$ | async) && (role$ | async) === roles.admin; else notAuthorized">
   <router-outlet></router-outlet>
 </app-layout>

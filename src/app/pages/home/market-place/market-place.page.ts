@@ -53,7 +53,7 @@ export class MarketPlacePage implements OnInit ,OnDestroy {
   ) {
     this.page = 1;
     this.isLoading = false;
-    this.routeService.clubName$.pipe(takeUntil(this.destroy$)).subscribe((clubName) => {
+    this.routeService.clubName$.pipe(distinctUntilChanged(),takeUntil(this.destroy$)).subscribe((clubName) => {
       this.clubName = clubName;
       if(this.clubName)
         this.getNfts();
