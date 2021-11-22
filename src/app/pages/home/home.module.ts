@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { MatMenuModule } from '@angular/material/menu';
 import { RouterModule, Routes } from '@angular/router';
 import { UserGuard } from '@app/@core/guards';
@@ -83,7 +84,8 @@ const childRoutes: Routes = [
     HistoryModule,
     MatMenuModule,
     NgxSpinnerModule,
-    QrCodeModule
+    QrCodeModule,
+    FormsModule,
       // BrowserAnimationsModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

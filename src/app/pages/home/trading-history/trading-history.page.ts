@@ -28,6 +28,7 @@ export class TradingHistoryPage implements OnInit, OnDestroy {
 
   public groups$ = this.groupService.groups$;
   public filterGroup: Group;
+  public filterDate: number;
 
   public isLoading:boolean;
   public type = 'All';
@@ -71,7 +72,7 @@ export class TradingHistoryPage implements OnInit, OnDestroy {
 
   getEvetns():void {
     if (this.isLoading) return
-    this.nftService.getEventsByUser(this.authService.loggedInUser.id,this.page, this.eventLimit ,this.filterGroup?.id, this.type).pipe(take(1)).subscribe((result:ApiResponse<ResponseEventByNFT>) => {
+    this.nftService.getEventsByUser(this.authService.loggedInUser.id,this.page, this.eventLimit, this.filterDate ,this.filterGroup?.id, this.type).pipe(take(1)).subscribe((result:ApiResponse<ResponseEventByNFT>) => {
       if (!result.hasErrors()) {
         this.responseEventByNFT = result.data;
       }
@@ -98,6 +99,12 @@ export class TradingHistoryPage implements OnInit, OnDestroy {
   filterBy (group:Group) :void {
     this.page = 1;
     this.filterGroup = group;
+    this.getEvetns();
+  }
+
+  filterByDate(data) {
+    this.page = 1;
+    this.filterDate = new Date(data).getTime();
     this.getEvetns();
   }
 

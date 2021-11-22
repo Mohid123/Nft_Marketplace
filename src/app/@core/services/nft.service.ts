@@ -233,7 +233,7 @@ export class NFTService extends ApiService<nftApiData> {
     }));
   }
 
-  getEventsByUser(id: string,page: number, limit: number ,groupId?:string, type?:string): Observable<ApiResponse<nftApiData>> {
+  getEventsByUser(id: string,page: number, limit: number,filterDate: number ,groupId?:string, type?:string): Observable<ApiResponse<nftApiData>> {
     page--;
     const param:any = {
       offset: page ? limit * page : 0,
@@ -242,9 +242,9 @@ export class NFTService extends ApiService<nftApiData> {
     };
     // name: searchValue,
 
-    if(groupId) {
-      param.groupID = groupId;
-    }
+    if(groupId) param.groupID = groupId;
+    if(filterDate) param.date = filterDate;
+
     return this.get('/event/getEventByUserId/'+ id,param).pipe(take(1),tap((result:ApiResponse<nftApiData>)=>{
       if (result.hasErrors()) {
         this.toastrService.error(result?.errors[0]?.error?.message)
