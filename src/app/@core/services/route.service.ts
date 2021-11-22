@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivationStart, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterEvent } from '@angular/router';
-import { getItem, setItem, StorageItem } from '@app/@core/utils';
+import { setItem, StorageItem } from '@app/@core/utils';
 import { AuthService } from '@app/pages/auth/services/auth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -23,7 +23,7 @@ export class RouteService {
   }));
   public readonly routerState$: Observable<RouterState> = this._routerState$.asObservable();
 
-  private _clubName$ = new BehaviorSubject<string>(<string>getItem(StorageItem.Club));
+  private _clubName$ = new BehaviorSubject<string>(null);
   public readonly clubName$: Observable<string>= this._clubName$.asObservable();
 
   private _isAdminPanel$ = new BehaviorSubject<boolean>(false);
@@ -90,6 +90,10 @@ export class RouteService {
         const path: any[] = [];
         const { params, queryParams, data } = route;
 
+        if(params?.clubName) {
+          this._clubName$.next(params?.clubName);
+        }
+
         if ( route?._urlSegment?.segments[1]?.path == ROUTER_UTILS.config.admin.root) {
           this._isAdminPanel$.next(true);
         } else {
@@ -101,10 +105,6 @@ export class RouteService {
             path.push(route.routeConfig.path);
           }
           route = route.parent;
-        }
-
-        if(params?.clubName) {
-          this._clubName$.next(params?.clubName);
         }
 
         this._routerState$.next({
