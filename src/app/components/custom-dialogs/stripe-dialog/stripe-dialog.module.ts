@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
 import { StripeKeyComponent } from './stripe-key/stripe-key.component';
 import { StripePaymentComponent } from './stripe-payment/stripe-payment.component';
@@ -13,6 +14,7 @@ import { StripePaymentComponent } from './stripe-payment/stripe-payment.componen
     CommonModule,
     FormsModule,
     ToastrModule.forRoot(),
+    NgxSpinnerModule,
     ReactiveFormsModule],
 })
 

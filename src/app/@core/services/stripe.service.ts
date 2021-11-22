@@ -45,26 +45,16 @@ export class StripeService extends ApiService<StripeApiData> {
     );
   }
 
-  purchaseNFT(params:BuyNFT): void {
-    this.spinner.show('main');
-    this.stripePay(params).pipe(take(1)).subscribe((res:ApiResponse<NFT>)=> {
-     if(!res.hasErrors()) {
-       this.customDialogService.showLoadingDialog('Transferring In Process');
-        setTimeout(() => {
-          this.customDialogService.closeDialogs();
-        }, 3000);
-
-        this._purchaseSuccess$.next(params.nftId)
-
-      } else {
-        this.toastr.warning(res.errors[0]?.error?.message, 'Error!');
-
-      }
-      this.spinner.hide('main');
-    });
+  purchaseNFT(params:BuyNFT) {
+    // this.spinner.show('main');
+    return this.stripePay(params).pipe(take(1));
     // setTimeout(() => {
     //   this.customDialogService.closeDialogs();
     // }, 3000);
+  }
+
+  purchaseNFTSuccess(data):void {
+    this._purchaseSuccess$.next(data)
   }
 
   stripePay(params:BuyNFT): Observable<ApiResponse<StripeApiData>> {

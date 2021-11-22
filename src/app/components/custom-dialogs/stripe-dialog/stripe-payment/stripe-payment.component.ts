@@ -1,10 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NFT } from '@app/@core/models/NFT.model';
+import { CreatorService } from '@app/@core/services/creator.service';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { AuthService } from '@app/pages/auth/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { BuyNFT } from './../../../../@core/models/requests/buy-nft.model';
+import { ApiResponse } from './../../../../@core/models/response.model';
 import { StripeService } from './../../../../@core/services/stripe.service';
 
 @Component({
@@ -17,10 +19,13 @@ export class StripePaymentComponent  {
 
   @Input() nft:NFT;
 
+  creator$ = this.creatorService.Creator$;
   public stripeForm: FormGroup;
+  public isLoading: boolean;
 
   constructor(
     private authService: AuthService,
+    private creatorService: CreatorService,
     private customDialogService: CustomDialogService,
     private formBuilder: FormBuilder,
     private stripeService: StripeService,
@@ -52,8 +57,19 @@ export class StripePaymentComponent  {
       nftId : this.nft.id,
       clubUserId : this.authService.loggedInUser.clubUserId,
     };
-
-    this.stripeService.purchaseNFT(param);
+    this.isLoading = true;
+    this.stripeService.purchaseNFT(param).subscribe((res:ApiResponse<NFT>)=> {
+      this.isLoading = false;
+      if(!res.hasErrors()) {
+        this.customDialogService.showLoadingDialog('Transferring In Process');
+        this.stripeService.purchaseNFTSuccess(param.nftId)
+         setTimeout(() => {
+           this.customDialogService.closeDialogs();
+         }, 3000);
+       } else {
+         this.toastr.warning(res.errors[0]?.error?.message, 'Error!');
+       }
+     });
     // this.close();
   }
 

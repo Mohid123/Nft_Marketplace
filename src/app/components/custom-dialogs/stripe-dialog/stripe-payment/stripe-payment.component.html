@@ -1,4 +1,8 @@
-<div class="strip-payment-model">
+<div class="relative strip-payment-model">
+  <ngx-spinner name="strip-payment-spinner" [fullScreen]="false" [showSpinner]="isLoading"
+  size="medium" color="#fff" type="ball-scale-multiple">
+  <p style="font-size: 20px; color: white">{{(creator$ | async)?.displayName}}...</p>
+</ngx-spinner>
   <div class="flex justify-end">
     <button class="btn-close"  (click)="close()">
       <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
