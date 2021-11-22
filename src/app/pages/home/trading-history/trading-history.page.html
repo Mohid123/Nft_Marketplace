@@ -22,7 +22,8 @@
           class="inline-flex items-center text-sm leading-none text-gray-400 border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-2 rounded-3xl">
           <button type="button " mat-icon-button aria-label="menu" class="filter-btn"
             id="menu-button" aria-expanded="true" aria-haspopup="true">
-            <input  type="date" class="w-auto h-6 p-0 font-light text-white bg-transparent cursor-pointer " [ngModel]="filterDate" (ngModelChange)="filterByDate($event)" >
+
+            <input  type="date" class="w-auto h-6 p-0 font-light text-white bg-transparent cursor-pointer filter-btn "  [ngModel]="filterDate | date:'yyyy-MM-dd'" (ngModelChange)="filterByDate($event)" >
           </button>
         </span>
       </div>

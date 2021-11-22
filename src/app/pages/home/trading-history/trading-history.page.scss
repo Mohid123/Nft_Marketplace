@@ -7,7 +7,7 @@
 }
 
 .filter-btn{
-  @apply inline-flex justify-center w-full px-4 py-1 text-sm font-medium text-white bg-gradient-to-r focus:from-blue-400 focus:to-green-400 rounded-full shadow-sm ;
+  @apply inline-flex justify-center w-full px-4 py-1 text-sm font-medium text-white rounded-full shadow-sm ;
 }
 .all-item {
  @apply px-4 py-1 text-xs tracking-wide text-white md:h-7 lg:h-7 h-11 bg-gradient-to-r focus:from-blue-400 focus:to-green-400 rounded-full shadow-sm focus:outline-none
@@ -15,17 +15,17 @@
 
 
 
-.membership-btn{
-  @apply px-4 py-1  text-xs tracking-wide text-white rounded-full bg-gradient-to-r focus:from-blue-400 focus:to-green-400 rounded-full md:h-7 lg:h-7 h-11
-}
+// .membership-btn{
+//   @apply px-4 py-1  text-xs tracking-wide text-white rounded-full bg-gradient-to-r focus:from-blue-400 focus:to-green-400 rounded-full md:h-7 lg:h-7 h-11
+// }
 
-.tickets-btn{
- @apply px-4 py-1  text-xs tracking-wide text-white rounded-full md:h-7 lg:h-7 h-11 bg-gradient-to-r focus:from-blue-400 focus:to-green-400 rounded-full
-}
+// .tickets-btn{
+//  @apply px-4 py-1  text-xs tracking-wide text-white rounded-full md:h-7 lg:h-7 h-11 bg-gradient-to-r focus:from-blue-400 focus:to-green-400 rounded-full
+// }
 
-.pagination-btn{
-  @apply inline-flex items-center justify-center w-12 h-12 px-3 py-3 font-bold bg-gray-500 bg-opacity-25 rounded-xl hover:bg-primary-400 focus:bg-primary-400;
-}
+// .pagination-btn{
+//   @apply inline-flex items-center justify-center w-12 h-12 px-3 py-3 font-bold bg-gray-500 bg-opacity-25 rounded-xl hover:bg-primary-400 focus:bg-primary-400;
+// }
 
 .pagination-btn{
   @apply inline-flex items-center justify-center w-12 h-12 px-3 py-3 font-bold bg-gray-400 bg-opacity-25 rounded-xl hover:bg-primary-400 focus:bg-primary-400;
