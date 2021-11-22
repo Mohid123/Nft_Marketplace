@@ -1,5 +1,5 @@
 <app-admin-header [hideSearch]="true"></app-admin-header>
-<div class="flex flex-col justify-start h-auto min-h-screen px-3 py-2 mt-10 mb-12 sm:px-6 xl:px-8 center">
+<div class="flex flex-col justify-start h-auto min-h-screen px-3 py-2 mb-12 sm:px-6 xl:px-8 center">
   <div class="flex items-center justify-between w-full h-12 py-px">
     <h1 class="h-auto m-0 text-2xl font-medium">Settings</h1>
   </div>
@@ -19,7 +19,7 @@
                   <div class="field">
                     <button>
                       <ng-container *ngIf="!profileImage; else profileImageFileName">
-                        <div class="ml-2 font-light text-gray-400">Select Profile Picture to Uplaod</div>
+                        <div class="ml-2 font-light text-gray-400">Select Profile Picture to Upload</div>
                     </ng-container>
                     <ng-template #profileImageFileName>
                       <div class="ml-2 font-light text-gray-400">{{profileImage.name}}</div>
@@ -47,7 +47,7 @@
                   <div class="field">
                     <button>
                       <ng-container *ngIf="!coverImage; else coverImageFileName">
-                        <div class="ml-2 font-light text-gray-400">Select Cover Picture to Uplaod</div>
+                        <div class="ml-2 font-light text-gray-400">Select Cover Picture to Upload</div>
                     </ng-container>
                     <ng-template #coverImageFileName>
                       <div class="ml-2 font-light text-gray-400">{{coverImage.name}}</div>
