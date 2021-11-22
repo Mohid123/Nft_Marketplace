@@ -36,8 +36,10 @@ export class RouteService {
   ) {
     this.clubName$.pipe(distinctUntilChanged()).subscribe(clubName => {
       // console.log('club name:',clubName);
-      this.authService.clubChanged(clubName);
-      setItem(StorageItem.Club, clubName);
+      if(clubName !== null) {
+        this.authService.clubChanged(clubName);
+        setItem(StorageItem.Club, clubName);
+      }
     });
 
     router.events.subscribe((event: RouterEvent) => {

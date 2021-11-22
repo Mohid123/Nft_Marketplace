@@ -165,9 +165,11 @@ export class AdminDashboardPage implements AfterViewInit {
     });
 
     this.creatorStats$.subscribe(status=> {
-      status.monthlyStats.forEach(stats => {
-        this.lineChartData[0].data.push(stats.profit);
-      })
+      if(status?.monthlyStats) {
+        status.monthlyStats.forEach(stats => {
+          this.lineChartData[0].data.push(stats.profit);
+        })
+      }
     })
   }
 
