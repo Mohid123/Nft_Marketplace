@@ -20,28 +20,10 @@
       <div class="mt-3 md:mt-0 lg:mt-0">
         <span
           class="inline-flex items-center text-sm leading-none text-gray-400 border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-2 rounded-3xl">
-          <button type="button " mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu" class="filter-btn"
+          <button type="button " mat-icon-button aria-label="menu" class="filter-btn"
             id="menu-button" aria-expanded="true" aria-haspopup="true">
-            <ng-container *ngIf="!filterGroup; else showGroups">Filters</ng-container>
-            <ng-template #showGroups>{{filterGroup.name}}</ng-template>
-
-            <svg class="w-5 h-5 ml-2 -mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-              aria-hidden="true">
-              <path fill-rule="evenodd"
-                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                clip-rule="evenodd" />
-            </svg>
+            <input  type="date" class="w-auto h-6 p-0 font-light text-white bg-transparent cursor-pointer " formControlName="date" >
           </button>
-
-          <mat-menu #menu="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 " xPosition='before'>
-            <button (click)="filterBy(null)" class="dropdown" mat-menu-item>
-              All
-            </button>
-            <button (click)="filterBy(group)" class="dropdown" mat-menu-item *ngFor="let group of (groups$ | async)">
-              {{group.name}}
-            </button>
-
-          </mat-menu>
         </span>
       </div>
     </div>
