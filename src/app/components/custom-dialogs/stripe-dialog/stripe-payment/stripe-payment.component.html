@@ -1,7 +1,7 @@
 <div class="relative strip-payment-model">
-  <ngx-spinner name="strip-payment-spinner" [fullScreen]="false" [showSpinner]="isLoading"
-  size="medium" color="#fff" type="ball-scale-multiple">
-  <p style="font-size: 20px; color: white">{{(creator$ | async)?.displayName}}...</p>
+  <ngx-spinner bdOpacity=0.9 bdColor="#fff" name="strip-payment-spinner" [fullScreen]="false" [showSpinner]="isLoading"
+  size="medium" color="#31314d" type="ball-scale-multiple">
+  <p style="font-size: 20px; color: #31314d">{{(creator$ | async)?.displayName}}...</p>
 </ngx-spinner>
   <div class="flex justify-end">
     <button class="btn-close"  (click)="close()">
