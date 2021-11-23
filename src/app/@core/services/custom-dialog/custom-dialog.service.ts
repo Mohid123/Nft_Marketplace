@@ -100,15 +100,18 @@ export class CustomDialogService {
     // });
   }
 
-  async showCreateNFTticketPreviewDialog(img,isTicket) {
+  async showCreateNFTticketPreviewDialog(img,isTicket, isMembership) {
     this.matDialog.closeAll();
     this._mapDialogref = await this.createNFTDiloagService.openCreateNFTticketPreviewComponent();
     this._mapDialogref.componentInstance.img = img;
     this._mapDialogref.componentInstance.isTicket = isTicket;
+    this._mapDialogref.componentInstance.isMembership = isMembership;
+    // this._mapDialogref.componentInstance.isTicket = isCustom;
     // (await this._mapDialogref).afterClosed().subscribe((result) => {
     //   console.log('Mat Dialog Results admin sign in:', result);
     // });
   }
+
 
   async showCreateGroupDialog() {
     this.matDialog.closeAll();

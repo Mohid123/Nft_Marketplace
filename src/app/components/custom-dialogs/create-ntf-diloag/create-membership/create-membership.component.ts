@@ -204,7 +204,7 @@ export class CreateMembershipComponent implements OnInit, AfterViewInit {
   preview(): void {
     this.createPreviewImg().then((dataUrl) => {
       this.nftService.createNftForm = this.createNft;
-      this.customDialogService.showCreateNFTticketPreviewDialog(dataUrl,false);
+      this.customDialogService.showCreateNFTticketPreviewDialog(dataUrl,false, true);
     });
   }
 

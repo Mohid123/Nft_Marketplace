@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/no-empty-lifecycle-method */
 import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Group } from '@app/@core/models/group.model';
@@ -62,8 +63,8 @@ export class CreateCustomTicketComponent implements OnInit, AfterViewInit {
       file: new FormControl(''),
       img: new FormControl(''),
       bgImg: new FormControl(''),
-      date: ['', [Validators.required]],
-      address: ['', [Validators.required, Validators.maxLength(32)]],
+      date: (''),
+      address: (''),
       group: [null]
     });
 
@@ -76,7 +77,7 @@ export class CreateCustomTicketComponent implements OnInit, AfterViewInit {
     if (this.nftService.createNftForm) {
       this.createNft = this.nftService.createNftForm;
       this.imageSrc = this.nftService?.createNftForm?.controls?.img?.value;
-      this._lastBgImg = this.createNft.controls?.bgImg?.value;
+      // this._lastBgImg = this.createNft.controls?.bgImg?.value;
       this.nftService.createNftForm = null;
     }
   }
@@ -94,7 +95,7 @@ export class CreateCustomTicketComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit():void {
-    this.setBackground(this._lastBgImg);
+    // this.setBackground(this._lastBgImg);
   }
 
   onSelectFile(event): void {
@@ -132,7 +133,7 @@ export class CreateCustomTicketComponent implements OnInit, AfterViewInit {
         this.imgFormData.append('file', this.createNft.get('file').value);
 
         const form: NFT = {
-          type : 'Ticket',
+          type : 'Custom',
           forSale: true,
           freezeNft:true,
           serverCaptureFileUrl:'',
@@ -176,20 +177,20 @@ export class CreateCustomTicketComponent implements OnInit, AfterViewInit {
   }
 
   // Click on each image and display each individually on background div
-  setBackground(src?):void {
-    const select = <HTMLImageElement>document.querySelector('#bg-image');
-    const tick = <HTMLImageElement>document.querySelector('#showImage');
-    tick.src = src || (event.target as HTMLImageElement).src || '../../../../../assets/card/1A.svg';
-    this.createNft.patchValue({
-      bgImg: tick.src,
-    });
-    // select.style.display = 'block';
-  }
+  // setBackground(src?):void {
+  //   const select = <HTMLImageElement>document.querySelector('#bg-image');
+  //   const tick = <HTMLImageElement>document.querySelector('#showImage');
+  //   tick.src = src || (event.target as HTMLImageElement).src || '../../../../../assets/card/1A.svg';
+  //   this.createNft.patchValue({
+  //     bgImg: tick.src,
+  //   });
+  //   // select.style.display = 'block';
+  // }
 
   preview(): void {
     this.createPreviewImg().then((dataUrl) => {
       this.nftService.createNftForm = this.createNft;
-      this.customDialogService.showCreateNFTticketPreviewDialog(dataUrl,true);
+      this.customDialogService.showCreateNFTticketPreviewDialog(dataUrl,false, false);
     });
   }
 
