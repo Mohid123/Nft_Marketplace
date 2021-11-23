@@ -60,6 +60,14 @@ export class CustomDialogService {
     // });
   }
 
+  async showCreateCustomTicketDialog() {
+    this.matDialog.closeAll();
+    this._mapDialogref = await this.createNFTDiloagService.openCreateCustomticketComponent();
+    // (await this._mapDialogref).afterClosed().subscribe((result) => {
+    //   console.log('Mat Dialog Results admin sign in:', result);
+    // });
+  }
+
   async showCreateMembership() {
     this.matDialog.closeAll();
     this._mapDialogref = await this.createNFTDiloagService.openCreateMembershipComponent();
