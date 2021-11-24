@@ -1,0 +1,32 @@
+::ng-deep .image-cropper-overlay {
+  height: auto;
+  min-height: 421px;
+  max-width: 581px !important;
+}
+
+
+ .image-cropper-model {
+   @apply flex flex-col  px-0  sm:px-20;
+
+
+   .btn-close {
+    @apply absolute top-0 right-0 bg-white rounded-full opacity-50 m-3.5 hover:opacity-70;
+    padding: 1px;
+    svg {
+      color: #132356;
+    }
+  }
+
+  h1 {
+    @apply capitalize my-12;
+    span {
+      padding-bottom: 4px;
+      border-bottom: 2px solid #75F16D;
+    }
+  }
+
+  .primary-btn {
+    @apply w-44 h-12  sm:my-14 self-center;
+  }
+
+ }
