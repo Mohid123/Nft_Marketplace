@@ -1,3 +1,4 @@
+import { ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ROLE_TYPE_UTILS } from '@app/@core/utils/role-type.utils';
 import { AuthService } from '@app/pages/auth/services/auth.service';
@@ -29,6 +30,7 @@ export class AppComponent implements OnInit {
     private creatorService: CreatorService,
     private customDialogService: CustomDialogService,
     private routeService: RouteService,
+    private viewportScroller: ViewportScroller
   ) {
     this.routeService.listenToRouter();
   }
@@ -40,5 +42,11 @@ export class AppComponent implements OnInit {
   private runGlobalServices(): void {
     this.seoService.init();
     this.themeService.init();
+  }
+
+  onActivate(event):void {
+    if(document.getElementById('admin-main')) {
+      document.getElementById('admin-main').scrollIntoView()
+    }
   }
 }

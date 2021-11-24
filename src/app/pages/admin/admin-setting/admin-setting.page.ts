@@ -3,6 +3,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CreatorService } from '@app/@core/services/creator.service';
+import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { RouteService } from '@app/@core/services/route.service';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
@@ -40,6 +41,7 @@ export class AdminSettingPage implements OnInit, OnDestroy {
 
   constructor(
     private creatorService: CreatorService,
+    private customDialogService: CustomDialogService,
     private formBuilder: FormBuilder,
     private routeService: RouteService,
     private stripeService: StripeService,
@@ -58,6 +60,7 @@ export class AdminSettingPage implements OnInit, OnDestroy {
       this.creator = creator;
       this.settingForm.controls.key.setValue(this.creator.stripeSecretKey);
       this.settingForm.controls.description.setValue(this.creator.description);
+      this.description = this.creator.description;
     });
   }
 
@@ -150,6 +153,7 @@ export class AdminSettingPage implements OnInit, OnDestroy {
   }
 
   onSelectProfile(event): void {
+    console.log('selecgt img:',);
     if (event.target.files && event.target.files[0]) {
       this.profileImage = event.target.files[0];
       this.settingForm.controls.profileImg.setValue(this.profileImage);
@@ -157,8 +161,20 @@ export class AdminSettingPage implements OnInit, OnDestroy {
       if (event.target.files && event.target.files[0]) {
         const reader = new FileReader();
         reader.onload = (e: any) => {
-          this.profileImageSrc = e.target.result;
-          };
+          console.log('img ccrop:',);
+          this.customDialogService.showImageCropperDialog(event, 1 / 1).then(matRef => {
+            matRef.afterClosed().subscribe((result) => {
+              console.log('showImageCropperDialog:',result);
+              if(result)
+                this.profileImageSrc = result;
+              else {
+                this.profileImageSrc = null;
+                this.profileImage = null;
+                this.settingForm.controls.profileImg.setValue(null);
+              }
+            });
+          })
+        };
         reader.readAsDataURL(event.target.files[0]);
       }
     }
@@ -172,7 +188,18 @@ export class AdminSettingPage implements OnInit, OnDestroy {
       if (event.target.files && event.target.files[0]) {
         const reader = new FileReader();
         reader.onload = (e: any) => {
-          this.coverImageSrc = e.target.result;
+          this.customDialogService.showImageCropperDialog(event, 3.88 / 1).then(matRef => {
+            matRef.afterClosed().subscribe((result) => {
+              console.log('showImageCropperDialog:',result);
+              if(result)
+                this.coverImageSrc = result;
+                else {
+                  this.coverImageSrc = null;
+                  this.coverImage = null;
+                  this.settingForm.controls.coverImg.setValue(null);
+                }
+            });
+          })
         };
         reader.readAsDataURL(event.target.files[0]);
       }

@@ -28,7 +28,7 @@
         </canvas>
         </div>
         <div class="section">
-          <ng-container *ngIf="monthIndex === 0 && (creatorStats$ | async) as creatorStats">
+          <ng-container *ngIf="monthIndex && monthIndex === 0 && (creatorStats$ | async) as creatorStats">
             <div class="listed">
               <p>Total NFT Listed</p>
               <span>{{creatorStats?.yearlyStats?.totalNftListed}}</span>
@@ -68,7 +68,7 @@
           </div>
           <div class="value">
             <p>Available NFT</p>
-            <span>{{creatorStats?.yearlyStats?.totalNftListed}}</span>
+            <span>{{creatorStats?.yearlyStats?.totalNftListed || 0}}</span>
           </div>
           <div class="graph-icon">
             <img class="" src="./assets/icons/growth.png"/>
@@ -80,7 +80,7 @@
           </div>
           <div class="value">
             <p>Total Revenue</p>
-            <span>€ {{creatorStats?.yearlyStats?.profit}}</span>
+            <span>€ {{creatorStats?.yearlyStats?.profit || 0}}</span>
           </div>
           <div class="graph-icon">
             <img class="" src="./assets/icons/growth.png"/>
@@ -92,7 +92,7 @@
           </div>
           <div class="value">
             <p>Pending For Sale</p>
-            <span>{{creatorStats?.yearlyStats?.pendingForSale}}</span>
+            <span>{{creatorStats?.yearlyStats?.pendingForSale || 0}}</span>
           </div>
           <div class="graph-icon">
             <img class="" src="./assets/icons/growth.png"/>

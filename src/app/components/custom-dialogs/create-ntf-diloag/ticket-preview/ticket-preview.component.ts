@@ -11,6 +11,9 @@ export class TicketPreviewComponent implements OnInit {
 
   @Input() img: any;
   @Input() isTicket: any;
+  @Input() isMembership: any;
+
+
 
   constructor(
     private customDialogService: CustomDialogService,
@@ -23,7 +26,8 @@ export class TicketPreviewComponent implements OnInit {
 
   close():void {
     if (this.isTicket) this.customDialogService.showCreateNFTticketDialog();
-    else this.customDialogService.showCreateMembership();
+    else if(this.isMembership) this.customDialogService.showCreateMembership();
+    else this.customDialogService.showCreateCustomTicketDialog()
   }
 
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AsyncCreateNFTDialog } from './async-create-nft-dialog';
+import { CreateCustomTicketComponent } from './create-custom-ticket/create-custom-ticket.component';
 import { CreateMembershipComponent } from './create-membership/create-membership.component';
 import { CreateNFTOptionsComponent } from './create-nft-options/create-nft-options.component';
 import { CreateNFTStyleComponent } from './create-nft-ticket-options/create-nft-ticket-options.component';
@@ -18,6 +19,7 @@ export class CreateNFTDiloagService extends AsyncCreateNFTDialog<
   | CreateNFTStyleComponent
   | CreateNFTMembershipOptionsComponent
   | TicketPreviewComponent
+  | CreateCustomTicketComponent
 > {
 
   constructor(protected matDialog: MatDialog) {
@@ -35,6 +37,21 @@ export class CreateNFTDiloagService extends AsyncCreateNFTDialog<
       {
         disableClose: false,
         panelClass: ['create-nft-dialog-overlay', 'action-dialog'],
+      },
+    );
+  }
+
+  async openCreateCustomticketComponent(): Promise<
+    MatDialogRef<CreateCustomTicketComponent>
+  > {
+    const { CreateNFTDiloagModule: CreateNFTDiloagModule } = await import(
+      './create-nft-diloag.module'
+    );
+    return this.matDialog.open(
+      CreateNFTDiloagModule.getCreateCustomTicketComponent(),
+      {
+        disableClose: false,
+        panelClass: ['create-custom-ticket-dialog-overlay', 'action-dialog'],
       },
     );
   }
