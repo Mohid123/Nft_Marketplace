@@ -26,7 +26,7 @@
                     </ng-template>
                       <img src="../../../../assets/icons/Icon feather-upload.svg" class="p-4" alt="">
                     </button>
-                    <input class="absolute block opacity-0 cursor-pointer pin-r pin-t " type="file" name=""
+                    <input #profileFile   class="absolute block opacity-0 cursor-pointer pin-r pin-t " type="file" name=""
                       accept="image/*" (change)="onSelectProfile($event)"/>
                   </div>
                 </div>
@@ -54,7 +54,7 @@
                     </ng-template>
                       <img src="../../../../assets/icons/Icon feather-upload.svg" class="p-4" alt="">
                     </button>
-                    <input class="absolute block opacity-0 cursor-pointer pin-r pin-t " type="file" name=""
+                    <input #coverFile class="absolute block opacity-0 cursor-pointer pin-r pin-t " type="file" name=""
                       accept="image/*" (change)="onSelectCover($event)"/>
                   </div>
                 </div>

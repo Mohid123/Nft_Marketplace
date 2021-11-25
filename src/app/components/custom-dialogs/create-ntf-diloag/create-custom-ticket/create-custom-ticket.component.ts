@@ -1,5 +1,4 @@
-/* eslint-disable @angular-eslint/no-empty-lifecycle-method */
-import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Group } from '@app/@core/models/group.model';
 import { NFT } from '@app/@core/models/NFT.model';
@@ -21,6 +20,7 @@ import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 })
 export class CreateCustomTicketComponent implements OnInit, AfterViewInit {
 
+  @ViewChild('imgFile') imgFile;
   msg: string
   public group: Group;
 
@@ -121,6 +121,7 @@ export class CreateCustomTicketComponent implements OnInit, AfterViewInit {
                 this.imageSrc = null;
                 this.file = null;
                 this.createNft.controls.img.setValue(null);
+                this.imgFile.nativeElement.value = "";
               }
             });
           })
