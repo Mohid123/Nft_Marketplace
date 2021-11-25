@@ -1,6 +1,4 @@
-/* eslint-disable @angular-eslint/no-empty-lifecycle-method */
-/* eslint-disable @typescript-eslint/no-empty-function */
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CreatorService } from '@app/@core/services/creator.service';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
@@ -22,6 +20,10 @@ import { StripeService } from './../../../@core/services/stripe.service';
   styleUrls: ['./admin-setting.page.scss'],
 })
 export class AdminSettingPage implements OnInit, OnDestroy {
+
+  @ViewChild('profileFile') profileFile;
+  @ViewChild('coverFile') coverFile;
+
   public destroy$ = new Subject();
   public creator$ = this.creatorService.Creator$;
 
@@ -171,6 +173,7 @@ export class AdminSettingPage implements OnInit, OnDestroy {
                 this.profileImageSrc = null;
                 this.profileImage = null;
                 this.settingForm.controls.profileImg.setValue(null);
+                this.profileFile.nativeElement.value = "";
               }
             });
           })
@@ -197,6 +200,7 @@ export class AdminSettingPage implements OnInit, OnDestroy {
                   this.coverImageSrc = null;
                   this.coverImage = null;
                   this.settingForm.controls.coverImg.setValue(null);
+                  this.coverFile.nativeElement.value = "";
                 }
             });
           })
