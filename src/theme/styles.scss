@@ -40,3 +40,8 @@ mat-dialog-container {
 .error-msg {
   color: rgb(250, 129, 129);
 }
+
+image-cropper > div {
+  display: flex;
+  justify-content: center;
+}
