@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, UrlTree } from '@angular/router';
 import { ROLE_TYPE_UTILS } from '@app/@core/utils/role-type.utils';
 import { Observable } from 'rxjs';
+import { getItem, StorageItem } from '../utils';
 import { AuthService } from './../../pages/auth/services/auth.service';
 import { RouteService } from './../services/route.service';
 import { ROUTER_UTILS } from './../utils/router.utils';
@@ -34,7 +35,16 @@ export class AdminGuard implements CanActivate {
           return false;
         }
 
-        return true;
+        if(route?.params?.clubName == getItem(StorageItem.ActiveClub)) {
+          return true;
+        } else {
+          this.router.navigate([
+            route?.params?.clubName || '/',
+            ROUTER_UTILS.config.auth.root,
+            ROUTER_UTILS.config.auth.adminSignIn,
+          ]);
+          return false;
+        }
       } else {
         this.router.navigate([
           route?.params?.clubName || '/',

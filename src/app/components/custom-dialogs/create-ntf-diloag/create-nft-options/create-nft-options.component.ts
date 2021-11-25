@@ -25,6 +25,8 @@ export class CreateNFTOptionsComponent {
     this.nftService.createNftForm = null;
     if(this.type == "Tickets")
       this.customDialogService.showCreateNFTticketDialog();
+    else if (this.type == "CustomTickets")
+      this.customDialogService.showCreateCustomTicketDialog();
     else
       this.customDialogService.showCreateMembership();
   }

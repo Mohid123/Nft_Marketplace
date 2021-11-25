@@ -26,7 +26,7 @@ const APP_ROUTES: Routes = [
         path: ROUTER_UTILS.config.auth.root,
         loadChildren: () =>
           import('@pages/auth/auth.module').then((m) => m.AuthModule),
-        canLoad: [NoAuthGuard],
+        canActivate: [NoAuthGuard],
       },
       {
         path: ROUTER_UTILS.config.admin.root,

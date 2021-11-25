@@ -37,7 +37,7 @@
       <label for="one"> Instant Mint</label>
     </div>
     <div class="chkbox">
-      <input id="two" type="checkbox" formControlName="sale">
+      <input id="two" type="checkbox" formControlName="sale" (click)="clickSale(createNft.controls.sale.value)">
       <span class="check"></span>
       <label for="two"> Sale</label>
     </div>

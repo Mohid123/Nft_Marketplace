@@ -49,6 +49,12 @@ export class CreateNFTMembershipOptionsComponent  {
     this.nftService.requestCreateNFT(this.nftForm,this.img);
   }
 
+  clickSale(data): void {
+    if(data == false) {
+      this.createNft.controls.mint.setValue(true);
+    }
+  }
+
   close(): void {
     this.customDialogService.closeDialogs();
   }

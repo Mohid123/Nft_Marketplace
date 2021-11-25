@@ -26,7 +26,7 @@
                     </ng-template>
                       <img src="../../../../assets/icons/Icon feather-upload.svg" class="p-4" alt="">
                     </button>
-                    <input class="absolute block opacity-0 cursor-pointer pin-r pin-t " type="file" name=""
+                    <input #profileFile   class="absolute block opacity-0 cursor-pointer pin-r pin-t " type="file" name=""
                       accept="image/*" (change)="onSelectProfile($event)"/>
                   </div>
                 </div>
@@ -54,7 +54,7 @@
                     </ng-template>
                       <img src="../../../../assets/icons/Icon feather-upload.svg" class="p-4" alt="">
                     </button>
-                    <input class="absolute block opacity-0 cursor-pointer pin-r pin-t " type="file" name=""
+                    <input #coverFile class="absolute block opacity-0 cursor-pointer pin-r pin-t " type="file" name=""
                       accept="image/*" (change)="onSelectCover($event)"/>
                   </div>
                 </div>
@@ -97,13 +97,13 @@
             <div class="details-container" style=" ">
               <h6 class=""><span>Old De</span>tails</h6>
               <div class="top-0 left-0 realtive">
-                <img *ngIf="!coverImageSrc; else cimg" class="relative top-0 left-0 object-cover w-full h-32" [src]="((creator$ | async)?.coverImageURL) || ''" alt="">
-                <img #cimg  src={{coverImageSrc}} alt="">
+                <img *ngIf="!coverImageSrc;" class="relative top-0 left-0 object-cover w-full h-32 rounded-lg" [src]="((creator$ | async)?.coverImageURL) || ''" alt="">
+                <img *ngIf="coverImageSrc;" class="relative top-0 left-0 object-cover w-full h-32 rounded-lg"  src={{coverImageSrc}} alt="">
                 <div class="absolute " style=" top: 233px; width: 204px;"  >
-                  <img *ngIf="!profileImageSrc; else pimg" class="inline object-cover w-12 h-12 ml-4 rounded-full"
+                  <img *ngIf="!profileImageSrc;" class="inline object-cover w-12 h-12 ml-4 rounded-full"
                     [src]="((creator$ | async)?.profileImageURL) || ''"
                     alt="Profile image" />
-                    <img #pimg  src={{profileImageSrc}} alt="">
+                    <img *ngIf="profileImageSrc;"  src={{profileImageSrc}} class="inline object-cover w-12 h-12 ml-4 rounded-full" alt="">
                 </div>
               </div>
               <div class="mt-8">
@@ -111,8 +111,9 @@
                 <p *ngIf="!description; else desc" class="mt-2 overflow-hidden text-sm text-gray-400 break-words overflow-ellipsis">
                   {{(creator$ | async)?.description }}
                 </p>
-
-                <p #desc class="mt-2 overflow-hidden text-sm text-gray-400 break-words overflow-ellipsis">{{description}}</p>
+                <ng-template #desc>
+                  <p class="mt-2 overflow-hidden text-sm text-gray-400 break-words overflow-ellipsis">{{description}}</p>
+                </ng-template>
 
               </div>
             </div>
