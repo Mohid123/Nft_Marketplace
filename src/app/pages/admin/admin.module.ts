@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -37,6 +37,7 @@ import { AdminMarketPlacePage } from './market-place/admin-market-place.page';
     ReactiveFormsModule,
     // BrowserAnimationsModule,
     ToastrModule.forRoot( {positionClass: 'toast-top-right'} )
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AdminModule { }
