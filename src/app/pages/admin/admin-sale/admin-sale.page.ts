@@ -27,7 +27,7 @@ export class AdminSalePage implements OnInit, OnDestroy {
   public clubName: string;
 
   public nftList: NFTList;
-  public limit = 6 ;
+  public limit = 12 ;
   public NftLimit = 12 ;
   public page:number;
 
