@@ -1,6 +1,8 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { CreatorService } from '@app/@core/services/creator.service';
+import { AngularFaviconService } from 'angular-favicon';
 import { Subject } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
 @Injectable({
@@ -10,11 +12,18 @@ export class SeoService implements OnDestroy {
   destroy$ = new Subject();
 
   constructor(
+    private ngxFavicon: AngularFaviconService,
+    private creatorService: CreatorService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private titleService: Title,
     private metaService: Meta,
-  ) {}
+  ) {
+    this.creatorService.Creator$.subscribe((creator)=> {
+      this.ngxFavicon.setFavicon(creator.profileImageURL);
+      this.setTitle(creator.displayName,'');
+    })
+  }
 
   init(): void {
     const appTitle = this.titleService.getTitle();
@@ -26,7 +35,6 @@ export class SeoService implements OnDestroy {
         takeUntil(this.destroy$),
       )
       .subscribe(({ title, description, robots }) => {
-        this.setTitle(appTitle, title);
         this.setDescription(description);
         this.setRobots(robots);
       });
@@ -45,6 +53,8 @@ export class SeoService implements OnDestroy {
   private setTitle(rootTitle: string, title: string): void {
     if (title) {
       this.titleService.setTitle(`${rootTitle} - ${title}`);
+    } else {
+      this.titleService.setTitle(`${rootTitle}`);
     }
   }
 
