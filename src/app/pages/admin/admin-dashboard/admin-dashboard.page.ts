@@ -183,7 +183,7 @@ export class AdminDashboardPage implements AfterViewInit {
     // console.log('aksdjkasjd');
     const gradient = this.canvas.nativeElement
       .getContext('2d')
-      .createLinearGradient(100, 0, 220, 600);
+      .createLinearGradient(100, 80, 220, 600);
     gradient.addColorStop(0, '#0040ff');
     gradient.addColorStop(0.2, '#bf00ff');
     gradient.addColorStop(0.5, '#ffff35');

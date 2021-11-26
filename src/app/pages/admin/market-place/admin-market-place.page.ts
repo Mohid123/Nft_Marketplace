@@ -131,6 +131,9 @@ export class AdminMarketPlacePage implements OnInit ,OnDestroy {
     },
     {
       type: 'Membership Card'
+    },
+    {
+      type: 'Custom'
     }
   ]
 

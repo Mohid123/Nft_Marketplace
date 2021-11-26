@@ -27,7 +27,7 @@
                       <img src="../../../../assets/icons/Icon feather-upload.svg" class="p-4" alt="">
                     </button>
                     <input #profileFile   class="absolute block opacity-0 cursor-pointer pin-r pin-t " type="file" name=""
-                      accept="image/*" (change)="onSelectProfile($event)"/>
+                    accept="image/png, image/gif, image/jpeg" (change)="onSelectProfile($event)"/>
                   </div>
                 </div>
                 <div class="border-4 rounded-md">
@@ -55,7 +55,7 @@
                       <img src="../../../../assets/icons/Icon feather-upload.svg" class="p-4" alt="">
                     </button>
                     <input #coverFile class="absolute block opacity-0 cursor-pointer pin-r pin-t " type="file" name=""
-                      accept="image/*" (change)="onSelectCover($event)"/>
+                    accept="image/png, image/gif, image/jpeg" (change)="onSelectCover($event)"/>
                   </div>
                 </div>
                 <div class="border-4 rounded-md">
