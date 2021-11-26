@@ -27,6 +27,7 @@
     "@angular/platform-browser": "12.0.1",
     "@angular/platform-browser-dynamic": "12.0.1",
     "@angular/router": "12.0.1",
+    "angular-favicon": "^1.0.8",
     "chart.js": "^2.9.3",
     "html-to-image": "^1.9.0",
     "ng-qrcode": "^5.2.0",
