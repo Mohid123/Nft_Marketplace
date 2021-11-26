@@ -70,7 +70,7 @@ export class CreateMembershipComponent implements OnInit, AfterViewInit {
       img: new FormControl(''),
       bgImg: new FormControl(''),
       date: ['', [Validators.required]],
-      membershipId: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(16)]],
+      membershipId: new FormControl('', [Validators.required, Validators.min(1000000000000000),Validators.required, Validators.minLength(16), Validators.maxLength(16)]),
       group: [null, [Validators.required]]
     });
 

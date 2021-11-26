@@ -52,6 +52,9 @@ export class CreateNFTStyleComponent {
   clickSale(data): void {
     if(data == false) {
       this.createNft.controls.mint.setValue(true);
+      this.createNft.controls.mint.disable();
+    } else {
+      this.createNft.controls.mint.enable();
     }
   }
 
