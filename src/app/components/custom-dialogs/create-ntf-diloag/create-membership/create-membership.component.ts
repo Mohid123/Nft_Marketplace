@@ -113,7 +113,7 @@ export class CreateMembershipComponent implements OnInit, AfterViewInit {
       if (event.target.files && event.target.files[0]) {
         const reader = new FileReader();
         reader.onload = (e: any) => {
-          this.customDialogService.showImageCropperDialog(event, 4 / 1).then(matRef => {
+          this.customDialogService.showImageCropperDialog(event, 4 / 1,false).then(matRef => {
             matRef.afterClosed().subscribe((result) => {
               console.log('showImageCropperDialog:',result);
               if (result) {

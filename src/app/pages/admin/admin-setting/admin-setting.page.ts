@@ -164,7 +164,7 @@ export class AdminSettingPage implements OnInit, OnDestroy {
         const reader = new FileReader();
         reader.onload = (e: any) => {
           console.log('img ccrop:',);
-          this.customDialogService.showImageCropperDialog(event, 1 / 1).then(matRef => {
+          this.customDialogService.showImageCropperDialog(event, 1 / 1,true).then(matRef => {
             matRef.afterClosed().subscribe((result) => {
               console.log('showImageCropperDialog:',result);
               if(result)
@@ -191,7 +191,7 @@ export class AdminSettingPage implements OnInit, OnDestroy {
       if (event.target.files && event.target.files[0]) {
         const reader = new FileReader();
         reader.onload = (e: any) => {
-          this.customDialogService.showImageCropperDialog(event, 3.88 / 1).then(matRef => {
+          this.customDialogService.showImageCropperDialog(event, 3.88 / 1,true).then(matRef => {
             matRef.afterClosed().subscribe((result) => {
               console.log('showImageCropperDialog:',result);
               if(result)

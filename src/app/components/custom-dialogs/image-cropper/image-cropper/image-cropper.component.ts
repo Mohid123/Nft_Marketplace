@@ -12,6 +12,7 @@ export class ImageCropperComponent {
 
   @Input() img: any;
   @Input() aspectRatio: any;
+  @Input() maintainAspectRatio: any;
 
   constructor(
     private customDialogService: CustomDialogService,
