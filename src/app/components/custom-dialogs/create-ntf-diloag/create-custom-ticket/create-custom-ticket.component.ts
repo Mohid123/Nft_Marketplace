@@ -110,7 +110,7 @@ export class CreateCustomTicketComponent implements OnInit, AfterViewInit {
       if (event.target.files && event.target.files[0]) {
         const reader = new FileReader();
         reader.onload = (e: any) => {
-          this.customDialogService.showImageCropperDialog(event, 1.13 / 1).then(matRef => {
+          this.customDialogService.showImageCropperDialog(event, 1.13 / 1,true).then(matRef => {
             matRef.afterClosed().subscribe((result) => {
               console.log('showImageCropperDialog:',result);
               if (result) {

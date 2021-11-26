@@ -32,7 +32,7 @@ export class CreateNFTMembershipOptionsComponent  {
     this.createNft = this.formBuilder.group({
       price: new FormControl('', [Validators.required, Validators.min(1) ,Validators.max(999999)]),
       mint: new FormControl(true),
-      sale: new FormControl(true),
+      sale: new FormControl(false),
     });
     this.img = this.nftService.createNFTImg;
     this.nftForm = this.nftService.createNFT;

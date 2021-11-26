@@ -158,10 +158,11 @@ export class CustomDialogService {
     this._mapDialogref.componentInstance.status = status;
   }
 
-  showImageCropperDialog(img,aspectRatio) {
+  showImageCropperDialog(img,aspectRatio,maintainAspectRatio) {
     // this.matDialog.closeAll();
     return new Promise<MatDialogRef<any,any>>(async (resolve, reject) => {
       this._imgCropDialogref = await this.imageCropperService.openImageCropperComponent();
+      this._imgCropDialogref.componentInstance.maintainAspectRatio = maintainAspectRatio;
       this._imgCropDialogref.componentInstance.aspectRatio = aspectRatio;
       this._imgCropDialogref.componentInstance.img = img;
       resolve(this._imgCropDialogref);
