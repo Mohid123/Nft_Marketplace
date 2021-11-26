@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/no-empty-lifecycle-method */
 import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Group } from '@app/@core/models/group.model';
@@ -202,6 +203,7 @@ export class CreateCustomTicketComponent implements OnInit, AfterViewInit {
   preview(): void {
     this.createPreviewImg().then((dataUrl) => {
       this.nftService.createNftForm = this.createNft;
+
       this.customDialogService.showCreateNFTticketPreviewDialog(dataUrl,false, false);
     });
   }

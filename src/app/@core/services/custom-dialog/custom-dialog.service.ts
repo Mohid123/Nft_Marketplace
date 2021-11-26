@@ -164,8 +164,9 @@ export class CustomDialogService {
       this._imgCropDialogref = await this.imageCropperService.openImageCropperComponent();
       this._imgCropDialogref.componentInstance.aspectRatio = aspectRatio;
       this._imgCropDialogref.componentInstance.img = img;
-      resolve(this._imgCropDialogref)
+      resolve(this._imgCropDialogref);
     })
+
   }
 
   closeImgCropDialogs(img) {
