@@ -28,7 +28,7 @@
         </canvas>
         </div>
         <div class="section">
-          <ng-container *ngIf="monthIndex && monthIndex === 0 && (creatorStats$ | async) as creatorStats">
+          <ng-container *ngIf=" monthIndex === 0 && (creatorStats$ | async) as creatorStats">
             <div class="listed">
               <p>Total NFT Listed</p>
               <span>{{creatorStats?.yearlyStats?.totalNftListed}}</span>
