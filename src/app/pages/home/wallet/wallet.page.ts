@@ -40,6 +40,7 @@ export class WalletPage implements OnInit {
     { text: '', isClicked: true },
     { text: 'Membership Card', isClicked: false },
     { text: 'Ticket', isClicked: false },
+    { text: 'Custom', isClicked: false },
   ]
 
   constructor(

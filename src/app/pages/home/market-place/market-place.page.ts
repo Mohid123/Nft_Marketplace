@@ -41,6 +41,7 @@ export class MarketPlacePage implements OnInit ,OnDestroy {
     { text: '', isClicked: true },
     { text: 'Membership Card', isClicked: false },
     { text: 'Ticket', isClicked: false },
+    { text: 'Custom', isClicked: false },
   ]
 
   constructor(

@@ -18,7 +18,7 @@
     </div>
   </div>
 
-  <div id="bg-image" class="relative p-0 text-2xl" style="display: none; width: 529px; height: 479px; background-image: url('{{imageSrc}}');  background-size: cover;">
+  <div id="bg-image" class="relative p-0 text-2xl rounded-2xl" style="display: none; width: 529px; height: 479px; background-image: url('{{imageSrc}}');  background-size: cover;">
     <!-- <img id="showImage" src="./assets/card/1A.svg" alt="{{createNft.controls.group?.value?.name}}" style="width: 529px; height: 482px; padding: 0;"> -->
     <img *ngIf="createNft.controls?.group?.value?.coverImageUrl" class="absolute top-0 right-0" [src]="createNft.controls?.group?.value?.coverImageUrl" style="height: 135px;padding: 0;">
       <!-- <img class="relative p-0 text-2xl" style=" " *ngIf="imageSrc" [src]="imageSrc"> -->
@@ -100,10 +100,12 @@
       <label class="block text-left" style="padding-top: 0; padding-bottom: 0;">
         <select formControlName="group"
           class="block w-full h-16 px-1 text-lg font-light text-gray-400 rounded-lg bg-primary-gray-100 focus:outline-none form-select">
-          <option [ngValue]="null" disabled>Select Group </option>
+          <option [ngValue]="null" disabled >Select Group </option>
+
           <option *ngFor="let group of (groups$ | async)" [ngValue]="group">
             {{group.name}}
           </option>
+          <option [ngValue]="null" class="font-medium text-primary-dark" >    None </option>
         </select>
       </label>
       <!-- <p class="error-msg error" *ngIf="createNft.controls.group.touched && createNft.controls.group.errors?.required">please select group</p> -->
