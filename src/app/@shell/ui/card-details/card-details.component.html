@@ -38,7 +38,7 @@
           <div class="flex items-center justify-between">
             <button  class="profileBtn">
               <div class="flex rounded">
-                <img class="w-10 h-10 rounded-full" [src]="nft?.creator?.profileImageURL" alt="Joker Card" />
+                <img class="w-10 h-10 rounded-full" [src]="nft?.creator?.profileImageURL" [alt]="nft?.creator?.displayName" />
               </div>
               <span class="ml-6 text-sm text-white"> {{nft?.creator?.displayName}}</span>
             </button>
@@ -54,7 +54,7 @@
               <p class="text-lg text-gray-400">Creator</p>
               <button class="inline-flex items-center justify-between py-2 text-white rounded-xl">
                 <div class="flex items-start rounded nft-img">
-                  <img class="rounded-full w-7 h-7" [src]="nft?.creator?.profileImageURL" alt="Joker Card" />
+                  <img class="rounded-full w-7 h-7" [src]="nft?.creator?.profileImageURL" [alt]="nft?.creator?.displayName" />
                 </div>
                 <span class="ml-2 mr-2 text-sm leading-none text-white">
                   {{nft?.creator?.displayName}}
@@ -65,7 +65,7 @@
               <p class="text-lg text-gray-400">Owner</p>
               <button class="inline-flex items-center justify-between py-2 text-white rounded-xl">
                 <div class="flex items-start rounded nft-img">
-                  <img class="rounded-full w-7 h-7" [src]="nft?.ownerData?.profilePicURL" alt="Joker Card" />
+                  <img class="rounded-full w-7 h-7" [src]="nft?.ownerData?.profilePicURL" [alt]="nft?.ownerData?.fullName" />
                 </div>
                 <span class="ml-2 mr-2 text-sm leading-none text-white">
                   {{nft?.ownerData?.fullName}}</span>
