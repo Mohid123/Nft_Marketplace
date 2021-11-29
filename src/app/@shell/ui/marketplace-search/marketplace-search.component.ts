@@ -52,16 +52,19 @@ export class MarketplaceSearchComponent implements OnInit, OnDestroy {
     this.customDialogService.showUserSignInDialog(false,'market-page');
   }
 
+  gotoHome(): void {
+    this.router.navigate([this.clubName]);
+  }
+
+  visitDashboard(): void {
+    this.router.navigate([this.clubName, 'admin']);
+  }
+
   ngOnDestroy(): void {
     this.destroy$.complete();
     this.destroy$.unsubscribe();
     if(this.formCtrlSub)
       this.formCtrlSub.unsubscribe();
   }
-
-  gotoHome() {
-    this.router.navigate([this.clubName]);
-  }
-
 
 }
