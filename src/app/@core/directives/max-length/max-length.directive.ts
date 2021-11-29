@@ -5,12 +5,12 @@ import { Directive, HostListener, Input } from '@angular/core';
 })
 export class MaxLengthDirective {
 
-  @Input() maxlength: string;
+  @Input() length: string;
 
   @HostListener("keydown", ["$event"])
   onKeydown(event) : void {
     const value = event.target.value;
-    const maxLength = parseInt(this.maxlength);
+    const maxLength = parseInt(this.length);
     if (
         event?.key !== 'Backspace' &&
         event?.key !== 'Delete' &&

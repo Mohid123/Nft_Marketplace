@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -25,5 +25,6 @@ import { LayoutComponent } from './layout.component';
     RouterModule
   ],
   exports: [LayoutComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class LayoutModule {}

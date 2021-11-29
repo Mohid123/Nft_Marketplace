@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Group } from '@app/@core/models/group.model';
 import { NFT } from '@app/@core/models/NFT.model';
@@ -20,6 +20,7 @@ import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 })
 export class CreateNFTticketComponent implements OnInit, AfterViewInit {
 
+  @ViewChild('imgFile') imgFile;
   msg: string
   public group: Group;
 
@@ -60,6 +61,7 @@ export class CreateNFTticketComponent implements OnInit, AfterViewInit {
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
       description: new FormControl('', [Validators.required, Validators.minLength(15), Validators.maxLength(25)]),
       file: new FormControl(''),
+      fileName: new FormControl(''),
       img: new FormControl(''),
       bgImg: new FormControl(''),
       date: ['', [Validators.required]],
@@ -77,6 +79,7 @@ export class CreateNFTticketComponent implements OnInit, AfterViewInit {
       this.createNft = this.nftService.createNftForm;
       this.imageSrc = this.nftService?.createNftForm?.controls?.img?.value;
       this._lastBgImg = this.createNft.controls?.bgImg?.value;
+      this.file = { name :this.createNft.controls?.fileName?.value};
       this.nftService.createNftForm = null;
     }
   }
@@ -101,17 +104,34 @@ export class CreateNFTticketComponent implements OnInit, AfterViewInit {
 
     if (event.target.files && event.target.files[0]) {
       this.file = event.target.files[0];
-
+      this.createNft.controls?.fileName.setValue(this.file.name);
       if (event.target.files && event.target.files[0]) {
         const reader = new FileReader();
         reader.onload = (e: any) => {
-          this.imageSrc = e.target.result;
-
-
-          this.createNft.patchValue({
-            img: this.imageSrc,
-
-          });
+          this.customDialogService.showImageCropperDialog(event, 4 / 1,false).then(matRef => {
+            matRef.afterClosed().subscribe((result) => {
+              console.log('showImageCropperDialog:',result);
+              if (result) {
+                this.imageSrc = result;
+                this.createNft.patchValue({
+                  img: this.imageSrc,
+                });
+              } else {
+                this.imageSrc = null;
+                this.file = null;
+                this.createNft.controls.img.setValue(null);
+                this.imgFile.nativeElement.value = "";
+              }
+            });
+          })
+          this.customDialogService.imgCrop$.pipe(takeUntil(this.destroy$)).subscribe((result) => {
+            console.log('showImageCropperDialog:',result);
+            if(result)
+              this.imageSrc = result;
+              this.createNft.patchValue({
+                img: this.imageSrc
+              });
+            });
         };
         reader.readAsDataURL(event.target.files[0]);
       }
@@ -189,7 +209,7 @@ export class CreateNFTticketComponent implements OnInit, AfterViewInit {
   preview(): void {
     this.createPreviewImg().then((dataUrl) => {
       this.nftService.createNftForm = this.createNft;
-      this.customDialogService.showCreateNFTticketPreviewDialog(dataUrl,true);
+      this.customDialogService.showCreateNFTticketPreviewDialog(dataUrl,true, false);
     });
   }
 

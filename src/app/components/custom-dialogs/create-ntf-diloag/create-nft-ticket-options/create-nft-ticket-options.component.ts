@@ -33,7 +33,7 @@ export class CreateNFTStyleComponent {
       price: new FormControl('', [Validators.required, Validators.min(1) ,Validators.max(999999)]),
       copies: new FormControl('', [Validators.required, Validators.min(1) ,Validators.max(999999)]),
       mint: new FormControl(true),
-      sale: new FormControl(true),
+      sale: new FormControl(false),
     });
 
     this.img = this.nftService.createNFTImg;
@@ -47,6 +47,15 @@ export class CreateNFTStyleComponent {
     this.nftForm.forSale = this.createNft.controls.sale.value;
     this.nftForm.freezeNft = this.createNft.controls.mint.value;
     this.nftService.requestCreateNFT(this.nftForm,this.img);
+  }
+
+  clickSale(data): void {
+    if(data == false) {
+      this.createNft.controls.mint.setValue(true);
+      this.createNft.controls.mint.disable();
+    } else {
+      this.createNft.controls.mint.enable();
+    }
   }
 
   close(): void {

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { TrimModule } from './../../../@core/directives/trim/trim.module';
 import { CreateGroupComponent } from './create-group/create-group.component';
 
 
@@ -16,6 +17,7 @@ import { CreateGroupComponent } from './create-group/create-group.component';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    TrimModule,
     ToastrModule.forRoot( {positionClass: 'toast-top-right'} )
   ]
 })

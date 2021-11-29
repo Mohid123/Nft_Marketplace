@@ -5,8 +5,10 @@ import { Router } from '@angular/router';
 import { NFT } from '@app/@core/models/NFT.model';
 import { AuthDialogService } from '@app/components/custom-dialogs/auth-diloag/auth-dialog.service';
 import { AuthService } from '@app/pages/auth/services/auth.service';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { CreateGroupService } from './../../../components/custom-dialogs/create-group-dialog/create-group.service';
 import { CreateNFTDiloagService } from './../../../components/custom-dialogs/create-ntf-diloag/create-nft-diloag.service';
+import { ImageCropperService } from './../../../components/custom-dialogs/image-cropper/image-cropper.service';
 import { LoadingDialogService } from './../../../components/custom-dialogs/loading-dialog/loading-dialog/loading-dialog.service';
 import { StripeDialogService } from './../../../components/custom-dialogs/stripe-dialog/stripe-dialog.service';
 
@@ -15,7 +17,14 @@ import { StripeDialogService } from './../../../components/custom-dialogs/stripe
 })
 export class CustomDialogService {
 
+  private _imgCrop$ = new BehaviorSubject<any>(
+    null,
+  );
+  public readonly imgCrop$: Observable<any> =
+    this._imgCrop$.asObservable();
+
   private _mapDialogref: MatDialogRef<any, any>;
+  private _imgCropDialogref: MatDialogRef<any, any>;
 
   constructor(
     protected router: Router,
@@ -25,6 +34,7 @@ export class CustomDialogService {
     private createGroupService: CreateGroupService,
     private loadingDialogService: LoadingDialogService,
     private stripeDialogService: StripeDialogService,
+    private imageCropperService: ImageCropperService,
     public matDialog: MatDialog
   ) {}
 
@@ -100,15 +110,18 @@ export class CustomDialogService {
     // });
   }
 
-  async showCreateNFTticketPreviewDialog(img,isTicket) {
+  async showCreateNFTticketPreviewDialog(img,isTicket, isMembership) {
     this.matDialog.closeAll();
     this._mapDialogref = await this.createNFTDiloagService.openCreateNFTticketPreviewComponent();
     this._mapDialogref.componentInstance.img = img;
     this._mapDialogref.componentInstance.isTicket = isTicket;
+    this._mapDialogref.componentInstance.isMembership = isMembership;
+    // this._mapDialogref.componentInstance.isTicket = isCustom;
     // (await this._mapDialogref).afterClosed().subscribe((result) => {
     //   console.log('Mat Dialog Results admin sign in:', result);
     // });
   }
+
 
   async showCreateGroupDialog() {
     this.matDialog.closeAll();
@@ -143,6 +156,22 @@ export class CustomDialogService {
     this.matDialog.closeAll();
     this._mapDialogref = await this.loadingDialogService.getLoadingDialogComponent();
     this._mapDialogref.componentInstance.status = status;
+  }
+
+  showImageCropperDialog(img,aspectRatio,maintainAspectRatio) {
+    // this.matDialog.closeAll();
+    return new Promise<MatDialogRef<any,any>>(async (resolve, reject) => {
+      this._imgCropDialogref = await this.imageCropperService.openImageCropperComponent();
+      this._imgCropDialogref.componentInstance.maintainAspectRatio = maintainAspectRatio;
+      this._imgCropDialogref.componentInstance.aspectRatio = aspectRatio;
+      this._imgCropDialogref.componentInstance.img = img;
+      resolve(this._imgCropDialogref);
+    })
+
+  }
+
+  closeImgCropDialogs(img) {
+    this._imgCropDialogref.close(img);
   }
 
   closeDialogs() {
