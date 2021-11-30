@@ -78,7 +78,7 @@
             <!-- <span class="ml-3 text-sm text-white opacity-50">32.44 USD</span> -->
           </div>
           <p class="text-lg text-gray-400">Description</p>
-          <div class="text-base text-justify text-white lg:mr-20 respDesc">
+          <div class="text-base text-justify text-white break-words lg:mr-20 respDesc overflow-ellipsis">
             {{nft?.description}}
           </div>
           <ng-container *ngIf="nft?.nftStatus && (isAdminPanel$ | async)">

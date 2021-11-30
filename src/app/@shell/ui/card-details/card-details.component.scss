@@ -73,6 +73,7 @@
   }
 
   .respDesc{
+    @apply break-words overflow-ellipsis;
     width: 100%;
   }
 
