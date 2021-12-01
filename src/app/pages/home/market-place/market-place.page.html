@@ -3,10 +3,12 @@
   <app-marketplace-search (search)="search($event)"></app-marketplace-search>
 
   <!--banner-->
+
   <section class="pt-0 pb-0 m-4 md:pb-10 lg:pb-10 md:pt-14 lg:pt-14 lg:m-0 md:m-0">
     <div class=" md:w-full flex-center md:max-w-full lg:w-full lg:max-w-full">
     <div class="md:flex-shrink-0">
-      <img src="../../../../assets/banner/marketplace.svg" alt="banner" >
+      <img class="hidden sm:block" src="../../../../assets/banner/marketplace.svg" alt="banner" >
+      <img class="lg:hidden md:hidden" src="../../../../assets/banner/mobile-marketplace.svg" alt="banner" >
     </div>
     </div>
   </section>
