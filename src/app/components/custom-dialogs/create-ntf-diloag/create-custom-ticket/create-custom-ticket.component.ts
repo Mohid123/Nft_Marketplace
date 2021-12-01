@@ -132,6 +132,11 @@ export class CreateCustomTicketComponent implements OnInit, AfterViewInit {
     }
   }
 
+  edit(){
+   console.log('edit')
+  }
+
+
   nextClick(): void {
    this.createPreviewImg().then((dataUrl) => {
         // const img = new Image();
