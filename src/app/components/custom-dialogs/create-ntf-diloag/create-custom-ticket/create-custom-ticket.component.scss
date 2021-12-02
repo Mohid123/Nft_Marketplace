@@ -129,8 +129,19 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
 .editBtn {
   position: absolute;
   z-index: 1;
-  left: 48%;
-  top: 37%;
+  left: 59%;
+  top: 76%;
+  border-radius: 20px;
+  opacity: 0.8;
   cursor: pointer;
+  // display: none;
 }
+
+// .edit-btn:hover {
+//   .editBtn{
+//     display: block;
+//   }
+// }
+
+
 

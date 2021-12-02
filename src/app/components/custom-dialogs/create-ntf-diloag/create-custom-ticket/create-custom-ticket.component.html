@@ -39,15 +39,19 @@
 
 
   <form action="" [formGroup]="createNft" class="px-0 overflow-y-auto sm:px-20 custom-scrollbar-css">
-     <div *ngIf="imageSrc" class="relative flex flex-col " (click)="edit()">
+     <div *ngIf="imageSrc" class="relative flex flex-col edit-btn " (click)="edit()">
 
-     <div class="editBtn " style="backdrop-filter: blur(0px);">
-      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 45 45" height="30px" id="Layer_1" version="1.1" viewBox="0 0 45 45" width="30px" xml:space="preserve"><g><rect fill="#FFF" height="23" transform="matrix(-0.7071 -0.7072 0.7072 -0.7071 38.2666 48.6029)" width="11" x="23.7" y="4.875"/><path d="M44.087,3.686l-2.494-2.494c-1.377-1.377-3.61-1.377-4.987,0L34.856,2.94l7.778,7.778l1.749-1.749   C45.761,7.593,45.465,5.063,44.087,3.686z" fill="#FFF"/><polygon fill="#FFF" points="16,22.229 16,30 23.246,30  "/><path d="M29,40H5V16h12.555l5-5H3.5C1.843,11,0,11.843,0,13.5v28C0,43.156,1.843,45,3.5,45h28   c1.656,0,2.5-1.844,2.5-3.5V23.596l-5,5V40z" fill="#FFF"/></g></svg>
+     <div class="editBtn">
+      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
+        <g id="Group_56289" data-name="Group 56289" transform="translate(11150 -4)">
+          <circle id="Ellipse_3170" data-name="Ellipse 3170" cx="12.5" cy="12.5" r="12.5" transform="translate(-11150 4)" fill="#fff"/>
+          <path id="Icon_material-edit" data-name="Icon material-edit" d="M4.5,12.486v2.1H6.6l6.2-6.2-2.1-2.1Zm9.928-5.723a.558.558,0,0,0,0-.79L13.116,4.66a.558.558,0,0,0-.79,0L11.3,5.686l2.1,2.1Z" transform="translate(-11146.5 6.504)" fill="#6a6a6a"/>
+        </g>
+      </svg>
      </div>
       <li class="inline-flex justify-around my-4 card-bg">
         <ul class="border-gradient-dp-p-bg-dark hover:border-gradient-tl-p-bg-light gradient-border-2">
-          <img style=" -webkit-filter: brightness(75%);
-          filter: brightness(75%); filter: blur(2px);    object-fit: cover;
+          <img style=" object-fit: cover;
 
           display: block;" id="ticket" class="preview" src="{{imageSrc}}" >
           </ul>
