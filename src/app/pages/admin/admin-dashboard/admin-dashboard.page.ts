@@ -33,7 +33,7 @@ export class AdminDashboardPage implements AfterViewInit {
   public clubName: string;
   public nftLimit = 10 ;
   public page:number;
-  public monthIndex:number;
+  public monthIndex = 0;
 
   public lineChartData: ChartDataSets[] = [
     {

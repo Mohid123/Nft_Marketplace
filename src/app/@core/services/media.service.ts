@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
 import { MediaUpload } from '../models/requests/media-upload.model';
-import { ResponseAddGroupMedia as ResponseAddMedia } from '../models/response-add-media.model';
+import { ResponseAddMedia as ResponseAddMedia } from '../models/response-add-media.model';
 import { ApiResponse } from '../models/response.model';
 import { ApiService } from './api.service';
 

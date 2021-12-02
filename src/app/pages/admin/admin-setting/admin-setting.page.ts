@@ -8,7 +8,7 @@ import { Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { Creator } from './../../../@core/models/creator.model';
 import { AddStripeKey } from './../../../@core/models/requests/add-stripe-key.model';
-import { ResponseAddGroupMedia } from './../../../@core/models/response-add-media.model';
+import { ResponseAddMedia } from './../../../@core/models/response-add-media.model';
 import { ResponseStripeStatus } from './../../../@core/models/response-add-stripe-key.model';
 import { ApiResponse } from './../../../@core/models/response.model';
 import { MediaService } from './../../../@core/services/media.service';
@@ -110,7 +110,7 @@ export class AdminSettingPage implements OnInit, OnDestroy {
     this.mediaService
     .uploadMedia('nft', this.profileImg)
     .pipe(take(1))
-    .subscribe((res: ApiResponse<ResponseAddGroupMedia>) => {
+    .subscribe((res: ApiResponse<ResponseAddMedia>) => {
       if (!res.hasErrors()) {
         this.creator.profileImageURL = res.data.url;
         if(this.coverImage) {
@@ -129,7 +129,7 @@ export class AdminSettingPage implements OnInit, OnDestroy {
     this.mediaService
     .uploadMedia('creatorCover', this.coverImg)
     .pipe(take(1))
-    .subscribe((res: ApiResponse<ResponseAddGroupMedia>) => {
+    .subscribe((res: ApiResponse<ResponseAddMedia>) => {
       if (!res.hasErrors()) {
         this.creator.coverImageURL = res.data.url;
         this.saveChagesToServer();

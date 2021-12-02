@@ -25,10 +25,6 @@ export class UserSignInComponent {
   public passwordHide: boolean;
   public clubName: string;
 
-  public profileImage: any;
-  public profileImg = new FormData();
-  public profileImageSrc: any;
-
   creator$ = this.creatorService.Creator$;
 
   constructor(
@@ -49,7 +45,6 @@ export class UserSignInComponent {
         Validators.required,
         Validators.minLength(6),
       ]),
-      // profileImg: new FormControl(''),
     });
     this.passwordHide = true;
   }
@@ -77,37 +72,12 @@ export class UserSignInComponent {
       });
   }
 
-  onSelectProfile(event): void {
-    console.log('selecgt img:',);
-    if (event.target.files && event.target.files[0]) {
-      this.profileImage = event.target.files[0];
-      this.loginForm.controls.profileImg.setValue(this.profileImage);
-      this.profileImg.append('file', this.loginForm.get('profileImg').value);
-      if (event.target.files && event.target.files[0]) {
-        const reader = new FileReader();
-        reader.onload = (e: any) => {
-          console.log('img ccrop:',);
-          this.customDialogService.showImageCropperDialog(event, 1 / 1,true).then(matRef => {
-            matRef.afterClosed().subscribe((result) => {
-              console.log('showImageCropperDialog:',result);
-              if(result)
-                this.profileImageSrc = result;
-              else {
-                this.profileImageSrc = null;
-                this.profileImage = null;
-                this.loginForm.controls.profileImg.setValue(null);
-                // this.profileFile.nativeElement.value = "";
-              }
-            });
-          })
-        };
-        reader.readAsDataURL(event.target.files[0]);
-      }
-    }
-  }
-
   passwordShowHide(): void {
     this.passwordHide = !this.passwordHide;
+  }
+
+  signUp() {
+    this.customDialogService.showUserSignUpDialog();
   }
 
   close() {

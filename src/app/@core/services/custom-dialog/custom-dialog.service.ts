@@ -53,6 +53,16 @@ export class CustomDialogService {
     // });
   }
 
+  async showUserSignUpDialog(isPage = false,page?:string) {
+    this.matDialog.closeAll();
+    this._mapDialogref = await this.authDialogService.openUserSignUp();
+    this._mapDialogref.componentInstance.isPage = isPage;
+    this._mapDialogref.componentInstance.page = page;
+    // (await this._mapDialogref).afterClosed().subscribe((result) => {
+    //   console.log('Mat Dialog Results user sign in:', result);
+    // });
+  }
+
   async showAdminSignInDialog(isPage = false) {
     this.matDialog.closeAll();
     this._mapDialogref = await this.authDialogService.openAdminSignIn();

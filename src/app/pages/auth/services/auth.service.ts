@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { SignUpCredentials } from '@app/@core/models/sign-up-credentials';
 import { getItem, removeItem, setItem, StorageItem } from '@app/@core/utils';
 import { ROLE_TYPE_UTILS } from '@app/@core/utils/role-type.utils';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -82,6 +83,33 @@ export class AuthService extends ApiService<AuthApiData> {
           } else {
             location.reload();
           }
+        }
+      }),
+    );
+  }
+
+  userSignUp(params: SignUpCredentials,adminCheck:boolean): Observable<ApiResponse<SignInResponse>> {
+    return this.post('/nodechain-users/createUser', params).pipe(
+      tap((result: ApiResponse<any>) => {
+        if (!result.hasErrors()) {
+
+          console.log('userSignUp:',result.data);
+          // const role = result?.data?.user.admin ? ROLE_TYPE_UTILS.admin : ROLE_TYPE_UTILS.user;
+          // setItem(StorageItem.Role, role);
+          // setItem(StorageItem.User, result?.data?.user || null);
+          // setItem(StorageItem.LoggedInUser, result?.data?.loggedInUser || null);
+          // setItem(StorageItem.JwtToken, result?.data?.nftJwtToken?.access_token || null);
+          // setItem(StorageItem.ActiveClub, params.clubName);
+          // setItem(StorageItem.LastRole,role);
+          // this._isLoggedIn$.next(true);
+          // this._user$.next(result?.data?.user || null);
+          // this._loggedInUser$.next(result?.data?.loggedInUser || null);
+          // this._role$.next(role);
+          // if(adminCheck && result?.data?.user?.admin) {
+          //   this.router.navigate(['/'+ params.clubName + '/admin'])
+          // } else {
+          //   location.reload();
+          // }
         }
       }),
     );
