@@ -19,4 +19,9 @@ export abstract class AsyncAuthDialog<
   abstract async openUserSignIn(
     data: DataType,
   ): Promise<MatDialogRef<ComponentType, ReturnType>>;
+
+  // @ts-ignore
+  abstract async openUserSignUp(
+    data: DataType,
+  ): Promise<MatDialogRef<ComponentType, ReturnType>>;
 }

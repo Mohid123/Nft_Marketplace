@@ -40,6 +40,7 @@ export class AppComponent implements OnInit {
     private viewportScroller: ViewportScroller,
 
     private toastr: ToastrService,
+    // private viewportScroller: ViewportScroller
   ) {
     this.routeService.listenToRouter();
   }

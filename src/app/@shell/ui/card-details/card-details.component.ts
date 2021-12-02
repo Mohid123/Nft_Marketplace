@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { CreatorService } from '@app/@core/services/creator.service';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { RouteService } from '@app/@core/services/route.service';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -16,6 +17,7 @@ export class CardDetailsComponent implements OnInit {
   public userName: any
   public profilePic: any
   public loggedInUser: any;
+  creator$ = this.creatorService.Creator$;
 
 
   @Input() nft:NFT;
@@ -23,9 +25,15 @@ export class CardDetailsComponent implements OnInit {
     private customDialogService: CustomDialogService,
     private spinner: NgxSpinnerService,
     private routeService: RouteService,
+    private creatorService: CreatorService,
   ) { }
 
   ngOnInit(): void {
+    this.spinner.show();
+
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 3000);
     this.userName = JSON.parse(localStorage.getItem('App/user'))
     this.profilePic = JSON.parse(localStorage.getItem('App/user'))
     this.loggedInUser = JSON.parse(localStorage.getItem('App/loggedInUser'))

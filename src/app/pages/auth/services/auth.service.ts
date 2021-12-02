@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { SignUpCredentials } from '@app/@core/models/sign-up-credentials';
 import { getItem, removeItem, setItem, StorageItem } from '@app/@core/utils';
 import { ROLE_TYPE_UTILS } from '@app/@core/utils/role-type.utils';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { exhaustMap, take, tap } from 'rxjs/operators';
 import { AuthCredentials } from './../../../@core/models/auth-credentials.model';
 import { LoggedInUser } from './../../../@core/models/logged-in-user.model';
 import { ApiResponse } from './../../../@core/models/response.model';
@@ -82,6 +83,24 @@ export class AuthService extends ApiService<AuthApiData> {
           } else {
             location.reload();
           }
+        }
+      }),
+    );
+  }
+
+  userSignUp(params: SignUpCredentials,adminCheck:boolean): Observable<ApiResponse<SignInResponse>> {
+    return this.post('/nodechain-users/createUser', params).pipe(
+      take(1),
+      exhaustMap((result: ApiResponse<any>) => {
+        if (!result.hasErrors()) {
+          const authParams: AuthCredentials = {
+            email: params.email,
+            pass:  params.pass,
+            clubName: params.clubName,
+          };
+          return this.userSignIn(authParams, adminCheck)
+        } else {
+          return of(result);
         }
       }),
     );

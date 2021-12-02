@@ -13,7 +13,7 @@ import { GetAllNftsByClub } from '../models/requests/get-all-afts-by-club.model'
 import { getNftsByUserId } from '../models/requests/get-nfts-by-user.model';
 import { NFTList } from './../models/NFTList.model';
 import { MediaUpload } from './../models/requests/media-upload.model';
-import { ResponseAddGroupMedia } from './../models/response-add-media.model';
+import { ResponseAddMedia } from './../models/response-add-media.model';
 import { ResponseEventByNFT } from './../models/response-events-by-nft.model';
 import { ApiResponse } from './../models/response.model';
 import { RouterState } from './../models/routerState.model';
@@ -61,7 +61,7 @@ export class NFTService extends ApiService<nftApiData> {
       .uploadMedia('nft', img)
       .pipe(
         take(1),
-        exhaustMap((res: ApiResponse<ResponseAddGroupMedia>) => {
+        exhaustMap((res: ApiResponse<ResponseAddMedia>) => {
           // console.log('res:',res);
           if (!res.hasErrors()) {
               nftForm.serverCaptureFileUrl = res.data.url;

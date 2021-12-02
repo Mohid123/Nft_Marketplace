@@ -39,10 +39,21 @@
 
 
   <form action="" [formGroup]="createNft" class="px-0 overflow-y-auto sm:px-20 custom-scrollbar-css">
-     <div *ngIf="imageSrc" class="flex flex-col ">
+     <div *ngIf="imageSrc" class="relative flex flex-col edit-btn " (click)="edit()">
+
+     <div class="editBtn">
+      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
+        <g id="Group_56289" data-name="Group 56289" transform="translate(11150 -4)">
+          <circle id="Ellipse_3170" data-name="Ellipse 3170" cx="12.5" cy="12.5" r="12.5" transform="translate(-11150 4)" fill="#fff"/>
+          <path id="Icon_material-edit" data-name="Icon material-edit" d="M4.5,12.486v2.1H6.6l6.2-6.2-2.1-2.1Zm9.928-5.723a.558.558,0,0,0,0-.79L13.116,4.66a.558.558,0,0,0-.79,0L11.3,5.686l2.1,2.1Z" transform="translate(-11146.5 6.504)" fill="#6a6a6a"/>
+        </g>
+      </svg>
+     </div>
       <li class="inline-flex justify-around my-4 card-bg">
         <ul class="border-gradient-dp-p-bg-dark hover:border-gradient-tl-p-bg-light gradient-border-2">
-          <img id="ticket" class="preview" src="{{imageSrc}}" >
+          <img style=" object-fit: cover;
+
+          display: block;" id="ticket" class="preview" src="{{imageSrc}}" >
           </ul>
        </li>
 
@@ -90,7 +101,8 @@
     <div class="flex flex-col pt-3">
       <span class="text-xl">Description</span><br>
       <div class="relative flex flex-col justify-between overflow-hidden rounded-lg">
-      <input appTrim class="w-full px-2 font-light " placeholder="I love NFT's" type="text" name="description" formControlName="description" maxlength="25"/>
+      <!-- <input appTrim class="w-full px-2 font-light " placeholder="I love NFT's" type="text" name="description" formControlName="description" maxlength="25"/> -->
+      <textarea type="text" appTrim class="w-full h-40 px-2 font-light"   cols="30" rows="10" name="description" formControlName="description" maxlength="600"></textarea>
       <p class="error-msg error" *ngIf="createNft.controls.description.touched && createNft.controls.description.errors?.required">please enter description</p>
       <p class="error-msg error" *ngIf="createNft.controls.description.touched && createNft.controls.description.errors?.minlength">description should be greater than or equal to {{createNft.controls.description.errors?.minlength.requiredLength}} character </p>
     </div>

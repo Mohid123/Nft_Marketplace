@@ -1,3 +1,13 @@
+ <ngx-spinner
+  name="main"
+  bdColor="#171830"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple"
+>
+  <p style="font-size: 20px; color: white">{{(creator$ | async)?.displayName}}...</p>
+</ngx-spinner>
+
 <div class="justify-center card-border">
   <div class="flex"
     style="background-image: url(./assets/card/bg-card.png); background-repeat: no-repeat;  background-size: 100% 100%;">
@@ -43,7 +53,7 @@
               <span class="ml-6 text-sm text-white"> {{nft?.creator?.displayName}}</span>
             </button>
             <div class="flex justify-between">
-              <span class="text-lg text-gray-400 ">Token ID <a href="{{nft?.transactionHashUrl}}" class="ml-3 text-white"  target=_blank> #{{nft?.tokenId}}</a></span>
+              <span class="text-lg text-gray-400 tokenID ">Token ID <a href="{{nft?.transactionHashUrl}}" class="ml-3 text-white"  target=_blank> #{{nft?.tokenId}}</a></span>
             </div>
           </div>
           <p class="mt-6 mb-6 text-3xl font-medium tracking-wider text-white trun">
@@ -78,7 +88,7 @@
             <!-- <span class="ml-3 text-sm text-white opacity-50">32.44 USD</span> -->
           </div>
           <p class="text-lg text-gray-400">Description</p>
-          <div class="text-base text-justify text-white lg:mr-20 respDesc">
+          <div class="text-base text-justify text-white break-words lg:mr-20 respDesc overflow-ellipsis">
             {{nft?.description}}
           </div>
           <ng-container *ngIf="nft?.nftStatus && (isAdminPanel$ | async)">

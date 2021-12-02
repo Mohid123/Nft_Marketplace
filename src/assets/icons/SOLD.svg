@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="14.741" height="20.347" viewBox="0 0 14.741 20.347">
+  <g id="Group_57688" data-name="Group 57688" transform="translate(-5725.375 208.242)">
+    <g id="coins" transform="translate(5725.525 -208.092)">
+      <path id="Path_53696" data-name="Path 53696" d="M7.22,12.11C3.72,12.11,0,11.025,0,9.016a.516.516,0,1,1,1.031,0c0,.861,2.354,2.063,6.189,2.063s6.189-1.2,6.189-2.063a.516.516,0,1,1,1.031,0C14.441,11.025,10.721,12.11,7.22,12.11Z" transform="translate(0 -1.741)" fill="#fff" stroke="#fff" stroke-width="0.2"/>
+      <path id="Path_53701" data-name="Path 53701" d="M7.22,6.189C3.72,6.189,0,5.1,0,3.095S3.72,0,7.22,0s7.22,1.085,7.22,3.095S10.721,6.189,7.22,6.189Zm0-5.158c-3.835,0-6.189,1.2-6.189,2.063S3.385,5.158,7.22,5.158s6.189-1.2,6.189-2.063S11.055,1.032,7.22,1.032Z" transform="translate(0 0)" fill="#fff" stroke="#fff" stroke-width="0.3"/>
+      <path id="Path_53702" data-name="Path 53702" d="M.516,17.3A.491.491,0,0,1,0,16.837V2.962A.491.491,0,0,1,.516,2.5a.491.491,0,0,1,.516.462V16.837A.491.491,0,0,1,.516,17.3Z" transform="translate(0 0.079)" fill="#fff" stroke="#fff" stroke-width="0.3"/>
+      <path id="Path_53703" data-name="Path 53703" d="M13.516,17.684c-.285,0-.516-.486-.516-1.085V3.585c0-.6.231-1.085.516-1.085s.516.486.516,1.085V16.6C14.031,17.2,13.8,17.684,13.516,17.684Z" transform="translate(0.409 0.079)" fill="#fff" stroke="#fff" stroke-width="0.3"/>
+      <path id="Path_54199" data-name="Path 54199" d="M7.22,9.11C3.72,9.11,0,8.025,0,6.016a.516.516,0,1,1,1.031,0c0,.861,2.354,2.063,6.189,2.063s6.189-1.2,6.189-2.063a.516.516,0,1,1,1.031,0C14.441,8.025,10.721,9.11,7.22,9.11Z" transform="translate(0 10.937)" fill="#fff" stroke="#fff" stroke-width="0.3"/>
+    </g>
+    <path id="Path_53704" data-name="Path 53704" d="M1.2,3.662H.616A4.122,4.122,0,0,0,.751,4.828q.131.416.375.416a.52.52,0,0,0,.343-.133l.037.63a.731.731,0,0,1-.384.118q-.39,0-.615-.576A4.694,4.694,0,0,1,.274,3.662H0V3.176H.274V2.64H0V2.15H.274A4.69,4.69,0,0,1,.511.572Q.733,0,1.12,0a.809.809,0,0,1,.386.121L1.469.752A.554.554,0,0,0,1.124.615Q.9.615.763.992A3.848,3.848,0,0,0,.616,2.15H1.2v.49H.616v.537H1.2Z" transform="translate(5730.091 -204.142) rotate(-90)" fill="#faa300" opacity="0.91"/>
+    <g id="Group_57685" data-name="Group 57685" transform="matrix(0.999, 0.035, -0.035, 0.999, 5731.193, -195.436)">
+      <line id="Line_105" data-name="Line 105" x2="1.387" y2="1.542" transform="translate(0 2.173)" fill="none" stroke="#faa300" stroke-linecap="round" stroke-width="1"/>
+      <line id="Line_106" data-name="Line 106" y1="3.716" x2="3.54" transform="translate(1.387 0)" fill="none" stroke="#faa300" stroke-linecap="round" stroke-width="1"/>
+    </g>
+  </g>
+</svg>

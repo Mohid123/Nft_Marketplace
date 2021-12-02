@@ -126,5 +126,22 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
   background-image: linear-gradient(to top, #3ABFF3 0%, #75F16D 100%);
 }
 
+.editBtn {
+  position: absolute;
+  z-index: 1;
+  left: 59%;
+  top: 76%;
+  border-radius: 20px;
+  opacity: 0.8;
+  cursor: pointer;
+  // display: none;
+}
+
+// .edit-btn:hover {
+//   .editBtn{
+//     display: block;
+//   }
+// }
+
 
 

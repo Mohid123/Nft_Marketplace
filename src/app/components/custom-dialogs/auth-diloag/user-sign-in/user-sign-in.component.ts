@@ -76,7 +76,15 @@ export class UserSignInComponent {
     this.passwordHide = !this.passwordHide;
   }
 
+  signUp() {
+    this.customDialogService.showUserSignUpDialog();
+  }
+
   close() {
     this.customDialogService.closeDialogs();
+  }
+
+  canShowSignUp() : boolean {
+    return this.clubName.toUpperCase() === 'CSKA';
   }
 }

@@ -1,7 +1,7 @@
 <!-- <div style="filter: brightness(100%); filter: blur(8px);"> -->
 <app-admin-header [hideSearch]="true" ></app-admin-header>
 <div class="h-auto min-h-screen p-1 mt-10 center md:p-3 xl:p-5 md:mt-0">
-  <div class="flex flex-wrap w-full pb-28">
+  <div class="flex flex-wrap w-full">
     <div class="order-1 w-full section-container lg:order-1 xl:w-65 lg:w-3/5 ">
       <div class="relative chart-status">
         <span class="nft-label">NFT STATS</span>
@@ -28,7 +28,7 @@
         </canvas>
         </div>
         <div class="section">
-          <ng-container *ngIf=" monthIndex === 0 && (creatorStats$ | async) as creatorStats">
+          <ng-container *ngIf="monthIndex === 0 && (creatorStats$ | async) as creatorStats">
             <div class="listed">
               <p>Total NFT Listed</p>
               <span>{{creatorStats?.yearlyStats?.totalNftListed}}</span>

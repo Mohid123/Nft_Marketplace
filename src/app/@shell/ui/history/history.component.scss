@@ -57,3 +57,8 @@
 th{
   font-weight: 400;
 }
+
+.eventIcons {
+  @apply inline-flex items-center justify-center  p-14 rounded-xl ;
+
+}

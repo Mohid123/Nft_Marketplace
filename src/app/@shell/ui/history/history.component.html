@@ -22,8 +22,23 @@
 
            <a href="{{nftEvent?.transactionUrl}}" target=_blank> {{nftEvent?.tokenId}}</a>
           </td>
-          <td >
-            {{nftEvent.eventType}}
+          <td *ngIf="nftEvent.eventType === 'Minted'" class="justify-center inline-block" >
+            <div class="eventIcons">
+              <img class="object-cover text-sm "src="../../../../assets/icons/MINTED.svg" alt=""/>
+              <span class="pl-2 mr-2 text-white "> {{nftEvent.eventType}}</span>
+            </div>
+          </td>
+          <td *ngIf="nftEvent.eventType === 'Transfer'" class="justify-center inline-block" >
+            <div class="eventIcons">
+              <img class="object-cover text-sm "src="../../../../assets/icons/TRANSFRING.svg" alt=""/>
+              <span class="pl-2 mr-2 text-white "> {{nftEvent.eventType}}</span>
+            </div>
+          </td>
+          <td *ngIf="nftEvent.eventType === 'Sale'" class="justify-center inline-block" >
+            <div class="eventIcons">
+              <img class="object-cover text-sm "src="../../../../assets/icons/SOLD.svg" alt=""/>
+              <span class="pl-2 mr-2 text-white "> {{nftEvent.eventType}}</span>
+            </div>
           </td>
           <td >
             {{nftEvent.price}}

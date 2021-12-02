@@ -60,7 +60,7 @@ export class CreateCustomTicketComponent implements OnInit, AfterViewInit {
   ) {
     this.createNft = this.formBuilder.group({
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      description: new FormControl('', [Validators.required, Validators.minLength(15), Validators.maxLength(25)]),
+      description: new FormControl('', [Validators.required, Validators.minLength(15), Validators.maxLength(600)]),
       file: new FormControl(''),
       fileName: new FormControl(''),
       img: new FormControl(''),
@@ -131,6 +131,11 @@ export class CreateCustomTicketComponent implements OnInit, AfterViewInit {
       }
     }
   }
+
+  edit(){
+   console.log('edit')
+  }
+
 
   nextClick(): void {
    this.createPreviewImg().then((dataUrl) => {
