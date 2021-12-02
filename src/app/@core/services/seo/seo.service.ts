@@ -20,8 +20,8 @@ export class SeoService implements OnDestroy {
     private metaService: Meta,
   ) {
     this.creatorService.Creator$.subscribe((creator)=> {
-      this.ngxFavicon.setFavicon(creator.profileImageURL);
-      this.setTitle(creator.displayName,'');
+      this.ngxFavicon.setFavicon(creator?.profileImageURL);
+      this.setTitle(creator?.displayName,'');
     })
   }
 

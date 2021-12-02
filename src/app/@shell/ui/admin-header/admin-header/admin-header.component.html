@@ -1,8 +1,8 @@
-<div class="flex flex-wrap w-full h-32 mt-16 md:mt-5 lg:h-16">
+<div class="flex flex-wrap w-full h-16 mt-16 md:mt-5">
   <div class="order-2 w-full px-3 py-2 lg:order-1 sm:py-3 xl:pl-8 sm:pl-6 lg:pl-6 lg:pr-5 sm:pr-6 xl:w-65 lg:w-3/5">
     <!-- <input class="flex w-full h-12 px-5 text-sm bg-gray-500 bg-opacity-25 rounded-lg focus:bg-white focus:outline-none"
     type="search" name="search" placeholder="Search"  /> -->
-    <div *ngIf="!hideSearch" class="relative">
+    <div *ngIf="!hideSearch" class="relative hidden lg:block">
       <input [formControl]="searchControl" type="text" class="flex w-full h-12 px-5 text-sm bg-gray-500 bg-opacity-25 rounded-lg focus:bg-white focus:outline-none focus:text-black" placeholder="Search...">
        <div class="absolute inset-y-0 flex items-center right-4 md:right-4 lg:right-4 ">  <span  class=" focus:outline-none focus:shadow-outline">
          <img class="h-4" src="./assets/icons/search.svg" alt="">

@@ -2,7 +2,7 @@
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ResponseAddGroupMedia } from '@app/@core/models/response-add-media.model';
+import { ResponseAddMedia } from '@app/@core/models/response-add-media.model';
 import { MediaService } from '@app/@core/services/media.service';
 import { RouteService } from '@app/@core/services/route.service';
 import { AuthService } from '@app/pages/auth/services/auth.service';
@@ -99,7 +99,7 @@ export class CreateGroupComponent {
         });
         this.imgFormData.append('file', this.groupForm.get('file').value);
         this.mediaService.uploadMedia('group', this.imgFormData).pipe(take(1),
-            exhaustMap((res: ApiResponse<ResponseAddGroupMedia>) => {
+            exhaustMap((res: ApiResponse<ResponseAddMedia>) => {
               if(!res.hasErrors()) {
                 const param: AddGroup = {
                   name: this.groupForm.controls.name.value,
