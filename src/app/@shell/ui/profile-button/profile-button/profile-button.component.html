@@ -1,6 +1,6 @@
 
 <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu" class="profile-btn">
-  <img class="object-cover text-sm leading-4 rounded-lg w-14 h-9" [src]="((user$ | async)?.profilePicURL) || ''" alt=""/>
+  <img class="object-cover w-10 text-sm leading-4 rounded-lg h-9" [src]="((user$ | async)?.profilePicURL) || '../../../../../assets/profile.png'" alt=""/>
   <span class="pl-2 mr-2 text-white truncate"> {{((user$ | async)?.fullName) || ''}}</span>
   <mat-icon style="width: 16px; color:white">more_vert</mat-icon>
 
