@@ -1,10 +1,10 @@
-::ng-deep .user-sign-in-dialog-overlay {
+::ng-deep .user-sign-up-dialog-overlay {
   height: auto;
   min-height: 596px;
   max-width: 631px !important;
 }
 
- .sign-in-model {
+ .sign-up-model {
    @apply flex flex-col items-center px-0  sm:px-20;
 
    .btn-close {
@@ -45,10 +45,26 @@
       @apply px-9;
     }
 
-    button {
+    .signup {
       @apply w-72 h-16 my-10 sm:my-3 self-center;
     }
 
   }
 
  }
+
+
+.field {
+  @apply relative flex justify-between w-10/12 mt-4 overflow-hidden border-2 border-gray-400 border-dashed rounded-lg;
+  button{
+    @apply flex items-center justify-between w-full px-4 font-bold text-gray-400 bg-primary-gray-100 ;
+  }
+}
+
+.preview {
+  @apply object-cover w-24 h-24;
+}
+
+// .choose {
+//   @apply m-0 p-0
+// }

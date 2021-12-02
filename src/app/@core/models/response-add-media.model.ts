@@ -1,4 +1,4 @@
-export interface ResponseAddGroupMedia{
+export interface ResponseAddMedia{
   fieldname:    string;
   originalname: string;
   encoding:     string;
