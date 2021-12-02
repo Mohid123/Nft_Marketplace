@@ -49,7 +49,7 @@ export class UserSignInComponent {
         Validators.required,
         Validators.minLength(6),
       ]),
-      profileImg: new FormControl(''),
+      // profileImg: new FormControl(''),
     });
     this.passwordHide = true;
   }
