@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { SignUpCredentials } from '@app/@core/models/sign-up-credentials';
 import { getItem, removeItem, setItem, StorageItem } from '@app/@core/utils';
 import { ROLE_TYPE_UTILS } from '@app/@core/utils/role-type.utils';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { exhaustMap, take, tap } from 'rxjs/operators';
 import { AuthCredentials } from './../../../@core/models/auth-credentials.model';
 import { LoggedInUser } from './../../../@core/models/logged-in-user.model';
 import { ApiResponse } from './../../../@core/models/response.model';
@@ -90,26 +90,17 @@ export class AuthService extends ApiService<AuthApiData> {
 
   userSignUp(params: SignUpCredentials,adminCheck:boolean): Observable<ApiResponse<SignInResponse>> {
     return this.post('/nodechain-users/createUser', params).pipe(
-      tap((result: ApiResponse<any>) => {
+      take(1),
+      exhaustMap((result: ApiResponse<any>) => {
         if (!result.hasErrors()) {
-
-          console.log('userSignUp:',result.data);
-          // const role = result?.data?.user.admin ? ROLE_TYPE_UTILS.admin : ROLE_TYPE_UTILS.user;
-          // setItem(StorageItem.Role, role);
-          // setItem(StorageItem.User, result?.data?.user || null);
-          // setItem(StorageItem.LoggedInUser, result?.data?.loggedInUser || null);
-          // setItem(StorageItem.JwtToken, result?.data?.nftJwtToken?.access_token || null);
-          // setItem(StorageItem.ActiveClub, params.clubName);
-          // setItem(StorageItem.LastRole,role);
-          // this._isLoggedIn$.next(true);
-          // this._user$.next(result?.data?.user || null);
-          // this._loggedInUser$.next(result?.data?.loggedInUser || null);
-          // this._role$.next(role);
-          // if(adminCheck && result?.data?.user?.admin) {
-          //   this.router.navigate(['/'+ params.clubName + '/admin'])
-          // } else {
-          //   location.reload();
-          // }
+          const authParams: AuthCredentials = {
+            email: params.email,
+            pass:  params.pass,
+            clubName: params.clubName,
+          };
+          return this.userSignIn(authParams, adminCheck)
+        } else {
+          return of(result);
         }
       }),
     );

@@ -12,7 +12,8 @@
   <img style="max-height: 90px;" class="object-scale-down logo rounded-xl" [src]="(creator$ | async)?.profileImageURL">
   <h1 class=""><span>Sig</span>n Up</h1>
   <form  [formGroup]="signUpForm" class="sign-up-form">
-    <div class="flex justify-self-start">
+    <!-- profile pic -->
+    <!-- <div class="flex justify-self-start">
       <div class="flex-1">
         <span class="text-xl">Profile Picture</span><br>
         <div class="field">
@@ -38,7 +39,7 @@
         </ng-template>
 
       </div>
-    </div>
+    </div> -->
 
     <!-- <div class="border-4 rounded-md">
       <ng-container *ngIf="!profileImage; else pImage">
@@ -50,10 +51,10 @@
     </ng-template>
 
     </div> -->
-    <label for="name" class="font-normal">Name</label>
+    <label for="name" class="font-normal">Full Name</label>
     <input appTrim type="text" formControlName="name">
-    <p class="error-msg error" *ngIf="signUpForm.controls.name.touched && signUpForm.controls.name.errors?.required">please enter name</p>
-    <p class="error-msg error" *ngIf="signUpForm.controls.name.touched && signUpForm.controls.name.errors?.minlength">name length should be greater than or equal to {{signUpForm.controls.name.errors?.minlength.requiredLength}} </p>
+    <p class="error-msg error" *ngIf="signUpForm.controls.name.touched && signUpForm.controls.name.errors?.required">please enter full name</p>
+    <p class="error-msg error" *ngIf="signUpForm.controls.name.touched && signUpForm.controls.name.errors?.minlength">full name length should be greater than or equal to {{signUpForm.controls.name.errors?.minlength.requiredLength}} </p>
 
 
     <label for="email" class="font-normal">Email</label>

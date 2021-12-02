@@ -83,4 +83,8 @@ export class UserSignInComponent {
   close() {
     this.customDialogService.closeDialogs();
   }
+
+  canShowSignUp() : boolean {
+    return this.clubName.toUpperCase() === 'CSKA';
+  }
 }
