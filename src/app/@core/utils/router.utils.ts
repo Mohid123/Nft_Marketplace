@@ -13,6 +13,7 @@ export const ROUTER_UTILS = {
       groups:'groups',
       marketplace: 'market-place',
       sale:'sale',
+      subscription:'subscription',
       setting: 'setting'
     },
     auth: {

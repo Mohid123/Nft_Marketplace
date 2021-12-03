@@ -1,0 +1,189 @@
+.section-container{
+  @apply p-2 sm:py-3 sm:px-3;
+
+  min-height: 415px;
+}
+.section{
+  @apply w-full h-full rounded-lg;
+}
+
+svg {
+  path {
+    opacity: 1;
+  }
+}
+
+.chart-status {
+  @apply relative h-full  rounded-lg;
+  background: transparent radial-gradient(closest-side at 50% 50%, #34237D 0%, #241858 100%) 0% 0% no-repeat padding-box;
+  background-size: auto 300px;
+
+  .section {
+    @apply absolute bottom-0 w-full h-32 flex justify-around items-center bg-white;
+    .listed,
+    .sold,
+    .profit {
+      @apply h-16 w-28 sm:w-32 mx-2 flex flex-col justify-between;
+      p {
+        @apply opacity-25 text-sm sm:text-base leading-5 font-bold;
+        color: #1F203E;
+      }
+      span {
+        @apply text-xl sm:text-3xl font-bold;
+        color: #1F203E;
+      }
+    }
+  }
+}
+
+.status {
+
+  .available-nft,
+  .total-revenue,
+  .pending-for-sale {
+    @apply w-full rounded-xl flex items-center px-7 py-8;
+    height: 126px;
+
+    .icon {
+      @apply w-28 h-full;
+    }
+
+    .value {
+      @apply w-28;
+
+      p {
+        @apply text-gray-100 tracking-wider text-sm mb-2;
+      }
+      span {
+        @apply text-white font-medium text-2xl tracking-wide;
+      }
+    }
+
+    .graph-icon {
+      @apply h-16 w-16 pt-4;
+    }
+  }
+
+  .available-nft {
+    background: transparent linear-gradient(107deg, #40DDFF 0%, #14BAE3 19%, #13B1E6 69%, #11AADF 82%, #0B98C5 100%) 0% 0% no-repeat padding-box;
+  }
+
+  .total-revenue {
+    background: transparent linear-gradient(107deg, #D6A1FF 0%, #BC64FF 19%, #9D33EC 69%, #8D16E8 82%, #7E09D6 100%) 0% 0% no-repeat padding-box;
+  }
+
+  .pending-for-sale {
+    background: transparent linear-gradient(107deg, #53DFA4 0%, #66EFB6 19%, #3ADC99 69%, #23D98E 82%, #19D185 100%) 0% 0% no-repeat padding-box;
+  }
+}
+
+.cards-container {
+  // min-height: 500px;
+  .heading-section {
+    @apply flex h-auto justify-between items-center tracking-wide font-medium text-white;
+
+    .pagination {
+      @apply w-20 flex justify-between items-center;
+
+      button {
+        @apply h-8 w-9 rounded-md bg-primary-600;
+      }
+
+      span {
+        @apply font-medium;
+      }
+    }
+  }
+
+  .body-section {
+    @apply py-2;
+
+    div {
+      @apply flex overflow-auto;
+
+      app-nft-card {
+        @apply p-2;
+      }
+
+      app-nft-card:first-child  {
+        @apply pl-0;
+     }
+
+    }
+  }
+}
+
+
+.groups {
+  @apply h-full pt-2.5;
+  height: 326px;
+  .group {
+    @apply flex mb-3 p-2 w-full border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-1 rounded-md;
+    height: 70px;
+
+    img {
+      @apply w-16 h-full object-cover rounded-md;
+    }
+
+    .name {
+      @apply text-white pt-1 px-3 font-medium;
+    }
+
+    .items {
+      @apply px-3;
+      color: #71728a;
+    }
+  }
+}
+
+
+
+.custom-scrollbar-css-y {
+  overflow-x: scroll;
+}
+/* scrollbar width */
+.custom-scrollbar-css-y::-webkit-scrollbar {
+  height: 3px;
+}
+/* scrollbar track */
+
+/* scrollbar handle */
+// .custom-scrollbar-css-y::-webkit-scrollbar-thumb {
+//   border-radius: 1rem;
+//   background-color: #34ABC5;
+//   background-image: linear-gradient(to top, #3ABFF3 0%, #75F16D 100%);
+// }
+
+
+.coming-soon {
+  position: absolute;
+  right: 32%;
+  top: 40%;
+  font-size: 90px;
+  color: white;
+  text-shadow: 2px 2px 4px #000000;
+}
+
+@media (max-width: 640px) {
+  .coming-soon {
+    font-size: 24px !important;
+
+  }
+}
+
+.dropdown{
+  @apply my-1 rounded-md mx-3 w-32 border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-1 text-center;
+}
+
+.stats-btn {
+  @apply flex items-center justify-end h-12 p-1.5  absolute right-0 mt-4;
+  width: 133px;
+}
+.nft-label {
+  @apply flex items-center justify-center h-12 p-1.5  absolute left-0 pl-2 mt-4 mr-2 tracking-wide text-white font-medium ;
+  width: 133px;
+}
+
+.bg-image{
+  background: transparent linear-gradient(109deg, #59C8D1 0%, #75F16D 100%) 0% 0% no-repeat padding-box;
+}
