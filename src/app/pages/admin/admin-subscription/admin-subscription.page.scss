@@ -1,7 +1,7 @@
 .section-container{
-  @apply p-2 sm:py-3 sm:px-3;
+  @apply p-2 sm:py-3 sm:px-3 ;
 
-  min-height: 415px;
+  min-height: 305px;
 }
 .section{
   @apply w-full h-full rounded-lg;
@@ -15,7 +15,7 @@ svg {
 
 .chart-status {
   @apply relative h-full  rounded-lg;
-  background: transparent radial-gradient(closest-side at 50% 50%, #34237D 0%, #241858 100%) 0% 0% no-repeat padding-box;
+  background: #292A4D;
   background-size: auto 300px;
 
   .section {
@@ -36,16 +36,30 @@ svg {
   }
 }
 
+
+h1 {
+  @apply capitalize mt-6 mb-10 text-3xl text-center tracking-wider;
+  font-weight: 400;
+  span {
+    padding-bottom: 4px;
+    border-bottom: 3px solid #75F16D;
+
+  }
+
+
+}
+
 .status {
 
   .available-nft,
   .total-revenue,
   .pending-for-sale {
-    @apply w-full rounded-xl flex items-center px-7 py-8;
-    height: 126px;
+    @apply w-full  rounded-xl flex items-center px-7 py-8 mb-2;
+    height: 93px;
+
 
     .icon {
-      @apply w-28 h-full;
+      @apply w-28;
     }
 
     .value {
@@ -59,9 +73,6 @@ svg {
       }
     }
 
-    .graph-icon {
-      @apply h-16 w-16 pt-4;
-    }
   }
 
   .available-nft {
@@ -78,9 +89,9 @@ svg {
 }
 
 .cards-container {
-  // min-height: 500px;
+  min-height: 500px;
   .heading-section {
-    @apply flex h-auto justify-between items-center tracking-wide font-medium text-white;
+    @apply flex h-auto justify-center items-center tracking-wide font-medium text-white;
 
     .pagination {
       @apply w-20 flex justify-between items-center;
@@ -99,91 +110,26 @@ svg {
     @apply py-2;
 
     div {
-      @apply flex overflow-auto;
-
-      app-nft-card {
-        @apply p-2;
-      }
-
-      app-nft-card:first-child  {
-        @apply pl-0;
-     }
+      @apply overflow-auto;
 
     }
   }
 }
 
-
-.groups {
-  @apply h-full pt-2.5;
-  height: 326px;
-  .group {
-    @apply flex mb-3 p-2 w-full border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-1 rounded-md;
-    height: 70px;
-
-    img {
-      @apply w-16 h-full object-cover rounded-md;
-    }
-
-    .name {
-      @apply text-white pt-1 px-3 font-medium;
-    }
-
-    .items {
-      @apply px-3;
-      color: #71728a;
-    }
-  }
+.card-border{
+  @apply p-3 rounded-2xl m-4 border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-2 ;
+  height: 405px;
+  width: 368px;
+  border: 2px solid transparent;
 }
 
-
-
-.custom-scrollbar-css-y {
-  overflow-x: scroll;
-}
-/* scrollbar width */
-.custom-scrollbar-css-y::-webkit-scrollbar {
-  height: 3px;
-}
-/* scrollbar track */
-
-/* scrollbar handle */
-// .custom-scrollbar-css-y::-webkit-scrollbar-thumb {
-//   border-radius: 1rem;
-//   background-color: #34ABC5;
-//   background-image: linear-gradient(to top, #3ABFF3 0%, #75F16D 100%);
-// }
-
-
-.coming-soon {
-  position: absolute;
-  right: 32%;
-  top: 40%;
-  font-size: 90px;
-  color: white;
-  text-shadow: 2px 2px 4px #000000;
-}
-
-@media (max-width: 640px) {
-  .coming-soon {
-    font-size: 24px !important;
-
-  }
-}
-
-.dropdown{
-  @apply my-1 rounded-md mx-3 w-32 border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-1 text-center;
-}
-
-.stats-btn {
-  @apply flex items-center justify-end h-12 p-1.5  absolute right-0 mt-4;
-  width: 133px;
-}
-.nft-label {
-  @apply flex items-center justify-center h-12 p-1.5  absolute left-0 pl-2 mt-4 mr-2 tracking-wide text-white font-medium ;
-  width: 133px;
-}
-
-.bg-image{
+.btn-nft {
   background: transparent linear-gradient(109deg, #59C8D1 0%, #75F16D 100%) 0% 0% no-repeat padding-box;
 }
+.nft-img {
+  display: flex;
+
+  justify-content: center;
+  border-radius: 1.21rem;
+  border-radius: 21px;
+ }
