@@ -41,7 +41,7 @@
   <form action="" [formGroup]="createNft" class="px-0 overflow-y-auto sm:px-20 custom-scrollbar-css">
      <div *ngIf="imageSrc" class="relative flex flex-col edit-btn " (click)="edit()">
 
-     <div class="editBtn">
+     <div class="editBtn" (click)="editImg()">
       <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
         <g id="Group_56289" data-name="Group 56289" transform="translate(11150 -4)">
           <circle id="Ellipse_3170" data-name="Ellipse 3170" cx="12.5" cy="12.5" r="12.5" transform="translate(-11150 4)" fill="#fff"/>

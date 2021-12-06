@@ -110,26 +110,31 @@ export class CreateCustomTicketComponent implements OnInit, AfterViewInit {
       if (event.target.files && event.target.files[0]) {
         const reader = new FileReader();
         reader.onload = (e: any) => {
-          this.customDialogService.showImageCropperDialog(event, 1.13 / 1,true).then(matRef => {
-            matRef.afterClosed().subscribe((result) => {
-              console.log('showImageCropperDialog:',result);
-              if (result) {
-                this.imageSrc = result;
-                this.createNft.patchValue({
-                  img: this.imageSrc,
-                });
-              } else {
-                this.imageSrc = null;
-                this.file = null;
-                this.createNft.controls.img.setValue(null);
-                this.imgFile.nativeElement.value = "";
-              }
-            });
-          })
+          this.cropImg(event)
         };
         reader.readAsDataURL(event.target.files[0]);
       }
     }
+  }
+
+  cropImg(event) :void {
+    this.createNft.controls.file.setValue(event);
+    this.customDialogService.showImageCropperDialog(event, 1.13 / 1,true).then(matRef => {
+      matRef.afterClosed().subscribe((result) => {
+        // console.log('showImageCropperDialog:',result);
+        if (result) {
+          this.imageSrc = result;
+          this.createNft.patchValue({
+            img: this.imageSrc,
+          });
+        } else {
+          this.imageSrc = null;
+          this.file = null;
+          this.createNft.controls.img.setValue(null);
+          this.imgFile.nativeElement.value = "";
+        }
+      });
+    })
   }
 
   edit(){
@@ -211,6 +216,10 @@ export class CreateCustomTicketComponent implements OnInit, AfterViewInit {
 
       this.customDialogService.showCreateNFTticketPreviewDialog(dataUrl,false, false);
     });
+  }
+
+  editImg():void {
+    this.cropImg(this.createNft.controls.file.value);
   }
 
 }

@@ -117,7 +117,7 @@ export class UserSignUpComponent {
           console.log('img ccrop:',);
           this.customDialogService.showImageCropperDialog(event, 1 / 1,true).then(matRef => {
             matRef.afterClosed().subscribe((result) => {
-              console.log('showImageCropperDialog:',result);
+              // console.log('showImageCropperDialog:',result);
               if(result)
                 this.profileImageSrc = result;
               else {
