@@ -37,15 +37,18 @@ svg {
 }
 
 .status {
-
+  .available-ndct,
   .available-nft,
   .total-revenue,
   .pending-for-sale {
     @apply w-full rounded-xl flex items-center px-7 py-8;
-    height: 126px;
+    height: 85px;
 
     .icon {
-      @apply w-28 h-full;
+      img{
+        width: 35px;
+      }
+      @apply w-20 ;
     }
 
     .value {
@@ -55,15 +58,18 @@ svg {
         @apply text-gray-100 tracking-wider text-sm mb-2;
       }
       span {
-        @apply text-white font-medium text-2xl tracking-wide;
+        @apply text-white font-medium text-base tracking-wide;
       }
     }
 
-    .graph-icon {
-      @apply h-16 w-16 pt-4;
-    }
+    // .graph-icon {
+    //   @apply   pt-4;
+    // }
   }
 
+  .available-ndct {
+    background: transparent linear-gradient(271deg, #DC774E 0%, #EC8559 33%, #F39B76 64%, #FFB18F 100%) 0% 0% no-repeat padding-box;
+  }
   .available-nft {
     background: transparent linear-gradient(107deg, #40DDFF 0%, #14BAE3 19%, #13B1E6 69%, #11AADF 82%, #0B98C5 100%) 0% 0% no-repeat padding-box;
   }
@@ -145,24 +151,7 @@ svg {
 .custom-scrollbar-css-y::-webkit-scrollbar {
   height: 3px;
 }
-/* scrollbar track */
 
-/* scrollbar handle */
-// .custom-scrollbar-css-y::-webkit-scrollbar-thumb {
-//   border-radius: 1rem;
-//   background-color: #34ABC5;
-//   background-image: linear-gradient(to top, #3ABFF3 0%, #75F16D 100%);
-// }
-
-
-.coming-soon {
-  position: absolute;
-  right: 32%;
-  top: 40%;
-  font-size: 90px;
-  color: white;
-  text-shadow: 2px 2px 4px #000000;
-}
 
 @media (max-width: 640px) {
   .coming-soon {
@@ -186,4 +175,43 @@ svg {
 
 .bg-image{
   background: transparent linear-gradient(109deg, #59C8D1 0%, #75F16D 100%) 0% 0% no-repeat padding-box;
+}
+
+
+a.button {
+  margin: 20px;
+  font-size: 16px;
+  background-color: #DC774E;
+  padding: 8px;
+  border-radius: 12px;
+}
+
+.arrow {
+  color: #ffffff;
+
+  margin: 1em 0;
+
+  &::after {
+      display: inline-block;
+      padding-left: 8px;
+      content: "\0279E"; // arrow right unicode
+      -webkit-transition: transform 0.3s ease-out;
+      -moz-transition: transform 0.3s ease-out;
+      -ms-transition: transform 0.3s ease-out;
+      -o-transition: transform 0.3s ease-out;
+      transition: transform 0.3s ease-out;
+  }
+
+  &:hover {
+      color: #ffffff;
+
+
+      &::after {
+          -webkit-transform: translateX(4px);
+          -moz-transform: translateX(4px);
+          -ms-transform: translateX(4px);
+          -o-transform: translateX(4px);
+          transform: translateX(4px);
+      }
+  }
 }
