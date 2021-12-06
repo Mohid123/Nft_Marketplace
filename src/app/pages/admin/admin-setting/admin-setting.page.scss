@@ -31,4 +31,25 @@ h6 {
   }
 }
 
+.editProfileBtn {
+  position: absolute;
+  z-index: 1;
+  left: 49%;
+  top: 17%;
+   opacity: 0.8;
+  cursor: pointer;
+
+}
+
+.editCoverBtn {
+  position: absolute;
+  z-index: 1;
+  left: 49%;
+  top: 34%;
+  opacity: 0.8;
+  cursor: pointer;
+  // display: none;
+}
+
+
 
