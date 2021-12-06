@@ -35,7 +35,7 @@
                     <img class="preview" [src]="((creator$ | async)?.profileImageURL) || ''" alt="">
 
                 </ng-container>
-                <div class="editProfileBtn" (click)="editProfileImg()">
+                <div *ngIf="profileImage" class="editProfileBtn" (click)="editProfileImg()">
                   <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
                     <g id="Group_56289" data-name="Group 56289" transform="translate(11150 -4)">
                       <circle id="Ellipse_3170" data-name="Ellipse 3170" cx="12.5" cy="12.5" r="12.5" transform="translate(-11150 4)" fill="#fff"/>
@@ -71,7 +71,7 @@
                     <img class="preview" [src]="((creator$ | async)?.coverImageURL) || ''" alt="">
 
                 </ng-container>
-                <div class="editCoverBtn" (click)="editCoverImg()">
+                <div *ngIf="coverImage" class="editCoverBtn" (click)="editCoverImg()">
                   <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
                     <g id="Group_56289" data-name="Group 56289" transform="translate(11150 -4)">
                       <circle id="Ellipse_3170" data-name="Ellipse 3170" cx="12.5" cy="12.5" r="12.5" transform="translate(-11150 4)" fill="#fff"/>
