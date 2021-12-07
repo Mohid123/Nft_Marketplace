@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@app/pages/auth/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { CustomDialogService } from './../../../../@core/services/custom-dialog/custom-dialog.service';
 import { RouteService } from './../../../../@core/services/route.service';
 
 @Component({
@@ -15,6 +16,7 @@ export class ProfileButtonComponent {
 
   constructor(
     private authService: AuthService,
+    private customDialogService: CustomDialogService,
     private router: Router,
     private routeService: RouteService,
     private toastr: ToastrService
@@ -27,6 +29,10 @@ export class ProfileButtonComponent {
       this.authService.signOut();
     });
     this.toastr.success(`You've logged out.`, 'Logout!')
+  }
+
+  exportKey() {
+    this.customDialogService.showExportKeyDialog();
   }
 
 }
