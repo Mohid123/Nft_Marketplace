@@ -1,11 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NFT } from '@app/@core/models/NFT.model';
+import { SubscriptionPlan } from '@app/@core/models/subscription-plan.model';
 import { CreatorService } from '@app/@core/services/creator.service';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { AuthService } from '@app/pages/auth/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
-import { BuyNFT } from './../../../../@core/models/requests/buy-nft.model';
+import { BuyNFT, BuySubscription } from './../../../../@core/models/requests/buy-nft.model';
 import { ApiResponse } from './../../../../@core/models/response.model';
 import { StripeService } from './../../../../@core/services/stripe.service';
 
@@ -18,6 +19,7 @@ import { StripeService } from './../../../../@core/services/stripe.service';
 export class StripePaymentComponent  {
 
   @Input() nft:NFT;
+  @Input() subscriptionPlan:SubscriptionPlan;
 
   creator$ = this.creatorService.Creator$;
   public stripeForm: FormGroup;
@@ -43,7 +45,17 @@ export class StripePaymentComponent  {
   }
 
   payNowClick(): void {
+    console.log('nft:',this.nft);
+    if(this.nft?.id) {
+      this.purchaseNFT()
+    } else {
+      this.purchaseSubscriptionPlan();
+    }
 
+    // this.close();
+  }
+
+  purchaseNFT():void {
     const param: BuyNFT = {
       card : {
         number: this.stripeForm.controls.cardNo.value.toString(),
@@ -70,7 +82,33 @@ export class StripePaymentComponent  {
          this.toastr.warning(res.errors[0]?.error?.message, 'Error!');
        }
      });
-    // this.close();
+  }
+
+  purchaseSubscriptionPlan(): void {
+    const param: BuySubscription = {
+      stripeDto : {
+      card : {
+        number: this.stripeForm.controls.cardNo.value.toString(),
+        expMonth: +this.stripeForm.controls.validity.value.substring(0, 2),
+        expYear: +this.stripeForm.controls.validity.value.substring(3, 5),
+        cvc: +this.stripeForm.controls.cvv.value
+      }
+    },
+      tokenQuantity : this.subscriptionPlan.tokenQuantity,
+    };
+    this.isLoading = true;
+    this.stripeService.purchaseSubscription(param).subscribe((res:ApiResponse<NFT>)=> {
+      this.isLoading = false;
+      if(!res.hasErrors()) {
+        console.log('subscriptionPlan Res:',res.data);
+        this.customDialogService.showLoadingDialog('Subscription In Process');
+         setTimeout(() => {
+           this.customDialogService.closeDialogs();
+         }, 3000);
+       } else {
+         this.toastr.warning(res.errors[0]?.error?.message, 'Error!');
+       }
+     });
   }
 
   isDateValid() {

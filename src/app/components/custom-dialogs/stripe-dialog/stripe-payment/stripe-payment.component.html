@@ -15,11 +15,11 @@
   <div class="h-16 mt-0 .center">
     <img class="object-center" src="./assets/logo/stripe-logo-blue.png">
   </div>
-  <div class="mt-6 rounded-2xl w-28 h-28">
-    <img class="object-center" *ngIf="nft?.serverCaptureFileUrl" [src]="nft?.serverCaptureFileUrl">
+  <div *ngIf="nft?.serverCaptureFileUrl" class="mt-6 rounded-2xl w-28 h-28">
+    <img class="object-center" [src]="nft?.serverCaptureFileUrl">
   </div>
   <div class="w-full price">
-    <p style="width:fit-content;" class="pb-5 mx-auto mt-2 font-bold min-w-min">€ {{nft.price}}</p>
+    <p style="width:fit-content;" class="pb-5 mx-auto mt-2 font-bold min-w-min">€ {{nft?.price || subscriptionPlan?.price }}</p>
   </div>
   <!-- <h1 class=""><span>Sig</span>n in</h1> -->
   <form  [formGroup]="stripeForm" class="strip-payment-form">
