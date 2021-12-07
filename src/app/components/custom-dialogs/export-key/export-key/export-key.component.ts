@@ -7,6 +7,7 @@ import { CustomDialogService } from './../../../../@core/services/custom-dialog/
   styleUrls: ['./export-key.component.scss']
 })
 export class ExportKeyComponent  {
+  btnVal = "Copy";
 
   constructor(
     private customDialogService:CustomDialogService,
@@ -15,5 +16,17 @@ export class ExportKeyComponent  {
   close():void {
     this.customDialogService.closeDialogs();
   }
+
+  copyInputMessage(inputElement) {
+    inputElement.select();
+    document.execCommand("copy");
+    inputElement.setSelectionRange(0, 0);
+  }
+
+  changeText()
+      {
+        this.btnVal = "Copied!"
+      }
+
 
 }
