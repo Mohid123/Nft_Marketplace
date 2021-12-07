@@ -6,6 +6,7 @@ import { NFT } from '@app/@core/models/NFT.model';
 import { AuthDialogService } from '@app/components/custom-dialogs/auth-diloag/auth-dialog.service';
 import { AuthService } from '@app/pages/auth/services/auth.service';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { ExportKeyService as ExportKeyDialogService } from '../../../components/custom-dialogs/export-key/export-key-dialog.service';
 import { CreateGroupService } from './../../../components/custom-dialogs/create-group-dialog/create-group.service';
 import { CreateNFTDiloagService } from './../../../components/custom-dialogs/create-ntf-diloag/create-nft-diloag.service';
 import { ImageCropperService } from './../../../components/custom-dialogs/image-cropper/image-cropper.service';
@@ -32,6 +33,7 @@ export class CustomDialogService {
     private authDialogService: AuthDialogService,
     private createNFTDiloagService: CreateNFTDiloagService,
     private createGroupService: CreateGroupService,
+    private exportKeyDialogService: ExportKeyDialogService,
     private loadingDialogService: LoadingDialogService,
     private stripeDialogService: StripeDialogService,
     private imageCropperService: ImageCropperService,
@@ -166,6 +168,11 @@ export class CustomDialogService {
     this.matDialog.closeAll();
     this._mapDialogref = await this.loadingDialogService.getLoadingDialogComponent();
     this._mapDialogref.componentInstance.status = status;
+  }
+
+  async showExportKeyDialog() {
+    this.matDialog.closeAll();
+    this._mapDialogref = await this.exportKeyDialogService.getExportKeyComponent();
   }
 
   showImageCropperDialog(img,aspectRatio,maintainAspectRatio) {
