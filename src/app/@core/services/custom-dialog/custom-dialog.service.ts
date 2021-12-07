@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { NFT } from '@app/@core/models/NFT.model';
+import { SubscriptionPlan } from '@app/@core/models/subscription-plan.model';
 import { AuthDialogService } from '@app/components/custom-dialogs/auth-diloag/auth-dialog.service';
 import { AuthService } from '@app/pages/auth/services/auth.service';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -151,11 +152,12 @@ export class CustomDialogService {
     // });
   }
 
-  async showStripePaymenDialog(nft:NFT) {
+  async showStripePaymenDialog(nft?:NFT, subscriptionPlan?: SubscriptionPlan) {
     if(this.authService.isLoggedIn) {
     this.matDialog.closeAll();
     this._mapDialogref = await this.stripeDialogService.openStripePaymentComponent();
     this._mapDialogref.componentInstance.nft = nft;
+    this._mapDialogref.componentInstance.subscriptionPlan = subscriptionPlan;
     // (await this._mapDialogref).afterClosed().subscribe((result) => {
     //   console.log('Mat Dialog Results admin sign in:', result);
     // });

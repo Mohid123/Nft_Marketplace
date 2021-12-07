@@ -9,11 +9,11 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
 import { AddStripeKey } from '../models/requests/add-stripe-key.model';
 import { ResponseStripeStatus } from '../models/response-add-stripe-key.model';
-import { BuyNFT } from './../models/requests/buy-nft.model';
+import { BuyNFT, BuySubscription } from './../models/requests/buy-nft.model';
 import { ApiResponse } from './../models/response.model';
 import { ApiService } from './api.service';
 
-type StripeApiData = ResponseStripeStatus | NFT;
+type StripeApiData = ResponseStripeStatus | NFT | any;
 @Injectable({
   providedIn: 'root',
 })
@@ -53,11 +53,23 @@ export class StripeService extends ApiService<StripeApiData> {
     // }, 3000);
   }
 
+  purchaseSubscription(params:BuySubscription) {
+    // this.spinner.show('main');
+    return this.stripePayForSubscription(params).pipe(take(1));
+    // setTimeout(() => {
+    //   this.customDialogService.closeDialogs();
+    // }, 3000);
+  }
+
   purchaseNFTSuccess(data):void {
     this._purchaseSuccess$.next(data)
   }
 
   stripePay(params:BuyNFT): Observable<ApiResponse<StripeApiData>> {
     return this.post('/nft/buyNft/'+ params.nftId, params);
+  }
+
+  stripePayForSubscription(params:BuySubscription): Observable<ApiResponse<StripeApiData>> {
+    return this.post('/token-transaction/buyNdct/',params);
   }
 }
