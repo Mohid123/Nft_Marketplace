@@ -32,5 +32,8 @@
 
 }
 
-
-
+.view-btn {
+  @apply self-center px-6 mt-6 text-sm text-center border-solid rounded-full h-14;
+  box-shadow: 0px 3px 40px #5640F594;
+  border: 1px solid #5640F5;
+}
