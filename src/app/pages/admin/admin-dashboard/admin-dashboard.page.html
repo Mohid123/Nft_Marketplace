@@ -5,10 +5,10 @@
     <div class="order-1 w-full section-container lg:order-1 xl:w-65 lg:w-3/5 ">
       <div class="relative chart-status">
         <span class="nft-label">NFT STATS</span>
-        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu" class="stats-btn">
+        <span mat-icon-button  class="stats-btn">
 
-          <mat-icon style="width: 16px; color:white">more_vert</mat-icon>
-       </button>
+          <mat-icon class="cursor-pointer" [matMenuTriggerFor]="menu" aria-label="menu" style=" color:white">more_vert</mat-icon>
+       </span>
         <mat-menu #menu="matMenu" class="bg-primary-600 mt-0.5" xPosition='before'>
           <ng-container *ngFor="let month of months;let i = index">
             <button (click)="chartStatus(i)" class="dropdown" mat-menu-item >

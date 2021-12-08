@@ -1,3 +1,36 @@
 .container {
   max-width: 100% !important ;
 }
+
+
+.clubs-container {
+  @apply flex flex-wrap w-full h-auto justify-center flex-row;
+
+  .x-gap {
+    margin: 15px 35px;
+  }
+
+  .circle {
+    height: 212px;
+    width: 212px;
+    background: transparent radial-gradient(closest-side at 50% 50%, #11143F 0%, #130633 100%) 0% 0% no-repeat padding-box;
+    box-shadow: 0px 15px 40px #329AF540;
+    @apply flex flex-col content-center justify-center rounded-full
+  }
+
+  .club-logo {
+    @apply block ml-auto mr-auto;
+  }
+
+  .title {
+    @apply text-lg font-light text-center;
+  }
+
+  .icon {
+    @apply block mt-2 ml-auto mr-auto opacity-25;
+  }
+
+}
+
+
+
