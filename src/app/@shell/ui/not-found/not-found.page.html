@@ -1,5 +1,5 @@
-<div class="container flex flex-col items-center justify-center h-auto bg-center bg-cover"
-  style="background-image: url(../../../../assets/banner/bg-404.jpg);">
+<div class="container relative flex flex-col items-center justify-center h-auto bg-center bg-cover m-auto"
+  style="background-image: url(../../../../assets/banner/bg-404.jpg); ">
 
   <div class="flex flex-col w-full">
     <h1 class="text-4xl font-light text-center mb-9 mt-9">Search Your Club</h1>
@@ -17,62 +17,157 @@
         </div>
       </div>
     </div>
-      <marquee class="slider" [class.show-all]="allClub" direction="left" onMouseOver="this.stop()" onMouseOut="this.start()">
-
-        <div class="marquee-container">
-          <div class="x-gap circle">
-            <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="">
-            <span class="title">TEST</span>
-            <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt=""></span>
-          </div>
-          <div class="x-gap circle">
-            <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="">
-            <span class="title">TEST</span>
-            <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt=""></span>
-          </div>
-          <div class="x-gap circle">
-            <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="">
-            <span class="title">TEST</span>
-            <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt=""></span>
-          </div>
-          <div class="x-gap circle">
-            <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="">
-            <span class="title">TEST</span>
-            <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt=""></span>
-          </div>
-          <div class="x-gap circle">
-            <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="">
-            <span class="title">TEST</span>
-            <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt=""></span>
-          </div>
-          <div class="x-gap circle">
-            <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="">
-            <span class="title">TEST</span>
-            <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt=""></span>
-          </div>
-          <div class="x-gap circle">
-            <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="">
-            <span class="title">TEST</span>
-            <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt=""></span>
-          </div>
-          <div class="x-gap circle">
-            <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="">
-            <span class="title">TEST</span>
-            <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt=""></span>
-          </div>
-        </div>
-      </marquee>
 
 
+      <swiper
+      [slidesPerView]="4"
+      [spaceBetween]="30"
+      [centeredSlides]="true"
+      [pagination]="{
+        clickable: true
+      }"
+      [autoplay]="{
+        delay: 2500,
+        disableOnInteraction: false
+      }"
+      [navigation]="true"
+      class="mySwiper slider"
+    [class.show-all]="allClub"
+    >
+      <ng-template swiperSlide><div class="x-gap circle">
+        <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="">
+        <span class="title">TEST</span>
+        <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt="" style=" opacity: 0.3;"></span>
+      </div></ng-template
+      ><ng-template swiperSlide><div class="x-gap circle">
+        <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="">
+        <span class="title">TEST</span>
+        <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt="" style=" opacity: 0.3;"></span>
+      </div></ng-template
+      ><ng-template swiperSlide><div class="x-gap circle">
+        <img class="club-logo" src="./assets/logo/stripe-logo-blue.png"  alt="" >
+        <span class="title">TEST</span>
+        <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt="" style="opacity: 0.3;"></span>
+      </div></ng-template
+      ><ng-template swiperSlide><div class="x-gap circle">
+        <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="">
+        <span class="title">TEST</span>
+        <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt="" style="opacity: 0.3;"></span>
+      </div></ng-template
+      ><ng-template swiperSlide><div class="x-gap circle">
+        <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="">
+        <span class="title">TEST</span>
+        <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt="" style="opacity: 0.3;"></span>
+      </div></ng-template
+      ><ng-template swiperSlide><div class="x-gap circle">
+        <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="">
+        <span class="title">TEST</span>
+        <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt="" style="opacity: 0.3;"></span>
+      </div></ng-template
+      ><ng-template swiperSlide><div class="x-gap circle">
+        <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="">
+        <span class="title">TEST</span>
+        <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt="" style="opacity: 0.3;"></span>
+      </div></ng-template
+      ><ng-template swiperSlide><div class="x-gap circle">
+        <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="" >
+        <span class="title">TEST</span>
+        <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt="" style="opacity: 0.3;"></span>
+      </div></ng-template
+      ><ng-template swiperSlide><div class="x-gap circle">
+        <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="">
+        <span class="title">TEST</span>
+        <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt="" style="opacity: 0.3;"></span>
+      </div></ng-template>
+    </swiper>
 
-      <button (click)="showAllClub()" class="view-btn slider" [class.show-all]="allClub">
+      <button (click)="showAllClub()" class="view-btn " [class.show-all]="allClub">
         View all
       </button>
 
+
+
   </div>
 
-  <div class="main-container all-club" [class.show-all]="allClub">
+
+
+ <div class=" all-club" [class.show-all]="allClub">
     <div class="clubs-container"  [class.show-all]="!allClub">
+      <div class="x-gap circle">
+        <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="">
+        <span class="title">TEST</span>
+        <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt=""></span>
+      </div>
+      <div class="x-gap circle">
+        <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="">
+        <span class="title">TEST</span>
+        <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt=""></span>
+      </div>
+      <div class="x-gap circle">
+        <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="">
+        <span class="title">TEST</span>
+        <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt=""></span>
+      </div>
+      <div class="x-gap circle">
+        <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="">
+        <span class="title">TEST</span>
+        <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt=""></span>
+      </div>
+      <div class="x-gap circle">
+        <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="">
+        <span class="title">TEST</span>
+        <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt=""></span>
+      </div>
+      <div class="x-gap circle">
+        <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="">
+        <span class="title">TEST</span>
+        <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt=""></span>
+      </div>
+      <div class="x-gap circle">
+        <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="">
+        <span class="title">TEST</span>
+        <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt=""></span>
+      </div>
+      <div class="x-gap circle">
+        <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="">
+        <span class="title">TEST</span>
+        <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt=""></span>
+      </div>
+      <div class="x-gap circle">
+        <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="">
+        <span class="title">TEST</span>
+        <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt=""></span>
+      </div>
+      <div class="x-gap circle">
+        <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="">
+        <span class="title">TEST</span>
+        <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt=""></span>
+      </div>
+      <div class="x-gap circle">
+        <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="">
+        <span class="title">TEST</span>
+        <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt=""></span>
+      </div>
+      <div class="x-gap circle">
+        <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="">
+        <span class="title">TEST</span>
+        <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt=""></span>
+      </div>
+      <div class="x-gap circle">
+        <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="">
+        <span class="title">TEST</span>
+        <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt=""></span>
+      </div>
+      <div class="x-gap circle">
+        <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="">
+        <span class="title">TEST</span>
+        <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt=""></span>
+      </div>
+      <div class="x-gap circle">
+        <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="">
+        <span class="title">TEST</span>
+        <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt=""></span>
+      </div>
       <div class="x-gap circle">
         <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="">
         <span class="title">TEST</span>

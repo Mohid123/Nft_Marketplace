@@ -1,10 +1,11 @@
 :host {
-  @apply w-full flex justify-center h-auto;
+  @apply w-full flex justify-center items-center h-auto;
   min-height: calc(100% - 105px);
 }
 
 .container {
   max-width: 100% !important ;
+  // max-height: 100% !important
 }
 
 
@@ -36,34 +37,7 @@
   }
 
 }
-.marquee-container {
-  @apply flex  h-auto justify-around flex-row mt-5;
-  width: 180%;
-  .x-gap {
-    margin: 15px 0px;
-  }
 
-  .circle {
-    height: 212px;
-    width: 212px;
-    background: transparent radial-gradient(closest-side at 50% 50%, #11143F 0%, #130633 100%) 0% 0% no-repeat padding-box;
-    box-shadow: 0px 15px 40px #329AF540;
-    @apply flex flex-col content-center justify-center rounded-full
-  }
-
-  .club-logo {
-    @apply block ml-auto mr-auto;
-  }
-
-  .title {
-    @apply text-lg font-light text-center;
-  }
-
-  .icon {
-    @apply block mt-2 ml-auto mr-auto opacity-25;
-  }
-
-}
 
 .view-btn {
   @apply self-center px-14 mt-6 text-sm text-center border-solid rounded-full h-14;
@@ -83,7 +57,7 @@
 }
 
 .all-club {
-  height: 0px;
+  // height: 0px;
   visibility: hidden;
   transition: height visibility 2s;
 }
@@ -91,4 +65,49 @@
 .all-club.show-all {
   height: auto;
   visibility: visible;
+}
+
+
+
+.mySwiper{
+  margin-top: 75px;
+}
+
+.swiper {
+  width: 100%;
+  height: 30%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  height: 212px;
+  width: 212px !important;
+  border-radius: 100%;
+  background: transparent radial-gradient(closest-side at 50% 50%, #11143F 0%, #130633 100%) 0% 0% no-repeat padding-box;
+  box-shadow: 0px 15px 40px #329AF540;
+
+
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  // width: 100%;
+
+  margin-left: auto;
+  margin-right: auto;
+  object-fit: cover;
 }

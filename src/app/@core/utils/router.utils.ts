@@ -6,7 +6,8 @@ export const ROUTER_UTILS = {
       detail: 'detail',
       dashboard: 'dashboard',
       wallet: 'wallet',
-      tradingHistory: 'trading-history'
+      tradingHistory: 'trading-history',
+      pageNotfound: '404'
     },
     admin: {
       root:'admin',
