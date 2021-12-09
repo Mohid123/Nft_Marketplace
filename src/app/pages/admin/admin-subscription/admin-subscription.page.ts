@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { TransactionStatsWallet } from '@app/@core/models/transaction-stats-wallet.model';
+import { TransactionStats } from '@app/@core/models/transaction-stats.model';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { interval } from 'rxjs';
 import { takeWhile, tap } from 'rxjs/operators';
 import { SubscriptionPlan } from './../../../@core/models/subscription-plan.model';
+import { TransactionService } from './../../../@core/services/transaction.service';
 
 @Component({
   selector: 'app-admin-subscription',
@@ -10,6 +13,10 @@ import { SubscriptionPlan } from './../../../@core/models/subscription-plan.mode
   styleUrls: ['./admin-subscription.page.scss'],
 })
 export class AdminSubscriptionPage implements OnInit {
+
+  public wallet:TransactionStatsWallet;
+  public stats:TransactionStats;
+
   public subscriptionPlan: SubscriptionPlan[] = [
     {
       price: 500,
@@ -26,10 +33,18 @@ export class AdminSubscriptionPage implements OnInit {
   ];
 
   constructor(
-    private customDialogService: CustomDialogService
+    private customDialogService: CustomDialogService,
+    private transactionService: TransactionService,
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.transactionService.getTransactionStats().subscribe(result=> {
+      if(!result.hasErrors()) {
+        this.wallet = result.data.wallet;
+        this.stats = result.data.stats;
+      }
+    })
+  }
 
   scrollLeft(el: Element) {
     const animTimeMs = 400;
