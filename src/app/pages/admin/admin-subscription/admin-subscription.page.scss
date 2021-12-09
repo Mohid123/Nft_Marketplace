@@ -54,12 +54,14 @@ h1 {
   .available-nft,
   .total-revenue,
   .pending-for-sale {
-    @apply w-full  rounded-xl flex items-center px-7 py-8 mb-2;
+    @apply w-full  rounded-xl flex items-center px-7 py-8 mb-2 justify-around;
     height: 93px;
 
 
     .icon {
-      @apply w-28;
+      img{
+        width: 35px;
+      }
     }
 
     .value {

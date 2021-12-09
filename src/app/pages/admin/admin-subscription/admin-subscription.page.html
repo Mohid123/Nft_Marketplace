@@ -10,7 +10,7 @@
             <div class="ml-3 " >
               <button
               class="inline-flex items-center justify-between px-3 bg-gray-600 bg-opacity-25 rounded cursor-pointer md:mt-0 ">
-              <a href="" target=_blank
+              <a href="{{wallet.walletUrl}}" target=_blank
                 class="ml-3 mr-3 text-sm leading-none text-gray-400 ">{{wallet.walletAddress}}</a>
                 <a  href="{{wallet.walletUrl}}" target=_blank
                 class=""><img class="w-4 h-10 ml-20 " src="./assets/icons/exit-top-right.svg" alt="polygon" /></a>
@@ -105,10 +105,10 @@
           </div>
           <div class="total-revenue">
             <div class="icon">
-              <img class="" src="./assets/icons/revenue.svg"/>
+              <img class="" src="./assets/icons/ndct icon.svg"/>
             </div>
             <div class="value">
-              <p>Available NFT</p>
+              <p>Available NDCT</p>
               <span>{{stats.availableNdct}}</span>
             </div>
             <div class="graph-icon">
@@ -117,11 +117,11 @@
           </div>
           <div class="pending-for-sale">
             <div class="icon">
-              <img class="" src="./assets/icons/cart.svg"/>
+              <img class="" src="./assets/icons/revenue.svg"/>
             </div>
             <div class="value">
               <p>Total Supply</p>
-              <span>€ {{stats.totalSupply}}</span>
+              <span>{{stats.totalSupply}}</span>
             </div>
             <div class="graph-icon">
               <img class="" src="./assets/icons/growth.png"/>
