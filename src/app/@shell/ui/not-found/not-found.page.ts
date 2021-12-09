@@ -7,4 +7,11 @@ import { ROUTER_UTILS } from '@app/@core/utils/router.utils';
 })
 export class NotFoundPage {
   path = ROUTER_UTILS.config.base;
+
+  public allClub = false;
+
+  showAllClub() {
+    this.allClub = true;
+  }
 }
+

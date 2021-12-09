@@ -1,3 +1,8 @@
+:host {
+  @apply w-full flex justify-center h-auto;
+  min-height: calc(100% - 105px);
+}
+
 .container {
   max-width: 100% !important ;
 }
@@ -64,4 +69,26 @@
   @apply self-center px-14 mt-6 text-sm text-center border-solid rounded-full h-14;
   box-shadow: 0px 3px 40px #5640F594;
   border: 1px solid #5640F5;
+}
+
+
+
+.slider {
+  height: auto;
+  transition: height 2s;
+}
+
+.slider.show-all {
+  height: 0;
+}
+
+.all-club {
+  height: 0px;
+  visibility: hidden;
+  transition: height visibility 2s;
+}
+
+.all-club.show-all {
+  height: auto;
+  visibility: visible;
 }
