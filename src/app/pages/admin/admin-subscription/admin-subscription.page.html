@@ -11,8 +11,8 @@
               <button
               class="inline-flex items-center justify-between px-3 bg-gray-600 bg-opacity-25 rounded cursor-pointer md:mt-0 ">
               <a href="" target=_blank
-                class="ml-3 mr-3 text-sm leading-none text-gray-400 ">xh2774883hdhhsk098xcd63788sgh21123788sgh2112</a>
-                <a  href="" target=_blank
+                class="ml-3 mr-3 text-sm leading-none text-gray-400 ">{{wallet.walletAddress}}</a>
+                <a  href="{{wallet.walletUrl}}" target=_blank
                 class=""><img class="w-4 h-10 ml-20 " src="./assets/icons/exit-top-right.svg" alt="polygon" /></a>
 
             </button>
@@ -36,8 +36,8 @@
 
 
                 <div class="text-gray-400 value">
-                  <p >72,36,415 <b class="text-white">NDCT</b></p>
-                  <span>€ 4500</span>
+                  <p >{{stats.totalNdct}} <b class="text-white">NDCT</b></p>
+                  <!-- <span>€ 4500</span> -->
                 </div>
 
               </div>
@@ -57,8 +57,8 @@
 
 
                 <div class="text-gray-400 value">
-                  <p >72,36,415 <b class="text-white">NDCT</b></p>
-                  <span>€ 4500</span>
+                  <p >{{stats.spentNdct}} <b class="text-white">NDCT</b></p>
+                  <!-- <span>€ 4500</span> -->
                 </div>
 
               </div>
@@ -78,8 +78,8 @@
 
 
                 <div class="text-gray-400 value">
-                  <p >72,36,415 <b class="text-white">NDCT</b></p>
-                  <span>€ 4500</span>
+                  <p >{{stats.spentAmount}} <b class="text-white">NDCT</b></p>
+                  <!-- <span>€ 4500</span> -->
                 </div>
 
               </div>
@@ -97,7 +97,7 @@
             </div>
             <div class="value">
               <p>Current Price</p>
-              <span>€ 4500</span>
+              <span>€ {{stats.price}}</span>
             </div>
             <div class="graph-icon">
               <img class="" src="./assets/icons/growth.png"/>
@@ -109,7 +109,7 @@
             </div>
             <div class="value">
               <p>Available NFT</p>
-              <span>46988</span>
+              <span>{{stats.availableNdct}}</span>
             </div>
             <div class="graph-icon">
               <img class="" src="./assets/icons/growth.png"/>
@@ -121,7 +121,7 @@
             </div>
             <div class="value">
               <p>Total Supply</p>
-              <span>€ 8977</span>
+              <span>€ {{stats.totalSupply}}</span>
             </div>
             <div class="graph-icon">
               <img class="" src="./assets/icons/growth.png"/>
