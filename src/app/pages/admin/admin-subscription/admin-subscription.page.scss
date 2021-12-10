@@ -135,3 +135,19 @@ h1 {
   border-radius: 1.21rem;
   border-radius: 21px;
  }
+
+
+ #fileName span {
+  white-space: nowrap;
+  overflow: hidden;
+  display:inline-block;
+}
+#fileName span:first-child {
+  width: 60px;
+  text-overflow: ellipsis;
+}
+#fileName span + span {
+  width: 40px;
+  direction:rtl;
+  text-align:right;
+}

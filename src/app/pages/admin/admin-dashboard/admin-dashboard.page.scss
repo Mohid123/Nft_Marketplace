@@ -42,8 +42,8 @@ svg {
   .available-nft,
   .total-revenue,
   .pending-for-sale {
-    @apply w-full rounded-xl flex items-center px-7 py-8;
-    height: 85px;
+    @apply w-full rounded-xl flex items-center justify-around px-7 py-8;
+    height: 95px;
 
     .icon {
       img{
@@ -53,7 +53,7 @@ svg {
     }
 
     .value {
-      @apply w-28;
+      @apply w-32;
 
       p {
         @apply text-gray-100 tracking-wider text-sm mb-2;
@@ -180,7 +180,7 @@ svg {
 
 
 a.button {
-  margin: 20px;
+  // margin: 20px;
   font-size: 16px;
   background-color: #DC774E;
   padding: 8px;

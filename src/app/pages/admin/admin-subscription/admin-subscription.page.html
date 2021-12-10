@@ -10,8 +10,8 @@
             <div class="ml-3 " >
               <button
               class="inline-flex items-center justify-between px-3 bg-gray-600 bg-opacity-25 rounded cursor-pointer md:mt-0 ">
-              <a href="{{wallet.walletUrl}}" target=_blank
-                class="ml-3 mr-3 text-sm leading-none text-gray-400 ">{{wallet.walletAddress}}</a>
+              <a href="{{wallet.walletUrl}}" target=_blank id="fileName"
+                class="ml-3 mr-3 text-sm leading-none text-gray-400 "><span>{{wallet.walletAddress}}</span><span>{{wallet.walletAddress}}</span></a>
                 <a  href="{{wallet.walletUrl}}" target=_blank
                 class=""><img class="w-4 h-10 ml-20 " src="./assets/icons/exit-top-right.svg" alt="polygon" /></a>
 
@@ -69,7 +69,7 @@
                   <img class="w-11 h-11" src="../../../../assets/icons/EXCHANGE RATE.svg"/>
                 </div>
                 <div class="flex ml-3">
-                  <p>Exchange Rate</p>
+                  <p>Spent Amount</p>
 
                 </div>
 
@@ -78,8 +78,8 @@
 
 
                 <div class="text-gray-400 value">
-                  <p >{{stats.spentAmount}} <b class="text-white">NDCT</b></p>
-                  <!-- <span>€ 4500</span> -->
+                   <p> <b class="text-white">€ </b>{{stats.spentAmount}} </p>
+                  <!-- <span> 4500</span> -->
                 </div>
 
               </div>
@@ -97,7 +97,7 @@
             </div>
             <div class="value">
               <p>Current Price</p>
-              <span>€ {{stats.price || 0 | number: '2.' }}</span>
+              <span>€ {{stats.price || 0 | number: '1.' }}</span>
             </div>
             <div class="graph-icon">
               <img class="" src="./assets/icons/growth.png"/>
@@ -109,7 +109,7 @@
             </div>
             <div class="value">
               <p>Available NDCT</p>
-              <span>{{stats.availableNdct || 0 | number: '2.' }}</span>
+              <span>{{stats.availableNdct || 0 | number: '1.' }}</span>
             </div>
             <div class="graph-icon">
               <img class="" src="./assets/icons/growth.png"/>

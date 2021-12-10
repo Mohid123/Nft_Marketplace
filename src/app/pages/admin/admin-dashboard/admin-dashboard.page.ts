@@ -149,6 +149,7 @@ export class AdminDashboardPage implements AfterViewInit {
     private groupService: GroupService,
     private nftService: NFTService,
     private routeService: RouteService,
+
   ){
     this.monthIndex = 0;
     this.page = 1;
