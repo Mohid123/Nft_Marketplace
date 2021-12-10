@@ -115,7 +115,7 @@ export class CreateMembershipComponent implements OnInit, AfterViewInit {
         reader.onload = (e: any) => {
           this.customDialogService.showImageCropperDialog(event, 4 / 1,false).then(matRef => {
             matRef.afterClosed().subscribe((result) => {
-              console.log('showImageCropperDialog:',result);
+              // console.log('showImageCropperDialog:',result);
               if (result) {
                 this.imageSrc = result;
                 this.createNft.patchValue({

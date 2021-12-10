@@ -8,3 +8,9 @@ export interface BuyNFT {
   nftId:       string;
   clubUserId:  string;
 }
+export interface BuySubscription {
+  tokenQuantity: number;
+  stripeDto: {
+    card: CreditCard;
+  };
+}

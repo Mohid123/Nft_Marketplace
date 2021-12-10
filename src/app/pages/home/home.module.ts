@@ -11,12 +11,14 @@ import { HistoryModule } from '@app/@shell/ui/history/history.module';
 import { MarketplaceSearchModule } from '@app/@shell/ui/marketplace-search/marketplace-search.module';
 import { QrCodeModule } from 'ng-qrcode';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { SwiperModule } from 'swiper/angular';
 import { AuthGuard } from './../../@core/guards/auth.guard';
 import { LoggedInUserSearchModule } from './../../@shell/ui/logged-in-user-search/logged-in-user-search.module';
 import { CardModule } from './../../@shell/ui/nft-card/card.module';
 import { CardDetailPage } from './card-detail/card-detail.page';
 import { HomePage } from './home.page';
 import { MarketPlacePage } from './market-place/market-place.page';
+import { PageNotFoundPage } from './page-not-found/page-not-found.page';
 import { TradingHistoryPage } from './trading-history/trading-history.page';
 import { WalletPage } from './wallet/wallet.page';
 
@@ -69,10 +71,20 @@ const childRoutes: Routes = [
     },
     canActivate: [AuthGuard],
   },
+  {
+    path: ROUTER_UTILS.config.base.pageNotfound,
+    component: PageNotFoundPage,
+    data: {
+      title: '404',
+      description: '404 Description',
+      robots: 'index, follow',
+    },
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({
-  declarations: [HomePage, MarketPlacePage, CardDetailPage, WalletPage, TradingHistoryPage],
+  declarations: [HomePage, MarketPlacePage, CardDetailPage, WalletPage, TradingHistoryPage, PageNotFoundPage],
   imports: [
     CommonModule,
     RouterModule.forChild(childRoutes),
@@ -86,6 +98,7 @@ const childRoutes: Routes = [
     NgxSpinnerModule,
     QrCodeModule,
     FormsModule,
+    SwiperModule,
       // BrowserAnimationsModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

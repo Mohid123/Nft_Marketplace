@@ -1,0 +1,137 @@
+.section-container{
+  @apply p-2 sm:py-3 sm:px-3 ;
+
+  min-height: 305px;
+}
+.section{
+  @apply w-full h-full rounded-lg;
+}
+
+svg {
+  path {
+    opacity: 1;
+  }
+}
+
+.chart-status {
+  @apply relative h-full  rounded-lg;
+  background: #292A4D;
+  background-size: auto 300px;
+
+  .section {
+    @apply absolute bottom-0 w-full h-32 flex justify-around items-center bg-white;
+    .listed,
+    .sold,
+    .profit {
+      @apply h-16 w-28 sm:w-32 mx-2 flex flex-col justify-between;
+      p {
+        @apply opacity-25 text-sm sm:text-base leading-5 font-bold;
+        color: #1F203E;
+      }
+      span {
+        @apply text-xl sm:text-3xl font-bold;
+        color: #1F203E;
+      }
+    }
+  }
+}
+
+
+h1 {
+  @apply capitalize mt-6 mb-10 text-3xl text-center tracking-wider;
+  font-weight: 400;
+  span {
+    padding-bottom: 4px;
+    border-bottom: 3px solid #75F16D;
+
+  }
+
+
+}
+
+.status {
+
+  .available-nft,
+  .total-revenue,
+  .pending-for-sale {
+    @apply w-full  rounded-xl flex items-center px-7 py-8 mb-2 justify-around;
+    height: 93px;
+
+
+    .icon {
+      img{
+        width: 35px;
+      }
+    }
+
+    .value {
+      @apply w-28;
+
+      p {
+        @apply text-gray-100 tracking-wider text-sm mb-2;
+      }
+      span {
+        @apply text-white font-medium text-2xl tracking-wide;
+      }
+    }
+
+  }
+
+  .available-nft {
+    background: transparent linear-gradient(107deg, #40DDFF 0%, #14BAE3 19%, #13B1E6 69%, #11AADF 82%, #0B98C5 100%) 0% 0% no-repeat padding-box;
+  }
+
+  .total-revenue {
+    background: transparent linear-gradient(107deg, #D6A1FF 0%, #BC64FF 19%, #9D33EC 69%, #8D16E8 82%, #7E09D6 100%) 0% 0% no-repeat padding-box;
+  }
+
+  .pending-for-sale {
+    background: transparent linear-gradient(107deg, #53DFA4 0%, #66EFB6 19%, #3ADC99 69%, #23D98E 82%, #19D185 100%) 0% 0% no-repeat padding-box;
+  }
+}
+
+.cards-container {
+  min-height: 500px;
+  .heading-section {
+    @apply flex h-auto justify-center items-center tracking-wide font-medium text-white;
+
+    .pagination {
+      @apply w-20 flex justify-between items-center;
+
+      button {
+        @apply h-8 w-9 rounded-md bg-primary-600;
+      }
+
+      span {
+        @apply font-medium;
+      }
+    }
+  }
+
+  .body-section {
+    @apply py-2;
+
+    div {
+      @apply overflow-auto;
+
+    }
+  }
+}
+
+.card-border{
+  @apply p-3 rounded-2xl m-4 border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-2 ;
+  height: 405px;
+  width: 368px;
+  border: 2px solid transparent;
+}
+
+.btn-nft {
+  background: transparent linear-gradient(109deg, #59C8D1 0%, #75F16D 100%) 0% 0% no-repeat padding-box;
+}
+.nft-img {
+  display: flex;
+
+  justify-content: center;
+  border-radius: 1.21rem;
+  border-radius: 21px;
+ }

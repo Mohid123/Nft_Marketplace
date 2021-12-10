@@ -1,0 +1,182 @@
+<!-- <div style="filter: brightness(100%); filter: blur(8px);"> -->
+  <app-admin-header [hideSearch]="true" ></app-admin-header>
+  <div class="h-auto p-1 mt-10 center md:p-3 xl:p-5 md:mt-0">
+    <div class="flex flex-wrap w-full">
+      <div class="order-1 w-full section-container lg:order-1 xl:w-65 lg:w-3/5 ">
+        <div class="chart-status">
+          <div class="flex flex-row flex-wrap items-center pt-4 ">
+            <div class="flex p-2 ml-8 text-gray-400 ">Wallet</div>
+            <div class="flex p-2 ml-8 text-gray-400 bg-gray-600 bg-opacity-25 rounded">ERC20</div>
+            <div class="ml-3 " >
+              <button
+              class="inline-flex items-center justify-between px-3 bg-gray-600 bg-opacity-25 rounded cursor-pointer md:mt-0 ">
+              <a href="{{wallet.walletUrl}}" target=_blank
+                class="ml-3 mr-3 text-sm leading-none text-gray-400 ">{{wallet.walletAddress}}</a>
+                <a  href="{{wallet.walletUrl}}" target=_blank
+                class=""><img class="w-4 h-10 ml-20 " src="./assets/icons/exit-top-right.svg" alt="polygon" /></a>
+
+            </button>
+          </div>
+          </div>
+
+
+          <div class="ml-8" >
+            <div class="flex items-center "  >
+              <div class="flex items-center w-56 h-20 ">
+                <div>
+                  <img class="w-11 h-11" src="../../../../assets/icons/TOTAL TOKENS.svg"/>
+                </div>
+                <div class="flex items-center ml-3">
+                  <p>Total Tokens</p>
+
+                </div>
+
+              </div>
+              <div class="flex items-start">
+
+
+                <div class="text-gray-400 value">
+                  <p >{{stats.totalNdct}} <b class="text-white">NDCT</b></p>
+                  <!-- <span>€ 4500</span> -->
+                </div>
+
+              </div>
+            </div>
+            <div class="flex items-center ">
+              <div class="flex items-center w-56 h-20 ">
+                <div>
+                  <img class="w-11 h-11" src="../../../../assets/icons/CONSUMED.svg"/>
+                </div>
+                <div class="flex items-center ml-3">
+                  <p>Consumed</p>
+
+                </div>
+
+              </div>
+              <div class="flex items-start">
+
+
+                <div class="text-gray-400 value">
+                  <p >{{stats.spentNdct}} <b class="text-white">NDCT</b></p>
+                  <!-- <span>€ 4500</span> -->
+                </div>
+
+              </div>
+            </div>
+            <div class="flex items-center ">
+              <div class="flex items-center w-56 h-20">
+                <div>
+                  <img class="w-11 h-11" src="../../../../assets/icons/EXCHANGE RATE.svg"/>
+                </div>
+                <div class="flex ml-3">
+                  <p>Exchange Rate</p>
+
+                </div>
+
+              </div>
+              <div class="flex items-start">
+
+
+                <div class="text-gray-400 value">
+                  <p >{{stats.spentAmount}} <b class="text-white">NDCT</b></p>
+                  <!-- <span>€ 4500</span> -->
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+         </div>
+      </div>
+      <div class="order-2 w-full section-container lg:order-2 xl:w-35 lg:w-2/5 ">
+        <div class="flex flex-col justify-between section status">
+          <ng-container >
+          <div class="available-nft">
+            <div class="icon">
+              <img class="" src="./assets/icons/network.svg"/>
+            </div>
+            <div class="value">
+              <p>Current Price</p>
+              <span>€ {{stats.price || 0 | number: '2.' }}</span>
+            </div>
+            <div class="graph-icon">
+              <img class="" src="./assets/icons/growth.png"/>
+            </div>
+          </div>
+          <div class="total-revenue">
+            <div class="icon">
+              <img class="" src="./assets/icons/ndct icon.svg"/>
+            </div>
+            <div class="value">
+              <p>Available NDCT</p>
+              <span>{{stats.availableNdct || 0 | number: '2.' }}</span>
+            </div>
+            <div class="graph-icon">
+              <img class="" src="./assets/icons/growth.png"/>
+            </div>
+          </div>
+          <div class="pending-for-sale">
+            <div class="icon">
+              <img class="" src="./assets/icons/revenue.svg"/>
+            </div>
+            <div class="value">
+              <p>Total Supply</p>
+              <span>{{stats.totalSupply || 0 | number: '2.'}}</span>
+            </div>
+            <div class="graph-icon">
+              <img class="" src="./assets/icons/growth.png"/>
+            </div>
+          </div>
+          </ng-container>
+        </div>
+      </div>
+
+
+
+      <div class="order-3 w-full section-container" >
+        <div class="section ">
+          <div  class="cards-container ">
+            <div class="heading-section">
+              <div>
+                <h1 class="text-center"><span>NDC</span>T SUBSCRIPTION PLANS</h1>
+              </div>
+
+          </div>
+          <div  class="body-section ">
+            <div class="flex flex-wrap justify-center" >
+                <div class="card-border" >
+                  <div class="nft-img">
+                    <img   src="../../../../assets/card/personal.svg"  />
+
+                  </div>
+                  <div class="flex justify-center mt-6">
+                    <button (click)="buySubscription(0)" class="px-6 py-2 text-lg text-white rounded-full btn-nft">Buy Now</button>
+                  </div>
+                 </div>
+                <div class="card-border" >
+                  <div class="nft-img">
+                    <img   src="../../../../assets/card/bussiness.svg"  />
+
+                  </div>
+                  <div class="flex justify-center mt-6">
+                    <button (click)="buySubscription(1)" class="px-6 py-2 text-lg text-white rounded-full btn-nft">Buy Now</button>
+                  </div>
+                </div>
+                <div class="card-border" >
+                  <div class="nft-img">
+                    <img   src="../../../../assets/card/enterprice.svg"  />
+
+                  </div>
+                  <div class="flex justify-center mt-6">
+                    <button (click)="buySubscription(2)" class="px-6 py-2 text-lg text-white rounded-full btn-nft">Buy Now</button>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+

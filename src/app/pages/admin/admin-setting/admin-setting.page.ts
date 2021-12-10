@@ -1,5 +1,12 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable @angular-eslint/no-empty-lifecycle-method */
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators
+} from '@angular/forms';
 import { CreatorService } from '@app/@core/services/creator.service';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { RouteService } from '@app/@core/services/route.service';
@@ -20,7 +27,6 @@ import { StripeService } from './../../../@core/services/stripe.service';
   styleUrls: ['./admin-setting.page.scss'],
 })
 export class AdminSettingPage implements OnInit, OnDestroy {
-
   @ViewChild('profileFile') profileFile;
   @ViewChild('coverFile') coverFile;
 
@@ -38,7 +44,6 @@ export class AdminSettingPage implements OnInit, OnDestroy {
   public isLoading: boolean;
   description: any;
 
-
   public creator: Creator;
 
   constructor(
@@ -52,8 +57,10 @@ export class AdminSettingPage implements OnInit, OnDestroy {
   ) {
     this.isLoading = false;
     this.settingForm = this.formBuilder.group({
-      description: new FormControl('',[Validators.required]),
+      description: new FormControl('', [Validators.required]),
       key: new FormControl(''),
+      profileImage: new FormControl(''),
+      coverImage: new FormControl(''),
       profileImg: new FormControl(''),
       coverImg: new FormControl(''),
     });
@@ -70,11 +77,14 @@ export class AdminSettingPage implements OnInit, OnDestroy {
 
   saveSetting(): void {
     this.isLoading = true;
-    if (this.settingForm.controls?.key?.value.length > 0 && this.creator.stripeSecretKey !== this.settingForm.controls?.key?.value) {
+    if (
+      this.settingForm.controls?.key?.value.length > 0 &&
+      this.creator.stripeSecretKey !== this.settingForm.controls?.key?.value
+    ) {
       this.updateKey();
-    } else if(this.profileImage) {
+    } else if (this.profileImage) {
       this.updateProfilePic();
-    } else if(this.coverImage) {
+    } else if (this.coverImage) {
       this.updateCoverPic();
     } else {
       this.saveChagesToServer();
@@ -92,9 +102,9 @@ export class AdminSettingPage implements OnInit, OnDestroy {
       .subscribe((result: ApiResponse<ResponseStripeStatus>) => {
         if (!result.hasErrors() && result.data.isValid) {
           this.creator.stripeSecretKey = params.key;
-          if(this.profileImage) {
+          if (this.profileImage) {
             this.updateProfilePic();
-          } else if(this.coverImage) {
+          } else if (this.coverImage) {
             this.updateCoverPic();
           } else {
             this.saveChagesToServer();
@@ -108,75 +118,77 @@ export class AdminSettingPage implements OnInit, OnDestroy {
 
   updateProfilePic(): void {
     this.mediaService
-    .uploadMedia('nft', this.profileImg)
-    .pipe(take(1))
-    .subscribe((res: ApiResponse<ResponseAddMedia>) => {
-      if (!res.hasErrors()) {
-        this.creator.profileImageURL = res.data.url;
-        if(this.coverImage) {
-          this.updateCoverPic();
+      .uploadMedia('nft', this.profileImg)
+      .pipe(take(1))
+      .subscribe((res: ApiResponse<ResponseAddMedia>) => {
+        if (!res.hasErrors()) {
+          this.creator.profileImageURL = res.data.url;
+          if (this.coverImage) {
+            this.updateCoverPic();
+          } else {
+            this.saveChagesToServer();
+          }
         } else {
-          this.saveChagesToServer();
+          this.isLoading = false;
+          this.toastr.error(res.errors);
         }
-      } else {
-        this.isLoading = false;
-        this.toastr.error(res.errors);
-      }
-    });
+      });
   }
 
   updateCoverPic(): void {
     this.mediaService
-    .uploadMedia('creatorCover', this.coverImg)
-    .pipe(take(1))
-    .subscribe((res: ApiResponse<ResponseAddMedia>) => {
-      if (!res.hasErrors()) {
-        this.creator.coverImageURL = res.data.url;
-        this.saveChagesToServer();
-      } else {
-        this.isLoading = false;
-        this.toastr.error(res.errors);
-      }
-    });
+      .uploadMedia('creatorCover', this.coverImg)
+      .pipe(take(1))
+      .subscribe((res: ApiResponse<ResponseAddMedia>) => {
+        if (!res.hasErrors()) {
+          this.creator.coverImageURL = res.data.url;
+          this.saveChagesToServer();
+        } else {
+          this.isLoading = false;
+          this.toastr.error(res.errors);
+        }
+      });
   }
 
-  saveChagesToServer():void {
-    if(this.settingForm.controls?.description?.value?.length > 0) {
+  saveChagesToServer(): void {
+    if (this.settingForm.controls?.description?.value?.length > 0) {
       this.creator.description = this.settingForm.controls?.description?.value;
     }
 
-    this.creatorService.updateCreator(this.routeService.clubName, this.creator).subscribe((res :ApiResponse<Creator>)=> {
-      this.isLoading = false;
-      this.settingForm.reset();
-      if (!res.hasErrors()) {
-        this.toastr.success("Profile update successfully")
-      }
-    });
+    this.creatorService
+      .updateCreator(this.routeService.clubName, this.creator)
+      .subscribe((res: ApiResponse<Creator>) => {
+        this.isLoading = false;
+        this.settingForm.reset();
+        if (!res.hasErrors()) {
+          this.toastr.success('Profile update successfully');
+        }
+      });
   }
 
   onSelectProfile(event): void {
-    console.log('selecgt img:',);
     if (event.target.files && event.target.files[0]) {
       this.profileImage = event.target.files[0];
-      this.settingForm.controls.profileImg.setValue(this.profileImage);
+      this.settingForm.controls?.profileImg.setValue(this.profileImage.name);
       this.profileImg.append('file', this.settingForm.get('profileImg').value);
       if (event.target.files && event.target.files[0]) {
         const reader = new FileReader();
         reader.onload = (e: any) => {
-          console.log('img ccrop:',);
-          this.customDialogService.showImageCropperDialog(event, 1 / 1,true).then(matRef => {
-            matRef.afterClosed().subscribe((result) => {
-              console.log('showImageCropperDialog:',result);
-              if(result)
-                this.profileImageSrc = result;
-              else {
-                this.profileImageSrc = null;
-                this.profileImage = null;
-                this.settingForm.controls.profileImg.setValue(null);
-                this.profileFile.nativeElement.value = "";
-              }
-            });
-          })
+          // console.log('img ccrop:',);
+          this.cropProfileImg(event);
+          // this.customDialogService.showImageCropperDialog(event, 1 / 1,true).then(matRef => {
+          //   matRef.afterClosed().subscribe((result) => {
+          //     // console.log('showImageCropperDialog:',result);
+          //     if(result)
+          //       this.profileImageSrc = result;
+          //     else {
+          //       this.profileImageSrc = null;
+          //       this.profileImage = null;
+          //       this.settingForm.controls.profileImg.setValue(null);
+          //       this.profileFile.nativeElement.value = "";
+          //     }
+          //   });
+          // })
         };
         reader.readAsDataURL(event.target.files[0]);
       }
@@ -186,24 +198,25 @@ export class AdminSettingPage implements OnInit, OnDestroy {
   onSelectCover(event): void {
     if (event.target.files && event.target.files[0]) {
       this.coverImage = event.target.files[0];
-      this.settingForm.controls.coverImg.setValue(this.coverImage);
+      this.settingForm.controls?.coverImg.setValue(this.coverImage.name);
       this.coverImg.append('file', this.settingForm.get('coverImg').value);
       if (event.target.files && event.target.files[0]) {
         const reader = new FileReader();
         reader.onload = (e: any) => {
-          this.customDialogService.showImageCropperDialog(event, 3.88 / 1,true).then(matRef => {
-            matRef.afterClosed().subscribe((result) => {
-              console.log('showImageCropperDialog:',result);
-              if(result)
-                this.coverImageSrc = result;
-                else {
-                  this.coverImageSrc = null;
-                  this.coverImage = null;
-                  this.settingForm.controls.coverImg.setValue(null);
-                  this.coverFile.nativeElement.value = "";
-                }
-            });
-          })
+          this.cropCoverImg(event);
+          // this.customDialogService.showImageCropperDialog(event, 3.88 / 1,true).then(matRef => {
+          //   matRef.afterClosed().subscribe((result) => {
+          //     // console.log('showImageCropperDialog:',result);
+          //     if(result)
+          //       this.coverImageSrc = result;
+          //       else {
+          //         this.coverImageSrc = null;
+          //         this.coverImage = null;
+          //         this.settingForm.controls.coverImg.setValue(null);
+          //         this.coverFile.nativeElement.value = "";
+          //       }
+          //   });
+          // })
         };
         reader.readAsDataURL(event.target.files[0]);
       }
@@ -213,5 +226,57 @@ export class AdminSettingPage implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.complete();
     this.destroy$.unsubscribe();
+  }
+
+  cropProfileImg(event): void {
+    this.settingForm.controls.profileImage?.setValue(event);
+    this.customDialogService
+      .showImageCropperDialog(event, 1 / 1, true)
+      .then((matRef) => {
+        matRef.afterClosed().subscribe((result) => {
+          // console.log('showImageCropperDialog:',result);
+          if (result) {
+            this.profileImageSrc = result;
+            this.settingForm.patchValue({
+              profileImg: this.profileImageSrc,
+            });
+          } else {
+            this.profileImageSrc = null;
+            this.profileImage = null;
+            this.settingForm.controls.profileImg?.setValue(null);
+            this.profileFile.nativeElement.value = '';
+          }
+        });
+      });
+  }
+
+  cropCoverImg(event): void {
+    this.settingForm.controls.coverImage?.setValue(event);
+    this.customDialogService
+      .showImageCropperDialog(event, 3.88 / 1, true)
+      .then((matRef) => {
+        matRef.afterClosed().subscribe((result) => {
+          // console.log('showImageCropperDialog:',result);
+          if (result) {
+            this.coverImageSrc = result;
+            this.settingForm.patchValue({
+              coverImg: this.coverImageSrc,
+            });
+          }
+           else {
+            this.coverImageSrc = null;
+            this.coverImage = null;
+            this.settingForm.controls.coverImg.setValue(null);
+            this.coverFile.nativeElement.value = '';
+          }
+        });
+      });
+  }
+
+  editProfileImg(): void {
+    this.cropProfileImg(this.settingForm.controls.profileImage?.value);
+  }
+  editCoverImg(): void {
+    this.cropCoverImg(this.settingForm.controls.coverImage?.value);
   }
 }

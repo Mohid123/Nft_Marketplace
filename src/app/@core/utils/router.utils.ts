@@ -6,13 +6,15 @@ export const ROUTER_UTILS = {
       detail: 'detail',
       dashboard: 'dashboard',
       wallet: 'wallet',
-      tradingHistory: 'trading-history'
+      tradingHistory: 'trading-history',
+      pageNotfound: '404'
     },
     admin: {
       root:'admin',
       groups:'groups',
       marketplace: 'market-place',
       sale:'sale',
+      subscription:'subscription',
       setting: 'setting'
     },
     auth: {

@@ -4,6 +4,7 @@ import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-di
 import { GroupService } from '@app/@core/services/group.service';
 import { NFTService } from '@app/@core/services/nft.service';
 import { RouteService } from '@app/@core/services/route.service';
+import { ROUTER_UTILS } from '@app/@core/utils/router.utils';
 import { AuthService } from '@app/pages/auth/services/auth.service';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
@@ -11,6 +12,7 @@ import { interval, Subject } from 'rxjs';
 import { take, takeUntil, takeWhile, tap } from 'rxjs/operators';
 import { NFTList } from './../../../@core/models/NFTList.model';
 import { ApiResponse } from './../../../@core/models/response.model';
+
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -34,6 +36,7 @@ export class AdminDashboardPage implements AfterViewInit {
   public nftLimit = 10 ;
   public page:number;
   public monthIndex = 0;
+  adminRouteUrl = ROUTER_UTILS.config.admin;
 
   public lineChartData: ChartDataSets[] = [
     {
@@ -221,6 +224,8 @@ export class AdminDashboardPage implements AfterViewInit {
     this.monthIndex = index
   }
 
-
+  btnClick= function () {
+    this.router.navigateByUrl('/subscription');
+};
 
 }

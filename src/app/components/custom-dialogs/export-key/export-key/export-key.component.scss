@@ -1,0 +1,58 @@
+::ng-deep .export-key-overlay {
+  height: auto;
+  min-height: 421px;
+  max-width: 581px !important;
+}
+
+
+ .export-key-model {
+   @apply flex flex-col  px-0  sm:px-20;
+
+
+   .btn-close {
+    @apply absolute top-0 right-0 bg-white rounded-full opacity-50 m-3.5 hover:opacity-70;
+    padding: 1px;
+    svg {
+      color: #132356;
+    }
+  }
+
+  // img {
+
+  // @apply h-5 w-5
+
+  // }
+
+  h1 {
+    @apply capitalize my-12 text-3xl;
+    font-weight: 400;
+    span {
+      padding-bottom: 4px;
+      border-bottom: 2px solid #75F16D;
+    }
+  }
+
+  .primary-btn {
+    @apply w-44 h-12  sm:my-14 self-center;
+  }
+
+  form {
+    @apply flex flex-col w-full;
+
+    label {
+      @apply px-12 py-4 text-lg;
+    }
+ }
+
+ }
+
+ input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+input[type=number] {
+  -moz-appearance: textfield;
+}

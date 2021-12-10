@@ -77,10 +77,20 @@
           </li>
           <li class="relative inline-block">
             <a class="menu-link icon-btn" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
+              [routerLink]="[clubName,adminRouteUrl.root,adminRouteUrl.subscription]">
+              <mat-icon style="margin-bottom: 16px;
+              margin-left: 5px;">
+               <!-- <img style="color: azure;" src="../../../../assets/icons/ndct.svg" alt=""> -->
+               €
+              </mat-icon>
+            </a>
+          </li>
+          <li class="relative inline-block">
+            <a class="menu-link icon-btn" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
               [routerLink]="[clubName,adminRouteUrl.root,adminRouteUrl.setting]">
               <mat-icon>
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20">
-                  <style>.a{fill:#710c0c;}.b{clip-path:url(#a);}.c{fill:#90929f;}</style>
+                  <style>.a{fill:#ffffff;}.b{clip-path:url(#a);}.c{fill:#90929f;}</style>
                   <defs>
                     <clipPath id="clip-path">
                       <rect id="Rectangle_18317" data-name="Rectangle 18317" width="20" height="20" transform="translate(0)" fill="#fff"/>

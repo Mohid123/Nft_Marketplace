@@ -1,0 +1,70 @@
+<div class="export-key-model ">
+  <div class="flex justify-end">
+    <button class="btn-close" (click)="close()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd"
+          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+          clip-rule="evenodd" />
+      </svg>
+    </button>
+  </div>
+
+  <form action=""  class="px-0 overflow-y-auto custom-scrollbar-css" >
+    <div class="flex flex-col">
+
+      <li class="inline-flex justify-center my-4 card-bg">
+        <img id="ticket" src="../../../../../assets/icons/export-key.svg"  >
+      </li>
+
+    </div>
+
+    <div class="flex flex-col pt-3">
+
+      <div class="flex flex-col justify-center overflow-hidden rounded-lg">
+     <p class="text-xs text-center text-gray-400">Never disclose this key. Anyone with your private key can fully control your account, including transferring away any of your fund.</p>
+
+    </div>
+    </div>
+    <div class="flex flex-col pt-3">
+      <span class="text-sm text-center">Enter Password to continue</span><br>
+      <div class="relative flex flex-col justify-between overflow-hidden rounded-lg">
+        <input  class="w-full px-2 font-light " placeholder="************" type="password" name="passsword" formControlName="password" maxlength="25"/>
+       </div>
+    </div>
+
+
+    <button class="primary-btn" >
+      Next
+    </button>
+
+
+  </form>
+
+
+<div>
+  <div class="flex flex-col justify-center pt-3">
+    <span class="text-lg font-medium text-center ">Secure The Asset</span><br>
+    <div class="flex flex-col">
+
+      <li class="inline-flex justify-center my-4 card-bg">
+        <img id="ticket" src="../../../../../assets/icons/shield.svg"  >
+      </li>
+
+    </div>
+    <span class="mt-5 text-lg font-medium text-center ">Your Private key</span><br>
+
+  </div>
+  <div class="flex flex-col items-center justify-center pt-3">
+
+    <div class="flex p-4 overflow-hidden text-sm text-center rounded-lg " style=" width:286px; ">
+      <!-- Never disclose this key. Anyone with your private key can fully control your account, including transferring away any of your fund. -->
+      <textarea #userinput type="text" class="w-full h-40 px-2 font-light border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-dark gradient-border-1" name="key" value="" formControlName="key" maxlength="600">Never disclose this key. Anyone with your private key can fully control your account, including transferring away any of your fund.
+      </textarea>
+  </div>
+  </div>
+  <button class="primary-btn" (click)="copyInputMessage(userinput); changeText()" value="click to copy" >
+    {{btnVal}}
+  </button>
+</div>
+
+</div>

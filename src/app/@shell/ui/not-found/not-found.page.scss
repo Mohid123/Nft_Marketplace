@@ -1,0 +1,113 @@
+:host {
+  @apply w-full flex justify-center items-center h-auto;
+  min-height: calc(100% - 105px);
+}
+
+.container {
+  max-width: 100% !important ;
+  // max-height: 100% !important
+}
+
+
+.clubs-container {
+  @apply flex w-full flex-wrap h-auto justify-center flex-row;
+  // height: calc (100% - 105px)
+  .x-gap {
+    margin: 15px 35px;
+  }
+
+  .circle {
+    height: 212px;
+    width: 212px;
+    background: transparent radial-gradient(closest-side at 50% 50%, #11143F 0%, #130633 100%) 0% 0% no-repeat padding-box;
+    box-shadow: 0px 15px 40px #329AF540;
+    @apply flex flex-col content-center justify-center rounded-full mb-5
+  }
+
+  .club-logo {
+    @apply block ml-auto mr-auto;
+  }
+
+  .title {
+    @apply text-lg font-light text-center;
+  }
+
+  .icon {
+    @apply block mt-2 ml-auto mr-auto opacity-25;
+  }
+
+}
+
+
+.view-btn {
+  @apply self-center px-14 mt-6 text-sm text-center border-solid rounded-full h-14;
+  box-shadow: 0px 3px 40px #5640F594;
+  border: 1px solid #5640F5;
+}
+
+
+
+.slider {
+  height: auto;
+  transition: height 2s;
+}
+
+.slider.show-all {
+  height: 0;
+}
+
+.all-club {
+  height: 0px;
+  visibility: hidden;
+  transition: height visibility 2s;
+}
+
+.all-club.show-all {
+  height: auto;
+  visibility: visible;
+}
+
+
+
+.mySwiper{
+  margin-top: 75px;
+}
+
+.swiper {
+  width: 100%;
+  height: 30%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  height: 212px;
+  width: 212px !important;
+  border-radius: 100%;
+  background: transparent radial-gradient(closest-side at 50% 50%, #11143F 0%, #130633 100%) 0% 0% no-repeat padding-box;
+  box-shadow: 0px 15px 40px #329AF540;
+
+
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  // width: 100%;
+
+  margin-left: auto;
+  margin-right: auto;
+  object-fit: cover;
+}

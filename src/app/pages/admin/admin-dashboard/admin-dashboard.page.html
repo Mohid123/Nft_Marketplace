@@ -5,10 +5,10 @@
     <div class="order-1 w-full section-container lg:order-1 xl:w-65 lg:w-3/5 ">
       <div class="relative chart-status">
         <span class="nft-label">NFT STATS</span>
-        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu" class="stats-btn">
+        <span mat-icon-button  class="stats-btn">
 
-          <mat-icon style="width: 16px; color:white">more_vert</mat-icon>
-       </button>
+          <mat-icon class="cursor-pointer" [matMenuTriggerFor]="menu" aria-label="menu" style=" color:white">more_vert</mat-icon>
+       </span>
         <mat-menu #menu="matMenu" class="bg-primary-600 mt-0.5" xPosition='before'>
           <ng-container *ngFor="let month of months;let i = index">
             <button (click)="chartStatus(i)" class="dropdown" mat-menu-item >
@@ -35,17 +35,17 @@
             </div>
             <div class="sold">
               <p>Total NFT Sold</p>
-              <span>{{creatorStats?.yearlyStats?.soldNft}}</span>
+              <span>{{creatorStats?.yearlyStats?.soldNft || 0 | number: '2.'}}</span>
             </div>
             <div class="profit">
               <p>Sold NFT Profit</p>
-              <span>€ {{creatorStats?.yearlyStats?.profit}}</span>
+              <span>€ {{creatorStats?.yearlyStats?.profit || 0 | number: '2.'}}</span>
             </div>
           </ng-container>
           <ng-container *ngIf="monthIndex > 0 && (creatorStats$ | async) as creatorStats">
             <div class="listed">
               <p>Total NFT Listed</p>
-              <span>{{creatorStats?.monthlyStats[monthIndex-1]?.totalNftListed}}</span>
+              <span>{{creatorStats?.monthlyStats[monthIndex-1]?.totalNftListed || 0 | number: '2.'}}</span>
             </div>
             <div class="sold">
               <p>Total NFT Sold</p>
@@ -62,13 +62,26 @@
     <div class="order-2 w-full section-container lg:order-2 xl:w-35 lg:w-2/5 ">
       <div class="flex flex-col justify-between section status">
         <ng-container *ngIf="(creatorStats$ | async) as creatorStats">
+        <div class="available-ndct">
+          <div class="icon">
+            <img class="" src="./assets/icons/buy.svg"/>
+          </div>
+          <div class="value">
+            <p>Available NDCT</p>
+            <span>{{creatorStats?.yearlyStats?.totalNftListed || 0 | number: '2.'}}</span>
+          </div>
+          <div class="graph-icon">
+           <a class="button arrow" href=""  [routerLinkActive]="['active']"  [routerLinkActiveOptions]="{ exact: true }"
+           [routerLink]="[adminRouteUrl.subscription]" ><b>Buy More</b></a>
+          </div>
+        </div>
         <div class="available-nft">
           <div class="icon">
             <img class="" src="./assets/icons/network.svg"/>
           </div>
           <div class="value">
             <p>Available NFT</p>
-            <span>{{creatorStats?.yearlyStats?.totalNftListed || 0}}</span>
+            <span>{{creatorStats?.yearlyStats?.totalNftListed || 0 | number: '2.'}}</span>
           </div>
           <div class="graph-icon">
             <img class="" src="./assets/icons/growth.png"/>
@@ -80,7 +93,7 @@
           </div>
           <div class="value">
             <p>Total Revenue</p>
-            <span>€ {{creatorStats?.yearlyStats?.profit || 0}}</span>
+            <span>€ {{creatorStats?.yearlyStats?.profit || 0 | number: '2.'}}</span>
           </div>
           <div class="graph-icon">
             <img class="" src="./assets/icons/growth.png"/>
@@ -92,7 +105,7 @@
           </div>
           <div class="value">
             <p>Pending For Sale</p>
-            <span>{{creatorStats?.yearlyStats?.pendingForSale || 0}}</span>
+            <span>{{creatorStats?.yearlyStats?.pendingForSale || 0 | number: '2.'}}</span>
           </div>
           <div class="graph-icon">
             <img class="" src="./assets/icons/growth.png"/>
