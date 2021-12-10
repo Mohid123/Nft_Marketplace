@@ -20,6 +20,15 @@ export class NotFoundPage implements OnInit {
 
   public allClub = false;
   public slider = true;
+  public filterName: string;
+  name = [
+    {
+      sortBy: 'A - Z'
+    },
+    {
+      sortBy: 'Z - A'
+    }
+  ]
 
   public clubs: Club[];
 

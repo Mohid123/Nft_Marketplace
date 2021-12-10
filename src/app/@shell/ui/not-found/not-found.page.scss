@@ -35,7 +35,6 @@
   .icon {
     @apply block mt-2 ml-auto mr-auto opacity-25;
   }
-
 }
 
 
@@ -106,8 +105,24 @@
 .swiper-slide img {
   display: block;
   // width: 100%;
-
   margin-left: auto;
   margin-right: auto;
   object-fit: cover;
+}
+
+.dropdown{
+  @apply my-1 rounded-md border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-1 text-center;
+}
+
+.mat-menu-item {
+  border: 1px solid #5640F5 !important;
+   text-align: center !important
+}
+
+nav  {
+  display: none !important
+}
+
+footer{
+  display: none !important
 }

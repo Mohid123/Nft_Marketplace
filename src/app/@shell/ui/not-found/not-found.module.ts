@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 import { RouterModule } from '@angular/router';
 import { ROUTER_UTILS } from '@app/@core/utils/router.utils';
 import { SwiperModule } from "swiper/angular";
@@ -9,6 +11,8 @@ import { NotFoundPage } from './not-found.page';
   declarations: [NotFoundPage],
   imports: [
     SwiperModule,
+    MatIconModule,
+    MatMenuModule,
 
     CommonModule,
     RouterModule.forChild([
