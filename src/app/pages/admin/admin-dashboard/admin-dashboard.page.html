@@ -35,17 +35,17 @@
             </div>
             <div class="sold">
               <p>Total NFT Sold</p>
-              <span>{{creatorStats?.yearlyStats?.soldNft}}</span>
+              <span>{{creatorStats?.yearlyStats?.soldNft || 0 | number: '2.'}}</span>
             </div>
             <div class="profit">
               <p>Sold NFT Profit</p>
-              <span>€ {{creatorStats?.yearlyStats?.profit}}</span>
+              <span>€ {{creatorStats?.yearlyStats?.profit || 0 | number: '2.'}}</span>
             </div>
           </ng-container>
           <ng-container *ngIf="monthIndex > 0 && (creatorStats$ | async) as creatorStats">
             <div class="listed">
               <p>Total NFT Listed</p>
-              <span>{{creatorStats?.monthlyStats[monthIndex-1]?.totalNftListed}}</span>
+              <span>{{creatorStats?.monthlyStats[monthIndex-1]?.totalNftListed || 0 | number: '2.'}}</span>
             </div>
             <div class="sold">
               <p>Total NFT Sold</p>

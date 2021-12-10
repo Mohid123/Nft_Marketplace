@@ -1,8 +1,8 @@
-<div class="container relative flex flex-col items-center justify-center bg-center bg-cover m-auto"
+<div class="container relative flex flex-col items-center justify-center bg-center bg-cover m-auto "
   style="background-image: url(../../../../assets/banner/bg-404.jpg); ">
 
-  <div class="flex flex-col w-full">
-    <h1 class="text-4xl font-light text-center mb-9 mt-9">Search Your Club</h1>
+  <div class="flex flex-col w-full h-screen overflow-hidden justify-center "  *ngIf="slider">
+    <h1 class="text-4xl font-light text-center mb-9">Search Your Club</h1>
     <div class="container flex items-center justify-center ">
       <div class="relative" style="width: 900px;">
         <div class="absolute flex top-4 left-3"> <img class="flex items-center justify-center w-6"
@@ -17,6 +17,7 @@
         </div>
       </div>
     </div>
+
 
 
       <swiper
@@ -91,7 +92,22 @@
 
 
 
- <div class=" all-club" [class.show-all]="allClub">
+ <div class=" all-club overflow-hidden" [class.show-all]="allClub">
+  <h1 class="text-4xl font-light text-center mb-9 mt-9">Search Your Club</h1>
+  <div class="container flex items-center justify-center ">
+    <div class="relative" style="width: 900px;">
+      <div class="absolute flex top-4 left-3"> <img class="flex items-center justify-center w-6"
+          src="../../../../assets/icons/search.svg"> </div> <input style="background:#140835; box-shadow: 0px 3px 40px #5640F594;
+          border: 1px solid #5640F5;" type="text"
+        class="z-0 w-full pl-10 pr-20 rounded-full h-14 focus:shadow focus:outline-none">
+
+      <div class="absolute border-r border-purple-600 top-2 right-24"> <span
+          class="flex items-center justify-center w-20 h-10 text-gray-500 rounded-lg">Search </span> </div>
+      <div class="absolute top-2 right-2"> <span
+          class="flex items-center justify-center w-20 h-10 text-gray-500 rounded-lg cursor-pointer">Sort by</span>
+      </div>
+    </div>
+  </div>
     <div class="clubs-container"  [class.show-all]="!allClub">
       <div class="x-gap circle">
         <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="">

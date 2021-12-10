@@ -17,9 +17,11 @@ export class NotFoundPage {
   path = ROUTER_UTILS.config.base;
 
   public allClub = false;
+  public slider = true;
 
   showAllClub() {
     this.allClub = true;
+    this.slider = false;
   }
 }
 
