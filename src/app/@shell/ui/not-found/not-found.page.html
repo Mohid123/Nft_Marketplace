@@ -27,59 +27,20 @@
       [pagination]="{
         clickable: true
       }"
-      [autoplay]="{
-        delay: 2500,
-        disableOnInteraction: false
-      }"
+
       [navigation]="true"
       class="mySwiper slider"
     [class.show-all]="allClub"
     >
-      <ng-template swiperSlide><div class="x-gap circle">
-        <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="">
-        <span class="title">TEST</span>
-        <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt="" style=" opacity: 0.3;"></span>
-      </div></ng-template
-      ><ng-template swiperSlide><div class="x-gap circle">
-        <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="">
-        <span class="title">TEST</span>
-        <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt="" style=" opacity: 0.3;"></span>
-      </div></ng-template
-      ><ng-template swiperSlide><div class="x-gap circle">
-        <img class="club-logo" src="./assets/logo/stripe-logo-blue.png"  alt="" >
-        <span class="title">TEST</span>
-        <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt="" style="opacity: 0.3;"></span>
-      </div></ng-template
-      ><ng-template swiperSlide><div class="x-gap circle">
-        <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="">
-        <span class="title">TEST</span>
-        <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt="" style="opacity: 0.3;"></span>
-      </div></ng-template
-      ><ng-template swiperSlide><div class="x-gap circle">
-        <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="">
-        <span class="title">TEST</span>
-        <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt="" style="opacity: 0.3;"></span>
-      </div></ng-template
-      ><ng-template swiperSlide><div class="x-gap circle">
-        <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="">
-        <span class="title">TEST</span>
-        <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt="" style="opacity: 0.3;"></span>
-      </div></ng-template
-      ><ng-template swiperSlide><div class="x-gap circle">
-        <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="">
-        <span class="title">TEST</span>
-        <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt="" style="opacity: 0.3;"></span>
-      </div></ng-template
-      ><ng-template swiperSlide><div class="x-gap circle">
-        <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="" >
-        <span class="title">TEST</span>
-        <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt="" style="opacity: 0.3;"></span>
-      </div></ng-template
-      ><ng-template swiperSlide><div class="x-gap circle">
-        <img class="club-logo" src="./assets/logo/stripe-logo-blue.png" alt="">
-        <span class="title">TEST</span>
-        <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt="" style="opacity: 0.3;"></span>
-      </div></ng-template>
+    <ng-container *ngFor="let club of clubs">
+      <ng-template swiperSlide>
+        <div class="x-gap circle">
+          <img class="club-logo" [src]="club.profileImageURL" alt="">
+          <span class="title">{{club.displayName}}</span>
+          <span><img class="icon" [src]="club.coverImageURL" alt="" style=" opacity: 0.3;"></span>
+        </div>
+      </ng-template>
+    </ng-container>
     </swiper>
 
       <button (click)="showAllClub()" class="view-btn " [class.show-all]="allClub">

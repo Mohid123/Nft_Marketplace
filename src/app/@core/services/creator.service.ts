@@ -23,7 +23,7 @@ export interface CreatorStatsInStore {
 @Injectable({
   providedIn: 'root',
 })
-export class CreatorService extends ApiService<creatorData> {
+export class CreatorService  extends ApiService<creatorData> {
   private _Creator$ = new BehaviorSubject<Creator>(null);
   public readonly Creator$: Observable<Creator> = this._Creator$.asObservable();
 
