@@ -68,10 +68,11 @@
           </div>
           <div class="value">
             <p>Available NDCT</p>
-            <span>{{creatorStats?.yearlyStats?.totalNftListed || 0}}</span>
+            <span>{{creatorStats?.yearlyStats?.totalNftListed || 0 | number: '2.'}}</span>
           </div>
           <div class="graph-icon">
-           <a class="button arrow" href=""><b>Buy More</b></a>
+           <a class="button arrow" href=""  [routerLinkActive]="['active']"  [routerLinkActiveOptions]="{ exact: true }"
+           [routerLink]="[adminRouteUrl.subscription]" ><b>Buy More</b></a>
           </div>
         </div>
         <div class="available-nft">
@@ -80,7 +81,7 @@
           </div>
           <div class="value">
             <p>Available NFT</p>
-            <span>{{creatorStats?.yearlyStats?.totalNftListed || 0}}</span>
+            <span>{{creatorStats?.yearlyStats?.totalNftListed || 0 | number: '2.'}}</span>
           </div>
           <div class="graph-icon">
             <img class="" src="./assets/icons/growth.png"/>
@@ -92,7 +93,7 @@
           </div>
           <div class="value">
             <p>Total Revenue</p>
-            <span>€ {{creatorStats?.yearlyStats?.profit || 0}}</span>
+            <span>€ {{creatorStats?.yearlyStats?.profit || 0 | number: '2.'}}</span>
           </div>
           <div class="graph-icon">
             <img class="" src="./assets/icons/growth.png"/>
@@ -104,7 +105,7 @@
           </div>
           <div class="value">
             <p>Pending For Sale</p>
-            <span>{{creatorStats?.yearlyStats?.pendingForSale || 0}}</span>
+            <span>{{creatorStats?.yearlyStats?.pendingForSale || 0 | number: '2.'}}</span>
           </div>
           <div class="graph-icon">
             <img class="" src="./assets/icons/growth.png"/>

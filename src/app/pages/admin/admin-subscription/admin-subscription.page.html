@@ -97,7 +97,7 @@
             </div>
             <div class="value">
               <p>Current Price</p>
-              <span>€ {{stats.price}}</span>
+              <span>€ {{stats.price || 0 | number: '2.' }}</span>
             </div>
             <div class="graph-icon">
               <img class="" src="./assets/icons/growth.png"/>
@@ -109,7 +109,7 @@
             </div>
             <div class="value">
               <p>Available NDCT</p>
-              <span>{{stats.availableNdct}}</span>
+              <span>{{stats.availableNdct || 0 | number: '2.' }}</span>
             </div>
             <div class="graph-icon">
               <img class="" src="./assets/icons/growth.png"/>
@@ -121,7 +121,7 @@
             </div>
             <div class="value">
               <p>Total Supply</p>
-              <span>{{stats.totalSupply}}</span>
+              <span>{{stats.totalSupply || 0 | number: '2.'}}</span>
             </div>
             <div class="graph-icon">
               <img class="" src="./assets/icons/growth.png"/>
