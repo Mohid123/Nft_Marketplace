@@ -38,6 +38,7 @@ export class AppComponent implements OnInit {
     private customDialogService: CustomDialogService,
     private routeService: RouteService,
     private viewportScroller: ViewportScroller,
+
     private toastr: ToastrService,
     // private viewportScroller: ViewportScroller
   ) {
