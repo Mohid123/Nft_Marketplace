@@ -18,6 +18,15 @@ export class NotFoundPage {
 
   public allClub = false;
   public slider = true;
+  public filterName: string;
+  name = [
+    {
+      sortBy: 'A - Z'
+    },
+    {
+      sortBy: 'Z - A'
+    }
+  ]
 
   showAllClub() {
     this.allClub = true;
