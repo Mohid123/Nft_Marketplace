@@ -25,7 +25,7 @@
   }
 
   .club-logo {
-    @apply block ml-auto mr-auto;
+    @apply block ml-auto mr-auto rounded-full ;
   }
 
   .title {
@@ -64,6 +64,7 @@
 .all-club.show-all {
   height: auto;
   visibility: visible;
+
 }
 
 
