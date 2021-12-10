@@ -1,8 +1,11 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { ROUTER_UTILS } from '@app/@core/utils/router.utils';
+import { debounceTime } from 'rxjs/operators';
 // import Swiper core and required modules
 import SwiperCore, { Autoplay, Pagination } from "swiper";
 import { Club } from './../../../@core/models/club.model';
+import { GetAllClubs } from './../../../@core/models/requests/get-all-club.model';
 import { ClubService } from './../../../@core/services/club.service';
 
 
@@ -21,6 +24,7 @@ export class NotFoundPage implements OnInit {
   public allClub = false;
   public slider = true;
   public filterName: string;
+  public sortBy: string;
   name = [
     {
       sortBy: 'A - Z'
@@ -32,16 +36,41 @@ export class NotFoundPage implements OnInit {
 
   public clubs: Club[];
 
+  searchControl = new FormControl();
+
   constructor(
     private ClubService: ClubService
-  ) {}
+  ) {
+    this.searchControl.valueChanges.pipe(debounceTime(1000))
+      .subscribe(newValue => {
+        this.getClubs();
+      });
+  }
 
   ngOnInit(): void {
-    this.ClubService.getAllClubs().subscribe(res=> {
+    this.getClubs();
+  }
+
+  getClubs(){
+    const params: GetAllClubs = {
+      offset: 0,
+      sortDisplayName: this.sortBy,
+    }
+
+    if(this.searchControl.value) {
+      params.displayName = this.searchControl.value;
+    }
+
+    this.ClubService.getAllClubs(params).subscribe(res=> {
       if(!res.hasErrors() && res.data.totalCount > 0) {
         this.clubs = res.data.data;
       }
     })
+  }
+
+  sortClick(sort){
+    this.sortBy = sort;
+    this.getClubs();
   }
 
   showAllClub() {

@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { RouterModule } from '@angular/router';
@@ -13,7 +14,7 @@ import { NotFoundPage } from './not-found.page';
     SwiperModule,
     MatIconModule,
     MatMenuModule,
-
+    ReactiveFormsModule,
     CommonModule,
     RouterModule.forChild([
       {

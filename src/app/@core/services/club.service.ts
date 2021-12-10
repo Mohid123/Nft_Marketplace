@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AllClubs } from '../models/all-clubs.model';
 import { ApiResponse } from '../models/response.model';
+import { GetAllClubs } from './../models/requests/get-all-club.model';
 import { ApiService } from './api.service';
 
 type clubsData = AllClubs;
@@ -16,8 +17,8 @@ export class ClubService  extends ApiService<clubsData>  {
     super(http);
   }
 
-  getAllClubs(): Observable<ApiResponse<clubsData>> {
-    return this.get('/creator/getClubsbyCreator')
+  getAllClubs(params: GetAllClubs): Observable<ApiResponse<clubsData>> {
+    return this.get('/creator/getClubsbyCreator', params)
   }
 
 
