@@ -1,6 +1,8 @@
 /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TooltipPosition } from '@angular/material/tooltip';
+import { Router } from '@angular/router';
+import { TransactionBalance } from '@app/@core/models/transaction-balance.model';
 import { CreatorService } from '@app/@core/services/creator.service';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { environment } from '@environments/environment';
@@ -10,6 +12,7 @@ import { NFTList } from './../../../@core/models/NFTList.model';
 import { ApiResponse } from './../../../@core/models/response.model';
 import { NFTService } from './../../../@core/services/nft.service';
 import { RouteService } from './../../../@core/services/route.service';
+import { TransactionService } from './../../../@core/services/transaction.service';
 
 @Component({
   selector: 'app-admin-market-place',
@@ -146,6 +149,8 @@ export class AdminMarketPlacePage implements OnInit ,OnDestroy {
     private creatorService: CreatorService,
     private nftService: NFTService,
     private routeService: RouteService,
+    private router: Router,
+    private transactionService: TransactionService,
   ) {
     this.page = 1;
     this.isLoading = false;
@@ -184,13 +189,20 @@ export class AdminMarketPlacePage implements OnInit ,OnDestroy {
   }
 
   createNFT():void {
-    const dialogRef = this.customDialogService.showConfirmationDialog('masdmaksd msg','subscribe', 'close');
-    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
-      if (confirmed) {
-        console.log('confirmed:',confirmed);
+    this.transactionService.getBalance().subscribe((res:ApiResponse<TransactionBalance>) => {
+      if(!res.hasErrors()) {
+        if(res.data.balance < 0) {
+          this.customDialogService.showCreateNFTOptionsDialog();
+        } else {
+          const dialogRef = this.customDialogService.showConfirmationDialog('masdmaksd msg','subscribe', 'close');
+          dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+            if (confirmed) {
+              this.router.navigate([this.clubName,'subscription']);
+            }
+          });
+        }
       }
-    });
-    // this.customDialogService.showCreateNFTOptionsDialog();
+    })
   }
 
   search(searchValu) {

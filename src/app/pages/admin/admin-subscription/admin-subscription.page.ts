@@ -4,7 +4,9 @@ import { TransactionStats } from '@app/@core/models/transaction-stats.model';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { interval } from 'rxjs';
 import { takeWhile, tap } from 'rxjs/operators';
+import { ApiResponse } from './../../../@core/models/response.model';
 import { SubscriptionPlan } from './../../../@core/models/subscription-plan.model';
+import { TransactionStatsResponse } from './../../../@core/models/transaction-stats-response.model';
 import { TransactionService } from './../../../@core/services/transaction.service';
 
 @Component({
@@ -38,7 +40,7 @@ export class AdminSubscriptionPage implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.transactionService.getTransactionStats().subscribe(result=> {
+    this.transactionService.getTransactionStats().subscribe((result: ApiResponse<TransactionStatsResponse>)=> {
       if(!result.hasErrors()) {
         this.wallet = result.data.wallet;
         this.stats = result.data.stats;
