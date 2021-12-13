@@ -39,7 +39,7 @@ export class NotFoundPage implements OnInit {
   searchControl = new FormControl();
 
   constructor(
-    private ClubService: ClubService
+    private ClubService: ClubService,
   ) {
     this.searchControl.valueChanges.pipe(debounceTime(1000))
       .subscribe(newValue => {

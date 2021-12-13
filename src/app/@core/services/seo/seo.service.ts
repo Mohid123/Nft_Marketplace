@@ -21,7 +21,7 @@ export class SeoService implements OnDestroy {
   ) {
     this.creatorService.Creator$.subscribe((creator)=> {
       this.ngxFavicon.setFavicon(creator?.profileImageURL);
-      this.setTitle(creator?.displayName,'');
+      this.setTitle(creator?.displayName || 'NFT Clubs','');
     })
   }
 
