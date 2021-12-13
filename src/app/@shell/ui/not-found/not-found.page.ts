@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { RouteService } from '@app/@core/services/route.service';
 import { ROUTER_UTILS } from '@app/@core/utils/router.utils';
+import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 // import Swiper core and required modules
 import SwiperCore, { Autoplay, Pagination } from "swiper";
@@ -19,7 +21,10 @@ SwiperCore.use([Pagination, Autoplay ]);
   encapsulation: ViewEncapsulation.None,
 })
 export class NotFoundPage implements OnInit {
+  destroy$ = new Subject();
   path = ROUTER_UTILS.config.base;
+  clubRouteUrl = ROUTER_UTILS;
+  public clubName: string;
 
   public allClub = false;
   public slider = true;
@@ -40,11 +45,30 @@ export class NotFoundPage implements OnInit {
 
   constructor(
     private ClubService: ClubService,
+    private routeService: RouteService
   ) {
     this.searchControl.valueChanges.pipe(debounceTime(1000))
       .subscribe(newValue => {
         this.getClubs();
       });
+
+      debugger
+      const params: GetAllClubs = {
+        offset: 0,
+        sortDisplayName: this.sortBy,
+      }
+
+      if(this.searchControl.value) {
+        params.displayName = this.searchControl.value;
+      }
+
+      this.ClubService.getAllClubs(params).subscribe(res=> {
+        if(!res.hasErrors() && res.data.totalCount > 0) {
+          this.clubs = res.data.data;
+
+        }
+      })
+
   }
 
   ngOnInit(): void {
@@ -64,6 +88,7 @@ export class NotFoundPage implements OnInit {
     this.ClubService.getAllClubs(params).subscribe(res=> {
       if(!res.hasErrors() && res.data.totalCount > 0) {
         this.clubs = res.data.data;
+
       }
     })
   }
