@@ -197,7 +197,7 @@ export class AdminMarketPlacePage implements OnInit ,OnDestroy {
           const dialogRef = this.customDialogService.showConfirmationDialog('masdmaksd msg','subscribe', 'close');
           dialogRef.afterClosed().subscribe((confirmed: boolean) => {
             if (confirmed) {
-              this.router.navigate([this.clubName,'subscription']);
+              this.router.navigate([this.clubName,'admin','subscription']);
             }
           });
         }
