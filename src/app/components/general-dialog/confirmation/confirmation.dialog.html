@@ -9,21 +9,22 @@
     </button>
   </div>
 
-  <h1>Alert</h1>
+  <div class="h-auto flex items-center justify-center flex-col inline-block mt-11 ">
+    <p class="text-center text-xl">
+      It seems you don't have enough <b>NDCT</b>.<br> Buy now to Create <b>NFT</b>.
+     </p>
+   <div class="flex justify-between w-full mt-4 mb-4">
 
-  <p>
-		{{message}}
-	</p>
-<div class="flex justify-between">
+     <button class="primary-btn text-white" (click)="onConfirmClick()">
+       {{confirmButtonText}}
+     </button>
+     <button class="cancel-btn" (click)="close()">
+       {{cancelButtonText}}
+     </button>
+   </div>
+  </div>
 
-  <button class="primary-btn" (click)="onConfirmClick()">
-    {{confirmButtonText}}
-  </button>
-  <button class="primary-btn" (click)="close()">
-    {{cancelButtonText}}
-  </button>
-</div>
 
-  <button mat-raised-button color="primary" (click)="onConfirmClick()" tabindex="1">{{confirmButtonText}}</button>
-	<button mat-raised-button mat-dialog-close tabindex="-1">{{cancelButtonText}}</button>
+
+
 </div>
