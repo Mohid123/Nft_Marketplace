@@ -39,9 +39,13 @@
     <ng-container *ngFor="let club of clubs">
       <ng-template swiperSlide>
         <div class="x-gap circle">
+          <a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
+          [routerLink]="[club.displayName]">
           <img class="club-logo" [src]="club.profileImageURL" style="max-width: 50%; border-radius: 10%;" alt="">
           <span class="title">{{club.displayName}}</span>
+
           <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt="" style=" opacity: 0.3;"></span>
+          </a>
         </div>
       </ng-template>
     </ng-container>
@@ -92,12 +96,20 @@
     </div>
   </div>
     <div class="clubs-container"  [class.show-all]="!allClub"  >
+      <ng-container *ngFor="let club of clubs">
+        <a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
+        [routerLink]="[club.displayName]">
+        <div class="x-gap circle" >
 
-      <div class="x-gap circle" *ngFor="let club of clubs">
-        <img class="club-logo" [src]="club.profileImageURL" style="max-width: 50%; border-radius: 10%;" alt="">
-        <span class="title">{{club.displayName}}</span>
-        <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt="" style=" opacity: 0.3;"></span>
-      </div>
+          <img class="club-logo" [src]="club.profileImageURL" style="max-width: 50%; border-radius: 10%;" alt="">
+          <span class="title">{{club.displayName}}</span>
+          <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt="" style=" opacity: 0.3;"></span>
+
+        </div>
+      </a>
+      </ng-container>
+
+
     </div>
   </div>
 

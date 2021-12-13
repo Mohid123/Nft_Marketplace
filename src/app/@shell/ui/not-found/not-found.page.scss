@@ -10,7 +10,7 @@
 
 
 .clubs-container {
-  @apply flex w-full flex-wrap h-auto justify-center flex-row;
+  @apply flex w-full flex-wrap h-auto justify-center flex-row mt-8;
   // height: calc (100% - 105px)
   .x-gap {
     margin: 15px 35px;
