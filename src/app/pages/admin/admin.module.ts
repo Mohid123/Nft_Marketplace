@@ -9,6 +9,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
 import { AdminHeaderModule } from './../../@shell/ui/admin-header/admin-header.module';
 import { CardModule } from './../../@shell/ui/nft-card/card.module';
+import { GeneralDialogModule } from './../../components/general-dialog/general-dialog.module';
 import { AdminDashboardPage } from './admin-dashboard/admin-dashboard.page';
 import { AdminGroupPage } from './admin-group/admin-group.page';
 import { AdminRoutingModule } from './admin-routing.module';
@@ -32,6 +33,7 @@ import { AdminMarketPlacePage } from './market-place/admin-market-place.page';
     AdminHeaderModule,
     ChartsModule,
     CardModule,
+    GeneralDialogModule,
     MatIconModule,
     MatMenuModule,
     NgxSpinnerModule,

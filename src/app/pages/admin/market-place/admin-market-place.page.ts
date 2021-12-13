@@ -184,7 +184,13 @@ export class AdminMarketPlacePage implements OnInit ,OnDestroy {
   }
 
   createNFT():void {
-    this.customDialogService.showCreateNFTOptionsDialog();
+    const dialogRef = this.customDialogService.showConfirmationDialog('masdmaksd msg','subscribe', 'close');
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        console.log('confirmed:',confirmed);
+      }
+    });
+    // this.customDialogService.showCreateNFTOptionsDialog();
   }
 
   search(searchValu) {

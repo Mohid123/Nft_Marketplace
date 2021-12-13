@@ -13,6 +13,7 @@ import { CreateNFTDiloagService } from './../../../components/custom-dialogs/cre
 import { ImageCropperService } from './../../../components/custom-dialogs/image-cropper/image-cropper.service';
 import { LoadingDialogService } from './../../../components/custom-dialogs/loading-dialog/loading-dialog/loading-dialog.service';
 import { StripeDialogService } from './../../../components/custom-dialogs/stripe-dialog/stripe-dialog.service';
+import { ConfirmationDialog } from './../../../components/general-dialog/confirmation/confirmation.dialog';
 
 @Injectable({
   providedIn: 'root',
@@ -195,6 +196,17 @@ export class CustomDialogService {
 
   closeDialogs() {
     this.matDialog.closeAll();
+  }
+
+  showConfirmationDialog(message,confirmButtonText,cancelButtonText) : MatDialogRef<ConfirmationDialog, any> {
+    const dialogRef = this.matDialog.open(ConfirmationDialog,{
+      panelClass: ['confirmation-dialog-overlay', 'action-dialog'],
+    });
+
+    dialogRef.componentInstance.message = message;
+    dialogRef.componentInstance.confirmButtonText = confirmButtonText;
+    dialogRef.componentInstance.cancelButtonText = cancelButtonText;
+    return dialogRef;
   }
 
 }
