@@ -191,7 +191,7 @@ export class AdminMarketPlacePage implements OnInit ,OnDestroy {
   createNFT():void {
     this.transactionService.getBalance().subscribe((res:ApiResponse<TransactionBalance>) => {
       if(!res.hasErrors()) {
-        if(res.data.balance < 0) {
+        if(res.data.balance > 0) {
           this.customDialogService.showCreateNFTOptionsDialog();
         } else {
           const dialogRef = this.customDialogService.showConfirmationDialog('masdmaksd msg','subscribe', 'close');
