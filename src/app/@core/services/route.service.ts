@@ -45,9 +45,9 @@ export class RouteService {
     router.events.subscribe((event: RouterEvent) => {
       if (event instanceof NavigationStart) {
         this.spinnerService.show('main');
-        if (event.id === 1 && event.url == '/') {
-          this.router.navigate(['/noderon']);
-        }
+        // if (event.id === 1 && event.url == '/') {
+        //   this.router.navigate(['/noderon']);
+        // }
       }
 
       if (event instanceof NavigationEnd) {
