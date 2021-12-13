@@ -30,7 +30,7 @@
         <label for="one"> Instant Mint</label>
       </div>
       <div class="chkbox">
-        <input  (click)="clickSale(createNft.controls.sale.value)" id="two" type="checkbox" formControlName="sale">
+        <input  (click)="clickSale(createNft.controls.sale.value);" id="two" type="checkbox" formControlName="sale">
         <span class="check"></span>
         <label for="two"> Sale</label>
       </div>
@@ -38,12 +38,12 @@
   </form>
 
 
-  <!-- <button class="primary-btn" [disabled]="!price || price === 0" (click)="save()">
-    Minting
-  </button> -->
-
   <button class="primary-btn" [disabled]="!createNft.valid" (click)="save()">
-    Minting
+    {{ createNft.controls.sale.value === false && createNft.controls.mint.value === false?  'Save as Draft' : 'Mint' }}
   </button>
+
+  <!-- <button value='Mint' id="p-btn" class="primary-btn" [disabled]="!createNft.valid" (click)="save();" >
+    Mint
+  </button> -->
 
 </div>

@@ -44,6 +44,6 @@
   </div>
 </form>
   <button class="primary-btn" [disabled]="!createNft.valid" (click)="save()">
-    Minting
+    {{ createNft.controls.sale.value === false && createNft.controls.mint.value === false?  'Save as Draft' : 'Mint' }}
   </button>
 </div>

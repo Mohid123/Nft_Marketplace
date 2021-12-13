@@ -16,6 +16,7 @@ export class CreateNFTMembershipOptionsComponent  {
   @Input() group: Group;
   img: FormData;
   nftForm: NFT;
+  marked = false;
 
   public createNft: FormGroup;
 
@@ -61,4 +62,6 @@ export class CreateNFTMembershipOptionsComponent  {
   close(): void {
     this.customDialogService.closeDialogs();
   }
+
+
 }
