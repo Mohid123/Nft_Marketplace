@@ -5,6 +5,7 @@ import { ROLE_TYPE_UTILS } from '@app/@core/utils/role-type.utils';
 import { AuthService } from '@app/pages/auth/services/auth.service';
 import { SeoService } from '@core/services/seo';
 import { ThemeService } from '@core/services/theme';
+import { AngularFaviconService } from 'angular-favicon';
 import { ToastrService } from 'ngx-toastr';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -41,6 +42,7 @@ export class AppComponent implements OnInit {
     private authService: AuthService,
     private creatorService: CreatorService,
     private customDialogService: CustomDialogService,
+    private ngxFavicon: AngularFaviconService,
     private routeService: RouteService,
     private router: Router,
     private viewportScroller: ViewportScroller,
@@ -51,8 +53,9 @@ export class AppComponent implements OnInit {
     this.router.events.pipe(
       filter((event) => event instanceof ActivationStart),
       ).subscribe((event: any) => {
-        if(event.snapshot.component.name === "NotFoundPage") {
-          console.log('event.snapshot.component:',event.snapshot.component.name);
+        if(event?.snapshot?.component?.name === "NotFoundPage") {
+          // console.log('event.snapshot.component:',event.snapshot.component.name);
+          this.ngxFavicon.setFavicon("");
           this.themeService.setHeader(false);
           this.themeService.setFooter(false);
         } else {
@@ -60,6 +63,11 @@ export class AppComponent implements OnInit {
           this.themeService.setFooter(true);
         }
       })
+    this.creator$.subscribe(creator => {
+      if(creator==null) {
+        this.router.navigate([]);
+      }
+    })
     this.routeService.listenToRouter();
   }
 
