@@ -68,7 +68,7 @@
           </div>
           <div class="value">
             <p>Available NDCT</p>
-            <span>{{creatorStats?.yearlyStats?.totalNftListed || 0 | number: '2.'}}</span>
+            <span>{{balance || 0 | number: '2.'}}</span>
           </div>
           <div class="graph-icon">
            <a class="button arrow" href=""  [routerLinkActive]="['active']"  [routerLinkActiveOptions]="{ exact: true }"

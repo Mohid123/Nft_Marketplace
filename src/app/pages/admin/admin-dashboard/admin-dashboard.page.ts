@@ -12,6 +12,8 @@ import { interval, Subject } from 'rxjs';
 import { take, takeUntil, takeWhile, tap } from 'rxjs/operators';
 import { NFTList } from './../../../@core/models/NFTList.model';
 import { ApiResponse } from './../../../@core/models/response.model';
+import { TransactionBalance } from './../../../@core/models/transaction-balance.model';
+import { TransactionService } from './../../../@core/services/transaction.service';
 
 
 @Component({
@@ -139,6 +141,7 @@ export class AdminDashboardPage implements AfterViewInit {
   public lineChartLegend = true;
   public lineChartType: ChartType = 'line';
   public lineChartPlugins = [];
+  public balance: number;
 
 
 
@@ -149,7 +152,7 @@ export class AdminDashboardPage implements AfterViewInit {
     private groupService: GroupService,
     private nftService: NFTService,
     private routeService: RouteService,
-
+    private transactionService: TransactionService,
   ){
     this.monthIndex = 0;
     this.page = 1;
@@ -194,6 +197,16 @@ export class AdminDashboardPage implements AfterViewInit {
     // console.log('gradient:',gradient);
     this.lineChartColors[0].backgroundColor = gradient;
     this.lineChartColors[0].borderColor = gradient;
+
+    this.transactionService.getBalance().subscribe((res:ApiResponse<TransactionBalance>) => {
+      if(!res.hasErrors()) {
+        if(res.data.balance > 0) {
+          this.balance = res.data.balance;
+        } else {
+          this.balance = 0;
+        }
+      }
+    })
 
   }
 
