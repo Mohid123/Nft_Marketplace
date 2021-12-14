@@ -24,13 +24,19 @@
   </div>
 
   <div class="flex flex-col mt-6">
-    <span class="text-xl">No. of Copies</span><br>
+    <div class="flex justify-between">
+      <span class="text-xl">No. of Copies</span>
+      <span class="text-xl text-yellow-600" *ngIf="createNft.controls.copies.touched && createNft.controls.copies.errors?.max && createNft.controls.copies.errors?.max !== 999999">Limit Exceeded</span>
+    </div>
+    <br>
     <input type='number' placeholder="999999" formControlName="copies" appMaxLength length="6" name="copies">
     <p class="error-msg error" *ngIf="createNft.controls.copies.touched && createNft.controls.copies.errors?.required">please enter no of copies</p>
     <p class="error-msg error" *ngIf="createNft.controls.copies.touched && createNft.controls.copies.errors?.min">copies must be greater then or equal to {{createNft.controls.copies.errors?.min?.min}} </p>
-    <p class="error-msg error" *ngIf="createNft.controls.copies.touched && createNft.controls.copies.errors?.max">copies must be less then or equal to {{createNft.controls.copies.errors?.max?.max}} </p>
+    <p class="error-msg error" *ngIf="createNft.controls.copies.touched && createNft.controls.copies.errors?.max && createNft.controls.copies.errors?.max === 999999">copies must be less then or equal to {{createNft.controls.copies.errors?.max?.max}} </p>
   </div>
-  <div class="flex float-right"><span class="text-green-500">Avaliable NCDT </span>{{balance}}</div>
+  <div class="flex self-end mt-2">
+    <div class=""><span class="text-green-500">Avaliable NCDT </span>{{balance}}</div>
+  </div>
   <div>
     <div class="chkbox">
       <input id="one" type="checkbox" formControlName="mint">
