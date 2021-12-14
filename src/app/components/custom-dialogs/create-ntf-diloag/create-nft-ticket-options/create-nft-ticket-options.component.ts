@@ -32,16 +32,17 @@ export class CreateNFTStyleComponent {
     private transactionService: TransactionService,
     private formBuilder: FormBuilder,
   ) {
+    this.balance = this.transactionService.checkBalance();
+
     this.createNft = this.formBuilder.group({
       price: new FormControl('', [Validators.required, Validators.min(1) ,Validators.max(999999)]),
-      copies: new FormControl('', [Validators.required, Validators.min(1) ,Validators.max(999999)]),
+      copies: new FormControl('', [Validators.required, Validators.min(1) ,Validators.max(this.balance || 999999)]),
       mint: new FormControl(true),
       sale: new FormControl(false),
     });
 
     this.img = this.nftService.createNFTImg;
     this.nftForm = this.nftService.createNFT;
-    this.balance = this.transactionService.checkBalance();
   }
 
   save():void {
