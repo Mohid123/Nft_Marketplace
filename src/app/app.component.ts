@@ -1,11 +1,13 @@
 import { ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { ActivationStart, Router } from '@angular/router';
 import { ROLE_TYPE_UTILS } from '@app/@core/utils/role-type.utils';
 import { AuthService } from '@app/pages/auth/services/auth.service';
 import { SeoService } from '@core/services/seo';
 import { ThemeService } from '@core/services/theme';
 import { ToastrService } from 'ngx-toastr';
 import { fromEvent, Observable, Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { CreatorService } from './@core/services/creator.service';
 import { CustomDialogService } from './@core/services/custom-dialog/custom-dialog.service';
 import { RouteService } from './@core/services/route.service';
@@ -26,6 +28,9 @@ export class AppComponent implements OnInit {
   isAdminPanel$: Observable<boolean> = this.routeService.isAdminPanel$;
   creator$ = this.creatorService.Creator$;
 
+  showHedader$ = this.themeService.showHeader$;
+  showFooter$ = this.themeService.showFooter$;
+
   roles = ROLE_TYPE_UTILS;
 
 
@@ -37,11 +42,24 @@ export class AppComponent implements OnInit {
     private creatorService: CreatorService,
     private customDialogService: CustomDialogService,
     private routeService: RouteService,
+    private router: Router,
     private viewportScroller: ViewportScroller,
 
     private toastr: ToastrService,
     // private viewportScroller: ViewportScroller
   ) {
+    this.router.events.pipe(
+      filter((event) => event instanceof ActivationStart),
+      ).subscribe((event: any) => {
+        if(event.snapshot.component.name === "NotFoundPage") {
+          console.log('event.snapshot.component:',event.snapshot.component.name);
+          this.themeService.setHeader(false);
+          this.themeService.setFooter(false);
+        } else {
+          this.themeService.setHeader(true);
+          this.themeService.setFooter(true);
+        }
+      })
     this.routeService.listenToRouter();
   }
 

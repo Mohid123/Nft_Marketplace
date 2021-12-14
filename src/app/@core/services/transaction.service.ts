@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { take, tap } from 'rxjs/operators';
 import { TransactionBalance } from '../models/transaction-balance.model';
 import { ApiResponse } from './../models/response.model';
 import { TransactionStatsResponse } from './../models/transaction-stats-response.model';
@@ -14,6 +14,8 @@ type TransactionStatsData = TransactionStatsResponse | TransactionBalance;
 })
 export class TransactionService extends ApiService<TransactionStatsData> {
 
+  private balance:number;
+
   constructor(
     protected http: HttpClient,
   ) {
@@ -25,7 +27,22 @@ export class TransactionService extends ApiService<TransactionStatsData> {
   }
 
   getBalance(): Observable<ApiResponse<TransactionStatsData>> {
-    return this.get('/token-transaction/getMyBalance').pipe(take(1));
+    return this.get('/token-transaction/getMyBalance').pipe(
+      take(1),
+      tap((res: ApiResponse<TransactionBalance>) => {
+        if (!res.hasErrors()) {
+          if (res.data.balance > 0) {
+            this.balance = res.data.balance;
+          } else {
+            this.balance = 0;
+          }
+        }
+      }),
+    );
+  }
+
+  checkBalance(): number {
+    return this.balance;
   }
 
 }

@@ -31,6 +31,10 @@
       [pagination]="{
         clickable: true
       }"
+      [autoplay]="{
+               delay: 2500,
+                disableOnInteraction: false
+              }"
 
       [navigation]="true"
       class="mySwiper slider"
@@ -40,9 +44,9 @@
       <ng-template swiperSlide>
         <div class="x-gap circle">
           <a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
-          [routerLink]="[club.displayName]">
-          <img class="club-logo" [src]="club.profileImageURL" style="max-width: 50%; border-radius: 10%;" alt="">
-          <span class="title">{{club.displayName}}</span>
+          [routerLink]="['/',club.redirectUrl]">
+          <img class="club-logo" [src]="club.profileImageURL" style="max-width: 50%; border-radius: 100%;" alt="">
+          <!-- <span class="title">{{club.displayName}}</span> -->
 
           <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt="" style=" opacity: 0.3;"></span>
           </a>
@@ -101,8 +105,8 @@
         [routerLink]="[club.displayName]">
         <div class="x-gap circle" >
 
-          <img class="club-logo" [src]="club.profileImageURL" style="max-width: 50%; border-radius: 10%;" alt="">
-          <span class="title">{{club.displayName}}</span>
+          <img class="club-logo" [src]="club.profileImageURL" style="max-width: 50%; border-radius: 100%;" alt="">
+          <!-- <span class="title">{{club.displayName}}</span> -->
           <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt="" style=" opacity: 0.3;"></span>
 
         </div>

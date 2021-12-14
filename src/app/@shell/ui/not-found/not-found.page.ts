@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { RouteService } from '@app/@core/services/route.service';
 import { ROUTER_UTILS } from '@app/@core/utils/router.utils';
+import { ThemeService } from '@core/services/theme';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 // import Swiper core and required modules
@@ -45,6 +46,7 @@ export class NotFoundPage implements OnInit {
 
   constructor(
     private ClubService: ClubService,
+    private themeService: ThemeService,
     private routeService: RouteService
   ) {
     this.searchControl.valueChanges.pipe(debounceTime(1000))
@@ -52,7 +54,7 @@ export class NotFoundPage implements OnInit {
         this.getClubs();
       });
 
-      debugger
+      // debugger
       const params: GetAllClubs = {
         offset: 0,
         sortDisplayName: this.sortBy,

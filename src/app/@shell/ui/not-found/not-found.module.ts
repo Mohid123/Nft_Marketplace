@@ -21,6 +21,8 @@ import { NotFoundPage } from './not-found.page';
         path: ROUTER_UTILS.config.errorResponse.notFound,
         component: NotFoundPage,
         data: {
+          header: false,
+          footer: false,
           title: 'The page you were looking for could not be found',
           robots: 'noindex, nofollow',
         },
