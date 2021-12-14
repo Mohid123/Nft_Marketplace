@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Group } from '../../../../@core/models/group.model';
 import { NFT } from '../../../../@core/models/NFT.model';
 import { NFTService } from '../../../../@core/services/nft.service';
+import { TransactionService } from './../../../../@core/services/transaction.service';
 
 @Component({
   selector: 'app-create-nft-ticket-options',
@@ -19,6 +20,7 @@ export class CreateNFTStyleComponent {
 
   price: any;
   copy: number;
+  balance: number;
 
   public createNft: FormGroup;
 
@@ -27,6 +29,7 @@ export class CreateNFTStyleComponent {
     private nftService: NFTService,
     private mediaService: MediaService,
     private toastr: ToastrService,
+    private transactionService: TransactionService,
     private formBuilder: FormBuilder,
   ) {
     this.createNft = this.formBuilder.group({
@@ -38,6 +41,7 @@ export class CreateNFTStyleComponent {
 
     this.img = this.nftService.createNFTImg;
     this.nftForm = this.nftService.createNFT;
+    this.balance = this.transactionService.checkBalance();
   }
 
   save():void {
