@@ -94,6 +94,8 @@ export class RouteService {
 
         if(params?.clubName) {
           this._clubName$.next(params?.clubName);
+        } else {
+          this._clubName$.next(null);
         }
 
         if ( route?._urlSegment?.segments[1]?.path == ROUTER_UTILS.config.admin.root) {

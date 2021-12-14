@@ -53,7 +53,7 @@ export class AppComponent implements OnInit {
     this.router.events.pipe(
       filter((event) => event instanceof ActivationStart),
       ).subscribe((event: any) => {
-        if(event.snapshot.component.name === "NotFoundPage") {
+        if(event?.snapshot?.component?.name === "NotFoundPage") {
           // console.log('event.snapshot.component:',event.snapshot.component.name);
           this.ngxFavicon.setFavicon("");
           this.themeService.setHeader(false);
@@ -63,6 +63,11 @@ export class AppComponent implements OnInit {
           this.themeService.setFooter(true);
         }
       })
+    this.creator$.subscribe(creator => {
+      if(creator==null) {
+        this.router.navigate([]);
+      }
+    })
     this.routeService.listenToRouter();
   }
 
