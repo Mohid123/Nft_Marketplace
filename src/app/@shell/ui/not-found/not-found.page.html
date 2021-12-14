@@ -40,7 +40,7 @@
       <ng-template swiperSlide>
         <div class="x-gap circle">
           <a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
-          [routerLink]="[club.displayName]">
+          [routerLink]="['/',club.redirectUrl]">
           <img class="club-logo" [src]="club.profileImageURL" style="max-width: 50%; border-radius: 10%;" alt="">
           <span class="title">{{club.displayName}}</span>
 
