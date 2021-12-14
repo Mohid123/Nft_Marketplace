@@ -3,7 +3,7 @@ import { Inject, Injectable, OnDestroy } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { getItem, setItem, StorageItem } from '@app/@core/utils';
-import { fromEventPattern, Subject } from 'rxjs';
+import { BehaviorSubject, fromEventPattern, Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DEFAULT_BASE_THEME, ThemeList } from './theme.config';
 
@@ -11,6 +11,14 @@ import { DEFAULT_BASE_THEME, ThemeList } from './theme.config';
   providedIn: 'root',
 })
 export class ThemeService implements OnDestroy {
+  private _showHedader$ = new BehaviorSubject<boolean>(true);
+  public readonly showHeader$: Observable<boolean> =
+    this._showHedader$.asObservable();
+
+  private _showFooter$ = new BehaviorSubject<boolean>(true);
+  public readonly showFooter$: Observable<boolean> =
+    this._showFooter$.asObservable();
+
   destroy$ = new Subject();
 
   private readonly mediaQuery = window.matchMedia(
@@ -137,6 +145,14 @@ export class ThemeService implements OnDestroy {
         '../assets/icons/logout.svg',
       ),
     );
+  }
+
+  setHeader(param:boolean): void {
+    this._showHedader$.next(param);
+  }
+
+  setFooter(param:boolean): void {
+    this._showFooter$.next(param);
   }
 
   ngOnDestroy(): void {

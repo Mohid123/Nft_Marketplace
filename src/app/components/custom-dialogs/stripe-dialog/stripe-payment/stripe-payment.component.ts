@@ -85,7 +85,7 @@ export class StripePaymentComponent  {
   }
 
   purchaseSubscriptionPlan(): void {
-    debugger
+    // debugger
     const param: BuySubscription = {
       stripeDto : {
       card : {
