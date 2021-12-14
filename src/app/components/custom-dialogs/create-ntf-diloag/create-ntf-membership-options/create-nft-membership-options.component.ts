@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Group } from './../../../../@core/models/group.model';
 import { NFT } from './../../../../@core/models/NFT.model';
 import { MediaService } from './../../../../@core/services/media.service';
+import { TransactionService } from './../../../../@core/services/transaction.service';
 
 @Component({
   selector: 'app-create-nft-membership-options',
@@ -21,9 +22,11 @@ export class CreateNFTMembershipOptionsComponent  {
   public createNft: FormGroup;
 
   price: any;
+  balance: number;
 
   constructor(
     private customDialogService: CustomDialogService,
+    private transactionService: TransactionService,
     private nftService: NFTService,
     private mediaService: MediaService,
     private toastr: ToastrService,
@@ -37,6 +40,8 @@ export class CreateNFTMembershipOptionsComponent  {
     });
     this.img = this.nftService.createNFTImg;
     this.nftForm = this.nftService.createNFT;
+
+    this.balance = this.transactionService.checkBalance();
   }
 
 

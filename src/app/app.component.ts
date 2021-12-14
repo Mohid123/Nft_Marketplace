@@ -53,11 +53,11 @@ export class AppComponent implements OnInit {
       ).subscribe((event: any) => {
         if(event.snapshot.component.name === "NotFoundPage") {
           console.log('event.snapshot.component:',event.snapshot.component.name);
-          this.themeService.setHeader(true);
-          this.themeService.setFooter(true);
-        } else {
           this.themeService.setHeader(false);
           this.themeService.setFooter(false);
+        } else {
+          this.themeService.setHeader(true);
+          this.themeService.setFooter(true);
         }
       })
     this.routeService.listenToRouter();
