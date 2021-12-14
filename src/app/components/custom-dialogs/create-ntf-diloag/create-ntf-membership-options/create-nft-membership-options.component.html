@@ -22,7 +22,9 @@
       <p class="error-msg error" *ngIf="createNft.controls.price.touched && createNft.controls.price.errors?.min">price must be greater then or equal to {{createNft.controls.price.errors?.min?.min}} </p>
       <p class="error-msg error" *ngIf="createNft.controls.price.touched && createNft.controls.price.errors?.max">price must be less then or equal to {{createNft.controls.price.errors?.max?.max}} </p>
     </div>
-    <div class="flex float-right justify-end mt-2"><span class="text-green-500 mr-1 ">Available NDCT </span>{{balance}}</div>
+    <div class="flex self-end mt-2">
+      <div class=""><span class="text-green-500">Avaliable NCDT </span>{{balance}}</div>
+    </div>
 
     <div>
       <div class="chkbox">
