@@ -82,7 +82,7 @@ export class AppComponent implements OnInit {
         console.log('NotFoundPage:',NotFoundPage.name);
         if(event?.snapshot?.component?.name.toString() === NotFoundPage.name) {
           // console.log('event.snapshot.component:',event.snapshot.component.name);
-          this.ngxFavicon.setFavicon("");
+          this.ngxFavicon.setFavicon("../assets/icons/favicon.png");
           this.themeService.setHeader(false);
           this.themeService.setFooter(false);
         } else {
