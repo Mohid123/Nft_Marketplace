@@ -4,9 +4,22 @@
   <div class="flex flex-wrap w-full">
     <div class="order-1 w-full section-container lg:order-1 xl:w-65 lg:w-3/5 ">
       <div class="relative chart-status">
+        <div class="flex justify-between">
         <span class="nft-label">NFT STATS</span>
-        <span mat-icon-button  class="stats-btn">
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu" class="stats-btn">
+          <mat-icon style="width: 16px; color:white">more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" class="bg-primary-600 hover:bg-primary-400  mt-0.5" xPosition='before'>
+          <ng-container *ngFor="let month of months;let i = index">
+            <button (click)="chartStatus(i)" class="dropdown" mat-menu-item >
+              {{month.name}}
+            </button>
+          </ng-container>
+        </mat-menu>
+      </div>
 
+
+        <!-- <span mat-icon-button  class="stats-btn">
           <mat-icon class="cursor-pointer" [matMenuTriggerFor]="menu" aria-label="menu" style=" color:white">more_vert</mat-icon>
        </span>
         <mat-menu #menu="matMenu" class="bg-primary-600 mt-0.5" xPosition='before'>
@@ -15,7 +28,7 @@
               {{month.name}}
             </button>
           </ng-container>
-        </mat-menu>
+        </mat-menu> -->
         <div style="">
           <canvas #myCanvas class="px-16 py-6 mb-32" baseChart width="816" height="300"
           [datasets]="lineChartData"

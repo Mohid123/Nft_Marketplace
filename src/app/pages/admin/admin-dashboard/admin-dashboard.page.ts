@@ -46,6 +46,7 @@ export class AdminDashboardPage implements AfterViewInit {
       ],
       fill: false,
       borderWidth: 7,
+      pointHoverRadius: 9,
     },
   ];
 
