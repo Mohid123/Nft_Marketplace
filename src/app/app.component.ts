@@ -12,6 +12,7 @@ import { filter } from 'rxjs/operators';
 import { CreatorService } from './@core/services/creator.service';
 import { CustomDialogService } from './@core/services/custom-dialog/custom-dialog.service';
 import { RouteService } from './@core/services/route.service';
+import { NotFoundPage } from './@shell/ui/not-found/not-found.page';
 
 @Component({
   selector: 'app-root',
@@ -50,19 +51,6 @@ export class AppComponent implements OnInit {
     private toastr: ToastrService,
     // private viewportScroller: ViewportScroller
   ) {
-    this.router.events.pipe(
-      filter((event) => event instanceof ActivationStart),
-      ).subscribe((event: any) => {
-        if(event?.snapshot?.component?.name === "NotFoundPage") {
-          // console.log('event.snapshot.component:',event.snapshot.component.name);
-          this.ngxFavicon.setFavicon("");
-          this.themeService.setHeader(false);
-          this.themeService.setFooter(false);
-        } else {
-          this.themeService.setHeader(true);
-          this.themeService.setFooter(true);
-        }
-      })
     this.routeService.listenToRouter();
   }
 
@@ -86,6 +74,22 @@ export class AppComponent implements OnInit {
         );
       })
     );
+
+    this.router.events.pipe(
+      filter((event) => event instanceof ActivationStart),
+      ).subscribe((event: any) => {
+        console.log('event?.snapshot?.component?.name:',event?.snapshot?.component?.name);
+        console.log('NotFoundPage:',NotFoundPage.name);
+        if(event?.snapshot?.component?.name.toString() === NotFoundPage.name) {
+          // console.log('event.snapshot.component:',event.snapshot.component.name);
+          this.ngxFavicon.setFavicon("");
+          this.themeService.setHeader(false);
+          this.themeService.setFooter(false);
+        } else {
+          this.themeService.setHeader(true);
+          this.themeService.setFooter(true);
+        }
+      })
   }
 
   ngOnDestroy() {
