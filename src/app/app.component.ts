@@ -78,8 +78,6 @@ export class AppComponent implements OnInit {
     this.router.events.pipe(
       filter((event) => event instanceof ActivationStart),
       ).subscribe((event: any) => {
-        console.log('event?.snapshot?.component?.name:',event?.snapshot?.component?.name);
-        console.log('NotFoundPage:',NotFoundPage.name);
         if(event?.snapshot?.component?.name.toString() === NotFoundPage.name) {
           // console.log('event.snapshot.component:',event.snapshot.component.name);
           this.ngxFavicon.setFavicon("../assets/icons/favicon.png");
