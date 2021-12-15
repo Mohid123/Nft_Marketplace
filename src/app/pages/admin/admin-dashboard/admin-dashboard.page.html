@@ -62,6 +62,7 @@
     <div class="order-2 w-full section-container lg:order-2 xl:w-35 lg:w-2/5 ">
       <div class="flex flex-col justify-between section status">
         <ng-container *ngIf="(creatorStats$ | async) as creatorStats">
+
         <div class="available-ndct">
           <div class="icon">
             <img class="" src="./assets/icons/buy.svg"/>
@@ -70,8 +71,8 @@
             <p>Available NDCT</p>
             <span>{{balance || 0 | number: '2.'}}</span>
           </div>
-          <div class="graph-icon">
-           <a class="button arrow" href=""  [routerLinkActive]="['active']"  [routerLinkActiveOptions]="{ exact: true }"
+          <div class="flex graph-icon">
+            <a class="w-full button arrow" href=""  [routerLinkActive]="['active']"  [routerLinkActiveOptions]="{ exact: true }"
            [routerLink]="[adminRouteUrl.subscription]" ><b>Buy More</b></a>
           </div>
         </div>
