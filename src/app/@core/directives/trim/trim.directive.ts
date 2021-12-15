@@ -16,10 +16,10 @@ export class TrimDirective {
     this.format(e);
   }
 
-  @HostListener('paste', ['$event']) onPaste(event: ClipboardEvent):void {
-    event.preventDefault();
-    this.format(event.clipboardData.getData('text/plain'));
-  }
+  // @HostListener('paste', ['$event']) onPaste(event: ClipboardEvent):void {
+  //   event.preventDefault();
+  //   this.format(event.clipboardData.getData('text/plain'));
+  // }
 
   @HostListener('focus', ['$event.target.value']) onFocus(target: string):void {
     if (this.isSpace) {
