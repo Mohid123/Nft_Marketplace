@@ -166,8 +166,7 @@ svg {
 }
 
 .stats-btn {
-  @apply flex items-center justify-end h-12 p-1.5  absolute right-0 mt-4;
-  width: 133px;
+  @apply flex items-center justify-end h-12 absolute right-0 mt-4 mr-3;
 }
 .nft-label {
   @apply flex items-center justify-center h-12 p-1.5  absolute left-0 pl-2 mt-4 mr-2 tracking-wide text-white font-medium ;
