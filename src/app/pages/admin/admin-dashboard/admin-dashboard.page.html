@@ -48,17 +48,17 @@
             </div>
             <div class="sold">
               <p>Total NFT Sold</p>
-              <span>{{creatorStats?.yearlyStats?.soldNft || 0 | number: '2.'}}</span>
+              <span>{{creatorStats?.yearlyStats?.soldNft || 0 | number: '1.'}}</span>
             </div>
             <div class="profit">
               <p>Sold NFT Profit</p>
-              <span>€ {{creatorStats?.yearlyStats?.profit || 0 | number: '2.'}}</span>
+              <span>€ {{creatorStats?.yearlyStats?.profit || 0 | number: '1.'}}</span>
             </div>
           </ng-container>
           <ng-container *ngIf="monthIndex > 0 && (creatorStats$ | async) as creatorStats">
             <div class="listed">
               <p>Total NFT Listed</p>
-              <span>{{creatorStats?.monthlyStats[monthIndex-1]?.totalNftListed || 0 | number: '2.'}}</span>
+              <span>{{creatorStats?.monthlyStats[monthIndex-1]?.totalNftListed || 0 | number: '1.'}}</span>
             </div>
             <div class="sold">
               <p>Total NFT Sold</p>
@@ -95,7 +95,7 @@
           </div>
           <div class="value">
             <p>Available NFT</p>
-            <span>{{creatorStats?.totalStats?.totalNftListed || 0 | number: '2.'}}</span>
+            <span>{{creatorStats?.totalStats?.totalNftListed || 0 | number: '1.'}}</span>
           </div>
           <div class="graph-icon">
             <img class="" src="./assets/icons/growth.png"/>
@@ -107,7 +107,7 @@
           </div>
           <div class="value">
             <p>Total Revenue</p>
-            <span>€ {{creatorStats?.totalStats?.profit || 0 | number: '2.'}}</span>
+            <span>€ {{creatorStats?.totalStats?.profit || 0 | number: '1.'}}</span>
           </div>
           <div class="graph-icon">
             <img class="" src="./assets/icons/growth.png"/>
@@ -119,7 +119,7 @@
           </div>
           <div class="value">
             <p>Pending For Sale</p>
-            <span>{{creatorStats?.totalStats?.pendingForSale || 0 | number: '2.'}}</span>
+            <span>{{creatorStats?.totalStats?.pendingForSale || 0 | number: '1.'}}</span>
           </div>
           <div class="graph-icon">
             <img class="" src="./assets/icons/growth.png"/>
