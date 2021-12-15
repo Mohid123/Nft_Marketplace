@@ -37,9 +37,9 @@
 
           <p class="error-msg error"
             *ngIf="stripeForm.controls.validity.touched && stripeForm.controls.validity.errors?.required">please select valid date</p>
-          <p class="error-msg error"
+          <!-- <p class="error-msg error"
             *ngIf="stripeForm.controls.validity.touched && stripeForm.controls.validity.errors?.minlength">card no
-            length should be greater than 3</p>
+            length should be greater than 3</p> -->
         </div>
         <div class="w-2/4 pl-4">
           <label class="floating-label" for="cvv">CVC</label>
