@@ -63,11 +63,6 @@ export class AppComponent implements OnInit {
           this.themeService.setFooter(true);
         }
       })
-    this.creator$.subscribe(creator => {
-      if(creator==null) {
-        this.router.navigate([]);
-      }
-    })
     this.routeService.listenToRouter();
   }
 

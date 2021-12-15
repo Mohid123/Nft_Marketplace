@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { getItem, setItem } from '@app/@core/utils';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
@@ -24,13 +25,16 @@ export interface CreatorStatsInStore {
   providedIn: 'root',
 })
 export class CreatorService  extends ApiService<creatorData> {
-  private _Creator$ = new BehaviorSubject<Creator>(null);
-  public readonly Creator$: Observable<Creator> = this._Creator$.asObservable();
+  private _Creator$ = new BehaviorSubject<Creator | undefined>(null);
+  public readonly Creator$: Observable<Creator | undefined> = this._Creator$.asObservable();
 
   private _CreatorStats$ = new BehaviorSubject<CreatorStats>(null);
   public readonly CreatorStats$: Observable<CreatorStats> = this._CreatorStats$.asObservable();
 
-  constructor(protected http: HttpClient) {
+  constructor(
+    protected http: HttpClient,
+    protected router: Router,
+  ) {
     super(http);
   }
 
@@ -40,7 +44,7 @@ export class CreatorService  extends ApiService<creatorData> {
       // console.log('creatoraaa:',creator);
       this._Creator$.next(creator.data)
       return of(creator.data);
-    } else {
+    } else if (clubName) {
       const param = {
         clubName: clubName,
       };
@@ -53,10 +57,16 @@ export class CreatorService  extends ApiService<creatorData> {
               data: result.data,
             };
             setItem(StorageItem.Creator, param);
-            this._Creator$.next(result.data)
+            if(result.data == null ) {
+              this.router.navigate([]);
+            } else {
+              this._Creator$.next(result.data)
+            }
           }
         }),
       );
+    } else {
+      return of(null)
     }
   }
 
