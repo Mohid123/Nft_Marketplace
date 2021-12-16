@@ -38,7 +38,7 @@ export class CreatorService  extends ApiService<creatorData> {
     super(http);
   }
 
-  getCreator(clubName: string, forceUpdate: boolean = false): Observable<ApiResponse<Creator> | Creator> {
+  getCreator(clubName: string, forceUpdate = false): Observable<ApiResponse<Creator> | Creator> {
     const creator: CreatorInStore = <CreatorInStore>getItem(StorageItem.Creator);
     if (!forceUpdate && creator?.club == clubName) {
       // console.log('creatoraaa:',creator);
@@ -70,9 +70,9 @@ export class CreatorService  extends ApiService<creatorData> {
     }
   }
 
-  getCreatorStats(clubName: string): Observable<ApiResponse<creatorData> | CreatorStats> {
+  getCreatorStats(clubName: string,forceUpdate?:boolean): Observable<ApiResponse<creatorData> | CreatorStats> {
     const creatorStats: CreatorStatsInStore = <CreatorStatsInStore>getItem(StorageItem.CreatorStats);
-    if (creatorStats?.club == clubName) {
+    if (!forceUpdate && creatorStats?.club == clubName) {
       // console.log('creatoraaa:',creatorStats);
       this._CreatorStats$.next(creatorStats.data)
       return of(creatorStats.data);

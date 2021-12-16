@@ -107,5 +107,8 @@ export class AppComponent implements OnInit {
     if(document.getElementById('admin-main')) {
       document.getElementById('admin-main').scrollIntoView()
     }
+    if(document.getElementById('user-main')) {
+      document.getElementById('user-main').scrollIntoView()
+    }
   }
 }
