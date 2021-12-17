@@ -44,6 +44,7 @@ export class AdminSettingPage implements OnInit, OnDestroy {
   description: any;
 
   public creator: Creator;
+  public toggleButton: boolean = false;
 
   constructor(
     private creatorService: CreatorService,
@@ -90,6 +91,14 @@ export class AdminSettingPage implements OnInit, OnDestroy {
       this.saveChagesToServer();
     }
   }
+
+  enable(){
+    this.toggleButton = false
+ }
+
+ disable(){
+    this.toggleButton = true
+ }
 
   updateKey(): void {
     const params: AddStripeKey = {
