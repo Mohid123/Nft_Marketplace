@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
-/* eslint-disable @angular-eslint/no-empty-lifecycle-method */
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import {
   FormBuilder,
@@ -59,10 +57,10 @@ export class AdminSettingPage implements OnInit, OnDestroy {
     this.settingForm = this.formBuilder.group({
       description: new FormControl('', [Validators.required]),
       key: new FormControl(''),
-      profileImage: new FormControl(''),
-      coverImage: new FormControl(''),
       profileImg: new FormControl(''),
       coverImg: new FormControl(''),
+      profileImage: new FormControl(''),
+      coverImage: new FormControl(''),
     });
 
     this.creator$.subscribe((creator) => {
@@ -123,6 +121,8 @@ export class AdminSettingPage implements OnInit, OnDestroy {
       .subscribe((res: ApiResponse<ResponseAddMedia>) => {
         if (!res.hasErrors()) {
           this.creator.profileImageURL = res.data.url;
+          this.resetProfileImg();
+          this.profileImg.delete('file');
           if (this.coverImage) {
             this.updateCoverPic();
           } else {
@@ -142,6 +142,8 @@ export class AdminSettingPage implements OnInit, OnDestroy {
       .subscribe((res: ApiResponse<ResponseAddMedia>) => {
         if (!res.hasErrors()) {
           this.creator.coverImageURL = res.data.url;
+          this.resetCoverImg();
+          this.coverImg.delete('file');
           this.saveChagesToServer();
         } else {
           this.isLoading = false;
@@ -169,67 +171,18 @@ export class AdminSettingPage implements OnInit, OnDestroy {
   onSelectProfile(event): void {
     if (event.target.files && event.target.files[0]) {
       this.profileImage = event.target.files[0];
-      this.settingForm.controls?.profileImg.setValue(this.profileImage.name);
-      this.profileImg.append('file', this.settingForm.get('profileImg').value);
       if (event.target.files && event.target.files[0]) {
         const reader = new FileReader();
         reader.onload = (e: any) => {
-          // console.log('img ccrop:',);
           this.cropProfileImg(event);
-          // this.customDialogService.showImageCropperDialog(event, 1 / 1,true).then(matRef => {
-          //   matRef.afterClosed().subscribe((result) => {
-          //     // console.log('showImageCropperDialog:',result);
-          //     if(result)
-          //       this.profileImageSrc = result;
-          //     else {
-          //       this.profileImageSrc = null;
-          //       this.profileImage = null;
-          //       this.settingForm.controls.profileImg.setValue(null);
-          //       this.profileFile.nativeElement.value = "";
-          //     }
-          //   });
-          // })
         };
         reader.readAsDataURL(event.target.files[0]);
       }
     }
   }
 
-  onSelectCover(event): void {
-    if (event.target.files && event.target.files[0]) {
-      this.coverImage = event.target.files[0];
-      this.settingForm.controls?.coverImg.setValue(this.coverImage.name);
-      this.coverImg.append('file', this.settingForm.get('coverImg').value);
-      if (event.target.files && event.target.files[0]) {
-        const reader = new FileReader();
-        reader.onload = (e: any) => {
-          this.cropCoverImg(event);
-          // this.customDialogService.showImageCropperDialog(event, 3.88 / 1,true).then(matRef => {
-          //   matRef.afterClosed().subscribe((result) => {
-          //     // console.log('showImageCropperDialog:',result);
-          //     if(result)
-          //       this.coverImageSrc = result;
-          //       else {
-          //         this.coverImageSrc = null;
-          //         this.coverImage = null;
-          //         this.settingForm.controls.coverImg.setValue(null);
-          //         this.coverFile.nativeElement.value = "";
-          //       }
-          //   });
-          // })
-        };
-        reader.readAsDataURL(event.target.files[0]);
-      }
-    }
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.complete();
-    this.destroy$.unsubscribe();
-  }
-
-  cropProfileImg(event): void {
-    this.settingForm.controls.profileImage?.setValue(event);
+  cropProfileImg(event) {
+    this.settingForm.controls.profileImage.setValue(event);
     this.customDialogService
       .showImageCropperDialog(event, 1 / 1, true)
       .then((matRef) => {
@@ -238,20 +191,44 @@ export class AdminSettingPage implements OnInit, OnDestroy {
           if (result) {
             this.profileImageSrc = result;
             this.settingForm.patchValue({
-              profileImg: this.profileImageSrc,
+              profileImg: this.mediaService.dataURLtoFile(
+                this.profileImageSrc,
+                this.profileImage.name,
+              ),
             });
+            this.profileImg.append(
+              'file',
+              this.settingForm.get('profileImg').value,
+            );
           } else {
-            this.profileImageSrc = null;
-            this.profileImage = null;
-            this.settingForm.controls.profileImg?.setValue(null);
-            this.profileFile.nativeElement.value = '';
+            this.resetProfileImg();
           }
         });
       });
   }
 
-  cropCoverImg(event): void {
-    this.settingForm.controls.coverImage?.setValue(event);
+  resetProfileImg() {
+    this.profileImageSrc = null;
+    this.profileImage = null;
+    this.settingForm.controls.profileImg.setValue(null);
+    this.profileFile.nativeElement.value = '';
+  }
+
+  onSelectCover(event): void {
+    if (event.target.files && event.target.files[0]) {
+      this.coverImage = event.target.files[0];
+      if (event.target.files && event.target.files[0]) {
+        const reader = new FileReader();
+        reader.onload = (e: any) => {
+          this.cropCoverImg(event);
+        };
+        reader.readAsDataURL(event.target.files[0]);
+      }
+    }
+  }
+
+  cropCoverImg(event) {
+    this.settingForm.controls.coverImage.setValue(event);
     this.customDialogService
       .showImageCropperDialog(event, 3.88 / 1, true)
       .then((matRef) => {
@@ -260,23 +237,40 @@ export class AdminSettingPage implements OnInit, OnDestroy {
           if (result) {
             this.coverImageSrc = result;
             this.settingForm.patchValue({
-              coverImg: this.coverImageSrc,
+              coverImg: this.mediaService.dataURLtoFile(
+                this.coverImageSrc,
+                this.coverImage.name,
+              ),
             });
-          }
-           else {
-            this.coverImageSrc = null;
-            this.coverImage = null;
-            this.settingForm.controls.coverImg.setValue(null);
-            this.coverFile.nativeElement.value = '';
+            this.coverImg.append(
+              'file',
+              this.settingForm.get('coverImg').value,
+            );
+          } else {
+            this.resetCoverImg();
           }
         });
       });
   }
 
+  resetCoverImg() {
+    this.coverImageSrc = null;
+    this.coverImage = null;
+    this.settingForm.controls.coverImg.setValue(null);
+    this.coverFile.nativeElement.value = '';
+  }
+
   editProfileImg(): void {
+    this.profileImg.delete('file');
     this.cropProfileImg(this.settingForm.controls.profileImage?.value);
   }
   editCoverImg(): void {
+    this.coverImg.delete('file');
     this.cropCoverImg(this.settingForm.controls.coverImage?.value);
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.complete();
+    this.destroy$.unsubscribe();
   }
 }
