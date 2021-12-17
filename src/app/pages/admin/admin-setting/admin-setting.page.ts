@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import {
   FormBuilder,
@@ -55,7 +56,7 @@ export class AdminSettingPage implements OnInit, OnDestroy {
   ) {
     this.isLoading = false;
     this.settingForm = this.formBuilder.group({
-      description: new FormControl('', [Validators.required]),
+      description: new FormControl('',  [Validators.required, Validators.minLength(15), Validators.maxLength(300)]),
       key: new FormControl(''),
       profileImg: new FormControl(''),
       coverImg: new FormControl(''),
@@ -71,6 +72,7 @@ export class AdminSettingPage implements OnInit, OnDestroy {
     });
   }
 
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngOnInit(): void {}
 
   saveSetting(): void {
