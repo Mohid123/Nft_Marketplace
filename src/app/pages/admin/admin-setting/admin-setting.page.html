@@ -117,10 +117,10 @@
                 <img *ngIf="!coverImageSrc;" class="relative top-0 left-0 object-cover w-full h-32 rounded-lg" [src]="((creator$ | async)?.coverImageURL) || ''" alt="">
                 <img *ngIf="coverImageSrc;" class="relative top-0 left-0 object-cover w-full h-32 rounded-lg"  src={{coverImageSrc}} alt="">
                 <div class="absolute " style=" top: 233px; width: 204px;"  >
-                  <img *ngIf="!profileImageSrc;" class="inline object-cover w-12 h-12 ml-4 rounded-full"
+                  <img *ngIf="!profileImageSrc;" class="inline object-cover w-12 h-12 ml-4 rounded-full border-gradient-dp-p-bg-dark  gradient-border-2"
                     [src]="((creator$ | async)?.profileImageURL) || ''"
                     alt="Profile image" />
-                    <img *ngIf="profileImageSrc;"  src={{profileImageSrc}} class="inline object-cover w-12 h-12 ml-4 rounded-full" alt="">
+                    <img *ngIf="profileImageSrc;"  src={{profileImageSrc}} class="inline object-cover w-12 h-12 ml-4 rounded-full border-gradient-dp-p-bg-dark  gradient-border-2 " alt="">
                 </div>
               </div>
               <div class="mt-8">
