@@ -54,6 +54,7 @@ svg {
 
     .value {
       @apply w-32;
+      position: relative;
 
       p {
         @apply text-gray-100 tracking-wider text-sm mb-2;
@@ -214,4 +215,9 @@ a.button {
           transform: translateX(4px);
       }
   }
+}
+
+.spinner:before {
+  top: 120%;
+  left: 42%;
 }

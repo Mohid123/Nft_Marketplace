@@ -13,6 +13,7 @@ import { take, takeUntil, takeWhile, tap } from 'rxjs/operators';
 import { NFTList } from './../../../@core/models/NFTList.model';
 import { ApiResponse } from './../../../@core/models/response.model';
 import { TransactionBalance } from './../../../@core/models/transaction-balance.model';
+import { StripeService } from './../../../@core/services/stripe.service';
 import { TransactionService } from './../../../@core/services/transaction.service';
 
 
@@ -28,6 +29,7 @@ export class AdminDashboardPage implements AfterViewInit, OnDestroy {
   canvas!: ElementRef;
 
   public creatorStats$ = this.creatorService.CreatorStats$;
+  public subscriptionInProgress$ = this.stripeService.subscriptionInProgress$;
   public groups$ = this.groupService.groups$;
 
   private _isLoading: boolean;
@@ -148,6 +150,7 @@ export class AdminDashboardPage implements AfterViewInit, OnDestroy {
     private nftService: NFTService,
     private routeService: RouteService,
     private transactionService: TransactionService,
+    private stripeService: StripeService,
   ) {
     this.monthIndex = 0;
     this.page = 1;

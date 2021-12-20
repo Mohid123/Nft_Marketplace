@@ -10,9 +10,9 @@
             <div class="ml-3 " >
               <button
               class="inline-flex items-center justify-between px-3 bg-gray-600 bg-opacity-25 rounded cursor-pointer md:mt-0 ">
-              <a href="{{wallet.walletUrl}}" target=_blank id="fileName"
-                class="ml-3 mr-3 text-sm leading-none text-gray-400 "><span>{{wallet.walletAddress}}</span><span>{{wallet.walletAddress}}</span></a>
-                <a  href="{{wallet.walletUrl}}" target=_blank
+              <a href="{{wallet?.walletUrl}}" target=_blank id="fileName"
+                class="ml-3 mr-3 text-sm leading-none text-gray-400 "><span>{{wallet?.walletAddress}}</span><span>{{wallet?.walletAddress}}</span></a>
+                <a  href="{{wallet?.walletUrl}}" target=_blank
                 class=""><img class="w-4 h-10 ml-20 " src="./assets/icons/exit-top-right.svg" alt="polygon" /></a>
 
             </button>
@@ -35,9 +35,12 @@
               <div class="flex items-start">
 
 
-                <div class="text-gray-400 value">
-                  <p >{{stats.totalNdct}} <b class="text-white">NDCT</b></p>
-                  <!-- <span>€ 4500</span> -->
+                <div class="text-gray-400 value relative">
+                  <p *ngIf="subscriptionInProgress$ | async; else nftBalance" class="spinner"> <b class="text-white">NDCT</b></p>
+                  <ng-template #nftBalance>
+                    <p >{{stats?.totalNdct}} <b class="text-white">NDCT</b></p>
+                  </ng-template>
+                  <!-- <span>€ 4500</span>
                 </div>
 
               </div>
@@ -57,7 +60,7 @@
 
 
                 <div class="text-gray-400 value">
-                  <p >{{stats.spentNdct}} <b class="text-white">NDCT</b></p>
+                  <p >{{stats?.spentNdct}} <b class="text-white">NDCT</b></p>
                   <!-- <span>€ 4500</span> -->
                 </div>
 
@@ -78,7 +81,7 @@
 
 
                 <div class="text-gray-400 value">
-                   <p> <b class="text-white">€ </b>{{stats.spentAmount}} </p>
+                   <p> <b class="text-white">€ </b>{{stats?.spentAmount}} </p>
                   <!-- <span> 4500</span> -->
                 </div>
 
@@ -97,7 +100,7 @@
             </div>
             <div class="value">
               <p>Current Price</p>
-              <span>€ {{stats.price || 0 | number: '1.' }}</span>
+              <span>€ {{stats?.price || 0 | number: '1.' }}</span>
             </div>
             <div class="graph-icon">
               <img class="" src="./assets/icons/growth.png"/>
@@ -109,7 +112,7 @@
             </div>
             <div class="value">
               <p>Available NDCT</p>
-              <span>{{stats.availableNdct || 0 | number: '1.' }}</span>
+              <span>{{stats?.availableNdct || 0 | number: '1.' }}</span>
             </div>
             <div class="graph-icon">
               <img class="" src="./assets/icons/growth.png"/>
@@ -121,7 +124,7 @@
             </div>
             <div class="value">
               <p>Total Supply</p>
-              <span>{{stats.totalSupply || 0 | number: '2.'}}</span>
+              <span>{{stats?.totalSupply || 0 | number: '2.'}}</span>
             </div>
             <div class="graph-icon">
               <img class="" src="./assets/icons/growth.png"/>

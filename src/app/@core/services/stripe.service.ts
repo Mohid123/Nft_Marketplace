@@ -23,6 +23,10 @@ export class StripeService extends ApiService<StripeApiData> {
   public readonly purchaseSuccess$: Observable<string> =
     this._purchaseSuccess$.asObservable();
 
+  private _subscriptionInProgress$ = new BehaviorSubject<boolean>(null);
+  public readonly subscriptionInProgress$: Observable<boolean> =
+    this._subscriptionInProgress$.asObservable();
+
 
   constructor(protected http: HttpClient,
     private customDialogService: CustomDialogService,
@@ -30,6 +34,12 @@ export class StripeService extends ApiService<StripeApiData> {
     private spinner: NgxSpinnerService
     ) {
     super(http);
+
+    this._subscriptionInProgress$.subscribe(status => {
+      if(status) {
+        this.checkSubscriptionProgress();
+      }
+    })
   }
 
   addKey(params: AddStripeKey): Observable<ApiResponse<StripeApiData>> {
@@ -55,10 +65,12 @@ export class StripeService extends ApiService<StripeApiData> {
 
   purchaseSubscription(params:BuySubscription) {
     // this.spinner.show('main');
-    return this.stripePayForSubscription(params).pipe(take(1));
-    // setTimeout(() => {
-    //   this.customDialogService.closeDialogs();
-    // }, 3000);
+    return this.stripePayForSubscription(params).pipe(take(1),tap((res:ApiResponse<any>)=> {
+      if(!res.hasErrors()) {
+        this._subscriptionInProgress$.next(true);
+       }
+     })
+    );
   }
 
   purchaseNFTSuccess(data):void {
@@ -71,5 +83,17 @@ export class StripeService extends ApiService<StripeApiData> {
 
   stripePayForSubscription(params:BuySubscription): Observable<ApiResponse<StripeApiData>> {
     return this.post('/token-transaction/buyNdct/',params);
+  }
+
+  checkSubscriptionProgress() {
+    this.get('/token-transaction/isBuyNdctTransactionPending').subscribe((res:ApiResponse<any>)=> {
+      if(!res.hasErrors() && res.data.status == false) {
+        this._subscriptionInProgress$.next(false);
+      } else {
+        setTimeout(() => {
+          this._subscriptionInProgress$.next(true);
+        }, 30000);
+      }
+    })
   }
 }
