@@ -7,6 +7,7 @@ import { takeWhile, tap } from 'rxjs/operators';
 import { ApiResponse } from './../../../@core/models/response.model';
 import { SubscriptionPlan } from './../../../@core/models/subscription-plan.model';
 import { TransactionStatsResponse } from './../../../@core/models/transaction-stats-response.model';
+import { StripeService } from './../../../@core/services/stripe.service';
 import { TransactionService } from './../../../@core/services/transaction.service';
 
 @Component({
@@ -16,6 +17,8 @@ import { TransactionService } from './../../../@core/services/transaction.servic
 })
 export class AdminSubscriptionPage implements OnInit {
 
+
+  public subscriptionInProgress$ = this.stripeService.subscriptionInProgress$;
   public wallet:TransactionStatsWallet;
   public stats:TransactionStats;
 
@@ -37,6 +40,7 @@ export class AdminSubscriptionPage implements OnInit {
   constructor(
     private customDialogService: CustomDialogService,
     private transactionService: TransactionService,
+    private stripeService: StripeService,
   ) {}
 
   ngOnInit(): void {
