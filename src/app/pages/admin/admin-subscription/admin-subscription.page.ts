@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TransactionStatsWallet } from '@app/@core/models/transaction-stats-wallet.model';
 import { TransactionStats } from '@app/@core/models/transaction-stats.model';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
-import { interval } from 'rxjs';
-import { takeWhile, tap } from 'rxjs/operators';
+import { interval, Subject } from 'rxjs';
+import { takeUntil, takeWhile, tap } from 'rxjs/operators';
 import { ApiResponse } from './../../../@core/models/response.model';
 import { SubscriptionPlan } from './../../../@core/models/subscription-plan.model';
 import { TransactionStatsResponse } from './../../../@core/models/transaction-stats-response.model';
@@ -15,8 +15,9 @@ import { TransactionService } from './../../../@core/services/transaction.servic
   templateUrl: './admin-subscription.page.html',
   styleUrls: ['./admin-subscription.page.scss'],
 })
-export class AdminSubscriptionPage implements OnInit {
+export class AdminSubscriptionPage implements OnInit, OnDestroy {
 
+  destroy$ = new Subject();
 
   public subscriptionInProgress$ = this.stripeService.subscriptionInProgress$;
   public wallet:TransactionStatsWallet;
@@ -44,6 +45,14 @@ export class AdminSubscriptionPage implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.subscriptionInProgress$.pipe(takeUntil(this.destroy$)).subscribe(stats => {
+      if(!stats) {
+        this.getTransactionStats();
+      }
+    })
+  }
+
+  getTransactionStats():void {
     this.transactionService.getTransactionStats().subscribe((result: ApiResponse<TransactionStatsResponse>)=> {
       if(!result.hasErrors()) {
         this.wallet = result.data.wallet;
@@ -52,7 +61,7 @@ export class AdminSubscriptionPage implements OnInit {
     })
   }
 
-  scrollLeft(el: Element) {
+  scrollLeft(el: Element): void {
     const animTimeMs = 400;
     const pixelsToMove = 315;
     const stepArray = [0.001, 0.021, 0.136, 0.341, 0.341, 0.136, 0.021, 0.001];
@@ -78,5 +87,10 @@ export class AdminSubscriptionPage implements OnInit {
 
   buySubscription(index) {
     this.customDialogService.showStripePaymenDialog(null,this.subscriptionPlan[index])
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.complete();
+    this.destroy$.unsubscribe();
   }
 }
