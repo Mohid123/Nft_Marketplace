@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CreatorService } from '@app/@core/services/creator.service';
 import { AuthService } from '@app/pages/auth/services/auth.service';
-import { take } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { distinctUntilChanged, take, takeUntil } from 'rxjs/operators';
 import { environment } from './../../../../environments/environment.prod';
 import { Group } from './../../../@core/models/group.model';
 import { NFTList } from './../../../@core/models/NFTList.model';
@@ -16,7 +17,9 @@ import { RouteService } from './../../../@core/services/route.service';
   templateUrl: './wallet.page.html',
   styleUrls: ['./wallet.page.scss'],
 })
-export class WalletPage implements OnInit {
+export class WalletPage implements OnInit, OnDestroy {
+
+  destroy$ = new Subject();
   creator$ = this.creatorService.Creator$;
   groups$ = this.groupService.groups$;
 
@@ -52,9 +55,13 @@ export class WalletPage implements OnInit {
   ) {
     this.page = 1;
     this.isLoading = false;
-    this.clubName = this.routeService.clubName;
-    this.getGroups();
-    this.getNfts();
+    this.routeService.clubName$.pipe(distinctUntilChanged(),takeUntil(this.destroy$)).subscribe((clubName) => {
+      this.clubName = clubName;
+      if(this.clubName){
+        this.getGroups();
+        this.getNfts();
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -134,5 +141,10 @@ export class WalletPage implements OnInit {
     this.type = type;
     this.page = 1;
     this.getNfts();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.complete();
+    this.destroy$.unsubscribe();
   }
 }
