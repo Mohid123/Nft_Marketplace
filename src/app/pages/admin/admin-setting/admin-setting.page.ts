@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import {
   FormBuilder,
@@ -43,6 +44,8 @@ export class AdminSettingPage implements OnInit, OnDestroy {
   description: any;
 
   public creator: Creator;
+  public isReadMore: boolean = true;
+
 
   constructor(
     private creatorService: CreatorService,
@@ -55,7 +58,7 @@ export class AdminSettingPage implements OnInit, OnDestroy {
   ) {
     this.isLoading = false;
     this.settingForm = this.formBuilder.group({
-      description: new FormControl('', [Validators.required]),
+      description: new FormControl('',  [Validators.required, Validators.minLength(15), Validators.maxLength(300)]),
       key: new FormControl(''),
       profileImg: new FormControl(''),
       coverImg: new FormControl(''),
@@ -66,11 +69,13 @@ export class AdminSettingPage implements OnInit, OnDestroy {
     this.creator$.subscribe((creator) => {
       this.creator = creator;
       this.settingForm.controls.key.setValue(this.creator.stripeSecretKey);
+
       this.settingForm.controls.description.setValue(this.creator.description);
       this.description = this.creator.description;
     });
   }
 
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngOnInit(): void {}
 
   saveSetting(): void {
@@ -88,6 +93,12 @@ export class AdminSettingPage implements OnInit, OnDestroy {
       this.saveChagesToServer();
     }
   }
+
+
+  showText(){
+    this.isReadMore = !this.isReadMore
+  }
+
 
   updateKey(): void {
     const params: AddStripeKey = {
