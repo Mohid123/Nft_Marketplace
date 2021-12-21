@@ -84,7 +84,7 @@
             <p>Available NDCT</p>
             <span *ngIf="subscriptionInProgress$ | async; else nftBalance" class="spinner"></span>
             <ng-template #nftBalance>
-              <span>{{balance || 0 | number: '2.'}}</span>
+              <span>{{balance || 0 | number: '1.'}}</span>
             </ng-template>
           </div>
           <div class="flex graph-icon">

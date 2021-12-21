@@ -35,7 +35,7 @@
               <div class="flex items-start">
 
 
-                <div class="text-gray-400 value relative">
+                <div class="relative text-gray-400 value">
                   <p *ngIf="subscriptionInProgress$ | async; else nftBalance" class="spinner"> <b class="text-white">NDCT</b></p>
                   <ng-template #nftBalance>
                     <p >{{stats?.totalNdct}} <b class="text-white">NDCT</b></p>
@@ -124,7 +124,7 @@
             </div>
             <div class="value">
               <p>Total Supply</p>
-              <span>{{stats?.totalSupply || 0 | number: '2.'}}</span>
+              <span>{{stats?.totalSupply || 0 | number: '1.'}}</span>
             </div>
             <div class="graph-icon">
               <img class="" src="./assets/icons/growth.png"/>
