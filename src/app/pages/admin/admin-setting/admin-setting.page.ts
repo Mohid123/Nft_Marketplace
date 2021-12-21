@@ -44,7 +44,8 @@ export class AdminSettingPage implements OnInit, OnDestroy {
   description: any;
 
   public creator: Creator;
-  public toggleButton: boolean = false;
+  public isReadMore: boolean = true;
+
 
   constructor(
     private creatorService: CreatorService,
@@ -68,6 +69,7 @@ export class AdminSettingPage implements OnInit, OnDestroy {
     this.creator$.subscribe((creator) => {
       this.creator = creator;
       this.settingForm.controls.key.setValue(this.creator.stripeSecretKey);
+
       this.settingForm.controls.description.setValue(this.creator.description);
       this.description = this.creator.description;
     });
@@ -92,13 +94,11 @@ export class AdminSettingPage implements OnInit, OnDestroy {
     }
   }
 
-  enable(){
-    this.toggleButton = false
- }
 
- disable(){
-    this.toggleButton = true
- }
+  showText(){
+    this.isReadMore = !this.isReadMore
+  }
+
 
   updateKey(): void {
     const params: AddStripeKey = {
