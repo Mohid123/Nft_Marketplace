@@ -56,9 +56,9 @@
       <h3>No Record Found</h3>
       <p>It seems we can't find any results.</p>
     </div>
-    <ng-container *ngIf="nftList.totalCount > 0">
+    <ng-container *ngIf="nftList?.totalCount > 0">
       <ng-container *ngFor="let nftCard of nftList.data" class="">
-        <app-nft-card [nft]="nftCard"></app-nft-card>
+        <app-nft-card [walletPage]="true" [nft]="nftCard"></app-nft-card>
       </ng-container>
     </ng-container>
   </div>

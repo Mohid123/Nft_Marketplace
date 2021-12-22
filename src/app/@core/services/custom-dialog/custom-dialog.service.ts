@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { NFT } from '@app/@core/models/NFT.model';
 import { SubscriptionPlan } from '@app/@core/models/subscription-plan.model';
 import { AuthDialogService } from '@app/components/custom-dialogs/auth-diloag/auth-dialog.service';
+import { ResaleDialog } from '@app/components/custom-dialogs/resale-dialog/resale/resale.dialog';
 import { AuthService } from '@app/pages/auth/services/auth.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ExportKeyService as ExportKeyDialogService } from '../../../components/custom-dialogs/export-key/export-key-dialog.service';
@@ -206,6 +207,18 @@ export class CustomDialogService {
     dialogRef.componentInstance.message = message;
     dialogRef.componentInstance.confirmButtonText = confirmButtonText;
     dialogRef.componentInstance.cancelButtonText = cancelButtonText;
+    return dialogRef;
+  }
+
+  async showReSaleDialog(nft) : Promise<MatDialogRef<ResaleDialog, any>> {
+    const { ResaleDialogModule: ResaleDialogModule } = await import(
+      '../../../components/custom-dialogs/resale-dialog/resale-dialog.module'
+    );
+    const dialogRef = this.matDialog.open(ResaleDialogModule.getResaleDialog(),{
+      panelClass: ['resale-dialog-overlay', 'action-dialog'],
+    });
+
+    dialogRef.componentInstance.nft = nft;
     return dialogRef;
   }
 
