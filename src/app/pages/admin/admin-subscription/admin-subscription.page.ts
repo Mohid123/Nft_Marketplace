@@ -45,6 +45,7 @@ export class AdminSubscriptionPage implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.stripeService.checkSubscriptionProgress();
     this.subscriptionInProgress$.pipe(takeUntil(this.destroy$)).subscribe(stats => {
       if(!stats) {
         this.getTransactionStats();
