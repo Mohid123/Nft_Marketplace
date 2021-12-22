@@ -1,10 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CreatorService } from '@app/@core/services/creator.service';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
+import { NFTService } from '@app/@core/services/nft.service';
 import { RouteService } from '@app/@core/services/route.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { NFT } from './../../../@core/models/NFT.model';
+import { ApiResponse } from './../../../@core/models/response.model';
 
 @Component({
   selector: 'app-card-details',
@@ -26,6 +29,7 @@ export class CardDetailsComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private routeService: RouteService,
     private creatorService: CreatorService,
+    private nftService: NFTService,
   ) { }
 
   ngOnInit(): void {
@@ -57,5 +61,37 @@ export class CardDetailsComponent implements OnInit {
 
   buyNow():void {
     this.customDialogService.showStripePaymenDialog(this.nft);
+  }
+
+  async resale():Promise<void> {
+    const dialogRef = await this.customDialogService.showReSaleDialog(this.nft);;
+    dialogRef.afterClosed().subscribe((resalePrice: number) => {
+      if(resalePrice > 0) {
+        this.nftService.updateNftResaleStatus(this.nft.id , true , resalePrice.toString()).subscribe((result:ApiResponse<any>)=>{
+          if (!result.hasErrors()) {
+            this.nftService.getNft(this.nft.id).pipe(take(1)).subscribe((result:ApiResponse<NFT>) => {
+              if (!result.hasErrors()) {
+                // console.log('nft after activate resale:',result.data);
+                this.nft = result.data;
+              }
+            });
+          }
+        })
+      }
+    });
+  }
+
+  cancelResale(): void {
+    // console.log('cancelResale:',);
+    this.nftService.updateNftResaleStatus(this.nft.id , false).subscribe((result:ApiResponse<any>)=>{
+      if (!result.hasErrors()) {
+        this.nftService.getNft(this.nft.id).pipe(take(1)).subscribe((result:ApiResponse<NFT>) => {
+          if (!result.hasErrors()) {
+            // console.log('nft after activate resale:',result.data);
+            this.nft = result.data;
+          }
+        });
+      }
+    })
   }
 }

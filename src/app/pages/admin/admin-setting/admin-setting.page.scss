@@ -51,5 +51,19 @@ h6 {
   // display: none;
 }
 
+.limitTextHeight {
+  // // height: auto;
+  // overflow: hidden;
+  // word-break: break-all;
+  // text-overflow: ellipsis;
+  // // width: 100%;
+  // white-space: nowrap;
 
+
+  display: block;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 

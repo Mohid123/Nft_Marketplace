@@ -6,7 +6,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   templateUrl: './confirmation.dialog.html',
   styleUrls: ['./confirmation.dialog.scss'],
 })
-// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class ConfirmationDialog {
 
   @Input() message: string;

@@ -25,13 +25,15 @@ export class NFT {
   numberOfCopies?:       number;
   nftStatus?:            string;
   transactionHashUrl?:   string;
-  appPackageId:         string;
+  appPackageId:          string;
   transactionHash?:      string;
   createdAt?:            Date;
   updatedAt?:            Date;
   __v?:                  number;
-  creator?:             NFTCreator;
+  isResaleAvailable?:    boolean;
+  isOwner?:              boolean;
+  creator?:              NFTCreator;
   id?:                   string;
-  ownerData?:           NFTOwner;
+  ownerData?:            NFTOwner;
   serverBlurHash?:       string;
 }
