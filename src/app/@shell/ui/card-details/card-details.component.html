@@ -96,7 +96,7 @@
               {{nft.nftStatus}}
             </button>
           </ng-container>
-          <ng-container *ngIf="!nft?.isResaleAvailable && nft?.nftStatus && nft?.nftStatus !== 'Sold' && (isAdminPanel$ | async) === false; else salesBtn">
+          <ng-container *ngIf="!nft?.isOwner && nft?.nftStatus && nft?.nftStatus !== 'Sold' && (isAdminPanel$ | async) === false; else salesBtn">
             <ng-container  *ngIf="nft?.nftStatus !== 'Active'; else nftButton" >
               <button class="buyNowBtn" >
                 {{nft.nftStatus}}

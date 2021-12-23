@@ -9,20 +9,20 @@
     </button>
   </div>
 
-  <div class="h-full flex flex-col inline-block mt-3 ">
-    <p class="font-bold text-2xl mb-4">Resale Alert!</p>
+  <div class="flex flex-col inline-block h-full mt-3 ">
+    <p class="mb-4 text-2xl font-bold">Resale Alert!</p>
     <div class="flex flex-col justify-between h-full">
-      <p class="text-lg text-black text-opacity-60 mb-4">
+      <p class="mb-4 text-lg text-black text-opacity-60">
         Are you sure you want resale token #{{nft?.tokenId}}?
       </p>
       <form action="" [formGroup]="priceFormGroup" >
-          <input type='number' name="price" formControlName="price" appMaxLength length="6" placeholder="999999">
+          <input  class="w-full" type='number' name="price" formControlName="price" appMaxLength length="6" min="1" placeholder="999999">
       </form>
       <div class="flex justify-between w-full">
         <button class="cancel-btn w-28 h-11" (click)="close()">
           No
         </button>
-        <button [disabled]="!priceFormGroup.controls.price.value || priceFormGroup.controls.price.value <= 0"  class="primary-btn text-white w-28 h-11" (click)="onConfirmClick(priceFormGroup.controls.price.value)">
+        <button [disabled]="!priceFormGroup.controls.price.value || priceFormGroup.controls.price.value <= 0"  class="text-white primary-btn w-28 h-11" (click)="onConfirmClick(priceFormGroup.controls.price.value)">
           Yes
         </button>
       </div>
