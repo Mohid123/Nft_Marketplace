@@ -16,7 +16,8 @@
         Are you sure you want resale token #{{nft?.tokenId}}?
       </p>
       <form action="" [formGroup]="priceFormGroup" >
-          <input  class="w-full" type='number' name="price" formControlName="price" appMaxLength length="6" min="1" placeholder="999999">
+        <!-- <input type='number' name="price" formControlName="price" appMaxLength length="6" placeholder="999999"> -->
+          <input  class="w-full" type='number' name="price" formControlName="price" appMaxLength length="6" placeholder="999999">
       </form>
       <div class="flex justify-between w-full">
         <button class="cancel-btn w-28 h-11" (click)="close()">
