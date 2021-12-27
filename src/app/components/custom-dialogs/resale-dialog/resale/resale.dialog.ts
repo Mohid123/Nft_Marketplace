@@ -38,4 +38,9 @@ export class ResaleDialog implements OnInit {
     this.dialogRef.close(value);
   }
 
+  onPaste(event: ClipboardEvent):void {
+    const val = event.clipboardData.getData('text').replace(/\D/g, '').toString();
+    event.preventDefault();
+    this.priceFormGroup.controls.price.setValue(val);
+  }
 }
