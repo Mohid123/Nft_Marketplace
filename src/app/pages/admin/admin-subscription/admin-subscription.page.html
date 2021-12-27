@@ -38,7 +38,7 @@
                 <div class="relative text-gray-400 value">
                   <p *ngIf="subscriptionInProgress$ | async; else nftBalance" class="spinner"> <b class="text-white">NDCT</b></p>
                   <ng-template #nftBalance>
-                    <p >{{stats?.totalNdct}} <b class="text-white">NDCT</b></p>
+                    <p >{{stats?.totalNdct | number: '1.'}} <b class="text-white">NDCT</b></p>
                   </ng-template>
                 </div>
 
@@ -59,7 +59,7 @@
 
 
                 <div class="text-gray-400 value">
-                  <p >{{stats?.spentNdct}} <b class="text-white">NDCT</b></p>
+                  <p >{{stats?.spentNdct | number: '1.'}} <b class="text-white">NDCT</b></p>
 
                 </div>
 
@@ -80,7 +80,7 @@
 
 
                 <div class="text-gray-400 value">
-                   <p> <b class="text-white">€ </b>{{stats?.spentAmount}} </p>
+                   <p> <b class="text-white">€ </b>{{stats?.spentAmount | number: '1.'}} </p>
                   <!-- <span> 4500</span> -->
                 </div>
 
