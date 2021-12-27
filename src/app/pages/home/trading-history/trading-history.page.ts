@@ -37,6 +37,8 @@ export class TradingHistoryPage implements OnInit, OnDestroy {
     { text: 'Minted', isClicked: false },
     { text: 'Sale', isClicked: false },
     { text: 'Transfer', isClicked: false },
+    { text: 'Resale', isClicked: false },
+    { text: 'Cancel Resale', isClicked: false },
   ]
 
   constructor(
