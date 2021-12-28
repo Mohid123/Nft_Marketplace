@@ -30,18 +30,10 @@
       <img src="./assets/coin/card-coin.svg" alt="">
       <span class="ml-2 font-semibold">{{nft.price}}</span>
     </span>
-    <ng-container *ngIf="walletPage">
-      <ng-container *ngIf="nft?.isResaleAvailable; else resaleBtn">
+    <ng-container *ngIf="walletPage || (nft?.isOwner && nft?.isResaleAvailable)">
         <button (click)="cancelResale()" class="px-4 py-1 text-xs text-white rounded-full w-18 h-7 btn-nft">
           Cancel Resale
         </button>
-      </ng-container>
-      <ng-template #resaleBtn>
-        <button (click)="resale()"
-          class="px-4 py-1 text-xs text-white rounded-full w-18 h-7 btn-nft">
-          Resale
-        </button>
-      </ng-template>
     </ng-container>
     <ng-container *ngIf="nft?.nftStatus && (isAdminPanel$ | async)">
       <button class="px-4 py-1 text-xs text-white rounded-full w-18 h-7 btn-nft" >

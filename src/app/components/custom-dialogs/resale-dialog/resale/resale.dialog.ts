@@ -39,7 +39,7 @@ export class ResaleDialog implements OnInit {
   }
 
   onPaste(event: ClipboardEvent):void {
-    const val = event.clipboardData.getData('text').replace(/\D/g, '').toString();
+    const val = event.clipboardData.getData('text').replace(/\D/g, '').toString().substring(0, 6);;
     event.preventDefault();
     this.priceFormGroup.controls.price.setValue(val);
   }
