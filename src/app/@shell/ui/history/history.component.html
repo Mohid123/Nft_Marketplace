@@ -56,10 +56,10 @@
             {{nftEvent.price}}
           </td>
           <td class="truncate">
-          {{nftEvent.from}}
+            <a href="{{nftEvent.fromAddress}}" target=_blank>{{nftEvent.from}}</a>
           </td>
           <td class="truncate">
-          {{nftEvent.to}}
+            <a href="{{nftEvent.toAddress}}" target=_blank>{{nftEvent.to}}</a>
           </td>
           <td >
             {{nftEvent.createdAt | timeAgo}}

@@ -4,6 +4,8 @@ export interface NFTEvent {
   price:          string;
   from:           string;
   to:             string;
+  fromAddress:    string;
+  toAddress:      string;
   userId:         string;
   clubUserId:     string;
   appPackageId:   string;
