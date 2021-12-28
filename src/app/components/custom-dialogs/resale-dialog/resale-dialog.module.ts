@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaxLengthModule } from './../../../@core/directives/max-length/max-length.module';
+import { NumberOnlyModule } from './../../../@core/directives/number-only/number-only.module';
 import { ResaleDialog } from './resale/resale.dialog';
 
 @NgModule({
@@ -13,6 +14,7 @@ import { ResaleDialog } from './resale/resale.dialog';
     FormsModule,
     ReactiveFormsModule,
     MaxLengthModule,
+    NumberOnlyModule,
   ],
   exports: [
     ResaleDialog
