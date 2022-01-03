@@ -40,14 +40,26 @@
               <span class="pl-2 mr-2 text-white "> {{nftEvent.eventType}}</span>
             </div>
           </td>
+          <td *ngIf="nftEvent.eventType === 'Resale'" class="justify-center inline-block" >
+            <div class="eventIcons">
+              <img class="object-cover text-sm" src="../../../../assets/icons/RESALE.svg" width="28" alt=""/>
+              <span class="pl-2 mr-2 text-white "> {{nftEvent.eventType}}</span>
+            </div>
+          </td>
+          <td *ngIf="nftEvent.eventType === 'Cancel Resale'" class="justify-center inline-block" >
+            <div class="eventIcons">
+              <img class="object-cover text-sm "src="../../../../assets/icons/CANCEL.svg"  width="25" alt=""/>
+              <span class="pl-2 mr-2 text-white "> {{nftEvent.eventType}}</span>
+            </div>
+          </td>
           <td >
             {{nftEvent.price}}
           </td>
           <td class="truncate">
-          {{nftEvent.from}}
+            <a href="{{nftEvent.fromAddress}}" target=_blank>{{nftEvent.from}}</a>
           </td>
           <td class="truncate">
-          {{nftEvent.to}}
+            <a href="{{nftEvent.toAddress}}" target=_blank>{{nftEvent.to}}</a>
           </td>
           <td >
             {{nftEvent.createdAt | timeAgo}}

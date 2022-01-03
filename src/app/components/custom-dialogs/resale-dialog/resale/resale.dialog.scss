@@ -1,0 +1,37 @@
+::ng-deep .resale-dialog-overlay {
+  @apply bg-white text-gray-900 rounded-3xl justify-center;
+  height: 271px;
+  max-width: 445px !important;
+}
+
+::ng-deep .confirmation-dialog-overlay .mat-dialog-container {
+  padding: 28px;
+}
+
+.resale-dialog-model {
+  @apply flex flex-col px-0 h-full;
+
+  .btn-close {
+   @apply absolute top-2 right-2 bg-white rounded-full opacity-50 m-3.5 hover:opacity-70;
+   padding: 1px;
+   svg {
+     color: #132356;
+   }
+ }
+
+}
+
+.cancel-btn{
+  @apply rounded-full border border-green-400 text-green-500 font-medium
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+input[type=number] {
+  -moz-appearance: textfield;
+}

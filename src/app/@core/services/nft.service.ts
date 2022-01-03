@@ -273,4 +273,14 @@ export class NFTService extends ApiService<nftApiData> {
       }
     }));
   }
+
+  updateNftResaleStatus(id: string,status:boolean , price?:string): Observable<ApiResponse<nftApiData>> {
+    const param: any = {
+      isResaleAvailable: status
+    };
+    if(status) {
+      param.price = price
+    }
+    return this.post('/nft/updateOwnedNft/'+ id, param).pipe(take(1));
+  }
 }
