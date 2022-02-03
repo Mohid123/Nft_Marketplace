@@ -58,6 +58,7 @@ export class GroupService extends ApiService<groupApiData> {
 
     this.get('/group/getAllGroupsByAppPackageId',param)
     .pipe(take(1),tap((result:ApiResponse<ResponseGroupsByClub>)=> {
+      debugger
       this._isLoading$.next(false)
       if (!result.hasErrors()) {
         this._totalCount$.next(result.data.totalCount)

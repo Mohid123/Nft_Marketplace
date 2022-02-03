@@ -49,6 +49,7 @@ export class CreateGroupComponent {
     this.groupForm = this.formBuilder.group({
       name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(7)]),
       description: new FormControl('', [ Validators.required, Validators.minLength(15), Validators.maxLength(600) ]),
+      royaltyFee: new FormControl('', [Validators.required, Validators.min(1) ,Validators.max(999999)]),
       file: new FormControl(''),
     });
 
@@ -103,6 +104,7 @@ export class CreateGroupComponent {
               if(!res.hasErrors()) {
                 const param: AddGroup = {
                   name: this.groupForm.controls.name.value,
+                  royaltyFee: this.groupForm.controls.royaltyFee.value,
                   description: this.groupForm.controls.description.value,
                   appPackageId: this.authService.loggedInUser?.appPackageId,
                   coverImageUrl: res.data.url,
@@ -132,6 +134,14 @@ export class CreateGroupComponent {
 
   }
 
+
+  numberOnly(event): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
+  }
 
 
 

@@ -23,6 +23,12 @@
       <p class="error-msg error" *ngIf="groupForm.controls.name.touched && groupForm.controls.name.errors?.required">please enter name</p>
       <p class="error-msg error" *ngIf="groupForm.controls.name.touched && groupForm.controls.name.errors?.minlength">name should be greater than or equal to {{groupForm.controls.name.errors?.minlength.requiredLength}} character </p>
 
+      <label for="royaltyFee">Royalty Fee</label>
+      <input type='text' name="royaltyFee" formControlName="royaltyFee" maxlength="6" (keypress)="numberOnly($event)">
+      <p class="error-msg error" *ngIf="groupForm.controls.royaltyFee.touched && groupForm.controls.royaltyFee.errors?.required">please enter fee</p>
+      <p class="error-msg error" *ngIf="groupForm.controls.royaltyFee.touched && groupForm.controls.royaltyFee.errors?.min">fee must be greater then or equal to {{groupForm.controls.royaltyFee.errors?.min?.min}} </p>
+      <p class="error-msg error" *ngIf="groupForm.controls.royaltyFee.touched && groupForm.controls.royaltyFee.errors?.max">fee must be less then or equal to {{groupForm.controls.royaltyFee.errors?.max?.max}} </p>
+
       <label class="floating-label" for="description">Description</label>
       <textarea appTrim type="text" formControlName="description" maxlength="600"></textarea>
       <span class="icon description-hide-icon"></span>

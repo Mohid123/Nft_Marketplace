@@ -6,5 +6,6 @@ export interface AddGroup {
   coverImageUrl: string,
   coverBlurHash?: string,
   path?: string,
-  itemsCount?: number
+  itemsCount?: number,
+  royaltyFee?: number
 }

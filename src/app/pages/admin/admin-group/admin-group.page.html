@@ -76,6 +76,7 @@
               <th>Name</th>
               <th>Item Count</th>
               <th>Description</th>
+              <th>Royalty Fee</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -86,8 +87,9 @@
               <ng-container *ngFor="let group of (groups$ | async);last as isLast" class="">
                 <tr [ngStyle]="{'border-bottom': isLast ? '1px solid #aaaaaa2a' : 'none' }">
                   <td>{{group.name}}</td>
-                  <td >{{group.itemsCount || 0}}</td>
-                  <td > <p class="name">{{group.description}}</p>  </td>
+                  <td>{{group.itemsCount || 0}}</td>
+                  <td><p class="name">{{group.description}}</p></td>
+                  <td>{{group.royaltyFee}}</td>
 
 
                   <td><mat-icon (click)="deleteGroup(group)"><img class="cursor-pointer" src="./assets/icons/bin.svg" alt="delete"></mat-icon></td>

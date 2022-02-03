@@ -4,6 +4,17 @@
   max-width: 580px !important;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+// input[type=number] {
+//   -moz-appearance: textfield;
+// }
+
  .group-model {
    @apply flex flex-col items-center px-0  sm:px-16;
 
