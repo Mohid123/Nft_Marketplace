@@ -31,6 +31,10 @@ export class CreatorService  extends ApiService<creatorData> {
   private _CreatorStats$ = new BehaviorSubject<CreatorStats>(null);
   public readonly CreatorStats$: Observable<CreatorStats> = this._CreatorStats$.asObservable();
 
+  get Creator() : Creator {
+    return this._Creator$.getValue();
+  }
+
   constructor(
     protected http: HttpClient,
     protected router: Router,

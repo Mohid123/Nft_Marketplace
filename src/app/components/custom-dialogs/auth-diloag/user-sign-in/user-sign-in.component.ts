@@ -65,6 +65,12 @@ export class UserSignInComponent {
           if(this.isPage) {
             this.router.navigate(['/'+this.clubName])
           }
+
+          if(this.page == 'market-page' && res?.data?.user?.admin) {
+            if(this.authService.isLoggedIn && !this.creatorService.Creator?.stripeSecretKey) {
+              this.customDialogService.showStripeKeyDialog();
+            }
+          }
         } else {
           // alert(res?.errors[0]?.error?.message);
           this.toastr.warning(res?.errors[0]?.error?.message, 'Invalid!' )
