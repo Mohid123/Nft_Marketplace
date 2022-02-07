@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { CreatorService } from '@app/@core/services/creator.service';
 import { RouteService } from '@app/@core/services/route.service';
 import { AuthService } from '@app/pages/auth/services/auth.service';
+import { environment } from '@environments/environment';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { CustomDialogService } from './../../../@core/services/custom-dialog/custom-dialog.service';
@@ -17,6 +18,7 @@ import { CustomDialogService } from './../../../@core/services/custom-dialog/cus
 })
 export class MarketplaceSearchComponent implements OnInit, OnDestroy {
 
+  testNet = environment.testNet;
   destroy$ = new Subject();
 
   @Output() search = new EventEmitter();

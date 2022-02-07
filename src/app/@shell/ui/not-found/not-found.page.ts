@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { RouteService } from '@app/@core/services/route.service';
 import { ROUTER_UTILS } from '@app/@core/utils/router.utils';
 import { ThemeService } from '@core/services/theme';
+import { environment } from '@environments/environment';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 // import Swiper core and required modules
@@ -22,6 +23,7 @@ SwiperCore.use([Pagination, Autoplay ]);
   encapsulation: ViewEncapsulation.None,
 })
 export class NotFoundPage implements OnInit {
+  testNet = environment.testNet;
   destroy$ = new Subject();
   path = ROUTER_UTILS.config.base;
   clubRouteUrl = ROUTER_UTILS;

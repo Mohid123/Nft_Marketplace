@@ -4,6 +4,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { CreatorService } from '@app/@core/services/creator.service';
 import { ROUTER_UTILS } from '@app/@core/utils/router.utils';
+import { environment } from '@environments/environment';
 import { Subject } from 'rxjs';
 import { delay, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { RouteService } from './../../../@core/services/route.service';
@@ -17,6 +18,7 @@ import { AuthService } from './../../../pages/auth/services/auth.service';
 })
 export class LayoutComponent implements AfterViewInit, OnDestroy {
 
+  testNet = environment.testNet;
   destroy$ = new Subject();
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;

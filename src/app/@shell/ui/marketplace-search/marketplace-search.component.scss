@@ -9,3 +9,9 @@ app-profile-button {
 
   width: 163px;
 }
+
+@media screen and (max-width: 768px) {
+  .test-net {
+    left: 56%;
+  }
+}

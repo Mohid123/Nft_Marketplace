@@ -1,6 +1,7 @@
 <div class="items-center p-4 mt-0 text-gray-600 md:mt-8 lg:mt-8 md:p-0 lg:p-0">
-  <div class="flex flex-col flex-wrap mx-auto md:items-center lg:items-center md:flex-row">
-  <img (click)="gotoHome()"  class="flex-wrap object-scale-down w-auto cursor-pointer max-h-16 lg:w-auto md:w-auto lg:max-h-16 mg:max-h-16 w-36 md:w-42 lg:w-42 sm:rounded-xl" [src]="(creator$ | async)?.profileImageURL" alt="" />
+  <div class="relative flex flex-col flex-wrap mx-auto md:items-center lg:items-center md:flex-row">
+    <img (click)="gotoHome()"  class="flex-wrap object-scale-down w-auto cursor-pointer max-h-16 lg:w-auto md:w-auto lg:max-h-16 mg:max-h-16 w-36 md:w-42 lg:w-42 sm:rounded-xl" [src]="(creator$ | async)?.profileImageURL" alt="" />
+    <div class="test-net top-12 md:left-16 md:top-12" *ngIf="testNet"><p> Testnets</p></div>
   <div class="justify-center flex-grow ">
     <div class="pt-2">
         <div class="relative">
