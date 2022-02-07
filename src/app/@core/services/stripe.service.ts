@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NFT } from '@app/@core/models/NFT.model';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
-import { setItem, StorageItem } from '@app/@core/utils';
+import { StorageItem } from '@app/@core/utils';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -11,7 +11,9 @@ import { AddStripeKey } from '../models/requests/add-stripe-key.model';
 import { ResponseStripeStatus } from '../models/response-add-stripe-key.model';
 import { BuyNFT, BuySubscription } from './../models/requests/buy-nft.model';
 import { ApiResponse } from './../models/response.model';
+import { getItem } from './../utils/local-storage.utils';
 import { ApiService } from './api.service';
+import { CreatorInStore, CreatorService } from './creator.service';
 
 type StripeApiData = ResponseStripeStatus | NFT | any;
 @Injectable({
@@ -30,6 +32,7 @@ export class StripeService extends ApiService<StripeApiData> {
 
   constructor(protected http: HttpClient,
     private customDialogService: CustomDialogService,
+    private creatorService: CreatorService,
     private toastr: ToastrService,
     private spinner: NgxSpinnerService
     ) {
@@ -47,7 +50,8 @@ export class StripeService extends ApiService<StripeApiData> {
       take(1),
       tap((res: ApiResponse<ResponseStripeStatus>) => {
         if (!res.hasErrors() && res.data.isValid) {
-          setItem(StorageItem.Key, res.data.isValid);
+          const creator: CreatorInStore = <CreatorInStore>getItem(StorageItem.Creator);
+          this.creatorService.getCreator(creator?.club,true).pipe(take(1)).subscribe();
         } else {
           // console.log('invalid key');
         }

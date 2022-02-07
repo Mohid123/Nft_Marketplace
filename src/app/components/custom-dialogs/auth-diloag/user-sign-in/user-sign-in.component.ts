@@ -65,7 +65,6 @@ export class UserSignInComponent {
           if(this.isPage) {
             this.router.navigate(['/'+this.clubName])
           }
-
           if(this.page == 'market-page' && res?.data?.user?.admin) {
             if(this.authService.isLoggedIn && !this.creatorService.Creator?.stripeSecretKey) {
               this.customDialogService.showStripeKeyDialog();

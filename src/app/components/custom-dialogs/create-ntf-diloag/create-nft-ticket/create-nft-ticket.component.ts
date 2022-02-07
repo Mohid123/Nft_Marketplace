@@ -116,7 +116,7 @@ export class CreateNFTticketComponent implements OnInit, AfterViewInit {
   }
 
   cropImg(event) :void {
-    debugger
+    // debugger
     this.createNft.controls.file.setValue(event);
     this.customDialogService.showImageCropperDialog(event, 1.13 / 1,true).then(matRef => {
       matRef.afterClosed().subscribe((result) => {
