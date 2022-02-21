@@ -49,7 +49,7 @@ export class CreateGroupComponent {
     this.groupForm = this.formBuilder.group({
       name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(7)]),
       description: new FormControl('', [ Validators.required, Validators.minLength(15), Validators.maxLength(600) ]),
-      royaltyFee: new FormControl('', [Validators.required, Validators.min(1) ,Validators.max(999999)]),
+      royaltyFee: new FormControl('', [Validators.required, Validators.min(1) ,Validators.max(20)]),
       file: new FormControl(''),
     });
 
