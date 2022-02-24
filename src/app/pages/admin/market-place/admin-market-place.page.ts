@@ -194,7 +194,7 @@ export class AdminMarketPlacePage implements OnInit ,OnDestroy {
         if(res.data.balance > 0) {
           this.customDialogService.showCreateNFTOptionsDialog();
         } else {
-          const dialogRef = this.customDialogService.showConfirmationDialog('masdmaksd msg','subscribe', 'close');
+          const dialogRef = this.customDialogService.showConfirmationDialog('subscription','subscribe', 'close');
           dialogRef.afterClosed().subscribe((confirmed: boolean) => {
             if (confirmed) {
               this.router.navigate([this.clubName,'admin','subscription']);
