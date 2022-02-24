@@ -40,9 +40,11 @@ export class UserSignInComponent {
     this.routeService.clubName$.pipe(take(1)).subscribe((clubName) => {
       this.clubName = clubName;
     });
+    debugger
     this.loginForm = this.formBuilder.group({
-      email: new FormControl( this.routeService.clubName === environment.demoClub ? environment.demoClubEmail : '', [Validators.required, Validators.email]),
-      password: new FormControl(this.routeService.clubName === environment.demoClub ? environment.demoClubPassword : '', [
+
+      email: new FormControl( this.routeService.clubName === (environment.demoClub).toLowerCase()  ? environment.demoClubEmail : '', [Validators.required, Validators.email]),
+      password: new FormControl(this.routeService.clubName === (environment.demoClub).toLowerCase() ? environment.demoClubPassword : '', [
         Validators.required,
         Validators.minLength(6),
       ]),
