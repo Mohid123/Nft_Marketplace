@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CreatorService } from '@app/@core/services/creator.service';
+import { environment } from '@environments/environment';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
 import { AuthCredentials } from './../../../../@core/models/auth-credentials.model';
@@ -40,8 +41,8 @@ export class UserSignInComponent {
       this.clubName = clubName;
     });
     this.loginForm = this.formBuilder.group({
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [
+      email: new FormControl( this.routeService.clubName === environment.demoClub ? environment.demoClubEmail : '', [Validators.required, Validators.email]),
+      password: new FormControl(this.routeService.clubName === environment.demoClub ? environment.demoClubPassword : '', [
         Validators.required,
         Validators.minLength(6),
       ]),
