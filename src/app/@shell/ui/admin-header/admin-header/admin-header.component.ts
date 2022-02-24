@@ -17,6 +17,7 @@ import { TransactionService } from './../../../../@core/services/transaction.ser
 export class AdminHeaderComponent implements OnInit, OnDestroy {
 
   @Output() search = new EventEmitter();
+  @Input() market:boolean;
   @Input() hideSearch:boolean;
   public searchStr = '';
 
