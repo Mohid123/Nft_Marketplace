@@ -101,16 +101,18 @@
   </div>
     <div class="clubs-container"  [class.show-all]="!allClub"  >
       <ng-container *ngFor="let club of clubs">
-        <a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
-        [routerLink]="['/',club.redirectUrl]">
-        <div class="x-gap circle" >
+        <ng-container *ngIf="club.redirectUrl !== 'Demo'">
+          <a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
+          [routerLink]="['/',club.redirectUrl]">
+          <div class="x-gap circle" >
 
-          <img class="club-logo" [src]="club.profileImageURL" style="max-width: 50%; height: 50%; object-fit: contain;" alt="">
-          <!-- <span class="title">{{club.displayName}}</span> -->
-          <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt="" style=" opacity: 0.3;"></span>
+            <img class="club-logo" [src]="club.profileImageURL" style="max-width: 50%; height: 50%; object-fit: contain;" alt="">
+            <!-- <span class="title">{{club.displayName}}</span> -->
+            <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt="" style=" opacity: 0.3;"></span>
 
-        </div>
-      </a>
+          </div>
+        </a>
+        </ng-container>
       </ng-container>
 
 

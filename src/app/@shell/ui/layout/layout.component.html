@@ -16,7 +16,7 @@
       <div class="flex flex-col items-center justify-start h-full">
 
         <img [routerLink]="[clubName,adminRouteUrl.root]" style="max-height: 42px; max-width: 42px;" class="object-scale-down cursor-pointer avatar mat-elevation-z8 rounded-xl" [src]="(creator$ | async)?.profileImageURL" />
-
+        <div class="test-net top-20" *ngIf="testNet"><p> Testnets</p></div>
         <ul class="flex flex-col items-center h-full mt-8 list-none">
           <li class="relative inline-block">
             <a class="menu-link icon-btn op" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"

@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   apiUrl: 'https://nft-dev.dividisapp.com',
   limit: 12,
+  testNet: false,
 };
 
 /*

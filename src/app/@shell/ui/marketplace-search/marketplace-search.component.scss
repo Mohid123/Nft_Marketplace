@@ -2,10 +2,20 @@ app-profile-button {
   @apply mt-4 md:mt-0 lg:mt-0;
 }
 
+.nft-btn {
+  width: 163px;
+}
+
 
 .navigationBtn {
   @apply flex items-center justify-center h-12 p-1.5 rounded-xl bg-primary-600 hover:bg-primary-400 mr-2 mt-4 md:mt-0 lg:mt-0;
 
 
   width: 163px;
+}
+
+@media screen and (max-width: 768px) {
+  .test-net {
+    left: 56%;
+  }
 }
