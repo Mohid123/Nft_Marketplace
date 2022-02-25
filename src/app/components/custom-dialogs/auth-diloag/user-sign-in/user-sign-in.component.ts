@@ -44,7 +44,7 @@ export class UserSignInComponent {
     let email =''
     let password =''
 
-    if (this.routeService.clubName === environment.demoClub) {
+    if (this.routeService.clubName === environment.demoClub.toLocaleLowerCase()) {
       email = environment.demoClubEmail;
       password = environment.demoClubPassword;
     } else if (this.routeService.clubName === environment.demoClub1) {
