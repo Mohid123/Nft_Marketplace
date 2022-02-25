@@ -25,6 +25,7 @@ SwiperCore.use([Pagination, Autoplay ]);
 export class NotFoundPage implements OnInit {
 
   demoCLub = environment.demoClub;
+  demoCLub1 = environment.demoClub1;
   testNet = environment.testNet;
   destroy$ = new Subject();
   path = ROUTER_UTILS.config.base;

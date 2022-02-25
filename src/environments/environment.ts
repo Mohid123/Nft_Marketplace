@@ -10,6 +10,9 @@ export const environment = {
   demoClub: 'Demo',
   demoClubEmail: 'demo@gmail.com',
   demoClubPassword: 'demotest123',
+  demoClub1: 'solis-solution',
+  demoClubEmail1: 'admin@gmail.com',
+  demoClubPassword1: 'qwertyuiop',
 };
 
 /*
