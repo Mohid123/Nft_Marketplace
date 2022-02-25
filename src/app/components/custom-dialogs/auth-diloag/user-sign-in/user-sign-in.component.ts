@@ -44,10 +44,10 @@ export class UserSignInComponent {
     let email =''
     let password =''
 
-    if (this.routeService.clubName === environment.demoClub.toLocaleLowerCase()) {
+    if (this.routeService.clubName.toLowerCase() === environment.demoClub) {
       email = environment.demoClubEmail;
       password = environment.demoClubPassword;
-    } else if (this.routeService.clubName === environment.demoClub1) {
+    } else if (this.routeService.clubName.toLowerCase() === environment.demoClub1) {
       email = environment.demoClubEmail1;
       password = environment.demoClubPassword1;
     }
