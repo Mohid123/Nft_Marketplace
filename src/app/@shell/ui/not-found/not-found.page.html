@@ -101,7 +101,7 @@
   </div>
     <div class="clubs-container"  [class.show-all]="!allClub"  >
       <ng-container *ngFor="let club of clubs">
-        <ng-container *ngIf="club.redirectUrl !== demoCLub">
+        <ng-container *ngIf="club.redirectUrl !== demoCLub && club.redirectUrl !== demoCLub1">
           <a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
           [routerLink]="['/',club.redirectUrl]">
           <div class="x-gap circle" >

@@ -40,9 +40,21 @@ export class UserSignInComponent {
     this.routeService.clubName$.pipe(take(1)).subscribe((clubName) => {
       this.clubName = clubName;
     });
+
+    let email =''
+    let password =''
+
+    if (this.routeService.clubName === environment.demoClub) {
+      email = environment.demoClubEmail;
+      password = environment.demoClubPassword;
+    } else if (this.routeService.clubName === environment.demoClub1) {
+      email = environment.demoClubEmail1;
+      password = environment.demoClubPassword1;
+    }
+
     this.loginForm = this.formBuilder.group({
-      email: new FormControl( this.routeService.clubName === environment.demoClub ? environment.demoClubEmail : '', [Validators.required, Validators.email]),
-      password: new FormControl(this.routeService.clubName === environment.demoClub ? environment.demoClubPassword : '', [
+      email: new FormControl(email, [Validators.required, Validators.email]),
+      password: new FormControl(password, [
         Validators.required,
         Validators.minLength(6),
       ]),
