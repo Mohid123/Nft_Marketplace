@@ -30,6 +30,7 @@ export class MarketplaceSearchComponent implements OnInit, OnDestroy {
 
   isLoggedIn$: Observable<boolean> = this.authService.isLoggedIn$;
   creator$ = this.creatorService.Creator$;
+  user$ = this.authService.user$;
 
   searchControl = new FormControl();
   formCtrlSub: Subscription;
