@@ -18,12 +18,12 @@
     <h2 class="mb-5 text-2xl font-light tracking-widest text-gray-400 title-font">Marketplace</h2>
     <div class="bottom-0 left-0 flex flex-wrap justify-between w-full pt-3 leading-none text-center ">
       <span class="inline-flex flex-wrap items-center w-full leading-none md:w-auto lg:w-auto">
-        <button mat-button *ngFor="let button of filterButtons" class="items-center px-3 py-2 mx-1 mb-3 tracking-wide dark:text-white align-middle rounded-full md:mb-0 lg:mb-0 text-md border-gradient-dp-p-bg-dark hover:border-gradient-tl-p-bg-light gradient-border-2"[ngClass]="{'active': button.isClicked}" (click)="setActive(button); setType(button.text)">
+        <button mat-button *ngFor="let button of filterButtons" class="items-center px-3 py-2 mx-1 mb-3 tracking-wide align-middle rounded-full dark:text-white md:mb-0 lg:mb-0 text-md border-gradient-dp-p-bg-dark hover:border-gradient-tl-p-bg-light gradient-border-1"[ngClass]="{'active': button.isClicked}" (click)="setActive(button); setType(button.text)">
           {{ button.text || 'All Items' }}
       </button>
    </span>
     <div class="flex justify-end w-full mt-3 md:w-auto lg:w-auto md:mt-0 lg:mt-0">
-        <span class="inline-flex items-center text-sm leading-none text-gray-400 border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-2 rounded-3xl">
+        <span class="inline-flex items-center text-sm leading-none text-gray-400 border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-1 rounded-3xl">
           <button type="button " mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu"
             class="filter-btn"
             id="menu-button" aria-expanded="true" aria-haspopup="true">

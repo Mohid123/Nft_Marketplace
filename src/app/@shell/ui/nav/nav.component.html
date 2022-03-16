@@ -19,17 +19,17 @@
     <div class="flex items-center justify-end flex-grow bg-opacity-0 shadow-none hidde bg-blueGray-800">
       <ul class="flex flex-row items-center list-none lg:ml-auto">
         <li class="relative inline-block">
-          <a class="menu-link op" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }" [routerLink]="[clubName]">
+          <a class="font-medium menu-link op" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }" [routerLink]="[clubName]">
             MarketPlace
           </a>
         </li>
         <li class="relative inline-block" *ngIf="isLogedIn$ | async">
-          <a class="menu-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }" [routerLink]="[clubName,routeUrl.config.base.wallet]">
+          <a class="font-medium menu-link " [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }" [routerLink]="[clubName,routeUrl.config.base.wallet]">
             Wallet
           </a>
         </li>
         <li class="relative inline-block" *ngIf="isLogedIn$ | async">
-          <a class="menu-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }" [routerLink]="[clubName,routeUrl.config.base.tradingHistory]">
+          <a class="font-medium menu-link " [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }" [routerLink]="[clubName,routeUrl.config.base.tradingHistory]">
             trading History
           </a>
         </li>

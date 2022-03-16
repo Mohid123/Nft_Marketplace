@@ -65,5 +65,8 @@ th{
 
 .eventIcons {
   @apply inline-flex items-center justify-center  p-14 rounded-xl ;
+  img{
+    height: 60px;
+  }
 
 }

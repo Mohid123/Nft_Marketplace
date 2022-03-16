@@ -7,6 +7,8 @@
  }
 
 
+
+
 .bg-card {
  background-color: #2F3157;
 }
@@ -40,12 +42,22 @@ background-size: contain;
 }
 
 .card-border{
-  @apply p-3 rounded-2xl mb-6  border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-2;
+  @apply p-3 rounded-2xl mb-6 bg-white
+  transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110;
   height: 358px;
   width: 281px;
-  border: 2px solid transparent;
+  border: 1px solid transparent;
+  box-shadow: rgba(4, 17, 29, 0.151) 0px 0px 10px 0px;
+  transition: transform .5s;
+ ;
 
 }
+
+.card-border:hover {
+  // transition: box-shadow .3s;
+  transform: scale(1.05);
+
+ }
 
 .trun{
 

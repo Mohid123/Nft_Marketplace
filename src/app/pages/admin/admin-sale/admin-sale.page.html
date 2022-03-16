@@ -93,15 +93,15 @@
               </tr>
             </thead>
             <tbody class="relative">
-              <ng-container *ngFor="let nft of nftList?.data;last as isLast" class="">
-                <tr [ngStyle]="{'border-bottom': isLast ? '1px solid #aaaaaa2a' : 'none' }">
+              <ng-container *ngFor="let nft of nftList?.data;last as isLast">
+                <tr [ngStyle]="{'border-bottom': isLast ? '1px solid #aaaaaa2a' : 'none' }" class="font-normal">
                   <td><a href="{{nft.transactionHashUrl}}" target=_blank> {{nft.tokenId}}</a></td>
                   <td>{{nft.type || 0}}</td>
                   <td>€{{nft.price}}</td>
                   <td>{{nft.createdAt  | date: 'dd-MM-yyyy'}}</td>
                   <td>
                     <ng-container *ngIf="nft?.nftStatus === 'Draft' || nft?.nftStatus === 'Minted'; else noStatusChange">
-                      <button class="inline-flex items-center justify-center w-24 h-6 px-4 font-light text-white bg-green-500 rounded-full  {{nft?.nftStatus | lowercase}}" mat-icon-button [matMenuTriggerFor]="changeStatus" aria-label="menu">
+                      <button class="inline-flex items-center justify-center w-24 h-6 px-4 font-light text-gray-600 bg-green-500 rounded-full  {{nft?.nftStatus | lowercase}}" mat-icon-button [matMenuTriggerFor]="changeStatus" aria-label="menu">
                         {{nft?.nftStatus}}
                         <svg class="w-5 h-5 ml-2 -mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                         aria-hidden="true">

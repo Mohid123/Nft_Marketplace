@@ -47,7 +47,7 @@ svg {
   .available-nft,
   .total-revenue,
   .pending-for-sale {
-    @apply w-full rounded-xl flex items-center justify-around px-7 py-8;
+    @apply w-full rounded-xl flex items-center justify-around px-7 py-8 border border-gray-200;
     height: 95px;
 
     .icon {
@@ -148,7 +148,7 @@ svg {
 
 .groups {
   @apply h-full pt-2.5;
-  height: 326px;
+  height: 339px;
   .group {
     @apply flex mb-3 p-2 w-full border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-1 rounded-md;
     height: 70px;
@@ -233,7 +233,7 @@ a.button {
   }
 
   &:hover {
-      color: #ffffff;
+      color: #000000;
 
 
       &::after {

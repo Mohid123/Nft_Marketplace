@@ -1,7 +1,7 @@
 .section-container{
   @apply p-2 sm:py-3 sm:px-3 ;
-
   min-height: 305px;
+
 }
 .section{
   @apply w-full h-full rounded-lg;
@@ -14,7 +14,8 @@ svg {
 }
 
 .chart-status {
-  @apply relative h-full bg-primary-gray-600 rounded-lg;
+  @apply relative h-full bg-white rounded-lg;
+  box-shadow: rgba(4, 17, 29, 0.13) 0px 0px 10px 0px;
   background-size: auto 300px;
 
   &.dark {
@@ -59,6 +60,7 @@ h1 {
   .pending-for-sale {
     @apply w-full  rounded-xl flex items-center px-7 py-8 mb-2 justify-around;
     height: 93px;
+    box-shadow: rgba(4, 17, 29, 0.13) 0px 0px 10px 0px;
 
 
     .icon {
@@ -115,6 +117,7 @@ h1 {
 
 .cards-container {
   min-height: 500px;
+
   .heading-section {
     @apply flex h-auto justify-center items-center tracking-wide font-medium dark:text-white;
 
@@ -146,6 +149,7 @@ h1 {
   height: 405px;
   width: 368px;
   border: 2px solid transparent;
+  box-shadow: rgba(4, 17, 29, 0.13) 0px 0px 10px 0px;
 }
 
 .btn-nft {

@@ -9,8 +9,8 @@
 
 <div class="justify-center card-border">
   <div class="flex"
-    style="background-image: url(./assets/bg-img.png); background-repeat: no-repeat;  background-size: 100% 100%; ">
-    <div class="md:flex lg:flex w-full">
+    style="background-image: url(./assets/bg-img.png); background-repeat: no-repeat;  background-size: 100% 100%; border-radius: 16px;">
+    <div class="w-full md:flex lg:flex">
       <!-- Left Section -->
       <div class="flex-col md:flex lg:flex">
         <div class="p-6 md:p-0 lg:p-0 lg:pt-6 lg:pb-6 lg:pl-6">
@@ -23,7 +23,7 @@
 
           <div class="inline-flex" id="fileName"><span >{{nft?.nftContract}}</span><span>{{nft?.nftContract}}</span>
           </div><br>
-          <p class="inline mt-6 text-lg dark:text-white opacity-50 mr-7">
+          <p class="inline mt-6 text-lg opacity-50 dark:text-white mr-7">
             Token Address
           </p>
           <span class="text-lg dark:text-white">ERC-721</span> <br /><br />
@@ -34,7 +34,7 @@
 
             </div>
             <a href="{{nft?.transactionHashUrl}}" target=_blank
-              class="ml-3 mr-3 text-sm leading-none text-gray-200 hover:text-gray-900">View on Polygon.</a>
+              class="ml-3 mr-3 text-sm leading-none dark:text-white hover:text-gray-900">View on Polygon.</a>
               <a href="{{nft?.transactionHashUrl}}" target=_blank
               class=""><img class="w-4 h-10" src="./assets/icons/exit-top-right.svg" alt="polygon" /></a>
 
@@ -87,7 +87,7 @@
             <!-- <span class="ml-3 text-sm text-white opacity-50">32.44 USD</span> -->
           </div>
           <p class="text-lg text-gray-400">Description</p>
-          <div class="text-base text-justify dark:text-white break-words lg:mr-20 respDesc overflow-ellipsis">
+          <div class="text-base text-justify break-words dark:text-white lg:mr-20 respDesc overflow-ellipsis">
             {{nft?.description}}
           </div>
           <ng-container *ngIf="nft?.nftStatus && (isAdminPanel$ | async)">
