@@ -18,7 +18,7 @@
     <h2 class="mb-5 text-2xl font-light tracking-widest text-gray-400 title-font">Marketplace</h2>
     <div class="bottom-0 left-0 flex flex-wrap justify-between w-full pt-3 leading-none text-center ">
       <span class="inline-flex flex-wrap items-center w-full leading-none md:w-auto lg:w-auto">
-        <button mat-button *ngFor="let button of filterButtons" class="items-center px-3 py-2 mx-1 mb-3 tracking-wide text-white align-middle rounded-full md:mb-0 lg:mb-0 text-md border-gradient-dp-p-bg-dark hover:border-gradient-tl-p-bg-light gradient-border-2"[ngClass]="{'active': button.isClicked}" (click)="setActive(button); setType(button.text)">
+        <button mat-button *ngFor="let button of filterButtons" class="items-center px-3 py-2 mx-1 mb-3 tracking-wide dark:text-white align-middle rounded-full md:mb-0 lg:mb-0 text-md border-gradient-dp-p-bg-dark hover:border-gradient-tl-p-bg-light gradient-border-2"[ngClass]="{'active': button.isClicked}" (click)="setActive(button); setType(button.text)">
           {{ button.text || 'All Items' }}
       </button>
    </span>
@@ -38,7 +38,7 @@
             </svg>
           </button>
 
-          <mat-menu #menu="matMenu" class="bg-primary-600 mt-0.5 p-2 w-32 " xPosition='before'>
+          <mat-menu #menu="matMenu" class="dark:bg-primary-600 bg-primary-gray-200  mt-0.5 p-2 w-32 " xPosition='before'>
             <button (click)="filterBy(null)" class="dropdown" mat-menu-item>
               All
             </button>
@@ -58,9 +58,9 @@
       [fullScreen]="false"
       [showSpinner]="isLoading"
       [show]="isLoading"
-      bdColor="#171830"
+      bdColor="#D9DBE0"
       size="medium"
-      color="#fff"
+
       type="ball-scale-multiple">
       <p style="font-size: 20px; color: white">{{(creator$ | async)?.displayName}}...</p>
     </ngx-spinner>

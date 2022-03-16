@@ -7,10 +7,10 @@
 }
 
 .filter-btn{
-  @apply inline-flex justify-center w-full px-4 py-1 text-sm font-medium text-white rounded-full shadow-sm ;
+  @apply inline-flex justify-center w-full px-4 py-1 text-sm font-medium dark:text-white rounded-full shadow-sm ;
 }
 .all-item {
- @apply px-4 py-1 text-xs tracking-wide text-white md:h-7 lg:h-7 h-11 bg-gradient-to-r focus:from-blue-400 focus:to-green-400 rounded-full shadow-sm focus:outline-none
+ @apply px-4 py-1 text-xs tracking-wide dark:text-white md:h-7 lg:h-7 h-11 bg-gradient-to-r focus:from-blue-400 focus:to-green-400 rounded-full shadow-sm focus:outline-none
 }
 
 
@@ -36,7 +36,10 @@
 }
 
 .active{
-  @apply items-center px-3 py-2 mx-1 bg-gradient-to-r from-blue-400 to-green-400 rounded-full
+  @apply items-center px-3 py-2 mx-1 bg-gradient-to-r from-yellow-200 to-yellow-500 rounded-full;
+  &.dark{
+    @apply from-blue-400 to-green-400 rounded-full;
+   }
  }
 
  ::-webkit-calendar-picker-indicator {

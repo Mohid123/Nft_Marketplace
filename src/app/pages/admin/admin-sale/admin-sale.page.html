@@ -50,7 +50,7 @@
           </div>
 
             <!--status menu-->
-            <mat-menu #statusMenu="matMenu" class="bg-primary-600 mt-0.5 p-3 w-32 rounded-md" xPosition='after' >
+            <mat-menu #statusMenu="matMenu" class="dark:bg-primary-600 bg-primary-gray-200  mt-0.5 p-3 w-32 rounded-md" xPosition='after' >
               <ng-container *ngFor="let status of nftStatus">
                 <button (click)="filterByStatus(status.name)" class="dropdown" mat-menu-item>
                   {{status.name}}
@@ -59,7 +59,7 @@
             </mat-menu>
 
            <!--price menu-->
-           <mat-menu #priceMenu="matMenu" class="bg-primary-600 mt-0.5 p-3 rounded-md text-sm mat-menu" xPosition='after'>
+           <mat-menu #priceMenu="matMenu" class="dark:bg-primary-600 bg-primary-gray-200 mt-0.5 p-3 rounded-md text-sm mat-menu" xPosition='after'>
             Range from
             <ng-container *ngFor="let range of priceRange">
               <button (click)="filterByPrice(range.to ? range.from + ' - ' + range.to : range.from)" class="dropdown" mat-menu-item>
@@ -69,7 +69,7 @@
           </mat-menu>
 
              <!--TokenId menu-->
-             <mat-menu #tokenId="matMenu" class="bg-primary-600 mt-0.5 p-3 rounded-md text-sm" xPosition='after'>
+             <mat-menu #tokenId="matMenu" class="dark:bg-primary-600 bg-primary-gray-200  mt-0.5 p-3 rounded-md text-sm" xPosition='after'>
               Sort by
               <ng-container *ngFor="let item of orderBy">
                 <button (click)="filterBySort(item.order)" class="dropdown" mat-menu-item>
@@ -83,7 +83,7 @@
       <div class="w-full bg-gray-400 groups-container">
         <div class="w-full overflow-x-auto">
           <table class="w-full space-y-6 text-sm">
-            <thead class="font-light tracking-wider text-white ">
+            <thead class="font-light tracking-wider dark:text-white ">
               <tr>
                 <th>TOKEN ID</th>
                 <th>TYPE</th>
@@ -95,7 +95,7 @@
             <tbody class="relative">
               <ng-container *ngFor="let nft of nftList?.data;last as isLast" class="">
                 <tr [ngStyle]="{'border-bottom': isLast ? '1px solid #aaaaaa2a' : 'none' }">
-                  <td><a href="{{nft.transactionHashUrl}}" target=_blank style="color: #64F3FF; "> {{nft.tokenId}}</a></td>
+                  <td><a href="{{nft.transactionHashUrl}}" target=_blank> {{nft.tokenId}}</a></td>
                   <td>{{nft.type || 0}}</td>
                   <td>€{{nft.price}}</td>
                   <td>{{nft.createdAt  | date: 'dd-MM-yyyy'}}</td>
@@ -111,7 +111,7 @@
                       </svg>
 
                       </button>
-                      <mat-menu #changeStatus="matMenu" class="bg-primary-500 mt-0.5 mb-6 p-2 w-68 text-center " xPosition='before'>
+                      <mat-menu #changeStatus="matMenu" class="dark:bg-primary-600 bg-primary-gray-200  mt-0.5 mb-6 p-2 w-68 text-center " xPosition='before'>
                         <span class="text-sm">Change status</span>
                         <div class="flex items-center mt-4 justify-items-center">
                           <button [disabled]="nft?.nftStatus === 'Minted'" (click)="updateStatus(nft.id, 'Minted')" type="checkbox"
@@ -138,8 +138,8 @@
                   <h3>No Record Found</h3>
                   <p>It seems we can't find any results.</p>
                 </div>
-              <ngx-spinner name="admin-market" [fullScreen]="false" [showSpinner]="isLoading" bdColor="#171830"
-                size="medium" color="#fff" type="ball-scale-multiple">
+              <ngx-spinner name="admin-market" [fullScreen]="false" [showSpinner]="isLoading" bdColor="#D9DBE0"
+                size="medium"  type="ball-scale-multiple">
                 <p style="font-size: 20px; color: white">{{(creator$ | async)?.displayName}}...</p>
               </ngx-spinner>
             </tbody>

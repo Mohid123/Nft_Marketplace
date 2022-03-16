@@ -1,14 +1,14 @@
 
 <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu" class="profile-btn" style="max-width: 80px;">
   <img class="object-cover w-10 text-sm leading-4 rounded-lg h-9" [src]="((user$ | async)?.profilePicURL) || '../../../../../assets/profile.png'" alt=""/>
-  <span class="pl-2 mr-2 text-white truncate"> {{((user$ | async)?.fullName) || ''}}</span>
-  <mat-icon style="width: 16px; color:white">more_vert</mat-icon>
+  <span class="pl-2 mr-2 dark:text-white truncate"> {{((user$ | async)?.fullName) || ''}}</span>
+  <mat-icon class="dark:text-white" style="width: 16px">more_vert</mat-icon>
 
 </button>
-<mat-menu #menu="matMenu" class="bg-primary-600 hover:bg-primary-400  mt-0.5" xPosition='before'>
+<mat-menu #menu="matMenu" class="dark:bg-primary-600 bg-primary-gray-200  mt-0.5" xPosition='before'>
 
   <button mat-menu-item (click)="signOut()" >
-    <mat-icon class="text-white">logout</mat-icon>
+    <mat-icon class="dark:text-white">logout</mat-icon>
     logout
   </button>
   <!-- <button mat-menu-item (click)="exportKey()" >

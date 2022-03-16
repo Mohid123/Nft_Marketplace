@@ -1,8 +1,8 @@
 <!-- <ngx-spinner
   name="main"
-  bdColor="#171830"
+  bdColor="#D9DBE0"
   size="medium"
-  color="#fff"
+
   type="ball-scale-multiple"
 >
   <p style="font-size: 20px; color: white">{{(creator$ | async)?.displayName}}...</p>
@@ -13,8 +13,9 @@
 
 <ng-template #notAuthorized>
   <app-nav *ngIf="showHedader$ | async"></app-nav>
-
+<div class="main-bg">
   <router-outlet (activate)="onActivate($event)"></router-outlet>
+</div>
 
   <app-footer *ngIf="showFooter$ | async"></app-footer>
 </ng-template>

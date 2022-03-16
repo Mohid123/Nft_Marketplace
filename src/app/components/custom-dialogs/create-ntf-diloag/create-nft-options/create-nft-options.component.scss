@@ -76,14 +76,19 @@ label.radio span {
 
   width: 384px;
   height: 56px;
-  border: 2px solid #4C5880;
-  background-color: #4C5880;
+  border: 2px solid #f4f4f5;
+  background-color: #f4f4f5;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
   border-radius: 8px;
   text-align: center;
+
+  &.dark {
+    border: 2px solid #4C5880;
+    background-color: #4C5880;
+    color: white;
+  }
 
 }
 // label.radio input:checked + span {
@@ -92,8 +97,13 @@ label.radio span {
 
 label.radio input:checked + span {
   @apply border-gradient-dp-p-bg-light gradient-border-2;
-  background: linear-gradient( to right, #4C5880, #4C5880 ), linear-gradient(
-109deg, #59C8D1 0%, #75F16D 100%);
+  background: linear-gradient( to right, #FFFF, #FFFF ), linear-gradient(
+    109deg, #FFB937 0%, #D59629 100%);
   background-clip: padding-box, border-box;
   background-origin: padding-box, border-box;
+
+  &.dark {
+    background: linear-gradient( to right, #f4f4f5, #f4f4f5 ), linear-gradient(
+      109deg, #59C8D1 0%, #75F16D 100%);
+  }
 }

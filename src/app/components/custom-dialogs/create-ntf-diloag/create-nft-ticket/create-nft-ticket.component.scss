@@ -119,7 +119,10 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
 .custom-scrollbar-css::-webkit-scrollbar-thumb {
   border-radius: 1rem;
   background-color: #34ABC5;
-  background-image: linear-gradient(to top, #3ABFF3 0%, #75F16D 100%);
+  background-image: linear-gradient(to top, #FFB937 0%, #D59629 100%);
+  &.dark {
+    background-image: linear-gradient(to top, #3ABFF3 0%, #75F16D 100%);
+  }
 }
 
 

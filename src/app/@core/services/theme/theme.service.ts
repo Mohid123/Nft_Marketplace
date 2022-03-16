@@ -22,7 +22,7 @@ export class ThemeService implements OnDestroy {
   destroy$ = new Subject();
 
   private readonly mediaQuery = window.matchMedia(
-    '(prefers-color-scheme: dark)',
+    '(prefers-color-scheme: light)',
   );
 
   constructor(

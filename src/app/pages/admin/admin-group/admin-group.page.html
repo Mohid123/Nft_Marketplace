@@ -5,7 +5,7 @@
   Custom Position (above)
 </div> -->
 
-<div class="flex flex-col justify-start h-auto min-h-screen px-3 py-2 mt-10 mb-12 sm:px-6 xl:px-8 center">
+<div class="flex flex-col justify-start h-auto min-h-screen px-3 mt-10 mb-12 sm:px-6 xl:px-8 center py-4 rounded-lg dark:bg-transparent">
   <div class="flex items-center justify-between w-full h-12 py-px">
     <h1 class="h-auto m-0 text-2xl font-medium">Groups</h1>
     <button class="w-40 h-full primary-btn" (click)="newGroup()">
@@ -47,7 +47,7 @@
         </div>
 
           <!--Item count menu-->
-        <mat-menu #itemCountMenu="matMenu" class="bg-primary-600 mt-0.5 p-3 w-32 rounded-md" xPosition='after'>
+        <mat-menu #itemCountMenu="matMenu" class="dark:bg-primary-600 bg-primary-gray-200  mt-0.5 p-3 w-32 rounded-md" xPosition='after'>
           <ng-container *ngFor="let sort of itemCount">
             <button (click)="filterByItemCount(sort.sortBy)" class="dropdown" mat-menu-item>
               {{sort.sortBy}}
@@ -57,7 +57,7 @@
         </mat-menu>
 
          <!--Name menu-->
-        <mat-menu #nameMenu="matMenu" class="bg-primary-600 mt-0.5 p-3 w-32 rounded-md text-sm mat-menu" xPosition='after'>
+        <mat-menu #nameMenu="matMenu" class="dark:bg-primary-600 bg-primary-gray-200  mt-0.5 p-3 w-32 rounded-md text-sm mat-menu" xPosition='after'>
           Sort by
           <ng-container *ngFor="let sort of name">
             <button (click)="filterByName(sort.sortBy)" class="dropdown" mat-menu-item>
@@ -71,7 +71,7 @@
     <div class="w-full bg-gray-400 groups-container">
       <div class="w-full overflow-x-auto ">
         <table class="w-full space-y-6 text-sm" [style.min-height]="((isLoading$ | async) === false && (groups$ | async).length === 0) ? '420px' : null">
-          <thead class="font-light tracking-wider text-white ">
+          <thead class="font-light tracking-wider dark:text-white ">
             <tr>
               <th>Name</th>
               <th>Item Count</th>
@@ -81,7 +81,7 @@
             </tr>
           </thead>
           <tbody class="relative">
-            <ngx-spinner name="admin-market" [fullScreen]="false" [showSpinner]="isLoading$ | async" bdColor="#171830" size="medium" color="#fff" type="ball-scale-multiple">
+            <ngx-spinner name="admin-market" [fullScreen]="false" [showSpinner]="isLoading$ | async" bdColor="#D9DBE0" size="medium"  type="ball-scale-multiple">
               <p style="font-size: 20px; color: white">{{(creator$ | async)?.displayName}}...</p>
             </ngx-spinner>
               <ng-container *ngFor="let group of (groups$ | async);last as isLast" class="">
@@ -92,7 +92,7 @@
                   <td>{{group.royaltyFee}}</td>
 
 
-                  <td><mat-icon (click)="deleteGroup(group)"><img class="cursor-pointer" src="./assets/icons/bin.svg" alt="delete"></mat-icon></td>
+                  <td><mat-icon (click)="deleteGroup(group)"><img class="cursor-pointer" src="./assets/icons/delete.svg" alt="delete"></mat-icon></td>
                 </tr >
               </ng-container>
 

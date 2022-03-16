@@ -1,4 +1,15 @@
 .profile-btn {
-  @apply flex items-center justify-center h-12 p-1.5 rounded-xl bg-primary-600 hover:bg-primary-400 mr-2;
+  @apply flex items-center justify-center h-12 p-1.5 rounded-xl bg-primary-gray-200 hover:bg-primary-gray-300 mr-2;
   width: 163px;
+  &.dark {
+    @apply  bg-primary-600 hover:bg-primary-400 mr-2;
+  }
+}
+
+.header-con {
+  background-color: #FFFF;
+
+  &.dark {
+    background-color: transparent;
+  }
 }

@@ -1,5 +1,5 @@
 <div class="relative w-full">
-  <div class="absolute block w-full h-10 bg-primary-900 md:hidden" [ngClass]="sidenav.opened ? 'z-0' : 'z-10'">
+  <div class="absolute block w-full h-10 dark:bg-primary-900 md:hidden" [ngClass]="sidenav.opened ? 'z-0' : 'z-10'">
   <button mat-icon-button *ngIf="sidenav.mode === 'over'"
     (click)="sidenav.toggle()">
     <mat-icon *ngIf="!sidenav.opened">
@@ -124,8 +124,10 @@
 
     </mat-sidenav>
     <mat-sidenav-content>
+      <div  class="main-bg">
       <div id="admin-main" class="main">
         <ng-content></ng-content>
+      </div>
       </div>
     </mat-sidenav-content>
   </mat-sidenav-container>

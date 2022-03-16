@@ -14,13 +14,13 @@
     <h2 class="mb-5 text-2xl font-light tracking-widest text-gray-400 title-font">My NFT Library</h2>
     <div class="bottom-0 left-0 flex flex-wrap justify-between w-full pt-3 leading-none text-center ">
       <span class="inline-flex flex-wrap items-center w-full leading-none md:w-auto lg:w-auto">
-        <button mat-button *ngFor="let button of filterButtons" class="items-center px-3 py-2 mx-1 mb-3 tracking-wide text-white align-middle rounded-full md:mb-0 lg:mb-0 text-md border-gradient-dp-p-bg-dark hover:border-gradient-tl-p-bg-light gradient-border-2"[ngClass]="{'active': button.isClicked}" (click)="setActive(button); setType(button.text)">
+        <button mat-button *ngFor="let button of filterButtons" class="items-center px-3 py-2 mx-1 mb-3 tracking-wide dark:text-white align-middle rounded-full md:mb-0 lg:mb-0 text-md border-gradient-dp-p-bg-dark hover:border-gradient-tl-p-bg-light gradient-border-2"[ngClass]="{'active': button.isClicked}" (click)="setActive(button); setType(button.text)">
           {{ button.text || 'All Items' }}
       </button>
       </span>
       <div class="flex justify-end w-full mt-3 md:w-auto lg:w-auto md:mt-0 lg:mt-0">
         <span
-          class="inline-flex items-center text-sm leading-none text-gray-400 border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-2 rounded-3xl ">
+          class="inline-flex items-center text-sm leading-none dark:bg-primary-600 bg-primary-gray-200  border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-2 rounded-3xl ">
           <button type="button " mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu" class="filter-btn"
             id="menu-button" aria-expanded="true" aria-haspopup="true">
             <ng-container *ngIf="!filterGroup; else showGroups">Filters</ng-container>
@@ -33,7 +33,7 @@
                 clip-rule="evenodd" />
             </svg>
           </button>
-          <mat-menu #menu="matMenu" class="bg-primary-600  mt-0.5 p-2" xPosition='before'>
+          <mat-menu #menu="matMenu" class="dark:bg-primary-600 bg-primary-gray-200   mt-0.5 p-2" xPosition='before'>
             <button (click)="filterBy(null)" class="dropdown" mat-menu-item>
               All
             </button>
@@ -48,8 +48,8 @@
 
   <!--Cards-->
   <div class="relative cards-container" style="min-height: 360px;">
-    <ngx-spinner [fullScreen]="false" [showSpinner]="isLoading" [show]="isLoading" bdColor="#171830" size="medium"
-      color="#fff" type="ball-scale-multiple">
+    <ngx-spinner [fullScreen]="false" [showSpinner]="isLoading" [show]="isLoading" bdColor="#D9DBE0" size="medium"
+       type="ball-scale-multiple">
       <p style="font-size: 20px; color: white">{{(creator$ | async)?.displayName}}...</p>
     </ngx-spinner>
     <div *ngIf="!isLoading && (!nftList || nftList?.totalCount === 0)"  class="absolute w-full text-center" style="top: 40%;">

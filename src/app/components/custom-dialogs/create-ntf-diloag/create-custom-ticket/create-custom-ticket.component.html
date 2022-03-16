@@ -14,7 +14,7 @@
     </div>
 
     <div class="inline-flex">
-      <span (click)="preview()" class="text-green-500 cursor-pointer">Preview</span>
+      <span (click)="preview()" class="dark:text-green-500 text-yellow-400 cursor-pointer">Preview</span>
     </div>
   </div>
 
@@ -117,7 +117,7 @@
           <option *ngFor="let group of (groups$ | async)" [ngValue]="group">
             {{group.name}}
           </option>
-          <option [ngValue]="null" class="font-medium text-primary-dark" >    None </option>
+          <option [ngValue]="null" class="font-medium text-primary-900" >    None </option>
         </select>
       </label>
       <!-- <p class="error-msg error" *ngIf="createNft.controls.group.touched && createNft.controls.group.errors?.required">please select group</p> -->
