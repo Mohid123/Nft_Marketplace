@@ -9,7 +9,7 @@ h6 {
   font-size: 18px;
   span {
     padding-bottom: 4px;
-    border-bottom: 2px solid #75F16D;
+    border-bottom: 2px solid #EFAF1E;
     font-size: 18px;
   }
 }
@@ -19,7 +19,7 @@ h6 {
 }
 
 .details-container {
-  @apply bg-primary-dark border-gradient-dp-p-bg-dark  gradient-border-1 rounded-xl mb-12 px-4 py-5 mt-6 ;
+  @apply bg-primary-900 border-gradient-dp-p-bg-dark  gradient-border-1 rounded-xl mb-12 px-4 py-5 mt-6 ;
   min-height: 358px;
   width: 508px;
 }

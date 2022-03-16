@@ -1,5 +1,5 @@
 <table class="m-4 spacing-table md:m-0 lg:m-0 ">
-  <thead class="tracking-wider text-white ">
+  <thead class="tracking-wider dark:text-white ">
     <tr class="items-center text-center" >
       <th >Token Id</th>
       <th>Event</th>
@@ -18,38 +18,38 @@
     <ng-container *ngIf="responseEventByNFT?.totalCount > 0">
       <ng-container *ngFor="let nftEvent of responseEventByNFT.data">
         <tr class="items-center h-24 ">
-          <td  style="color: #64F3FF; " >
+          <td  style="color: #EFAF1E; " >
 
            <a href="{{nftEvent?.transactionUrl}}" target=_blank> {{nftEvent?.tokenId}}</a>
           </td>
           <td *ngIf="nftEvent.eventType === 'Minted'" class="justify-center inline-block" >
             <div class="eventIcons">
               <img class="object-cover text-sm "src="../../../../assets/icons/MINTED.svg" alt=""/>
-              <span class="pl-2 mr-2 text-white "> {{nftEvent.eventType}}</span>
+              <span class="pl-2 mr-2 dark:text-white "> {{nftEvent.eventType}}</span>
             </div>
           </td>
           <td *ngIf="nftEvent.eventType === 'Transfer'" class="justify-center inline-block" >
             <div class="eventIcons">
               <img class="object-cover text-sm "src="../../../../assets/icons/TRANSFRING.svg" alt=""/>
-              <span class="pl-2 mr-2 text-white "> {{nftEvent.eventType}}</span>
+              <span class="pl-2 mr-2 dark:text-white "> {{nftEvent.eventType}}</span>
             </div>
           </td>
           <td *ngIf="nftEvent.eventType === 'Sale'" class="justify-center inline-block" >
             <div class="eventIcons">
               <img class="object-cover text-sm "src="../../../../assets/icons/SOLD.svg" alt=""/>
-              <span class="pl-2 mr-2 text-white "> {{nftEvent.eventType}}</span>
+              <span class="pl-2 mr-2 dark:text-white "> {{nftEvent.eventType}}</span>
             </div>
           </td>
           <td *ngIf="nftEvent.eventType === 'Resale'" class="justify-center inline-block" >
             <div class="eventIcons">
               <img class="object-cover text-sm" src="../../../../assets/icons/RESALE.svg" width="28" alt=""/>
-              <span class="pl-2 mr-2 text-white "> {{nftEvent.eventType}}</span>
+              <span class="pl-2 mr-2 dark:text-white "> {{nftEvent.eventType}}</span>
             </div>
           </td>
           <td *ngIf="nftEvent.eventType === 'Cancel Resale'" class="justify-center inline-block" >
             <div class="eventIcons">
               <img class="object-cover text-sm "src="../../../../assets/icons/CANCEL.svg"  width="25" alt=""/>
-              <span class="pl-2 mr-2 text-white "> {{nftEvent.eventType}}</span>
+              <span class="pl-2 mr-2 dark:text-white "> {{nftEvent.eventType}}</span>
             </div>
           </td>
           <td >

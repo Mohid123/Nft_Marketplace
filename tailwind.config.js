@@ -1,9 +1,3 @@
-const primaryColors = {
-  light: '#31314d',
-  DEFAULT: '#1F203E',
-  dark: '#171830',
-};
-
 module.exports = {
   prefix: '',
   purge: {
@@ -14,16 +8,24 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'primary': primaryColors,
-        'primary-400': '#4C5880',
-        'primary-500': '#132356',
-        'primary-600': '#2f304c',
-        'primary-650': '#31314d',
-        'primary-700': '#292a4d',
-        'primary-800': '#1F203E',
-        'primary-900': '#171830',
-        'primary-gray-50': '#f2f2f4',
-        'primary-gray-100': '#f3f3f354',
+        'primary': '#1F203E',
+        primary: {
+          '400': '#4C5880',
+          '500': '#132356',
+          '600': '#2f304c',
+          '650': '#31314d',
+          '700': '#292a4d',
+          '800': '#1F203E',
+          '900': '#171830',
+        },
+        'primary-gray' :{
+          '50': '#f2f2f4',
+          '100': '#f3f3f354',
+          '200': '#F6F6F8',
+          '300': '#f8f8fa',
+          '400': '#F4F4F5',
+          '600': '#D9DBE0',
+        }
       },
       width: {
         '35': '35%',
@@ -61,12 +63,12 @@ module.exports = {
         tl: 'to top left',
       },
       colors: {
-        p: ['#59C8D1 0%', '#75F16D 100%'],
+        p: ['#FFB937 0%', '#D59629 100%'],
       },
       background: {
-        'bg': primaryColors.DEFAULT,
-        'bg-light': primaryColors.light,
-        'bg-dark': primaryColors.dark,
+        'bg': '#FFFFFF',
+        'bg-light': '#FFFFFF',
+        'bg-dark': '#FFFFFF',
       },
       border: {
         // defaults to these values (optional)

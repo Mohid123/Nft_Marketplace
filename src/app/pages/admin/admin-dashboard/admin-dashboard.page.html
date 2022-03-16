@@ -1,15 +1,15 @@
 <!-- <div style="filter: brightness(100%); filter: blur(8px);"> -->
 <app-admin-header [hideSearch]="true" ></app-admin-header>
-<div class="h-auto min-h-screen p-1 mt-10 center md:p-3 xl:p-5 md:mt-0">
-  <div class="flex flex-wrap w-full">
+<div class="h-auto min-h-screen p-1 mt-10 center md:p-3 xl:p-5 md:mt-0 admin-dashboard-con rounded-lg">
+  <div class="flex flex-wrap w-full self-start">
     <div class="order-1 w-full section-container lg:order-1 xl:w-65 lg:w-3/5 ">
       <div class="relative chart-status">
         <div class="flex justify-between">
         <span class="nft-label">NFT STATS</span>
         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu" class="stats-btn">
-          <mat-icon style="width: 16px; color:white">more_vert</mat-icon>
+          <mat-icon class="dark:text-white" style="width: 16px;">more_vert</mat-icon>
         </button>
-        <mat-menu #menu="matMenu" class="bg-primary-600 hover:bg-primary-400  mt-0.5" xPosition='before'>
+        <mat-menu #menu="matMenu" class="dark:bg-primary-600 bg-primary-gray-200  mt-0.5" xPosition='before'>
           <ng-container *ngFor="let month of months;let i = index">
             <button (click)="chartStatus(i)" class="dropdown" mat-menu-item >
               {{month.name}}
@@ -78,7 +78,7 @@
 
         <div class="available-ndct">
           <div class="icon">
-            <img class="" src="./assets/icons/buy.svg"/>
+            <img class="" src="./assets/icons/noderon-logo.svg"/>
           </div>
           <div class="value">
             <p>Available NDCT</p>
@@ -101,7 +101,7 @@
             <span>{{creatorStats?.totalStats?.totalNftListed || 0 | number: '1.'}}</span>
           </div>
           <div class="graph-icon">
-            <img class="" src="./assets/icons/growth.png"/>
+            <img class="" src="./assets/icons/growth1.png"/>
           </div>
         </div>
         <div class="total-revenue">
@@ -113,7 +113,7 @@
             <span>€ {{creatorStats?.totalStats?.profit || 0 | number: '1.'}}</span>
           </div>
           <div class="graph-icon">
-            <img class="" src="./assets/icons/growth.png"/>
+            <img class="" src="./assets/icons/growth2.png"/>
           </div>
         </div>
         <div class="pending-for-sale">
@@ -125,15 +125,15 @@
             <span>{{creatorStats?.totalStats?.pendingForSale || 0 | number: '1.'}}</span>
           </div>
           <div class="graph-icon">
-            <img class="" src="./assets/icons/growth.png"/>
+            <img class="" src="./assets/icons/growth3.png"/>
           </div>
         </div>
         </ng-container>
       </div>
     </div>
     <div class="order-3 w-full p-5 section-container lg:order-4 xl:w-35 lg:w-2/5 " style="height: 440px;">
-      <div class="p-5 section rounded-xl bg-primary-light" id="container1" >
-        <p class="tracking-wide font-medium text-white py-2.5">NFT Groups</p>
+      <div class="p-5 section rounded-xl dark:bg-primary-650" id="container1" >
+        <p class="tracking-wide font-medium dark:text-white py-2.5">NFT Groups</p>
       <div class="overflow-hidden groups" id="container2">
         <ng-container *ngFor="let group of (groups$ | async)">
           <div class="group ">
@@ -155,7 +155,7 @@
               <p>Recently Sold NFT</p>
             </div>
             <div class="pagination">
-              <button class="h-8 rounded-md icon-btn w-9 bg-primary-600" (click)="scrollLeft(list)">
+              <button class="h-8 rounded-md icon-btn w-9 bg-primary-gray-600 dark:bg-primary-600" (click)="scrollLeft(list)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="17.618" height="11.75" viewBox="0 0 17.618 11.75">
                   <defs>
                     <style>

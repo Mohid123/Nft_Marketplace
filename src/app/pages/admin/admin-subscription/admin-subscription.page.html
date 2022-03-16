@@ -5,13 +5,13 @@
       <div class="order-1 w-full section-container lg:order-1 xl:w-65 lg:w-3/5 ">
         <div class="chart-status">
           <div class="flex flex-row flex-wrap items-center pt-4 ">
-            <div class="flex p-2 ml-8 text-gray-400 ">Wallet</div>
-            <div class="flex p-2 ml-8 text-gray-400 bg-gray-600 bg-opacity-25 rounded">ERC20</div>
+            <div class="flex p-2 ml-8 dark:text-gray-400 ">Wallet</div>
+            <div class="flex p-2 ml-8 dark:text-gray-400 bg-gray-600 bg-opacity-25 rounded">ERC20</div>
             <div class="ml-3 " >
               <button
               class="inline-flex items-center justify-between px-3 bg-gray-600 bg-opacity-25 rounded cursor-pointer md:mt-0 ">
               <a href="{{wallet?.walletUrl}}" target=_blank id="fileName"
-                class="ml-3 mr-3 text-sm leading-none text-gray-400 "><span>{{wallet?.walletAddress}}</span><span>{{wallet?.walletAddress}}</span></a>
+                class="ml-3 mr-3 text-sm leading-none dark:text-gray-400 "><span>{{wallet?.walletAddress}}</span><span>{{wallet?.walletAddress}}</span></a>
                 <a  href="{{wallet?.walletUrl}}" target=_blank
                 class=""><img class="w-4 h-10 ml-20 " src="./assets/icons/exit-top-right.svg" alt="polygon" /></a>
 
@@ -35,10 +35,10 @@
               <div class="flex items-start">
 
 
-                <div class="relative text-gray-400 value">
-                  <p *ngIf="subscriptionInProgress$ | async; else nftBalance" class="spinner"> <b class="text-white">NDCT</b></p>
+                <div class="relative dark:text-gray-400 value">
+                  <p *ngIf="subscriptionInProgress$ | async; else nftBalance" class="spinner"> <b class="dark:text-white">NDCT</b></p>
                   <ng-template #nftBalance>
-                    <p >{{stats?.totalNdct || 0 | number: '1.'}} <b class="text-white">NDCT</b></p>
+                    <p >{{stats?.totalNdct || 0 | number: '1.'}} <b class="dark:text-white">NDCT</b></p>
                   </ng-template>
                 </div>
 
@@ -58,8 +58,8 @@
               <div class="flex items-start">
 
 
-                <div class="text-gray-400 value">
-                  <p >{{stats?.spentNdct || 0 | number: '1.'}} <b class="text-white">NDCT</b></p>
+                <div class="dark:text-gray-400 value">
+                  <p >{{stats?.spentNdct || 0 | number: '1.'}} <b class="dark:text-white">NDCT</b></p>
 
                 </div>
 
@@ -79,8 +79,8 @@
               <div class="flex items-start">
 
 
-                <div class="text-gray-400 value">
-                   <p> <b class="text-white">€ </b>{{stats?.spentAmount || 0 | number: '1.'}} </p>
+                <div class="dark:text-gray-400 value">
+                   <p> <b class="dark:text-white">€ </b>{{stats?.spentAmount || 0 | number: '1.'}} </p>
                   <!-- <span> 4500</span> -->
                 </div>
 
@@ -102,19 +102,19 @@
               <span>€ {{stats?.price || 0 | number: '1.' }}</span>
             </div>
             <div class="graph-icon">
-              <img class="" src="./assets/icons/growth.png"/>
+              <img class="" src="./assets/icons/growth1.png"/>
             </div>
           </div>
           <div class="total-revenue">
             <div class="icon">
-              <img class="" src="./assets/icons/ndct icon.svg"/>
+              <img class="" src="./assets/icons/revenue.svg"/>
             </div>
             <div class="value">
               <p>Available NDCT</p>
               <span>{{stats?.availableNdct || 0 | number: '1.' }}</span>
             </div>
             <div class="graph-icon">
-              <img class="" src="./assets/icons/growth.png"/>
+              <img class="" src="./assets/icons/growth2.png"/>
             </div>
           </div>
           <div class="pending-for-sale">
@@ -126,7 +126,7 @@
               <span>{{stats?.totalSupply || 0 | number: '1.'}}</span>
             </div>
             <div class="graph-icon">
-              <img class="" src="./assets/icons/growth.png"/>
+              <img class="" src="./assets/icons/growth3.png"/>
             </div>
           </div>
           </ng-container>

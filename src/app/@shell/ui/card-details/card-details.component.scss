@@ -3,7 +3,7 @@
 }
 
 .buyNowBtn {
-  @apply text-white
+  @apply dark:text-white
   hover:text-primary-400
   md:w-10/12 lg:w-10/12 w-full
   font-medium
@@ -11,10 +11,16 @@
   h-14
   rounded-full
   py-3;
-  background: transparent linear-gradient(96deg, #73BFD6 0%, #75F36B 100%) 0% 0% no-repeat padding-box;
+  background: transparent linear-gradient(96deg, #FFB937 0%, #D59629 100%) 0% 0% no-repeat padding-box;
+  &.dark {
+    background: transparent linear-gradient(96deg, #73BFD6 0%, #75F36B 100%) 0% 0% no-repeat padding-box;
+  }
 }
 .buyNowBtn.Minted {
-  background: transparent linear-gradient(109deg, #C67BFF 0%, #C5E857 100%) 0% 0% no-repeat padding-box;
+  background: transparent linear-gradient(96deg, #FFB937 0%, #D59629 100%) 0% 0% no-repeat padding-box;
+  &.dark {
+    background: transparent linear-gradient(96deg, #73BFD6 0%, #75F36B 100%) 0% 0% no-repeat padding-box;
+  }
 }
 .buyNowBtn.Draft {
   background: #B2B2B2 0% 0% no-repeat padding-box;
@@ -24,18 +30,21 @@
   @apply inline-flex
   items-center
   px-2
-  text-white
+  dark:text-white
   bg-opacity-25
   h-14
   w-44
   rounded-xl;
-  background: #1F203E 0% 0% no-repeat padding-box;
+  background: #D59629 0% 0% no-repeat padding-box;
+  &.dark {
+    background: #1F203E 0% 0% no-repeat padding-box;
+  }
 }
 .tokenID {
   @apply inline-flex
   items-center
   px-2
-  text-white
+  dark:text-white
   bg-opacity-25
   h-14
   w-44

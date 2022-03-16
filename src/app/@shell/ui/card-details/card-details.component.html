@@ -1,8 +1,7 @@
  <ngx-spinner
   name="main"
-  bdColor="#171830"
+  bdColor="#D9DBE0"
   size="medium"
-  color="#fff"
   type="ball-scale-multiple"
 >
   <p style="font-size: 20px; color: white">{{(creator$ | async)?.displayName}}...</p>
@@ -10,7 +9,7 @@
 
 <div class="justify-center card-border">
   <div class="flex"
-    style="background-image: url(./assets/card/bg-card.png); background-repeat: no-repeat;  background-size: 100% 100%; ">
+    style="background-image: url(./assets/bg-img.png); background-repeat: no-repeat;  background-size: 100% 100%; ">
     <div class="md:flex lg:flex w-full">
       <!-- Left Section -->
       <div class="flex-col md:flex lg:flex">
@@ -18,16 +17,16 @@
           <img *ngIf="nft?.serverCaptureFileUrl" [src]="nft?.serverCaptureFileUrl" alt="nftmarketSearch" class="resImg rounded-2xl" />
         </div>
         <div class="mb-6 ml-6">
-          <span class="mt-6 inline-flex mr-2.5 text-lg text-white opacity-50">
+          <span class="mt-6 inline-flex mr-2.5 text-lg dark:text-white opacity-50">
             Contract Address
           </span>
 
           <div class="inline-flex" id="fileName"><span >{{nft?.nftContract}}</span><span>{{nft?.nftContract}}</span>
           </div><br>
-          <p class="inline mt-6 text-lg text-white opacity-50 mr-7">
+          <p class="inline mt-6 text-lg dark:text-white opacity-50 mr-7">
             Token Address
           </p>
-          <span class="text-lg text-white">ERC-721</span> <br /><br />
+          <span class="text-lg dark:text-white">ERC-721</span> <br /><br />
           <a href="{{nft?.transactionHashUrl}}" target=_blank
             class="inline-flex items-center justify-between px-3 bg-gray-400 bg-opacity-25 cursor-pointer rounded-xl md:mt-0 hover:bg-opacity-70 ">
             <div class="flex items-start">
@@ -50,45 +49,45 @@
               <div class="flex rounded">
                 <img class="w-10 h-10 rounded-full" [src]="nft?.creator?.profileImageURL" [alt]="nft?.creator?.displayName" />
               </div>
-              <span class="ml-6 text-sm text-white"> {{nft?.creator?.displayName}}</span>
+              <span class="ml-6 text-sm dark:text-white"> {{nft?.creator?.displayName}}</span>
             </button>
             <div class="flex justify-between">
-              <span class="text-lg text-gray-400 tokenID ">Token ID <a href="{{nft?.transactionHashUrl}}" class="ml-3 text-white"  target=_blank> #{{nft?.tokenId}}</a></span>
+              <span class="text-lg text-gray-400 tokenID ">Token ID <a href="{{nft?.transactionHashUrl}}" class="ml-3 dark:text-white"  target=_blank> #{{nft?.tokenId}}</a></span>
             </div>
           </div>
-          <p class="mt-6 mb-6 text-3xl font-medium tracking-wider text-white trun">
+          <p class="mt-6 mb-6 text-3xl font-medium tracking-wider dark:text-white trun">
            {{nft?.name}}
           </p>
           <div class="flex items-center justify-start">
             <div class="mt-0">
               <p class="text-lg text-gray-400">Creator</p>
-              <button class="inline-flex items-center justify-between py-2 text-white rounded-xl">
+              <button class="inline-flex items-center justify-between py-2 dark:text-white rounded-xl">
                 <div class="flex items-start rounded nft-img">
                   <img class="rounded-full w-7 h-7" [src]="nft?.creator?.profileImageURL" [alt]="nft?.creator?.displayName" />
                 </div>
-                <span class="ml-2 mr-2 text-sm leading-none text-white">
+                <span class="ml-2 mr-2 text-sm leading-none dark:text-white">
                   {{nft?.creator?.displayName}}
                 </span>
               </button>
             </div>
             <div class="ml-3">
               <p class="text-lg text-gray-400">Owner</p>
-              <button class="inline-flex items-center justify-between py-2 text-white rounded-xl">
+              <button class="inline-flex items-center justify-between py-2 dark:text-white rounded-xl">
                 <div class="flex items-start rounded nft-img">
                   <img class="rounded-full w-7 h-7" [src]="nft?.ownerData?.profilePicURL" [alt]="nft?.ownerData?.fullName" />
                 </div>
-                <span class="ml-2 mr-2 text-sm leading-none text-white">
+                <span class="ml-2 mr-2 text-sm leading-none dark:text-white">
                   {{nft?.ownerData?.fullName}}</span>
               </button>
             </div>
           </div>
           <p class="mt-6 mb-2 text-lg text-gray-400">Price</p>
           <div class="flex items-center justify-start mb-5">
-            <span class="text-2xl font-semibold tracking-widest text-white">€ {{nft?.price}}</span>
+            <span class="text-2xl font-semibold tracking-widest dark:text-white">€ {{nft?.price}}</span>
             <!-- <span class="ml-3 text-sm text-white opacity-50">32.44 USD</span> -->
           </div>
           <p class="text-lg text-gray-400">Description</p>
-          <div class="text-base text-justify text-white break-words lg:mr-20 respDesc overflow-ellipsis">
+          <div class="text-base text-justify dark:text-white break-words lg:mr-20 respDesc overflow-ellipsis">
             {{nft?.description}}
           </div>
           <ng-container *ngIf="nft?.nftStatus && (isAdminPanel$ | async)">

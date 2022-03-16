@@ -15,8 +15,13 @@ svg {
 
 .chart-status {
   @apply relative h-full  rounded-lg;
-  background: transparent radial-gradient(closest-side at 50% 50%, #34237D 0%, #241858 100%) 0% 0% no-repeat padding-box;
+  background: transparent radial-gradient(closest-side at 50% 50%, #FFFFFF 0%, #ECECEC 100%) 0% 0% no-repeat padding-box;
+  border-radius: 8px;
   background-size: auto 300px;
+
+  &.dark {
+    background: transparent radial-gradient(closest-side at 50% 50%, #34237D 0%, #241858 100%) 0% 0% no-repeat padding-box;
+  }
 
   .section {
     @apply absolute bottom-0 w-full h-32 flex justify-around items-center bg-white;
@@ -57,44 +62,63 @@ svg {
       position: relative;
 
       p {
-        @apply text-gray-100 tracking-wider text-sm mb-2;
+        @apply text-gray-700 tracking-wider text-sm mb-2;
+        &.darl{
+          @apply text-gray-100;
+        }
       }
       span {
-        @apply text-white font-medium text-base tracking-wide;
+        @apply font-medium text-base tracking-wide text-xl;
+        color: #2F3157;
+        &.darl{
+          @apply text-gray-100;
+        }
       }
     }
 
-    // .graph-icon {
-    //   @apply   pt-4;
-    // }
+    .graph-icon {
+      width: 93px;
+    }
   }
 
   .available-ndct {
-    background: transparent linear-gradient(271deg, #DC774E 0%, #EC8559 33%, #F39B76 64%, #FFB18F 100%) 0% 0% no-repeat padding-box;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    &.dark{
+      background: transparent linear-gradient(271deg, #DC774E 0%, #EC8559 33%, #F39B76 64%, #FFB18F 100%) 0% 0% no-repeat padding-box;
+    }
   }
   .available-nft {
+    background: white;
+    &.dark{
     background: transparent linear-gradient(107deg, #40DDFF 0%, #14BAE3 19%, #13B1E6 69%, #11AADF 82%, #0B98C5 100%) 0% 0% no-repeat padding-box;
+    }
   }
 
   .total-revenue {
+    background: white;
+    &.dark{
     background: transparent linear-gradient(107deg, #D6A1FF 0%, #BC64FF 19%, #9D33EC 69%, #8D16E8 82%, #7E09D6 100%) 0% 0% no-repeat padding-box;
+    }
   }
 
   .pending-for-sale {
+    background: white;
+    &.dark{
     background: transparent linear-gradient(107deg, #53DFA4 0%, #66EFB6 19%, #3ADC99 69%, #23D98E 82%, #19D185 100%) 0% 0% no-repeat padding-box;
+    }
   }
 }
 
 .cards-container {
   // min-height: 500px;
   .heading-section {
-    @apply flex h-auto justify-between items-center tracking-wide font-medium text-white;
+    @apply flex h-auto justify-between items-center tracking-wide font-medium dark:text-white;
 
     .pagination {
       @apply w-20 flex justify-between items-center;
 
       button {
-        @apply h-8 w-9 rounded-md bg-primary-600;
+        @apply h-8 w-9 rounded-md dark:bg-primary-600 bg-primary-gray-600;
       }
 
       span {
@@ -134,7 +158,7 @@ svg {
     }
 
     .name {
-      @apply text-white pt-1 px-3 font-medium;
+      @apply dark:text-white pt-1 px-3 font-medium;
     }
 
     .items {
@@ -170,7 +194,7 @@ svg {
   @apply flex items-center justify-end h-12 absolute right-0 mt-4 mr-3;
 }
 .nft-label {
-  @apply flex items-center justify-center h-12 p-1.5  absolute left-0 pl-2 mt-4 mr-2 tracking-wide text-white font-medium ;
+  @apply flex items-center justify-center h-12 p-1.5  absolute left-0 pl-2 mt-4 mr-2 tracking-wide dark:text-white font-medium ;
   width: 133px;
 }
 
@@ -181,10 +205,15 @@ svg {
 
 a.button {
   // margin: 20px;
+  color: black;
   font-size: 16px;
-  background-color: #DC774E;
   padding: 8px;
   border-radius: 12px;
+
+  &.darl{
+    color: white;
+    background-color: #DC774E;
+  }
 }
 
 .arrow {

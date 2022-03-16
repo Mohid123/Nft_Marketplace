@@ -12,10 +12,16 @@
 }
 
 .btn-nft {
-  background: transparent linear-gradient(109deg, #59C8D1 0%, #75F16D 100%) 0% 0% no-repeat padding-box;
+  background: transparent linear-gradient(99deg, #FFB937 0%, #D59629 100%) 0% 0% no-repeat padding-box;
+  &.dark {
+    background: transparent linear-gradient(109deg, #59C8D1 0%, #75F16D 100%) 0% 0% no-repeat padding-box;
+  }
 }
 .btn-nft.Minted {
-  background: transparent linear-gradient(109deg, #C67BFF 0%, #C5E857 100%) 0% 0% no-repeat padding-box;
+  background: transparent linear-gradient(100deg, #FBB636 0%, #D9992B 100%) 0% 0% no-repeat padding-box;
+  &.dark {
+    background: transparent linear-gradient(109deg, #C67BFF 0%, #C5E857 100%) 0% 0% no-repeat padding-box;
+  }
 }
 .btn-nft.Draft {
   background: #B2B2B2 0% 0% no-repeat padding-box;

@@ -1,4 +1,4 @@
-<div class="flex flex-wrap w-full h-16 mt-16 md:mt-5">
+<div class="flex flex-wrap w-full h-32 pt-16 md:h-24 md:pt-5">
   <div class="order-2 w-full px-3 py-2 lg:order-1 sm:py-3 xl:pl-8 sm:pl-6 lg:pl-6 lg:pr-5 sm:pr-6 xl:w-65 lg:w-3/5">
     <!-- <input class="flex w-full h-12 px-5 text-sm bg-gray-500 bg-opacity-25 rounded-lg focus:bg-white focus:outline-none"
     type="search" name="search" placeholder="Search"  /> -->
@@ -16,8 +16,8 @@
 
     </button> -->
     <button  class="profile-btn" (click)="visitMarketplace()">
-      <img class="object-cover w-5 h-5 text-sm leading-4 rounded-lg mr-2" src="../../../../../assets/icons/market-place.svg" alt=""/>
-      <span class="pl-2 text-white truncate"> <p>Marketplace</p></span>
+      <img class="object-cover w-5 h-5 mr-2 text-sm leading-4 rounded-lg" src="../../../../../assets/icons/market-place.svg" alt=""/>
+      <span class="pl-2 dark:text-white truncate"> <p>Marketplace</p></span>
     </button>
     <button *ngIf="!market" class="nft-btn w-40 primary-btn h-12 p-1.5 rounded-xl mr-2" (click)="createNFT()">
       <span class="mr-1 text-xl">+</span>  Mint NFT

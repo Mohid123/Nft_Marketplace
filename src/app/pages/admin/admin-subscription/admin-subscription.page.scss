@@ -14,9 +14,12 @@ svg {
 }
 
 .chart-status {
-  @apply relative h-full  rounded-lg;
-  background: #292A4D;
+  @apply relative h-full bg-primary-gray-600 rounded-lg;
   background-size: auto 300px;
+
+  &.dark {
+    background: #292A4D;
+  }
 
   .section {
     @apply absolute bottom-0 w-full h-32 flex justify-around items-center bg-white;
@@ -42,7 +45,7 @@ h1 {
   font-weight: 400;
   span {
     padding-bottom: 4px;
-    border-bottom: 3px solid #75F16D;
+    border-bottom: 3px solid #ffd04e;
 
   }
 
@@ -68,32 +71,52 @@ h1 {
       @apply w-28;
 
       p {
-        @apply text-gray-100 tracking-wider text-sm mb-2;
+        @apply dark:text-gray-100 tracking-wider text-sm mb-2;
       }
       span {
-        @apply text-white font-medium text-2xl tracking-wide;
+        @apply dark:text-white font-medium text-2xl tracking-wide;
       }
+    }
+
+    .graph-icon {
+      width: 93px;
     }
 
   }
 
+
+  .available-ndct {
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    &.dark{
+      background: transparent linear-gradient(271deg, #DC774E 0%, #EC8559 33%, #F39B76 64%, #FFB18F 100%) 0% 0% no-repeat padding-box;
+    }
+  }
   .available-nft {
+    background: white;
+    &.dark{
     background: transparent linear-gradient(107deg, #40DDFF 0%, #14BAE3 19%, #13B1E6 69%, #11AADF 82%, #0B98C5 100%) 0% 0% no-repeat padding-box;
+    }
   }
 
   .total-revenue {
+    background: white;
+    &.dark{
     background: transparent linear-gradient(107deg, #D6A1FF 0%, #BC64FF 19%, #9D33EC 69%, #8D16E8 82%, #7E09D6 100%) 0% 0% no-repeat padding-box;
+    }
   }
 
   .pending-for-sale {
+    background: white;
+    &.dark{
     background: transparent linear-gradient(107deg, #53DFA4 0%, #66EFB6 19%, #3ADC99 69%, #23D98E 82%, #19D185 100%) 0% 0% no-repeat padding-box;
+    }
   }
 }
 
 .cards-container {
   min-height: 500px;
   .heading-section {
-    @apply flex h-auto justify-center items-center tracking-wide font-medium text-white;
+    @apply flex h-auto justify-center items-center tracking-wide font-medium dark:text-white;
 
     .pagination {
       @apply w-20 flex justify-between items-center;
