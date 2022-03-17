@@ -3,8 +3,8 @@
   <div class="flex items-center justify-between w-full h-12 py-px">
     <h1 class="h-auto m-0 text-2xl font-medium">Settings</h1>
   </div>
-  <div class="w-full">
-    <div class="w-full mt-6 groups-container">
+  <div class="w-full ">
+    <div class="w-full mt-6 groups-container ">
       <div class="relative w-full overflow-x-auto" style="border-radius: 17px;">
         <ngx-spinner name="admin-market" [fullScreen]="false" [showSpinner]="isLoading" bdColor="#D9DBE0" size="medium"
            type="ball-scale-multiple">
@@ -105,7 +105,7 @@
 
               </div>
               <div class="flex flex-row-reverse">
-                <button class="flex justify-end mt-2 p-2 border-gradient-dp-p-bg-light  gradient-border-1 rounded-lg" (click)="input.disabled = false; showText()" type="button"><span class="mr-1">{{ isReadMore ? 'Edit ': 'Edit ' }}</span>  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 25 25">
+                <button class="flex justify-end p-2 mt-2 rounded-lg border-gradient-dp-p-bg-light gradient-border-1" (click)="input.disabled = false; showText()" type="button"><span class="mr-1">{{ isReadMore ? 'Edit ': 'Edit ' }}</span>  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 25 25">
                   <g id="Group_56289" data-name="Group 56289" transform="translate(11150 -4)">
                     <circle id="Ellipse_3170" data-name="Ellipse 3170" cx="12.5" cy="12.5" r="12.5" transform="translate(-11150 4)" fill="#fff"/>
                     <path id="Icon_material-edit" data-name="Icon material-edit" d="M4.5,12.486v2.1H6.6l6.2-6.2-2.1-2.1Zm9.928-5.723a.558.558,0,0,0,0-.79L13.116,4.66a.558.558,0,0,0-.79,0L11.3,5.686l2.1,2.1Z" transform="translate(-11146.5 6.504)" fill="#6a6a6a"/>
@@ -127,16 +127,16 @@
             </form>
           </div>
           <div class="flex " style=" " class="ml-16">
-            <div class="details-container" style=" ">
+            <div class="details-container " style=" ">
               <h6 class=""><span>Old De</span>tails</h6>
               <div class="top-0 left-0 realtive">
                 <img *ngIf="!coverImageSrc;" class="relative top-0 left-0 object-cover w-full h-32 rounded-lg" [src]="((creator$ | async)?.coverImageURL) || ''" alt="">
                 <img *ngIf="coverImageSrc;" class="relative top-0 left-0 object-cover w-full h-32 rounded-lg"  src={{coverImageSrc}} alt="">
                 <div class="absolute " style=" top: 233px; width: 204px;"  >
-                  <img *ngIf="!profileImageSrc;" class="inline object-cover w-12 h-12 ml-4 rounded-full border-gradient-dp-p-bg-dark  gradient-border-2"
+                  <img *ngIf="!profileImageSrc;" class="inline object-cover w-12 h-12 ml-4 rounded-full border-gradient-dp-p-bg-dark gradient-border-2"
                     [src]="((creator$ | async)?.profileImageURL) || ''"
                     alt="Profile image" />
-                    <img *ngIf="profileImageSrc;"  src={{profileImageSrc}} class="inline object-cover w-12 h-12 ml-4 rounded-full border-gradient-dp-p-bg-dark  gradient-border-2 " alt="">
+                    <img *ngIf="profileImageSrc;"  src={{profileImageSrc}} class="inline object-cover w-12 h-12 ml-4 rounded-full border-gradient-dp-p-bg-dark gradient-border-2 " alt="">
                 </div>
               </div>
               <div class="mt-8">

@@ -60,13 +60,14 @@ thead tr {
 }
 
 th{
-  font-weight: 400;
+  @apply font-medium;
 }
 
 .eventIcons {
   @apply inline-flex items-center justify-center  p-14 rounded-xl ;
   img{
-    height: 60px;
+    height: 24px;
+    width: 30px;
   }
 
 }

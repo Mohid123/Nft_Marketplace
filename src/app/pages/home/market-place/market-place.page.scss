@@ -31,12 +31,13 @@
  @apply bg-black px-4 py-1  text-xs tracking-wide text-white rounded-full md:h-7 lg:h-7 h-11 bg-gradient-to-r focus:from-blue-400 focus:to-green-400 rounded-full
 }
 
-.pagination-btn{
-  @apply inline-flex items-center justify-center w-12 h-12 px-3 py-3 font-bold bg-gray-500 bg-opacity-25 rounded-xl hover:bg-primary-400 focus:bg-primary-400;
-}
+
+// .pagination-btn{
+//   @apply inline-flex items-center justify-center w-12 h-12 px-3 py-3 font-bold bg-gray-400 bg-opacity-25 rounded-xl hover:bg-primary-400 focus:bg-primary-400;
+// }
 
 .pagination-btn{
-  @apply inline-flex items-center justify-center w-12 h-12 px-3 py-3 font-bold bg-gray-400 bg-opacity-25 rounded-xl hover:bg-primary-400 focus:bg-primary-400;
+  @apply inline-flex items-center justify-center w-12 h-12 px-3 py-3 font-bold bg-gray-400 bg-opacity-25 rounded-xl hover:bg-yellow-500 focus:bg-yellow-500;
 }
 
 .groups{
@@ -52,3 +53,11 @@
  @apply items-center px-3 py-2 mx-1 bg-gradient-to-r from-yellow-200 to-yellow-500 rounded-full
 }
 
+.width-container {
+  @apply flex flex-col justify-between my-0 mx-auto sm:px-4 ;
+  @apply md:px-8;
+  @apply lg:px-10;
+
+  max-width: 100%;
+  min-width: 340px;
+}
