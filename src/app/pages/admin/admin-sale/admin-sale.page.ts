@@ -110,6 +110,8 @@ export class AdminSalePage implements OnInit, OnDestroy {
     },
   ]
 
+  allSelected = false;
+
   constructor(
     private authService: AuthService,
     private creatorService: CreatorService,
@@ -132,6 +134,18 @@ export class AdminSalePage implements OnInit, OnDestroy {
     this.groupService.getAllGroupsByClub(this.clubName, 0, param);
   }
 
+  checkAllCheckBox():void {
+    this.allSelected = !this.allSelected;
+    this.nftList.data.forEach(x => x.checked = this.allSelected)
+	}
+
+  checkBoxClick(nftId:string,check):void {
+    this.allSelected = false;
+    this.nftList.data.find((x) => x.id == nftId).checked = !check;
+  }
+
+
+
   getPendingForSaleNfts():void {
     const params: any = {
       nftStatus: this.filterStatus,
@@ -139,14 +153,14 @@ export class AdminSalePage implements OnInit, OnDestroy {
       tokenId: this.filterSort,
     }
     this.isLoading = true
-    console.log('this.filterPrice:',this.filterPrice);
-    console.log('params:',params);
     this.nftService.getPendingForSaleNfts(this.clubName,this.page, this.NftLimit ,params).pipe(take(1))
     .subscribe((result:ApiResponse<NFTList>) => {
       // console.log('result.dataresult.data:',result.data);
       if (!result.hasErrors()) {
         this.nftList = result.data;
       }
+      this.nftList.data.forEach(x => x.checked = false);
+      this.allSelected = false;
       this.isLoading = false;
     });
 
@@ -183,7 +197,6 @@ export class AdminSalePage implements OnInit, OnDestroy {
   filterByPrice(price: string):void {
     this.page = 1;
     this.filterPrice = price;
-    console.log('this.filterPrice:',this.filterPrice);
     this.getPendingForSaleNfts();
   }
 
@@ -207,6 +220,31 @@ export class AdminSalePage implements OnInit, OnDestroy {
         this.getPendingForSaleNfts();
       }
     });
+  }
+
+  batchUpdateStatus(status:string):void {
+    if (this.allSelected) {
+      this.nftService
+        .allUpdateNft(status, this.authService.loggedInUser?.appPackageId,)
+        .pipe(take(1))
+        .subscribe((result: ApiResponse<NFT>) => {
+          if (!result.hasErrors()) {
+            this.getPendingForSaleNfts();
+          }
+        });
+    } else {
+      const ids = this.nftList.data.filter(x => x.checked).map(x => x.id);
+      if(ids.length) {
+        this.nftService
+        .batchUpdateNft(ids, status, this.authService.loggedInUser?.appPackageId,)
+        .pipe(take(1))
+        .subscribe((result: ApiResponse<NFT>) => {
+          if (!result.hasErrors()) {
+            this.getPendingForSaleNfts();
+          }
+        });
+      }
+    }
   }
 
   ngOnDestroy(): void {

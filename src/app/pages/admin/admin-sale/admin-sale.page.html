@@ -7,7 +7,7 @@
 
     </div>
     <div class="w-full">
-      <div class="mt-6">
+      <div class="flex items-center mt-6">
         <div class="filters">
           <div class="filter bg-primary-gray-100 cursor-text">
             <button mat-icon-button aria-label="statusMenu">
@@ -79,12 +79,36 @@
            </mat-menu>
 
         </div>
+        <button class="inline-flex items-center justify-center ml-5 px-4 nft-btn w-40 primary-btn h-12 p-1.5 rounded-full" mat-icon-button [matMenuTriggerFor]="changeAllStatus" aria-label="menu">
+          Change state
+          <svg class="w-5 h-5 ml-2 -mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+          aria-hidden="true">
+          <path fill-rule="evenodd"
+            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+            clip-rule="evenodd" />
+        </svg>
+
+        </button>
+        <mat-menu #changeAllStatus="matMenu" class="dark:bg-primary-600 bg-primary-gray-200  mt-0.5 mb-6 p-2 w-68 text-center " xPosition='before'>
+          <span class="text-sm">Change status</span>
+          <div class="flex items-center mt-4 justify-items-center">
+            <button (click)="batchUpdateStatus('Minted')"
+              class="items-center h-6 px-4 m-1 text-sm font-light text-white bg-gray-300 rounded-full justify-items-center">
+              Minted
+            </button>
+            <button (click)="batchUpdateStatus('Active')"
+              class="items-center h-6 px-4 m-1 text-sm font-light text-white bg-green-500 rounded-full justify-items-center">
+              Active
+            </button>
+            </div>
+        </mat-menu>
       </div>
       <div class="w-full bg-gray-400 groups-container">
         <div class="w-full overflow-x-auto">
           <table class="w-full space-y-6 text-sm">
             <thead class="font-light tracking-wider dark:text-white ">
               <tr>
+                <th><input type="checkbox" [checked]="allSelected" (change)="checkAllCheckBox()"></th>
                 <th>TOKEN ID</th>
                 <th>TYPE</th>
                 <th>PRICE</th>
@@ -95,6 +119,7 @@
             <tbody class="relative">
               <ng-container *ngFor="let nft of nftList?.data;last as isLast" class="">
                 <tr [ngStyle]="{'border-bottom': isLast ? '1px solid #aaaaaa2a' : 'none' }">
+                  <td><input type="checkbox" [checked]="nft.checked" (change)="checkBoxClick(nft.id,nft.checked)"></td>
                   <td><a href="{{nft.transactionHashUrl}}" target=_blank> {{nft.tokenId}}</a></td>
                   <td>{{nft.type || 0}}</td>
                   <td>€{{nft.price}}</td>

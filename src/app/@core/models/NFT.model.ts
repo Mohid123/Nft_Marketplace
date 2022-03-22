@@ -36,4 +36,5 @@ export class NFT {
   id?:                   string;
   ownerData?:            NFTOwner;
   serverBlurHash?:       string;
+  checked?:              boolean;
 }
