@@ -222,6 +222,31 @@ export class NFTService extends ApiService<nftApiData> {
     }));
   }
 
+  allUpdateNft(status,appPackageId: string): Observable<ApiResponse<nftApiData>> {
+    const param: any = {
+      nftStatus: status,
+      appPackageId: appPackageId
+    };
+    return this.post('/nft/updateAllNfts/', param).pipe(take(1),tap((result:ApiResponse<nftApiData>)=>{
+      if (result.hasErrors()) {
+        this.toastrService.error(result?.errors[0]?.error?.message)
+      }
+    }));
+  }
+
+  batchUpdateNft(ids: string[],status,appPackageId: string): Observable<ApiResponse<nftApiData>> {
+    const param: any = {
+      nftStatus: status,
+      nftArray: ids,
+      appPackageId: appPackageId
+    };
+    return this.post('/nft/updateMultipleNfts/', param).pipe(take(1),tap((result:ApiResponse<nftApiData>)=>{
+      if (result.hasErrors()) {
+        this.toastrService.error(result?.errors[0]?.error?.message)
+      }
+    }));
+  }
+
   getEventsByNft(id: string): Observable<ApiResponse<nftApiData>> {
     const param: any = {
       id: id,
