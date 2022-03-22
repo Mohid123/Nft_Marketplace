@@ -41,12 +41,12 @@
     <div class="chkbox">
       <input id="one" type="checkbox" formControlName="mint">
       <span class="check"></span>
-      <label for="one dark:text-white"> Instant Mint</label>
+      <label for="one"> Instant Mint</label>
     </div>
     <div class="chkbox">
-      <input id="two" type="checkbox" formControlName="sale" (click)="clickSale(createNft.controls.sale.value)">
+      <input  (click)="clickSale(createNft.controls.sale.value);" id="two" type="checkbox" formControlName="sale">
       <span class="check"></span>
-      <label for="two dark:text-white"> Sale</label>
+      <label for="two"> Sale</label>
     </div>
   </div>
 </form>
