@@ -1,7 +1,7 @@
 <div class="card-border">
     <a [routerLink]="['/',clubName,'detail',nft.id]">
       <div class="nft-img">
-        <img *ngIf="nft?.serverCaptureFileUrl" class="w-64 h-56" [src]="nft.serverCaptureFileUrl" [alt]="nft.name" />
+        <img [src]="nft?.mediaType === 'Video' ?  nft?.videoThumbnailUrl : nft?.serverCaptureFileUrl" [alt]="nft.name" />
       </div>
     </a>
   <div class="flex items-center justify-between">

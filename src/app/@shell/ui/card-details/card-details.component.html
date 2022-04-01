@@ -14,7 +14,7 @@
       <!-- Left Section -->
       <div class="flex-col md:flex lg:flex">
         <div class="p-6 md:p-0 lg:p-0 lg:pt-6 lg:pb-6 lg:pl-6">
-          <img *ngIf="nft?.serverCaptureFileUrl" [src]="nft?.serverCaptureFileUrl" alt="nftmarketSearch" class="resImg rounded-2xl" />
+          <img *ngIf="nft?.serverCaptureFileUrl" [src]="nft?.mediaType === 'Video' ?  nft?.videoThumbnailUrl : nft?.serverCaptureFileUrl " alt="nftmarketSearch" class="resImg rounded-2xl" />
         </div>
         <div class="mb-6 ml-6">
           <span class="mt-6 inline-flex mr-2.5 text-lg dark:text-white opacity-50">
