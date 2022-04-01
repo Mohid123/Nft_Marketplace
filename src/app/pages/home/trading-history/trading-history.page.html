@@ -1,29 +1,30 @@
 <div class="main-container">
   <app-marketplace-search></app-marketplace-search>
-  <section class="pt-0 pb-0 m-4 md:pb-10 lg:pb-10 md:pt-14 lg:pt-14 lg:m-0 md:m-0">
+  <section class="pb-0 mt-16 lg:m-0 md:m-0 lg:mt-4 sm:pt-16 sm:m-0">
     <div class=" md:w-full flex-center md:max-w-full">
       <div class="md:flex-shrink-0">
-        <img class="hidden sm:block" src="../../../../assets/banner/trading-history.svg" alt="banner" width="100%">
-        <img class="lg:hidden md:hidden" src="../../../../assets/banner/trading-mobile.svg" alt="banner" width="100%">
+        <img src="../../../../assets/banner/trading-banner.png" alt="banner" width="100%">
+        <!-- <img class="lg:hidden md:hidden" src="../../../../assets/banner/trading-mobile.svg" alt="banner" width="100%"> -->
       </div>
     </div>
   </section>
 
-  <!--Filters-->
+  <div class="custom-container">
+        <!--Filters-->
   <div class="p-4 ld:p-0 md:p-0 pb-14 lg:pb-14 md:pb-14">
-    <h2 class="mb-5 text-2xl font-light tracking-widest text-gray-400 title-font">Marketplace</h2>
-    <div class="bottom-0 left-0 flex flex-wrap justify-between w-full pt-3 leading-none text-center ">
+    <h2 class="px-4 py-8 mb-5 text-lg font-light font-semibold tracking-widest border-b-2 border-gray-200 lg:text-4xl title-font">Trading History</h2>
+    <div class="bottom-0 left-0 flex flex-wrap justify-between w-full px-4 pt-3 leading-none text-center">
       <span class="inline-flex flex-wrap items-center w-full leading-none md:w-auto lg:w-auto">
 
         <button mat-button *ngFor="let button of filterButtons"
-          class="items-center px-3 py-2 mx-1 mb-3 tracking-wide align-middle rounded-full dark:text-white md:mb-0 lg:mb-0 text-md border-gradient-dp-p-bg-dark hover:border-gradient-tl-p-bg-light gradient-border-1"
+        class="items-center px-4 py-2 mx-1 mb-3 text-sm font-medium leading-snug tracking-wider text-gray-500 align-middle transition duration-150 ease-in-out bg-gray-100 rounded-full dark:text-white md:mb-0 lg:mb-0"
           [ngClass]="{'active': button.isClicked}" (click)="setActive(button); setType(button.text)">
           {{ button.text }}
         </button>
       </span>
-      <div class="flex justify-end w-full mt-3 md:w-auto lg:w-auto md:mt-0 lg:mt-0">
+      <div class="flex justify-end w-full px-4 mt-3 md:w-auto lg:w-auto md:mt-0 lg:mt-0">
         <span
-          class="inline-flex items-center text-sm leading-none text-gray-400 border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-1 rounded-3xl">
+        class="inline-flex items-center text-sm leading-none text-gray-400 bg-gray-100 rounded-full">
           <button type="button " mat-icon-button aria-label="menu" class="filter-btn" id="menu-button"
             aria-expanded="true" aria-haspopup="true">
 
@@ -52,7 +53,7 @@
 
   <!--pagination-->
   <div class="w-full px-12 mb-14 ld:px-0 md:px-0">
-    <div class="flex justify-between pt-3 mt-10 ">
+    <div class="flex justify-between px-4 pt-3 mt-10">
       <div *ngIf="responseEventByNFT?.totalCount > 0; else noItems"
         class="inline-flex items-center text-sm text-gray-500">
         Show {{ page === 1 ? 1 : (page-1) * eventLimit }}-{{ page * eventLimit < responseEventByNFT?.totalCount ? (page
@@ -96,5 +97,8 @@
 
 
   </div>
+  </div>
+
+
 
 

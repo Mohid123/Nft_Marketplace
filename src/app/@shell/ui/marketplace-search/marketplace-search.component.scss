@@ -1,21 +1,102 @@
-app-profile-button {
-  @apply mt-4 md:mt-0 lg:mt-0;
+
+
+// .mat-toolbar{
+// height: 10vh;
+// }
+
+div {
+  overflow: inherit;
 }
 
-.nft-btn {
-  width: 163px;
+// .mat-sidenav-container{
+// background-color: lightskyblue;
+// min-height: 93vh !important;
+// }
+
+
+
+button{
+  font-size: 110%;
+  min-width: min-content;
 }
 
-
-.navigationBtn {
-  @apply flex items-center justify-center h-12 p-1.5 rounded-xl bg-gray-200 hover:bg-primary-gray-300 dark:bg-primary-600 dark:hover:bg-primary-400 mr-2 mt-4 md:mt-0 lg:mt-0;
-
-
-  width: 163px;
+.example-icon {
+  padding: 0 14px;
 }
 
-@media screen and (max-width: 768px) {
-  .test-net {
-    left: 56%;
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+// .mat-sidenav-content{
+//     font-size: 200%;
+//     text-align: center;
+// }
+
+mat-sidenav {
+  @apply absolute top-0 left-0 min-h-screen flex flex-col justify-center items-start pt-8 pb-5;
+  width: 100%;
+  background: rgba(255,255,255,0.5);
+  backdrop-filter: blur(9px);
+  color: black;
+
+  &.dark {
+    background: #2F3157;
   }
+
+
+  .menu-link {
+    @apply block p-3 h-12 w-12 my-2 mx-5 rounded-xl;
+
+    .mat-icon {
+      @apply h-5 w-5 z-10;
+      color: #90929f;
+    }
+  }
+
+  .menu-link:hover{
+    background-color: #ffffff0f;
+
+    .mat-icon:hover {
+      color: rgb(0, 0, 0) !important;
+    }
+  }
+
+  .menu-link.active::before {
+    @apply absolute top-0 w-1.5 h-12 my-2 ;
+    background-color: black;
+    &.dark {
+      background-color: #00CB75;
+    }
+    content: "";
+    left: -16px;
+    border-radius: 0 10px 10px 0;
+  }
+
+  .menu-link.active {
+    background-color: #6060620f;
+
+    &.dark {
+      background-color: #ffffff0f;
+    }
+
+     .mat-icon {
+      color: #232323 !important;
+
+      &.dark {
+        color: white !important;
+      }
+    }
+  }
+}
+
+
+
+mat-sidenav {
+   width: 100%
+}
+
+
+::ng-deep mat-sidenav-container {
+  margin-top: 40px;
 }

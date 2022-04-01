@@ -1,73 +1,77 @@
 .spacing-table {
-
   font-size: 15px;
   border-collapse: separate;
   table-layout: fixed;
   text-align: center;
-
   border-spacing: 0 10px;
-  /* this is the ultimate fix */
-}
-
-.spacing-table th {
-  text-align: center;
-  padding: 5px 15px;
-}
-
-.spacing-table td {
-  border-width: 1px 0;
-
-  border-style: solid;
-
-  // border-image-source: linear-gradient(to bottom, #59C8D1 0%, #75F16D 100%);
-  border-color: #EFAF1E;
-  border-image-slice: 20;
-  border-image-repeat: stretch;
-  radius: 20px;
-
-  padding: 5px 15px;
-}
-tr {
-  background: white;
-}
-thead tr {
-  background:transparent;
-}
-.spacing-table td:first-child {
-  border-left-width: 1px;
-
-  border-radius: 12px 0 0 12px;
+  -webkit-box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow:    7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+  box-shadow:         7px 7px 5px 0px rgba(50, 50, 50, 0.75);
 
 }
 
-.spacing-table td:last-child {
-  border-right-width: 1px;
-  border-radius: 0 12px 12px 0;
-}
+// .spacing-table th {
+//   text-align: center;
+//   padding: 5px 15px;
+// }
 
-.spacing-table thead {
-  display: table;
-  table-layout: fixed;
-  width: 100%;
-}
+// .spacing-table td {
+//   border-width: 1px 0;
+//   border-style: solid;
+//   border-color: #EFAF1E;
+//   border-image-slice: 20;
+//   border-image-repeat: stretch;
+//   radius: 20px;
+//   padding: 5px 15px;
+// }
+// tr {
+//   background: white;
+// }
 
-.spacing-table tbody {
-  display: table;
-  table-layout: fixed;
-  width: 100%;
-  border-spacing: 0 25px;
-  border-radius: 20px !important;
-}
+// .spacing-table td:first-child {
+//   border-left-width: 1px;
+
+//   border-radius: 12px 0 0 12px;
+
+// }
+
+// .spacing-table td:last-child {
+//   border-right-width: 1px;
+//   border-radius: 0 12px 12px 0;
+// }
+
+// .spacing-table thead {
+//   display: table;
+//   table-layout: fixed;
+//   width: 100%;
+// }
+
+// .spacing-table tbody {
+//   display: table;
+//   table-layout: fixed;
+//   width: 100%;
+//   border-spacing: 0 25px;
+//   border-radius: 20px !important;
+// }
 
 th{
   @apply font-medium;
 }
 
-.eventIcons {
-  @apply inline-flex items-center justify-center  p-14 rounded-xl ;
-  img{
-    height: 24px;
-    width: 30px;
-  }
+// .eventIcons {
+//   @apply inline-flex items-center justify-center  p-14 rounded-xl ;
+//   img{
+//     height: 24px;
+//     width: 30px;
+//   }
 
+// }
+
+td {
+  @apply my-40
+}
+table {
+  -webkit-box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow:    7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+  box-shadow:         7px 7px 5px 0px rgba(50, 50, 50, 0.75);
 }

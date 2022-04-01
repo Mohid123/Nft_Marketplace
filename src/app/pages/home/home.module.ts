@@ -15,6 +15,7 @@ import { SwiperModule } from 'swiper/angular';
 import { AuthGuard } from './../../@core/guards/auth.guard';
 import { LoggedInUserSearchModule } from './../../@shell/ui/logged-in-user-search/logged-in-user-search.module';
 import { CardModule } from './../../@shell/ui/nft-card/card.module';
+import { SwipeModule } from './../../@shell/ui/swiper/swiper.module';
 import { CardDetailPage } from './card-detail/card-detail.page';
 import { HomePage } from './home.page';
 import { MarketPlacePage } from './market-place/market-place.page';
@@ -86,7 +87,8 @@ const childRoutes: Routes = [
 @NgModule({
   declarations: [HomePage, MarketPlacePage, CardDetailPage, WalletPage, TradingHistoryPage, PageNotFoundPage],
   imports: [
-    CommonModule,
+
+  CommonModule,
     RouterModule.forChild(childRoutes),
     CardModule,
     MarketplaceSearchModule,
@@ -99,6 +101,7 @@ const childRoutes: Routes = [
     QrCodeModule,
     FormsModule,
     SwiperModule,
+    SwipeModule
       // BrowserAnimationsModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

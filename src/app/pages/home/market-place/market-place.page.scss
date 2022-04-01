@@ -1,3 +1,9 @@
+@import "~swiper/css";
+@import "~swiper/css/pagination";
+@import "~swiper/css/navigation";
+
+
+
 :host {
   @apply w-full flex justify-center;
 }
@@ -50,7 +56,7 @@
 
 
 .active{
- @apply items-center px-3 py-2 mx-1 bg-gradient-to-r from-yellow-200 to-yellow-500 rounded-full
+ @apply items-center px-3 py-2 mx-1 bg-gradient-to-r from-yellow-500 to-purple-400 rounded-full text-white text-sm
 }
 
 .width-container {
@@ -60,4 +66,17 @@
 
   max-width: 100%;
   min-width: 340px;
+}
+
+// Group section
+
+.group-img {
+  @apply rounded-full shadow-lg w-44 h-44;
+}
+
+@media only screen and (min-width: 1280px) {
+  .custom {
+    left: 46.333333%;
+}
+
 }

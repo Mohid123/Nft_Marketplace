@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiResponse } from '@app/@core/models/response.model';
@@ -10,16 +11,19 @@ import { RouteService } from '@app/@core/services/route.service';
 import { AuthService } from '@app/pages/auth/services/auth.service';
 import { environment } from '@environments/environment';
 import { Observable, Subject, Subscription } from 'rxjs';
-import { debounceTime, takeUntil } from 'rxjs/operators';
+import { debounceTime, delay, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { CustomDialogService } from './../../../@core/services/custom-dialog/custom-dialog.service';
 import { TransactionService } from './../../../@core/services/transaction.service';
+import { ROUTER_UTILS } from './../../../@core/utils/router.utils';
 
 @Component({
   selector: 'app-marketplace-search',
   templateUrl: './marketplace-search.component.html',
-  styleUrls: ['./marketplace-search.component.scss']
+  styleUrls: ['./marketplace-search.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  // encapsulation: ViewEncapsulation.None
 })
-export class MarketplaceSearchComponent implements OnInit, OnDestroy {
+export class MarketplaceSearchComponent implements OnInit, AfterViewInit, OnDestroy {
 
   testNet = environment.testNet;
   destroy$ = new Subject();
@@ -31,9 +35,11 @@ export class MarketplaceSearchComponent implements OnInit, OnDestroy {
   isLoggedIn$: Observable<boolean> = this.authService.isLoggedIn$;
   creator$ = this.creatorService.Creator$;
   user$ = this.authService.user$;
-
+  sidenav!: any;
   searchControl = new FormControl();
   formCtrlSub: Subscription;
+
+  routeUrl = ROUTER_UTILS;
 
   constructor(
     private authService: AuthService,
@@ -41,9 +47,10 @@ export class MarketplaceSearchComponent implements OnInit, OnDestroy {
     private customDialogService: CustomDialogService,
     private transactionService: TransactionService,
     private routeService: RouteService,
+    private observer: BreakpointObserver,
     private router: Router,
   ) {
-    this.routeService.clubName$.pipe(takeUntil(this.destroy$)).subscribe((clubName) => {
+    this.routeService.clubName$.pipe(distinctUntilChanged(),takeUntil(this.destroy$)).subscribe((clubName) => {
       this.clubName = clubName;
     });
    }
@@ -53,6 +60,27 @@ export class MarketplaceSearchComponent implements OnInit, OnDestroy {
       .subscribe(newValue => {
         this.search.emit(newValue);
       });
+  }
+
+  ngAfterViewInit() {
+    this.observer
+      .observe(['(max-width: 768px)'])
+      .pipe(delay(1))
+      .subscribe((res) => {
+        if (res.matches) {
+          this.sidenav.mode = 'over';
+          this.sidenav.close();
+        } else {
+          this.sidenav.mode = 'side';
+          this.sidenav.open();
+        }
+      });
+
+      this.routeService.clubName$
+        .pipe(distinctUntilChanged(), takeUntil(this.destroy$))
+        .subscribe((clubName) => {
+          this.clubName = clubName;
+        });
   }
 
   login():void {

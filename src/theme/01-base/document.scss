@@ -20,21 +20,26 @@ body {
 
 .main-container {
   @apply flex flex-col justify-between my-0 mx-auto sm:px-4 w-full;
-  @apply md:px-8;
-  @apply lg:px-10;
+  @apply md:p-8 md:pt-0;
+  @apply lg:px-0 lg:pt-0;
 
-  max-width: 1280px;
-  min-width: 340px;
+  // old styles
+  // max-width: 1280px;
+  // min-width: 340px;
+
+  // max-width: 1440px;
+  // min-width: 390px;
 }
 
-// .custom-container {
-//   @apply flex flex-col justify-between my-0 mx-auto sm:px-4 ;
-//   @apply md:px-8;
-//   @apply lg:px-10;
+.custom-container {
+  @apply flex flex-col justify-between my-0 mx-auto sm:p-7 w-full ;
+  @apply md:px-8;
+  @apply lg:px-0;
 
-//   max-width: 1280px;
-//   min-width: 340px;
-// }
+
+  max-width: 1440px;
+  min-width: 390px;
+}
 
 .center {
   @apply flex justify-center items-end;
@@ -102,7 +107,7 @@ body {
 }
 
 .top-nav-social-icons {
-  @apply inline-block w-5 mr-1 text-gray-400 cursor-pointer fill-current hover:text-white;
+  @apply inline-block w-5 mr-1 text-white cursor-pointer fill-current hover:text-white;
 }
 
 .action-dialog {

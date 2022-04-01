@@ -1,36 +1,91 @@
 <div class="main-container">
   <!--top search bar with login button-->
+
+
   <app-marketplace-search (search)="search($event)"></app-marketplace-search>
-
-
 
 
   <!--banner-->
 
-  <section class="pt-0 pb-0 m-4 md:pb-10 lg:pb-10 md:pt-14 lg:pt-14 lg:m-0 md:m-0">
+  <!-- <section class="pt-0 pb-0 m-4 md:pb-10 md:pt-14 lg:m-0 md:m-0">
     <div class=" md:w-full flex-center md:max-w-full lg:w-full lg:max-w-full">
-    <div class="md:flex-shrink-0">
-      <img class="hidden sm:block" src="../../../../assets/banner/marketplace.svg" alt="banner" >
-      <img class="lg:hidden md:hidden" src="../../../../assets/banner/mobile-marketplace.svg" alt="banner" >
+      <div class="md:flex-shrink-0">
+        <img class="hidden sm:block" src="../../../../assets/banner/banner-marketplace.svg" alt="banner">
+        <img class="lg:hidden md:hidden" src="../../../../assets/banner/mobile-marketplace.svg" alt="banner">
+      </div>
     </div>
+  </section> -->
+
+  <!-- This example requires Tailwind CSS v2.0+ -->
+  <div class="relative mt-24 overflow-hidden bg-white lg:px-20 sm:px-0">
+  <div class="pt-16 pb-80 sm:pt-24 sm:pb-40 lg:pt-40 lg:pb-48">
+    <div class="relative px-4 mx-auto lg:max-w-full sm:px-6 lg:px-2 sm:static">
+      <div class="sm:max-w-lg">
+        <h1 class="font-extrabold tracking-wide text-gray-900 lg:text-7xl font sm:text-6xl">Discover, Buy & Sell Finest NFT's</h1>
+        <p class="mt-4 text-xl text-gray-500">This year, our new NFT collection will shelter you from the harsh elements of a world that doesn't care if you live or die.</p>
+      </div>
+      <div>
+        <div class="mt-10">
+          <div aria-hidden="true" class="pointer-events-none lg:absolute lg:inset-y-0 lg:max-w-full lg:mx-auto lg:w-full">
+            <div class="absolute transform sm:left-1/2 sm:top-0 sm:translate-x-8 lg:left-1/2 lg:top-1/2 lg:-translate-y-1/2 lg:translate-x-8 xl:left-1/2 custom xl:top-1/2 xl:-translate-y-1/2 xl:translate-x-8 2xl:left-1/2 2xl:top-1/2 2xl:-translate-y-1/2 2xl:translate-x-8">
+              <div class="flex items-center space-x-6 lg:space-x-8">
+                <div class="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
+                  <div class="h-64 overflow-hidden rounded-lg w-44 sm:opacity-0 lg:opacity-100">
+                    <img src="https://public.nftstatic.com/static/nft/res/a8a00b11a76747d0bdd18175200d1c70.png" alt="" class="object-cover object-center w-full h-full">
+                  </div>
+                  <div class="h-64 overflow-hidden rounded-lg w-44">
+                    <img src="https://nftcalendar.io/storage/uploads/events/2022/3/cQ7zCSWKfzmayBQ7eIc3aaxcGirkH6oZO9DD4pOA.gif" alt="" class="object-cover object-center w-full h-full">
+                  </div>
+                </div>
+                <div class="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
+                  <div class="h-64 overflow-hidden rounded-lg w-44">
+                    <img src="https://nftcalendar.io/storage/uploads/2022/03/23/wos-club-8_03232022234649623bb1692ade2.gif" alt="" class="object-cover object-center w-full h-full">
+                  </div>
+                  <div class="h-64 overflow-hidden rounded-lg w-44">
+                    <img src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-04.jpg" alt="" class="object-cover object-center w-full h-full">
+                  </div>
+                  <div class="h-64 overflow-hidden rounded-lg w-44">
+                    <img src="https://nftcalendar.io/storage/uploads/events/2022/3/9gKic8XvAibUlVhZj1jS9JS3NnMpFhgCp5GIK5E3.gif" alt="" class="object-cover object-center w-full h-full">
+                  </div>
+                </div>
+                <div class="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
+                  <div class="h-64 overflow-hidden rounded-lg w-44">
+                    <img src="https://lh3.googleusercontent.com/0iJq7j4lB_RO93mbfK3aj93xxmLx1yal9jXXKCZmYlRKgHUKy-VfpZK3fKJ5oOAvKAHwesgWYXMKTshgg8z-M49fH4HDDZKSLT23cw=w286" alt="" class="object-cover object-center w-full h-full">
+                  </div>
+                  <div class="h-64 overflow-hidden rounded-lg w-44">
+                    <img src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-07.jpg" alt="" class="object-cover object-center w-full h-full">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <a (click)="goDown1()" class="inline-block px-8 py-3 font-medium text-center text-white bg-yellow-500 border border-transparent rounded-full cursor-pointer hover:bg-yellow-600">Shop Collection</a>
+        </div>
+      </div>
     </div>
-  </section>
+  </div>
+</div>
 
 
-  <div class="custom-container">
-     <!--Filters-->
+  <app-swiper></app-swiper>
+
+ <div class="sticky top-0 z-50 custom-container " id="targetRed">
+    <!--Filters-->
     <div class="p-4 ld:p-0 md:p-0 pb-14 lg:pb-14 md:pb-14">
-      <h2 class="mb-5 text-2xl font-light tracking-widest text-gray-400 title-font">Marketplace</h2>
+      <h2 class="px-4 py-8 mb-5 text-lg font-light font-semibold tracking-widest border-b-2 border-gray-200 lg:text-4xl title-font">NFT Collections</h2>
       <div class="bottom-0 left-0 flex flex-wrap justify-between w-full pt-3 leading-none text-center ">
-        <span class="inline-flex flex-wrap items-center w-full leading-none md:w-auto lg:w-auto">
-          <button mat-button *ngFor="let button of filterButtons" class="items-center px-3 py-2 mx-1 mb-3 leading-snug tracking-wide align-middle transition duration-150 ease-in-out rounded-full dark:text-white md:mb-0 lg:mb-0 text-md border-gradient-dp-p-bg-dark hover:border-gradient-tl-p-bg-light gradient-border-1"[ngClass]="{'active': button.isClicked}" (click)="setActive(button); setType(button.text)">
+        <span class="inline-flex flex-wrap items-center w-full px-4 leading-none md:w-auto lg:w-auto">
+          <button mat-button *ngFor="let button of filterButtons"
+            class="items-center px-3 py-2 mx-1 mb-3 text-sm font-medium leading-snug tracking-wider text-gray-500 align-middle transition duration-150 ease-in-out bg-gray-100 rounded-full dark:text-white md:mb-0 lg:mb-0"
+            [ngClass]="{'active': button.isClicked}" (click)="setActive(button); setType(button.text)">
             {{ button.text || 'All Items' }}
-        </button>
-    </span>
-      <div class="flex justify-end w-full mt-3 md:w-auto lg:w-auto md:mt-0 lg:mt-0">
-          <span class="inline-flex items-center text-sm leading-none text-gray-400 border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-1 rounded-3xl">
-            <button type="button " mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu"
-              class="filter-btn"
+          </button>
+        </span>
+        <div class="flex justify-end w-full px-4 mt-3 md:w-auto lg:w-auto md:mt-0 lg:mt-0">
+          <span
+            class="inline-flex items-center text-sm leading-none text-gray-400 bg-gray-100 rounded-full">
+            <button type="button " mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu" class="filter-btn"
               id="menu-button" aria-expanded="true" aria-haspopup="true">
               <ng-container *ngIf="!filterGroup; else showGroups">Filters</ng-container>
               <ng-template #showGroups>{{filterGroup.name}}</ng-template>
@@ -43,7 +98,8 @@
               </svg>
             </button>
 
-            <mat-menu #menu="matMenu" class="dark:bg-primary-600 bg-primary-gray-200  mt-0.5 p-2 w-32 " xPosition='before'>
+            <mat-menu #menu="matMenu" class="dark:bg-primary-600 bg-primary-gray-200  mt-0.5 p-2 w-32 "
+              xPosition='before'>
               <button (click)="filterBy(null)" class="dropdown" mat-menu-item>
                 All
               </button>
@@ -53,60 +109,77 @@
 
             </mat-menu>
           </span>
-      </div>
+        </div>
       </div>
     </div>
 
-      <!--nft cards-->
-  <div class="relative cards-container" style="min-height: 360px;">
-    <ngx-spinner
-      [fullScreen]="false"
-      [showSpinner]="isLoading"
-      [show]="isLoading"
-      bdColor="#D9DBE0"
-      size="medium"
+    <!--nft cards-->
+    <div class="relative cards-container" style="min-height: 360px;">
+      <ngx-spinner [fullScreen]="false" [showSpinner]="isLoading" [show]="isLoading" bdColor="#D9DBE0" size="medium"
+        type="ball-scale-multiple">
+        <p style="font-size: 20px; color: white">{{(creator$ | async)?.displayName}}...</p>
+      </ngx-spinner>
+      <div *ngIf="!isLoading && (!nftList || nftList?.totalCount === 0)" class="absolute w-full text-center"
+        style="top: 40%;">
+        <h3>No Record Found</h3>
+        <p>It seems we can't find any results.</p>
+      </div>
 
-      type="ball-scale-multiple">
-      <p style="font-size: 20px; color: white">{{(creator$ | async)?.displayName}}...</p>
-    </ngx-spinner>
-    <div *ngIf="!isLoading && (!nftList || nftList?.totalCount === 0)"  class="absolute w-full text-center" style="top: 40%;">
-      <h3>No Record Found</h3>
-      <p>It seems we can't find any results.</p>
-    </div>
-
-    <ng-container *ngIf="nftList?.totalCount > 0">
-      <ng-container *ngFor="let nftCard of nftList.data" class="">
-        <app-nft-card [nft]="nftCard" ></app-nft-card>
+      <ng-container *ngIf="nftList?.totalCount > 0">
+        <ng-container *ngFor="let nftCard of nftList.data" class="">
+          <app-nft-card [nft]="nftCard"></app-nft-card>
+        </ng-container>
       </ng-container>
-    </ng-container>
-  </div>
+    </div>
 
-  <div class="w-full px-12 mb-14 ld:px-0 md:px-0">
-    <div class="flex justify-between pt-3 mt-10 ">
-      <div *ngIf="nftList?.totalCount > 0; else noItems" class="inline-flex items-center text-sm text-gray-500">
-       Show {{ page === 1 ? 1 : (page-1) * nftLimit }}-{{ page * nftLimit < nftList?.totalCount ? (page * nftLimit) : nftList?.totalCount }}/{{nftList?.totalCount}}
-      </div>
-      <ng-template #noItems >
-        Show 0/0
-      </ng-template>
-      <div class="inline-flex items-center text-sm text-gray-400">
-        <button [disabled]="page < 2" class="pagination-btn " (click)="previous()">
-          <svg xmlns="http://www.w3.org/2000/svg" width="17.618" height="11.75" viewBox="0 0 17.618 11.75"><defs><style>.a{fill:#fff; }</style></defs><path class="a" d="M14.265,11.477a.8.8,0,0,1,.006,1.126l-3.715,3.727H24.711a.8.8,0,0,1,0,1.591H10.556l3.721,3.727a.805.805,0,0,1-.006,1.126.792.792,0,0,1-1.12-.006L8.108,17.688h0a.893.893,0,0,1-.165-.251.759.759,0,0,1-.061-.306.8.8,0,0,1,.226-.557l5.043-5.079A.78.78,0,0,1,14.265,11.477Z" transform="translate(-7.882 -11.252)"/></svg>
-        </button>
-        <button [disabled]="nftList?.totalCount <= page * nftLimit" class="ml-2 pagination-btn" (click)="next()">
-          <svg xmlns="http://www.w3.org/2000/svg" width="17.618" height="11.75" viewBox="0 0 17.618 11.75"><defs><style>.a{fill:#fff;}</style></defs><path class="a" d="M19.118,11.477a.8.8,0,0,0-.006,1.126l3.715,3.727H8.671a.8.8,0,0,0,0,1.591H22.826l-3.721,3.727a.805.805,0,0,0,.006,1.126.792.792,0,0,0,1.12-.006l5.043-5.079h0a.893.893,0,0,0,.165-.251.759.759,0,0,0,.061-.306.8.8,0,0,0-.226-.557l-5.043-5.079A.78.78,0,0,0,19.118,11.477Z" transform="translate(-7.882 -11.252)"/></svg>
-       </button>
+    <div class="w-full px-12 mb-14 lg:px-4 md:px-0">
+      <div class="flex justify-between pt-3 mt-10 ">
+        <div *ngIf="nftList?.totalCount > 0; else noItems" class="inline-flex items-center text-sm text-gray-500">
+          Show {{ page === 1 ? 1 : (page-1) * nftLimit }}-{{ page * nftLimit < nftList?.totalCount ? (page * nftLimit) :
+            nftList?.totalCount }}/{{nftList?.totalCount}} </div>
+            <ng-template #noItems>
+              Show 0/0
+            </ng-template>
+            <div class="inline-flex items-center text-sm text-gray-400">
+              <button [disabled]="page < 2" class="pagination-btn " (click)="previous()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17.618" height="11.75" viewBox="0 0 17.618 11.75">
+                  <defs>
+                    <style>
+                      .a {
+                        fill: #fff;
+                      }
+                    </style>
+                  </defs>
+                  <path class="a"
+                    d="M14.265,11.477a.8.8,0,0,1,.006,1.126l-3.715,3.727H24.711a.8.8,0,0,1,0,1.591H10.556l3.721,3.727a.805.805,0,0,1-.006,1.126.792.792,0,0,1-1.12-.006L8.108,17.688h0a.893.893,0,0,1-.165-.251.759.759,0,0,1-.061-.306.8.8,0,0,1,.226-.557l5.043-5.079A.78.78,0,0,1,14.265,11.477Z"
+                    transform="translate(-7.882 -11.252)" />
+                </svg>
+              </button>
+              <button [disabled]="nftList?.totalCount <= page * nftLimit" class="ml-2 pagination-btn" (click)="next()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17.618" height="11.75" viewBox="0 0 17.618 11.75">
+                  <defs>
+                    <style>
+                      .a {
+                        fill: #fff;
+                      }
+                    </style>
+                  </defs>
+                  <path class="a"
+                    d="M19.118,11.477a.8.8,0,0,0-.006,1.126l3.715,3.727H8.671a.8.8,0,0,0,0,1.591H22.826l-3.721,3.727a.805.805,0,0,0,.006,1.126.792.792,0,0,0,1.12-.006l5.043-5.079h0a.893.893,0,0,0,.165-.251.759.759,0,0,0,.061-.306.8.8,0,0,0-.226-.557l-5.043-5.079A.78.78,0,0,0,19.118,11.477Z"
+                    transform="translate(-7.882 -11.252)" />
+                </svg>
+              </button>
 
+            </div>
+        </div>
       </div>
     </div>
+
+
+
+
+
+
+
+
   </div>
-  </div>
-
-
-
-
-
-
-
-
-</div>

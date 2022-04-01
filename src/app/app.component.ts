@@ -1,5 +1,5 @@
 import { ViewportScroller } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivationStart, Router } from '@angular/router';
 import { ROLE_TYPE_UTILS } from '@app/@core/utils/role-type.utils';
 import { AuthService } from '@app/pages/auth/services/auth.service';
@@ -18,6 +18,7 @@ import { NotFoundPage } from './@shell/ui/not-found/not-found.page';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements OnInit {
 
