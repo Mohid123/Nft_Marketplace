@@ -16,6 +16,7 @@ import { TransactionService } from './../../../../@core/services/transaction.ser
 export class CreateNFTStyleComponent {
   @Input() group: Group;
   img: FormData;
+  thumbnailImg: FormData;
   nftForm: NFT;
 
   price: any;
@@ -42,6 +43,7 @@ export class CreateNFTStyleComponent {
     });
 
     this.img = this.nftService.createNFTImg;
+    this.thumbnailImg = this.nftService.createNFTthumbnailImg;
     this.nftForm = this.nftService.createNFT;
   }
 
@@ -51,7 +53,9 @@ export class CreateNFTStyleComponent {
     this.nftForm.numberOfCopies = this.createNft.controls.copies.value;
     this.nftForm.forSale = this.createNft.controls.sale.value;
     this.nftForm.freezeNft = this.createNft.controls.mint.value;
-    this.nftService.requestCreateNFT(this.nftForm,this.img);
+    console.log('this img:',this.img);
+    console.log('this.thumbnailImg:',this.thumbnailImg);
+    this.nftService.requestCreateNFT(this.nftForm,this.img,this.thumbnailImg);
   }
 
   clickSale(data): void {

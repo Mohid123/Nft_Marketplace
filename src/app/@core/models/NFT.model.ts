@@ -37,4 +37,6 @@ export class NFT {
   ownerData?:            NFTOwner;
   serverBlurHash?:       string;
   checked?:              boolean;
+  mediaType?:            string;
+  videoThumbnailUrl?:    string;
 }

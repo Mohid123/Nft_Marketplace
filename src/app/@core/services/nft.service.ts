@@ -6,14 +6,13 @@ import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-di
 import { environment } from '@environments/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
 import { exhaustMap, take, tap } from 'rxjs/operators';
 import { IsMembershipIdExists } from '../models/is-membership-id-exists.model';
 import { GetAllNftsByClub } from '../models/requests/get-all-afts-by-club.model';
 import { getNftsByUserId } from '../models/requests/get-nfts-by-user.model';
 import { NFTList } from './../models/NFTList.model';
 import { MediaUpload } from './../models/requests/media-upload.model';
-import { ResponseAddMedia } from './../models/response-add-media.model';
 import { ResponseEventByNFT } from './../models/response-events-by-nft.model';
 import { ApiResponse } from './../models/response.model';
 import { RouterState } from './../models/routerState.model';
@@ -37,6 +36,7 @@ export class NFTService extends ApiService<nftApiData> {
   });
 
   public createNFTImg = new FormData();
+  public createNFTthumbnailImg = new FormData();
   public createNFT:NFT = new NFT();
   public createNftForm:FormGroup;
 
@@ -55,33 +55,47 @@ export class NFTService extends ApiService<nftApiData> {
     super(http);
   }
 
-  requestCreateNFT(nftForm,img):void {
+  requestCreateNFT(nftForm,img,thumbnailImg?):void {
     this.spinner.show('main');
-    this.mediaService
-      .uploadMedia('nft', img)
-      .pipe(
-        take(1),
-        exhaustMap((res: ApiResponse<ResponseAddMedia>) => {
-          // console.log('res:',res);
-          if (!res.hasErrors()) {
-              nftForm.serverCaptureFileUrl = res.data.url;
-              nftForm.path = res.data.path;
-              return this.addNft(nftForm);
-            } else {
-            return of(null);
+    // this.mediaService
+    //   .uploadMedia('nft', img)
+
+
+    const mediaUpload:any = [];
+    mediaUpload.push(this.mediaService.uploadMedia('nft', img));
+
+    if(nftForm.mediaType == 'Video'){
+      mediaUpload.push(this.mediaService.uploadMedia('nft-thumbnail', thumbnailImg))
+    }
+
+    combineLatest(mediaUpload)
+        .pipe(
+          take(1),
+          exhaustMap(res => {
+            if (!res[0].hasErrors()) {
+              console.log('res:',res);
+              if(res[0] && res[1] && !res[1].hasErrors()) {
+                nftForm.videoThumbnailUrl = res[1].data.url;
+                console.log('res:',nftForm.videoThumbnailUrl);
+                }
+                nftForm.serverCaptureFileUrl = res[0].data.url;
+                nftForm.path = res[0].data.path;
+                return this.addNft(nftForm);
+              } else {
+              return of(null);
+            }
+          }),
+        )
+        .subscribe((res: any) => {
+          // console.log('res:', res);
+          if (res == null) {
+            this.toastrService.warning(res?.errors[0]?.error?.message, 'Error!' )
           }
-        }),
-      )
-      .subscribe((res: any) => {
-        // console.log('res:', res);
-        if (res == null) {
-          this.toastrService.warning(res?.errors[0]?.error?.message, 'Error!' )
-        }
-        else {
-          this.customDialogService.closeDialogs();
-        }
-        this.spinner.hide('main');
-    });
+          else {
+            this.customDialogService.closeDialogs();
+          }
+          this.spinner.hide('main');
+      });
 
     setTimeout(() => {
       this.customDialogService.closeDialogs();

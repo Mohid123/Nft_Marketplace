@@ -18,7 +18,7 @@
     </div>
   </div>
 
-  <div id="bg-image" class="relative p-0 text-2xl rounded-2xl" style="display: none; width: 529px; height: 479px; background-image: url('{{imageSrc}}');  background-size: cover;">
+  <div id="bg-image" class="relative p-0 text-2xl rounded-2xl" style="display: none; width: 529px; height: 479px; background-image: url('{{imageSrc || thumbnailImageSrc}}');  background-size: cover;">
     <!-- <img id="showImage" src="./assets/card/1A.svg" alt="{{createNft.controls.group?.value?.name}}" style="width: 529px; height: 482px; padding: 0;"> -->
     <img *ngIf="createNft.controls?.group?.value?.coverImageUrl" class="absolute top-0 right-0" [src]="createNft.controls?.group?.value?.coverImageUrl" style="height: 135px;padding: 0;">
       <!-- <img class="relative p-0 text-2xl" style=" " *ngIf="imageSrc" [src]="imageSrc"> -->
@@ -39,9 +39,9 @@
 
 
   <form action="" [formGroup]="createNft" class="px-0 overflow-y-auto sm:px-20 custom-scrollbar-css">
-     <div *ngIf="imageSrc" class="relative flex flex-col edit-btn " (click)="edit()">
+     <div *ngIf="imageSrc || thumbnailImageSrc" class="relative flex flex-col edit-btn " (click)="edit()">
 
-     <div class="editBtn" (click)="editImg()">
+     <div class="editBtn" (click)="editImg()" *ngIf="createNft.controls['mediaType'].value == 'Image'">
       <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
         <g id="Group_56289" data-name="Group 56289" transform="translate(11150 -4)">
           <circle id="Ellipse_3170" data-name="Ellipse 3170" cx="12.5" cy="12.5" r="12.5" transform="translate(-11150 4)" fill="#fff"/>
@@ -53,17 +53,17 @@
         <ul class="border-gradient-dp-p-bg-dark hover:border-gradient-tl-p-bg-light gradient-border-2">
           <img style=" object-fit: cover;
 
-          display: block;" id="ticket" class="preview" src="{{imageSrc}}" >
+          display: block;" id="ticket" class="preview" src="{{imageSrc || thumbnailImageSrc}}" >
           </ul>
        </li>
 
     </div>
     <div class="flex flex-col">
-      <span class="text-xl">Select Image</span><br>
+      <span class="text-xl">Select Media</span><br>
       <div class="relative flex justify-between overflow-hidden border-2 border-gray-400 border-dashed rounded-lg">
       <button
         class="flex items-center justify-between w-full px-2 py-2 font-bold bg-primary-gray-100 hover:bg-indigo-dark">
-        <ng-container *ngIf="!imageSrc; else show">
+        <ng-container *ngIf="(!imageSrc && !thumbnailImageSrc); else show">
             <div class="px-2 font-light text-gray-400">Select Image to Upload</div>
         </ng-container>
         <ng-template #show>
@@ -85,7 +85,8 @@
       <input #imgFile
         class="absolute block opacity-0 cursor-pointer pin-r pin-t "
         type="file"
-        name=""  accept="image/png, image/gif, image/jpeg"
+        name=""
+        accept=".jpg,.jpeg,.png,video/mp4,.mov,.gif"
         (change)="onSelectFile($event)"
       />
     </div>
@@ -122,7 +123,7 @@
       </label>
       <!-- <p class="error-msg error" *ngIf="createNft.controls.group.touched && createNft.controls.group.errors?.required">please select group</p> -->
     </div>
-    <button [disabled]="!createNft.valid || !imageSrc" class="primary-btn"  (click)="nextClick();">
+    <button [disabled]="!createNft.valid || (!imageSrc && !thumbnailImageSrc)" class="primary-btn"  (click)="nextClick();">
       Next
     </button>
   </form>
