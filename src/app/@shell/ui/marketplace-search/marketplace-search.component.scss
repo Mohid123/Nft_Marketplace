@@ -1,37 +1,8 @@
-
-
-// .mat-toolbar{
-// height: 10vh;
-// }
-
-div {
-  overflow: inherit;
-}
-
-// .mat-sidenav-container{
-// background-color: lightskyblue;
-// min-height: 93vh !important;
-// }
-
-
-
 button{
   font-size: 110%;
   min-width: min-content;
 }
 
-.example-icon {
-  padding: 0 14px;
-}
-
-.example-spacer {
-  flex: 1 1 auto;
-}
-
-// .mat-sidenav-content{
-//     font-size: 200%;
-//     text-align: center;
-// }
 
 mat-sidenav {
   @apply absolute top-0 left-0 min-h-screen flex flex-col justify-center items-start pt-8 pb-5;
@@ -47,19 +18,11 @@ mat-sidenav {
 
   .menu-link {
     @apply block p-3 h-12 w-12 my-2 mx-5 rounded-xl;
-
-    .mat-icon {
-      @apply h-5 w-5 z-10;
-      color: #90929f;
-    }
   }
 
   .menu-link:hover{
-    background-color: #ffffff0f;
+    background-color: #ffffff75;
 
-    .mat-icon:hover {
-      color: rgb(0, 0, 0) !important;
-    }
   }
 
   .menu-link.active::before {
@@ -90,6 +53,18 @@ mat-sidenav {
   }
 }
 
+.menu-link:hover {
+  @apply text-gray-700
+}
+
+.menu-link {
+  @apply text-gray-500
+}
+
+.menu-link.active {
+  @apply text-gray-900;
+}
+
 
 
 mat-sidenav {
@@ -98,5 +73,25 @@ mat-sidenav {
 
 
 ::ng-deep mat-sidenav-container {
-  margin-top: 40px;
+  @apply mt-9 lg:mt-9;
+  // overflow: hidden;
 }
+
+
+.sticky {
+  position: fixed;
+  top: 0px;
+  background: rgba(255,255,255,0.5);
+  backdrop-filter: blur(9px);
+  z-index: 1200;
+  padding-top: 0px;
+}
+
+::ng-deep .mat-elevation-z5 {
+  @apply flex justify-between shadow-xl p-5 lg:p-0 sm:mt-0  h-16;
+  position: relative;
+}
+
+// mat-toolbar {
+//   @apply pt-3
+// }

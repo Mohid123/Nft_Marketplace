@@ -103,12 +103,12 @@
 </nav>  -->
 
 
-<div>
+<div class="parent">
 
   <mat-sidenav-container fullscreen>
-    <mat-toolbar class="flex justify-between shadow-xl">
-      <div fxShow="true" fxHide.gt-sm="true" class="navbar">
-        <div class="absolute block w-full h-10 dark:bg-primary-900 md:hidden" [ngClass]="sidenav.opened ? 'z-0' : 'z-10'">
+    <mat-toolbar [ngClass]="{'mat-elevation-z5' : true, 'sticky' : isSticky}">
+      <div fxShow="true" fxHide.gt-sm="true" class="flex justify-between navbar">
+        <div class="block w-full h-10 lg:absolute dark:bg-primary-900 md:hidden" [ngClass]="sidenav.opened ? 'z-0' : 'z-10'">
           <button mat-icon-button *ngIf="sidenav.mode === 'over'"
             (click)="sidenav.toggle()">
             <mat-icon *ngIf="!sidenav.opened">
@@ -127,15 +127,15 @@
         </div>
       </div>
 
-      <a mat-button class="flex">
-        <img (click)="gotoHome()"  class="flex-wrap object-scale-down cursor-pointer max-h-16 lg:w-auto md:w-auto lg:max-h-16 mg:max-h-16 w-36 md:w-42 lg:w-42 sm:rounded-xl" [src]="(creator$ | async)?.profileImageURL" alt="" />
+      <a mat-button class="flex justify-end">
+        <img (click)="gotoHome()"  class="absolute right-0 flex-wrap object-scale-down w-20 h-20 mt-2 cursor-pointer lg:relative bottom-2 max-h-16 lg:w-auto md:w-auto lg:max-h-16 mg:max-h-16 md:w-42 lg:w-42 sm:rounded-xl" [src]="(creator$ | async)?.profileImageURL" alt="" />
       </a>
       <span class="example-spacer"></span>
       <div class="flex-grow block w-full lg:flex lg:items-center lg:w-auto" fxHide.lt-md="true">
-        <div class="justify-center flex-grow " #searchBar>
-          <div class="pt-2">
-              <div class="relative mt-4 mb-4 ml-20">
-               <input type="text" [formControl]="searchControl" class="flex w-full h-10 px-5 mx-auto text-sm bg-gray-400 bg-opacity-25 rounded-full md:w-2/3 lg:w-full md:h-14 lg:h-14 focus:outline-none" placeholder="Search NFT...">
+        <div class="justify-center flex-grow ml-16" #searchBar>
+          <div >
+              <div class="relative mt-4 mb-4">
+               <input type="text" [formControl]="searchControl" class="flex w-full h-8 mx-auto text-sm bg-gray-500 bg-opacity-25 rounded-full md:w-2/3 lg:w-full md:h-14 lg:h-9 focus:outline-none" placeholder="Search NFT...">
             </div>
           </div>
         </div>
@@ -171,6 +171,8 @@
       </div>
 
     </mat-toolbar>
+
+
     <mat-sidenav #sidenav="matSidenav" position="end" style="position: fixed;" >
       <div fxLayout="column" class="mt-28">
         <div class="flex flex-col justify-start h-full m-14">
@@ -223,12 +225,6 @@
         </div>
       </div>
     </mat-sidenav>
-
-
-
-
-
-
   </mat-sidenav-container>
 </div>
 

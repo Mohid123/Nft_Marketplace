@@ -23,6 +23,7 @@ body {
   @apply md:p-8 md:pt-0;
   @apply lg:px-0 lg:pt-0;
 
+
   // old styles
   // max-width: 1280px;
   // min-width: 340px;
@@ -32,7 +33,7 @@ body {
 }
 
 .custom-container {
-  @apply flex flex-col justify-between my-0 mx-auto sm:p-7 w-full ;
+  @apply flex flex-col justify-between my-0 mx-auto sm:p-7 w-full  ;
   @apply md:px-8;
   @apply lg:px-0;
 

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, HostListener, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiResponse } from '@app/@core/models/response.model';
@@ -40,6 +40,13 @@ export class MarketplaceSearchComponent implements OnInit, AfterViewInit, OnDest
   formCtrlSub: Subscription;
 
   routeUrl = ROUTER_UTILS;
+
+  isSticky = false;
+  @HostListener('window:scroll', ['$event'])
+  checkScroll() {
+    this.isSticky = window.pageYOffset >= 210;
+  }
+
 
   constructor(
     private authService: AuthService,
