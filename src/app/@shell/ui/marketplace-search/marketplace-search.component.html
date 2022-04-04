@@ -105,9 +105,9 @@
 
 <div class="parent">
 
-  <mat-sidenav-container fullscreen>
+  <mat-sidenav-container>
     <mat-toolbar [ngClass]="{'mat-elevation-z5' : true, 'sticky' : isSticky}">
-      <div fxShow="true" fxHide.gt-sm="true" class="flex justify-between navbar">
+      <div fxShow="true" fxHide.gt-sm="true" class="flex justify-between">
         <div class="block w-full h-10 lg:absolute dark:bg-primary-900 md:hidden" [ngClass]="sidenav.opened ? 'z-0' : 'z-10'">
           <button mat-icon-button *ngIf="sidenav.mode === 'over'"
             (click)="sidenav.toggle()">
