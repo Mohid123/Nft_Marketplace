@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { CreatorService } from '@app/@core/services/creator.service';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { NFTService } from '@app/@core/services/nft.service';
@@ -25,6 +26,7 @@ export class CardDetailsComponent implements OnInit {
 
   @Input() nft:NFT;
   constructor(
+    public dialog: MatDialog,
     private customDialogService: CustomDialogService,
     private spinner: NgxSpinnerService,
     private routeService: RouteService,
@@ -93,5 +95,11 @@ export class CardDetailsComponent implements OnInit {
         });
       }
     })
+  }
+
+  imgClick(PreviewDialog) {
+    if(this.nft.mediaType == 'Video'){
+      this.dialog.open(PreviewDialog);
+    }
   }
 }

@@ -10,6 +10,7 @@ import { NFTService } from '@app/@core/services/nft.service';
 export class TicketPreviewComponent implements OnInit {
 
   @Input() img: any;
+  @Input() videoFile: any;
   @Input() isTicket: any;
   @Input() isMembership: any;
 

@@ -32,6 +32,7 @@ export class CreateCustomTicketComponent implements OnInit, AfterViewInit {
   public group: Group;
 
   public imageSrc: any;
+  public videoSrc: any;
   public thumbnailImageSrc: any;
   public createNft: FormGroup;
   public imgFormData = new FormData();
@@ -74,6 +75,7 @@ export class CreateCustomTicketComponent implements OnInit, AfterViewInit {
       thumbnailFile: new FormControl(''),
       fileName: new FormControl(''),
       img: new FormControl(''),
+      video: new FormControl(''),
       thumbnailImg: new FormControl(''),
       bgImg: new FormControl(''),
       mediaType: new FormControl(''),
@@ -91,6 +93,7 @@ export class CreateCustomTicketComponent implements OnInit, AfterViewInit {
     if (this.nftService.createNftForm) {
       this.createNft = this.nftService.createNftForm;
       this.imageSrc = this.nftService?.createNftForm?.controls?.img?.value;
+      this.videoSrc = this.nftService?.createNftForm?.controls?.video?.value;
       this.thumbnailImageSrc = this.nftService?.createNftForm?.controls?.thumbnailImg?.value;
       // this._lastBgImg = this.createNft.controls?.bgImg?.value;
       this.file = { name :this.createNft.controls?.fileName?.value};
@@ -123,6 +126,7 @@ export class CreateCustomTicketComponent implements OnInit, AfterViewInit {
         if (event.target.files && event.target.files[0]) {
           const reader = new FileReader();
           if(this._imgFileExtensions.includes(event.target.files[0].type)) {
+            this.videoSrc = null;
             this.thumbnailImageSrc = null;
             this.createNft.controls.thumbnailImg.setValue(null);
             this.createNft.controls['mediaType'].setValue('Image');
@@ -138,6 +142,7 @@ export class CreateCustomTicketComponent implements OnInit, AfterViewInit {
               this.createNft.patchValue({ img: this.imageSrc });
               this.createNft.controls.thumbnailImg.setValue(null);
               this.thumbnailImageSrc = null;
+              this.videoSrc = null;
             };
             reader.readAsDataURL(event.target.files[0]);
 
@@ -145,7 +150,6 @@ export class CreateCustomTicketComponent implements OnInit, AfterViewInit {
             const thumbnailReader = new FileReader();
             this.createNft.controls['mediaType'].setValue('Video');
             // reader.onload = (e: any) => {};
-            thumbnailReader.onload = (e: any) => {};
             this.mediaService.generateThumbnail(this.file, ('thumbnail-' + this.file.name)).then(img => {
 
               thumbnailReader.onload = e => {
@@ -157,6 +161,10 @@ export class CreateCustomTicketComponent implements OnInit, AfterViewInit {
                   this.createNft.controls.img.setValue(null);
               };
               thumbnailReader.readAsDataURL(img);
+              reader.onload = (e: any) => {
+                this.videoSrc = reader.result;
+              };
+              reader.readAsDataURL(event.target.files[0]);
             })
           }
           }
@@ -280,11 +288,15 @@ export class CreateCustomTicketComponent implements OnInit, AfterViewInit {
   // }
 
   preview(): void {
-    this.createPreviewImg().then((dataUrl) => {
+    if(this.createNft.controls.mediaType.value == 'Video'){
       this.nftService.createNftForm = this.createNft;
-
-      this.customDialogService.showCreateNFTticketPreviewDialog(dataUrl,false, false);
-    });
+      this.customDialogService.showCreateNFTticketPreviewDialog(null,false, false, this.videoSrc);
+    } else {
+      this.createPreviewImg().then((dataUrl) => {
+        this.nftService.createNftForm = this.createNft;
+        this.customDialogService.showCreateNFTticketPreviewDialog(dataUrl,false, false);
+      });
+    }
   }
 
   editImg():void {

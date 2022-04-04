@@ -125,10 +125,11 @@ export class CustomDialogService {
     // });
   }
 
-  async showCreateNFTticketPreviewDialog(img,isTicket, isMembership) {
+  async showCreateNFTticketPreviewDialog(img,isTicket, isMembership, videoFile?) {
     this.matDialog.closeAll();
     this._mapDialogref = await this.createNFTDiloagService.openCreateNFTticketPreviewComponent();
     this._mapDialogref.componentInstance.img = img;
+    this._mapDialogref.componentInstance.videoFile = videoFile;
     this._mapDialogref.componentInstance.isTicket = isTicket;
     this._mapDialogref.componentInstance.isMembership = isMembership;
     // this._mapDialogref.componentInstance.isTicket = isCustom;

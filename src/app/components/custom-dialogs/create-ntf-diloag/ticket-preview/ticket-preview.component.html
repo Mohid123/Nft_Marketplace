@@ -18,9 +18,16 @@
       <ng-template #Custom><h1 class="text-3xl font-medium"><span>Custom Ca</span>rd Preview</h1></ng-template>
     </div>
   </div>
-  <img alt [src]="img">
+  <ng-container *ngIf="img; else video">
+    <img alt [src]="img">
+  </ng-container>
 </div>
 
+<ng-template #video>
+  <video class="preview-card" autoplay width="960" height="540" controls controlsList="nodownload">
+    <source src="{{ videoFile }}" type="video/mp4" />
+  </video>
+</ng-template>
 
 <!-- <ng-container [ngSwitch]="true">
   <div *ngSwitchCase="ismembership"><h1 class="text-3xl font-medium"><span>Membersh</span>ip Card Preview</h1></div>
