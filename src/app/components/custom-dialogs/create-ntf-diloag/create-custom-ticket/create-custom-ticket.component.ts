@@ -24,15 +24,16 @@ export class CreateCustomTicketComponent implements OnInit, AfterViewInit {
 
   _imgFileExtensions = ["image/jpeg", "image/jpeg", "image/bmp", "image/tiff", "image/png"];
   _gifFileExtensions = ["image/gif"];
-  _videFileExtensions = ["video/m4v", "video/quicktime", "video/avi", "video/mpg", "video/mp4"];
-  _validFileExtensions = [...this._imgFileExtensions,...this._gifFileExtensions,...this._videFileExtensions]
+  _audioFileExtensions = ["audio/mp3","audio/wav","audio/mpeg"];
+  _videoFileExtensions = ["video/m4v", "video/quicktime", "video/avi", "video/mpg", "video/mp4"];
+  _validFileExtensions = [...this._imgFileExtensions,...this._gifFileExtensions,...this._videoFileExtensions, ...this._audioFileExtensions]
 
   @ViewChild('imgFile') imgFile;
   msg: string
   public group: Group;
 
   public imageSrc: any;
-  public videoSrc: any;
+  public otherFileScr: any;
   public thumbnailImageSrc: any;
   public createNft: FormGroup;
   public imgFormData = new FormData();
@@ -75,7 +76,7 @@ export class CreateCustomTicketComponent implements OnInit, AfterViewInit {
       thumbnailFile: new FormControl(''),
       fileName: new FormControl(''),
       img: new FormControl(''),
-      video: new FormControl(''),
+      otherFile: new FormControl(''),
       thumbnailImg: new FormControl(''),
       bgImg: new FormControl(''),
       mediaType: new FormControl(''),
@@ -93,7 +94,7 @@ export class CreateCustomTicketComponent implements OnInit, AfterViewInit {
     if (this.nftService.createNftForm) {
       this.createNft = this.nftService.createNftForm;
       this.imageSrc = this.nftService?.createNftForm?.controls?.img?.value;
-      this.videoSrc = this.nftService?.createNftForm?.controls?.video?.value;
+      this.otherFileScr = this.nftService?.createNftForm?.controls?.otherFile?.value;
       this.thumbnailImageSrc = this.nftService?.createNftForm?.controls?.thumbnailImg?.value;
       // this._lastBgImg = this.createNft.controls?.bgImg?.value;
       this.file = { name :this.createNft.controls?.fileName?.value};
@@ -126,7 +127,7 @@ export class CreateCustomTicketComponent implements OnInit, AfterViewInit {
         if (event.target.files && event.target.files[0]) {
           const reader = new FileReader();
           if(this._imgFileExtensions.includes(event.target.files[0].type)) {
-            this.videoSrc = null;
+            this.otherFileScr = null;
             this.thumbnailImageSrc = null;
             this.createNft.controls.thumbnailImg.setValue(null);
             this.createNft.controls['mediaType'].setValue('Image');
@@ -142,11 +143,19 @@ export class CreateCustomTicketComponent implements OnInit, AfterViewInit {
               this.createNft.patchValue({ img: this.imageSrc });
               this.createNft.controls.thumbnailImg.setValue(null);
               this.thumbnailImageSrc = null;
-              this.videoSrc = null;
+              this.otherFileScr = null;
             };
             reader.readAsDataURL(event.target.files[0]);
 
-          } else if(this._videFileExtensions.includes(event.target.files[0].type)) {
+          } else if(this._audioFileExtensions.includes(event.target.files[0].type)) {
+            const thumbnailReader = new FileReader();
+            this.createNft.controls['mediaType'].setValue('Audio');
+            // reader.onload = (e: any) => {};
+              reader.onload = (e: any) => {
+                this.otherFileScr = reader.result;
+              };
+              reader.readAsDataURL(event.target.files[0]);
+          } else if(this._videoFileExtensions.includes(event.target.files[0].type)) {
             const thumbnailReader = new FileReader();
             this.createNft.controls['mediaType'].setValue('Video');
             // reader.onload = (e: any) => {};
@@ -162,13 +171,14 @@ export class CreateCustomTicketComponent implements OnInit, AfterViewInit {
               };
               thumbnailReader.readAsDataURL(img);
               reader.onload = (e: any) => {
-                this.videoSrc = reader.result;
+                this.otherFileScr = reader.result;
               };
               reader.readAsDataURL(event.target.files[0]);
             })
           }
           }
       } else {
+        console.log('event.target.files[0].type:',event.target.files[0].type);
         this.toastrService.error('Invalid File Format', 'Error');
       }
     }
@@ -290,7 +300,7 @@ export class CreateCustomTicketComponent implements OnInit, AfterViewInit {
   preview(): void {
     if(this.createNft.controls.mediaType.value == 'Video'){
       this.nftService.createNftForm = this.createNft;
-      this.customDialogService.showCreateNFTticketPreviewDialog(null,false, false, this.videoSrc);
+      this.customDialogService.showCreateNFTticketPreviewDialog(null,false, false, this.otherFileScr);
     } else {
       this.createPreviewImg().then((dataUrl) => {
         this.nftService.createNftForm = this.createNft;

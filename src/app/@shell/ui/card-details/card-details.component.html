@@ -14,11 +14,11 @@
       <!-- Left Section -->
       <div class="flex-col md:flex lg:flex">
         <div class="p-6 md:p-0 lg:p-0 lg:pt-6 lg:pb-6 lg:pl-6">
-          <img  *ngIf="nft?.serverCaptureFileUrl" [src]="nft?.mediaType === 'Video' ?  nft?.videoThumbnailUrl : nft?.serverCaptureFileUrl " alt="nftmarketSearch" class="resImg rounded-2xl" />
+          <img  *ngIf="nft?.serverCaptureFileUrl" [src]="nft?.mediaType === 'Video' ?  nft?.videoThumbnailUrl :  (nft?.mediaType === 'Audio' ? '/assets/audio.png' : nft?.serverCaptureFileUrl) " alt="nftmarketSearch" class="resImg rounded-2xl" />
         </div>
 
-        <h1  *ngIf="nft?.mediaType === 'Video'" class="playBtn">
-          <img (click)="imgClick(PreviewDialog)"  src="../../../../assets/icons/node-play.svg" class="w-44 h-44" alt="">
+        <h1  *ngIf="nft?.mediaType === 'Video' || nft?.mediaType === 'Audio'" class="playBtn">
+          <img (click)="imgClick(PreviewDialog,AudioPreviewDialog)"  src="../../../../assets/icons/node-play.svg" class="w-44 h-44" alt="">
          </h1>
         <div class="mb-6 ml-6">
           <span class="mt-6 inline-flex mr-2.5 text-lg dark:text-white opacity-50">
@@ -145,6 +145,16 @@
       >
         <source src="{{ nft?.serverCaptureFileUrl }}" type="video/mp4" />
       </video>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #AudioPreviewDialog let-ref="dialogRef">
+  <div style="background: black">
+    <div>
+      <audio controls>
+        <source src="{{ nft?.serverCaptureFileUrl }}" type="audio/mpeg">
+      </audio>
     </div>
   </div>
 </ng-template>

@@ -97,8 +97,11 @@ export class CardDetailsComponent implements OnInit {
     })
   }
 
-  imgClick(PreviewDialog) {
+  imgClick(PreviewDialog,AudioPreviewDialog?) {
     if(this.nft.mediaType == 'Video'){
+      this.dialog.open(PreviewDialog);
+    }
+    if(this.nft.mediaType == 'Audio'){
       this.dialog.open(PreviewDialog);
     }
   }

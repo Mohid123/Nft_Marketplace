@@ -14,7 +14,7 @@
     </div>
 
     <div class="inline-flex">
-      <span (click)="preview()" class="dark:text-green-500 text-yellow-400 cursor-pointer">Preview</span>
+      <span (click)="preview()" class="text-yellow-400 cursor-pointer dark:text-green-500">Preview</span>
     </div>
   </div>
 
@@ -39,7 +39,7 @@
 
 
   <form action="" [formGroup]="createNft" class="px-0 overflow-y-auto sm:px-20 custom-scrollbar-css">
-     <div *ngIf="imageSrc || thumbnailImageSrc" class="relative flex flex-col edit-btn " (click)="edit()">
+     <div *ngIf="imageSrc || otherFileScr" class="relative flex flex-col edit-btn " (click)="edit()">
 
      <div class="editBtn" (click)="editImg()" *ngIf="createNft.controls['mediaType'].value == 'Image'">
       <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
@@ -53,7 +53,7 @@
         <ul class="border-gradient-dp-p-bg-dark hover:border-gradient-tl-p-bg-light gradient-border-2">
           <img style=" object-fit: cover;
 
-          display: block;" id="ticket" class="preview" src="{{imageSrc || thumbnailImageSrc}}" >
+          display: block;" id="ticket" class="preview" src="{{imageSrc || thumbnailImageSrc || '/assets/audio.png'}}" >
           </ul>
        </li>
 
@@ -63,7 +63,7 @@
       <div class="relative flex justify-between overflow-hidden border-2 border-gray-400 border-dashed rounded-lg">
       <button
         class="flex items-center justify-between w-full px-2 py-2 font-bold bg-primary-gray-100 hover:bg-indigo-dark">
-        <ng-container *ngIf="(!imageSrc && !thumbnailImageSrc); else show">
+        <ng-container *ngIf="(!imageSrc && !otherFileScr); else show">
             <div class="px-2 font-light text-gray-400">Select Image to Upload</div>
         </ng-container>
         <ng-template #show>
@@ -86,7 +86,7 @@
         class="absolute block opacity-0 cursor-pointer pin-r pin-t "
         type="file"
         name=""
-        accept=".jpg,.jpeg,.png,video/mp4,.mov,.gif"
+        accept=".jpg,.jpeg,.png,video/mp4,.mov,.gif,.mp3, .wav"
         (change)="onSelectFile($event)"
       />
     </div>
@@ -123,7 +123,7 @@
       </label>
       <!-- <p class="error-msg error" *ngIf="createNft.controls.group.touched && createNft.controls.group.errors?.required">please select group</p> -->
     </div>
-    <button [disabled]="!createNft.valid || (!imageSrc && !thumbnailImageSrc)" class="primary-btn"  (click)="nextClick();">
+    <button [disabled]="!createNft.valid || (!imageSrc && !otherFileScr)" class="primary-btn"  (click)="nextClick();">
       Next
     </button>
   </form>
