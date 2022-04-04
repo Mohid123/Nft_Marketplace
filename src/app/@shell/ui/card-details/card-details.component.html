@@ -10,12 +10,16 @@
 <div class="justify-center card-border">
   <div class="flex"
     style="background-image: url(./assets/bg-img.png); background-repeat: no-repeat;  background-size: 100% 100%; ">
-    <div class="md:flex lg:flex w-full">
+    <div class="w-full md:flex lg:flex">
       <!-- Left Section -->
       <div class="flex-col md:flex lg:flex">
         <div class="p-6 md:p-0 lg:p-0 lg:pt-6 lg:pb-6 lg:pl-6">
-          <img (click)="imgClick(PreviewDialog)" *ngIf="nft?.serverCaptureFileUrl" [src]="nft?.mediaType === 'Video' ?  nft?.videoThumbnailUrl : nft?.serverCaptureFileUrl " alt="nftmarketSearch" class="resImg rounded-2xl" />
+          <img  *ngIf="nft?.serverCaptureFileUrl" [src]="nft?.mediaType === 'Video' ?  nft?.videoThumbnailUrl : nft?.serverCaptureFileUrl " alt="nftmarketSearch" class="resImg rounded-2xl" />
         </div>
+
+        <h1  *ngIf="nft?.mediaType === 'Video'" class="playBtn">
+          <img (click)="imgClick(PreviewDialog)"  src="../../../../assets/icons/node-play.svg" class="w-44 h-44" alt="">
+         </h1>
         <div class="mb-6 ml-6">
           <span class="mt-6 inline-flex mr-2.5 text-lg dark:text-white opacity-50">
             Contract Address
@@ -23,7 +27,7 @@
 
           <div class="inline-flex" id="fileName"><span >{{nft?.nftContract}}</span><span>{{nft?.nftContract}}</span>
           </div><br>
-          <p class="inline mt-6 text-lg dark:text-white opacity-50 mr-7">
+          <p class="inline mt-6 text-lg opacity-50 dark:text-white mr-7">
             Token Address
           </p>
           <span class="text-lg dark:text-white">ERC-721</span> <br /><br />
@@ -87,7 +91,7 @@
             <!-- <span class="ml-3 text-sm text-white opacity-50">32.44 USD</span> -->
           </div>
           <p class="text-lg text-gray-400">Description</p>
-          <div class="text-base text-justify dark:text-white break-words lg:mr-20 respDesc overflow-ellipsis">
+          <div class="text-base text-justify break-words dark:text-white lg:mr-20 respDesc overflow-ellipsis">
             {{nft?.description}}
           </div>
           <ng-container *ngIf="nft?.nftStatus && (isAdminPanel$ | async)">

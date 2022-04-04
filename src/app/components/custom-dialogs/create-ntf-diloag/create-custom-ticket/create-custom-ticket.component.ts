@@ -169,7 +169,7 @@ export class CreateCustomTicketComponent implements OnInit, AfterViewInit {
           }
           }
       } else {
-        this.toastrService.error('Invalid File Formate', 'Error');
+        this.toastrService.error('Invalid File Format', 'Error');
       }
     }
   }

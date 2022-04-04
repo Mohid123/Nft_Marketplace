@@ -137,3 +137,18 @@
 
 }
 
+.playBtn {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -402px;
+  margin-top: -85px;
+  text-align: center;
+  // filter: invert(1);
+  cursor: pointer;
+  transition: transform 500ms ease-in-out 25ms;
+}
+
+.playBtn:hover  {
+  transform: scale(1.5);
+}

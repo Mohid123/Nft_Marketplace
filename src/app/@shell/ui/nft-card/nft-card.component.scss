@@ -56,4 +56,19 @@ background-size: contain;
 
 }
 
+.playBtn {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -40px;
+  margin-top: -90px;
+  text-align: center;
+  // filter: invert(1);
+  transition: transform 500ms ease-in-out 25ms;
+  cursor: pointer;
+}
+
+.playBtn:hover  {
+  transform: scale(1.5);
+}
 

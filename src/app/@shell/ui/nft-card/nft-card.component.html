@@ -1,7 +1,29 @@
-<div class="card-border">
+<div class="relative card-border">
     <a [routerLink]="['/',clubName,'detail',nft.id]">
-      <div class="nft-img">
-        <img [src]="nft?.mediaType === 'Video' ?  nft?.videoThumbnailUrl : nft?.serverCaptureFileUrl" [alt]="nft.name" />
+      <div class="nft-img"  >
+        <img *ngIf="nft?.mediaType !== 'Video'" style="object-fit: cover;
+        margin-right: auto;
+        margin-left: auto;
+        height: 230px;
+        width: 100%;
+        border-radius: 12px;
+        background: rgba(227, 227, 227, 0.356);
+        display: block;" [src]="nft?.mediaType === 'Video' ?  nft?.videoThumbnailUrl : nft?.serverCaptureFileUrl" [alt]="nft.name" />
+        <img *ngIf="nft?.mediaType === 'Video'" style="object-fit: cover;
+        /* -webkit-filter: brightness(75%);
+                            filter: brightness(75%);
+                            filter: blur(2px); */
+        margin-right: auto;
+        margin-left: auto;
+        height: 230px;
+        width: 100%;
+        border-radius: 12px;
+        background: rgba(227, 227, 227, 0.356);
+        display: block;" [src]="nft?.mediaType === 'Video' ?  nft?.videoThumbnailUrl : nft?.serverCaptureFileUrl" [alt]="nft.name" />
+
+<h1 *ngIf="nft?.mediaType === 'Video'" class="playBtn">
+ <img src="../../../../assets/icons/node-play.svg" class="w-20 h-20" alt="">
+</h1>
       </div>
     </a>
   <div class="flex items-center justify-between">
