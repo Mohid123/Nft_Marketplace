@@ -14,7 +14,7 @@
     </div>
 
     <div class="inline-flex">
-      <span (click)="preview()" class="text-yellow-400 cursor-pointer dark:text-green-500">Preview</span>
+      <span *ngIf="createNft.controls['mediaType'].value !== 'Audio'" (click)="preview()" class="text-yellow-400 cursor-pointer dark:text-green-500">Preview</span>
     </div>
   </div>
 
@@ -41,7 +41,7 @@
   <form action="" [formGroup]="createNft" class="px-0 overflow-y-auto sm:px-20 custom-scrollbar-css">
      <div *ngIf="imageSrc || otherFileScr" class="relative flex flex-col edit-btn " (click)="edit()">
 
-     <div class="editBtn" (click)="editImg()" *ngIf="createNft.controls['mediaType'].value == 'Image'">
+     <div class="editBtn" (click)="editImg()" *ngIf="createNft.controls['mediaType'].value === 'Image'">
       <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
         <g id="Group_56289" data-name="Group 56289" transform="translate(11150 -4)">
           <circle id="Ellipse_3170" data-name="Ellipse 3170" cx="12.5" cy="12.5" r="12.5" transform="translate(-11150 4)" fill="#fff"/>
@@ -53,7 +53,7 @@
         <ul class="border-gradient-dp-p-bg-dark hover:border-gradient-tl-p-bg-light gradient-border-2">
           <img style=" object-fit: cover;
 
-          display: block;" id="ticket" class="preview" src="{{imageSrc || thumbnailImageSrc || '/assets/audio.png'}}" >
+          display: block;" id="ticket" class="preview" src="{{imageSrc || thumbnailImageSrc || '/assets/audio-bg.svg'}}" >
           </ul>
        </li>
 
@@ -64,7 +64,7 @@
       <button
         class="flex items-center justify-between w-full px-2 py-2 font-bold bg-primary-gray-100 hover:bg-indigo-dark">
         <ng-container *ngIf="(!imageSrc && !otherFileScr); else show">
-            <div class="px-2 font-light text-gray-400">Select Image to Upload</div>
+            <div class="px-2 font-light text-gray-400">Select File to Upload</div>
         </ng-container>
         <ng-template #show>
           <div class="px-2 font-light ">{{file.name}}</div>
@@ -86,7 +86,7 @@
         class="absolute block opacity-0 cursor-pointer pin-r pin-t "
         type="file"
         name=""
-        accept=".jpg,.jpeg,.png,video/mp4,.mov,.gif,.mp3, .wav"
+        accept=".jpg, .jpeg, .png, video/mp4, .mov, .gif, .mp3, .wav"
         (change)="onSelectFile($event)"
       />
     </div>

@@ -14,7 +14,7 @@
       <!-- Left Section -->
       <div class="flex-col md:flex lg:flex">
         <div class="p-6 md:p-0 lg:p-0 lg:pt-6 lg:pb-6 lg:pl-6">
-          <img  *ngIf="nft?.serverCaptureFileUrl" [src]="nft?.mediaType === 'Video' ?  nft?.videoThumbnailUrl :  (nft?.mediaType === 'Audio' ? '/assets/audio.png' : nft?.serverCaptureFileUrl) " alt="nftmarketSearch" class="resImg rounded-2xl" />
+          <img  *ngIf="nft?.serverCaptureFileUrl" [src]="nft?.mediaType === 'Video' ?  nft?.videoThumbnailUrl :  (nft?.mediaType === 'Audio' ? '/assets/audio-bg.svg' : nft?.serverCaptureFileUrl) " alt="nftmarketSearch" class="resImg rounded-2xl" />
         </div>
 
         <h1  *ngIf="nft?.mediaType === 'Video' || nft?.mediaType === 'Audio'" class="playBtn">
