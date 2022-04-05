@@ -68,7 +68,7 @@
  <div class="w-full overflow-hidden "  >
    <div class="custom-container">
     <h1 class="text-4xl font-light text-center text-white mb-9 mt-9">Search Your Club</h1>
-    <!-- <button (click)="openNav()" class="creator-btn"> Become a Creator</button> -->
+    <button (click)="openNav()" class="creator-btn"> Become a Creator</button>
    </div>
 
   <div class="container flex items-center justify-center ">
@@ -126,55 +126,101 @@
   <div id="myNav" class="overlay" #menu>
     <a class="closebtn" (click)="closeNav()">&times;</a>
     <div class="overlay-content">
-      <div class="dark:bg-gray-900">
-        <div class="container mx-auto py-9 md:py-12 lg:py-24">
-            <div class="flex flex-col justify-center mx-4 lg:flex-row items-strech">
-                <div class="flex items-center justify-center lg:w-4/12">
-                    <div>
-                        <h1 class="w-7/12 text-4xl font-semibold text-gray-900 dark:text-white md:text-5xl xl:text-6xl">Amoire</h1>
-                        <p class="mt-4 text-base leading-normal text-gray-600 dark:text-gray-300 md:w-7/12 lg:w-11/12 xl:w-10/12 lg:mt-5">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using.</p>
-                    </div>
-                </div>
-                <div class="mt-6 lg:w-8/12 md:mt-8 lg:mt-0">
-                    <div class="relative w-full h-full">
-                        <img src="https://i.ibb.co/gmV2mLr/pexels-maksim-goncharenok-4352247-1-1-1.png" alt="A lounge sofa" role="img" class="relative hidden w-full h-full lg:block" />
-                        <img src="https://i.ibb.co/Mhgkt2f/pexels-maksim-goncharenok-4352247-1-1-1.png" alt="A lounge sofa" role="img" class="w-full h-full lg:hidden" />
-                        <div class="absolute bottom-0 right-0 hidden w-1/2 bg-red-200 lg:block">
-                            <button class="flex items-center justify-between w-full p-5 text-xl font-medium text-white bg-gray-800 dark:hover:bg-gray-800 dark:bg-white dark:hover:text-gray-50 dark:text-gray-800 xl:text-2xl xl:p-6 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 hover:bg-gray-700">
-                                Discover More
+
+      <div class="w-screen h-screen bg-blue-400">
+        <div class="flex flex-col items-center justify-center flex-1 h-full px-4 sm:px-0">
+            <div class="flex w-full h-full bg-white rounded-lg shadow-lg">
+                <div class="flex flex-col w-full p-4 md:w-1/2">
+                    <div class="flex flex-col justify-center flex-1 mb-8">
+                        <h1 class="text-4xl font-thin text-center">Welcome Back</h1>
+                        <div class="w-full mt-4">
+                          <mat-stepper [linear]="true" labelPosition="bottom" #stepper class="w-full h-full py-6 text-center">
+                            <mat-step [stepControl]="firstFormGroup">
+                              <h1 class="mb-4 text-3xl font-medium text-center sm:text-3xl text-dark">Welcome! first things first</h1>
+                              <h3 class="max-w-xs mx-auto text-xs font-medium text-center mb-7">Let's make sure we understand your company. What describes your business best?"</h3>
+                              <form [formGroup]="firstFormGroup" class="flex flex-wrap justify-start">
+                                <ng-template matStepLabel>Add Club</ng-template>
+                                <!-- <mat-form-field appearance="fill">
+                                  <mat-label>Name</mat-label>
+                                  <input class="w-full bg-gray-200 rounded-xl" matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+                                </mat-form-field> -->
+
+                                <mat-label>Name</mat-label>
+                                <input formControlName="name" required type="text">
+                                <p class="error-msg error" *ngIf="firstFormGroup.controls.name.touched && firstFormGroup.controls.name.errors?.required">please enter Name</p>
                                 <div>
-                                    <svg class="fill-stroke dark:hover:text-gray-600" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M6.66663 16H25.3333" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M20 21.3333L25.3333 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M20 10.667L25.3333 16.0003" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
+                                  <button mat-button matStepperNext class="primary-btn" [disabled]="firstFormGroup.invalid">Next</button>
                                 </div>
-                            </button>
+                              </form>
+                            </mat-step>
+
+
+                            <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
+                                          <h1 class="mb-2 text-3xl font-medium text-center sm:text-3xl text-dark">Let's get to know each other!</h1>
+            <h3 class="max-w-xs mx-auto mb-4 text-xs font-medium text-center">How can we reach out?</h3>
+                              <form [formGroup]="secondFormGroup">
+                                <ng-template matStepLabel>Add Profile Image</ng-template>
+                                <div class="relative mb-4">
+                                  <label for="full-name" class="text-sm leading-7 text-gray-600">Profile Picture</label>
+                                  <div class="relative flex justify-between overflow-hidden border-2 border-gray-400 border-dashed rounded-lg">
+                                    <button
+                                      class="flex items-center justify-between w-full px-2 py-2 font-bold bg-primary-gray-100 hover:bg-indigo-dark">
+                                      <ng-container *ngIf="!file; else show">
+                                          <div class="px-2 font-light text-gray-400">Select Image to Upload</div>
+                                      </ng-container>
+                                      <ng-template #show>
+                                        <div class="px-2 font-light text-dark ">File selected!</div>
+                                      </ng-template>
+                                    <div>
+                                        <svg
+                                          fill="#FFF"
+                                          height="28"
+                                          viewBox="0 0 24 24"
+                                          width="28"
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          class="m-2">
+                                          <path d="M0 0h24v24H0z" fill="none" />
+                                          <path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z" />
+                                        </svg>
+                                      </div>
+                                    </button>
+                                    <input
+                                      class="absolute block opacity-0 cursor-pointer pin-r pin-t "
+                                      type="file"
+                                      name=""  accept="image/png, image/gif, image/jpeg"
+                                      (change)="onSelectFile($event)"
+                                    />
+                                  </div>
+                                </div>
+                                <!-- <mat-form-field appearance="fill">
+                                  <mat-label>Address</mat-label>
+                                  <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
+                                         required>
+                                </mat-form-field> -->
+                                <div>
+                                  <button mat-button matStepperPrevious>Back</button>
+                                  <button mat-button matStepperNext>Next</button>
+                                </div>
+                              </form>
+                            </mat-step>
+                            <mat-step>
+                              <ng-template matStepLabel>Done</ng-template>
+                              <p>You are now done.</p>
+                              <div>
+                                <button mat-button matStepperPrevious>Back</button>
+                                <button mat-button (click)="stepper.reset()">Reset</button>
+                              </div>
+                            </mat-step>
+                          </mat-stepper>
                         </div>
                     </div>
-                    <div class="mt-6 md:mt-8 lg:hidden">
-                        <button class="flex items-center justify-between w-full px-5 py-4 text-base font-semibold leading-tight text-white bg-gray-800 dark:hover:bg-gray-800 dark:bg-white dark:hover:text-gray-50 dark:text-gray-800 md:text-xl lg:py-7 lg:px-7 md:w-5/12 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 hover:bg-gray-700">
-                            Discover More
-                            <div>
-                                <svg class="fill-stroke" width="22" height="24" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0)">
-                                        <path d="M0.453735 12H14.4537" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M10.4539 16L14.4539 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M10.4539 8L14.4539 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0">
-                                            <rect width="21.7269" height="24" fill="white" />
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                            </div>
-                        </button>
-                    </div>
                 </div>
+                <div class="hidden rounded-r-lg md:block md:w-1/2" style="background: url('https://images.unsplash.com/photo-1515965885361-f1e0095517ea?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3300&q=80'); background-size: cover; background-position: center center;"></div>
             </div>
         </div>
     </div>
+
+
 
     </div>
   </div>

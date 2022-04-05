@@ -137,6 +137,10 @@
 
 }
 
+.preview {
+  @apply object-cover w-24 h-24;
+}
+
 .overlay {
   height: 100%;
   width: 0;
@@ -144,7 +148,7 @@
   z-index: 1;
   top: 0;
   right: 0;
-  background-color: #001c2c;
+  background-color: white;
   overflow-x: hidden;
   transition: 0.5s;
 }
@@ -154,7 +158,7 @@
   // top: 25%;
   width: 100%;
   text-align: center;
-  margin-top: 30px;
+  // margin-top: 30px;
 }
 
 .overlay a {
@@ -194,3 +198,27 @@ a{
   color:greenyellow;
 }
 
+mat-label {
+ text-align: start;
+}
+
+form {
+  @apply flex flex-col w-full;
+
+  p{
+    @apply text-red-400
+  }
+
+  label {
+    @apply px-3 py-4 text-lg;
+  }
+
+  input {
+    @apply px-9;
+  }
+
+  button {
+    @apply w-72 h-16 my-10 sm:my-3 self-center;
+  }
+
+}
