@@ -7,23 +7,23 @@
   <p style="font-size: 20px; color: white">{{(creator$ | async)?.displayName}}...</p>
 </ngx-spinner>
 
-<div class="justify-center ">
+<div class="justify-center custom-container">
   <div class=""
     >
     <div class="w-full md:flex lg:flex ">
       <!-- Left Section -->
-      <div class="flex-col md:flex lg:flex">
+      <div class="flex-col w-5/12 md:flex lg:flex">
         <div class="pl-3 pr-7">
           <img *ngIf="nft?.serverCaptureFileUrl" [src]="nft?.mediaType === 'Video' ?  nft?.videoThumbnailUrl :  (nft?.mediaType === 'Audio' ? '/assets/audio-bg.svg' : nft?.serverCaptureFileUrl) " alt="nftmarketSearch" class="resImg rounded-2xl" />
         </div>
 
         <h1  *ngIf="nft?.mediaType === 'Video' || nft?.mediaType === 'Audio'" class="playBtn">
-          <img (click)="imgClick(PreviewDialog,AudioPreviewDialog)"  src="../../../../assets/icons/node-play.svg" class="w-44 h-44" alt="">
+          <img (click)="imgClick(PreviewDialog,AudioPreviewDialog)"  src="../../../../assets/icons/node-play.svg" class="w-32 h-32" alt="">
          </h1>
 
       </div>
       <!-- Right Section  -->
-      <div class="m-4 lg:flex md:flex md:m-0 lg:m-0">
+      <div class="w-6/12 m-4 lg:flex md:flex md:m-0 lg:m-0">
         <div class="mt-2">
           <div class="flex items-center justify-between">
             <button  class="creator-name">
@@ -150,6 +150,9 @@
     </div>
   </div>
 </div>
+
+
+
 
 <ng-template #PreviewDialog let-ref="dialogRef">
   <div style="background: black">

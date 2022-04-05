@@ -18,7 +18,7 @@
   hover:text-primary-400
  w-full
   font-medium
-  mt-3.5
+  mt-24
   h-14
   rounded-full
   py-3;
@@ -152,10 +152,8 @@
   position: absolute;
   left: 50%;
   top: 50%;
-
   margin-left: -517px;
-
-  margin-top: -85px;
+  margin-top: -150px;
   text-align: center;
   // filter: invert(1);
   cursor: pointer;
