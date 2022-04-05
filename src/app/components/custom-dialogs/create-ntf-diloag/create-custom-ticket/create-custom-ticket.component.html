@@ -65,10 +65,12 @@
         class="flex items-center justify-between w-full px-2 py-2 font-bold bg-primary-gray-100 hover:bg-indigo-dark">
         <ng-container *ngIf="(!imageSrc && !otherFileScr); else show">
             <div class="px-2 font-light text-gray-400">Select File to Upload</div>
+
         </ng-container>
         <ng-template #show>
           <div class="px-2 font-light ">{{file.name}}</div>
         </ng-template>
+
       <div>
           <svg
             fill="#FFF"
@@ -91,6 +93,7 @@
       />
     </div>
     </div>
+    <span class="mt-2 text-xs text-gray-400">Supported files are .jpg, .jpeg, .png, video/mp4, .mov, .gif, .mp3, .wav </span>
     <div class="flex flex-col pt-3">
       <span class="text-xl">Name</span><br>
       <div class="relative flex flex-col justify-between overflow-hidden rounded-lg">
