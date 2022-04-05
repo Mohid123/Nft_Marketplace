@@ -28,7 +28,7 @@
 // }
 
 .pagination-btn{
-  @apply inline-flex items-center justify-center w-12 h-12 px-3 py-3 font-bold bg-gray-400 bg-opacity-25 rounded-xl hover:bg-primary-400 focus:bg-primary-400;
+  @apply inline-flex items-center justify-center w-12 h-12 px-3 py-3 font-bold bg-gray-400 bg-opacity-25 rounded-xl hover:bg-yellow-500 focus:bg-yellow-500;
 }
 
 .dropdown{
@@ -36,10 +36,7 @@
 }
 
 .active{
-  @apply items-center px-3 py-2 mx-1 bg-gradient-to-r from-yellow-200 to-yellow-500 rounded-full;
-  &.dark{
-    @apply from-blue-400 to-green-400 rounded-full;
-   }
+  @apply items-center px-3 py-2 mx-1 bg-gradient-to-r from-yellow-500 to-purple-400 rounded-full text-white text-sm
  }
 
  ::-webkit-calendar-picker-indicator {

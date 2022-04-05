@@ -5,7 +5,7 @@ export const environment = {
   testNet: false,
   demoClub: 'demo',
   demoClubEmail: 'demo@gmail.com',
-  demoClubPassword: 'demotest123',
+  demoClubPassword: 'demo@123',
   demoClub1: 'solis-solution',
   demoClubEmail1: 'admin@gmail.com',
   demoClubPassword1: 'qwertyuiop',

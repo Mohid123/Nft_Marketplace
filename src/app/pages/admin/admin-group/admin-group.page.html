@@ -5,7 +5,7 @@
   Custom Position (above)
 </div> -->
 
-<div class="flex flex-col justify-start h-auto min-h-screen px-3 mt-10 mb-12 sm:px-6 xl:px-8 center py-4 rounded-lg dark:bg-transparent">
+<div class="flex flex-col justify-start h-auto min-h-screen px-3 py-4 mt-10 mb-12 rounded-lg sm:px-6 xl:px-8 center dark:bg-transparent">
   <div class="flex items-center justify-between w-full h-12 py-px">
     <h1 class="h-auto m-0 text-2xl font-medium">Groups</h1>
     <button class="w-40 h-full primary-btn" (click)="newGroup()">
@@ -69,7 +69,7 @@
       </div>
     </div>
     <div class="w-full bg-gray-400 groups-container">
-      <div class="w-full overflow-x-auto ">
+      <div class="w-full overflow-x-auto bg-gray-50 rounded-xl ">
         <table class="w-full space-y-6 text-sm" [style.min-height]="((isLoading$ | async) === false && (groups$ | async).length === 0) ? '420px' : null">
           <thead class="font-light tracking-wider dark:text-white ">
             <tr>
@@ -84,8 +84,8 @@
             <ngx-spinner name="admin-market" [fullScreen]="false" [showSpinner]="isLoading$ | async" bdColor="#D9DBE0" size="medium"  type="ball-scale-multiple">
               <p style="font-size: 20px; color: white">{{(creator$ | async)?.displayName}}...</p>
             </ngx-spinner>
-              <ng-container *ngFor="let group of (groups$ | async);last as isLast" class="">
-                <tr [ngStyle]="{'border-bottom': isLast ? '1px solid #aaaaaa2a' : 'none' }">
+              <ng-container *ngFor="let group of (groups$ | async);last as isLast">
+                <tr [ngStyle]="{'border-bottom': isLast ? '1px solid #aaaaaa2a' : 'none' }" class="font-normal">
                   <td>{{group.name}}</td>
                   <td>{{group.itemsCount || 0}}</td>
                   <td><p class="name">{{group.description}}</p></td>

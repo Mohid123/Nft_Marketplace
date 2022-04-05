@@ -1,11 +1,19 @@
 
 
-<div id="user-main" class="main-container">
+<div class="main-container">
   <app-marketplace-search></app-marketplace-search>
+
+
+<div id="user-main" class="custom-container">
+
   <app-card-details [nft]="nft"></app-card-details>
   <div class="mb-0 md:mb-8 lg:mb-8 ">
-    <span class="m-4 md:m-0 lg:m-0 "><span>Tradin</span>g History</span>
+    <h2
+    class="px-4 py-8 mb-5 text-lg font-light font-semibold tracking-widest border-b-2 border-gray-200 lg:text-4xl title-font">
+    Trading History </h2>
   </div>
 
   <app-history [responseEventByNFT]="responseEventByNFT"></app-history>
+</div>
+
 </div>

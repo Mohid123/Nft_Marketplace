@@ -2,13 +2,13 @@
   @apply w-full flex justify-center;
 }
 
-.main-bg {
-  background: url('/assets/bg-img.png');
-  background-repeat: no-repeat;
-    background-position-x: 0;
-    background-position-y: 100px;
-    background-size: 100% 100%;
-}
+// .main-bg {
+//   background: url('/assets/bg-img.png');
+//   background-repeat: no-repeat;
+//     background-position-x: 0;
+//     background-position-y: 100px;
+//     background-size: 100% 100%;
+// }
 
 
 .main {
@@ -21,6 +21,7 @@ mat-sidenav {
   @apply absolute top-0 left-0 min-h-screen flex flex-col justify-center items-center rounded-r-2xl rounded-l-none text-white pt-8 pb-5;
   width: 120px;
   background: #fff;
+  box-shadow: rgba(4, 17, 29, 0.13) 0px 0px 10px 0px !important;
 
   &.dark {
     background: #2F3157;
@@ -40,7 +41,7 @@ mat-sidenav {
     background-color: #ffffff0f;
 
     .mat-icon:hover {
-      color: white !important;
+      color: rgb(0, 0, 0) !important;
     }
   }
 
@@ -74,6 +75,6 @@ mat-sidenav {
 
 @media(min-width:1500px) {
   .main-bg {
-    background-size: calc(100% - 32px) 100%;
+    // background-size: calc(100% - 32px) 100%;
   }
 }

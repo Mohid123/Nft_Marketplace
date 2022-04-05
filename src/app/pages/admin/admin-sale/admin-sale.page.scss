@@ -1,7 +1,7 @@
 .filters {
   @apply h-16 w-full text-white rounded-lg my-6 flex items-center flex-grow;
   max-width: 550px;
-  border: 0.6px solid #FFFFFF9C;
+  border: 0.6px solid #ffffff;
 
   background: #D3982F 0% 0% no-repeat padding-box;
   &.dark {
@@ -10,7 +10,7 @@
 
   .filter {
     @apply flex justify-around items-center flex-grow h-full;
-    border-left: 1px solid #afafaf3a;
+    border-left: 1px solid #ffffff3a;
     font-size: 9px;
 
     button {

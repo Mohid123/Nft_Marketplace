@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
+import { ViewportScroller } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CreatorService } from '@app/@core/services/creator.service';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { Subject } from 'rxjs';
 import { distinctUntilChanged, take, takeUntil } from 'rxjs/operators';
+import SwiperCore, { Navigation, Pagination } from "swiper";
 import { Group } from './../../../@core/models/group.model';
 import { NFTList } from './../../../@core/models/NFTList.model';
 import { ApiResponse } from './../../../@core/models/response.model';
@@ -13,11 +15,16 @@ import { NFTService } from './../../../@core/services/nft.service';
 import { RouteService } from './../../../@core/services/route.service';
 import { StripeService } from './../../../@core/services/stripe.service';
 
+// install Swiper modules
+SwiperCore.use([Pagination, Navigation ]);
+
 
 @Component({
   selector: 'app-market-place',
   templateUrl: './market-place.page.html',
   styleUrls: ['./market-place.page.scss'],
+  // encapsulation: ViewEncapsulation.None
+
 })
 export class MarketPlacePage implements OnInit ,OnDestroy {
 
@@ -48,6 +55,7 @@ export class MarketPlacePage implements OnInit ,OnDestroy {
     private customDialogService: CustomDialogService,
     private creatorService: CreatorService,
     private groupService: GroupService,
+    private scroller: ViewportScroller,
     private nftService: NFTService,
     private routeService: RouteService,
     private stripeService: StripeService,
@@ -93,6 +101,10 @@ export class MarketPlacePage implements OnInit ,OnDestroy {
         }
         this.isLoading = false;
       });
+  }
+
+  goDown1() {
+    this.scroller.scrollToAnchor("targetRed");
   }
 
   next():void {

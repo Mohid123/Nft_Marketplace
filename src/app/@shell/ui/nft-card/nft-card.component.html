@@ -4,7 +4,7 @@
         <img *ngIf="nft?.mediaType !== 'Video'" style="object-fit: cover;
         margin-right: auto;
         margin-left: auto;
-        height: 230px;
+        height: 300px;
         width: 100%;
         border-radius: 12px;
         background: rgba(227, 227, 227, 0.356);
@@ -16,7 +16,7 @@
                             filter: blur(2px); */
         margin-right: auto;
         margin-left: auto;
-        height: 230px;
+        height: 300px;
         width: 100%;
         border-radius: 12px;
         background: rgba(227, 227, 227, 0.356);
@@ -27,65 +27,60 @@
 </h1>
       </div>
     </a>
-  <div class="flex items-center justify-between">
-    <div class="inline-flex">
-      <div class="flex justify-start h-9">
-        <span class="inline-flex items-center py-1 text-sm leading-none text-gray-400 ">
-         {{nft.type}}
-
-        </span>
-        <span class="inline-flex items-center text-sm text-gray-400">
-          <span class="relative mb-8" style="color: #46F5AB; font-size: 50px;">.</span>
-        </span>
-
-
-      </div>
-    </div>
-    <span class="inline-flex text-gray-400">
+  <div class="flex items-center justify-between mt-1">
+    <div class="flex justify-start text-xs font-bold ">
       #{{nft.tokenId}}
-    </span>
-  </div>
-  <div class="mb-2">
-    <p class="w-2 pt-1 text-lg tracking-widest dark:text-white trun">{{nft.name}}</p>
-  </div>
-  <div class="flex items-center justify-between">
+    </div>
     <span class="inline-flex">
       <img src="./assets/coin/card-coin.svg" alt="">
-      <span class="ml-2 font-semibold">{{nft.price}}</span>
+      <span class="ml-2 text-sm font-semibold">{{nft.price}}</span>
     </span>
+  </div>
+  <div class="inline-flex">
+    <div class="flex items-center justify-start text-sm leading-none text-gray-400 ">
+      {{nft.type}}
+      <!-- <span class="inline-flex items-center text-sm text-gray-400">
+        <span  style="color: #46F5AB; font-size: 50px;">.</span>
+      </span> -->
+    </div>
+  </div>
+  <div class="flex items-center justify-between">
+    <div class="w-2/5">
+      <p class="pt-1 text-xl font-medium dark:text-white trun">{{nft.name}}</p>
+    </div>
     <ng-container *ngIf="walletPage">
       <ng-container *ngIf="nft?.isResaleAvailable; else resaleBtn">
-        <button (click)="cancelResale()" class="px-4 py-1 text-xs text-white rounded-full w-18 h-7 btn-nft">
+        <button (click)="cancelResale()" class="btn-nft">
           Cancel Resale
         </button>
       </ng-container>
       <ng-template #resaleBtn>
         <button (click)="resale()"
-        class="px-4 py-1 text-xs text-white rounded-full w-18 h-7 btn-nft">
+        class="btn-nft">
           Resale
         </button>
       </ng-template>
     </ng-container>
     <ng-container *ngIf="!walletPage">
       <ng-container *ngIf="nft?.nftStatus && (isAdminPanel$ | async)">
-        <button class="px-4 py-1 text-xs text-white rounded-full w-18 h-7 btn-nft" >
+        <button class="btn-nft" >
           {{nft.nftStatus}}
         </button>
       </ng-container>
       <ng-container *ngIf="!nft?.isResaleAvailable && nft?.nftStatus && nft?.nftStatus !== 'Sold' && (isAdminPanel$ | async) === false">
         <ng-container  *ngIf="nft?.nftStatus !== 'Active'; else nftButton" >
-          <button class="px-4 py-1 text-xs text-white rounded-full w-18 h-7 btn-nft" >
+          <button class="btn-nft" >
             {{nft.nftStatus}}
           </button>
         </ng-container>
         <ng-template #nftButton>
-          <button (click)="buyNow()" class="px-4 py-1 text-xs text-white rounded-full w-18 h-7 btn-nft" >
+          <button (click)="buyNow()" class="btn-nft" >
             Buy Now
           </button>
         </ng-template>
       </ng-container>
       <ng-container *ngIf="nft?.isResaleAvailable;">
-        <button (click)="cancelResale()" class="px-4 py-1 text-xs text-white rounded-full w-18 h-7 btn-nft">
+        <button (click)="cancelResale()" class="btn-nft">
           Cancel Resale
         </button>
       </ng-container>

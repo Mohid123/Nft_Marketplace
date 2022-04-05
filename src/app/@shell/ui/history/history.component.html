@@ -1,4 +1,4 @@
-<table class="m-4 spacing-table md:m-0 lg:m-0 ">
+<!-- <table class="m-4 spacing-table md:m-0 lg:m-0 ">
   <thead class="tracking-wider dark:text-white ">
     <tr class="items-center text-center" >
       <th >Token Id</th>
@@ -9,7 +9,7 @@
       <th>Date Created</th>
     </tr>
   </thead>
-  <tbody class="relative" style="min-height: 165px">
+  <tbody class="relative " style="min-height: 165px">
 
     <div *ngIf="(!responseEventByNFT || responseEventByNFT?.totalCount === 0)"  class="absolute w-full text-center" style="top: 40%;">
       <h3>No Record Found</h3>
@@ -17,38 +17,38 @@
     </div>
     <ng-container *ngIf="responseEventByNFT?.totalCount > 0">
       <ng-container *ngFor="let nftEvent of responseEventByNFT.data">
-        <tr class="items-center h-24 ">
-          <td  style="color: #EFAF1E; " >
+        <tr class="items-center h-24 font-normal ">
+          <td  style="color: #EFAF1E; "  >
 
            <a href="{{nftEvent?.transactionUrl}}" target=_blank> {{nftEvent?.tokenId}}</a>
           </td>
           <td *ngIf="nftEvent.eventType === 'Minted'" class="justify-center inline-block" >
             <div class="eventIcons">
-              <img class="object-cover text-sm "src="../../../../assets/icons/MINTED.svg" alt=""/>
+              <img class="object-cover" src="../../../../assets/icons/MINTING.svg" alt=""/>
               <span class="pl-2 mr-2 dark:text-white "> {{nftEvent.eventType}}</span>
             </div>
           </td>
           <td *ngIf="nftEvent.eventType === 'Transfer'" class="justify-center inline-block" >
             <div class="eventIcons">
-              <img class="object-cover text-sm "src="../../../../assets/icons/TRANSFRING.svg" alt=""/>
+              <img class="object-cover" src="../../../../assets/icons/TRANSFERING.svg" alt=""/>
               <span class="pl-2 mr-2 dark:text-white "> {{nftEvent.eventType}}</span>
             </div>
           </td>
           <td *ngIf="nftEvent.eventType === 'Sale'" class="justify-center inline-block" >
             <div class="eventIcons">
-              <img class="object-cover text-sm "src="../../../../assets/icons/SOLD.svg" alt=""/>
+              <img class="object-cover" src="../../../../assets/icons/SOLD.svg" alt=""/>
               <span class="pl-2 mr-2 dark:text-white "> {{nftEvent.eventType}}</span>
             </div>
           </td>
           <td *ngIf="nftEvent.eventType === 'Resale'" class="justify-center inline-block" >
             <div class="eventIcons">
-              <img class="object-cover text-sm" src="../../../../assets/icons/RESALE.svg" width="28" alt=""/>
+              <img class="object-cover" src="../../../../assets/icons/RESALE.svg" width="28" alt=""/>
               <span class="pl-2 mr-2 dark:text-white "> {{nftEvent.eventType}}</span>
             </div>
           </td>
           <td *ngIf="nftEvent.eventType === 'Cancel Resale'" class="justify-center inline-block" >
             <div class="eventIcons">
-              <img class="object-cover text-sm "src="../../../../assets/icons/CANCEL.svg"  width="25" alt=""/>
+              <img class="object-cover" src="../../../../assets/icons/CANCEL.svg"  width="25" alt=""/>
               <span class="pl-2 mr-2 dark:text-white "> {{nftEvent.eventType}}</span>
             </div>
           </td>
@@ -71,4 +71,66 @@
   </tbody>
 
 
-</table>
+</table> -->
+
+
+<div class="w-full rounded-xl">
+  <table class="w-full m-4 rounded-xl spacing-table md:m-0 lg:m-0 ">
+    <tr class="mb-4 text-center text-gray-600 border-b-2 border-gray-200 rounded-lg">
+      <th class="font-thin p-7">Token Id</th>
+      <th class="font-thin p-7">Price</th>
+      <th class="font-thin p-7">From</th>
+      <th class="font-thin p-7">To</th>
+      <th class="font-thin p-7">Event</th>
+      <th class="font-thin p-7">Date Created</th>
+    </tr>
+
+    <tbody class="relative " style="min-height: 165px">
+      <div *ngIf="(!responseEventByNFT || responseEventByNFT?.totalCount === 0)"  class="absolute w-full text-center" style="top: 40%;">
+        <h3>No Record Found</h3>
+        <p>It seems we can't find any results.</p>
+      </div>
+      <ng-container *ngIf="responseEventByNFT?.totalCount > 0">
+        <ng-container *ngFor="let nftEvent of responseEventByNFT.data">
+      <tr class="z-40 w-full mt-4 text-center text-black bg-white rounded-lg h-14">
+        <td class="p-4 my-4 text-sm font-semibold">
+          <a href="{{nftEvent?.transactionUrl}}" target=_blank> {{nftEvent?.tokenId}}</a>
+        </td>
+        <td class="p-4 text-sm font-medium text-gray-500">
+          {{nftEvent.price}}
+        </td>
+        <td class="w-2 p-4 overflow-hidden text-sm font-medium text-gray-500 truncate">
+          <a class="w-2 overflow-hidden truncate" href="{{nftEvent.fromAddress}}" target=_blank>{{nftEvent.from}}</a>
+        </td>
+        <td class="p-4 text-sm font-medium text-gray-500 truncate">
+          <a href="{{nftEvent.toAddress}}" target=_blank>{{nftEvent.to}}</a>
+        </td>
+        <td *ngIf="nftEvent.eventType === 'Minted'" >
+          <span class="px-5 py-3 text-sm text-yellow-700 bg-yellow-200 rounded-full">{{nftEvent.eventType}}</span>
+        </td>
+        <td *ngIf="nftEvent.eventType === 'Transfer'"  >
+         <span class="px-5 py-3 text-sm text-purple-500 bg-purple-200 rounded-full">{{nftEvent.eventType}}</span>
+        </td>
+        <td *ngIf="nftEvent.eventType === 'Sale'" >
+          <span class="px-5 py-3 text-sm text-blue-500 bg-blue-200 rounded-full">{{nftEvent.eventType}}</span>
+        </td>
+        <td *ngIf="nftEvent.eventType === 'Resale'" >
+         <span class="px-5 py-3 text-sm text-green-700 bg-green-200 rounded-full">{{nftEvent.eventType}}</span>
+        </td>
+        <td *ngIf="nftEvent.eventType === 'Cancel Resale'" >
+
+          <span class="px-5 py-3 text-sm text-red-700 bg-red-200 rounded-full">{{nftEvent.eventType}}</span>
+
+        </td>
+        <td class="p-4 text-sm font-medium text-gray-500">
+          {{nftEvent.createdAt | timeAgo}}
+        </td>
+      </tr>
+    </ng-container>
+    </ng-container>
+
+    </tbody>
+
+
+  </table>
+</div>

@@ -1,21 +1,104 @@
-app-profile-button {
-  @apply mt-4 md:mt-0 lg:mt-0;
-}
-
-.nft-btn {
-  width: 163px;
+button{
+  font-size: 110%;
+  min-width: min-content;
 }
 
 
-.navigationBtn {
-  @apply flex items-center justify-center h-12 p-1.5 rounded-xl bg-primary-gray-200 hover:bg-primary-gray-300 dark:bg-primary-600 dark:hover:bg-primary-400 mr-2 mt-4 md:mt-0 lg:mt-0;
+mat-sidenav {
+  @apply absolute top-0 left-0  flex flex-col justify-center items-start pt-8 pb-5;
+  width: 100%;
+  background: rgba(255,255,255,0.5);
+  backdrop-filter: blur(9px);
+  color: black;
+
+  &.dark {
+    background: #2F3157;
+  }
 
 
-  width: 163px;
-}
+  .menu-link {
+    @apply block p-3 h-12 w-12 my-2 mx-5 rounded-xl;
+  }
 
-@media screen and (max-width: 768px) {
-  .test-net {
-    left: 56%;
+  .menu-link:hover{
+    background-color: #ffffff75;
+
+  }
+
+  .menu-link.active::before {
+    @apply absolute top-0 w-1.5 h-12 my-2 ;
+    background-color: black;
+    &.dark {
+      background-color: #00CB75;
+    }
+    content: "";
+    left: -16px;
+    border-radius: 0 10px 10px 0;
+  }
+
+  .menu-link.active {
+    background-color: #6060620f;
+
+    &.dark {
+      background-color: #ffffff0f;
+    }
+
+     .mat-icon {
+      color: #232323 !important;
+
+      &.dark {
+        color: white !important;
+      }
+    }
   }
 }
+mat-sidenav-container {
+  box-shadow: rgba(4, 17, 29, 0.13) 0px 0px 10px 0px !important;
+}
+
+.menu-link:hover {
+  @apply text-gray-700
+}
+
+.menu-link {
+  @apply text-gray-500
+}
+
+.menu-link.active {
+  @apply text-gray-900;
+}
+
+
+
+mat-sidenav {
+   width: 100%
+}
+
+
+::ng-deep mat-sidenav-container ::-webkit-scrollbar {
+  display: none;
+  @apply lg:mt-9;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+
+.sticky {
+  position: fixed;
+  top: 0px;
+  background: rgba(255,255,255,0.5);
+  backdrop-filter: blur(9px);
+  z-index: 999;
+  padding-top: 0px;
+}
+
+::ng-deep .mat-elevation-z5 {
+  @apply flex justify-between shadow-xl p-5 lg:p-0 sm:mt-0  h-16;
+  position: relative;
+
+}
+
+mat-toolbar {
+  @apply mt-6 lg:mt-0 z-50;
+}
+

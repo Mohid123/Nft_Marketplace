@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { RouteService } from '@app/@core/services/route.service';
 import { ROUTER_UTILS } from '@app/@core/utils/router.utils';
@@ -23,7 +23,8 @@ SwiperCore.use([Pagination, Autoplay ]);
   encapsulation: ViewEncapsulation.None,
 })
 export class NotFoundPage implements OnInit {
-
+  @ViewChild('menu') menu!: ElementRef
+  @ViewChild('content') content!: ElementRef
   demoCLub = environment.demoClub;
   demoCLub1 = environment.demoClub1;
   testNet = environment.testNet;
@@ -80,6 +81,14 @@ export class NotFoundPage implements OnInit {
 
   ngOnInit(): void {
     this.getClubs();
+  }
+
+  openNav(){
+    this.menu.nativeElement.style.width = "100%";
+  }
+
+  closeNav(){
+  this.menu.nativeElement.style.width = "0%"
   }
 
   getClubs(){

@@ -4,7 +4,10 @@
   justify-content: center;
   border-radius: 1.21rem;
   border-radius: 21px;
+
  }
+
+
 
 
 .bg-card {
@@ -12,18 +15,21 @@
 }
 
 .btn-nft {
-  background: transparent linear-gradient(99deg, #FFB937 0%, #D59629 100%) 0% 0% no-repeat padding-box;
+  @apply w-24 h-8 text-sm rounded-full text-white;
+  background: #D69729;
   &.dark {
     background: transparent linear-gradient(109deg, #59C8D1 0%, #75F16D 100%) 0% 0% no-repeat padding-box;
   }
 }
 .btn-nft.Minted {
-  background: transparent linear-gradient(100deg, #FBB636 0%, #D9992B 100%) 0% 0% no-repeat padding-box;
+  @apply w-24 h-8 text-sm rounded-full text-white;
+  background: #D69729;
   &.dark {
     background: transparent linear-gradient(109deg, #C67BFF 0%, #C5E857 100%) 0% 0% no-repeat padding-box;
   }
 }
 .btn-nft.Draft {
+  @apply w-24 h-8 text-sm rounded-full text-white;
   background: #B2B2B2 0% 0% no-repeat padding-box;
 }
 
@@ -40,16 +46,26 @@ background-size: contain;
 }
 
 .card-border{
-  @apply p-3 rounded-2xl mb-6  border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-2;
-  height: 358px;
-  width: 281px;
-  border: 2px solid transparent;
+  @apply p-3 rounded-2xl mb-6 bg-white
+  transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 cursor-pointer;
+  height: 407px;
+  width: 305px;
+  border: 1px solid transparent;
+  box-shadow: rgba(4, 17, 29, 0.151) 0px 0px 10px 0px;
+  transition: transform .5s;
+ ;
 
 }
 
+.card-border:hover {
+  // transition: box-shadow .3s;
+  transform: scale(1.05);
+
+ }
+
 .trun{
 
-    width: 250px;
+    width: 150px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
