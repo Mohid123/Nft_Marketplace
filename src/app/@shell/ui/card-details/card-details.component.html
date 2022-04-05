@@ -7,65 +7,42 @@
   <p style="font-size: 20px; color: white">{{(creator$ | async)?.displayName}}...</p>
 </ngx-spinner>
 
-<div class="justify-center card-border ">
-  <div class="flex pattern"
+<div class="justify-center ">
+  <div class=""
     >
-    <div class="w-full md:flex lg:flex justify-evenly">
+    <div class="w-full md:flex lg:flex ">
       <!-- Left Section -->
       <div class="flex-col md:flex lg:flex">
-        <div class="p-6 md:p-0 lg:p-0 lg:pt-6 lg:pb-6 lg:pl-6">
-          <img  *ngIf="nft?.serverCaptureFileUrl" [src]="nft?.mediaType === 'Video' ?  nft?.videoThumbnailUrl :  (nft?.mediaType === 'Audio' ? '/assets/audio-bg.svg' : nft?.serverCaptureFileUrl) " alt="nftmarketSearch" class="resImg rounded-2xl" />
+        <div class="pl-3 pr-7">
+          <img *ngIf="nft?.serverCaptureFileUrl" [src]="nft?.mediaType === 'Video' ?  nft?.videoThumbnailUrl :  (nft?.mediaType === 'Audio' ? '/assets/audio-bg.svg' : nft?.serverCaptureFileUrl) " alt="nftmarketSearch" class="resImg rounded-2xl" />
         </div>
 
         <h1  *ngIf="nft?.mediaType === 'Video' || nft?.mediaType === 'Audio'" class="playBtn">
           <img (click)="imgClick(PreviewDialog,AudioPreviewDialog)"  src="../../../../assets/icons/node-play.svg" class="w-44 h-44" alt="">
          </h1>
-        <div class="mb-6 ml-6">
-          <span class="mt-6 inline-flex mr-2.5 text-lg dark:text-white opacity-50">
-            Contract Address
-          </span>
 
-          <div class="inline-flex" id="fileName"><span >{{nft?.nftContract}}</span><span>{{nft?.nftContract}}</span>
-          </div><br>
-          <p class="inline mt-6 text-lg opacity-50 dark:text-white mr-7">
-            Token Address
-          </p>
-          <span class="text-lg dark:text-white">ERC-721</span> <br /><br />
-          <a href="{{nft?.transactionHashUrl}}" target=_blank
-            class="inline-flex items-center justify-between px-3 bg-gray-400 bg-opacity-25 cursor-pointer rounded-xl md:mt-0 hover:bg-opacity-70 ">
-            <div class="flex items-start">
-              <img class="w-6 h-10" src="./assets/icons/polygon-matic-logo.svg" alt="polygon" />
-
-            </div>
-            <a href="{{nft?.transactionHashUrl}}" target=_blank
-              class="ml-3 mr-3 text-sm leading-none dark:text-white hover:text-gray-900">View on Polygon.</a>
-              <a href="{{nft?.transactionHashUrl}}" target=_blank
-              class=""><img class="w-4 h-10" src="./assets/icons/exit-top-right.svg" alt="polygon" /></a>
-
-          </a>
-        </div>
       </div>
       <!-- Right Section  -->
       <div class="m-4 lg:flex md:flex md:m-0 lg:m-0">
-        <div class="mt-10 lg:ml-11 md:ml-5">
+        <div class="mt-2">
           <div class="flex items-center justify-between">
-            <button  class="profileBtn">
-              <div class="flex rounded">
+            <button  class="creator-name">
+              <!-- <div class="flex rounded">
                 <img class="w-10 h-10 rounded-full" [src]="nft?.creator?.profileImageURL" [alt]="nft?.creator?.displayName" />
-              </div>
-              <span class="ml-6 text-sm dark:text-white"> {{nft?.creator?.displayName}}</span>
+              </div> -->
+              <span class="text-sm dark:text-white"> {{nft?.creator?.displayName}}</span>
             </button>
             <div class="flex justify-between">
               <span class="text-lg text-gray-400 tokenID ">Token ID <a href="{{nft?.transactionHashUrl}}" class="ml-3 dark:text-white"  target=_blank> #{{nft?.tokenId}}</a></span>
             </div>
           </div>
-          <p class="mt-6 mb-6 text-3xl font-medium tracking-wider dark:text-white trun">
+          <p class="mt-6 text-3xl font-medium tracking-wider dark:text-white trun">
            {{nft?.name}}
           </p>
-          <div class="flex items-center justify-start">
+          <!-- <div class="flex items-center justify-start">
             <div class="mt-0">
               <p class="text-lg text-gray-400">Creator</p>
-              <button class="inline-flex items-center justify-between py-2 dark:text-white rounded-xl">
+              <button class="inline-flex items-center justify-between py-2 rounded-full dark:text-white">
                 <div class="flex items-start rounded nft-img">
                   <img class="rounded-full w-7 h-7" [src]="nft?.creator?.profileImageURL" [alt]="nft?.creator?.displayName" />
                 </div>
@@ -76,7 +53,7 @@
             </div>
             <div class="ml-3">
               <p class="text-lg text-gray-400">Owner</p>
-              <button class="inline-flex items-center justify-between py-2 dark:text-white rounded-xl">
+              <button class="inline-flex items-center justify-between py-2 rounded-full dark:text-white">
                 <div class="flex items-start rounded nft-img">
                   <img class="rounded-full w-7 h-7" [src]="nft?.ownerData?.profilePicURL" [alt]="nft?.ownerData?.fullName" />
                 </div>
@@ -84,14 +61,56 @@
                   {{nft?.ownerData?.fullName}}</span>
               </button>
             </div>
+
+          </div> -->
+          <div class="mt-2">
+            <div class="mt-2">
+              <p class="inline text-base font-medium opacity-50 dark:text-white mr-7">
+                Creator
+               </p>
+               <p class="inline-flex text-base font-medium text-gray-500" >{{nft?.creator?.displayName}}
+               </p><br>
+            </div>
+            <div class="mt-2">
+              <p class="inline text-base font-medium opacity-50 dark:text-white mr-7">
+                Owner
+              </p>
+              <p class="inline-flex text-base font-medium text-gray-500"> {{nft?.ownerData?.fullName}}
+              </p>
+            </div>
+            <div class="mt-2">
+              <p class="inline text-base font-medium opacity-50 dark:text-white mr-7">
+                Contract Address
+               </p>
+              <div class="inline-flex text-base font-medium text-gray-500" id="fileName"><span >{{nft?.nftContract}}</span><span>{{nft?.nftContract}}</span>
+              </div><br>
+            </div>
+            <div class="mt-2">
+              <p class="inline text-base font-medium opacity-50 dark:text-white mr-7">
+                Token Address
+                </p>
+                <p class="inline-flex text-base font-medium text-gray-500"> ERC-721
+               </p><br>
+               <a  href="{{nft?.transactionHashUrl}}" target=_blank
+                 class="inline-flex items-center justify-between my-4">
+                 <!-- <div class="flex items-start">
+                   <img class="w-6 h-10" src="./assets/icons/polygon-matic-logo.svg" alt="polygon" />
+                 </div> -->
+                 <a href="{{nft?.transactionHashUrl}}" target=_blank
+                   class="text-sm font-medium leading-none text-primary-nodechain dark:text-white hover:text-gray-900">View on Polygon.</a>
+                   <!-- <a href="{{nft?.transactionHashUrl}}" target=_blank
+                   class=""><img class="w-4 h-10" src="./assets/icons/exit-top-right.svg" alt="polygon" /></a> -->
+               </a>
+            </div>
           </div>
-          <p class="mt-6 mb-2 text-lg text-gray-400">Price</p>
+
+          <!-- <p class="mt-6 mb-2 text-lg text-gray-400">Price</p> -->
           <div class="flex items-center justify-start mb-5">
-            <span class="text-2xl font-semibold tracking-widest dark:text-white">€ {{nft?.price}}</span>
+            <span class="text-4xl font-semibold tracking-widest dark:text-white">€ {{nft?.price}}</span>
             <!-- <span class="ml-3 text-sm text-white opacity-50">32.44 USD</span> -->
           </div>
-          <p class="text-lg text-gray-400">Description</p>
-          <div class="text-base text-justify break-words dark:text-white lg:mr-20 respDesc overflow-ellipsis">
+          <!-- <p class="text-lg text-gray-400">Description</p> -->
+          <div class="text-base text-justify text-gray-400 break-words dark:text-white lg:mr-20 respDesc overflow-ellipsis">
             {{nft?.description}}
           </div>
           <ng-container *ngIf="nft?.nftStatus && (isAdminPanel$ | async)">
@@ -148,6 +167,9 @@
     </div>
   </div>
 </ng-template>
+
+
+
 
 <ng-template #AudioPreviewDialog let-ref="dialogRef">
   <div style="background: black">
