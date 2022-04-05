@@ -62,6 +62,7 @@ export class RouteService {
       if (event instanceof NavigationError) {
        this.hideLoader();
       }
+      window.scrollTo(0, 0)
     });
   }
 

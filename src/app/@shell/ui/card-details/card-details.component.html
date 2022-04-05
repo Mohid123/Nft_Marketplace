@@ -154,11 +154,15 @@
 <ng-template #PreviewDialog let-ref="dialogRef">
   <div style="background: black">
     <div>
-      <video
+      <video style="
+        margin-right: auto;
+        margin-left: auto;
+        height: 100%;
+        width: 100%;
+        object-position: contain;
+        display: block;"
         class="preview-card"
         autoplay
-        width="960"
-        height="540"
         controls
         controlsList="nodownload"
       >
