@@ -130,7 +130,7 @@ input {
 
 
 .primary-btn {
-  @apply px-5 py-1 rounded-full text-white h-10 ;
+  @apply px-5 py-1 rounded-full text-white h-12 ;
   background: transparent linear-gradient(308deg, #D59529 0%, #F1B11D 100%) 0% 0% no-repeat padding-box;
   &.dark {
     @apply text-black;
