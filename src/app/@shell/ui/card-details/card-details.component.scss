@@ -225,6 +225,7 @@ video::-webkit-media-controls-play-button {
   background-color: #D59629;
   border-radius: 50%;
  margin-right: 20px;
+ margin-left: 5px;
 
 }
 video::-webkit-media-controls-volume-slider {
@@ -240,10 +241,11 @@ video::-webkit-media-controls-mute-button {
 video::-webkit-media-controls-timeline {
   background-color: #D59629;
   padding-bottom: 0;
-  margin-bottom: 20px;
+  margin-top: 12px;
+  margin-bottom: 12px;
 }
 video::-webkit-media-controls-fullscreen-button {
-  background-color: #d59629c2;
+  background-color: #D59629;
   border-radius: 50%;
   margin-left: 12px;
 }
