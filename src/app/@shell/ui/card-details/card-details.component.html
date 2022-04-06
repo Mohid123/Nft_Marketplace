@@ -155,35 +155,31 @@
 
 
 <ng-template #PreviewDialog let-ref="dialogRef">
-  <div style="background: black">
-    <div>
-      <video style="
-        margin-right: auto;
-        margin-left: auto;
-        height: 100%;
-        width: 100%;
-        object-position: contain;
-        display: block;"
-        class="preview-card"
-        autoplay
-        controls
-        controlsList="nodownload"
-      >
-        <source src="{{ nft?.serverCaptureFileUrl }}" type="video/mp4" />
-      </video>
-    </div>
-  </div>
+  <video style="
+  margin-right: auto;
+  margin-left: auto;
+  height: 100%;
+  width: 100%;
+  object-position: contain;
+  display: block;"
+  class="preview-card"
+  autoplay
+  controls
+  controlsList="nodownload"
+>
+  <source src="{{ nft?.serverCaptureFileUrl }}" type="video/mp4" />
+</video>
 </ng-template>
 
 
 
 
 <ng-template #AudioPreviewDialog let-ref="dialogRef">
-  <div style="background: black">
-    <div>
-      <audio controls>
-        <source src="{{ nft?.serverCaptureFileUrl }}" type="audio/mpeg">
-      </audio>
-    </div>
-  </div>
+  <audio controls>
+    <source src="{{ nft?.serverCaptureFileUrl }}" type="audio/mpeg">
+  </audio>
+
 </ng-template>
+
+
+

@@ -102,7 +102,7 @@ export class CardDetailsComponent implements OnInit {
       this.dialog.open(PreviewDialog);
     }
     if(this.nft.mediaType == 'Audio'){
-      this.dialog.open(PreviewDialog);
+      this.dialog.open(AudioPreviewDialog);
     }
   }
 }
