@@ -18,7 +18,7 @@ export class CreateNFTMembershipOptionsComponent  {
   img: FormData;
   nftForm: NFT;
   marked = false;
-
+  disabled = false;
   public createNft: FormGroup;
 
   price: any;
@@ -47,6 +47,7 @@ export class CreateNFTMembershipOptionsComponent  {
 
 
   save():void {
+    this.disabled = true;
     this.nftForm.price = this.createNft.controls.price.value;
     // this.createNft = this.nftService.createNftForm;
     this.nftForm.numberOfCopies = 1;

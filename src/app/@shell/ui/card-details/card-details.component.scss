@@ -67,8 +67,8 @@
 }
 
 .resImg {
-  width: 529px;
-  height: 538px;
+  // width: 529px;
+  // height: 538px;
 }
 
 .respDesc{
@@ -100,8 +100,8 @@
 
 @media (max-width: 640px) {
   .resImg {
-    height: 302px !important;
-    width: 362px !important;
+    // height: 302px !important;
+    // width: 362px !important;
 
   }
 
@@ -141,7 +141,6 @@
 
 .trun{
 
-  width: 400px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -149,13 +148,14 @@
 }
 
 .playBtn {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  margin-left: -517px;
-  margin-top: -150px;
+
+  @apply absolute left-64 top-80 text-center lg:top-72 lg:left-44 xl:top-96 xl:left-56 2xl:top-96 2xl:left-72;
+  // position: absolute;
+  // left: 50%;
+  // top: 50%;
+  // margin-left: -517px;
+  // margin-top: -150px;
   text-align: center;
-  // filter: invert(1);
   cursor: pointer;
   transition: transform 500ms ease-in-out 25ms;
 }

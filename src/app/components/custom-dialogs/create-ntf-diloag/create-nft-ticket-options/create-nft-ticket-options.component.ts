@@ -22,6 +22,7 @@ export class CreateNFTStyleComponent {
   price: any;
   copy: number;
   balance: number;
+  disabled = false;
 
   public createNft: FormGroup;
 
@@ -48,6 +49,7 @@ export class CreateNFTStyleComponent {
   }
 
   save():void {
+    this.disabled = true;
     this.nftForm.price = this.createNft.controls.price.value;
     // this.createNft = this.nftService.createNftForm;
     this.nftForm.numberOfCopies = this.createNft.controls.copies.value;
