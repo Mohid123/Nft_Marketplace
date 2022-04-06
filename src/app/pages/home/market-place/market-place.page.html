@@ -125,7 +125,7 @@
 
     <!--nft cards-->
     <div class="relative cards-container" style="min-height: 360px;">
-      <ngx-spinner [fullScreen]="false" [showSpinner]="isLoading" [show]="isLoading" bdColor="#D9DBE0" size="medium"
+      <ngx-spinner [fullScreen]="false" [showSpinner]="isLoading" [show]="isLoading" bdColor = "rgba(0,0,0,0.05)" size="medium"
         type="ball-scale-multiple">
         <p style="font-size: 20px; color: white">{{(creator$ | async)?.displayName}}...</p>
       </ngx-spinner>
