@@ -43,6 +43,7 @@ export class NotFoundPage implements OnInit {
   registrationForm: FormGroup;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
+  adminRouteUrl = ROUTER_UTILS.config.base.register;
 
   public file: any;
   public urls: any[] = [];

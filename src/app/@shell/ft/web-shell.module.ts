@@ -9,14 +9,18 @@ import { FooterModule } from '../ui/footer/footer.module';
 import { HeaderModule } from '../ui/header/header.module';
 import { LayoutModule } from '../ui/layout/layout.module';
 import { NotFoundPage } from '../ui/not-found/not-found.page';
+import { NavListComponent } from '../ui/side-nav/nav-list.component';
 import { AdminGuard } from './../../@core/guards/admin.guard';
 import { NavModule } from './../ui/nav/nav.module';
-
 
 const APP_ROUTES: Routes = [
   {
     path: ROUTER_UTILS.config.base.home,
     component: NotFoundPage,
+  },
+  {
+    path: ROUTER_UTILS.config.base.register,
+    component: NavListComponent,
   },
   {
     path: ROUTER_UTILS.config.base.clubName,
@@ -73,7 +77,8 @@ const APP_ROUTES: Routes = [
 
 @NgModule({
   imports: [
-    CommonModule,
+
+  CommonModule,
     RouterModule.forRoot(APP_ROUTES),
     FooterModule,
     HeaderModule,

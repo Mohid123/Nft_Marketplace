@@ -9,4 +9,6 @@ export interface Group {
   createdAt:     Date;
   updatedAt:     Date;
   id:            string;
+  groupImageUrl: string
+  groupImageBlurHash: string
 }

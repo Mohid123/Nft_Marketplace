@@ -12,7 +12,7 @@
 </app-layout>
 
 <ng-template #notAuthorized>
-  <app-nav *ngIf="showHedader$ | async"></app-nav>
+  <!-- <app-nav *ngIf="showHedader$ | async"></app-nav> -->
 <div class="main-bg">
   <router-outlet (activate)="onActivate($event)"></router-outlet>
 </div>

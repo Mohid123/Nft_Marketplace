@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ResponseAddMedia } from '@app/@core/models/response-add-media.model';
 import { MediaService } from '@app/@core/services/media.service';
@@ -23,9 +23,11 @@ import { GroupService } from './../../../../@core/services/group.service';
   styleUrls: ['./create-group.component.scss']
 })
 export class CreateGroupComponent {
+  @ViewChild('imgFile') imgFile;
   destroy$ = new Subject();
   public groupForm: FormGroup;
   public imgFormData = new FormData();
+  public groupFile: any;
 
 
   private _isLoading:boolean;
@@ -33,6 +35,7 @@ export class CreateGroupComponent {
   public groups$ = this.groupService.groups$;
   public limit = 6 ;
   public page:number;
+  public imageSrc: any;
 
   constructor(
     private authService: AuthService,
@@ -51,6 +54,9 @@ export class CreateGroupComponent {
       description: new FormControl('', [ Validators.required, Validators.minLength(15), Validators.maxLength(600) ]),
       royaltyFee: new FormControl('', [Validators.required, Validators.min(1) ,Validators.max(20)]),
       file: new FormControl(''),
+      groupFile: new FormControl(''),
+      fileName: new FormControl(''),
+      img: new FormControl(''),
     });
 
     this.page = 1;
@@ -71,9 +77,50 @@ export class CreateGroupComponent {
     this.groupService.getAllGroupsByClub(this.clubName, this.page, param);
   }
 
+  onSelectFile(event): void {
+    if (event.target.files && event.target.files[0]) {
+      this.groupFile = event.target.files[0];
+      this.groupForm.controls?.fileName.setValue(this.groupFile.name);
+
+      if (event.target.files && event.target.files[0]) {
+        const reader = new FileReader();
+        reader.onload = (e: any) => {
+          this.cropImg(event)
+        };
+        reader.readAsDataURL(event.target.files[0]);
+      }
+    }
+  }
+
+  cropImg(event) :void {
+    // debugger
+    this.groupForm.controls.groupFile.setValue(event);
+    this.customDialogService.showImageCropperDialog(event, 1.13 / 1,true).then(matRef => {
+      matRef.afterClosed().subscribe((result) => {
+        // console.log('showImageCropperDialog:',result);
+        if (result) {
+          this.imageSrc = result;
+          this.groupForm.patchValue({
+            img: this.imageSrc,
+          });
+        } else {
+          this.imageSrc = null;
+          this.groupFile = null;
+          this.groupForm.controls.img.setValue(null);
+          this.imgFile.nativeElement.value = "";
+        }
+      });
+    })
+  }
+
+  editImg():void {
+    this.cropImg(this.groupForm.controls.file.value);
+  }
+
   addGroup():void {
     this.spinner.show('main');
     const node = document.getElementById('group-img');
+    debugger
     htmlToImage
       .toPng(node, {
         canvasWidth: 186,
@@ -92,15 +139,20 @@ export class CreateGroupComponent {
         // const img = new Image();
         // img.src = dataUrl;
         // document.getElementById('group-view').appendChild(img);
+        debugger
         this.groupForm.patchValue({
           file: this.mediaService.dataURLtoFile(
             dataUrl,
             this.groupForm.controls.name.value + '.png',
           ),
+          groupFile: this.groupFile
         });
         this.imgFormData.append('file', this.groupForm.get('file').value);
+        this.imgFormData.append('groupFile', this.groupForm.get('groupFile').value);
+        debugger
         this.mediaService.uploadMedia('group', this.imgFormData).pipe(take(1),
             exhaustMap((res: ApiResponse<ResponseAddMedia>) => {
+              debugger
               if(!res.hasErrors()) {
                 const param: AddGroup = {
                   name: this.groupForm.controls.name.value,
@@ -108,6 +160,8 @@ export class CreateGroupComponent {
                   description: this.groupForm.controls.description.value,
                   appPackageId: this.authService.loggedInUser?.appPackageId,
                   coverImageUrl: res.data.url,
+
+
                 };
                 return this.groupService.addGroups(param);
               } else {

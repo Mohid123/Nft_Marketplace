@@ -23,6 +23,60 @@
       <p class="error-msg error" *ngIf="groupForm.controls.name.touched && groupForm.controls.name.errors?.required">please enter name</p>
       <p class="error-msg error" *ngIf="groupForm.controls.name.touched && groupForm.controls.name.errors?.minlength">name should be greater than or equal to {{groupForm.controls.name.errors?.minlength.requiredLength}} character </p>
 
+
+      <div class="flex flex-col" >
+        <li *ngIf="imageSrc" class="inline-flex justify-around my-4 card-bg">
+          <ul class="border-gradient-dp-p-bg-dark hover:border-gradient-tl-p-bg-light gradient-border-2">
+            <img id="ticket" class="preview" src="{{imageSrc}}" >
+            </ul>
+         </li>
+        <span class="text-xl">Select Group Image</span><br>
+        <div class="relative flex justify-between overflow-hidden border-2 border-gray-400 border-dashed rounded-lg h-14">
+        <button
+          class="flex items-center justify-between px-4 py-2 font-bold bg-primary-gray-100 hover:bg-indigo-dark">
+          <ng-container *ngIf="!imageSrc; else show">
+            <div class="ml-2 font-light text-gray-400">Select Image to Upload</div>
+        </ng-container>
+        <ng-template #show>
+          <div class="w-10 ml-2 font-light truncate">{{groupFile.name}}</div>
+        </ng-template>
+          <div>
+            <svg
+              fill="#FFF"
+              height="28"
+              viewBox="0 0 24 24"
+              width="28"
+              xmlns="http://www.w3.org/2000/svg"
+              class="m-2">
+              <path d="M0 0h24v24H0z" fill="none" />
+              <path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z" />
+            </svg>
+          </div>
+        </button>
+        <input #imgFile
+          class="absolute block w-full opacity-0 cursor-pointer pin-r pin-t"
+          type="file"
+          name=""  accept="image/png, image/gif, image/jpeg"
+          (change)="onSelectFile($event)"
+        />
+
+        <a *ngIf="imageSrc" class="flex items-center justify-center w-1/3 text-center cursor-pointer" (click)="editImg()"><span class="mr-2">Edit</span>  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
+          <g id="Group_56289" data-name="Group 56289" transform="translate(11150 -4)">
+            <circle id="Ellipse_3170" data-name="Ellipse 3170" cx="12.5" cy="12.5" r="12.5" transform="translate(-11150 4)" fill="#fff"/>
+            <path id="Icon_material-edit" data-name="Icon material-edit" d="M4.5,12.486v2.1H6.6l6.2-6.2-2.1-2.1Zm9.928-5.723a.558.558,0,0,0,0-.79L13.116,4.66a.558.558,0,0,0-.79,0L11.3,5.686l2.1,2.1Z" transform="translate(-11146.5 6.504)" fill="#6a6a6a"/>
+          </g>
+        </svg>
+
+      </a>
+
+      </div>
+
+
+
+      </div>
+
+
+
       <label for="royaltyFee">Royalty Fee (%)</label>
       <input type='text' name="royaltyFee" formControlName="royaltyFee" maxlength="2" (keypress)="numberOnly($event)">
       <p class="error-msg error" *ngIf="groupForm.controls.royaltyFee.touched && groupForm.controls.royaltyFee.errors?.required">please enter fee</p>

@@ -10,6 +10,9 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+.preview {
+  @apply object-cover w-24 h-24 ;
+}
 
 // input[type=number] {
 //   -moz-appearance: textfield;
@@ -26,11 +29,11 @@ input::-webkit-inner-spin-button {
     }
   }
 
-  img {
-    @apply object-scale-down mt-6 sm:mt-6 md:mt-12;
-    width: 410px;
-    height: 90px;
-  }
+  // img {
+  //   @apply object-scale-down mt-6 sm:mt-6 md:mt-12;
+  //   width: 410px;
+  //   height: 90px;
+  // }
 
   h1 {
     @apply my-4 text-3xl self-start;
@@ -62,7 +65,7 @@ input::-webkit-inner-spin-button {
     }
 
     button {
-      @apply w-40 h-11 my-8 self-center;
+      @apply  h-11 my-8 self-center;
     }
 
   }
