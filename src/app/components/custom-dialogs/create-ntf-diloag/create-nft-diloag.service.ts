@@ -95,7 +95,7 @@ export class CreateNFTDiloagService extends AsyncCreateNFTDialog<
     return this.matDialog.open(
       CreateNFTDiloagModule.getCreateNFTOptionsComponent(),
       {
-        disableClose: false,
+        disableClose: true,
         panelClass: ['create-nft-options-dialog-overlay', 'action-dialog'],
       },
     );

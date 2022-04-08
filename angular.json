@@ -32,10 +32,12 @@
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "src/theme/styles.scss",
-
+              "node_modules/intl-tel-input/build/css/intlTelInput.css",
               "node_modules/ngx-toastr/toastr.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/intl-tel-input/build/js/intlTelInput.min.js"
+            ]
           },
           "configurations": {
             "production": {

@@ -12,6 +12,7 @@ import { NotFoundPage } from '../ui/not-found/not-found.page';
 import { NavListComponent } from '../ui/side-nav/nav-list.component';
 import { AdminGuard } from './../../@core/guards/admin.guard';
 import { NavModule } from './../ui/nav/nav.module';
+import { SideNavModule } from './../ui/side-nav/side-nav.module';
 
 const APP_ROUTES: Routes = [
   {
@@ -78,12 +79,14 @@ const APP_ROUTES: Routes = [
 @NgModule({
   imports: [
 
+
   CommonModule,
     RouterModule.forRoot(APP_ROUTES),
     FooterModule,
     HeaderModule,
     LayoutModule,
     NotFoundModule,
+    SideNavModule
   ],
   exports: [
     RouterModule,
@@ -92,6 +95,7 @@ const APP_ROUTES: Routes = [
     NavModule,
     LayoutModule,
     NotFoundModule,
+    SideNavModule
   ],
   providers: [
     CreatorResolver
