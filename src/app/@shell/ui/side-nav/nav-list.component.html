@@ -29,7 +29,7 @@
                   <ng-template matStepLabel>Add Club</ng-template>
                   <div class="image-upload">
                     <label for="file-input">
-                      <img style="width: 500px" src="../../../../assets/upload.png"/>
+                      <img src="../../../../assets/upload.png"/>
                     </label>
 
                     <input id="file-input" type="file" (change)="onSelectFile($event)" multiple/>
@@ -62,23 +62,22 @@
               <mat-step [stepControl]="firstFormGroup">
                 <h3 class="absolute pt-4 text-base font-thin lg:text-lg text-start top-20"><span class="mr-2 text-md">x</span> Create Marketplace(Step 3 of 4)</h3>
                 <h1 class="mb-16 text-2xl font-medium tracking-wide lg:text-5xl text-start text-dark">Enter your phone <br>number</h1>
-                <form>
+                <form [formGroup]="firstFormGroup" class="justify-start">
                   <ng-template matStepLabel>Add Club</ng-template>
                   <div class="w-full mb-16 border-b border-teal-500 lg:w-62">
-                    <input type="text" (keypress)="numberOnly($event)"
+                    <input [(ngModel)]="phoneNumber"
+                    [ngModelOptions]="{standalone: true}" type="text" (keypress)="numberOnly($event)"
                       ng2TelInput
                       [ng2TelInputOptions]="{initialCountry: 'bg'}"
                       (countryChange)="onCountryChange($event)"
                       class="leading-tight text-gray-700 bg-transparent border-none appearance-none w-62 focus:outline-none" placeholder="xxxxxxxxxx"/>
                     <p class="error-msg error" *ngIf="firstFormGroup.controls.name.touched && firstFormGroup.controls.name.errors?.required">please enter Name</p></div>
-                    <div class="flex justify-end w-full lg:w-62">
-                      <button mat-button matStepperPrevious class="back-btn">Back</button>
-                      <button mat-button matStepperNext class="primary-btn" >Continue</button>
-                    </div>
+                  <div class="flex justify-end w-full lg:w-62">
+                    <button mat-button matStepperPrevious class="back-btn">Back</button>
+                    <button mat-button matStepperNext class="primary-btn">Continue</button>
+                  </div>
                 </form>
               </mat-step>
-
-
               <mat-step [stepControl]="firstFormGroup">
                 <h3 class="absolute pt-4 text-base font-thin lg:text-lg text-start top-20"><span class="mr-2 text-md">x</span> Create Marketplace(Step 4 of 4)</h3>
                 <h1 class="mb-16 text-2xl font-medium tracking-wide lg:text-5xl text-start text-dark">Enter the 6 digit code  <br>sent to</h1>
@@ -156,7 +155,7 @@
       <!-- Col -->
       <div
         class="hidden w-full h-screen bg-white bg-cover rounded-l-lg lg:block lg:w-5/12">
-        <img style="object-fit: cover; height: 100vh; width: 100%; margin-left: 20px ;" src="../../../../assets/on-board.svg" alt="">
+        <img style="object-fit: cover;" src="../../../../assets/on-board.svg" alt="">
       </div>
 
 

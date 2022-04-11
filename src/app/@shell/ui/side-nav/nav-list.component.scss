@@ -10,3 +10,9 @@
 .image-upload>input {
   display: none;
 }
+
+.file-input {
+  img{
+    @apply w-64 lg:w-2/4
+  }
+}

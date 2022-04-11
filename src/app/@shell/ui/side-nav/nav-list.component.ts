@@ -16,6 +16,8 @@ export class NavListComponent implements OnInit {
   countryCode: number;
   otp!: string;
 
+  phoneNumber: number
+
 
 
 
