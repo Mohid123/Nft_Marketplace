@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { CreatorService } from '@app/@core/services/creator.service';
 import SwiperCore, { Autoplay, Pagination } from "swiper";
 import { GroupService } from './../../../@core/services/group.service';
 SwiperCore.use([Pagination, Autoplay ]);
@@ -18,7 +19,9 @@ export class SwiperComponent implements OnInit {
   public searchValu = '';
   public clubName: string;
   public page:number;
-  constructor( private groupService: GroupService) { }
+  creator$ = this.creatorService.Creator$;
+  constructor( private groupService: GroupService,
+    private creatorService: CreatorService) { }
 
   ngOnInit(): void {
   }
