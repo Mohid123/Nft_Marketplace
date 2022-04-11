@@ -9,7 +9,7 @@
           <!-- <h1 class="text-4xl font-thin text-center">Welcome Back</h1> -->
           <div class="w-full mt-4">
             <mat-stepper [linear]="true" labelPosition="bottom" #stepper class="w-full h-full px-6 py-6 text-start">
-              <mat-step [stepControl]="firstFormGroup">
+              <!-- <mat-step [stepControl]="firstFormGroup">
                 <h3 class="absolute pt-4 text-base font-thin lg:text-lg text-start top-20"><span class="mr-2 text-md">x</span> Create Marketplace(Step 1 of 4)</h3>
                 <h1 class="mb-16 text-2xl font-medium tracking-wide lg:text-5xl text-start text-dark">Let's start with Your<br>Marketplace name</h1>
                 <form [formGroup]="firstFormGroup" class="justify-start">
@@ -51,36 +51,34 @@
                     <button mat-button matStepperNext class="primary-btn" >Continue</button>
                   </div>
                 </form>
-                <!-- <div>
-                  <button mat-button matStepperPrevious>Back</button>
-                  <button mat-button (click)="stepper.reset()">Reset</button>
-                </div> -->
-              </mat-step>
+
+              </mat-step> -->
 
               <!--api call nest-->
 
-              <mat-step [stepControl]="firstFormGroup">
+              <mat-step>
                 <h3 class="absolute pt-4 text-base font-thin lg:text-lg text-start top-20"><span class="mr-2 text-md">x</span> Create Marketplace(Step 3 of 4)</h3>
                 <h1 class="mb-16 text-2xl font-medium tracking-wide lg:text-5xl text-start text-dark">Enter your phone <br>number</h1>
-                <form [formGroup]="firstFormGroup" class="justify-start">
+                <form class="justify-start">
                   <ng-template matStepLabel>Add Club</ng-template>
                   <div class="w-full mb-16 border-b border-teal-500 lg:w-62">
-                    <input [(ngModel)]="phoneNumber"
+                    <input [(ngModel)]="phoneNumber" min="10" max="15"
                     [ngModelOptions]="{standalone: true}" type="text" (keypress)="numberOnly($event)"
                       ng2TelInput
                       [ng2TelInputOptions]="{initialCountry: 'bg'}"
                       (countryChange)="onCountryChange($event)"
-                      class="leading-tight text-gray-700 bg-transparent border-none appearance-none w-62 focus:outline-none" placeholder="xxxxxxxxxx"/>
-                    <p class="error-msg error" *ngIf="firstFormGroup.controls.name.touched && firstFormGroup.controls.name.errors?.required">please enter Name</p></div>
+                      class="leading-tight text-gray-700 bg-transparent border-none appearance-none w-62 focus:outline-none" placeholder="Enter phone numberOnly"/>
+                   </div>
                   <div class="flex justify-end w-full lg:w-62">
                     <button mat-button matStepperPrevious class="back-btn">Back</button>
-                    <button mat-button matStepperNext class="primary-btn">Continue</button>
+                    <!-- <button mat-button matStepperNext class="primary-btn">Continue</button> -->
+                    <button mat-button (click)="getOTP()" class="primary-btn">Get OTP</button>
                   </div>
                 </form>
               </mat-step>
-              <mat-step [stepControl]="firstFormGroup">
+              <mat-step>
                 <h3 class="absolute pt-4 text-base font-thin lg:text-lg text-start top-20"><span class="mr-2 text-md">x</span> Create Marketplace(Step 4 of 4)</h3>
-                <h1 class="mb-16 text-2xl font-medium tracking-wide lg:text-5xl text-start text-dark">Enter the 6 digit code  <br>sent to</h1>
+                <h1 class="mb-16 text-2xl font-medium tracking-wide lg:text-5xl text-start text-dark">Enter the 6 digit code  <br>sent to {{phoneNumber}}</h1>
                 <form [formGroup]="firstFormGroup" class="justify-start">
                   <ng-template matStepLabel>Add Club</ng-template>
                   <div class="w-full mb-16 lg:w-62">
@@ -89,6 +87,7 @@
                     <div class="flex justify-end w-full lg:w-62">
                       <button mat-button matStepperPrevious class="back-btn">Back</button>
                       <button mat-button matStepperNext class="primary-btn" >Continue</button>
+                      <button mat-button class="primary-btn" (click)="handleClick()" >Verify OTP</button>
                     </div>
                 </form>
               </mat-step>
@@ -150,6 +149,9 @@
 
             </mat-stepper>
           </div>
+
+          <!--recaptcha-->
+          <div id="sign-in-button"></div>
       </div>
       </div>
       <!-- Col -->

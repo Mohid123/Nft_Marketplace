@@ -1,5 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+//firebase service + environmnet module
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -7,6 +11,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatStepperModule } from '@angular/material/stepper';
 import { RouterModule } from '@angular/router';
 import { ROUTER_UTILS } from '@app/@core/utils/router.utils';
+import { environment } from '@environments/environment';
 import { NgOtpInputModule } from 'ng-otp-input';
 import { Ng2TelInputModule } from 'ng2-tel-input';
 import { NavListComponent } from './nav-list.component';
@@ -17,6 +22,11 @@ import { NavListComponent } from './nav-list.component';
     NavListComponent
   ],
   imports: [
+
+
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
     FormsModule,
     CommonModule,
     NgOtpInputModule,
