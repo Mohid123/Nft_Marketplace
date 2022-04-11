@@ -9,7 +9,7 @@ import { AuthService } from '@app/pages/auth/services/auth.service';
 import * as htmlToImage from 'html-to-image';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { of, Subject } from 'rxjs';
+import { combineLatest, of, Subject } from 'rxjs';
 import { distinctUntilChanged, exhaustMap, take, takeUntil } from 'rxjs/operators';
 import { AddGroup } from './../../../../@core/models/requests/add-group.model';
 import { ApiResponse } from './../../../../@core/models/response.model';
@@ -27,6 +27,7 @@ export class CreateGroupComponent {
   destroy$ = new Subject();
   public groupForm: FormGroup;
   public imgFormData = new FormData();
+  public groupimgFormData = new FormData();
   public groupFile: any;
 
 
@@ -148,39 +149,53 @@ export class CreateGroupComponent {
           groupFile: this.groupFile
         });
         this.imgFormData.append('file', this.groupForm.get('file').value);
-        this.imgFormData.append('groupFile', this.groupForm.get('groupFile').value);
+        this.groupimgFormData.append('file', this.groupForm.get('groupFile').value);
         debugger
-        this.mediaService.uploadMedia('group', this.imgFormData).pipe(take(1),
-            exhaustMap((res: ApiResponse<ResponseAddMedia>) => {
-              debugger
-              if(!res.hasErrors()) {
-                const param: AddGroup = {
-                  name: this.groupForm.controls.name.value,
-                  royaltyFee: this.groupForm.controls.royaltyFee.value,
-                  description: this.groupForm.controls.description.value,
-                  appPackageId: this.authService.loggedInUser?.appPackageId,
-                  coverImageUrl: res.data.url,
 
+        const mediaUpload:any = [];
+        mediaUpload.push(this.mediaService.uploadMedia('group', this.imgFormData));
 
-                };
-                return this.groupService.addGroups(param);
-              } else {
-                return of(null);
+        if(this.imageSrc){
+          mediaUpload.push(this.mediaService.uploadMedia('group', this.groupimgFormData));
+        }
+
+        combineLatest(mediaUpload)
+        .pipe(
+          take(1),
+          exhaustMap((res: ApiResponse<ResponseAddMedia>) => {
+            debugger
+            if(!res[0].hasErrors()) {
+              const param: AddGroup = {
+                name: this.groupForm.controls.name.value,
+                royaltyFee: this.groupForm.controls.royaltyFee.value,
+                description: this.groupForm.controls.description.value,
+                appPackageId: this.authService.loggedInUser?.appPackageId,
+                coverImageUrl: res[0].data.url,
+              };
+
+              if (res[0] && res[1] && !res[1].hasErrors()) {
+                param.groupImageUrl = res[1].data.url
               }
-            }),
-          ).subscribe((res:any) => {
-            this.spinner.hide('main');
-            if (res !== null && !res.hasErrors()) {
-              this.cf.detectChanges();
-              this.toastr.success('New group successfully added.', 'Success!');
-              this.getGroup()
-              this.close();
+
+              return this.groupService.addGroups(param);
             } else {
-              this.imgFormData = new FormData();
-              this.toastr.error(res.errors[0]?.error?.message, 'Error!');
-              // alert('error :' + res.errors[0]?.error?.message);
+              return of(null);
             }
-          });
+          }),
+        )
+        .subscribe((res:any) => {
+          this.spinner.hide('main');
+          if (res !== null && !res.hasErrors()) {
+            this.cf.detectChanges();
+            this.toastr.success('New group successfully added.', 'Success!');
+            this.getGroup()
+            this.close();
+          } else {
+            this.imgFormData = new FormData();
+            this.toastr.error(res.errors[0]?.error?.message, 'Error!');
+            // alert('error :' + res.errors[0]?.error?.message);
+          }
+        });
       })
       .catch((error) => {
         this.toastr.warning(error, 'Error!');
