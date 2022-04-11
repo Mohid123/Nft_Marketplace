@@ -257,10 +257,11 @@ video::-webkit-media-controls-fullscreen-button {
   background-size: cover;
   position: relative;
   border-radius: 2px;
+
 }
 
 .audioPlayer audio{
 position: absolute;
-bottom: 0;
+bottom: 2%;
 width: 100%
 }

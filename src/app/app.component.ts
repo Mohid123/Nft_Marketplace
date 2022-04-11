@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { ViewportScroller } from '@angular/common';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivationStart, Router } from '@angular/router';
@@ -13,6 +14,7 @@ import { CreatorService } from './@core/services/creator.service';
 import { CustomDialogService } from './@core/services/custom-dialog/custom-dialog.service';
 import { RouteService } from './@core/services/route.service';
 import { NotFoundPage } from './@shell/ui/not-found/not-found.page';
+import { NavListComponent } from './@shell/ui/side-nav/nav-list.component';
 
 @Component({
   selector: 'app-root',
@@ -80,7 +82,7 @@ export class AppComponent implements OnInit {
     this.router.events.pipe(
       filter((event) => event instanceof ActivationStart),
       ).subscribe((event: any) => {
-        if(event?.snapshot?.component?.name.toString() === NotFoundPage.name) {
+        if(event?.snapshot?.component?.name.toString() === NotFoundPage.name || event?.snapshot?.component?.name.toString() === NavListComponent.name ) {
           // console.log('event.snapshot.component:',event.snapshot.component.name);
           this.ngxFavicon.setFavicon("../assets/icons/favicon.png");
           this.themeService.setHeader(false);

@@ -15,8 +15,8 @@
     <div class="w-full lg:flex ">
       <!-- Left Section -->
       <div class="flex-col sm:w-full lg:w-5/12 md:w-full lg:flex">
-        <!-- <div class="pl-3 pr-7 container">
-          <img *ngIf="nft?.serverCaptureFileUrl" [src]="nft?.mediaType === 'Video' ?  nft?.videoThumbnailUrl :  (nft?.mediaType === 'Audio' ? '/assets/audio-bg.svg' : nft?.serverCaptureFileUrl) " alt="nftmarketSearch" class="resImg relative rounded-2xl" />
+        <!-- <div class="container pl-3 pr-7">
+          <img *ngIf="nft?.serverCaptureFileUrl" [src]="nft?.mediaType === 'Video' ?  nft?.videoThumbnailUrl :  (nft?.mediaType === 'Audio' ? '/assets/audio-bg.svg' : nft?.serverCaptureFileUrl) " alt="nftmarketSearch" class="relative resImg rounded-2xl" />
           <h1  *ngIf="nft?.mediaType === 'Video' || nft?.mediaType === 'Audio'" class="playBtn">
             <img (click)="imgClick(PreviewDialog,AudioPreviewDialog)"  src="../../../../assets/icons/node-play.svg" class="w-32 h-32 lg:w-16 lg:h-16" alt="">
            </h1>
@@ -43,15 +43,15 @@
 
         </div>
         <div class="container" style="height: 520px" *ngIf="nft?.mediaType === 'Audio'">
-          <div class="audioPlayer">
+          <div class="audioPlayer" >
             <audio controls = 'controls'>
-              <source src="{{ nft?.serverCaptureFileUrl }}" type="audio/mpeg">
+              <source  src="{{ nft?.serverCaptureFileUrl }}" type="audio/mpeg">
             </audio>
           </div>
         </div>
 
         <div class="container" style="height: 520px" *ngIf="nft?.mediaType !== 'Video' && nft?.mediaType !== 'Audio'">
-          <img [src]="nft?.serverCaptureFileUrl" class="resImg relative rounded-2xl">
+          <img [src]="nft?.serverCaptureFileUrl" class="relative resImg rounded-2xl">
         </div>
 
 
@@ -61,8 +61,8 @@
 
       </div>
       <!-- Right Section  -->
-      <div class="w-6/12 m-4 lg:flex  md:m-0 lg:m-0">
-        <div class="mt-2 w-full">
+      <div class="w-6/12 m-4 lg:flex md:m-0 lg:m-0">
+        <div class="w-full mt-2">
           <div class="flex items-center justify-between">
             <button  class="creator-name">
               <!-- <div class="flex rounded">
