@@ -30,6 +30,9 @@ export class JwtInterceptor implements HttpInterceptor {
       request = request.clone({
         setHeaders: {
           Authorization: `Bearer ${token}`,
+          'Cache-Control': 'no-cache',
+          'Pragma': 'no-cache',
+          'Expires': 'Sat, 01 Jan 2000 00:00:00 GMT'
         },
       });
     }
