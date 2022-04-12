@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { ApiResponse } from '@app/@core/models/response.model';
 import { getItem, setItem } from '@app/@core/utils';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
 import { Creator } from '../models/creator.model';
+import { environment } from './../../../environments/environment';
 import { CreatorStats } from './../models/creator-stats.mode';
-import { ApiResponse } from './../models/response.model';
 import { StorageItem } from './../utils/local-storage.utils';
 import { ApiService } from './api.service';
 
@@ -31,6 +32,14 @@ export class CreatorService  extends ApiService<creatorData> {
   private _CreatorStats$ = new BehaviorSubject<CreatorStats>(null);
   public readonly CreatorStats$: Observable<CreatorStats> = this._CreatorStats$.asObservable();
 
+  private _creator$ = new BehaviorSubject<Array<Creator>>([]);
+  public readonly groups$: Observable<Array<Creator>> = this._creator$.asObservable();
+
+  private _totalCount$ = new BehaviorSubject<number>(0);
+  public readonly totalCount$: Observable<number> = this._totalCount$.asObservable();
+
+
+  private limit = environment.limit;
   get Creator() : Creator {
     return this._Creator$.getValue();
   }
@@ -106,5 +115,19 @@ export class CreatorService  extends ApiService<creatorData> {
         }),
       );
   }
+
+  addCreator(param: Creator): Observable<ApiResponse<creatorData>> {
+    return this.post('/creator/createCreator', param).pipe(take(1), tap((result:ApiResponse<Creator>) => {
+      if(!result.hasErrors()) {
+        this._totalCount$.next(this._totalCount$.getValue()+1);
+       if(this._creator$.getValue().length < this.limit ) {
+         const creator: Array<Creator> = this._creator$.getValue();
+         this._creator$.next([result.data,...creator])
+       }
+      }
+    }))
+  }
+
+
 
 }

@@ -115,7 +115,7 @@ export class CreateGroupComponent {
   }
 
   editImg():void {
-    this.cropImg(this.groupForm.controls.file.value);
+    this.cropImg(this.groupForm.controls.groupFile.value);
   }
 
   addGroup():void {

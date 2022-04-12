@@ -22,6 +22,7 @@ const APP_ROUTES: Routes = [
   {
     path: ROUTER_UTILS.config.base.register,
     component: NavListComponent,
+
   },
   {
     path: ROUTER_UTILS.config.base.clubName,

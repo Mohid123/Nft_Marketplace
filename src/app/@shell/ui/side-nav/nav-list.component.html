@@ -8,51 +8,66 @@
         <div class="flex flex-col justify-center flex-1 mb-8">
           <!-- <h1 class="text-4xl font-thin text-center">Welcome Back</h1> -->
           <div class="w-full mt-4">
-            <mat-stepper [linear]="true" labelPosition="bottom" #stepper class="w-full h-full px-6 py-6 text-start">
-              <!-- <mat-step [stepControl]="firstFormGroup">
+            <mat-stepper labelPosition="bottom" #stepper class="w-full h-full px-6 py-6 text-start">
+              <mat-step>
                 <h3 class="absolute pt-4 text-base font-thin lg:text-lg text-start top-20"><span class="mr-2 text-md">x</span> Create Marketplace(Step 1 of 4)</h3>
                 <h1 class="mb-16 text-2xl font-medium tracking-wide lg:text-5xl text-start text-dark">Let's start with Your<br>Marketplace name</h1>
-                <form [formGroup]="firstFormGroup" class="justify-start">
+                <form [formGroup]="creatorForm" class="justify-start">
                   <ng-template matStepLabel>Add Club</ng-template>
                   <div class="w-full mb-16 border-b border-teal-500 lg:w-62">
                     <input class="leading-tight text-gray-700 bg-transparent border-none appearance-none w-62 focus:outline-none" formControlName="name" required type="text" placeholder="Marketplace" aria-label="Full name">
-                    <p class="error-msg error" *ngIf="firstFormGroup.controls.name.touched && firstFormGroup.controls.name.errors?.required">please enter Name</p></div>
+                    <p class="error-msg error" *ngIf="creatorForm.controls.name.touched && creatorForm.controls.name.errors?.required">Name is Required</p>
+                    <p class="error-msg error" *ngIf="creatorForm.controls.name.touched && creatorForm.controls.name.errors?.minlength">Name should be greater than or equal to {{creatorForm.controls.name.errors?.minlength.requiredLength}} character </p>
+                  </div>
                   <div class="flex justify-end w-full lg:w-62">
-                    <button mat-button matStepperNext class="primary-btn" [disabled]="firstFormGroup.invalid">Continue</button>
+                    <button mat-button matStepperNext class="primary-btn" [disabled]="creatorForm.invalid">Continue</button>
                   </div>
                 </form>
               </mat-step>
               <mat-step>
                 <h3 class="absolute pt-4 text-base font-thin lg:text-lg text-start top-20"><span class="mr-2 text-md">x</span> Create Marketplace(Step 2 of 4)</h3>
                 <h1 class="mb-16 text-2xl font-medium tracking-wide lg:text-5xl text-start text-dark">Upload Marketplace<br class="leading-loose">profile image</h1>
-                <form [formGroup]="firstFormGroup" class="justify-start">
+                <form [formGroup]="creatorForm" class="justify-start">
                   <ng-template matStepLabel>Add Club</ng-template>
                   <div class="image-upload">
                     <label for="file-input">
                       <img src="../../../../assets/upload.png"/>
                     </label>
 
-                    <input id="file-input" type="file" (change)="onSelectFile($event)" multiple/>
+                    <input #imgFile id="file-input" accept="image/png, image/gif, image/jpeg" type="file" (change)="onSelectProfile($event)"/>
                   </div>
 
-                   <div class="w-full mt-4 mb-5 overflow-y-hidden border-yellow-600 lg:w-38 xl:w-38">
-                    <div class="object-cover h-auto" data-max-image="10" *ngIf="multiples.length > 0">
-                    <ng-container *ngFor="let multiple of multiples; let i = index;">
+                   <div class="w-full mt-4 mb-5 overflow-y-hidden border-yellow-600 lg:w-38 xl:w-38" >
+                    <div *ngIf="groupFile" class="object-cover h-auto" >
                       <div class="flex justify-between w-full p-5 mb-3 border-2 border-gray-200 rounded align-items-center">
-                        <img [src]="multiple" class="w-20 h-16 mr-3 rounded-sm">
+                        <img src="{{imageSrc}}" class="w-20 h-16 mr-3 rounded-sm">
 
-                        <i class="p-0 text-yellow-500 cursor-pointer fas fa-minus-circle" >yes</i>
+                        <button (click)="editImg()" >
+                          <i  class="flex items-center p-0 text-yellow-500 cursor-pointer fas fa-minus-circle" >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
+                            <g id="Group_56289" data-name="Group 56289" transform="translate(11150 -4)">
+                              <circle id="Ellipse_3170" data-name="Ellipse 3170" cx="12.5" cy="12.5" r="12.5" transform="translate(-11150 4)" fill="#fff"/>
+                              <path id="Icon_material-edit" data-name="Icon material-edit" d="M4.5,12.486v2.1H6.6l6.2-6.2-2.1-2.1Zm9.928-5.723a.558.558,0,0,0,0-.79L13.116,4.66a.558.558,0,0,0-.79,0L11.3,5.686l2.1,2.1Z" transform="translate(-11146.5 6.504)" fill="#6a6a6a"/>
+                            </g>
+                          </svg>
+                        </i>
+                         </button>
+
                       </div>
-                    </ng-container>
                    </div>
+
+
+
+
                   </div>
                   <div class="flex justify-end w-full lg:w-38">
                     <button mat-button matStepperPrevious class="back-btn">Back</button>
-                    <button mat-button matStepperNext class="primary-btn" >Continue</button>
+                    <!-- <button mat-button matStepperNext class="primary-btn" >Continue</button> -->
+                    <button mat-button class="primary-btn" (click)="addCreator()">Add</button>
                   </div>
                 </form>
 
-              </mat-step> -->
+              </mat-step>
 
               <!--api call nest-->
 
@@ -71,12 +86,12 @@
                    </div>
                   <div class="flex justify-end w-full lg:w-62">
                     <button mat-button matStepperPrevious class="back-btn">Back</button>
-                    <!-- <button mat-button matStepperNext class="primary-btn">Continue</button> -->
-                    <button mat-button (click)="getOTP()" class="primary-btn">Get OTP</button>
+                    <button mat-button matStepperNext class="primary-btn">Continue</button>
+                    <!-- <button mat-button (click)="getOTP()" class="primary-btn">Get OTP</button> -->
                   </div>
                 </form>
               </mat-step>
-              <mat-step>
+              <!-- <mat-step>
                 <h3 class="absolute pt-4 text-base font-thin lg:text-lg text-start top-20"><span class="mr-2 text-md">x</span> Create Marketplace(Step 4 of 4)</h3>
                 <h1 class="mb-16 text-2xl font-medium tracking-wide lg:text-5xl text-start text-dark">Enter the 6 digit code  <br>sent to {{phoneNumber}}</h1>
                 <form [formGroup]="firstFormGroup" class="justify-start">
@@ -90,50 +105,54 @@
                       <button mat-button class="primary-btn" (click)="handleClick()" >Verify OTP</button>
                     </div>
                 </form>
-              </mat-step>
+              </mat-step> -->
                <!--firebase-->
 
-              <mat-step [stepControl]="firstFormGroup">
+              <mat-step>
                 <h3 class="absolute pt-4 text-base font-thin lg:text-lg text-start top-20"><span class="mr-2 text-md">x</span> Create Marketplace(Step 1 of 3)</h3>
                 <h1 class="mb-16 text-2xl font-medium tracking-wide lg:text-5xl text-start text-dark">Enter Your fullname</h1>
-                <form [formGroup]="firstFormGroup" class="justify-start">
+                <form [formGroup]="signUpForm" class="justify-start">
                   <ng-template matStepLabel>Add Club</ng-template>
                   <div class="w-full mb-16 border-b border-teal-500 lg:w-62">
-                    <input class="leading-tight text-gray-700 bg-transparent border-none appearance-none w-62 focus:outline-none" formControlName="name" required type="text" placeholder="John Doe" aria-label="Full name">
-                    <p class="error-msg error" *ngIf="firstFormGroup.controls.name.touched && firstFormGroup.controls.name.errors?.required">please enter Name</p></div>
+                    <input class="leading-tight text-gray-700 bg-transparent border-none appearance-none w-62 focus:outline-none" formControlName="fullname"  type="text" placeholder="John Doe" aria-label="Full name">
+                    <p class="error-msg error" *ngIf="signUpForm.controls.fullname.touched && signUpForm.controls.fullname.errors?.required">Name is required</p>
+                    <!-- <mat-error *ngIf="name?.errors?.['required']">
+                      Name is required
+                    </mat-error> -->
+                  </div>
                     <div class="flex justify-end w-full lg:w-62">
                       <button mat-button matStepperPrevious class="back-btn">Back</button>
-                      <button mat-button matStepperNext class="primary-btn" >Continue</button>
+                      <button mat-button matStepperNext class="primary-btn" [disabled]="signUpForm.invalid" >Continue</button>
                     </div>
                 </form>
               </mat-step>
-              <mat-step [stepControl]="firstFormGroup">
+              <mat-step>
                 <h3 class="absolute pt-4 text-base font-thin lg:text-lg text-start top-20"><span class="mr-2 text-md">x</span> Create Marketplace(Step 2 of 3)</h3>
                 <h1 class="mb-16 text-2xl font-medium tracking-wide lg:text-5xl text-start text-dark">Enter Your email<br>Address</h1>
-                <form [formGroup]="firstFormGroup" class="justify-start">
+                <form [formGroup]="signUpForm" class="justify-start">
                   <ng-template matStepLabel>Add Club</ng-template>
                   <div class="w-full mb-16 border-b border-teal-500 lg:w-62">
-                    <input class="leading-tight text-gray-700 bg-transparent border-none appearance-none w-62 focus:outline-none" formControlName="name" required type="text" placeholder="John Doe" aria-label="Full name">
-                    <p class="error-msg error" *ngIf="firstFormGroup.controls.name.touched && firstFormGroup.controls.name.errors?.required">please enter Name</p></div>
+                    <input class="leading-tight text-gray-700 bg-transparent border-none appearance-none w-62 focus:outline-none" formControlName="email" required type="text" placeholder="John Doe" aria-label="Full name">
+                  </div>
                     <div class="flex justify-end w-full lg:w-62">
                       <button mat-button matStepperPrevious class="back-btn">Back</button>
                       <button mat-button matStepperNext class="primary-btn" >Continue</button>
                     </div>
                 </form>
               </mat-step>
-              <mat-step [stepControl]="firstFormGroup">
+              <mat-step>
                 <h3 class="absolute pt-4 text-base font-thin lg:text-lg text-start top-20"><span class="mr-2 text-md">x</span> Create Marketplace(Step 3 of 3)</h3>
                 <h1 class="mb-16 text-2xl font-medium tracking-wide lg:text-5xl text-start text-dark">Create Your Password</h1>
-                <form [formGroup]="firstFormGroup" class="justify-start">
+                <form [formGroup]="signUpForm" class="justify-start">
                   <ng-template matStepLabel>Add Club</ng-template>
                   <div class="mb-16">
                     <div class="w-full mb-4 border-b border-teal-500 lg:w-62">
-                      <input class="leading-tight text-gray-700 bg-transparent border-none appearance-none w-62 focus:outline-none" formControlName="name" required type="text" placeholder="John Doe" aria-label="Full name">
-                      <p class="error-msg error" *ngIf="firstFormGroup.controls.name.touched && firstFormGroup.controls.name.errors?.required">please enter Name</p>
+                      <input class="leading-tight text-gray-700 bg-transparent border-none appearance-none w-62 focus:outline-none" formControlName="password" required type="text" placeholder="John Doe" aria-label="Full name">
+
                     </div>
                     <div class="w-full border-b border-teal-500 lg:w-62">
-                      <input class="leading-tight text-gray-700 bg-transparent border-none appearance-none w-62 focus:outline-none" formControlName="name" required type="text" placeholder="John Doe" aria-label="Full name">
-                      <p class="error-msg error" *ngIf="firstFormGroup.controls.name.touched && firstFormGroup.controls.name.errors?.required">please enter Name</p>
+                      <input class="leading-tight text-gray-700 bg-transparent border-none appearance-none w-62 focus:outline-none" formControlName="confirmPassword" required type="text" placeholder="John Doe" aria-label="Full name">
+
                     </div>
                   </div>
 

@@ -12,7 +12,6 @@ import { ApiResponse } from './../../../@core/models/response.model';
 import { SignInResponse } from './../../../@core/models/sign-in-response';
 import { User } from './../../../@core/models/user.model';
 import { ApiService } from './../../../@core/services/api.service';
-
 type AuthApiData = SignInResponse;
 @Injectable({
   providedIn: 'root',
@@ -154,4 +153,10 @@ export class AuthService extends ApiService<AuthApiData> {
     this._loggedInUser$.next(null);
     this._role$.next(ROLE_TYPE_UTILS.noUser);
   }
+
+  // signUp(name: string, email: string, password: string){
+  //   return from(createUserWithEmailAndPassword(this.auth, email, password)).pipe(
+  //     switchMap(({ user }) => updateProfile(user, { displayName: name }))
+  //   )
+  // }
 }
