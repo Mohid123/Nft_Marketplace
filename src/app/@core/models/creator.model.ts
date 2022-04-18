@@ -1,11 +1,12 @@
 export interface Creator {
+  isWithoutApp?:       boolean;
   coverImageURL?:       string;
   coverBlurHash?:       string;
   profileImageURL:     string;
   profileBlurHash?:     string;
   displayName:         string;
   description?:         string;
-  appPackageId?:        string;
+  appPackageId:        string;
   stripeSecretKey?:     string;
   availableNftCount?:   number;
   revenueCount?:        number;

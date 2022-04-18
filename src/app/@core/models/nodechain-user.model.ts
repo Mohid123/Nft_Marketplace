@@ -5,6 +5,6 @@ export interface NodechainUser {
   phoneNumber:	string
   profilePicURL?:	string
   blurHash?:	string
-  appPackageId?:	string
+  appPackageId:	string
   clubName:	string;
 }

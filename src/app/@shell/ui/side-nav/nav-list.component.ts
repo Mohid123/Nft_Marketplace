@@ -117,7 +117,7 @@ export class NavListComponent implements OnInit {
       allowNumbersOnly: true,
       length: 6,
       isPasswordInput: false,
-      disableAutoFocus: false,
+      disableAutoFocus: true,
       timer: 1,
       placeholder: '',
       inputStyles: {
@@ -175,17 +175,20 @@ export class NavListComponent implements OnInit {
   }
 
    createNodechainUser() {
+     debugger
     const payload: NodechainUser = {
       name: this.fullname,
       pass: this.password,
       email: this.email,
       phoneNumber: `+${this.countryCode}`+this.phoneNumber,
       clubName: this.creatorForm.value.name,
+      appPackageId: (this.creatorForm.value.name).toLowerCase().replace(/\s/g,'')
       // profilePicURL: 'https://api.solissol.com/api/v1/en/media-upload/mediaFiles/profilepics/0I7KH97u1JOpUAEfpfA7lc7oyhD2/86771a2591c445395929d5e938cef6b7.png'
     }
 
     // this.fireAuth.signup(this.fullname, this.email, this.password);
     this.signup().then(() => {
+      debugger
       this.userService.createUser(payload).pipe(takeUntil(this.destroy$)).subscribe((res: ApiResponse<NodechainUser>) => {
         if(!res.hasErrors()) {
           this.toastr.success('User Created Successfully', 'Success');
@@ -207,10 +210,10 @@ export class NavListComponent implements OnInit {
     {size: 'invisible'
     },
     )
-    if (!this.countryCode || !this.phoneNumber) {
-      this.toastr.error('Please enter valid login details(registered phone number) to continue.', 'Invalid!')
-      return
-    }
+    // if (!this.countryCode || !this.phoneNumber) {
+    //   this.toastr.error('Please enter valid login details(registered phone number) to continue.', 'Invalid!')
+    //   return
+    // }
     this.timer(1);
 
     this.payload = {
@@ -231,25 +234,12 @@ export class NavListComponent implements OnInit {
       setTimeout(() => {
         window.location.reload()
       }, 1000);
+      // this.myStepper.previous();
     })
   }
 
   resend() {
-    firebase
-    .auth()
-    .signInWithPhoneNumber(this.payload, this.reCaptchaVerifier)
-    .then((res)=> {
-      console.log(res);
-      localStorage.setItem('verificationId', JSON.stringify(res.verificationId))
-      // debugger
-      // this.myStepper.next();
-      this.toastr.success('New OTP has been sent. Please fill in the below fields to continue.', 'Verify')
-    }).catch((error)=> {
-      this.toastr.error(error.message)
-      setTimeout(() => {
-        window.location.reload()
-      }, 1000);
-    })
+  this.getOTP()
   }
 
   onOtpChange(otpCode: any) {
@@ -269,6 +259,10 @@ export class NavListComponent implements OnInit {
       localStorage.setItem('user_data',JSON.stringify(res))
     }).catch((error) => {
       this.toastr.error(error.message)
+      setTimeout(() => {
+        window.location.reload()
+      }, 1000);
+      // this.myStepper.previous();
     })
   }
 
@@ -349,10 +343,9 @@ export class NavListComponent implements OnInit {
         debugger
         const param: Creator = {
           displayName: this.creatorForm.controls.name.value,
-
-          // description: this.groupForm.controls.description.value,
-          // appPackageId: this.authService.loggedInUser?.appPackageId,
+          appPackageId: (this.creatorForm.controls.name.value).toLowerCase().replace(/\s/g,''),
           profileImageURL: res[0].data.url,
+          isWithoutApp: true
         };
 
         if (res[0] && res[1] && !res[1].hasErrors()) {
@@ -377,13 +370,9 @@ export class NavListComponent implements OnInit {
             }, 3000);
         this.showLoading = false;
         this.myStepper.next();
-        // this.getGroup()
-        // this.close();
       } else {
-        // this.imgFormData = new FormData();
         this.toastr.error(res.errors[0]?.error?.message, 'Error!');
-        // alert('error :' + res.errors[0]?.error?.message);
-      }
+       }
     })
 
   }
