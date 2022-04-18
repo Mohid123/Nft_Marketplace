@@ -10,20 +10,23 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatStepperModule } from '@angular/material/stepper';
 import { RouterModule } from '@angular/router';
+import { TrimModule } from '@app/@core/directives/trim/trim.module';
 import { ROUTER_UTILS } from '@app/@core/utils/router.utils';
 import { environment } from '@environments/environment';
 import { NgOtpInputModule } from 'ng-otp-input';
 import { Ng2TelInputModule } from 'ng2-tel-input';
+import { FireAuthService } from './../../../@core/services/fire-auth.service';
 import { NavListComponent } from './nav-list.component';
+
 
 
 @NgModule({
   declarations: [
-    NavListComponent
+    NavListComponent,
   ],
   imports: [
 
-
+    TrimModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
@@ -51,6 +54,7 @@ import { NavListComponent } from './nav-list.component';
   ],
   exports: [
     NavListComponent
-  ]
+  ],
+  providers: [FireAuthService],
 })
 export class SideNavModule { }

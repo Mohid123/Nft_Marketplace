@@ -1,44 +1,46 @@
+/* eslint-disable @angular-eslint/no-host-metadata-property */
+/* eslint-disable @typescript-eslint/no-inferrable-types */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import {
-  AbstractControl,
   FormBuilder,
   FormControl,
-  FormGroup,
-  ValidationErrors,
-  ValidatorFn,
-  Validators
+  FormGroup, Validators
 } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
+import { flyInOut } from '@app/@core/animations/app.animation';
 import { Creator } from '@app/@core/models/creator.model';
 import { ApiResponse } from '@app/@core/models/response.model';
 import { CreatorService } from '@app/@core/services/creator.service';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
+import { FireAuthService } from '@app/@core/services/fire-auth.service';
 import { MediaService } from '@app/@core/services/media.service';
-import { AuthService } from '@app/pages/auth/services/auth.service';
+import { UserService } from '@app/@core/services/user.service';
 // firebase imports
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import { ToastrService } from 'ngx-toastr';
-import { combineLatest, of } from 'rxjs';
-import { exhaustMap, take } from 'rxjs/operators';
+import { combineLatest, of, Subject } from 'rxjs';
+import { exhaustMap, take, takeUntil } from 'rxjs/operators';
+import { NodechainUser } from './../../../@core/models/nodechain-user.model';
 import { ResponseAddMedia } from './../../../@core/models/response-add-media.model';
+import { ROUTER_UTILS } from './../../../@core/utils/router.utils';
 
-export function passwordsMatchValidator(): ValidatorFn {
-  return (control: AbstractControl): ValidationErrors | null => {
-    const password = control.get('password')?.value;
-    const confirmPassword = control.get('confirmPassword')?.value;
+// export function passwordsMatchValidator(): ValidatorFn {
+//   return (control: AbstractControl): ValidationErrors | null => {
+//     const password = control.get('password')?.value;
+//     const confirmPassword = control.get('confirmPassword')?.value;
 
-    if (password && confirmPassword && password !== confirmPassword) {
-      return { passwordsDontMatch: true };
-    } else {
-      return null;
-    }
-  };
-}
+//     if (password && confirmPassword && password !== confirmPassword) {
+//       return { passwordsDontMatch: true };
+//     } else {
+//       return null;
+//     }
+//   };
+// }
 
 const fireConfig = {
   apiKey: "AIzaSyCHyGMm-OaTigJU1l3ynVH8L0enkl34xPI",
@@ -54,48 +56,53 @@ const fireConfig = {
 @Component({
   selector: 'app-nav-list',
   templateUrl: './nav-list.component.html',
-  styleUrls: ['./nav-list.component.scss']
+  styleUrls: ['./nav-list.component.scss'],
+  host: {
+    '[@flyInOut]': 'true',
+    'style': 'display: block;'
+    },
+  animations: [
+      flyInOut()
+    ]
 })
 export class NavListComponent implements OnInit {
-
+  destroy$ = new Subject();
 
   @ViewChild('imgFile') imgFile;
   @ViewChild('stepper') private myStepper: MatStepper;
   firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
   creatorForm: FormGroup;
-  test: FormGroup;
+  UserForm: FormGroup;
+  display: any;
+  adminRouteUrl = ROUTER_UTILS.config.base.home;
+
+  showLoading: boolean = false;
 
   countryCode: number;
   otp!: string;
   verify: any;
-
+  public passwordHide: boolean;
   phoneNumber: any;
   reCaptchaVerifier: any;
   payload: any
 
+  fullname: any;
+  email: any;
+  password: any;
+  confirmPassword: any
+
   public groupFile: any;
   public imageSrc: any;
   public groupimgFormData = new FormData();
-  signUpForm = new FormGroup(
-    {
-      fullname: new FormControl('', Validators.required),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', Validators.required),
-      confirmPassword: new FormControl('', Validators.required),
-    },
-    { validators: passwordsMatchValidator() }
-  );
-
-
 
   constructor( private _formBuilder: FormBuilder,
     private toastr: ToastrService,
     private cf: ChangeDetectorRef,
-    private authService: AuthService,
+    public fireAuth: FireAuthService,
     private customDialogService: CustomDialogService,
     private mediaService: MediaService,
     private creatorService: CreatorService,
+    private userService: UserService,
     private route: Router) {
       this.creatorForm = this._formBuilder.group({
         name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(7)]),
@@ -103,12 +110,15 @@ export class NavListComponent implements OnInit {
         fileName: new FormControl(''),
         img: new FormControl(''),
       });
+
+      this.passwordHide = true;
     }
     config = {
       allowNumbersOnly: true,
       length: 6,
       isPasswordInput: false,
       disableAutoFocus: false,
+      timer: 1,
       placeholder: '',
       inputStyles: {
         width: '50px',
@@ -116,53 +126,92 @@ export class NavListComponent implements OnInit {
       }
     }
   ngOnInit() {
+    this.UserForm = this._formBuilder.group( {
+      fullname: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(7)]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', Validators.required),
+      confirmPassword: new FormControl('', Validators.required),
+    },
+    // { validators: passwordsMatchValidator() }
+    )
 
     firebase.initializeApp(fireConfig)
     this.verify = JSON.parse(localStorage.getItem('verificationId') || '{}')
-    console.log(this.verify)
-    this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required],
-    });
-
-
-
 
   }
 
-  get email() {
-    return this.signUpForm.get('email');
+  timer(minute) {
+    // let minute = 1;
+    let seconds: number = minute * 60;
+    let textSec: any = "0";
+    let statSec: number = 60;
+
+    const prefix = minute < 10 ? "0" : "";
+
+    const timer = setInterval(() => {
+      seconds--;
+      if (statSec != 0) statSec--;
+      else statSec = 59;
+
+      if (statSec < 10) {
+        textSec = "0" + statSec;
+      } else textSec = statSec;
+
+      this.display = `${prefix}${Math.floor(seconds / 60)}:${textSec}`;
+
+      if (seconds == 0) {
+        console.log("finished");
+        clearInterval(timer);
+      }
+    }, 1000);
   }
 
-  get password() {
-    return this.signUpForm.get('password');
+  passwordShowHide(): void {
+    this.passwordHide = !this.passwordHide;
   }
 
-  get confirmPassword() {
-    return this.signUpForm.get('confirmPassword');
+ async signup() {
+   await this.fireAuth.signup(this.fullname, this.email, this.password);
   }
 
-  get fullname() {
-    return this.signUpForm.get('fullname');
+   createNodechainUser() {
+    const payload: NodechainUser = {
+      name: this.fullname,
+      pass: this.password,
+      email: this.email,
+      phoneNumber: `+${this.countryCode}`+this.phoneNumber,
+      clubName: this.creatorForm.value.name,
+      // profilePicURL: 'https://api.solissol.com/api/v1/en/media-upload/mediaFiles/profilepics/0I7KH97u1JOpUAEfpfA7lc7oyhD2/86771a2591c445395929d5e938cef6b7.png'
+    }
+
+    // this.fireAuth.signup(this.fullname, this.email, this.password);
+    this.signup().then(() => {
+      this.userService.createUser(payload).pipe(takeUntil(this.destroy$)).subscribe((res: ApiResponse<NodechainUser>) => {
+        if(!res.hasErrors()) {
+          this.toastr.success('User Created Successfully', 'Success');
+          this.route.navigate([''])
+        }
+        else {
+          this.toastr.error('Failed To Create New User', 'Create User');
+        }
+      })
+    }).catch((error)=> {
+      this.toastr.error(error, 'Something went wrong')
+    })
   }
 
-  // submit() {
-  //   debugger
-  //   if(!this.signUpForm.valid) return
-  //   const { name, email, password} = this.signUpForm.value;
-  //   this.authService.signUp(name, email, password).pipe()
-  //   .subscribe((res)=>{
-  //     console.log(res)
-  //   })
-  // }
 
   getOTP() {
-
     this.reCaptchaVerifier = new firebase.auth.RecaptchaVerifier
-    ('sign-in-button', {size: 'invisible'})
+    ('sign-in-button',
+    {size: 'invisible'
+    },
+    )
     if (!this.countryCode || !this.phoneNumber) {
       this.toastr.error('Please enter valid login details(registered phone number) to continue.', 'Invalid!')
       return
     }
+    this.timer(1);
 
     this.payload = {
       phoneNumber: `+${this.countryCode}`+this.phoneNumber
@@ -176,11 +225,30 @@ export class NavListComponent implements OnInit {
       localStorage.setItem('verificationId', JSON.stringify(res.verificationId))
       // debugger
       this.myStepper.next();
+      this.toastr.success('We have sent an otp. Please fill in the below fields to continue.', 'Verify')
     }).catch((error)=> {
       this.toastr.error(error.message)
       setTimeout(() => {
         window.location.reload()
-      }, 5000);
+      }, 1000);
+    })
+  }
+
+  resend() {
+    firebase
+    .auth()
+    .signInWithPhoneNumber(this.payload, this.reCaptchaVerifier)
+    .then((res)=> {
+      console.log(res);
+      localStorage.setItem('verificationId', JSON.stringify(res.verificationId))
+      // debugger
+      // this.myStepper.next();
+      this.toastr.success('New OTP has been sent. Please fill in the below fields to continue.', 'Verify')
+    }).catch((error)=> {
+      this.toastr.error(error.message)
+      setTimeout(() => {
+        window.location.reload()
+      }, 1000);
     })
   }
 
@@ -191,7 +259,6 @@ export class NavListComponent implements OnInit {
 
   handleClick() {
     const credentials = firebase.auth.PhoneAuthProvider.credential(this.verify, this.otp);
-
     firebase
     .auth()
     .signInWithCredential(credentials)
@@ -205,12 +272,9 @@ export class NavListComponent implements OnInit {
     })
   }
 
-
   onCountryChange(country) {
     this.countryCode = country.dialCode
   }
-
-
 
   numberOnly(event): boolean {
     const charCode = (event.which) ? event.which : event.keyCode;
@@ -254,7 +318,7 @@ export class NavListComponent implements OnInit {
           this.imageSrc = null;
           this.groupFile = null;
           this.creatorForm.controls.img.setValue(null);
-          this.imgFile.nativeElement.value = "";
+          // this.imgFile.nativeElement.value = "";
         }
       });
     })
@@ -266,13 +330,14 @@ export class NavListComponent implements OnInit {
 
 
   addCreator() {
-    debugger
+    this.showLoading = true;
     this.creatorForm.patchValue({
       groupFile: this.groupFile
     });
     this.groupimgFormData.append('file', this.creatorForm.get('groupFile').value);
 
     const mediaUpload:any = [];
+
     if(this.imageSrc){
       mediaUpload.push(this.mediaService.uploadMedia('creator', this.groupimgFormData));
     }
@@ -305,7 +370,13 @@ export class NavListComponent implements OnInit {
       console.log(res)
       if (res !== null && !res.hasErrors()) {
         this.cf.detectChanges();
-        this.toastr.success('New creator successfully added.', 'Success!');
+        // this.toastr.success('New creator successfully added.', 'Success!');
+        this.customDialogService.showSuccessDialog('HELLo')
+            setTimeout(() => {
+              this.customDialogService.closeDialogs();
+            }, 3000);
+        this.showLoading = false;
+        this.myStepper.next();
         // this.getGroup()
         // this.close();
       } else {
@@ -315,6 +386,11 @@ export class NavListComponent implements OnInit {
       }
     })
 
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.complete();
+    this.destroy$.unsubscribe();
   }
 
 

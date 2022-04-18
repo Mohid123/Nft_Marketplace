@@ -12,6 +12,7 @@ import { ApiResponse } from './../../../@core/models/response.model';
 import { SignInResponse } from './../../../@core/models/sign-in-response';
 import { User } from './../../../@core/models/user.model';
 import { ApiService } from './../../../@core/services/api.service';
+
 type AuthApiData = SignInResponse;
 @Injectable({
   providedIn: 'root',
@@ -38,7 +39,7 @@ export class AuthService extends ApiService<AuthApiData> {
   public readonly role$: Observable<ROLE_TYPE_UTILS> =
     this._role$.asObservable();
 
-  constructor(protected http: HttpClient, private router: Router) {
+  constructor( protected http: HttpClient, private router: Router) {
     super(http);
   }
 

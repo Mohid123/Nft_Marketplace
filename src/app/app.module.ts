@@ -1,4 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -12,11 +13,13 @@ import { AppComponent } from './app.component';
 
 
 
-
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserAnimationsModule,
+
+
+
+  BrowserAnimationsModule,
     BrowserModule,
     CoreModule,
     WebShellModule,
@@ -29,5 +32,7 @@ import { AppComponent } from './app.component';
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],
+  providers: [AngularFireAuth]
+
 })
 export class AppModule {}

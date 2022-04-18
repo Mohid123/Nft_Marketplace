@@ -16,3 +16,16 @@
     @apply w-64 lg:w-2/4
   }
 }
+
+.spinner:before {
+  left: 90%;
+}
+.primary-btn {
+  @apply px-5 py-1 rounded-full text-white h-12 w-32 ;
+  background: transparent linear-gradient(308deg, #D59529 0%, #F1B11D 100%) 0% 0% no-repeat padding-box;
+  &.dark {
+    @apply text-black;
+    background: transparent linear-gradient(109deg, #59C8D1 0%, #75F16D 100%) 0% 0% no-repeat padding-box;
+  }
+}
+

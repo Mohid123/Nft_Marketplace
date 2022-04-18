@@ -6,6 +6,7 @@ import { NFT } from '@app/@core/models/NFT.model';
 import { SubscriptionPlan } from '@app/@core/models/subscription-plan.model';
 import { AuthDialogService } from '@app/components/custom-dialogs/auth-diloag/auth-dialog.service';
 import { ResaleDialog } from '@app/components/custom-dialogs/resale-dialog/resale/resale.dialog';
+import { SuccessDialogService } from '@app/components/custom-dialogs/success-dialog/success-dialog/success-dialog/success-dialog.service';
 import { AuthService } from '@app/pages/auth/services/auth.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ExportKeyService as ExportKeyDialogService } from '../../../components/custom-dialogs/export-key/export-key-dialog.service';
@@ -15,7 +16,6 @@ import { ImageCropperService } from './../../../components/custom-dialogs/image-
 import { LoadingDialogService } from './../../../components/custom-dialogs/loading-dialog/loading-dialog/loading-dialog.service';
 import { StripeDialogService } from './../../../components/custom-dialogs/stripe-dialog/stripe-dialog.service';
 import { ConfirmationDialog } from './../../../components/general-dialog/confirmation/confirmation.dialog';
-
 @Injectable({
   providedIn: 'root',
 })
@@ -38,6 +38,7 @@ export class CustomDialogService {
     private createGroupService: CreateGroupService,
     private exportKeyDialogService: ExportKeyDialogService,
     private loadingDialogService: LoadingDialogService,
+    private successDialogService: SuccessDialogService,
     private stripeDialogService: StripeDialogService,
     private imageCropperService: ImageCropperService,
     public matDialog: MatDialog
@@ -172,6 +173,11 @@ export class CustomDialogService {
   async showLoadingDialog(status) {
     this.matDialog.closeAll();
     this._mapDialogref = await this.loadingDialogService.getLoadingDialogComponent();
+    this._mapDialogref.componentInstance.status = status;
+  }
+  async showSuccessDialog(status) {
+    this.matDialog.closeAll();
+    this._mapDialogref = await this.successDialogService.getSuccessDialogComponent();
     this._mapDialogref.componentInstance.status = status;
   }
 

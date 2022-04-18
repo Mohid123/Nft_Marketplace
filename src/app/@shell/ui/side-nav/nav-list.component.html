@@ -1,4 +1,4 @@
-<div class="mx-auto ">
+<div class="relative mx-auto overflow-x-hidden overflow-y-hidden">
   <div class="flex justify-center overflow-x-hidden">
     <!-- Row -->
     <div class="flex items-center w-full h-screen">
@@ -9,39 +9,48 @@
           <!-- <h1 class="text-4xl font-thin text-center">Welcome Back</h1> -->
           <div class="w-full mt-4">
             <mat-stepper labelPosition="bottom" #stepper class="w-full h-full px-6 py-6 text-start">
-              <mat-step>
-                <h3 class="absolute pt-4 text-base font-thin lg:text-lg text-start top-20"><span class="mr-2 text-md">x</span> Create Marketplace(Step 1 of 4)</h3>
+           <mat-step>
+                <h3 [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
+                [routerLink]="[adminRouteUrl]" class="absolute flex items-center pt-4 text-base font-thin text-gray-500 lg:text-lg text-start top-16">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="inline w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                      clip-rule="evenodd" />
+                  </svg> <span class="items-center inline ml-2">Create Marketplace (Step 1 of 4)</span>
+                </h3>
                 <h1 class="mb-16 text-2xl font-medium tracking-wide lg:text-5xl text-start text-dark">Let's start with Your<br>Marketplace name</h1>
                 <form [formGroup]="creatorForm" class="justify-start">
-                  <ng-template matStepLabel>Add Club</ng-template>
                   <div class="w-full mb-16 border-b border-teal-500 lg:w-62">
                     <input class="leading-tight text-gray-700 bg-transparent border-none appearance-none w-62 focus:outline-none" formControlName="name" required type="text" placeholder="Marketplace" aria-label="Full name">
-                    <p class="error-msg error" *ngIf="creatorForm.controls.name.touched && creatorForm.controls.name.errors?.required">Name is Required</p>
-                    <p class="error-msg error" *ngIf="creatorForm.controls.name.touched && creatorForm.controls.name.errors?.minlength">Name should be greater than or equal to {{creatorForm.controls.name.errors?.minlength.requiredLength}} character </p>
+                    <p class="pl-4 error-msg error" *ngIf="creatorForm.controls.name.touched && creatorForm.controls.name.errors?.required">Name is Required</p>
+                    <p class="pl-4 error-msg error" *ngIf="creatorForm.controls.name.touched && creatorForm.controls.name.errors?.minlength">Name should be greater than or equal to {{creatorForm.controls.name.errors?.minlength.requiredLength}} character </p>
                   </div>
                   <div class="flex justify-end w-full lg:w-62">
                     <button mat-button matStepperNext class="primary-btn" [disabled]="creatorForm.invalid">Continue</button>
                   </div>
                 </form>
-              </mat-step>
-              <mat-step>
-                <h3 class="absolute pt-4 text-base font-thin lg:text-lg text-start top-20"><span class="mr-2 text-md">x</span> Create Marketplace(Step 2 of 4)</h3>
-                <h1 class="mb-16 text-2xl font-medium tracking-wide lg:text-5xl text-start text-dark">Upload Marketplace<br class="leading-loose">profile image</h1>
+            </mat-step>
+            <mat-step class="relative">
+                <h3 [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
+                [routerLink]="[adminRouteUrl]" class="absolute flex items-center pt-4 text-base font-thin text-gray-500 lg:text-lg text-start top-16">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="inline w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                      clip-rule="evenodd" />
+                  </svg> <span class="items-center inline ml-2">Create Marketplace (Step 2 of 4)</span>
+                </h3>
+                <h1 class="mb-16 text-2xl font-medium tracking-wide lg:text-5xl text-start text-dark lg:mb-0 ">Upload Marketplace<br class="leading-loose">profile image</h1>
                 <form [formGroup]="creatorForm" class="justify-start">
-                  <ng-template matStepLabel>Add Club</ng-template>
                   <div class="image-upload">
                     <label for="file-input">
                       <img src="../../../../assets/upload.png"/>
                     </label>
-
                     <input #imgFile id="file-input" accept="image/png, image/gif, image/jpeg" type="file" (change)="onSelectProfile($event)"/>
                   </div>
-
-                   <div class="w-full mt-4 mb-5 overflow-y-hidden border-yellow-600 lg:w-38 xl:w-38" >
+                  <div class="w-full mt-4 mb-5 overflow-y-hidden border-yellow-600 xl:w-38" >
                     <div *ngIf="groupFile" class="object-cover h-auto" >
                       <div class="flex justify-between w-full p-5 mb-3 border-2 border-gray-200 rounded align-items-center">
-                        <img src="{{imageSrc}}" class="w-20 h-16 mr-3 rounded-sm">
-
+                        <img [src]="imageSrc" class="w-20 h-16 mr-3 rounded-xl">
                         <button (click)="editImg()" >
                           <i  class="flex items-center p-0 text-yellow-500 cursor-pointer fas fa-minus-circle" >
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
@@ -52,122 +61,185 @@
                           </svg>
                         </i>
                          </button>
-
-                      </div>
+                        </div>
                    </div>
-
-
-
-
-                  </div>
+                   </div>
                   <div class="flex justify-end w-full lg:w-38">
                     <button mat-button matStepperPrevious class="back-btn">Back</button>
-                    <!-- <button mat-button matStepperNext class="primary-btn" >Continue</button> -->
-                    <button mat-button class="primary-btn" (click)="addCreator()">Add</button>
+                    <button  mat-button class="relative inline-flex items-center justify-center text-center primary-btn" [disabled]="!imageSrc" (click)="addCreator()">
+                      <svg *ngIf="showLoading === true" role="status" class="inline w-5 h-5 mr-2 text-gray-200 animate-spin dark:text-gray-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="#D59529"/>
+                        </svg>
+                        <span >{{showLoading === true? 'Creating' : 'Continue'}}  </span>
+                    </button>
                   </div>
                 </form>
 
-              </mat-step>
+            </mat-step>
 
               <!--api call nest-->
 
-              <mat-step>
-                <h3 class="absolute pt-4 text-base font-thin lg:text-lg text-start top-20"><span class="mr-2 text-md">x</span> Create Marketplace(Step 3 of 4)</h3>
+           <mat-step>
+                <h3 [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
+                [routerLink]="[adminRouteUrl]" class="absolute flex items-center pt-4 text-base font-thin text-gray-500 lg:text-lg text-start top-16">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="inline w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                      clip-rule="evenodd" />
+                  </svg> <span class="items-center inline ml-2">Create Marketplace (Step 3 of 4)</span>
+                </h3>
                 <h1 class="mb-16 text-2xl font-medium tracking-wide lg:text-5xl text-start text-dark">Enter your phone <br>number</h1>
                 <form class="justify-start">
-                  <ng-template matStepLabel>Add Club</ng-template>
                   <div class="w-full mb-16 border-b border-teal-500 lg:w-62">
-                    <input [(ngModel)]="phoneNumber" min="10" max="15"
+                    <input [(ngModel)]="phoneNumber"
+                    #phone="ngModel"
+                    minlength=10
+                    maxlength=15
                     [ngModelOptions]="{standalone: true}" type="text" (keypress)="numberOnly($event)"
                       ng2TelInput
                       [ng2TelInputOptions]="{initialCountry: 'bg'}"
                       (countryChange)="onCountryChange($event)"
-                      class="leading-tight text-gray-700 bg-transparent border-none appearance-none w-62 focus:outline-none" placeholder="Enter phone numberOnly"/>
-                   </div>
+                      class="leading-tight text-gray-700 bg-transparent border-none appearance-none w-62 lg:w-full focus:outline-none" placeholder="Enter phone number"/>
+
+                      <div *ngIf="phone.dirty && phone.invalid">
+                        <small class="error-msg error" *ngIf="phone.errors.required">
+                                            Your Number is required.
+                        </small>
+                        <small class="error-msg error" *ngIf="phone.errors.minlength">
+                                            Your Number is required to be at least 10 characters.
+                        </small>
+                        <small class="error-msg error" *ngIf="phone.errors.maxlength">
+                                            Your Number cannot be longer than 15 characters.
+                        </small>
+                      </div>
+
+                    </div>
                   <div class="flex justify-end w-full lg:w-62">
                     <button mat-button matStepperPrevious class="back-btn">Back</button>
-                    <button mat-button matStepperNext class="primary-btn">Continue</button>
-                    <!-- <button mat-button (click)="getOTP()" class="primary-btn">Get OTP</button> -->
+                    <button mat-button (click)="getOTP()" [disabled]="phone.invalid || !phoneNumber " class="primary-btn">Continue</button>
                   </div>
                 </form>
-              </mat-step>
-              <!-- <mat-step>
-                <h3 class="absolute pt-4 text-base font-thin lg:text-lg text-start top-20"><span class="mr-2 text-md">x</span> Create Marketplace(Step 4 of 4)</h3>
-                <h1 class="mb-16 text-2xl font-medium tracking-wide lg:text-5xl text-start text-dark">Enter the 6 digit code  <br>sent to {{phoneNumber}}</h1>
-                <form [formGroup]="firstFormGroup" class="justify-start">
+            </mat-step>
+            <mat-step>
+                 <h3 [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
+                [routerLink]="[adminRouteUrl]" class="absolute flex items-center pt-4 text-base font-thin text-gray-500 lg:text-lg text-start top-16">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="inline w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                      clip-rule="evenodd" />
+                  </svg> <span class="items-center inline ml-2">Create Marketplace (Step 4 of 4)</span>
+                </h3>
+                <h1 class="mb-16 text-2xl font-medium tracking-wide lg:text-5xl text-start text-dark">Enter the 6 digit code  <br>sent to <span class="text-base text-gray-400">+{{countryCode }}{{phoneNumber}}</span></h1>
+                <form class="justify-start">
                   <ng-template matStepLabel>Add Club</ng-template>
-                  <div class="w-full mb-16 lg:w-62">
-                  <ng-otp-input  (onInputChange)="onOtpChange($event)"  [config]="config"></ng-otp-input>
-                    <p class="error-msg error" *ngIf="firstFormGroup.controls.name.touched && firstFormGroup.controls.name.errors?.required">please enter Name</p></div>
+                  <div class="items-center w-full mb-16 lg:inline-flex lg:w-62">
+                  <ng-otp-input  (onInputChange)="onOtpChange($event)"  [config]="config" class="inline w-full lg:w-62"></ng-otp-input>
+                  <p class="justify-center inline text-gray-500 "> Didn't receive a code? <a (click)="resend()" class="ml-2 text-yellow-500 cursor-pointer">Resend</a> </p>
+                  </div>
                     <div class="flex justify-end w-full lg:w-62">
                       <button mat-button matStepperPrevious class="back-btn">Back</button>
-                      <button mat-button matStepperNext class="primary-btn" >Continue</button>
-                      <button mat-button class="primary-btn" (click)="handleClick()" >Verify OTP</button>
+                      <button mat-button (click)="handleClick()" [disabled]="!otp" class="primary-btn" >Continue</button>
                     </div>
                 </form>
-              </mat-step> -->
+            </mat-step>
                <!--firebase-->
 
-              <mat-step>
-                <h3 class="absolute pt-4 text-base font-thin lg:text-lg text-start top-20"><span class="mr-2 text-md">x</span> Create Marketplace(Step 1 of 3)</h3>
+            <mat-step>
+                <h3 [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
+                [routerLink]="[adminRouteUrl]" class="absolute flex items-center pt-4 text-base font-thin text-gray-500 lg:text-lg text-start top-16">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="inline w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                      clip-rule="evenodd" />
+                  </svg> <span class="items-center inline ml-2">Create User (Step 1 of 3)</span>
+                </h3>
                 <h1 class="mb-16 text-2xl font-medium tracking-wide lg:text-5xl text-start text-dark">Enter Your fullname</h1>
-                <form [formGroup]="signUpForm" class="justify-start">
-                  <ng-template matStepLabel>Add Club</ng-template>
+                <form  class="justify-start">
                   <div class="w-full mb-16 border-b border-teal-500 lg:w-62">
-                    <input class="leading-tight text-gray-700 bg-transparent border-none appearance-none w-62 focus:outline-none" formControlName="fullname"  type="text" placeholder="John Doe" aria-label="Full name">
-                    <p class="error-msg error" *ngIf="signUpForm.controls.fullname.touched && signUpForm.controls.fullname.errors?.required">Name is required</p>
-                    <!-- <mat-error *ngIf="name?.errors?.['required']">
-                      Name is required
-                    </mat-error> -->
+                    <input appTrim minlength=7 name="name" required placeholder="John Doe"
+                    maxlength=15 #name="ngModel" [(ngModel)]="fullname" [ngModelOptions]="{standalone: true}"  class="leading-tight text-gray-700 bg-transparent border-none appearance-none w-62 focus:outline-none" >
+                    <div *ngIf="name.invalid && (name.dirty || name.touched)">
+                      <small class="pl-4 error-msg error" *ngIf="name.errors?.required">
+                                          Fullname is required.
+                      </small>
+                      <small class="pl-4 error-msg error" *ngIf="name.errors.minlength">
+                                          Fullname is required to be at least 7 characters.
+                      </small>
+                      <small class="pl-4 error-msg error" *ngIf="name.errors.maxlength">
+                                          Fullname cannot be longer than 15 characters.
+                      </small>
+                    </div>
                   </div>
                     <div class="flex justify-end w-full lg:w-62">
-                      <button mat-button matStepperPrevious class="back-btn">Back</button>
-                      <button mat-button matStepperNext class="primary-btn" [disabled]="signUpForm.invalid" >Continue</button>
+                      <button mat-button matStepperNext [disabled]="name.invalid || !fullname" class="primary-btn" >Continue</button>
                     </div>
                 </form>
-              </mat-step>
-              <mat-step>
-                <h3 class="absolute pt-4 text-base font-thin lg:text-lg text-start top-20"><span class="mr-2 text-md">x</span> Create Marketplace(Step 2 of 3)</h3>
+            </mat-step>
+            <mat-step>
+                <h3 [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
+                [routerLink]="[adminRouteUrl]" class="absolute flex items-center pt-4 text-base font-thin text-gray-500 lg:text-lg text-start top-16">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="inline w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                      clip-rule="evenodd" />
+                  </svg> <span class="items-center inline ml-2">Create User (Step 2 of 3)</span>
+                </h3>
                 <h1 class="mb-16 text-2xl font-medium tracking-wide lg:text-5xl text-start text-dark">Enter Your email<br>Address</h1>
-                <form [formGroup]="signUpForm" class="justify-start">
-                  <ng-template matStepLabel>Add Club</ng-template>
-                  <div class="w-full mb-16 border-b border-teal-500 lg:w-62">
-                    <input class="leading-tight text-gray-700 bg-transparent border-none appearance-none w-62 focus:outline-none" formControlName="email" required type="text" placeholder="John Doe" aria-label="Full name">
+                <form class="justify-start">
+                   <div class="w-full mb-16 border-b border-teal-500 lg:w-62">
+                    <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  appTrim  name="email" required
+                     [email]="true" #mail="ngModel" [(ngModel)]="email" [ngModelOptions]="{standalone: true}" class="leading-tight text-gray-700 bg-transparent border-none appearance-none w-62 focus:outline-none"  placeholder="your@email.com">
+                    <div *ngIf="mail.touched">
+                      <p class="pl-4 error-msg error"  *ngIf="mail.errors?.required">Email is a required.</p>
+                      <p class="pl-4 error-msg error"  *ngIf="mail.errors?.pattern">This is not a valid Email.</p>
+                    </div>
                   </div>
                     <div class="flex justify-end w-full lg:w-62">
                       <button mat-button matStepperPrevious class="back-btn">Back</button>
-                      <button mat-button matStepperNext class="primary-btn" >Continue</button>
+                      <button mat-button matStepperNext [disabled]="mail.invalid || !email" class="primary-btn" >Continue</button>
                     </div>
                 </form>
-              </mat-step>
-              <mat-step>
-                <h3 class="absolute pt-4 text-base font-thin lg:text-lg text-start top-20"><span class="mr-2 text-md">x</span> Create Marketplace(Step 3 of 3)</h3>
+            </mat-step>
+            <mat-step>
+                <h3 [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
+                [routerLink]="[adminRouteUrl]" class="absolute flex items-center pt-4 text-base font-thin text-gray-500 lg:text-lg text-start top-16">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="inline w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                      clip-rule="evenodd" />
+                  </svg> <span class="items-center inline ml-2">Create User (Step 3 of 3)</span>
+                </h3>
                 <h1 class="mb-16 text-2xl font-medium tracking-wide lg:text-5xl text-start text-dark">Create Your Password</h1>
-                <form [formGroup]="signUpForm" class="justify-start">
-                  <ng-template matStepLabel>Add Club</ng-template>
+                <form class="justify-start" >
                   <div class="mb-16">
-                    <div class="w-full mb-4 border-b border-teal-500 lg:w-62">
-                      <input class="leading-tight text-gray-700 bg-transparent border-none appearance-none w-62 focus:outline-none" formControlName="password" required type="text" placeholder="John Doe" aria-label="Full name">
-
+                    <div class="relative w-full mb-4 border-b border-teal-500 lg:w-62">
+                      <span class="absolute inset-y-0 right-0 flex items-center pl-2" (click)="passwordShowHide()">
+                        <span  class="p-1 focus:outline-none focus:shadow-outline">
+                          <img class="w-4 h-4" src="./assets/icons/password.svg" alt="">
+                        </span>
+                      </span>
+                      <input required minlength="6" [(ngModel)]="password" name="password"    [ngModelOptions]="{standalone: true}"  class="leading-tight text-gray-700 bg-transparent border-none appearance-none w-62 focus:outline-none"  type="{{passwordHide ? 'password' : 'text'}}" placeholder="Password">
                     </div>
-                    <div class="w-full border-b border-teal-500 lg:w-62">
-                      <input class="leading-tight text-gray-700 bg-transparent border-none appearance-none w-62 focus:outline-none" formControlName="confirmPassword" required type="text" placeholder="John Doe" aria-label="Full name">
-
+                    <div class="relative w-full border-b border-teal-500 lg:w-62">
+                      <span class="absolute inset-y-0 right-0 flex items-center pl-2" (click)="passwordShowHide()">
+                        <span  class="p-1 focus:outline-none focus:shadow-outline">
+                          <img class="w-4 h-4" src="./assets/icons/password.svg" alt="">
+                        </span>
+                      </span>
+                      <input required [(ngModel)]="confirmPassword"  id="passwordB" name="confirmPassword"  class="leading-tight text-gray-700 bg-transparent border-none appearance-none w-62 focus:outline-none"  type="{{passwordHide ? 'password' : 'text'}}" placeholder="Confirm password">
                     </div>
                   </div>
-
-                    <div class="flex justify-end w-full lg:w-62">
+                <p  class="error-msg error" *ngIf="password !== confirmPassword">Password must match</p>
+                <div class="flex justify-end w-full lg:w-62">
                       <button mat-button matStepperPrevious class="back-btn">Back</button>
-                      <button mat-button matStepperNext class="primary-btn" >Continue</button>
+                      <button mat-button  class="primary-btn" [disabled]="password !== confirmPassword || !password " (click)="  createNodechainUser()">Continue</button>
                     </div>
                 </form>
-              </mat-step>
+            </mat-step>
                <!--firebase-->
-
-
-
-            </mat-stepper>
-          </div>
+          </mat-stepper>
+        </div>
 
           <!--recaptcha-->
           <div id="sign-in-button"></div>
@@ -175,11 +247,12 @@
       </div>
       <!-- Col -->
       <div
-        class="hidden w-full h-screen bg-white bg-cover rounded-l-lg lg:block lg:w-5/12">
-        <img style="object-fit: cover;" src="../../../../assets/on-board.svg" alt="">
+        class="hidden w-full h-screen overflow-hidden bg-white bg-cover rounded-l-lg lg:block lg:w-5/12 ">
+        <img style="object-fit: none; height:100vh;" src="../../../../assets/on-board.svg" alt="">
       </div>
-
-
     </div>
   </div>
 </div>
+
+
+
