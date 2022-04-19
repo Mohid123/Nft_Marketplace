@@ -72,6 +72,9 @@ export class NavListComponent implements OnInit {
   @ViewChild('stepper') private myStepper: MatStepper;
   firstFormGroup: FormGroup;
   creatorForm: FormGroup;
+  public profileImage: any;
+  public profileImg = new FormData();
+  public profileImageSrc: any;
   UserForm: FormGroup;
   display: any;
   adminRouteUrl = ROUTER_UTILS.config.base.home;
@@ -106,9 +109,11 @@ export class NavListComponent implements OnInit {
     private route: Router) {
       this.creatorForm = this._formBuilder.group({
         name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(7)]),
-        groupFile: new FormControl(''),
-        fileName: new FormControl(''),
-        img: new FormControl(''),
+        // groupFile: new FormControl(''),
+        // fileName: new FormControl(''),
+        // img: new FormControl(''),
+        profileImg: new FormControl(''),
+        profileImage: new FormControl(''),
       });
 
       this.passwordHide = true;
@@ -126,6 +131,8 @@ export class NavListComponent implements OnInit {
       }
     }
   ngOnInit() {
+    // window.location.reload()
+
     this.UserForm = this._formBuilder.group( {
       fullname: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(7)]),
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -280,62 +287,65 @@ export class NavListComponent implements OnInit {
   }
 
 
-
-
   onSelectProfile(event): void {
-    debugger
     if (event.target.files && event.target.files[0]) {
-      this.groupFile = event.target.files[0];
-      this.creatorForm.controls?.fileName.setValue(this.groupFile.name);
-
+      this.profileImage = event.target.files[0];
       if (event.target.files && event.target.files[0]) {
         const reader = new FileReader();
         reader.onload = (e: any) => {
-          this.cropImg(event)
+          this.cropProfileImg(event);
         };
         reader.readAsDataURL(event.target.files[0]);
       }
     }
   }
 
-  cropImg(event) :void {
-    this.creatorForm.controls.groupFile.setValue(event);
-    this.customDialogService.showImageCropperDialog(event, 1.13 / 1,true).then(matRef => {
-      matRef.afterClosed().subscribe((result) => {
-        // console.log('showImageCropperDialog:',result);
-        if (result) {
-          this.imageSrc = result;
-          this.creatorForm.patchValue({
-            img: this.imageSrc,
-          });
-        } else {
-          this.imageSrc = null;
-          this.groupFile = null;
-          this.creatorForm.controls.img.setValue(null);
-          // this.imgFile.nativeElement.value = "";
-        }
+  cropProfileImg(event) {
+    this.creatorForm.controls.profileImage.setValue(event);
+    this.customDialogService
+      .showImageCropperDialog(event, 3.88 / 1, false)
+      .then((matRef) => {
+        matRef.afterClosed().subscribe((result) => {
+          // console.log('showImageCropperDialog:',result);
+          if (result) {
+            this.profileImageSrc = result;
+            this.creatorForm.patchValue({
+              profileImg: this.mediaService.dataURLtoFile(
+                this.profileImageSrc,
+                this.profileImage.name,
+              ),
+            });
+            this.profileImg.append(
+              'file',
+              this.creatorForm.get('profileImg').value,
+            );
+          } else {
+            this.resetProfileImg();
+          }
+        });
       });
-    })
+  }
+
+  resetProfileImg() {
+    this.profileImageSrc = null;
+    this.profileImage = null;
+    this.creatorForm.controls.profileImg.setValue(null);
+    this.imgFile.nativeElement.value = '';
   }
 
   editImg():void {
-    this.cropImg(this.creatorForm.controls.groupFile.value);
+    debugger
+    this.profileImg.delete('file');
+    this.cropProfileImg(this.creatorForm.controls.profileImage?.value);
   }
 
 
   addCreator() {
     this.showLoading = true;
-    this.creatorForm.patchValue({
-      groupFile: this.groupFile
-    });
-    this.groupimgFormData.append('file', this.creatorForm.get('groupFile').value);
-
     const mediaUpload:any = [];
-
-    if(this.imageSrc){
-      mediaUpload.push(this.mediaService.uploadMedia('creator', this.groupimgFormData));
+    if(this.profileImageSrc){
+      mediaUpload.push(this.mediaService.uploadMedia('creator', this.profileImg));
     }
-
     combineLatest(mediaUpload)
     .pipe(take(1),
     exhaustMap((res: ApiResponse<ResponseAddMedia>) => {
@@ -347,17 +357,14 @@ export class NavListComponent implements OnInit {
           profileImageURL: res[0].data.url,
           isWithoutApp: true
         };
-
         if (res[0] && res[1] && !res[1].hasErrors()) {
           param.profileImageURL = res[1].data.url
         }
-
         return this.creatorService.addCreator(param);
       } else {
         return of(null);
       }
     }),
-
     )
     .subscribe((res:any) => {
       console.log(res)
