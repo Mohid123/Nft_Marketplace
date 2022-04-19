@@ -334,7 +334,6 @@ export class NavListComponent implements OnInit {
   }
 
   editImg():void {
-    debugger
     this.profileImg.delete('file');
     this.cropProfileImg(this.creatorForm.controls.profileImage?.value);
   }

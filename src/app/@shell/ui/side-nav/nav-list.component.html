@@ -134,10 +134,9 @@
                 </h3>
                 <h1 class="mb-16 text-2xl font-medium tracking-wide lg:text-5xl text-start text-dark">Enter the 6 digit code  <br>sent to <span class="text-base text-gray-400">+{{countryCode }}{{phoneNumber}}</span></h1>
                 <form class="justify-start">
-                  <ng-template matStepLabel>Add Club</ng-template>
                   <div class="items-center w-full mb-16 lg:inline-flex lg:w-62">
                   <ng-otp-input  (onInputChange)="onOtpChange($event)"  [config]="config" class="inline w-full lg:w-62"></ng-otp-input>
-                  <p class="justify-center inline text-gray-500 "> Didn't receive a code? <a (click)="resend()" class="ml-2 text-yellow-500 cursor-pointer">Resend</a> </p>
+                  <p class="justify-center inline text-gray-500 "> Didn't receive a code? {{display}}<a (click)="resend()" class="ml-2 text-yellow-500 cursor-pointer">Resend</a> </p>
                   </div>
                     <div class="flex justify-end w-full lg:w-62">
                       <button mat-button matStepperPrevious class="back-btn">Back</button>
