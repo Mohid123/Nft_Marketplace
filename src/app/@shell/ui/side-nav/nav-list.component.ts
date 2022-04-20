@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -65,11 +65,12 @@ const fireConfig = {
       flyInOut()
     ]
 })
-export class NavListComponent implements OnInit {
+export class NavListComponent implements OnInit, AfterViewInit {
   destroy$ = new Subject();
 
   @ViewChild('imgFile') imgFile;
   @ViewChild('stepper') private myStepper: MatStepper;
+
   firstFormGroup: FormGroup;
   creatorForm: FormGroup;
   public profileImage: any;
@@ -109,9 +110,6 @@ export class NavListComponent implements OnInit {
     private route: Router) {
       this.creatorForm = this._formBuilder.group({
         name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(7)]),
-        // groupFile: new FormControl(''),
-        // fileName: new FormControl(''),
-        // img: new FormControl(''),
         profileImg: new FormControl(''),
         profileImage: new FormControl(''),
       });
@@ -131,9 +129,9 @@ export class NavListComponent implements OnInit {
       }
     }
   ngOnInit() {
-    // window.location.reload()
-
-    this.UserForm = this._formBuilder.group( {
+    //  window.location.reload()
+    //  this.cf.detectChanges();
+     this.UserForm = this._formBuilder.group( {
       fullname: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(7)]),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required),
@@ -145,6 +143,13 @@ export class NavListComponent implements OnInit {
     firebase.initializeApp(fireConfig)
     this.verify = JSON.parse(localStorage.getItem('verificationId') || '{}')
 
+  }
+
+  ngAfterViewInit() {
+    // debugger
+    // if(localStorage.getItem('display_name' && 'appPackageId')) {
+    //  this.myStepper.selectedIndex = 2
+    // }
   }
 
   timer(minute) {
@@ -222,10 +227,9 @@ export class NavListComponent implements OnInit {
     //   return
     // }
     this.timer(1);
-
+    debugger
     this.payload = {
       phoneNumber: `+${this.countryCode}`+this.phoneNumber
-      // phoneNumberPrefix: `+${this.countryCode}`
     }
     firebase
     .auth()
@@ -233,16 +237,24 @@ export class NavListComponent implements OnInit {
     .then((res)=> {
       console.log(res);
       localStorage.setItem('verificationId', JSON.stringify(res.verificationId))
-      // debugger
+      debugger
       this.myStepper.next();
       this.toastr.success('We have sent an otp. Please fill in the below fields to continue.', 'Verify')
     }).catch((error)=> {
       this.toastr.error(error.message)
-      setTimeout(() => {
+       setTimeout(() => {
         window.location.reload()
-      }, 1000);
-      // this.myStepper.previous();
+      },2000);
+    }).finally(()=>{
+      debugger
+      console.log('finally')
+      // this.select()
     })
+  }
+
+  select() {
+    debugger
+   this.myStepper.selectedIndex = 2
   }
 
   resend() {
@@ -250,11 +262,13 @@ export class NavListComponent implements OnInit {
   }
 
   onOtpChange(otpCode: any) {
+    this.cf.detectChanges();
     this.otp = otpCode
     console.log(this.otp)
   }
 
   handleClick() {
+    this.cf.detectChanges();
     const credentials = firebase.auth.PhoneAuthProvider.credential(this.verify, this.otp);
     firebase
     .auth()
@@ -375,7 +389,10 @@ export class NavListComponent implements OnInit {
               this.customDialogService.closeDialogs();
             }, 3000);
         this.showLoading = false;
+        localStorage.setItem('display_name',JSON.stringify(this.creatorForm.controls.name.value))
+        localStorage.setItem('appPackageId',JSON.stringify((this.creatorForm.controls.name.value).toLowerCase().replace(/\s/g,'')))
         this.myStepper.next();
+
       } else {
         this.toastr.error(res.errors[0]?.error?.message, 'Error!');
        }
