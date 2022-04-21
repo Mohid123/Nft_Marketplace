@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ConnService } from '@app/@core/services/conn.service';
 import { CreatorService } from '@app/@core/services/creator.service';
 import { environment } from '@environments/environment';
 import { ToastrService } from 'ngx-toastr';
@@ -25,6 +26,7 @@ export class UserSignInComponent {
   public loginForm: FormGroup;
   public passwordHide: boolean;
   public clubName: string;
+  public userCredentials: any;
 
   creator$ = this.creatorService.Creator$;
 
@@ -34,15 +36,27 @@ export class UserSignInComponent {
     private customDialogService: CustomDialogService,
     private formBuilder: FormBuilder,
     private router: Router,
+    private connService: ConnService,
     private routeService: RouteService,
     private toastr: ToastrService
   ) {
+
+    this.connService.getUserCredentials().subscribe((res) => {
+      this.userCredentials = res
+
+      setTimeout(() => {
+        this.signInClick()
+      }, 2000)
+
+    })
+
+
     this.routeService.clubName$.pipe(take(1)).subscribe((clubName) => {
       this.clubName = clubName;
     });
 
-    let email =''
-    let password =''
+    let email = this.userCredentials.email
+    let password = this.userCredentials.pass
 
     if (this.routeService.clubName.toLowerCase() === environment.demoClub) {
       email = environment.demoClubEmail;

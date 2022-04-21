@@ -1,10 +1,10 @@
 export interface NodechainUser {
-  name:	string;
-  email:	string;
-  pass:	string
-  phoneNumber:	string
+  name?:	string;
+  email?:	string;
+  pass?:	string
+  phoneNumber?:	string
   profilePicURL?:	string
   blurHash?:	string
-  appPackageId:	string
-  clubName:	string;
+  appPackageId?:	string
+  clubName?:	string;
 }

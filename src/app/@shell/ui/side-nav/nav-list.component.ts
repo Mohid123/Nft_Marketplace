@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
-import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 import { flyInOut } from '@app/@core/animations/app.animation';
 import { Creator } from '@app/@core/models/creator.model';
 import { ApiResponse } from '@app/@core/models/response.model';
+import { ConnService } from '@app/@core/services/conn.service';
 import { CreatorService } from '@app/@core/services/creator.service';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { FireAuthService } from '@app/@core/services/fire-auth.service';
@@ -63,14 +64,20 @@ const fireConfig = {
     },
   animations: [
       flyInOut()
-    ]
+    ],
+   encapsulation: ViewEncapsulation.None
 })
 export class NavListComponent implements OnInit, AfterViewInit {
   destroy$ = new Subject();
 
   @ViewChild('imgFile') imgFile;
   @ViewChild('stepper') private myStepper: MatStepper;
-
+  public settings = {
+    length: 6,
+    numbersOnly: true,
+    timer: 120,
+    timerType: 1
+  }
   firstFormGroup: FormGroup;
   creatorForm: FormGroup;
   public profileImage: any;
@@ -107,6 +114,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
     private mediaService: MediaService,
     private creatorService: CreatorService,
     private userService: UserService,
+    private connService : ConnService,
     private route: Router) {
       this.creatorForm = this._formBuilder.group({
         name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(7)]),
@@ -120,7 +128,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
       allowNumbersOnly: true,
       length: 6,
       isPasswordInput: false,
-      disableAutoFocus: true,
+      disableAutoFocus: false,
       timer: 1,
       placeholder: '',
       inputStyles: {
@@ -204,7 +212,16 @@ export class NavListComponent implements OnInit, AfterViewInit {
       this.userService.createUser(payload).pipe(takeUntil(this.destroy$)).subscribe((res: ApiResponse<NodechainUser>) => {
         if(!res.hasErrors()) {
           this.toastr.success('User Created Successfully', 'Success');
-          this.route.navigate([''])
+          debugger
+          this.connService.sendUserCredentials({
+            email: payload.email,
+            pass: payload.pass
+          })
+          this.route.navigate(['/', this.creatorForm.value.name])
+          setTimeout(()=>{
+            this.login()
+          },2000)
+
         }
         else {
           this.toastr.error('Failed To Create New User', 'Create User');
@@ -213,6 +230,10 @@ export class NavListComponent implements OnInit, AfterViewInit {
     }).catch((error)=> {
       this.toastr.error(error, 'Something went wrong')
     })
+  }
+
+  login():void {
+    this.customDialogService.showUserSignInDialog(false,'market-page');
   }
 
 
@@ -239,6 +260,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
       localStorage.setItem('verificationId', JSON.stringify(res.verificationId))
       debugger
       this.myStepper.next();
+      this.cf.detectChanges();
       this.toastr.success('We have sent an otp. Please fill in the below fields to continue.', 'Verify')
     }).catch((error)=> {
       this.toastr.error(error.message)
@@ -265,6 +287,20 @@ export class NavListComponent implements OnInit, AfterViewInit {
     this.cf.detectChanges();
     this.otp = otpCode
     console.log(this.otp)
+  }
+
+  public onInputChange(e) {
+    console.log(e);
+    if(e.length == this.settings.length) {
+      this.otp = e
+      console.log('otp is', e);
+    }else if(e == -1) {
+      // if e == -1, timer has stopped
+      console.log(e, 'resend button enables');
+    }else if(e == -2) {
+      // e == -2, button click handle
+      console.log('resend otp');
+    }
   }
 
   handleClick() {

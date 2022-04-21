@@ -58,6 +58,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.deleteAllCookies();
     this.runGlobalServices();
     // OFFLINE/ONLINE CHECK
