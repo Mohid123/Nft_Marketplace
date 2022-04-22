@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
-import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -72,6 +72,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
 
   @ViewChild('imgFile') imgFile;
   @ViewChild('stepper') private myStepper: MatStepper;
+  @ViewChild('menu') menu!: ElementRef
   public settings = {
     length: 6,
     numbersOnly: true,
@@ -90,7 +91,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
   showLoading: boolean = false;
 
   countryCode: number;
-  otp!: string;
+  otp: any;
   verify: any;
   public passwordHide: boolean;
   phoneNumber: any;
@@ -117,7 +118,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
     private connService : ConnService,
     private route: Router) {
       this.creatorForm = this._formBuilder.group({
-        name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(7)]),
+        name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
         profileImg: new FormControl(''),
         profileImage: new FormControl(''),
       });
@@ -139,6 +140,8 @@ export class NavListComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     //  window.location.reload()
     //  this.cf.detectChanges();
+    // this.customDialogService.showSuccessDialog('HELLo')
+    // this.openNav()
      this.UserForm = this._formBuilder.group( {
       fullname: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(7)]),
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -152,6 +155,18 @@ export class NavListComponent implements OnInit, AfterViewInit {
     this.verify = JSON.parse(localStorage.getItem('verificationId') || '{}')
 
   }
+
+
+  openNav(){
+    this.menu.nativeElement.style.width = "100%";
+  }
+
+  closeNav(){
+  this.menu.nativeElement.style.width = "0%"
+  }
+
+
+
 
   ngAfterViewInit() {
     // debugger
@@ -248,7 +263,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
     //   return
     // }
     this.timer(1);
-    debugger
+    // debugger
     this.payload = {
       phoneNumber: `+${this.countryCode}`+this.phoneNumber
     }
@@ -258,7 +273,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
     .then((res)=> {
       console.log(res);
       localStorage.setItem('verificationId', JSON.stringify(res.verificationId))
-      debugger
+      // debugger
       this.myStepper.next();
       this.cf.detectChanges();
       this.toastr.success('We have sent an otp. Please fill in the below fields to continue.', 'Verify')
@@ -268,7 +283,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
         window.location.reload()
       },2000);
     }).finally(()=>{
-      debugger
+      // debugger
       console.log('finally')
       // this.select()
     })
@@ -284,28 +299,32 @@ export class NavListComponent implements OnInit, AfterViewInit {
   }
 
   onOtpChange(otpCode: any) {
+    debugger
     this.cf.detectChanges();
     this.otp = otpCode
     console.log(this.otp)
   }
 
-  public onInputChange(e) {
-    console.log(e);
-    if(e.length == this.settings.length) {
-      this.otp = e
-      console.log('otp is', e);
-    }else if(e == -1) {
-      // if e == -1, timer has stopped
-      console.log(e, 'resend button enables');
-    }else if(e == -2) {
-      // e == -2, button click handle
-      console.log('resend otp');
-    }
-  }
+  // public onInputChange(e) {
+  //   console.log(e);
+  //   if(e.length == this.settings.length) {
+  //     this.otp = e
+  //     console.log('otp is', e);
+  //   }else if(e == -1) {
+  //     // if e == -1, timer has stopped
+  //     console.log(e, 'resend button enables');
+  //   }else if(e == -2) {
+  //     // e == -2, button click handle
+  //     console.log('resend otp');
+  //   }
+  // }
 
   handleClick() {
+    debugger
     this.cf.detectChanges();
-    const credentials = firebase.auth.PhoneAuthProvider.credential(this.verify, this.otp);
+    const otp = this.otp.replace(/\s/g,'');
+
+    const credentials = firebase.auth.PhoneAuthProvider.credential(this.verify, otp);
     firebase
     .auth()
     .signInWithCredential(credentials)
@@ -420,10 +439,13 @@ export class NavListComponent implements OnInit, AfterViewInit {
       if (res !== null && !res.hasErrors()) {
         this.cf.detectChanges();
         // this.toastr.success('New creator successfully added.', 'Success!');
-        this.customDialogService.showSuccessDialog('HELLo')
+        // this.customDialogService.showSuccessDialog('HELLo')
+
+        this.openNav()
             setTimeout(() => {
-              this.customDialogService.closeDialogs();
-            }, 3000);
+              // this.customDialogService.closeDialogs();
+              this.closeNav()
+            }, 5000);
         this.showLoading = false;
         localStorage.setItem('display_name',JSON.stringify(this.creatorForm.controls.name.value))
         localStorage.setItem('appPackageId',JSON.stringify((this.creatorForm.controls.name.value).toLowerCase().replace(/\s/g,'')))
@@ -440,6 +462,8 @@ export class NavListComponent implements OnInit, AfterViewInit {
     this.destroy$.complete();
     this.destroy$.unsubscribe();
   }
+
+
 
 
 }

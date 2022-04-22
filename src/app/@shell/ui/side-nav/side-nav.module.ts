@@ -16,15 +16,18 @@ import { environment } from '@environments/environment';
 import { AngularOtpLibModule } from 'angular-otp-box';
 import { NgOtpInputModule } from 'ng-otp-input';
 import { Ng2TelInputModule } from 'ng2-tel-input';
+import { NumberOnlyModule } from './../../../@core/directives/number-only/number-only.module';
+import { SpacebetweenModule } from './../../../@core/directives/spacebetween/spacebetween.module';
 import { FireAuthService } from './../../../@core/services/fire-auth.service';
 import { NavListComponent } from './nav-list.component';
-
-
 @NgModule({
   declarations: [
     NavListComponent,
   ],
   imports: [
+
+  NumberOnlyModule,
+  SpacebetweenModule,
     NgOtpInputModule,
     AngularOtpLibModule,
     TrimModule,

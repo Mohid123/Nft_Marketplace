@@ -31,3 +31,70 @@
   }
 }
 
+.btn-close {
+  @apply absolute top-0 right-0 bg-white rounded-full opacity-50 m-3.5 hover:opacity-70;
+  padding: 1px;
+  svg {
+    color: #132356;
+  }
+}
+
+.overlay {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #ffffff;
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+.overlay-content {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+  display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90%;
+  // display: flex;
+}
+
+.overlay a {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 45px;
+  font-weight: 700;
+  display: block;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.overlay a:hover, .overlay a:focus {
+  color: #269604;
+}
+
+.overlay .closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+  color: #ffffff;
+}
+
+@media screen and (max-height: 450px) {
+  .overlay a {font-size: 20px}
+  .overlay .closebtn {
+  font-size: 40px;
+  top: 15px;
+  right: 35px;
+  }
+}
+
+
+a{
+  color:greenyellow;
+}
