@@ -90,6 +90,9 @@ export class NavListComponent implements OnInit, AfterViewInit {
 
   showLoading: boolean = false;
 
+  showPhoneLoading: boolean = false;
+  showVerifyOtp: boolean = false;
+
   countryCode: number;
   otp: any;
   verify: any;
@@ -253,15 +256,10 @@ export class NavListComponent implements OnInit, AfterViewInit {
 
 
   getOTP() {
+    this.showPhoneLoading = true;
     this.reCaptchaVerifier = new firebase.auth.RecaptchaVerifier
     ('sign-in-button',
-    {size: 'invisible'
-    },
-    )
-    // if (!this.countryCode || !this.phoneNumber) {
-    //   this.toastr.error('Please enter valid login details(registered phone number) to continue.', 'Invalid!')
-    //   return
-    // }
+    {size: 'invisible'},)
     this.timer(1);
     // debugger
     this.payload = {
@@ -276,6 +274,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
       // debugger
       this.myStepper.next();
       this.cf.detectChanges();
+      this.showPhoneLoading = false;
       this.toastr.success('We have sent an otp. Please fill in the below fields to continue.', 'Verify')
     }).catch((error)=> {
       this.toastr.error(error.message)
@@ -289,10 +288,6 @@ export class NavListComponent implements OnInit, AfterViewInit {
     })
   }
 
-  select() {
-    debugger
-   this.myStepper.selectedIndex = 2
-  }
 
   resend() {
   this.getOTP()
@@ -322,8 +317,8 @@ export class NavListComponent implements OnInit, AfterViewInit {
   handleClick() {
     debugger
     this.cf.detectChanges();
+    this.showVerifyOtp = true;
     const otp = this.otp.replace(/\s/g,'');
-
     const credentials = firebase.auth.PhoneAuthProvider.credential(this.verify, otp);
     firebase
     .auth()
@@ -332,6 +327,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
       console.log(res)
       this.toastr.success('Your phone number is verified.', 'Success!')
       this.myStepper.next();
+      this.showVerifyOtp = false;
       localStorage.setItem('user_data',JSON.stringify(res))
     }).catch((error) => {
       this.toastr.error(error.message)
@@ -440,17 +436,15 @@ export class NavListComponent implements OnInit, AfterViewInit {
         this.cf.detectChanges();
         // this.toastr.success('New creator successfully added.', 'Success!');
         // this.customDialogService.showSuccessDialog('HELLo')
-
         this.openNav()
             setTimeout(() => {
               // this.customDialogService.closeDialogs();
               this.closeNav()
             }, 5000);
         this.showLoading = false;
-        localStorage.setItem('display_name',JSON.stringify(this.creatorForm.controls.name.value))
-        localStorage.setItem('appPackageId',JSON.stringify((this.creatorForm.controls.name.value).toLowerCase().replace(/\s/g,'')))
+        // localStorage.setItem('display_name',JSON.stringify(this.creatorForm.controls.name.value))
+        // localStorage.setItem('appPackageId',JSON.stringify((this.creatorForm.controls.name.value).toLowerCase().replace(/\s/g,'')))
         this.myStepper.next();
-
       } else {
         this.toastr.error(res.errors[0]?.error?.message, 'Error!');
        }
