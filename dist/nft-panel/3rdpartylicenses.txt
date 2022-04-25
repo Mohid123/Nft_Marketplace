@@ -146,6 +146,9 @@ Apache-2.0
 angular-favicon
 MIT
 
+angular-otp-box
+MIT
+
 base64-js
 MIT
 The MIT License (MIT)
