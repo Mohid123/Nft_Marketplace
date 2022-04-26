@@ -27,8 +27,8 @@ export class CreateGroupComponent {
   destroy$ = new Subject();
   public groupForm: FormGroup;
   public imgFormData = new FormData();
-  public groupimgFormData = new FormData();
-  public groupFile: any;
+  public groupImage = new FormData();
+  public groupFile = new FormData();
 
 
   private _isLoading:boolean;
@@ -37,6 +37,9 @@ export class CreateGroupComponent {
   public limit = 6 ;
   public page:number;
   public imageSrc: any;
+  public groupFileImage: any;
+  public groupProfileImage: any;
+  public groupProfileImg: any;
 
   constructor(
     private authService: AuthService,
@@ -55,7 +58,8 @@ export class CreateGroupComponent {
       description: new FormControl('', [ Validators.required, Validators.minLength(15), Validators.maxLength(600) ]),
       royaltyFee: new FormControl('', [Validators.required, Validators.min(1) ,Validators.max(20)]),
       file: new FormControl(''),
-      groupFile: new FormControl(''),
+      groupImage: new FormControl(''),
+      groupFileImage: new FormControl(''),
       fileName: new FormControl(''),
       img: new FormControl(''),
     });
@@ -79,9 +83,10 @@ export class CreateGroupComponent {
   }
 
   onSelectFile(event): void {
+    debugger
     if (event.target.files && event.target.files[0]) {
-      this.groupFile = event.target.files[0];
-      this.groupForm.controls?.fileName.setValue(this.groupFile.name);
+      this.groupFileImage = event.target.files[0];
+      // this.groupForm.controls?.fileName.setValue(this.groupFile.name);
 
       if (event.target.files && event.target.files[0]) {
         const reader = new FileReader();
@@ -94,28 +99,41 @@ export class CreateGroupComponent {
   }
 
   cropImg(event) :void {
-    // debugger
-    this.groupForm.controls.groupFile.setValue(event);
+    debugger
+    this.groupForm.controls.groupFileImage.setValue(event);
     this.customDialogService.showImageCropperDialog(event, 1.13 / 1,true).then(matRef => {
       matRef.afterClosed().subscribe((result) => {
         // console.log('showImageCropperDialog:',result);
         if (result) {
+          debugger
           this.imageSrc = result;
+          debugger
           this.groupForm.patchValue({
-            img: this.imageSrc,
+
+            groupImage: this.mediaService.dataURLtoFile(
+              this.imageSrc,
+              this.groupFileImage.name
+            ),
           });
+
+          this.groupImage.append(
+            'file',
+            this.groupForm.get('groupImage').value
+          )
         } else {
           this.imageSrc = null;
-          this.groupFile = null;
-          this.groupForm.controls.img.setValue(null);
+          this.groupFileImage = null;
+          this.groupForm.controls.groupImage.setValue(null);
           this.imgFile.nativeElement.value = "";
         }
       });
     })
   }
 
+
+
   editImg():void {
-    this.cropImg(this.groupForm.controls.groupFile.value);
+    this.cropImg(this.groupForm.controls.groupProfileImg.value);
   }
 
   addGroup():void {
@@ -146,17 +164,17 @@ export class CreateGroupComponent {
             dataUrl,
             this.groupForm.controls.name.value + '.png',
           ),
-          groupFile: this.groupFile
+          // groupFile: this.groupFile
         });
         this.imgFormData.append('file', this.groupForm.get('file').value);
-        this.groupimgFormData.append('file', this.groupForm.get('groupFile').value);
+        // this.groupImage.append('file', this.groupForm.get('groupImage').value);
         debugger
 
         const mediaUpload:any = [];
         mediaUpload.push(this.mediaService.uploadMedia('group', this.imgFormData));
 
         if(this.imageSrc){
-          mediaUpload.push(this.mediaService.uploadMedia('group', this.groupimgFormData));
+          mediaUpload.push(this.mediaService.uploadMedia('group', this.groupImage));
         }
 
         combineLatest(mediaUpload)

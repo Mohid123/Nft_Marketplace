@@ -4,7 +4,6 @@ import { ROLE_TYPE_UTILS } from '@app/@core/utils/role-type.utils';
 import { Observable } from 'rxjs';
 import { getItem, StorageItem } from '../utils';
 import { AuthService } from './../../pages/auth/services/auth.service';
-import { RouteService } from './../services/route.service';
 import { ROUTER_UTILS } from './../utils/router.utils';
 
 @Injectable({
@@ -14,8 +13,7 @@ export class AdminGuard implements CanActivate {
 
   constructor(
     private authService: AuthService,
-    private router: Router,
-    private routeService: RouteService,
+    private router: Router
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot):
