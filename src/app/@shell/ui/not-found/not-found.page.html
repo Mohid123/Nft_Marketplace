@@ -1,4 +1,4 @@
-<div class="container relative flex flex-col items-center justify-center h-screen m-auto bg-center bg-cover "
+<div class="container relative flex flex-col items-center justify-center lg:h-screen xl:h-screen  m-auto bg-center bg-cover "
   style="background-image: url(../../../../assets/banner/bg-404.jpg); ">
 
   <!-- <div class="flex flex-col justify-center w-full h-screen overflow-hidden "  *ngIf="slider">
@@ -65,11 +65,13 @@
 
 
 
- <div class="w-full overflow-hidden "  >
-   <div class="custom-container">
+ <div class="w-full  "  >
+   <div class="custom-container items-center">
     <h1 class="text-4xl font-light text-center text-white mb-9 mt-9">Search Your Club</h1>
     <button [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
-    [routerLink]="[adminRouteUrl]"class="creator-btn"> Become a Creator</button>
+    [routerLink]="[adminRouteUrl]"class="creator-btn invisible lg:visible"> Become a Creator</button>
+    <button [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
+    [routerLink]="[adminRouteUrl]"class="creator-btn-sm visible lg:invisible mb-4 lg:mb-0">Become a Creator</button>
    </div>
 
   <div class="container flex items-center justify-center ">

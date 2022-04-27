@@ -3,6 +3,14 @@
   min-height: calc(100% - 105px);
 }
 
+html {
+  background: url(../../../../assets/banner/bg-404.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 .container {
   max-width: 100% !important ;
   // max-height: 100% !important
@@ -134,6 +142,13 @@
     position: absolute;
     top: 13px;
     right: 13px;
+
+}
+.creator-btn-sm {
+  @apply flex items-center justify-center text-center rounded-full h-14 bg-primary-nodechain w-44 mb-4 lg:mb-0;
+    // position: absolute;
+    // top: 13px;
+    // right: 13px;
 
 }
 
