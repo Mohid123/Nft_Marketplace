@@ -11,6 +11,7 @@ import {
 import { MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
 import { flyInOut } from '@app/@core/animations/app.animation';
+import { BecomeCreator } from '@app/@core/models/become-a-creator.model';
 import { Creator } from '@app/@core/models/creator.model';
 import { ApiResponse } from '@app/@core/models/response.model';
 import { ConnService } from '@app/@core/services/conn.service';
@@ -250,6 +251,154 @@ export class NavListComponent implements OnInit, AfterViewInit {
     })
   }
 
+  addCreator() {
+    this.showLoading = true;
+    const mediaUpload:any = [];
+    if(this.profileImageSrc){
+      mediaUpload.push(this.mediaService.uploadMedia('creator', this.profileImg));
+    }
+    combineLatest(mediaUpload)
+    .pipe(take(1),
+    exhaustMap((res: ApiResponse<ResponseAddMedia>) => {
+      if(!res[0].hasErrors()) {
+        debugger
+        const param: Creator = {
+          displayName: this.creatorForm.controls.name.value,
+          appPackageId: (this.creatorForm.controls.name.value).toLowerCase().replace(/\s/g,''),
+          profileImageURL: res[0].data.url,
+          isWithoutApp: true
+        };
+        if (res[0] && res[1] && !res[1].hasErrors()) {
+          param.profileImageURL = res[1].data.url
+        }
+        return this.creatorService.addCreator(param);
+      } else {
+        return of(null);
+      }
+    }),
+    )
+    .subscribe((res:any) => {
+      console.log(res)
+      if (res !== null && !res.hasErrors()) {
+        this.cf.detectChanges();
+        // this.toastr.success('New creator successfully added.', 'Success!');
+        // this.customDialogService.showSuccessDialog('HELLo')
+        this.openNav()
+            setTimeout(() => {
+              // this.customDialogService.closeDialogs();
+              this.closeNav()
+            }, 5000);
+        this.showLoading = false;
+        // localStorage.setItem('display_name',JSON.stringify(this.creatorForm.controls.name.value))
+        // localStorage.setItem('appPackageId',JSON.stringify((this.creatorForm.controls.name.value).toLowerCase().replace(/\s/g,'')))
+        this.myStepper.next();
+      } else {
+        this.toastr.error(res.errors[0]?.error?.message, 'Error!');
+       }
+    })
+
+  }
+
+  next() {
+    this.myStepper.next();
+  }
+
+  async sign() {
+    this.connService.sendUserCredentials({
+      email: this.email,
+      pass: this.password
+    })
+  }
+
+  becomeCreator() {
+    debugger
+    this.showLoading = true;
+    const mediaUpload:any = [];
+    if(this.profileImageSrc){
+      mediaUpload.push(this.mediaService.uploadMedia('creator', this.profileImg));
+    }
+    combineLatest(mediaUpload)
+    .pipe(take(1),
+    exhaustMap((res: ApiResponse<ResponseAddMedia>) => {
+      if(!res[0].hasErrors()) {
+        debugger
+        const param: BecomeCreator = {
+          creatorDisplayName: this.creatorForm.controls.name.value,
+          appPackageId: (this.creatorForm.controls.name.value).toLowerCase().replace(/\s/g,''),
+          creatorProfileImageURL: res[0].data.url,
+          isWithoutApp: true,
+          name: this.fullname,
+          pass: this.password,
+          email: this.email,
+          // phoneNumber: `+${this.countryCode}`+this.phoneNumber,
+          clubName: this.creatorForm.value.name,
+        };
+        if (res[0] && res[1] && !res[1].hasErrors()) {
+          param.creatorProfileImageURL = res[1].data.url
+        }
+        return this.signup().then(() => {
+          debugger
+          this.userService.becomeCreator(param).pipe(takeUntil(this.destroy$)).subscribe((res: ApiResponse<BecomeCreator>) => {
+            if(!res.hasErrors()) {
+              this.openNav()
+              setTimeout(() => {
+                this.closeNav()
+              }, 10000);
+              debugger
+              this.sign().then(() => {
+                this.route.navigate(['/', this.creatorForm.value.name])
+                setTimeout(()=>{
+                  this.login()
+                },2000)
+              })
+              // this.connService.sendUserCredentials({
+              //   email: param.email,
+              //   pass: param.pass
+              // })
+
+
+              // this.toastr.success('User Created Successfully', 'Success');
+              debugger
+
+              // this.route.navigate(['/', this.creatorForm.value.name])
+              // setTimeout(()=>{
+              //   this.login()
+              // },2000)
+              this.showLoading = false;
+
+
+            }
+            else {
+              this.toastr.error('Failed To Create New User', 'Create User');
+            }
+          })
+        }).catch((error)=> {
+          this.toastr.error(error, 'Something went wrong')
+        })
+      } else {
+        return of(null);
+      }
+    }),
+    )
+    .subscribe((res:any) => {
+      debugger
+      console.log(res)
+      if (res !== null && !res.hasErrors()) {
+        // this.openNav()
+        //     setTimeout(() => {
+        //       this.closeNav()
+        //     }, 5000);
+
+        this.showLoading = false;
+        // this.myStepper.next();
+
+      } else {
+        this.toastr.error(res.errors[0]?.error?.message, 'Error!');
+       }
+    })
+
+  }
+
   login():void {
     this.customDialogService.showUserSignInDialog(false,'market-page');
   }
@@ -403,54 +552,6 @@ export class NavListComponent implements OnInit, AfterViewInit {
     this.cropProfileImg(this.creatorForm.controls.profileImage?.value);
   }
 
-
-  addCreator() {
-    this.showLoading = true;
-    const mediaUpload:any = [];
-    if(this.profileImageSrc){
-      mediaUpload.push(this.mediaService.uploadMedia('creator', this.profileImg));
-    }
-    combineLatest(mediaUpload)
-    .pipe(take(1),
-    exhaustMap((res: ApiResponse<ResponseAddMedia>) => {
-      if(!res[0].hasErrors()) {
-        debugger
-        const param: Creator = {
-          displayName: this.creatorForm.controls.name.value,
-          appPackageId: (this.creatorForm.controls.name.value).toLowerCase().replace(/\s/g,''),
-          profileImageURL: res[0].data.url,
-          isWithoutApp: true
-        };
-        if (res[0] && res[1] && !res[1].hasErrors()) {
-          param.profileImageURL = res[1].data.url
-        }
-        return this.creatorService.addCreator(param);
-      } else {
-        return of(null);
-      }
-    }),
-    )
-    .subscribe((res:any) => {
-      console.log(res)
-      if (res !== null && !res.hasErrors()) {
-        this.cf.detectChanges();
-        // this.toastr.success('New creator successfully added.', 'Success!');
-        // this.customDialogService.showSuccessDialog('HELLo')
-        this.openNav()
-            setTimeout(() => {
-              // this.customDialogService.closeDialogs();
-              this.closeNav()
-            }, 5000);
-        this.showLoading = false;
-        // localStorage.setItem('display_name',JSON.stringify(this.creatorForm.controls.name.value))
-        // localStorage.setItem('appPackageId',JSON.stringify((this.creatorForm.controls.name.value).toLowerCase().replace(/\s/g,'')))
-        this.myStepper.next();
-      } else {
-        this.toastr.error(res.errors[0]?.error?.message, 'Error!');
-       }
-    })
-
-  }
 
   ngOnDestroy(): void {
     this.destroy$.complete();
