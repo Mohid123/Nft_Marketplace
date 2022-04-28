@@ -311,7 +311,6 @@ export class NavListComponent implements OnInit, AfterViewInit {
   }
 
   becomeCreator() {
-    debugger
     this.showLoading = true;
     const mediaUpload:any = [];
     if(this.profileImageSrc){
@@ -321,7 +320,6 @@ export class NavListComponent implements OnInit, AfterViewInit {
     .pipe(take(1),
     exhaustMap((res: ApiResponse<ResponseAddMedia>) => {
       if(!res[0].hasErrors()) {
-        debugger
         const param: BecomeCreator = {
           creatorDisplayName: this.creatorForm.controls.name.value,
           appPackageId: (this.creatorForm.controls.name.value).toLowerCase().replace(/\s/g,''),
@@ -337,20 +335,23 @@ export class NavListComponent implements OnInit, AfterViewInit {
           param.creatorProfileImageURL = res[1].data.url
         }
         return this.signup().then(() => {
-          debugger
           this.userService.becomeCreator(param).pipe(takeUntil(this.destroy$)).subscribe((res: ApiResponse<BecomeCreator>) => {
             if(!res.hasErrors()) {
               this.openNav()
               setTimeout(() => {
-                this.closeNav()
-              }, 10000);
-              debugger
-              this.sign().then(() => {
-                this.route.navigate(['/', this.creatorForm.value.name])
-                setTimeout(()=>{
-                  this.login()
-                },2000)
-              })
+                this.closeNav();
+                this.sign().then(() => {
+                  debugger
+                    this.route.navigate(['/', this.creatorForm.value.name]);
+                    this.login();
+                })
+                .catch((err) => {
+                  if(err) {
+                    this.toastr.error('Failed')
+                    return
+                  }
+                })
+              }, 5000)
               // this.connService.sendUserCredentials({
               //   email: param.email,
               //   pass: param.pass
@@ -400,7 +401,9 @@ export class NavListComponent implements OnInit, AfterViewInit {
   }
 
   login():void {
-    this.customDialogService.showUserSignInDialog(false,'market-page');
+    setTimeout(() => {
+      this.customDialogService.showUserSignInDialog(false,'market-page');
+    }, 2000);
   }
 
 
