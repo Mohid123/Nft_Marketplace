@@ -21,7 +21,7 @@ export class ImageCropperService extends AsyncImageCropperDialog<ImageCropperCom
   return this.matDialog.open(
     ImageCropperModule.getImageCropperComponent(),
     {
-      disableClose: false,
+      disableClose: true,
       panelClass: ['image-cropper-overlay', 'action-dialog'],
     },
   );
