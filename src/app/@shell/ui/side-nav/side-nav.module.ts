@@ -16,6 +16,7 @@ import { environment } from '@environments/environment';
 import { AngularOtpLibModule } from 'angular-otp-box';
 import { NgOtpInputModule } from 'ng-otp-input';
 import { Ng2TelInputModule } from 'ng2-tel-input';
+import { SwiperModule } from 'swiper/angular';
 import { NumberOnlyModule } from './../../../@core/directives/number-only/number-only.module';
 import { SpacebetweenModule } from './../../../@core/directives/spacebetween/spacebetween.module';
 import { FireAuthService } from './../../../@core/services/fire-auth.service';
@@ -26,6 +27,7 @@ import { NavListComponent } from './nav-list.component';
   ],
   imports: [
 
+  SwiperModule,
   NumberOnlyModule,
   SpacebetweenModule,
     NgOtpInputModule,

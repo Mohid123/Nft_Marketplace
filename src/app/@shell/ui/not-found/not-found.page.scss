@@ -1,15 +1,28 @@
+@import "~swiper/css";
+@import "~swiper/css/scrollbar";
+@import "~swiper/css/navigation";
+@import "~swiper/css/pagination";
+
+.swiper-button-next,
+.swiper-button-prev {
+    background-color: white;
+    border-radius: 100%;
+    background-color: rgba(255, 255, 255, 0.897);
+    right:10px;
+    padding: 30px;
+    color: rgb(255, 176, 6) !important;
+    fill: black !important;
+    stroke: black !important;
+    font-size: 12px !important;
+}
+
+
+
 :host {
   @apply w-full flex justify-center items-center h-auto;
   min-height: calc(100% - 105px);
 }
 
-html {
-  background: url(../../../../assets/banner/bg-404.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
 
 .container {
   max-width: 100% !important ;
@@ -33,7 +46,7 @@ html {
   }
 
   .club-logo {
-    @apply block ml-auto mr-auto  ;
+    @apply block ml-auto mr-auto rounded-full ;
   }
 
   .title {

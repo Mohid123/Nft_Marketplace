@@ -7,15 +7,14 @@ import { ThemeService } from '@core/services/theme';
 import { environment } from '@environments/environment';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-// import Swiper core and required modules
 import SwiperCore, { Autoplay, Pagination } from "swiper";
 import { Club } from './../../../@core/models/club.model';
 import { GetAllClubs } from './../../../@core/models/requests/get-all-club.model';
 import { ClubService } from './../../../@core/services/club.service';
-
-
-// install Swiper modules
 SwiperCore.use([Pagination, Autoplay ]);
+
+
+
 
 
 @Component({
@@ -81,6 +80,7 @@ export class NotFoundPage implements OnInit {
       const params: GetAllClubs = {
         offset: 0,
         sortDisplayName: this.sortBy,
+        limit: 100
       }
 
       if(this.searchControl.value) {
@@ -90,6 +90,7 @@ export class NotFoundPage implements OnInit {
       this.ClubService.getAllClubs(params).subscribe(res=> {
         if(!res.hasErrors() && res.data.totalCount > 0) {
           this.clubs = res.data.data;
+          console.log(this.clubs)
 
         }
       })
@@ -100,6 +101,9 @@ export class NotFoundPage implements OnInit {
 
 
   ngOnInit(){
+
+
+
     this.getClubs();
 
     this.firstFormGroup = this._formBuilder.group({

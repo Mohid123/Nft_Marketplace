@@ -1,77 +1,12 @@
-<div class="container relative flex flex-col items-center justify-center lg:h-screen xl:h-screen  m-auto bg-center bg-cover "
+<!-- <div class="container relative flex flex-col items-center justify-center m-auto bg-center bg-cover lg:h-screen xl:h-screen "
   style="background-image: url(../../../../assets/banner/bg-404.jpg); ">
-
-  <!-- <div class="flex flex-col justify-center w-full h-screen overflow-hidden "  *ngIf="slider">
-    <h1 class="text-4xl font-light text-center mb-9">Search Your Club</h1>
-    <div class="container flex items-center justify-center ">
-      <div class="relative" style="width: 900px;">
-        <div class="absolute flex top-4 left-3"> <img class="flex items-center justify-center w-6"
-            src="../../../../assets/icons/search.svg"> </div> <input [formControl]="searchControl" style="background:#140835; box-shadow: 0px 3px 40px #5640F594;
-            border: 1px solid #5640F5;" type="text"
-          class="z-0 w-full pl-10 pr-20 rounded-full h-14 focus:shadow focus:outline-none">
-
-        <div class="absolute border-r border-purple-600 top-2 right-24"> <span
-            class="flex items-center justify-center w-20 h-10 text-gray-500 rounded-lg">Search </span> </div>
-        <div class="absolute top-2 right-2">  <div class="filter">
-          <button mat-icon-button aria-label="menu" class="flex items-center justify-center w-20 h-10 text-gray-500 rounded-lg cursor-pointer" [matMenuTriggerFor]="nameMenu" >
-            <ng-container *ngIf="!filterName; else showName">Sort by</ng-container>
-            <ng-template #showName>{{filterName}}</ng-template>
-          </button>
-        </div>
-        </div>
-      </div>
-    </div>
-
-
-
-      <swiper
-      [slidesPerView]="4"
-      [spaceBetween]="30"
-      [centeredSlides]="true"
-      [pagination]="{
-        clickable: true
-      }"
-      [autoplay]="{
-               delay: 2500,
-                disableOnInteraction: false
-              }"
-
-      [navigation]="true"
-      class="mySwiper slider"
-    [class.show-all]="allClub"
-    >
-    <ng-container *ngFor="let club of clubs">
-      <ng-template swiperSlide>
-        <div class="x-gap circle">
-          <a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
-          [routerLink]="['/',club.redirectUrl]">
-          <img class="club-logo" [src]="club.profileImageURL" style="max-width: 50%; border-radius: 100%;" alt="">
-
-
-          <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt="" style=" opacity: 0.3;"></span>
-          </a>
-        </div>
-      </ng-template>
-    </ng-container>
-    </swiper>
-
-       <button (click)="showAllClub()" class="view-btn " [class.show-all]="allClub">
-        View all
-      </button>
-
-
-
-  </div> -->
-
-
-
- <div class="w-full  "  >
-   <div class="custom-container items-center">
+<div class="w-full "  >
+   <div class="items-center custom-container">
     <h1 class="text-4xl font-light text-center text-white mb-9 mt-9">Search Your Club</h1>
     <button [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
-    [routerLink]="[adminRouteUrl]"class="creator-btn invisible lg:visible"> Become a Creator</button>
+    [routerLink]="[adminRouteUrl]"class="invisible creator-btn lg:visible"> Become a Creator</button>
     <button [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
-    [routerLink]="[adminRouteUrl]"class="creator-btn-sm visible lg:invisible mb-4 lg:mb-0">Become a Creator</button>
+    [routerLink]="[adminRouteUrl]"class="visible mb-4 creator-btn-sm lg:invisible lg:mb-0">Become a Creator</button>
    </div>
 
   <div class="container flex items-center justify-center ">
@@ -84,8 +19,6 @@
       <div class="absolute border-r border-purple-600 top-2 right-24"> <span
           class="flex items-center justify-center w-20 h-10 text-gray-500 rounded-lg">Search </span> </div>
       <div class="absolute top-2 right-2">
-        <!-- <span
-          class="flex items-center justify-center w-20 h-10 text-gray-500 rounded-lg cursor-pointer" >Sort by</span> -->
           <div class="filter">
             <button mat-icon-button aria-label="menu" class="flex items-center justify-center w-20 h-10 text-gray-500 rounded-lg cursor-pointer" [matMenuTriggerFor]="nameMenu" >
               <ng-container *ngIf="!filterName; else showName">Sort by</ng-container>
@@ -101,9 +34,7 @@
               </button>
             </ng-container>
            </mat-menu>
-
-
-      </div>
+           </div>
     </div>
   </div>
     <div class="clubs-container"  [class.show-all]="!allClub"  >
@@ -114,7 +45,6 @@
           <div class="x-gap circle" >
 
             <img class="club-logo" [src]="club.profileImageURL" style="max-width: 50%; height: 50%; object-fit: contain;" alt="">
-            <!-- <span class="title">{{club.displayName}}</span> -->
             <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt="" style=" opacity: 0.3;"></span>
 
           </div>
@@ -126,15 +56,109 @@
     </div>
   </div>
 
+</div> -->
+
+<div  class="container relative flex flex-col items-center justify-center m-auto bg-center bg-cover lg:h-screen xl:h-screen "
+style="background-image: url(../../../../assets/banner/bg-404.jpg); ">
+<div class="flex flex-col justify-center w-full h-screen overflow-hidden "  *ngIf="slider">
+  <div class="items-center custom-container">
+    <h1 class="text-4xl font-light text-center text-white mb-9 mt-9">Search Your Club</h1>
+    <button [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
+    [routerLink]="[adminRouteUrl]"class="invisible creator-btn lg:visible"> Become a Creator</button>
+    <button [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
+    [routerLink]="[adminRouteUrl]"class="visible mb-4 creator-btn-sm lg:invisible lg:mb-0">Become a Creator</button>
+   </div>
+  <div class="container flex items-center justify-center ">
+    <div class="relative" style="width: 900px;">
+      <div class="absolute flex top-4 left-3"> <img class="flex items-center justify-center w-6"
+          src="../../../../assets/icons/search.svg"> </div> <input [formControl]="searchControl" style="background:#140835; box-shadow: 0px 3px 40px #5640F594;
+          border: 1px solid #5640F5;" type="text"
+        class="z-0 w-full pl-10 pr-20 rounded-full h-14 focus:shadow focus:outline-none">
+
+      <div class="absolute border-r border-purple-600 top-2 right-24"> <span
+          class="flex items-center justify-center w-20 h-10 text-gray-500 rounded-lg">Search </span> </div>
+      <div class="absolute top-2 right-2">  <div class="filter">
+        <button mat-icon-button aria-label="menu" class="flex items-center justify-center w-20 h-10 text-gray-500 rounded-lg cursor-pointer" [matMenuTriggerFor]="nameMenu" >
+          <ng-container *ngIf="!filterName; else showName">Sort by</ng-container>
+          <ng-template #showName>{{filterName}}</ng-template>
+        </button>
+      </div>
+      </div>
+    </div>
+  </div>
 
 
 
-  <!-- <a
-      [routerLink]="['/']"
-      class="inline-block h-12 px-6 py-3 mb-12 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-500 focus:ring-4 focus:ring-offset-blue-600 focus:outline-none"
-    >
-      Take me somewhere nice
-    </a> -->
-  <!-- </div>  -->
+    <swiper
+    [breakpoints]="{
+      '@0.00': {
+        slidesPerView: 3,
+        spaceBetween: 10
+      },
+      '@0.75': {
+        slidesPerView: 2,
+        spaceBetween: 20
+      },
+      '@1.00': {
+        slidesPerView: 4,
+        spaceBetween: 40
+      },
+      '@1.50': {
+        slidesPerView: 4,
+        spaceBetween: 50
+      }
+    }"
+    [slidesPerView]="50"
+    [spaceBetween]="30"
+    [centeredSlides]="false"
+
+
+    class="mySwiper slider swiper-container"
+  [class.show-all]="allClub"
+  >
+  <ng-container *ngFor="let club of clubs">
+    <ng-template swiperSlide *ngIf="(club.redirectUrl | lowercase) !== demoCLub && (club.redirectUrl | lowercase) !== demoCLub1">
+      <div class="x-gap circle">
+        <a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
+        [routerLink]="['/',club.redirectUrl]">
+        <img class="club-logo" [src]="club.profileImageURL" style="max-width: 50%; height: 50%; border-radius: 100%; object-fit: contain;" alt="">
+
+
+        <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt="" style=" opacity: 0.3;"></span>
+        </a>
+      </div>
+    </ng-template>
+  </ng-container>
+
+  <!-- <ng-container *ngFor="let club of clubs">
+    <ng-container *ngIf="(club.redirectUrl | lowercase) !== demoCLub && (club.redirectUrl | lowercase) !== demoCLub1">
+      <a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
+      [routerLink]="['/',club.redirectUrl]">
+      <div class="x-gap circle" >
+
+        <img class="club-logo" [src]="club.profileImageURL" style="max-width: 50%; height: 50%; object-fit: contain;" alt="">
+        <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt="" style=" opacity: 0.3;"></span>
+
+      </div>
+    </a>
+    </ng-container>
+  </ng-container> -->
+  </swiper>
+
+     <!-- <button (click)="showAllClub()" class="view-btn " [class.show-all]="allClub">
+      View all
+    </button> -->
+
+
 
 </div>
+</div>
+
+<mat-menu #nameMenu="matMenu" class="bg-primary-600 mt-0.5 p-3 w-32 rounded-md text-sm " xPosition='after'>
+  Sort by
+  <ng-container *ngFor="let sort of name">
+    <button (click)="sortClick(sort.sortBy)" class="dropdown" mat-menu-item>
+      {{sort.sortBy}}
+    </button>
+  </ng-container>
+ </mat-menu>
