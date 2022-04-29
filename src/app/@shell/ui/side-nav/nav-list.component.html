@@ -107,7 +107,7 @@
                     <p class="pl-4 error-msg error" *ngIf="creatorForm.controls.name.touched && creatorForm.controls.name.errors?.required">Name is Required</p>
                     <p class="pl-4 error-msg error" *ngIf="creatorForm.controls.name.touched && creatorForm.controls.name.errors?.minlength">Name should be greater than or equal to {{creatorForm.controls.name.errors?.minlength.requiredLength}} character </p>
                   </div>
-                  <div *ngIf="profileImageSrc " class="relative flex flex-col edit-btn " (click)="editImg()">
+                  <div *ngIf="profileImageSrc " class="relative flex flex-col edit-btn ">
 
                     <!-- <div class="editBtn"  >
                      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">

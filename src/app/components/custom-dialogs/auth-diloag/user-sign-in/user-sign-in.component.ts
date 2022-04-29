@@ -46,7 +46,7 @@ export class UserSignInComponent {
 
       setTimeout(() => {
         this.signInClick()
-      }, 2000)
+      })
 
     })
 
