@@ -35,6 +35,7 @@ export class FireAuthService {
       })
       .catch(err => {
         this.toastr.error(err.message, 'Something went wrong' )
+        return;
         // console.log('Something went wrong:',err.message);
       });
   }

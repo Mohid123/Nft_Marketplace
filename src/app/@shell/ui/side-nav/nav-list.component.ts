@@ -248,6 +248,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
         }
       })
     }).catch((error)=> {
+      debugger
       this.toastr.error(error, 'Something went wrong')
     })
   }
@@ -372,12 +373,17 @@ export class NavListComponent implements OnInit, AfterViewInit {
             }
             else {
               this.toastr.error('Failed To Create New User', 'Create User');
+              this.showLoading = false;
             }
           })
         }).catch((error)=> {
           this.toastr.error(error, 'Something went wrong')
+          this.showLoading = false;
+          return;
+
         })
       } else {
+        this.showLoading = false;
         return of(null);
       }
     }),
