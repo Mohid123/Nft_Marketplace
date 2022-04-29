@@ -433,10 +433,6 @@ export class NavListComponent implements OnInit, AfterViewInit {
        setTimeout(() => {
         window.location.reload()
       },2000);
-    }).finally(()=>{
-      // debugger
-      console.log('finally')
-      // this.select()
     })
   }
 
@@ -445,50 +441,61 @@ export class NavListComponent implements OnInit, AfterViewInit {
   this.getOTP()
   }
 
-  onOtpChange(otpCode: any) {
-    debugger
-    this.cf.detectChanges();
-    this.otp = otpCode
-    console.log(this.otp)
-  }
-
-  // public onInputChange(e) {
-  //   console.log(e);
-  //   if(e.length == this.settings.length) {
-  //     this.otp = e
-  //     console.log('otp is', e);
-  //   }else if(e == -1) {
-  //     // if e == -1, timer has stopped
-  //     console.log(e, 'resend button enables');
-  //   }else if(e == -2) {
-  //     // e == -2, button click handle
-  //     console.log('resend otp');
-  //   }
-  // }
-
   handleClick() {
     debugger
-    this.cf.detectChanges();
     this.showVerifyOtp = true;
+    debugger
     const otp = this.otp.replace(/\s/g,'');
     const credentials = firebase.auth.PhoneAuthProvider.credential(this.verify, otp);
+    debugger
     firebase
     .auth()
     .signInWithCredential(credentials)
-    .then((res) => {
-      console.log(res)
+    // .catch((error) => {
+    //   if (error.code === 'Invalid') {
+    //     firebase.auth().signInWithCredential(credentials)
+    //   }
+    // })
+    .then((res)=> {
       this.toastr.success('Your phone number is verified.', 'Success!')
       this.myStepper.next();
       this.showVerifyOtp = false;
       localStorage.setItem('user_data',JSON.stringify(res))
-    }).catch((error) => {
-      this.toastr.error(error.message)
-      setTimeout(() => {
-        window.location.reload()
-      }, 1000);
-      // this.myStepper.previous();
     })
+    .catch((error) => {
+      debugger
+      if (error) {
+            firebase.auth().signInWithCredential(credentials)
+            this.myStepper.next();
+         }
+
+    })
+    // .then((res) => {
+    //   console.log(res)
+    //   this.toastr.success('Your phone number is verified.', 'Success!')
+    //   this.myStepper.next();
+    //   this.showVerifyOtp = false;
+    //   localStorage.setItem('user_data',JSON.stringify(res))
+    // }).catch((error) => {
+    //   this.toastr.error(error.message)
+    //   console.log(error.message)
+    //   // setTimeout(() => {
+    //   //   window.location.reload()
+    //   // }, 1000);
+    //   // this.myStepper.previous();
+    // })
   }
+
+  onOtpChange(otpCode: any) {
+    debugger
+    this.cf.detectChanges();
+    this.otp = otpCode
+    // console.log(this.otp)
+  }
+
+
+
+
 
   onCountryChange(country) {
     this.countryCode = country.dialCode
