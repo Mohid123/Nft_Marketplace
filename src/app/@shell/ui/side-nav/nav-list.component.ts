@@ -343,7 +343,6 @@ export class NavListComponent implements OnInit, AfterViewInit {
               setTimeout(() => {
                 this.closeNav();
                 this.sign().then(() => {
-                  debugger
                     this.route.navigate(['/', this.creatorForm.value.name]);
                     this.login();
                 })
@@ -354,26 +353,12 @@ export class NavListComponent implements OnInit, AfterViewInit {
                   }
                 })
               }, 5000)
-              // this.connService.sendUserCredentials({
-              //   email: param.email,
-              //   pass: param.pass
-              // })
-
-
-              // this.toastr.success('User Created Successfully', 'Success');
-              debugger
-
-              // this.route.navigate(['/', this.creatorForm.value.name])
-              // setTimeout(()=>{
-              //   this.login()
-              // },2000)
               this.showLoading = false;
-
-
             }
             else {
               this.toastr.error('Failed To Create New User', 'Create User');
               this.showLoading = false;
+              return
             }
           })
         }).catch((error)=> {
@@ -392,16 +377,10 @@ export class NavListComponent implements OnInit, AfterViewInit {
       debugger
       console.log(res)
       if (res !== null && !res.hasErrors()) {
-        // this.openNav()
-        //     setTimeout(() => {
-        //       this.closeNav()
-        //     }, 5000);
-
         this.showLoading = false;
-        // this.myStepper.next();
-
       } else {
-        this.toastr.error(res.errors[0]?.error?.message, 'Error!');
+        this.toastr.error(res.errors[0]?.error?.message, 'Error!')
+        return
        }
     })
 

@@ -94,7 +94,25 @@
   }
 }
 
+.preview {
+  @apply object-cover w-24 h-24 ;
+}
+
+
+.editBtn {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -40px;
+  margin-top: -90px;
+  text-align: center;
+  // filter: invert(1);
+  transition: transform 500ms ease-in-out 25ms;
+  cursor: pointer;
+  // display: none;
+}
+
 
 a{
-  color:greenyellow;
+  color:rgb(250, 169, 19);
 }

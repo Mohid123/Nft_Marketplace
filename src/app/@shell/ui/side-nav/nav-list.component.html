@@ -76,8 +76,6 @@
                         <div class="flex justify-end w-full lg:w-full xl:w-9/12">
                           <span class="justify-end text-sm font-thin text-right text-gray-600">Didn't recieve a code? <a (click)="resend()" class="text-sm font-thin text-yellow-600 cursor-pointer">Resend</a></span>
                         </div>
-                      <!-- <ng-otp-input  (onInputChange)="onOtpChange($event)"  [config]="config" class="inline w-full lg:w-full xl:w-1/2"></ng-otp-input> -->
-                    <!-- <p class="justify-center inline text-gray-500 "> Didn't receive a code? {{display}}<a (click)="resend()" class="ml-2 text-yellow-500 cursor-pointer">Resend</a> </p> -->
                       </div>
                         <div class="flex justify-end w-full mt-3 lg:w-full xl:w-1/2">
                           <button mat-button matStepperPrevious class="back-btn">Back</button>
@@ -104,19 +102,75 @@
                 </h3>
                 <span class="mt-16 mb-16 text-xl font-medium tracking-wide md:text-xl lg:text-2xl lg:mb-0 xl:mb-0 text-start text-dark">Let's start with Your<br>Marketplace name</span>
                 <form [formGroup]="creatorForm" class="justify-start">
-                  <div class="w-full mt-2 border-b-2 border-teal-500 lg:w-full xl:w-62">
+                  <div class="w-full mt-2 border-b-2 border-teal-500 lg:w-1/2">
                     <input class="leading-tight tracking-wider text-gray-700 bg-transparent border-none appearance-none w-62 lg:w-62 focus:outline-none" formControlName="name" required type="text" placeholder="Marketplace" aria-label="Full name">
                     <p class="pl-4 error-msg error" *ngIf="creatorForm.controls.name.touched && creatorForm.controls.name.errors?.required">Name is Required</p>
                     <p class="pl-4 error-msg error" *ngIf="creatorForm.controls.name.touched && creatorForm.controls.name.errors?.minlength">Name should be greater than or equal to {{creatorForm.controls.name.errors?.minlength.requiredLength}} character </p>
                   </div>
+                  <div *ngIf="profileImageSrc " class="relative flex flex-col edit-btn " (click)="editImg()">
 
-                  <div class="image-upload">
+                    <!-- <div class="editBtn"  >
+                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
+                       <g id="Group_56289" data-name="Group 56289" transform="translate(11150 -4)">
+                         <circle id="Ellipse_3170" data-name="Ellipse 3170" cx="12.5" cy="12.5" r="12.5" transform="translate(-11150 4)" fill="#fff"/>
+                         <path id="Icon_material-edit" data-name="Icon material-edit" d="M4.5,12.486v2.1H6.6l6.2-6.2-2.1-2.1Zm9.928-5.723a.558.558,0,0,0,0-.79L13.116,4.66a.558.558,0,0,0-.79,0L11.3,5.686l2.1,2.1Z" transform="translate(-11146.5 6.504)" fill="#6a6a6a"/>
+                       </g>
+                     </svg>
+                    </div> -->
+                     <li class="inline-flex my-4 card-bg">
+                       <ul class="border-gradient-dp-p-bg-dark hover:border-gradient-tl-p-bg-light gradient-border-2">
+                         <img style=" object-fit: cover; position: relative;
+
+                         display: block;" id="ticket" class="preview" src="{{profileImageSrc }}" >
+                         </ul>
+                      </li>
+
+                      <a (click)="editImg()">Edit</a>
+
+                   </div>
+
+                  <div class="flex flex-col mt-3 mb-3">
+                    <div class="relative flex justify-between w-full h-12 overflow-hidden border-2 border-gray-400 border-dashed rounded-lg lg:w-1/2">
+                    <button
+                      class="flex items-center justify-between w-full px-2 py-2 font-bold lg:w-62 bg-primary-gray-100 hover:bg-indigo-dark">
+                      <ng-container *ngIf="!profileImageSrc ; else show">
+                          <div class="px-2 font-light text-gray-400">Select File to Upload</div>
+
+                      </ng-container>
+                      <ng-template #show>
+                        <div class="px-2 font-light ">File selected!</div>
+                      </ng-template>
+
+                    <div>
+                        <svg
+                          fill="#FFF"
+                          height="28"
+                          viewBox="0 0 24 24"
+                          width="28"
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="m-2">
+                          <path d="M0 0h24v24H0z" fill="none" />
+                          <path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z" />
+                        </svg>
+                      </div>
+                    </button>
+                    <input #imgFile
+                      class="absolute block opacity-0 cursor-pointer pin-r pin-t"
+                      type="file"
+                      name=""
+                      accept=".jpg, .jpeg, .png"
+                      (change)="onSelectProfile($event)"
+                    />
+                  </div>
+                  </div>
+
+                  <!-- <div class="image-upload">
                     <label for="file-input">
                       <img class="w-60" src="../../../../assets/upload.png"/>
                     </label>
                     <input #imgFile id="file-input" accept="image/png, image/gif, image/jpeg" type="file" (change)="onSelectProfile($event)"/>
-                  </div>
-                  <div class="w-full mt-2 mb-4 overflow-y-hidden border-yellow-600 xl:w-1/2" >
+                  </div> -->
+                  <!-- <div class="w-full mt-2 mb-4 overflow-y-hidden border-yellow-600 xl:w-1/2" >
                     <div *ngIf="profileImage" class="object-cover h-auto" >
                       <div class="flex items-center justify-between w-full p-2 border border-gray-200 rounded">
                         <img [src]="profileImageSrc" class="object-cover w-16 h-16 mr-3 rounded-xl">
@@ -132,7 +186,7 @@
                          </button>
                       </div>
                    </div>
-                  </div>
+                  </div> -->
                   <div class="flex justify-end w-full lg:w-full xl:w-1/2">
                     <!-- <button mat-button matStepperPrevious class="back-btn">Back</button> -->
                     <button  mat-button class="relative inline-flex items-center justify-center text-center primary-btn" [disabled]="!profileImageSrc  || creatorForm.invalid" (click)="next()">
@@ -216,7 +270,7 @@
                 <form  class="justify-start">
                   <div class="w-full mb-4 border-b-2 border-teal-500 lg:w-62">
                     <input appTrim minlength=7 name="name" required placeholder="John Doe"
-                    maxlength=15 #name="ngModel" [(ngModel)]="fullname" [ngModelOptions]="{standalone: true}"  class="leading-tight tracking-wider text-gray-700 bg-transparent border-none appearance-none w-62 focus:outline-none" >
+                    maxlength=15 #name="ngModel" [(ngModel)]="fullname" [ngModelOptions]="{standalone: true}"  class="w-full leading-tight tracking-wider text-gray-700 bg-transparent border-none appearance-none focus:outline-none" >
                     <div *ngIf="name.invalid && (name.dirty || name.touched)">
                       <p class="pl-4 error-msg error" *ngIf="name.errors?.required">
                                           Fullname is required.
@@ -236,7 +290,7 @@
                 <form class="justify-start">
                   <div class="w-full mb-4 border-b-2 border-teal-500 lg:w-62">
                    <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  appTrim  name="email" required
-                    [email]="true" #mail="ngModel" [(ngModel)]="email" [ngModelOptions]="{standalone: true}" class="leading-tight tracking-wider text-gray-700 bg-transparent border-none appearance-none w-62 focus:outline-none"  placeholder="your@email.com">
+                    [email]="true" #mail="ngModel" [(ngModel)]="email" [ngModelOptions]="{standalone: true}" class="leading-tight tracking-wider text-gray-700 bg-transparent border-none appearance-none focus:outline-none"  placeholder="your@email.com">
                    <div *ngIf="mail.touched">
                      <p class="pl-4 error-msg error"  *ngIf="mail.errors?.required">Email is a required.</p>
                      <p class="pl-4 error-msg error"  *ngIf="mail.errors?.pattern">This is not a valid Email.</p>
@@ -255,7 +309,7 @@
                         <img class="w-4 h-4" src="./assets/icons/password.svg" alt="">
                       </span>
                     </span>
-                    <input required minlength="6" [(ngModel)]="password" name="password"    [ngModelOptions]="{standalone: true}"  class="leading-tight text-gray-700 bg-transparent border-none appearance-none w-62 focus:outline-none"  type="{{passwordHide ? 'password' : 'text'}}" placeholder="Password">
+                    <input required minlength="6" [(ngModel)]="password" name="password"    [ngModelOptions]="{standalone: true}"  class="w-full leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"  type="{{passwordHide ? 'password' : 'text'}}" placeholder="Password">
                   </div>
                   <div class="relative w-full border-b-2 border-teal-500 lg:w-62">
                     <span class="absolute inset-y-0 right-0 flex items-center pl-2" (click)="passwordShowHide()">
@@ -263,7 +317,7 @@
                         <img class="w-4 h-4" src="./assets/icons/password.svg" alt="">
                       </span>
                     </span>
-                    <input required [(ngModel)]="confirmPassword"  id="passwordB" name="confirmPassword"  class="leading-tight tracking-wider text-gray-700 bg-transparent border-none appearance-none w-62 focus:outline-none"  type="{{passwordHide ? 'password' : 'text'}}" placeholder="Confirm password">
+                    <input required [(ngModel)]="confirmPassword"  id="passwordB" name="confirmPassword"  class="w-full leading-tight tracking-wider text-gray-700 bg-transparent border-none appearance-none focus:outline-none"  type="{{passwordHide ? 'password' : 'text'}}" placeholder="Confirm password">
                     <p class="pl-4 error-msg error" *ngIf="password !== confirmPassword">Password must match</p>
                   </div>
                 </div>
