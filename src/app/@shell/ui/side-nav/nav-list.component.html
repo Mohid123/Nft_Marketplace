@@ -103,7 +103,7 @@
                 <span class="mt-16 mb-16 text-xl font-medium tracking-wide md:text-xl lg:text-2xl lg:mb-0 xl:mb-0 text-start text-dark">Let's start with Your<br>Marketplace name</span>
                 <form [formGroup]="creatorForm" class="justify-start">
                   <div class="w-full mt-2 border-b-2 border-teal-500 lg:w-1/2">
-                    <input class="leading-tight tracking-wider text-gray-700 bg-transparent border-none appearance-none w-62 lg:w-62 focus:outline-none" formControlName="name" required type="text" placeholder="Marketplace" aria-label="Full name">
+                    <input appTrim class="leading-tight tracking-wider text-gray-700 bg-transparent border-none appearance-none w-62 lg:w-62 focus:outline-none" formControlName="name" maxlength="16" required type="text" placeholder="Marketplace" aria-label="Full name">
                     <p class="pl-4 error-msg error" *ngIf="creatorForm.controls.name.touched && creatorForm.controls.name.errors?.required">Name is Required</p>
                     <p class="pl-4 error-msg error" *ngIf="creatorForm.controls.name.touched && creatorForm.controls.name.errors?.minlength">Name should be greater than or equal to {{creatorForm.controls.name.errors?.minlength.requiredLength}} character </p>
                   </div>
@@ -290,7 +290,7 @@
                 <form class="justify-start">
                   <div class="w-full mb-4 border-b-2 border-teal-500 lg:w-62">
                    <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  appTrim  name="email" required
-                    [email]="true" #mail="ngModel" [(ngModel)]="email" [ngModelOptions]="{standalone: true}" class="leading-tight tracking-wider text-gray-700 bg-transparent border-none appearance-none focus:outline-none"  placeholder="your@email.com">
+                    [email]="true" #mail="ngModel" [(ngModel)]="email" [ngModelOptions]="{standalone: true}" class="w-full leading-tight tracking-wider text-gray-700 bg-transparent border-none appearance-none focus:outline-none"  placeholder="your@email.com">
                    <div *ngIf="mail.touched">
                      <p class="pl-4 error-msg error"  *ngIf="mail.errors?.required">Email is a required.</p>
                      <p class="pl-4 error-msg error"  *ngIf="mail.errors?.pattern">This is not a valid Email.</p>
@@ -443,3 +443,6 @@
     </div>
   </div>
 </div>
+
+
+

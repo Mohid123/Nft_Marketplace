@@ -1,7 +1,7 @@
-@import "~swiper/css";
-@import "~swiper/css/scrollbar";
-@import "~swiper/css/navigation";
-@import "~swiper/css/pagination";
+@import "swiper/css";
+@import "swiper/css/scrollbar";
+@import "swiper/css/navigation";
+@import "swiper/css/pagination";
 
 .swiper-button-next,
 .swiper-button-prev {
@@ -14,6 +14,7 @@
     fill: black !important;
     stroke: black !important;
     font-size: 12px !important;
+    z-index: 999;
 }
 
 
@@ -33,9 +34,9 @@
 .clubs-container {
   @apply flex w-full flex-wrap h-auto justify-center flex-row mt-8;
   // height: calc (100% - 105px)
-  .x-gap {
-    margin: 15px 35px;
-  }
+  // .x-gap {
+  //   margin: 15px 35px;
+  // }
 
   .circle {
     height: 212px;
@@ -54,8 +55,9 @@
   }
 
   .icon {
-    @apply block mt-2 ml-auto mr-auto opacity-25;
+    @apply block mt-4 ml-auto mr-auto opacity-25;
   }
+
 }
 
 
@@ -96,7 +98,7 @@
 
 .swiper {
   width: 100%;
-  height: 30%;
+  // height: 30%;
 }
 
 .swiper-slide {
@@ -169,62 +171,7 @@
   @apply object-cover w-24 h-24;
 }
 
-.overlay {
-  height: 100%;
-  width: 0;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  right: 0;
-  background-color: white;
-  overflow-x: hidden;
-  transition: 0.5s;
-}
 
-.overlay-content {
-  position: relative;
-  // top: 25%;
-  width: 100%;
-  text-align: center;
-  // margin-top: 30px;
-}
-
-.overlay a {
-  padding: 8px;
-  text-decoration: none;
-  font-size: 45px;
-  font-weight: 700;
-  display: block;
-  transition: 0.3s;
-  cursor: pointer;
-}
-
-.overlay a:hover, .overlay a:focus {
-  color: #269604;
-}
-
-.overlay .closebtn {
-  z-index: 1;
-  position: absolute;
-  top: 20px;
-  right: 45px;
-  font-size: 60px;
-  color: #ffffff;
-}
-
-@media screen and (max-height: 450px) {
-  .overlay a {font-size: 20px}
-  .overlay .closebtn {
-  font-size: 40px;
-  top: 15px;
-  right: 35px;
-  }
-}
-
-
-a{
-  color:greenyellow;
-}
 
 mat-label {
  text-align: start;

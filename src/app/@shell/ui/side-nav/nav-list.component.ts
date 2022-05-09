@@ -123,7 +123,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
     private connService : ConnService,
     private route: Router) {
       this.creatorForm = this._formBuilder.group({
-        name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
+        name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(16)]),
         profileImg: new FormControl(''),
         profileImage: new FormControl(''),
       });
@@ -160,7 +160,6 @@ export class NavListComponent implements OnInit, AfterViewInit {
     this.verify = JSON.parse(localStorage.getItem('verificationId') || '{}')
 
   }
-
 
   openNav(){
     this.menu.nativeElement.style.width = "100%";
@@ -341,10 +340,11 @@ export class NavListComponent implements OnInit, AfterViewInit {
             if(!res.hasErrors()) {
               this.openNav()
               setTimeout(() => {
-                this.closeNav();
+
                 this.sign().then(() => {
                     this.route.navigate(['/', this.creatorForm.value.name]);
                     this.login();
+                    this.closeNav();
                 })
                 .catch((err) => {
                   if(err) {

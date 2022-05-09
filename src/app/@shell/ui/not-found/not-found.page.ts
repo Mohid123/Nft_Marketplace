@@ -7,11 +7,11 @@ import { ThemeService } from '@core/services/theme';
 import { environment } from '@environments/environment';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import SwiperCore, { Autoplay, Pagination } from "swiper";
+import SwiperCore, { Autoplay, Navigation, Pagination } from "swiper";
 import { Club } from './../../../@core/models/club.model';
 import { GetAllClubs } from './../../../@core/models/requests/get-all-club.model';
 import { ClubService } from './../../../@core/services/club.service';
-SwiperCore.use([Pagination, Autoplay ]);
+SwiperCore.use([Pagination, Autoplay, Navigation ]);
 
 
 
@@ -23,6 +23,7 @@ SwiperCore.use([Pagination, Autoplay ]);
   encapsulation: ViewEncapsulation.None,
 })
 export class NotFoundPage implements OnInit {
+
   @ViewChild('menu') menu!: ElementRef
   @ViewChild('content') content!: ElementRef
   demoCLub = environment.demoClub;
