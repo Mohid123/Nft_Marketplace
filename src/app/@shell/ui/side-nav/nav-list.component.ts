@@ -335,13 +335,14 @@ export class NavListComponent implements OnInit, AfterViewInit {
         if (res[0] && res[1] && !res[1].hasErrors()) {
           param.creatorProfileImageURL = res[1].data.url
         }
+
         return this.signup().then(() => {
           this.userService.becomeCreator(param).pipe(takeUntil(this.destroy$)).subscribe((res: ApiResponse<BecomeCreator>) => {
+
             if(!res.hasErrors()) {
               this.openNav()
               setTimeout(() => {
-
-                this.sign().then(() => {
+                 this.sign().then(() => {
                     this.route.navigate(['/', this.creatorForm.value.name]);
                     this.login();
                     this.closeNav();
@@ -353,21 +354,25 @@ export class NavListComponent implements OnInit, AfterViewInit {
                   }
                 })
               }, 5000)
+
               this.showLoading = false;
             }
+
             else {
               this.toastr.error('Failed To Create New User', 'Create User');
               this.showLoading = false;
               return
             }
           })
-        }).catch((error)=> {
+        })
+        .catch((error)=> {
           this.toastr.error(error, 'Something went wrong')
+          console.log(error)
           this.showLoading = false;
           return;
-
         })
-      } else {
+      }
+      else {
         this.showLoading = false;
         return of(null);
       }

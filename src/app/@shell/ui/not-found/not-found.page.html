@@ -87,7 +87,7 @@ style="background-image: url(../../../../assets/banner/bg-404.jpg); ">
     </div>
   </div>
   <section class="custom-container">
-    <!-- <swiper
+    <swiper
     [breakpoints]="{
       '@0.00': {
         slidesPerView: 3,
@@ -106,58 +106,11 @@ style="background-image: url(../../../../assets/banner/bg-404.jpg); ">
         spaceBetween: 50
       }
     }"
-    class="mySwiper slider custom-container"
-  [class.show-all]="allClub"
-  >
-  <ng-container *ngFor="let club of clubs">
-    <ng-template swiperSlide *ngIf="(club.redirectUrl | lowercase) !== demoCLub && (club.redirectUrl | lowercase) !== demoCLub1">
-      <div class="x-gap circle">
-        <a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
-        [routerLink]="['/',club.redirectUrl]">
-        <img class="club-logo" [src]="club.profileImageURL"
-        style="object-fit: cover;
-        margin-right: auto;
-        margin-left: auto;
-        height: 100px;
-        width: 100px;
-        border-radius: 100%;
-        display: block;
-        margin-bottom: 12px;"
-
-        alt="">
-
-
-        <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt="" style=" opacity: 0.3;"></span>
-        </a>
-      </div>
-    </ng-template>
-  </ng-container>
-  </swiper> -->
-
-  <swiper
-  [breakpoints]="{
-    '@0.00': {
-      slidesPerView: 3,
-      spaceBetween: 10
-    },
-    '@0.75': {
-      slidesPerView: 2,
-      spaceBetween: 20
-    },
-    '@1.00': {
-      slidesPerView: 4,
-      spaceBetween: 40
-    },
-    '@1.50': {
-      slidesPerView: 4,
-      spaceBetween: 50
-    }
-  }"
-  [slidesPerView]="4"
-  [spaceBetween]="80"
-  [centeredSlides]="false"
-  [navigation]="true"
-  class="mySwiper slider custom-container">
+    [slidesPerView]="4"
+    [spaceBetween]="30"
+    [centeredSlides]="false"
+    [navigation]="true"
+  class="mySwiper slider ">
 <ng-container *ngFor="let club of clubs">
   <ng-template swiperSlide *ngIf="(club.redirectUrl | lowercase) !== demoCLub && (club.redirectUrl | lowercase) !== demoCLub1">
     <div class="x-gap circle">

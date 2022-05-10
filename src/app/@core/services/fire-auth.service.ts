@@ -21,9 +21,10 @@ export class FireAuthService {
   //   .pipe(switchMap(({ user }) => updateProfile(user, { displayName: name})))
   // }
 
-   signup(fullname: string, email: string, password: string) {
+  async signup(fullname: string, email: string, password: string) {
      debugger
-    this.afAuth
+  try {
+    await this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((value )=> {
         debugger
@@ -33,10 +34,12 @@ export class FireAuthService {
         // this.toastr.success('User created', 'Success!')
 
       })
-      .catch(err => {
-        this.toastr.error(err.message, 'Something went wrong' )
-        // return
-      });
+  }
+  catch(error) {
+    throw error;
+  }
+
+      // throw Error('Something went wrong')
   }
 
 }

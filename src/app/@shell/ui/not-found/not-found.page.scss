@@ -5,18 +5,16 @@
 
 .swiper-button-next,
 .swiper-button-prev {
-    background-color: white;
+    // background-color: white;
     border-radius: 100%;
-    background-color: rgba(255, 255, 255, 0.897);
-    right:10px;
-    padding: 30px;
-    color: rgb(255, 176, 6) !important;
+    // right:10px;
+    padding: 12px;
+    color: rgb(255, 255, 255) !important;
     fill: black !important;
     stroke: black !important;
     font-size: 12px !important;
     z-index: 999;
 }
-
 
 
 :host {
@@ -34,9 +32,9 @@
 .clubs-container {
   @apply flex w-full flex-wrap h-auto justify-center flex-row mt-8;
   // height: calc (100% - 105px)
-  // .x-gap {
-  //   margin: 15px 35px;
-  // }
+  .x-gap {
+    margin: 15px 35px;
+  }
 
   .circle {
     height: 212px;
@@ -104,7 +102,7 @@
 .swiper-slide {
   text-align: center;
   font-size: 18px;
-  height: 212px;
+  height: 212px !important;
   width: 212px !important;
   border-radius: 100%;
   background: transparent radial-gradient(closest-side at 50% 50%, #11143F 0%, #130633 100%) 0% 0% no-repeat padding-box;
@@ -197,3 +195,4 @@ form {
   }
 
 }
+
