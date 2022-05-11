@@ -21,6 +21,7 @@
   [cropperMinWidth]="128"
   format="png"
   (imageCropped)="imageCropped($event)"
+  class="px-0 overflow-y-auto sm:px-20 custom-scrollbar-css"
 ></image-cropper>
   <!-- <img alt [src]="img"> -->
   <button class="primary-btn" (click)="crop();">

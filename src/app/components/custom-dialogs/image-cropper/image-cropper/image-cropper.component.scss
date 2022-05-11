@@ -29,4 +29,29 @@
     @apply w-44 h-12  sm:my-14 self-center;
   }
 
+  .custom-scrollbar-css {
+    height: 500px;
+  }
+  /* Custom Scrollbar using CSS */
+  .custom-scrollbar-css {
+    overflow-y: scroll;
+  }
+  /* scrollbar width */
+  .custom-scrollbar-css::-webkit-scrollbar {
+    width: 7px;
+  }
+  /* scrollbar track */
+  .custom-scrollbar-css::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+  /* scrollbar handle */
+  .custom-scrollbar-css::-webkit-scrollbar-thumb {
+    border-radius: 1rem;
+    background-color: #34ABC5;
+    background-image: linear-gradient(to top, #FFB937 0%, #D59629 100%);
+    &.dark {
+      background-image: linear-gradient(to top, #3ABFF3 0%, #75F16D 100%);
+    }
+
  }
+}

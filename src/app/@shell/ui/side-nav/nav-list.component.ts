@@ -179,31 +179,31 @@ export class NavListComponent implements OnInit, AfterViewInit {
     // }
   }
 
-  timer(minute) {
-    // let minute = 1;
-    let seconds: number = minute * 60;
-    let textSec: any = "0";
-    let statSec: number = 60;
+  // timer(minute) {
+  //   let minute = 1;
+  //   let seconds: number = minute * 60;
+  //   let textSec: any = "0";
+  //   let statSec: number = 60;
 
-    const prefix = minute < 10 ? "0" : "";
+  //   const prefix = minute < 10 ? "0" : "";
 
-    const timer = setInterval(() => {
-      seconds--;
-      if (statSec != 0) statSec--;
-      else statSec = 59;
+  //   const timer = setInterval(() => {
+  //     seconds--;
+  //     if (statSec != 0) statSec--;
+  //     else statSec = 59;
 
-      if (statSec < 10) {
-        textSec = "0" + statSec;
-      } else textSec = statSec;
+  //     if (statSec < 10) {
+  //       textSec = "0" + statSec;
+  //     } else textSec = statSec;
 
-      this.display = `${prefix}${Math.floor(seconds / 60)}:${textSec}`;
+  //     this.display = `${prefix}${Math.floor(seconds / 60)}:${textSec}`;
 
-      if (seconds == 0) {
-        console.log("finished");
-        clearInterval(timer);
-      }
-    }, 1000);
-  }
+  //     if (seconds == 0) {
+  //       console.log("finished");
+  //       clearInterval(timer);
+  //     }
+  //   }, 1000);
+  // }
 
   passwordShowHide(): void {
     this.passwordHide = !this.passwordHide;
@@ -345,7 +345,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
                  this.sign().then(() => {
                     this.route.navigate(['/', this.creatorForm.value.name]);
                     this.login();
-                    this.closeNav();
+                  this.closeNav();
                 })
                 .catch((err) => {
                   if(err) {
@@ -403,7 +403,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
     this.reCaptchaVerifier = new firebase.auth.RecaptchaVerifier
     ('sign-in-button',
     {size: 'invisible'},)
-    this.timer(1);
+    // this.timer(1);
     // debugger
     this.payload = {
       phoneNumber: `+${this.countryCode}`+this.phoneNumber
