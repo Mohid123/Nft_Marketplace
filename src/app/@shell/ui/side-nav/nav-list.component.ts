@@ -177,6 +177,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
     // if(localStorage.getItem('display_name' && 'appPackageId')) {
     //  this.myStepper.selectedIndex = 2
     // }
+
   }
 
   // timer(minute) {
@@ -558,6 +559,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
     this.destroy$.complete();
     this.destroy$.unsubscribe();
   }
+
 
 
 

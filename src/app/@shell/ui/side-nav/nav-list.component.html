@@ -1,9 +1,11 @@
-<div class="relative mx-auto overflow-x-hidden overflow-y-hidden">
+<div class="relative mx-auto overflow-x-hidden overflow-y-hidden ">
   <div class="flex justify-center overflow-x-hidden">
     <!-- Row -->
     <div class="flex items-center w-full h-screen">
          <!-- Col -->
-      <div class="w-full p-5 bg-white rounded-lg lg:w-3/5 xl:w-2/4 2xl:w-3/5 lg:rounded-l-none ">
+      <div class="w-full p-5 bg-white rounded-lg lg:w-3/5 xl:w-2/4 2xl:w-3/5 lg:rounded-l-none " style="height: 100vh;
+      display: flex;
+      align-items: center;">
 
         <div class="flex flex-col justify-center flex-1 mb-8">
           <!-- <h1 class="text-4xl font-thin text-center">Welcome Back</h1> -->
@@ -12,16 +14,22 @@
 
                   <!--phone-->
                   <mat-step>
-                    <h3 [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
-                    [routerLink]="[adminRouteUrl]" class="absolute flex items-center pt-4 text-xs font-medium tracking-wider text-gray-500 lg:text-lg text-start top-16">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="inline w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                          clip-rule="evenodd" />
-                      </svg> <span class="items-center inline ml-2 ">Phone Number (Step 1 of 4)</span>
-                    </h3>
-                    <span class="text-2xl font-medium tracking-wide lg:text-5xl text-start text-dark">Enter your phone <br>number</span>
-                    <form class="justify-start">
+                    <div class="absolute top-16 animate__animated animate__fadeInRight">
+                      <h3 [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
+                      [routerLink]="[adminRouteUrl]" class="flex items-center pt-4 text-xs font-medium tracking-wider text-gray-500 lg:text-lg text-start ">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="inline w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd" />
+                        </svg> <span class="items-center inline ml-2 ">Phone Number (Step 1 of 4)</span>
+                      </h3>
+                    </div>
+
+                    <div class="animate__animated animate__fadeInRight">
+                      <span class="text-2xl font-medium tracking-wide lg:text-5xl text-start text-dark ">Enter your phone <br>number</span>
+                    </div>
+
+                    <form class="justify-start animate__animated animate__fadeInRight">
                       <div class="w-full mt-24 border-b-2 border-teal-500 lg:w-full xl:w-1/2">
                         <input [(ngModel)]="phoneNumber"
                         #phone="ngModel"
@@ -49,19 +57,27 @@
                         </button>
                       </div>
                     </form>
+
                   </mat-step>
 
                 <!--otp-->
                 <mat-step>
-                     <h3 [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
-                    [routerLink]="[adminRouteUrl]" class="absolute flex items-center pt-4 text-base font-medium tracking-wider text-gray-500 lg:text-lg text-start top-16">
+
+                  <div class="absolute top-16 ">
+                    <h3 [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
+                    [routerLink]="[adminRouteUrl]" class="flex items-center pt-4 text-base font-medium tracking-wider text-gray-500 lg:text-lg text-start ">
                       <svg xmlns="http://www.w3.org/2000/svg" class="inline w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd"
                           d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
                           clip-rule="evenodd" />
                       </svg> <span class="items-center inline ml-2">Confirm Code (Step 2 of 3)</span>
                     </h3>
-                    <span class="mb-16 text-2xl font-medium tracking-wide lg:text-5xl text-start text-dark">Enter the 6 digit code  <br>sent to <span class="text-base text-gray-400">+{{countryCode }}{{phoneNumber}}</span></span>
+                  </div>
+
+                  <div>
+                    <span class="mb-16 text-2xl font-medium tracking-wide lg:text-5xl text-start text-dark">Enter the 6 digit code  <br>sent to <span class="text-base text-gray-400 ">+{{countryCode }}{{phoneNumber}}</span></span>
+                  </div>
+
                     <form class="justify-start mt-4">
                       <div class="items-center w-full mb-16 lg:w-full xl:w-2/3">
                         <input

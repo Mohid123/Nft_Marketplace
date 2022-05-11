@@ -33,7 +33,8 @@
             "styles": [
               "src/theme/styles.scss",
               "node_modules/intl-tel-input/build/css/intlTelInput.css",
-              "node_modules/ngx-toastr/toastr.css"
+              "node_modules/ngx-toastr/toastr.css",
+              "node_modules/animate.css/animate.min.css"
             ],
             "scripts": [
               "node_modules/intl-tel-input/build/js/intlTelInput.min.js"
