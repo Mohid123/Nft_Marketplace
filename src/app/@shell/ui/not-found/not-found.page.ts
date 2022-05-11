@@ -1,12 +1,12 @@
-import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { RouteService } from '@app/@core/services/route.service';
 import { ROUTER_UTILS } from '@app/@core/utils/router.utils';
 import { ThemeService } from '@core/services/theme';
 import { environment } from '@environments/environment';
-import { Subject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { fromEvent, Subject } from 'rxjs';
+import { debounceTime, takeUntil } from 'rxjs/operators';
 import SwiperCore, { Autoplay, Navigation, Pagination } from "swiper";
 import { Club } from './../../../@core/models/club.model';
 import { GetAllClubs } from './../../../@core/models/requests/get-all-club.model';
@@ -22,8 +22,9 @@ SwiperCore.use([Pagination, Autoplay, Navigation ]);
   styleUrls: ['./not-found.page.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class NotFoundPage implements OnInit {
-
+export class NotFoundPage implements OnInit, OnDestroy {
+  private unsubscriber: Subject<void> = new Subject<void>();
+  showError = false;
   @ViewChild('menu') menu!: ElementRef
   @ViewChild('content') content!: ElementRef
   demoCLub = environment.demoClub;
@@ -102,7 +103,14 @@ export class NotFoundPage implements OnInit {
 
 
   ngOnInit(){
+    history.pushState(null, '');
 
+    fromEvent(window, 'popstate')
+      .pipe(takeUntil(this.unsubscriber))
+      .subscribe((_) => {
+        history.pushState(null, '');
+        this.showError = true;
+      });
 
 
     this.getClubs();
@@ -193,6 +201,11 @@ export class NotFoundPage implements OnInit {
   showAllClub() {
     this.allClub = true;
     this.slider = false;
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscriber.next();
+    this.unsubscriber.complete();
   }
 }
 
