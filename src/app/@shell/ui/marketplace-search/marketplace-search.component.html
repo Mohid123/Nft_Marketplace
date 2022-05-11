@@ -128,7 +128,7 @@
       </div>
 
       <a mat-button class="flex justify-end">
-        <img (click)="gotoHome()"  class="absolute right-0 flex-wrap object-scale-down w-20 h-20 mt-2 cursor-pointer lg:relative bottom-2 max-h-16 lg:w-auto md:w-auto lg:max-h-16 mg:max-h-16 md:w-42 lg:w-42 sm:rounded-xl" [src]="(creator$ | async)?.profileImageURL" alt="" />
+        <img (click)="gotoHome()"  class="absolute right-0 flex-wrap object-cover object-scale-down w-20 h-12 mt-4 cursor-pointer lg:relative bottom-2 max-h-16 lg:w-auto md:w-auto lg:max-h-16 mg:max-h-16 md:w-42 lg:w-42 sm:rounded-xl" [src]="(creator$ | async)?.profileImageURL" alt="" />
       </a>
       <span class="example-spacer"></span>
       <div class="flex-grow block w-full lg:flex lg:items-center lg:w-auto" fxHide.lt-md="true">
