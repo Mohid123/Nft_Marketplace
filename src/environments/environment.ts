@@ -3,6 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  version: '0.0.0',
   production: false,
   apiUrl: 'https://nft-dev.dividisapp.com',
   limit: 12,

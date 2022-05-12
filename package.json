@@ -14,7 +14,9 @@
     "test:e2e": "ng e2e",
     "test:coverage": "ng test --coverage",
     "lint": "ng lint",
-    "analyze": "webpack-bundle-analyzer dist/nft-panel/stats.json"
+    "analyze": "webpack-bundle-analyzer dist/nft-panel/stats.json",
+    "build-prod-patch": "npm version patch && node ./replace.build.js && ng build --prod --base-href=./ && node ./versioning.build.js",
+    "build-prod-no-patch": "node ./replace.build.js && ng build --prod --base-href=./ && node ./versioning.build.js"
   },
   "dependencies": {
     "@angular/animations": "^12.0.1",
@@ -44,6 +46,7 @@
     "ngx-intl-tel-input": "^3.2.0",
     "ngx-spinner": "^12.0.0",
     "ngx-toastr": "^14.1.4",
+    "replace-in-file": "^6.3.2",
     "rxjs": "7.1.0",
     "swiper": "^7.3.1",
     "tailwindcss-border-gradient-radius": "^2.0.0",
