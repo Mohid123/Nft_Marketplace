@@ -12,7 +12,6 @@ import { MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
 import { flyInOut } from '@app/@core/animations/app.animation';
 import { BecomeCreator } from '@app/@core/models/become-a-creator.model';
-import { Creator } from '@app/@core/models/creator.model';
 import { ApiResponse } from '@app/@core/models/response.model';
 import { ConnService } from '@app/@core/services/conn.service';
 import { CreatorService } from '@app/@core/services/creator.service';
@@ -253,53 +252,53 @@ export class NavListComponent implements OnInit, AfterViewInit {
     })
   }
 
-  addCreator() {
-    this.showLoading = true;
-    const mediaUpload:any = [];
-    if(this.profileImageSrc){
-      mediaUpload.push(this.mediaService.uploadMedia('creator', this.profileImg));
-    }
-    combineLatest(mediaUpload)
-    .pipe(take(1),
-    exhaustMap((res: ApiResponse<ResponseAddMedia>) => {
-      if(!res[0].hasErrors()) {
-        debugger
-        const param: Creator = {
-          displayName: this.creatorForm.controls.name.value,
-          appPackageId: (this.creatorForm.controls.name.value).toLowerCase().replace(/\s/g,''),
-          profileImageURL: res[0].data.url,
-          isWithoutApp: true
-        };
-        if (res[0] && res[1] && !res[1].hasErrors()) {
-          param.profileImageURL = res[1].data.url
-        }
-        return this.creatorService.addCreator(param);
-      } else {
-        return of(null);
-      }
-    }),
-    )
-    .subscribe((res:any) => {
-      console.log(res)
-      if (res !== null && !res.hasErrors()) {
-        this.cf.detectChanges();
-        // this.toastr.success('New creator successfully added.', 'Success!');
-        // this.customDialogService.showSuccessDialog('HELLo')
-        this.openNav()
-            setTimeout(() => {
-              // this.customDialogService.closeDialogs();
-              this.closeNav()
-            }, 5000);
-        this.showLoading = false;
-        // localStorage.setItem('display_name',JSON.stringify(this.creatorForm.controls.name.value))
-        // localStorage.setItem('appPackageId',JSON.stringify((this.creatorForm.controls.name.value).toLowerCase().replace(/\s/g,'')))
-        this.myStepper.next();
-      } else {
-        this.toastr.error(res.errors[0]?.error?.message, 'Error!');
-       }
-    })
+  // addCreator() {
+  //   this.showLoading = true;
+  //   const mediaUpload:any = [];
+  //   if(this.profileImageSrc){
+  //     mediaUpload.push(this.mediaService.uploadMedia('creator', this.profileImg));
+  //   }
+  //   combineLatest(mediaUpload)
+  //   .pipe(take(1),
+  //   exhaustMap((res: ApiResponse<ResponseAddMedia>) => {
+  //     if(!res[0].hasErrors()) {
+  //       debugger
+  //       const param: Creator = {
+  //         displayName: this.creatorForm.controls.name.value,
+  //         appPackageId: (this.creatorForm.controls.name.value).toLowerCase().replace(/\s/g,''),
+  //         profileImageURL: res[0].data.url,
+  //         isWithoutApp: true
+  //       };
+  //       if (res[0] && res[1] && !res[1].hasErrors()) {
+  //         param.profileImageURL = res[1].data.url
+  //       }
+  //       return this.creatorService.addCreator(param);
+  //     } else {
+  //       return of(null);
+  //     }
+  //   }),
+  //   )
+  //   .subscribe((res:any) => {
+  //     console.log(res)
+  //     if (res !== null && !res.hasErrors()) {
+  //       this.cf.detectChanges();
+  //       // this.toastr.success('New creator successfully added.', 'Success!');
+  //       // this.customDialogService.showSuccessDialog('HELLo')
+  //       this.openNav()
+  //           setTimeout(() => {
+  //             // this.customDialogService.closeDialogs();
+  //             this.closeNav()
+  //           }, 5000);
+  //       this.showLoading = false;
+  //       // localStorage.setItem('display_name',JSON.stringify(this.creatorForm.controls.name.value))
+  //       // localStorage.setItem('appPackageId',JSON.stringify((this.creatorForm.controls.name.value).toLowerCase().replace(/\s/g,'')))
+  //       this.myStepper.next();
+  //     } else {
+  //       this.toastr.error(res.errors[0]?.error?.message, 'Error!');
+  //      }
+  //   })
 
-  }
+  // }
 
   next() {
     this.myStepper.next();
@@ -343,8 +342,9 @@ export class NavListComponent implements OnInit, AfterViewInit {
             if(!res.hasErrors()) {
               this.openNav()
               setTimeout(() => {
+                this.route.navigate(['/', this.creatorForm.value.name]);
                  this.sign().then(() => {
-                    this.route.navigate(['/', this.creatorForm.value.name]);
+
                     this.login();
                   this.closeNav();
                 })
