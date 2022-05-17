@@ -94,7 +94,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
   showPhoneLoading: boolean = false;
   showVerifyOtp: boolean = false;
 
-  countryCode: number;
+  countryCode = 359;
   otp: any;
   verify: any;
   public passwordHide: boolean;
@@ -142,6 +142,9 @@ export class NavListComponent implements OnInit, AfterViewInit {
       }
     }
   ngOnInit() {
+    debugger
+
+    // this.onCountryChange(this.countryCode)
     //  window.location.reload()
     //  this.cf.detectChanges();
     // this.customDialogService.showSuccessDialog('HELLo')
@@ -405,7 +408,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
     ('sign-in-button',
     {size: 'invisible'},)
     // this.timer(1);
-    // debugger
+    debugger
     this.payload = {
       phoneNumber: `+${this.countryCode}`+this.phoneNumber
     }
@@ -490,7 +493,13 @@ export class NavListComponent implements OnInit, AfterViewInit {
 
 
   onCountryChange(country) {
+    // debugger
     this.countryCode = country.dialCode
+  }
+
+  telInputObject(obj) {
+    console.log(obj);
+    obj.setCountry('bg');
   }
 
   numberOnly(event): boolean {

@@ -33,18 +33,19 @@
                       <div class="w-full mt-24 border-b-2 border-teal-500 lg:w-full xl:w-1/2">
                         <input [(ngModel)]="phoneNumber"
                         #phone="ngModel"
-                        minlength=10
+                        minlength=7
                         maxlength=15
                         [ngModelOptions]="{standalone: true}" type="text" (keypress)="numberOnly($event)"
                           ng2TelInput
                           [ng2TelInputOptions]="{initialCountry: 'bg'}"
                           (countryChange)="onCountryChange($event)"
+                          (intlTelInputObject)="telInputObject($event)"
                           class="w-full leading-tight text-gray-600 bg-transparent " placeholder="Enter phone number"/>
 
                         </div>
                         <div *ngIf="phone.dirty && phone.invalid && phone.touched">
                           <p class="text-xs error-msg error" *ngIf="phone.errors.required">Your Number is required.</p>
-                          <p class="text-xs error-msg error" *ngIf="phone.errors.minlength"> Your Number is required to be at least 10 characters.</p>
+                          <p class="text-xs error-msg error" *ngIf="phone.errors.minlength"> Your Number is required to be at least 7 characters.</p>
                           <p class="error-msg error" *ngIf="phone.errors?.maxlength && phone.errors.touched">Your Number cannot be longer than 15 characters. </p>
                         </div>
                         <div class="flex justify-end w-full lg:w-full xl:w-1/2">
