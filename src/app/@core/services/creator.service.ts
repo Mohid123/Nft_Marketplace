@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiResponse } from '@app/@core/models/response.model';
 import { getItem, setItem } from '@app/@core/utils';
+import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
 import { Creator } from '../models/creator.model';
@@ -47,6 +48,7 @@ export class CreatorService  extends ApiService<creatorData> {
   constructor(
     protected http: HttpClient,
     protected router: Router,
+    protected toastrService: ToastrService
   ) {
     super(http);
   }
@@ -128,6 +130,13 @@ export class CreatorService  extends ApiService<creatorData> {
     }))
   }
 
+  deleteCreator(id) {
+    return this.get(`/creator/deleteCreator/${id}`).pipe(take(1),tap((result:ApiResponse<any>)=> {
+      if (result.hasErrors()) {
+        this.toastrService.error(result?.errors[0]?.error?.message)
+      }
+    }));
+  }
 
 
 }

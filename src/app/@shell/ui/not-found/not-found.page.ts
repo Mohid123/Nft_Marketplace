@@ -1,16 +1,18 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { RouteService } from '@app/@core/services/route.service';
 import { ROUTER_UTILS } from '@app/@core/utils/router.utils';
 import { ThemeService } from '@core/services/theme';
 import { environment } from '@environments/environment';
+import { ToastrService } from 'ngx-toastr';
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import SwiperCore, { Autoplay, Navigation, Pagination } from "swiper";
 import { Club } from './../../../@core/models/club.model';
 import { GetAllClubs } from './../../../@core/models/requests/get-all-club.model';
 import { ClubService } from './../../../@core/services/club.service';
+import { CreatorService } from './../../../@core/services/creator.service';
 SwiperCore.use([Pagination, Autoplay, Navigation ]);
 
 
@@ -71,7 +73,10 @@ export class NotFoundPage implements OnInit, OnDestroy {
     private themeService: ThemeService,
     private routeService: RouteService,
     private _formBuilder: FormBuilder,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private creatorService: CreatorService,
+    private toastr: ToastrService,
+    private cf: ChangeDetectorRef
   ) {
     this.searchControl.valueChanges.pipe(debounceTime(1000))
       .subscribe(newValue => {
@@ -122,6 +127,17 @@ export class NotFoundPage implements OnInit, OnDestroy {
       secondCtrl: ['', Validators.required],
     });
 
+  }
+
+  deleteCreator(club) {
+    this.creatorService.deleteCreator(club.id).subscribe((data) => {
+      if (!data.hasErrors()) {
+        this.cf.detectChanges();
+        this.toastr.success('Creator successfully deleted.', 'Success!');
+        this.getClubs();
+        window.location.reload()
+      }
+    });
   }
 
   onSelectProfile(event): void {

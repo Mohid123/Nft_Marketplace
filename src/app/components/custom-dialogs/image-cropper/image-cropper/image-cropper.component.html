@@ -14,6 +14,7 @@
       <h1 class="text-3xl font-medium"><span>Ima</span>ge Crop</h1>
     </div>
   </div>
+
   <image-cropper *ngIf="aspectRatio"
   [imageChangedEvent]="img"
   [maintainAspectRatio]="maintainAspectRatio"
@@ -21,7 +22,7 @@
   [cropperMinWidth]="128"
   format="png"
   (imageCropped)="imageCropped($event)"
-  class="px-0 overflow-y-auto sm:px-20 custom-scrollbar-css"
+  class="px-0 overflow-y-auto sm:px-20 "
 ></image-cropper>
   <!-- <img alt [src]="img"> -->
   <button class="primary-btn" (click)="crop();">
