@@ -1,5 +1,5 @@
 export const environment = {
-  version: '0.0.1',
+  version: '0.0.2',
   production: true,
   apiUrl: 'https://nft-dev.dividisapp.com',
   limit: 12,
