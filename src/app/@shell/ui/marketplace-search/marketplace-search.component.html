@@ -107,8 +107,8 @@
 
   <mat-sidenav-container>
     <mat-toolbar [ngClass]="{'mat-elevation-z5' : true, 'sticky' : isSticky}">
-      <div fxShow="true" fxHide.gt-sm="true" class="flex justify-between">
-        <div class="block w-full h-10 lg:absolute dark:bg-primary-900 md:hidden" [ngClass]="sidenav.opened ? 'z-0' : 'z-10'">
+      <div fxShow="true" fxHide.gt-sm="true" class="flex justify-between md:w-full" >
+        <div class="block w-full h-10 md:w-0 lg:absolute dark:bg-primary-900 " [ngClass]="sidenav.opened ? 'z-0' : 'z-10'">
           <button mat-icon-button *ngIf="sidenav.mode === 'over'"
             (click)="sidenav.toggle()">
             <mat-icon *ngIf="!sidenav.opened">
@@ -128,7 +128,7 @@
         <div class="justify-center flex-grow ml-4" #searchBar >
           <div>
               <div class="relative">
-               <input type="text" [formControl]="searchControl" class="flex h-8 mx-auto text-sm bg-gray-500 bg-opacity-25 rounded-full md:w-2/3 lg:w-full md:h-14 lg:h-9 focus:outline-none" placeholder="Search NFT...">
+               <input type="text" [formControl]="searchControl" class="flex h-8 mx-auto text-sm bg-gray-500 bg-opacity-25 rounded-full md:w-2/3 lg:w-full md:h-9 lg:h-9 focus:outline-none" placeholder="Search NFT...">
             </div>
           </div>
         </div>
