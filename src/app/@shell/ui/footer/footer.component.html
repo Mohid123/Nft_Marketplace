@@ -48,7 +48,7 @@ background-size: cover; ;">
         <div class="">
           <h6 class="flex items-center justify-center mb-4 font-semibold uppercase md:justify-start">
 
-            <img (click)="gotoHome()"  class="absolute right-0 flex-wrap object-scale-down w-20 h-20 mt-2 cursor-pointer lg:relative bottom-2 max-h-16 lg:w-auto md:w-auto lg:max-h-16 mg:max-h-16 md:w-42 lg:w-42 sm:rounded-xl" [src]="(creator$ | async)?.profileImageURL" alt="" />
+            <img (click)="gotoHome()"  class="right-0 flex-wrap invisible object-scale-down w-20 h-20 mt-2 cursor-pointer lg:visible md:visible lg:relative bottom-2 max-h-16 lg:w-auto md:w-auto lg:max-h-16 mg:max-h-16 md:w-42 lg:w-42 sm:rounded-xl" [src]="(creator$ | async)?.profileImageURL" alt="" />
           </h6>
           <p>
             Help your community engage with your NFTs, away from the noise of public marketplaces.

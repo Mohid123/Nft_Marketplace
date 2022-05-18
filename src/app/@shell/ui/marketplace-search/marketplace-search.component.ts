@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, HostListener, OnDestroy, OnInit, Output } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, HostListener, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { ApiResponse } from '@app/@core/models/response.model';
 import { TransactionBalance } from '@app/@core/models/transaction-balance.model';
@@ -35,7 +36,8 @@ export class MarketplaceSearchComponent implements OnInit, AfterViewInit, OnDest
   isLoggedIn$: Observable<boolean> = this.authService.isLoggedIn$;
   creator$ = this.creatorService.Creator$;
   user$ = this.authService.user$;
-  sidenav!: any;
+  @ViewChild(MatSidenav)
+  sidenav!: MatSidenav;
   searchControl = new FormControl();
   formCtrlSub: Subscription;
 
@@ -89,6 +91,7 @@ export class MarketplaceSearchComponent implements OnInit, AfterViewInit, OnDest
           this.clubName = clubName;
         });
   }
+
 
   login():void {
     this.customDialogService.showUserSignInDialog(false,'market-page');

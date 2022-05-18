@@ -46,7 +46,7 @@ export class UserSignInComponent {
 
       setTimeout(() => {
         this.signInClick()
-      })
+      }, 100000)
 
     })
 
@@ -116,7 +116,7 @@ export class UserSignInComponent {
     this.customDialogService.closeDialogs();
   }
 
-  canShowSignUp() : boolean {
-    return this.clubName.toUpperCase() === 'CSKA';
-  }
+  // canShowSignUp() : boolean {
+  //   return this.clubName.toUpperCase() === 'CSKA';
+  // }
 }
