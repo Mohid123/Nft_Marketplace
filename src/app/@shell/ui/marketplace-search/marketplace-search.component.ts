@@ -12,7 +12,7 @@ import { RouteService } from '@app/@core/services/route.service';
 import { AuthService } from '@app/pages/auth/services/auth.service';
 import { environment } from '@environments/environment';
 import { Observable, Subject, Subscription } from 'rxjs';
-import { debounceTime, delay, distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { CustomDialogService } from './../../../@core/services/custom-dialog/custom-dialog.service';
 import { TransactionService } from './../../../@core/services/transaction.service';
 import { ROUTER_UTILS } from './../../../@core/utils/router.utils';
@@ -72,19 +72,18 @@ export class MarketplaceSearchComponent implements OnInit, AfterViewInit, OnDest
   }
 
   ngAfterViewInit() {
-    this.observer
-      .observe(['(max-width: 768px)'])
-      .pipe(delay(1))
-      .subscribe((res) => {
-        if (res.matches) {
-          this.sidenav.mode = 'over';
-          this.sidenav.close();
-        } else {
-          this.sidenav.mode = 'side';
-          this.sidenav.open();
-        }
-      });
-
+    // this.observer
+    // .observe(['(max-width: 768px)'])
+    // .pipe(delay(1))
+    // .subscribe((res) => {
+    //   if (res.matches) {
+    //     this.sidenav.mode = 'over';
+    //     this.sidenav.close();
+    //   } else {
+    //     this.sidenav.mode = 'side';
+    //     this.sidenav.open();
+    //   }
+    // });
       this.routeService.clubName$
         .pipe(distinctUntilChanged(), takeUntil(this.destroy$))
         .subscribe((clubName) => {
