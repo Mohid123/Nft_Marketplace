@@ -42,7 +42,7 @@
         </video>
 
         </div>
-        <div class="container" style="height: 520px" *ngIf="nft?.mediaType === 'Audio'">
+        <div class="container audiocontainer" *ngIf="nft?.mediaType === 'Audio'">
           <div class="audioPlayer" >
             <audio controls = 'controls'>
               <source  src="{{ nft?.serverCaptureFileUrl }}" type="audio/mpeg">
@@ -50,7 +50,7 @@
           </div>
         </div>
 
-        <div class="container" style="height: 520px" *ngIf="nft?.mediaType !== 'Video' && nft?.mediaType !== 'Audio'">
+        <div class="container imgcontainer" *ngIf="nft?.mediaType !== 'Video' && nft?.mediaType !== 'Audio'">
           <img [src]="nft?.serverCaptureFileUrl" class="relative resImg rounded-2xl">
         </div>
 
@@ -61,9 +61,9 @@
 
       </div>
       <!-- Right Section  -->
-      <div class="w-6/12 m-4 lg:flex md:m-0 lg:m-0">
+      <div class="m-4 lg:flex md:m-0 lg:m-0 rightsection">
         <div class="w-full mt-2">
-          <div class="flex items-center justify-between">
+          <div class="flex items-center justify-between mr-5">
             <button  class="creator-name">
               <!-- <div class="flex rounded">
                 <img class="w-10 h-10 rounded-full" [src]="nft?.creator?.profileImageURL" [alt]="nft?.creator?.displayName" />
