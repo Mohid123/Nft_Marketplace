@@ -64,6 +64,7 @@ export class AuthService extends ApiService<AuthApiData> {
   }
 
   userSignIn(params: AuthCredentials,adminCheck:boolean): Observable<ApiResponse<SignInResponse>> {
+    debugger
     return this.post('/auth/loginForNftPanel', params).pipe(
       tap((result: ApiResponse<SignInResponse>) => {
         if (!result.hasErrors()) {
@@ -98,8 +99,10 @@ export class AuthService extends ApiService<AuthApiData> {
             pass:  params.pass,
             clubName: params.clubName,
           };
+          debugger
           return this.userSignIn(authParams, adminCheck)
         } else {
+
           return of(result);
         }
       }),

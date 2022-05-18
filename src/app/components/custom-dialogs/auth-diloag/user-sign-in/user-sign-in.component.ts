@@ -44,9 +44,9 @@ export class UserSignInComponent {
     this.connService.getUserCredentials().subscribe((res) => {
       this.userCredentials = res
 
-      setTimeout(() => {
-        this.signInClick()
-      }, 20000)
+      // setTimeout(() => {
+      //   this.signInClick()
+      // }, 20000)
 
     })
 
