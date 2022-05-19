@@ -6,7 +6,7 @@ import { NodechainUser } from './../models/nodechain-user.model';
   providedIn: 'root'
 })
 export class ConnService {
-  private userCredentials: BehaviorSubject<NodechainUser> = new BehaviorSubject<NodechainUser>({});
+  public userCredentials: BehaviorSubject<NodechainUser> = new BehaviorSubject<NodechainUser>({});
 
   sendUserCredentials(data: any) {
     this.userCredentials.next(data);
