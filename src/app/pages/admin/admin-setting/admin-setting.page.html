@@ -87,24 +87,26 @@
               <div class="flex flex-col pt-5">
                 <span class="text-xl">Description</span><br>
                 <div class="relative flex flex-col justify-between overflow-hidden rounded-lg">
-                  <textarea  [(ngModel)]="description"  rows="10" cols="100" maxlength="300" class="w-full h-40 p-4 font-light text-gray-300" type="textarea"
+                  <textarea  [(ngModel)]="description"  rows="10" cols="100" maxlength="300" class="w-full h-40 p-4 font-light text-gray-400" type="textarea"
                     name="description" formControlName="description">
             </textarea>
             <p class="error-msg error" *ngIf="settingForm.controls.description.touched && settingForm.controls.description.errors?.required">please enter brief description</p>
             <p class="error-msg error" *ngIf="settingForm.controls.description.touched && settingForm.controls.description.errors?.minlength">description should be greater than or equal to {{settingForm.controls.description.errors?.minlength.requiredLength}} character </p>
           </div>
               </div>
-              <!-- <div class="flex flex-col pt-5">
+              <div class="flex flex-col pt-5">
                 <span class="text-xl">Stripe Key</span><br>
                 <div class="relative flex flex-col justify-between overflow-hidden rounded-lg">
-                  <input class="w-full h-12 font-light text-gray-300" type="text" placeholder="123456789" #input disabled [ngClass]="{'limitTextHeight': isReadMore}"
+                  <input class="w-full h-12 font-light text-gray-400" type="text" placeholder="123456789" #input disabled [ngClass]="{'limitTextHeight': isReadMore}"
                     name="key" formControlName="key" >
                     <p class="error-msg error" *ngIf="settingForm.controls.key.touched && settingForm.controls.key.errors?.required">please enter key</p>
       <p class="error-msg error" *ngIf="settingForm.controls.key.touched && settingForm.controls.key.errors?.key">please enter valid key</p>
+      <p class="error-msg error" *ngIf="settingForm.controls.key.touched && settingForm.controls.key.errors?.key">please enter valid key</p>
+      <p class="error-msg error" *ngIf="settingForm.controls.key.touched && settingForm.controls.key.errors?.key">please enter valid key</p>
                   </div>
 
-              </div> -->
-              <!-- <div class="flex flex-row-reverse">
+              </div>
+              <div class="flex flex-row-reverse">
                 <button class="flex justify-end p-2 mt-2 rounded-lg border-gradient-dp-p-bg-light gradient-border-1" (click)="input.disabled = false; showText()" type="button"><span class="mr-1">{{ isReadMore ? 'Edit ': 'Edit ' }}</span>  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 25 25">
                   <g id="Group_56289" data-name="Group 56289" transform="translate(11150 -4)">
                     <circle id="Ellipse_3170" data-name="Ellipse 3170" cx="12.5" cy="12.5" r="12.5" transform="translate(-11150 4)" fill="#fff"/>
@@ -113,7 +115,7 @@
                 </svg>
               </button>
 
-              </div> -->
+              </div>
 
 
 
