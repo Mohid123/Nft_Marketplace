@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="336" height="296" viewBox="0 0 336 296">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_18965" data-name="Rectangle 18965" width="336" height="296" transform="translate(13529 -4144)" fill="#fff"/>
+    </clipPath>
+    <linearGradient id="linear-gradient" x1="0.057" y1="0.026" x2="1.011" y2="1.014" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#262424"/>
+      <stop offset="1" stop-color="#ffc65b"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.706" y1="-0.177" x2="-0.165" y2="0.844" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ce8a14"/>
+      <stop offset="1" stop-color="#0a0a18"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-3" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#d3982f"/>
+      <stop offset="1" stop-color="#d59629"/>
+    </linearGradient>
+  </defs>
+  <g id="Mask_Group_147" data-name="Mask Group 147" transform="translate(-13529 4144)" clip-path="url(#clip-path)">
+    <g id="Group_57782" data-name="Group 57782">
+      <path id="Sub1_Background" data-name="Sub1 Background" d="M20,0H316a20,20,0,0,1,20,20V276a20,20,0,0,1-20,20H20A20,20,0,0,1,0,276V20A20,20,0,0,1,20,0Z" transform="translate(13529.039 -4144)" fill="url(#linear-gradient)"/>
+      <path id="Path_54238" data-name="Path 54238" d="M86.742,0a93.063,93.063,0,0,1,40.183,9.071c.324.152,2.154,1.268,2.154,1.268l.113,106.616a30.635,30.635,0,0,1-.363,7.525,21.472,21.472,0,0,1-4.911,10.392,18.655,18.655,0,0,1-7.068,4.822,29.636,29.636,0,0,1-10.471,1.524l-75.219-.094s-1.093-.845-1.881-1.478C11.524,125.39,0,103.85,0,79.833,0,35.742,38.836,0,86.742,0Z" transform="translate(13735.371 -3989.238)" opacity="0.12" fill="url(#linear-gradient-2)"/>
+      <path id="Path_54239" data-name="Path 54239" d="M195.05,203.4s-.685.766-1.437,1.434C173.143,223.01,146.853,233.451,117,233.451c-64.617,0-117-52.249-117-116.7C0,77.009,19.916,41.907,50.776,20.535c.275-.191,1.217-.828,1.217-.828s66.647-.316,98.746-.11,32.448-1.877,41.676,9.113c4.762,6.918,2.636,20.623,2.636,38.657Z" transform="translate(13669.539 -4163.527)" opacity="0.26" fill="url(#linear-gradient-3)"/>
+      <text id="_350" data-name="350" transform="translate(13564.039 -4037)" fill="#fff" font-size="33" font-family="MicrosoftYaHei, Microsoft YaHei"><tspan x="0" y="0">350</tspan></text>
+      <text id="BUSINESS" transform="translate(13564.039 -4089)" fill="#fff" font-size="16" font-family="MicrosoftYaHei-Bold, Microsoft YaHei" font-weight="700" letter-spacing="0.1em"><tspan x="0" y="0">BUSINESS</tspan></text>
+      <rect id="Rectangle_18983" data-name="Rectangle 18983" width="29.221" height="3.205" rx="1.602" transform="translate(13566.039 -4080)" fill="#faa300"/>
+      <rect id="Rectangle_18984" data-name="Rectangle 18984" width="5.708" height="3.205" rx="1.602" transform="translate(13598.068 -4080)" fill="#faa300"/>
+      <circle id="Ellipse_1547" data-name="Ellipse 1547" cx="21.5" cy="21.5" r="21.5" transform="translate(13721.051 -4099)" fill="#0a0a18" opacity="0.04"/>
+      <circle id="Ellipse_1548" data-name="Ellipse 1548" cx="5" cy="5" r="5" transform="translate(13787.051 -4058)" fill="#0a0a18" opacity="0.04"/>
+      <circle id="Ellipse_1549" data-name="Ellipse 1549" cx="13.5" cy="13.5" r="13.5" transform="translate(13790.051 -4101)" fill="#0a0a18" opacity="0.04"/>
+      <text id="NDCT" transform="translate(13627 -4040)" fill="#fff" font-size="14" font-family="MicrosoftYaHei, Microsoft YaHei"><tspan x="0" y="0">NDCT</tspan></text>
+      <g id="Group_57779" data-name="Group 57779" transform="translate(0 1)">
+        <text id="_299_" data-name="299 €" transform="translate(13595.59 -3973)" fill="#fff" font-size="16" font-family="MicrosoftYaHei, Microsoft YaHei"><tspan x="0" y="0">299 €</tspan></text>
+        <path id="Icon_feather-check" data-name="Icon feather-check" d="M15.124,9,8.851,15.273,6,12.422" transform="translate(13563.586 -3991.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+      <g id="Group_57777" data-name="Group 57777">
+        <text id="Mint_499_NFT_" data-name="Mint 499 NFT " transform="translate(13595.59 -3942)" fill="#fff" font-size="16" font-family="MicrosoftYaHei, Microsoft YaHei"><tspan x="0" y="0">Mint 499 NFT </tspan></text>
+        <path id="Icon_feather-check-2" data-name="Icon feather-check" d="M15.124,9,8.851,15.273,6,12.422" transform="translate(13563.586 -3960.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+      <g id="Group_57778" data-name="Group 57778" transform="translate(0 1)">
+        <path id="Icon_feather-check-3" data-name="Icon feather-check" d="M15.124,9,8.851,15.273,6,12.422" transform="translate(13563.586 -3931.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <text id="Full_NDCT_Token_ownership_" data-name="Full NDCT Token ownership " transform="translate(13595.537 -3913)" fill="#fff" font-size="16" font-family="MicrosoftYaHei, Microsoft YaHei"><tspan x="0" y="0">Full NDCT Token ownership </tspan></text>
+      </g>
+    </g>
+  </g>
+</svg>
