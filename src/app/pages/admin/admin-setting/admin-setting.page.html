@@ -13,7 +13,7 @@
         <div class="inline-flex m-8">
           <div class="flex" style=" width: 590px;" class="mx-2">
             <form action="" style="width: inherit;" [formGroup]="settingForm">
-              <div class="flex justify-self-start">
+              <!-- <div class="flex justify-self-start">
                 <div class="flex-1">
                   <span class="text-xl">Profile Picture</span><br>
                   <div class="field">
@@ -93,7 +93,7 @@
             <p class="error-msg error" *ngIf="settingForm.controls.description.touched && settingForm.controls.description.errors?.required">please enter brief description</p>
             <p class="error-msg error" *ngIf="settingForm.controls.description.touched && settingForm.controls.description.errors?.minlength">description should be greater than or equal to {{settingForm.controls.description.errors?.minlength.requiredLength}} character </p>
           </div>
-              </div>
+              </div> -->
               <div class="flex flex-col pt-5">
                 <span class="text-xl">Stripe Key</span><br>
                 <div class="relative flex flex-col justify-between overflow-hidden rounded-lg">
@@ -120,12 +120,12 @@
 
 
               <!-- <button (click)="input.disabled = true" type="button">Disable</button> -->
-              <div class="flex flex-row-reverse">
+              <!-- <div class="flex flex-row-reverse">
 
                 <button class="py-2 mt-8 px-7 primary-btn" [disabled]="!settingForm.valid" (click)="saveSetting()">
                   Save Setting
                 </button>
-              </div>
+              </div> -->
             </form>
           </div>
           <div class="flex " style=" " class="ml-16">
@@ -153,6 +153,12 @@
               </div>
             </div>
           </div>
+        </div>
+        <div class="flex flex-row justify-center w-full">
+
+          <button class="py-2 mt-8 px-7 primary-btn" [disabled]="!settingForm.valid || settingForm.touched" (click)="saveSetting()">
+            Save Setting
+          </button>
         </div>
       </div>
     </div>

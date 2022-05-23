@@ -153,8 +153,16 @@ h1 {
 }
 
 .btn-nft {
-  background: transparent linear-gradient(109deg, #59C8D1 0%, #75F16D 100%) 0% 0% no-repeat padding-box;
+  background: transparent linear-gradient(109deg, #e4a617 0%, #ffb300  100%) 0% 0% no-repeat padding-box;
 }
+
+.shrink {
+  transition: all .2s ease-in-out;
+  }
+
+  .shrink:hover {
+  transform: scale(0.9);
+  }
 .nft-img {
   display: flex;
 

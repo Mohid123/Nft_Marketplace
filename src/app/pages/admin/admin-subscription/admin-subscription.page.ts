@@ -25,16 +25,16 @@ export class AdminSubscriptionPage implements OnInit, OnDestroy {
 
   public subscriptionPlan: SubscriptionPlan[] = [
     {
-      price: 500,
-      tokenQuantity: 10000
+      price: 99,
+      tokenQuantity: 99
     },
     {
-      price: 3000,
-      tokenQuantity: 60000,
+      price: 299,
+      tokenQuantity: 350,
     },
     {
-      price: 5000,
-      tokenQuantity: 100000,
+      price: 499,
+      tokenQuantity: 650,
     },
   ];
 
