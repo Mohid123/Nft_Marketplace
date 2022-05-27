@@ -38,6 +38,7 @@ export class StripePaymentComponent  {
       validity: new FormControl('', [Validators.required, Validators.minLength(3)]),
       cvv: new FormControl('', [Validators.required, Validators.minLength(3)]),
     });
+
   }
 
   close(): void {
