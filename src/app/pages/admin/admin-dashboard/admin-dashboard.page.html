@@ -80,9 +80,9 @@
           <div class="icon">
             <img class="" src="./assets/icons/noderon-logo.svg"/>
           </div>
-          <div class="value">
+          <div class="relative value">
             <p>Available NDCT</p>
-            <span *ngIf="subscriptionInProgress$ | async; else nftBalance" class="spinner"></span>
+            <p *ngIf="subscriptionInProgress$ | async; else nftBalance" class="text-xs spinner">Transferring in process</p>
             <ng-template #nftBalance>
               <span>{{balance || 0 | number: '1.'}}</span>
             </ng-template>

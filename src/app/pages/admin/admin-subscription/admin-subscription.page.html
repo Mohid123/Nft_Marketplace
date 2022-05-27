@@ -36,7 +36,7 @@
 
 
                 <div class="relative dark:text-gray-400 value">
-                  <p *ngIf="subscriptionInProgress$ | async; else nftBalance" class="spinner"> <b class="dark:text-white">NDCT</b></p>
+                  <p *ngIf="subscriptionInProgress$ | async; else nftBalance" class="p-3 text-xs bg-yellow-100 rounded-lg spinner"><b>Please wait!</b> NDCT transfer in process</p>
                   <ng-template #nftBalance>
                     <p >{{stats?.totalNdct || 0 | number: '1.'}} <b class="dark:text-white">NDCT</b></p>
                   </ng-template>
