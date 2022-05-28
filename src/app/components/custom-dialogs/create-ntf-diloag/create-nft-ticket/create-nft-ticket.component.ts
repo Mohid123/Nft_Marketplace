@@ -66,7 +66,8 @@ export class CreateNFTticketComponent implements OnInit, AfterViewInit {
       bgImg: new FormControl(''),
       date: ['', [Validators.required]],
       address: ['', [Validators.required, Validators.maxLength(32)]],
-      group: [null, [Validators.required]]
+      group: [null, [Validators.required]],
+      mediaType: new FormControl('')
     });
 
     this.routeService.clubName$
@@ -164,7 +165,7 @@ export class CreateNFTticketComponent implements OnInit, AfterViewInit {
           userId: this.authService.loggedInUser.id,
           clubUserId: this.authService.loggedInUser.clubUserId,
           appPackageId: this.authService.loggedInUser.appPackageId,
-
+          mediaType: 'Image',
         }
         this.nftService.createNFT = form;
         this.nftService.createNFTImg = this.imgFormData;

@@ -18,20 +18,20 @@
         <img [routerLink]="[clubName,adminRouteUrl.root]" style="max-height: 42px; max-width: 42px;" class="object-scale-down cursor-pointer avatar mat-elevation-z8 rounded-xl" [src]="(creator$ | async)?.profileImageURL" />
         <div class="test-net top-20" *ngIf="testNet"><p> Testnets</p></div>
         <ul class="flex flex-col items-center h-full mt-8 list-none">
-          <li class="relative inline-block">
-            <a class="menu-link icon-btn op" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
+          <li  class="relative inline-block">
+            <a data-bs-toggle="tooltip" data-bs-placement="left" title="Dashboard" class="menu-link icon-btn op" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
               [routerLink]="[clubName,adminRouteUrl.root]">
               <mat-icon><svg xmlns="http://www.w3.org/2000/svg" width="19.982" height="19.982" viewBox="0 0 19.982 19.982"><defs><style>.a{fill:#fff;}</style></defs><path class="a" d="M74.326,289.5v14.986a2.5,2.5,0,0,1-2.5,2.5H68.5a2.5,2.5,0,0,1-2.5-2.5V289.5a2.5,2.5,0,0,1,2.5-2.5h3.33a2.5,2.5,0,0,1,2.5,2.5Zm9.158,10.573h-5a2.5,2.5,0,0,0-2.5,2.5v1.915a2.5,2.5,0,0,0,2.5,2.5h5a2.5,2.5,0,0,0,2.5-2.5v-1.915a2.5,2.5,0,0,0-2.5-2.5Zm0-13.071h-5a2.5,2.5,0,0,0-2.5,2.5v6.411a2.5,2.5,0,0,0,2.5,2.5h5a2.5,2.5,0,0,0,2.5-2.5V289.5a2.5,2.5,0,0,0-2.5-2.5Z" transform="translate(-66 -287)"/></svg></mat-icon>
             </a>
           </li>
           <li class="relative inline-block">
-            <a class="menu-link icon-btn" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
+            <a data-bs-toggle="tooltip" data-bs-placement="left" title="Marketplace" class="menu-link icon-btn" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
               [routerLink]="[clubName,adminRouteUrl.root,adminRouteUrl.marketplace]">
               <mat-icon><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20"><defs><style>.a{fill:#fff;}.b{clip-path:url(#a);}.c{fill:#90929f;}</style><clipPath id="a"><rect class="a" width="20" height="20" transform="translate(1626 -1506)"/></clipPath></defs><g class="b" transform="translate(-1626 1506)"><g transform="translate(1595.131 -1506)"><g transform="translate(32.124)"><path class="c" d="M49.612,19.364,48.985.566A.586.586,0,0,0,48.4,0H33.337a.586.586,0,0,0-.586.566l-.628,18.828A.586.586,0,0,0,32.71,20H49.028a.586.586,0,0,0,.586-.586C49.614,19.4,49.613,19.38,49.612,19.364ZM40.868,8.7a4.356,4.356,0,0,1-4.352-4.352.586.586,0,0,1,1.172,0,3.18,3.18,0,1,0,6.359,0,.586.586,0,0,1,1.172,0A4.356,4.356,0,0,1,40.868,8.7Z" transform="translate(-32.124)"/></g></g></g></svg></mat-icon>
             </a>
           </li>
           <li class="relative inline-block">
-            <a class="menu-link icon-btn" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
+            <a data-bs-toggle="tooltip" data-bs-placement="left" title="Sale" class="menu-link icon-btn" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
               [routerLink]="[clubName,adminRouteUrl.root,adminRouteUrl.sale]">
               <mat-icon><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15.62" height="20" viewBox="0 0 15.62 20">
                 <defs><style>.a{fill:#710c0c;}.b{clip-path:url(#a);}.c{fill:#90929f;}</style><clipPath id="a"><rect class="a" width="15.62" height="20" transform="translate(0 0)"/></clipPath></defs>
@@ -39,7 +39,7 @@
             </a>
           </li>
           <li class="relative inline-block">
-            <a class="menu-link icon-btn" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
+            <a data-bs-toggle="tooltip" data-bs-placement="left" title="Groups" class="menu-link icon-btn" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
               [routerLink]="[clubName,adminRouteUrl.root,adminRouteUrl.groups]">
               <mat-icon><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="19.98" height="19.98" viewBox="0 0 19.98 19.98">
                 <style>.a{fill:#710c0c;}.b{clip-path:url(#a);}.c{fill:#90929f;}</style>
@@ -76,7 +76,7 @@
             </a>
           </li>
           <li class="relative inline-block">
-            <a class="menu-link icon-btn" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
+            <a data-bs-toggle="tooltip" data-bs-placement="left" title="Subscription Plans" class="menu-link icon-btn" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
               [routerLink]="[clubName,adminRouteUrl.root,adminRouteUrl.subscription]">
               <mat-icon style="margin-bottom: 16px;
               margin-left: 5px;">
@@ -86,7 +86,7 @@
             </a>
           </li>
           <li class="relative inline-block">
-            <a class="menu-link icon-btn" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
+            <a data-bs-toggle="tooltip" data-bs-placement="left" title="Settings" class="menu-link icon-btn" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
               [routerLink]="[clubName,adminRouteUrl.root,adminRouteUrl.setting]">
               <mat-icon>
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20">
@@ -105,7 +105,7 @@
           </li>
 
           <li class="relative flex items-end flex-grow">
-            <button class="flex mt-auto menu-link" (click)="onClickSignOut()">
+            <button data-bs-toggle="tooltip" data-bs-placement="left" title="Logout" class="flex mt-auto menu-link" (click)="onClickSignOut()">
               <mat-icon>
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19.553" viewBox="0 0 20 19.553">
                   <style>.a{fill:#710c0c;}.b{clip-path:url(#a);}.c{fill:#90929f;}</style>

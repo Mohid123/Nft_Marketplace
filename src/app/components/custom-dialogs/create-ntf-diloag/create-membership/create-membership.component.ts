@@ -179,6 +179,7 @@ export class CreateMembershipComponent implements OnInit, AfterViewInit {
             clubUserId: this.authService.loggedInUser.clubUserId,
             appPackageId: this.authService.loggedInUser.appPackageId,
             membershipId:  this.createNft.controls.membershipId.value,
+            mediaType: 'Image'
           }
           this.nftService.createNFT = form;
           this.nftService.createNFTImg = this.imgFormData;

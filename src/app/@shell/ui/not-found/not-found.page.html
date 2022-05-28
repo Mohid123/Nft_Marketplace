@@ -59,7 +59,7 @@
 </div> -->
 
 <div  class="container relative flex flex-col items-center justify-center m-auto bg-center bg-cover lg:h-screen xl:h-screen "
-style="background-image: url(../../../../assets/banner/bg-404.jpg); ">
+style="background-image: url(../../../../assets/scene.jpg); ">
 <div class="flex flex-col justify-center w-full h-screen overflow-hidden "  *ngIf="slider">
   <div class="items-center custom-container">
     <h1 class="text-4xl font-light text-center text-white mb-9 mt-9">Search Your Club</h1>
@@ -71,11 +71,11 @@ style="background-image: url(../../../../assets/banner/bg-404.jpg); ">
   <div class="container flex items-center justify-center ">
     <div class="relative" style="width: 900px;">
       <div class="absolute flex top-4 left-3"> <img class="flex items-center justify-center w-6"
-          src="../../../../assets/icons/search.svg"> </div> <input [formControl]="searchControl" style="background:#140835; box-shadow: 0px 3px 40px #5640F594;
-          border: 1px solid #5640F5;" type="text"
-        class="z-0 w-full pl-10 pr-20 text-gray-300 rounded-full h-14 focus:shadow focus:outline-none">
+          src="../../../../assets/icons/search.svg"> </div> <input [formControl]="searchControl" style="background:#ffffff;   box-shadow: 0px 3px 25px #f5d4406b;
+          border: 1px solid #f5c80183;" type="text"
+        class="z-0 w-full pl-10 pr-20 rounded-full text-dark h-14 focus:shadow focus:outline-none">
 
-      <div class="absolute border-r border-purple-600 top-2 right-24"> <span
+      <div class="absolute border-r border-yellow-400 top-2 right-24"> <span
           class="flex items-center justify-center w-20 h-10 text-gray-500 rounded-lg">Search </span> </div>
       <div class="absolute top-2 right-2">  <div class="filter">
         <button mat-icon-button aria-label="menu" class="flex items-center justify-center w-20 h-10 text-gray-500 rounded-lg cursor-pointer" [matMenuTriggerFor]="nameMenu" >
@@ -90,7 +90,7 @@ style="background-image: url(../../../../assets/banner/bg-404.jpg); ">
     <swiper
     [breakpoints]="{
       '@0.00': {
-        slidesPerView: 3,
+        slidesPerView: 1,
         spaceBetween: 10
       },
       '@0.75': {
@@ -98,22 +98,20 @@ style="background-image: url(../../../../assets/banner/bg-404.jpg); ">
         spaceBetween: 20
       },
       '@1.00': {
-        slidesPerView: 4,
-        spaceBetween: 40
+        slidesPerView: 3,
+        spaceBetween: 10
       },
       '@1.50': {
         slidesPerView: 4,
-        spaceBetween: 50
+        spaceBetween: 10
       }
     }"
-    [slidesPerView]="4"
-    [spaceBetween]="30"
     [centeredSlides]="false"
     [navigation]="true"
-  class="mySwiper slider ">
+  class="mySwiper slider custom-container">
 <ng-container *ngFor="let club of clubs">
   <ng-template swiperSlide *ngIf="(club.redirectUrl | lowercase) !== demoCLub && (club.redirectUrl | lowercase) !== demoCLub1">
-    <div class="x-gap circle" style="  text-align: center;
+    <!-- <div class="x-gap circle" style="  text-align: center;
     font-size: 18px;
     height: 212px !important;
     width: 212px !important;
@@ -146,13 +144,36 @@ style="background-image: url(../../../../assets/banner/bg-404.jpg); ">
       border-radius: 100%;
       display: block;
       margin-bottom: 12px;"
-
       alt="">
-
-
       <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt="" style=" opacity: 0.3;"></span>
-      <!-- <span><img (click)="deleteCreator(club)" class="mt-2 icon" src="./assets/icons/delete.svg" alt="" ></span> -->
-      </a>
+    </a>
+    </div> -->
+
+    <!-- <div class="cards ">
+      <div class="card" [ngStyle]="{ 'background-image': 'url(' + club.profileImageURL + ')'}">
+        <div class="details">
+          <div class="content">
+            <h2>{{club.displayName}}</h2>
+            <p>This is the description.</p>
+            <a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
+            [routerLink]="['/',club.redirectUrl]" class="button">Visit</a>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <div class="card">
+      <img style="object-fit: cover;
+      margin-right: auto;
+      margin-left: auto;
+      height: 100px;
+      width: 100px;
+      border-radius: 100%;
+      display: block;
+      margin-bottom: 12px;" [src]="club.profileImageURL">
+      <p style="width: 270px; text-align: center;">{{club.displayName}}</p>
+      <a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
+      [routerLink]="['/',club.redirectUrl]">Enter Marketplace</a>
     </div>
 
 
@@ -169,6 +190,8 @@ style="background-image: url(../../../../assets/banner/bg-404.jpg); ">
 
 
 
+
+
      <!-- <button (click)="showAllClub()" class="view-btn " [class.show-all]="allClub">
       View all
     </button> -->
@@ -176,6 +199,9 @@ style="background-image: url(../../../../assets/banner/bg-404.jpg); ">
 
 
 </div>
+
+
+
 </div>
 
 <mat-menu #nameMenu="matMenu" class="bg-primary-600 mt-0.5 p-3 w-32 rounded-md text-sm " xPosition='after'>

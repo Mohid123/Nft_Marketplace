@@ -100,9 +100,6 @@
                   <input class="w-full h-12 font-light text-gray-400" type="text" placeholder="123456789" #input disabled [ngClass]="{'limitTextHeight': isReadMore}"
                     name="key" formControlName="key" >
                     <p class="error-msg error" *ngIf="settingForm.controls.key.touched && settingForm.controls.key.errors?.required">please enter key</p>
-      <p class="error-msg error" *ngIf="settingForm.controls.key.touched && settingForm.controls.key.errors?.key">please enter valid key</p>
-      <p class="error-msg error" *ngIf="settingForm.controls.key.touched && settingForm.controls.key.errors?.key">please enter valid key</p>
-      <p class="error-msg error" *ngIf="settingForm.controls.key.touched && settingForm.controls.key.errors?.key">please enter valid key</p>
                   </div>
 
               </div>
@@ -156,7 +153,7 @@
         </div>
         <div class="flex flex-row justify-center w-full">
 
-          <button class="py-2 mt-8 px-7 primary-btn" [disabled]="!settingForm.valid || settingForm.touched" (click)="saveSetting()">
+          <button class="py-2 mt-8 px-7 primary-btn" [disabled]="!settingForm.valid || !settingForm.controls.key.touched" (click)="saveSetting()">
             Save Setting
           </button>
         </div>
