@@ -59,10 +59,12 @@
 </div> -->
 
 <div  class="container relative flex flex-col items-center justify-center m-auto bg-center bg-cover lg:h-screen xl:h-screen "
-style="background-image: url(../../../../assets/scene.jpg); ">
+style="background-image: url(../../../../assets/rodion-kutsaev-pVoEPpLw818-unsplash.jpg); ">
 <div class="flex flex-col justify-center w-full h-screen overflow-hidden "  *ngIf="slider">
   <div class="items-center custom-container">
-    <h1 class="text-4xl font-light text-center text-white mb-9 mt-9">Search Your Club</h1>
+    <h1 class="p-4 text-4xl font-light text-center text-white rounded-lg mb-9 mt-9" style="
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);">Search Your Club</h1>
     <button [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
     [routerLink]="[adminRouteUrl]"class="invisible creator-btn lg:visible"> Become a Creator</button>
     <button [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
@@ -171,7 +173,7 @@ style="background-image: url(../../../../assets/scene.jpg); ">
       border-radius: 100%;
       display: block;
       margin-bottom: 12px;" [src]="club.profileImageURL">
-      <p style="width: 270px; text-align: center;">{{club.displayName}}</p>
+      <p style="width: 270px; text-align: center; color:black; font-weight: 500;">{{club.displayName}}</p>
       <a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
       [routerLink]="['/',club.redirectUrl]">Enter Marketplace</a>
     </div>

@@ -213,6 +213,7 @@ form {
   cursor: pointer;
 
   background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
   backface-visibility: hidden;
   padding: 30px 10px;
   text-align: center;
@@ -220,9 +221,9 @@ form {
 
   border-radius: 15px;
   box-shadow: 0px 3px 25px #ffae006b;
-  border: 1px solid #f5b40183;
+  border: 2px solid #f5b40183;
 
-  backdrop-filter: blur(4px);
+
   -webkit-backdrop-filter: blur(0px);
   transform: scale(1);
   transition: all 1s ease-in-out;
