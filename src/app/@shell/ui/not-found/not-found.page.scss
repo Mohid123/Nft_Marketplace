@@ -138,7 +138,7 @@
 }
 
 .dropdown{
-  @apply my-1 rounded-md border-gradient-dp-p-bg-light hover:border-gradient-tl-p-bg-light gradient-border-1 text-center;
+  @apply my-1 rounded-md bg-yellow-500  text-center;
 }
 
 // .mat-menu-item {
@@ -211,19 +211,15 @@ form {
   width: 260px;
   height: 260px;
   cursor: pointer;
-
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(8px);
   backface-visibility: hidden;
   padding: 30px 10px;
   text-align: center;
   opacity: 1;
-
   border-radius: 15px;
   box-shadow: 0px 3px 30px #ffffff6b;
   border: 2px solid #ffffff83;
-
-
   -webkit-backdrop-filter: blur(0px);
   transform: scale(1);
   transition: all 1s ease-in-out;
@@ -246,12 +242,6 @@ form {
   background: rgba(255, 255, 255, 0.3);
   border: 1px solid rgba(0, 0, 0, 0.1);
   margin: 0 auto;
-  margin-bottom: 1rem;
-}
-
-.card h2 {
-  font-size: 1.8em;
-  color: #fff;
   margin-bottom: 1rem;
 }
 
