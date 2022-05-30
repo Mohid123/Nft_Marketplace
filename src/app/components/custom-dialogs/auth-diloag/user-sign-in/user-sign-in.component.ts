@@ -51,6 +51,8 @@ export class UserSignInComponent {
     })
 
 
+
+
     this.routeService.clubName$.pipe(take(1)).subscribe((clubName) => {
       this.clubName = clubName;
     });
@@ -93,9 +95,9 @@ export class UserSignInComponent {
             this.router.navigate(['/'+this.clubName])
           }
           if(this.page == 'market-page' && res?.data?.user?.admin) {
-            // if(this.authService.isLoggedIn && !this.creatorService.Creator?.stripeSecretKey) {
-            //   this.customDialogService.showStripeKeyDialog();
-            // }
+            if(this.authService.isLoggedIn && !this.creatorService.Creator?.stripeSecretKey) {
+              this.customDialogService.showStripeKeyDialog();
+            }
           }
         } else {
           // alert(res?.errors[0]?.error?.message);
