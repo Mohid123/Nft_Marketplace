@@ -58,12 +58,11 @@
 
 </div> -->
 
-<div  class="container relative flex flex-col items-center justify-center m-auto bg-center bg-cover lg:h-screen xl:h-screen "
-style="background-image: url(../../../../assets/pexels-bg-min.png); ">
+<div  class="container relative flex flex-col items-center justify-center m-auto bg-center bg-auto lg:h-screen xl:h-screen pattern ">
 <div class="flex flex-col justify-center w-full h-screen overflow-hidden "  *ngIf="slider">
   <div class="items-center custom-container">
-    <h1 class="p-4 text-4xl font-light text-center text-white rounded-lg mb-9 mt-9" style="
-    background: rgba(255, 255, 255, 0.1);
+    <h1 class="p-4 text-4xl font-light text-center rounded-lg text-dark mb-9 mt-9" style="
+    background: rgb(241 177 29 / 13%);
     backdrop-filter: blur(8px);">Search Your Club</h1>
     <button [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
     [routerLink]="[adminRouteUrl]"class="invisible creator-btn lg:visible"> Become a Creator</button>
@@ -73,8 +72,9 @@ style="background-image: url(../../../../assets/pexels-bg-min.png); ">
   <div class="container flex items-center justify-center ">
     <div class="relative" style="width: 900px;">
       <div class="absolute flex top-4 left-3"> <img class="flex items-center justify-center w-6"
-          src="../../../../assets/icons/search.svg"> </div> <input [formControl]="searchControl" style="background:#ffffff;   box-shadow: 0px 3px 30px #ffffff6b;
-          border: 1px solid #ffffff83;" type="text"
+          src="../../../../assets/icons/search.svg"> </div> <input [formControl]="searchControl" style="background: #ffffff;
+          box-shadow: 0px 3px 30px #f2e8d0;
+          border: 1px solid #f8d687 !important" type="text"
         class="z-0 w-full pl-10 pr-20 rounded-full text-dark h-14 focus:shadow focus:outline-none">
 
       <div class="absolute border-r border-yellow-400 top-2 right-24"> <span
