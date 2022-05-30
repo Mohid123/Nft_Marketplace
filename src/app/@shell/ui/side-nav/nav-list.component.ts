@@ -52,7 +52,7 @@ const fireConfig = {
   messagingSenderId: "242147439537",
   appId: "1:242147439537:web:9e9a6a2b494a05ce7ec390",
   measurementId: "G-WD23R4NTBM"
-}
+};
 
 
 @Component({
