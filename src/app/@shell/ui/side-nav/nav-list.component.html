@@ -335,7 +335,7 @@
                           <img class="w-4 h-4" src="./assets/icons/password.svg" alt="">
                         </span>
                       </span>
-                      <input required [(ngModel)]="confirmPassword"  id="passwordB" name="confirmPassword"  class="w-full pl-0 leading-tight tracking-wider text-gray-700 bg-transparent border-none appearance-none focus:outline-none"  type="{{passwordHide ? 'password' : 'text'}}" placeholder="Confirm password">
+                      <input required [(ngModel)]="confirmPassword"  id="passwordB" name="confirmPassword"  class="w-full pl-0 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"  type="{{passwordHide ? 'password' : 'text'}}" placeholder="Confirm password">
 
                     </div>
                     <p class="text-xs error-msg error" *ngIf="password !== confirmPassword">Password must match</p>

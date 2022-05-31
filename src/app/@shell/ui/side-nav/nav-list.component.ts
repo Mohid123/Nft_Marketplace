@@ -229,30 +229,29 @@ export class NavListComponent implements OnInit, AfterViewInit {
     }
 
     // this.fireAuth.signup(this.fullname, this.email, this.password);
-    this.signup().then(() => {
-      debugger
-      this.userService.createUser(payload).pipe(takeUntil(this.destroy$)).subscribe((res: ApiResponse<NodechainUser>) => {
-        if(!res.hasErrors()) {
-          this.toastr.success('User Created Successfully', 'Success');
-          debugger
-          this.connService.sendUserCredentials({
-            email: payload.email,
-            pass: payload.pass
-          })
-          this.route.navigate(['/', this.creatorForm.value.name])
-          setTimeout(()=>{
-            this.login()
-          },2000)
+    this.userService.createUser(payload).pipe(takeUntil(this.destroy$), exhaustMap((res:any)=> {
+      if(!res.hasErrors()) {
+        this.signup();
+        this.toastr.success('User Created Successfully', 'Success');
+        debugger
+        this.connService.sendUserCredentials({
+          email: payload.email,
+          pass: payload.pass
+        })
+        this.route.navigate(['/', this.creatorForm.value.name])
+        setTimeout(()=>{
+          this.login()
+        },2000)
 
-        }
-        else {
-          this.toastr.error('Failed To Create New User', 'Create User');
-        }
-      })
-    }).catch((error)=> {
-      debugger
-      this.toastr.error(error, 'Something went wrong')
+      }
+      else {
+        this.toastr.error('Failed To Create New User', 'Create User');
+        return (res)
+      }
+    })).subscribe((res:any)=> {
+      console.log(res)
     })
+
   }
 
   // addCreator() {
