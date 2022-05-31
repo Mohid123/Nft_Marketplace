@@ -325,7 +325,8 @@ export class NavListComponent implements OnInit, AfterViewInit {
       if(!res[0].hasErrors()) {
         const param: BecomeCreator = {
           creatorDisplayName: this.creatorForm.controls.name.value,
-          appPackageId: (this.creatorForm.controls.name.value).toLowerCase().replace(/\s/g,''),
+          // appPackageId: (this.creatorForm.controls.name.value).toLowerCase().replace(/\s/g,''),
+          appPackageId: this.email,
           creatorProfileImageURL: res[0].data.url,
           isWithoutApp: true,
           name: this.fullname,
