@@ -156,14 +156,14 @@
 
 
 .creator-btn {
-  @apply flex items-center justify-center text-center rounded-full h-14 bg-primary-nodechain w-44;
-    position: absolute;
-    top: 13px;
-    right: 13px;
+  @apply flex items-center text-white justify-center text-center rounded-full h-14 bg-primary-nodechain w-auto px-3 mt-4;
+    // position: absolute;
+    // top: 13px;
+    // right: 13px;
 
 }
 .creator-btn-sm {
-  @apply flex items-center justify-center text-center rounded-full h-14 bg-primary-nodechain w-44 mb-4 lg:mb-0;
+  @apply flex items-center text-white justify-center text-center rounded-full h-14 bg-primary-nodechain w-auto px-3 mb-4 lg:mb-0;
     // position: absolute;
     // top: 13px;
     // right: 13px;

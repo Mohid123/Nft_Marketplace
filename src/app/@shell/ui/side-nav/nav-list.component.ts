@@ -241,7 +241,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
           name: this.fullname,
           pass: this.password,
           email: this.email,
-          // phoneNumber: `+${this.countryCode}`+this.phoneNumber,
+          phoneNumber: `+${this.countryCode}`+this.phoneNumber,
           clubName: this.creatorForm.value.name,
         };
         if (res[0] && res[1] && !res[1].hasErrors()) {

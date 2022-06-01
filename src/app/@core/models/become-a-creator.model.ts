@@ -15,4 +15,5 @@ export interface BecomeCreator {
   description?: string,
   stripeSecretKey?: string,
   isWithoutApp?: boolean;
+  phoneNumber?: string;
 }
