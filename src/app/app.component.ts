@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
   onlineEvent: Observable<Event>;
   offlineEvent: Observable<Event>;
   subscriptions: Subscription[] = [];
-
+  test: any;
   isLoggedIn$: Observable<boolean> = this.authService.isLoggedIn$;
   role$: Observable<ROLE_TYPE_UTILS> = this.authService.role$;
   isAdminPanel$: Observable<boolean> = this.routeService.isAdminPanel$;
