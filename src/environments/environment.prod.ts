@@ -1,7 +1,7 @@
 export const environment = {
   version: '0.0.2',
   production: true,
-  apiUrl: 'https://nft-testnet.dividisapp.com',
+  apiUrl: 'https://nft-live.dividisapp.com',
   limit: 12,
   testNet: false,
   demoClub: 'demo',
