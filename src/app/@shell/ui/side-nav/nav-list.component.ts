@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @angular-eslint/no-host-metadata-property */
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
@@ -25,8 +26,7 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import { ToastrService } from 'ngx-toastr';
 import { combineLatest, of, Subject } from 'rxjs';
-import { exhaustMap, take, takeUntil } from 'rxjs/operators';
-import { NodechainUser } from './../../../@core/models/nodechain-user.model';
+import { exhaustMap, map, take } from 'rxjs/operators';
 import { ResponseAddMedia } from './../../../@core/models/response-add-media.model';
 import { ROUTER_UTILS } from './../../../@core/utils/router.utils';
 
@@ -143,13 +143,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
       }
     }
   ngOnInit() {
-    debugger
 
-    // this.onCountryChange(this.countryCode)
-    //  window.location.reload()
-    //  this.cf.detectChanges();
-    // this.customDialogService.showSuccessDialog('HELLo')
-    // this.openNav()
      this.UserForm = this._formBuilder.group( {
       fullname: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(7)]),
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -217,92 +211,6 @@ export class NavListComponent implements OnInit, AfterViewInit {
    await this.fireAuth.signup(this.fullname, this.email, this.password);
   }
 
-   createNodechainUser() {
-     debugger
-    const payload: NodechainUser = {
-      name: this.fullname,
-      pass: this.password,
-      email: this.email,
-      phoneNumber: `+${this.countryCode}`+this.phoneNumber,
-      clubName: this.creatorForm.value.name,
-      appPackageId: (this.creatorForm.value.name).toLowerCase().replace(/\s/g,'')
-      // profilePicURL: 'https://api.solissol.com/api/v1/en/media-upload/mediaFiles/profilepics/0I7KH97u1JOpUAEfpfA7lc7oyhD2/86771a2591c445395929d5e938cef6b7.png'
-    }
-
-    // this.fireAuth.signup(this.fullname, this.email, this.password);
-    this.userService.createUser(payload).pipe(takeUntil(this.destroy$), exhaustMap((res:any)=> {
-      if(!res.hasErrors()) {
-        this.signup();
-        this.toastr.success('User Created Successfully', 'Success');
-        debugger
-        this.connService.sendUserCredentials({
-          email: payload.email,
-          pass: payload.pass
-        })
-        this.route.navigate(['/', this.creatorForm.value.name])
-        setTimeout(()=>{
-          this.login()
-        },2000)
-
-      }
-      else {
-        this.toastr.error('Failed To Create New User', 'Create User');
-        return (res)
-      }
-    })).subscribe((res:any)=> {
-      console.log(res)
-    })
-
-  }
-
-  // addCreator() {
-  //   this.showLoading = true;
-  //   const mediaUpload:any = [];
-  //   if(this.profileImageSrc){
-  //     mediaUpload.push(this.mediaService.uploadMedia('creator', this.profileImg));
-  //   }
-  //   combineLatest(mediaUpload)
-  //   .pipe(take(1),
-  //   exhaustMap((res: ApiResponse<ResponseAddMedia>) => {
-  //     if(!res[0].hasErrors()) {
-  //       debugger
-  //       const param: Creator = {
-  //         displayName: this.creatorForm.controls.name.value,
-  //         appPackageId: (this.creatorForm.controls.name.value).toLowerCase().replace(/\s/g,''),
-  //         profileImageURL: res[0].data.url,
-  //         isWithoutApp: true
-  //       };
-  //       if (res[0] && res[1] && !res[1].hasErrors()) {
-  //         param.profileImageURL = res[1].data.url
-  //       }
-  //       return this.creatorService.addCreator(param);
-  //     } else {
-  //       return of(null);
-  //     }
-  //   }),
-  //   )
-  //   .subscribe((res:any) => {
-  //     console.log(res)
-  //     if (res !== null && !res.hasErrors()) {
-  //       this.cf.detectChanges();
-  //       // this.toastr.success('New creator successfully added.', 'Success!');
-  //       // this.customDialogService.showSuccessDialog('HELLo')
-  //       this.openNav()
-  //           setTimeout(() => {
-  //             // this.customDialogService.closeDialogs();
-  //             this.closeNav()
-  //           }, 5000);
-  //       this.showLoading = false;
-  //       // localStorage.setItem('display_name',JSON.stringify(this.creatorForm.controls.name.value))
-  //       // localStorage.setItem('appPackageId',JSON.stringify((this.creatorForm.controls.name.value).toLowerCase().replace(/\s/g,'')))
-  //       this.myStepper.next();
-  //     } else {
-  //       this.toastr.error(res.errors[0]?.error?.message, 'Error!');
-  //      }
-  //   })
-
-  // }
-
   next() {
     this.myStepper.next();
   }
@@ -340,59 +248,92 @@ export class NavListComponent implements OnInit, AfterViewInit {
           param.creatorProfileImageURL = res[1].data.url
         }
 
-        return this.signup().then(() => {
-          this.userService.becomeCreator(param).pipe(takeUntil(this.destroy$)).subscribe((res: ApiResponse<BecomeCreator>) => {
+        return this.userService.becomeCreator(param).pipe(map((res:ApiResponse<any>) => {
+          if(!res.hasErrors()) {
+            this.openNav()
+            setTimeout(() => {
+              this.route.navigate(['/', this.creatorForm.value.name]);
+               this.sign().then(() => {
 
-            if(!res.hasErrors()) {
-              this.openNav()
-              setTimeout(() => {
-                this.route.navigate(['/', this.creatorForm.value.name]);
-                 this.sign().then(() => {
+                  this.login();
+                this.closeNav();
+              })
+              .catch((err) => {
+                if(err) {
+                  this.toastr.error('Failed')
+                  return
+                }
+              })
+            }, 5000)
 
-                    this.login();
-                  this.closeNav();
-                })
-                .catch((err) => {
-                  if(err) {
-                    this.toastr.error('Failed')
-                    return
-                  }
-                })
-              }, 5000)
-
-              this.showLoading = false;
-            }
-
+            this.showLoading = false;
+          }
             else {
-              this.toastr.error('Failed To Create New User', 'Create User');
-              this.showLoading = false;
-              return
-            }
-          })
-        })
-        .catch((error)=> {
-          this.toastr.error(error, 'Something went wrong')
-          console.log(error)
-          this.showLoading = false;
-          return;
-        })
+            this.toastr.error('Failed To Create New User', 'Create User');
+            this.showLoading = false;
+            return
+          }
+        }))
+
+        // return this.signup().then(() => {
+
+        // })
+        // .catch((error)=> {
+        //   this.toastr.error(error, 'Something went wrong')
+        //   console.log(error)
+        //   this.showLoading = false;
+        //   return;
+        // })
+
+        // this.userService.becomeCreator(param)
+        // .pipe(takeUntil(this.destroy$))
+        // .subscribe((res: ApiResponse<BecomeCreator>) => {
+
+        //   if(!res.hasErrors()) {
+        //     this.openNav()
+        //     setTimeout(() => {
+        //       this.route.navigate(['/', this.creatorForm.value.name]);
+        //        this.sign().then(() => {
+
+        //           this.login();
+        //         this.closeNav();
+        //       })
+        //       .catch((err) => {
+        //         if(err) {
+        //           this.toastr.error('Failed')
+        //           return
+        //         }
+        //       })
+        //     }, 5000)
+
+        //     this.showLoading = false;
+        //   }
+
+        //   else {
+        //     this.toastr.error('Failed To Create New User', 'Create User');
+        //     this.showLoading = false;
+        //     return
+        //   }
+        // })
       }
+
       else {
         this.showLoading = false;
-        return of(null);
+        return of(res);
       }
     }),
     )
-    .subscribe((res:any) => {
-      debugger
-      console.log(res)
-      if (res !== null && !res.hasErrors()) {
-        this.showLoading = false;
-      } else {
-        this.toastr.error(res.errors[0]?.error?.message, 'Error!')
-        return
-       }
-    })
+    .subscribe()
+      // (res:any) => {
+    //   debugger
+    //   console.log(res)
+    //   if (res !== null && !res.hasErrors()) {
+    //     this.showLoading = false;
+    //   } else {
+    //     this.toastr.error(res.errors[0]?.error?.message, 'Error!')
+    //     return (res)
+    //    }
+    // })
 
   }
 

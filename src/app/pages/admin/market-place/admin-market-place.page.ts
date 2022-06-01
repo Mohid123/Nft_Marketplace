@@ -161,12 +161,18 @@ export class AdminMarketPlacePage implements OnInit ,OnDestroy {
       if(nftId && this.clubName)
         this.getNfts();
     });
+
+
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   ngOnInit(): void {
     // console.log('market palce:');
     // this.nftService.getNft('');
+    debugger
+    this.creatorService.Creator$.subscribe((res)=>{
+      console.log(this.creatorService.Creator?.stripeSecretKey)
+    })
   }
 
   getNfts(): void {
@@ -189,15 +195,17 @@ export class AdminMarketPlacePage implements OnInit ,OnDestroy {
   }
 
   createNFT():void {
+    console.log(this.creatorService.Creator)
     this.transactionService.getBalance().subscribe((res:ApiResponse<TransactionBalance>) => {
       if(!res.hasErrors()) {
         debugger
-        if (res.data.balance > 0) {
+        if (res.data.balance > 0 && this.creatorService.Creator?.stripeSecretKey == "") {
+          this.customDialogService.showStripeKeyDialog();
+        }
+       else if (res.data.balance > 0) {
           this.customDialogService.showCreateNFTOptionsDialog();
          }
-         else if (!this.creatorService.Creator?.stripeSecretKey) {
-           this.customDialogService.showStripeKeyDialog();
-         }
+
          else {
           debugger
           const dialogRef = this.customDialogService.showConfirmationDialog('subscription','subscribe', 'close');
