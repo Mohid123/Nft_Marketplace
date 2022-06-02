@@ -46,14 +46,13 @@ import { ROUTER_UTILS } from './../../../@core/utils/router.utils';
 // }
 
 const fireConfig = {
-  apiKey: "AIzaSyB6QLWR3WOdWHO8509Oz80i0s8NmaADxAg",
-  authDomain: "noderon-b855c.firebaseapp.com",
-  databaseURL: "https://noderon-b855c-default-rtdb.firebaseio.com",
-  projectId: "noderon-b855c",
-  storageBucket: "noderon-b855c.appspot.com",
-  messagingSenderId: "350246945413",
-  appId: "1:350246945413:web:41553760aab149ff231fec",
-  measurementId: "G-KJQER735Z2"
+  apiKey: "AIzaSyCHyGMm-OaTigJU1l3ynVH8L0enkl34xPI",
+  authDomain: "nft-auth-app.firebaseapp.com",
+  projectId: "nft-auth-app",
+  storageBucket: "nft-auth-app.appspot.com",
+  messagingSenderId: "242147439537",
+  appId: "1:242147439537:web:9e9a6a2b494a05ce7ec390",
+  measurementId: "G-WD23R4NTBM"
 };
 
 

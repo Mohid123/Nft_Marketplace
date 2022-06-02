@@ -107,9 +107,12 @@ export class MarketplaceSearchComponent implements OnInit, AfterViewInit, OnDest
   createNFT():void {
     this.transactionService.getBalance().subscribe((res:ApiResponse<TransactionBalance>) => {
       if(!res.hasErrors()) {
-        if(res.data.balance > 0) {
+        if (res.data.balance > 0 && this.creatorService.Creator?.stripeSecretKey == "") {
+          this.customDialogService.showStripeKeyDialog();
+        }
+       else if (res.data.balance > 0) {
           this.customDialogService.showCreateNFTOptionsDialog();
-        } else {
+         } else {
           const dialogRef = this.customDialogService.showConfirmationDialog('subscription','subscribe', 'close');
           dialogRef.afterClosed().subscribe((confirmed: boolean) => {
             if (confirmed) {
