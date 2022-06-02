@@ -1,6 +1,7 @@
 export const environment = {
   version: '0.0.2',
   production: true,
+  //test-net github
   apiUrl: 'https://nft-nodechaintestnet.dividisapp.com',
   limit: 12,
   testNet: false,

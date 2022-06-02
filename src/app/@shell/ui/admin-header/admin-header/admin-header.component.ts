@@ -7,6 +7,7 @@ import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-di
 import { RouteService } from '@app/@core/services/route.service';
 import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { CreatorService } from './../../../../@core/services/creator.service';
 import { TransactionService } from './../../../../@core/services/transaction.service';
 
 @Component({
@@ -20,6 +21,7 @@ export class AdminHeaderComponent implements OnInit, OnDestroy {
   @Input() market:boolean;
   @Input() hideSearch:boolean;
   public searchStr = '';
+  creator$ = this.creatorService.Creator$;
 
   searchControl = new FormControl();
   formCtrlSub: Subscription;
@@ -29,6 +31,7 @@ export class AdminHeaderComponent implements OnInit, OnDestroy {
     private transactionService: TransactionService,
     private router: Router,
     private routeService: RouteService,
+    private creatorService: CreatorService
   ) {
 
   }
@@ -47,9 +50,12 @@ export class AdminHeaderComponent implements OnInit, OnDestroy {
   createNFT():void {
     this.transactionService.getBalance().subscribe((res:ApiResponse<TransactionBalance>) => {
       if(!res.hasErrors()) {
-        if(res.data.balance > 0) {
+        if (res.data.balance > 0 && this.creatorService.Creator?.stripeSecretKey == "") {
+          this.customDialogService.showStripeKeyDialog();
+        }
+       else if (res.data.balance > 0) {
           this.customDialogService.showCreateNFTOptionsDialog();
-        } else {
+         } else {
           const dialogRef = this.customDialogService.showConfirmationDialog('subscription','subscribe', 'close');
           dialogRef.afterClosed().subscribe((confirmed: boolean) => {
             if (confirmed) {
