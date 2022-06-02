@@ -20,6 +20,7 @@ import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-di
 import { FireAuthService } from '@app/@core/services/fire-auth.service';
 import { MediaService } from '@app/@core/services/media.service';
 import { UserService } from '@app/@core/services/user.service';
+import { environment } from '@environments/environment';
 // firebase imports
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
@@ -153,7 +154,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
     // { validators: passwordsMatchValidator() }
     )
 
-    firebase.initializeApp(fireConfig)
+    firebase.initializeApp(environment.firebase)
     this.verify = JSON.parse(localStorage.getItem('verificationId') || '{}')
 
   }
