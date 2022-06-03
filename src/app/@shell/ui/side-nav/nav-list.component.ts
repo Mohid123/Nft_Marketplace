@@ -241,7 +241,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
           Validators.maxLength(15)
         ]),
 
-        [this.clubValidator()]
+
       ],
       name: [
         this.defaultUser.creatorDisplayName,
@@ -250,6 +250,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
           Validators.minLength(4),
           Validators.maxLength(16)
         ]),
+        [this.clubValidator()]
       ],
       phone: [
         this.defaultUser.phoneNumber,

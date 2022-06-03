@@ -166,7 +166,8 @@
           </div>
         </div>
       </div> -->
-
+      <a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
+      [routerLink]="['/',club.redirectUrl]">
       <div class="card">
         <img style="object-fit: cover;
         margin-right: auto;
@@ -180,6 +181,8 @@
         <a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
         [routerLink]="['/',club.redirectUrl]">Enter Marketplace</a>
       </div>
+      </a>
+
 
 
     </ng-template>

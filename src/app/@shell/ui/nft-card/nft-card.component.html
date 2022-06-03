@@ -1,4 +1,6 @@
-<div class="relative card-border">
+
+<a [routerLink]="['/',clubName,'detail',nft.id]">
+  <div class="relative card-border">
     <a [routerLink]="['/',clubName,'detail',nft.id]">
       <div class="nft-img"  >
         <img *ngIf="nft?.mediaType !== 'Video'" style="object-fit: fill;
@@ -48,7 +50,7 @@
     <div class="w-2/5">
       <p class="pt-1 text-xl font-medium dark:text-white trun">{{nft.name}}</p>
     </div>
-    <ng-container *ngIf="walletPage">
+    <!-- <ng-container *ngIf="walletPage">
       <ng-container *ngIf="nft?.isResaleAvailable; else resaleBtn">
         <button (click)="cancelResale()" class="btn-nft">
           Cancel Resale
@@ -60,7 +62,7 @@
           Resale
         </button>
       </ng-template>
-    </ng-container>
+    </ng-container> -->
     <ng-container *ngIf="!walletPage">
       <ng-container *ngIf="nft?.nftStatus && (isAdminPanel$ | async)">
         <button class="btn-nft" >
@@ -79,11 +81,14 @@
           </button>
         </ng-template>
       </ng-container>
-      <ng-container *ngIf="nft?.isResaleAvailable;">
+      <!-- <ng-container *ngIf="nft?.isResaleAvailable;">
         <button (click)="cancelResale()" class="btn-nft">
           Cancel Resale
         </button>
-      </ng-container>
+      </ng-container> -->
     </ng-container>
   </div>
 </div>
+
+</a>
+
