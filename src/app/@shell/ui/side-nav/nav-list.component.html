@@ -13,57 +13,63 @@
             <mat-stepper labelPosition="bottom" #stepper class="w-full h-full px-0 py-6 lg:px-6 xl:px-6 text-start">
 
                   <!--phone-->
-                  <mat-step>
-                    <div class="absolute top-16 animate__animated animate__fadeInRight">
-                      <h3 [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
-                      [routerLink]="[adminRouteUrl]" class="flex items-center pt-4 text-xs font-medium tracking-wider text-gray-500 lg:text-lg text-start ">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="inline w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
-                          <path fill-rule="evenodd"
-                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                            clip-rule="evenodd" />
-                        </svg> <span class="items-center inline ml-2 ">Phone Number (Step 1 of 4)</span>
-                      </h3>
-                    </div>
-
-                    <div class="animate__animated animate__fadeInRight">
-                      <span class="text-2xl font-medium tracking-wide lg:text-5xl text-start text-dark ">Enter your phone <br>number</span>
-                    </div>
-
-                    <form class="justify-start animate__animated animate__fadeInRight">
-                      <div class="w-full mt-24 border-b-2 border-teal-500 lg:w-full xl:w-1/2">
-                        <input [(ngModel)]="phoneNumber"
-                        #phone="ngModel"
-                        minlength=7
-                        maxlength=15
-                        [ngModelOptions]="{standalone: true}" type="text" (keypress)="numberOnly($event)"
-                          ng2TelInput
-                          [ng2TelInputOptions]="{initialCountry: 'bg'}"
-                          (countryChange)="onCountryChange($event)"
-                          (intlTelInputObject)="telInputObject($event)"
-                          class="w-full leading-tight text-gray-600 bg-transparent " placeholder="Enter phone number"/>
-
-                        </div>
-                        <div *ngIf="phone.dirty && phone.invalid && phone.touched">
-                          <p class="text-xs error-msg error" *ngIf="phone.errors.required">Your Number is required.</p>
-                          <p class="text-xs error-msg error" *ngIf="phone.errors.minlength"> Your Number is required to be at least 7 characters.</p>
-                          <p class="error-msg error" *ngIf="phone.errors?.maxlength && phone.errors.touched">Your Number cannot be longer than 15 characters. </p>
-                        </div>
-                        <div class="flex justify-end w-full lg:w-full xl:w-1/2">
-                          <button  mat-button class="relative inline-flex items-center justify-center mt-20 text-center primary-btn" [disabled]="phone.invalid || !phoneNumber || showPhoneLoading" (click)="getOTP()">
-                          <svg *ngIf="showPhoneLoading === true" role="status" class="inline w-5 h-5 mr-2 text-gray-200 animate-spin dark:text-gray-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
-                            <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="#D59529"/>
-                            </svg>
-                            <span >{{showPhoneLoading === true? 'Sending' : 'Continue'}}  </span>
-                        </button>
+                <mat-step>
+                      <div class="absolute top-16 animate__animated animate__fadeInRight">
+                        <h3 [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
+                        [routerLink]="[adminRouteUrl]" class="flex items-center pt-4 text-xs font-medium tracking-wider text-gray-500 lg:text-lg text-start ">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="inline w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                              clip-rule="evenodd" />
+                          </svg> <span class="items-center inline ml-2 ">Phone Number (Step 1 of 4)</span>
+                        </h3>
                       </div>
-                    </form>
-
-                  </mat-step>
+                      <div class="animate__animated animate__fadeInRight">
+                        <span class="text-2xl font-medium tracking-wide lg:text-5xl text-start text-dark ">Enter your phone <br>number</span>
+                      </div>
+                      <form [formGroup]="creatorForm" class="justify-start animate__animated animate__fadeInRight">
+                        <div class="w-full mt-24 border-b-2 border-teal-500 lg:w-full xl:w-1/2">
+                          <input formControlName="phone"
+                          minlength=7
+                          maxlength=15
+                          type="text" (keypress)="numberOnly($event)"
+                            ng2TelInput
+                            [ng2TelInputOptions]="{initialCountry: 'bg'}"
+                            (countryChange)="onCountryChange($event)"
+                            (intlTelInputObject)="telInputObject($event)"
+                            class="w-full leading-tight text-gray-600 bg-transparent " placeholder="Enter phone number"/>
+                          </div>
+                          <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                            validation: 'required',
+                            message: 'Phone Number is required',
+                            control: creatorForm.controls['phone']
+                          }">
+                        </ng-container>
+                        <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                            validation: 'minlength',
+                            message: 'Phone Number should at least be 10 characters',
+                            control: creatorForm.controls['phone']
+                          }">
+                        </ng-container>
+                        <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                          validation: 'phoneExists',
+                          message: 'This phone number is already in use. Please try another.',
+                          control: creatorForm.controls['phone']}">
+                      </ng-container>
+                      <div class="flex justify-end w-full lg:w-full xl:w-1/2">
+                            <button  mat-button class="relative inline-flex items-center justify-center mt-20 text-center primary-btn" [disabled]="creatorForm.controls['phone'].invalid || showPhoneLoading" (click)="getOTP()">
+                            <svg *ngIf="showPhoneLoading === true" role="status" class="inline w-5 h-5 mr-2 text-gray-200 animate-spin dark:text-gray-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                              <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="#D59529"/>
+                              </svg>
+                              <span >{{showPhoneLoading === true? 'Sending' : 'Continue'}}  </span>
+                          </button>
+                        </div>
+                      </form>
+                </mat-step>
 
                 <!--otp-->
                 <mat-step>
-
                   <div class="absolute top-16 ">
                     <h3 [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
                     [routerLink]="[adminRouteUrl]" class="flex items-center pt-4 text-base font-medium tracking-wider text-gray-500 lg:text-lg text-start ">
@@ -76,7 +82,7 @@
                   </div>
 
                   <div>
-                    <span class="mb-16 text-2xl font-medium tracking-wide lg:text-5xl text-start text-dark">Enter the 6 digit code  <br>sent to <span class="text-base text-gray-400 ">+{{countryCode }}{{phoneNumber}}</span></span>
+                    <span class="mb-16 text-2xl font-medium tracking-wide lg:text-5xl text-start text-dark">Enter the 6 digit code  <br>sent to <span class="text-base text-gray-400 ">+{{countryCode }}{{creatorForm.controls.phone.value}}</span></span>
                   </div>
 
                     <form class="justify-start mt-4">
@@ -88,9 +94,7 @@
                           class="inline w-full text-center lg:w-full xl:w-9/12"
                           [ngModelOptions]="{standalone: true}"
                           [(ngModel)]="otp"
-                          (onInputChange)="onOtpChange($event)"
-
-                        />
+                          (onInputChange)="onOtpChange($event)"/>
                         <div class="flex justify-end w-full lg:w-full xl:w-9/12">
                           <span class="justify-end text-sm font-thin text-right text-gray-600">Didn't recieve a code? <a (click)="resend()" class="text-sm font-thin text-yellow-600 cursor-pointer">Resend</a></span>
                         </div>
@@ -109,115 +113,98 @@
                 </mat-step>
 
             <!--creator data-->
-            <mat-step>
-              <h3 [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
-                 [routerLink]="[adminRouteUrl]" class="absolute flex items-center pt-4 text-base font-medium tracking-wider text-gray-500 lg:text-lg text-start top-5">
-                   <svg xmlns="http://www.w3.org/2000/svg" class="inline w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
-                     <path fill-rule="evenodd"
-                       d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                       clip-rule="evenodd" />
-                   </svg> <span class="items-center inline ml-2">Create Marketplace (Step 3 of 4)</span>
-                 </h3>
-                 <span class="mt-16 mb-16 text-2xl font-medium tracking-wide md:text-xl lg:text-5xl lg:mb-0 xl:mb-0 text-start text-dark">Let's start with Your<br>Marketplace name</span>
-                 <form [formGroup]="creatorForm" class="justify-start">
-                   <div class="w-full mt-2 border-b-2 border-teal-500 lg:w-1/2">
-                     <input appTrim class="pl-0 leading-tight tracking-wider text-gray-700 bg-transparent border-none appearance-none w-62 lg:w-62 focus:outline-none" formControlName="name" maxlength="16" required type="text" placeholder="Marketplace" aria-label="Full name">
+                <mat-step>
+                  <h3 [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
+                    [routerLink]="[adminRouteUrl]" class="absolute flex items-center pt-4 text-base font-medium tracking-wider text-gray-500 lg:text-lg text-start top-5">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="inline w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                          clip-rule="evenodd" />
+                      </svg> <span class="items-center inline ml-2">Create Marketplace (Step 3 of 4)</span>
+                    </h3>
+                    <span class="mt-16 mb-16 text-2xl font-medium tracking-wide md:text-xl lg:text-5xl lg:mb-0 xl:mb-0 text-start text-dark">Let's start with Your<br>Marketplace name</span>
+                    <form [formGroup]="creatorForm" class="justify-start">
+                      <div class="w-full mt-2 border-b-2 border-teal-500 lg:w-1/2">
+                        <input appTrim class="pl-0 leading-tight tracking-wider text-gray-700 bg-transparent border-none appearance-none w-62 lg:w-62 focus:outline-none" formControlName="name" maxlength="16" required type="text" placeholder="Marketplace">
+                        </div>
 
-                   </div>
-                   <p class="text-xs error-msg error" *ngIf="creatorForm.controls.name.touched && creatorForm.controls.name.errors?.required">Name is Required</p>
-                     <p class="text-xs error-msg error" *ngIf="creatorForm.controls.name.touched && creatorForm.controls.name.errors?.minlength">Name should be greater than or equal to {{creatorForm.controls.name.errors?.minlength.requiredLength}} character </p>
-                   <div *ngIf="profileImageSrc " class="relative flex flex-col edit-btn ">
+                      <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                        validation: 'required',
+                        message: 'Creator name is required',
+                        control: creatorForm.controls['name']
+                      }">
+                    </ng-container>
+                    <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                        validation: 'minlength',
+                        message: 'Creator name should at least be 4 characters',
+                        control: creatorForm.controls['name']
+                      }">
+                    </ng-container>
+                    <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                        validation: 'maxlength',
+                        message: 'Creator name cannot exceed 16 characters',
+                        control: creatorForm.controls['name']
+                      }">
+                    </ng-container>
+                    <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                      validation: 'clubNameExists',
+                      message: 'This name is already in use. Please try another.',
+                      control: creatorForm.controls['name']}">
+                  </ng-container>
+                  <div *ngIf="profileImageSrc " class="relative flex flex-col edit-btn ">
+                    <li class="inline-flex my-4 card-bg">
+                            <ul class="border-gradient-dp-p-bg-dark hover:border-gradient-tl-p-bg-light gradient-border-2">
+                              <img style=" object-fit: cover; position: relative; display: block;" id="ticket" class="preview" src="{{profileImageSrc}}" >
+                              </ul>
+                          </li>
+                          <a (click)="editImg()">Edit</a>
+                  </div>
+                  <div class="flex flex-col mt-3 mb-3">
+                        <div class="relative flex justify-between w-full h-12 overflow-hidden border-2 border-gray-400 border-dashed rounded-lg lg:w-1/2">
+                        <button
+                          class="flex items-center justify-between w-full px-2 py-2 font-bold lg:w-62 bg-primary-gray-100 hover:bg-indigo-dark">
+                          <ng-container *ngIf="!profileImageSrc ; else show">
+                              <div class="px-2 font-light text-gray-400">Select File to Upload</div>
+                            </ng-container>
+                          <ng-template #show>
+                            <div class="px-2 font-light ">File selected!</div>
+                          </ng-template>
+                          <div>
+                            <svg
+                              fill="#FFF"
+                              height="28"
+                              viewBox="0 0 24 24"
+                              width="28"
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="m-2">
+                              <path d="M0 0h24v24H0z" fill="none" />
+                              <path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z" />
+                            </svg>
+                          </div>
+                        </button>
+                        <input #imgFile
+                          class="absolute block opacity-0 cursor-pointer pin-r pin-t"
+                          type="file"
+                          form
+                          name=""
+                          accept=".jpg, .jpeg, .png"
+                          (change)="onSelectProfile($event)"
+                        />
+                      </div>
+                      </div>
 
-                     <!-- <div class="editBtn"  >
-                      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
-                        <g id="Group_56289" data-name="Group 56289" transform="translate(11150 -4)">
-                          <circle id="Ellipse_3170" data-name="Ellipse 3170" cx="12.5" cy="12.5" r="12.5" transform="translate(-11150 4)" fill="#fff"/>
-                          <path id="Icon_material-edit" data-name="Icon material-edit" d="M4.5,12.486v2.1H6.6l6.2-6.2-2.1-2.1Zm9.928-5.723a.558.558,0,0,0,0-.79L13.116,4.66a.558.558,0,0,0-.79,0L11.3,5.686l2.1,2.1Z" transform="translate(-11146.5 6.504)" fill="#6a6a6a"/>
-                        </g>
-                      </svg>
-                     </div> -->
-                      <li class="inline-flex my-4 card-bg">
-                        <ul class="border-gradient-dp-p-bg-dark hover:border-gradient-tl-p-bg-light gradient-border-2">
-                          <img style=" object-fit: cover; position: relative;
-
-                          display: block;" id="ticket" class="preview" src="{{profileImageSrc }}" >
-                          </ul>
-                       </li>
-
-                       <a (click)="editImg()">Edit</a>
-
-                    </div>
-
-                   <div class="flex flex-col mt-3 mb-3">
-                     <div class="relative flex justify-between w-full h-12 overflow-hidden border-2 border-gray-400 border-dashed rounded-lg lg:w-1/2">
-                     <button
-                       class="flex items-center justify-between w-full px-2 py-2 font-bold lg:w-62 bg-primary-gray-100 hover:bg-indigo-dark">
-                       <ng-container *ngIf="!profileImageSrc ; else show">
-                           <div class="px-2 font-light text-gray-400">Select File to Upload</div>
-
-                       </ng-container>
-                       <ng-template #show>
-                         <div class="px-2 font-light ">File selected!</div>
-                       </ng-template>
-
-                     <div>
-                         <svg
-                           fill="#FFF"
-                           height="28"
-                           viewBox="0 0 24 24"
-                           width="28"
-                           xmlns="http://www.w3.org/2000/svg"
-                           class="m-2">
-                           <path d="M0 0h24v24H0z" fill="none" />
-                           <path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z" />
-                         </svg>
-                       </div>
-                     </button>
-                     <input #imgFile
-                       class="absolute block opacity-0 cursor-pointer pin-r pin-t"
-                       type="file"
-                       name=""
-                       accept=".jpg, .jpeg, .png"
-                       (change)="onSelectProfile($event)"
-                     />
-                   </div>
-                   </div>
-
-                   <!-- <div class="image-upload">
-                     <label for="file-input">
-                       <img class="w-60" src="../../../../assets/upload.png"/>
-                     </label>
-                     <input #imgFile id="file-input" accept="image/png, image/gif, image/jpeg" type="file" (change)="onSelectProfile($event)"/>
-                   </div> -->
-                   <!-- <div class="w-full mt-2 mb-4 overflow-y-hidden border-yellow-600 xl:w-1/2" >
-                     <div *ngIf="profileImage" class="object-cover h-auto" >
-                       <div class="flex items-center justify-between w-full p-2 border border-gray-200 rounded">
-                         <img [src]="profileImageSrc" class="object-cover w-16 h-16 mr-3 rounded-xl">
-                         <button class="flex items-center justify-end" (click)="editImg()" >
-                           <i  class="flex items-center p-0 text-yellow-500 cursor-pointer fas fa-minus-circle" >
-                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
-                             <g id="Group_56289" data-name="Group 56289" transform="translate(11150 -4)">
-                               <circle id="Ellipse_3170" data-name="Ellipse 3170" cx="12.5" cy="12.5" r="12.5" transform="translate(-11150 4)" fill="#fff"/>
-                               <path id="Icon_material-edit" data-name="Icon material-edit" d="M4.5,12.486v2.1H6.6l6.2-6.2-2.1-2.1Zm9.928-5.723a.558.558,0,0,0,0-.79L13.116,4.66a.558.558,0,0,0-.79,0L11.3,5.686l2.1,2.1Z" transform="translate(-11146.5 6.504)" fill="#6a6a6a"/>
-                             </g>
-                           </svg>
-                         </i>
-                          </button>
-                       </div>
-                    </div>
-                   </div> -->
-                   <div class="flex justify-end w-full lg:w-full xl:w-1/2">
-                     <!-- <button mat-button matStepperPrevious class="back-btn">Back</button> -->
-                     <button  mat-button class="relative inline-flex items-center justify-center text-center primary-btn" [disabled]="!profileImageSrc  || creatorForm.invalid" (click)="next()">
-                       <svg *ngIf="showLoading === true" role="status" class="inline w-5 h-5 mr-2 text-gray-200 animate-spin dark:text-gray-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                         <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
-                         <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="#D59529"/>
-                         </svg>
-                         <span >{{showLoading === true? 'Wait' : 'Continue'}}  </span>
-                     </button>
-                   </div>
-                 </form>
-             </mat-step>
+                      <div class="flex justify-end w-full lg:w-full xl:w-1/2">
+                        <!-- <button mat-button matStepperPrevious class="back-btn">Back</button> -->
+                        <button  mat-button class="relative inline-flex items-center justify-center text-center primary-btn" [disabled]="!profileImageSrc  || creatorForm.controls['name'].invalid" (click)="next()">
+                          <svg *ngIf="showLoading === true" role="status" class="inline w-5 h-5 mr-2 text-gray-200 animate-spin dark:text-gray-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                            <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="#D59529"/>
+                            </svg>
+                            <span >{{showLoading === true? 'Wait' : 'Continue'}}  </span>
+                        </button>
+                      </div>
+                    </form>
+                </mat-step>
 
             <!--profile step-->
             <!-- <mat-step class="relative">
@@ -276,136 +263,178 @@
                <!--firebase-->
 
                <!--user data-->
-            <mat-step>
-                <h3 [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
-                [routerLink]="[adminRouteUrl]" class="absolute flex items-center pt-4 text-base font-medium tracking-wider text-gray-500 lg:text-lg text-start top-16">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="inline w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd"
-                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                      clip-rule="evenodd" />
-                  </svg> <span class="items-center inline ml-2">Registration (Step 4 of 4)</span>
-                </h3>
-                <span class="text-2xl font-medium tracking-wide lg:text-3xl xl:text-5xl lg:mb-16 xl:mb-16 text-start text-dark">Let's register yourself</span>
+                <mat-step>
+                    <h3 [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
+                    [routerLink]="[adminRouteUrl]" class="absolute flex items-center pt-4 text-base font-medium tracking-wider text-gray-500 lg:text-lg text-start top-16">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="inline w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                          clip-rule="evenodd" />
+                      </svg> <span class="items-center inline ml-2">Registration (Step 4 of 4)</span>
+                    </h3>
+                    <span class="text-2xl font-medium tracking-wide lg:text-3xl xl:text-5xl lg:mb-16 xl:mb-16 text-start text-dark">Let's register yourself</span>
 
-                <div class="mt-4">
-                  <form  class="justify-start">
-                    <div class="w-full border-b-2 border-teal-500 lg:w-62">
-                      <input appTrim minlength=7 name="name" required placeholder="John Doe"
-                      maxlength=15 #name="ngModel" [(ngModel)]="fullname" [ngModelOptions]="{standalone: true}"  class="w-full pl-0 leading-tight tracking-wider text-gray-700 bg-transparent border-none appearance-none focus:outline-none" >
+                    <div class="mt-4">
+                      <form [formGroup]="creatorForm" class="justify-start">
+                        <div class="w-full border-b-2 border-teal-500 lg:w-62">
+                          <input appTrim minlength=4 name="name" required placeholder="John Doe"
+                          maxlength=15 formControlName="username" class="w-full pl-0 leading-tight tracking-wider text-gray-700 bg-transparent border-none appearance-none focus:outline-none" >
 
-                    </div>
-                    <div *ngIf="name.invalid && (name.dirty || name.touched)">
-                      <p class="text-xs error-msg error" *ngIf="name.errors?.required">
-                                          Fullname is required.
-                      </p>
-                      <p class="text-xs error-msg error" *ngIf="name.errors.minlength">
-                                          Fullname is required to be at least 7 characters.
-                      </p>
-                      <p class="text-xs error-msg error" *ngIf="name.errors.maxlength">
-                                          Fullname cannot be longer than 15 characters.
-                      </p>
-                    </div>
-                  </form>
-                  <form class="justify-start">
-                    <div class="w-full border-b-2 border-teal-500 lg:w-62">
-                     <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  appTrim  name="email" required
-                      [email]="true" #mail="ngModel" [(ngModel)]="email" [ngModelOptions]="{standalone: true}" class="w-full pl-0 leading-tight tracking-wider text-gray-700 bg-transparent border-none appearance-none focus:outline-none"  placeholder="your@email.com">
+                        </div>
+                        <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                          validation: 'required',
+                          message: 'Full name is required',
+                          control: creatorForm.controls['username']
+                        }">
+                      </ng-container>
+                      <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                          validation: 'minlength',
+                          message: 'Full name should at least be 4 characters',
+                          control: creatorForm.controls['username']
+                        }">
+                      </ng-container>
+                      <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                          validation: 'maxlength',
+                          message: 'Full name cannot exceed 15 characters',
+                          control: creatorForm.controls['username']
+                        }">
+                      </ng-container>
 
-                   </div>
-                   <div *ngIf="mail.touched">
-                    <p class="text-xs error-msg error"  *ngIf="mail.errors?.required">Email is a required.</p>
-                    <p class="text-xs error-msg error"  *ngIf="mail.errors?.pattern">This is not a valid Email.</p>
-                  </div>
-                 </form>
-                 <form class="justify-start" >
-                  <div class="mb-16">
-                    <div class="relative w-full border-b-2 border-teal-500 lg:w-62">
-                      <span class="absolute inset-y-0 right-0 flex items-center pl-2" (click)="passwordShowHide()">
-                        <span  class="p-1 focus:outline-none focus:shadow-outline">
-                          <img class="w-4 h-4" src="./assets/icons/password.svg" alt="">
-                        </span>
-                      </span>
-                      <input required minlength="6" [(ngModel)]="password" name="password"    [ngModelOptions]="{standalone: true}"  class="w-full pl-0 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"  type="{{passwordHide ? 'password' : 'text'}}" placeholder="Password">
-                     </div>
+                      </form>
+                      <form [formGroup]="creatorForm" class="justify-start">
+                        <div class="w-full border-b-2 border-teal-500 lg:w-62">
+                        <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  appTrim  name="email" required
+                        formControlName="email" class="w-full pl-0 leading-tight tracking-wider text-gray-700 bg-transparent border-none appearance-none focus:outline-none"  placeholder="your@email.com">
 
+                      </div>
 
-                    <div class="relative w-full border-b-2 border-teal-500 lg:w-62">
-                      <span class="absolute inset-y-0 right-0 flex items-center pl-2" (click)="passwordShowHide()">
-                        <span  class="p-1 focus:outline-none focus:shadow-outline">
-                          <img class="w-4 h-4" src="./assets/icons/password.svg" alt="">
-                        </span>
-                      </span>
-                      <input required [(ngModel)]="confirmPassword"  id="passwordB" name="confirmPassword"  class="w-full pl-0 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"  type="{{passwordHide ? 'password' : 'text'}}" placeholder="Confirm password">
-
-                    </div>
-                    <p class="text-xs error-msg error" *ngIf="password !== confirmPassword">Password must match</p>
-                  </div>
-
-                <div class="flex justify-end w-full lg:w-62">
-                      <button mat-button matStepperPrevious class="back-btn">Back</button>
-                      <button  mat-button class="relative inline-flex items-center justify-center text-center primary-btn"  [disabled]="password !== confirmPassword || !password || name.invalid || !fullname || mail.invalid || !email || showLoading " (click)="becomeCreator()">
-                        <svg *ngIf="showLoading === true" role="status" class="inline w-5 h-5 mr-2 text-gray-200 animate-spin dark:text-gray-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
-                          <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="#D59529"/>
-                          </svg>
-                          <span >{{showLoading === true? 'Wait' : 'Continue'}}  </span>
-                      </button>
-
-                    </div>
+                      <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                        validation: 'required',
+                        message: 'Email address is required',
+                        control: creatorForm.controls['email']
+                      }">
+                    </ng-container>
+                    <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                        validation: 'pattern',
+                        message: 'Email should have the following character/s: @',
+                        control: creatorForm.controls['email']
+                      }">
+                    </ng-container>
+                      <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                      validation: 'emailExists',
+                      message: 'This email is already in use. Please try another.',
+                      control: creatorForm.controls['email']}">
+                  </ng-container>
                 </form>
-                </div>
+                    <form [formGroup]="creatorForm" class="justify-start" >
+                      <div class="mb-16">
+                        <div class="relative w-full border-b-2 border-teal-500 lg:w-62">
+                          <span class="absolute inset-y-0 right-0 flex items-center pl-2" (click)="passwordShowHide()">
+                            <span  class="p-1 focus:outline-none focus:shadow-outline">
+                              <img class="w-4 h-4" src="./assets/icons/password.svg" alt="">
+                            </span>
+                          </span>
+                          <input required minlength="6"  formControlName="pass" class="w-full pl-0 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"  type="{{passwordHide ? 'password' : 'text'}}" placeholder="Password">
+                        </div>
 
-
-              <!-- <div class="w-full lg:w-1/2">
-                <form class="relative w-full mt-6 space-y-8">
-                  <div class="relative">
-                     <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">Full Name</label>
-                     <input appTrim minlength=7 name="name" required
-                     maxlength=15 #name="ngModel" [(ngModel)]="fullname" [ngModelOptions]="{standalone: true}" type="text" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="John">
-                     <div *ngIf="name.invalid && (name.dirty || name.touched)">
-                      <p class="text-xs error-msg error" *ngIf="name.errors?.required">
-                                          Fullname is required.
-                      </p>
-                      <p class="text-xs error-msg error" *ngIf="name.errors.minlength">
-                                          Fullname is required to be at least 7 characters.
-                      </p>
-                      <p class="text-xs error-msg error" *ngIf="name.errors.maxlength">
-                                          Fullname cannot be longer than 15 characters.
-                      </p>
+                        <div class="relative w-full border-b-2 border-teal-500 lg:w-62">
+                          <span class="absolute inset-y-0 right-0 flex items-center pl-2" (click)="passwordShowHide()">
+                            <span  class="p-1 focus:outline-none focus:shadow-outline">
+                              <img class="w-4 h-4" src="./assets/icons/password.svg" alt="">
+                            </span>
+                          </span>
+                          <input required formControlName="confirmpass"  class="w-full pl-0 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"  type="{{passwordHide ? 'password' : 'text'}}" placeholder="Confirm password">
+                        </div>
+                        <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                          validation: 'required',
+                          message: 'Password is required',
+                          control: creatorForm.controls['pass']
+                        }">
+                      </ng-container>
+                      <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                          validation: 'minlength',
+                          message: 'Password should at least be 8 characters',
+                          control: creatorForm.controls['pass']
+                        }">
+                      </ng-container>
+                      <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                          validation: 'maxlength',
+                          message: 'Password cannot exceed 128 characters',
+                          control: creatorForm.controls['pass']
+                        }">
+                      </ng-container>
+                      <div class="text-base text-red-500"
+                      *ngIf="creatorForm.controls['confirmpass']?.errors?.confirmedValidator">
+                      The Passwords do not match
                     </div>
-                  </div>
-                  <div class="relative">
-                     <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">Email Address</label>
-                     <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  appTrim  name="email" required
-                     [email]="true" #mail="ngModel" [(ngModel)]="email" [ngModelOptions]="{standalone: true}" type="email" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="janedoe@email.com">
-                     <div *ngIf="mail.touched">
-                      <p class="text-xs error-msg error"  *ngIf="mail.errors?.required">Email is a required.</p>
-                      <p class="text-xs error-msg error"  *ngIf="mail.errors?.pattern">This is not a valid Email.</p>
                     </div>
-                  </div>
-                  <div class="relative">
-                     <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">Password</label>
-                     <span class="absolute inset-y-0 right-0 flex items-center pl-2" (click)="passwordShowHide()">
-                      <span  class="p-1 focus:outline-none focus:shadow-outline">
-                        <img class="w-4 h-4" src="./assets/icons/password.svg" alt="">
-                      </span>
-                    </span>
-                     <input required minlength="6" [(ngModel)]="password" name="password"    [ngModelOptions]="{standalone: true}" type="{{passwordHide ? 'password' : 'text'}}" placeholder="Password"  class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Password">
-                  </div>
-                  <div class="relative">
-                     <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">Confirm Password</label>
-                     <span class="absolute inset-y-0 right-0 flex items-center pl-2" (click)="passwordShowHide()">
-                      <span  class="p-1 focus:outline-none focus:shadow-outline">
-                        <img class="w-4 h-4" src="./assets/icons/password.svg" alt="">
-                      </span>
-                    </span>
-                     <input required [(ngModel)]="confirmPassword"  id="passwordB" name="confirmPassword"     [ngModelOptions]="{standalone: true}" type="{{passwordHide ? 'password' : 'text'}}" placeholder="Password"  class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Confirm password">
-                     <p class="pl-4 error-msg error" *ngIf="password !== confirmPassword">Password must match</p>
-                  </div>
 
-               </form>
-              </div> -->
-            </mat-step>
+
+                    <div class="flex justify-end w-full lg:w-62">
+                          <button mat-button matStepperPrevious class="back-btn">Back</button>
+                          <button  mat-button class="relative inline-flex items-center justify-center text-center primary-btn"  [disabled]="creatorForm.controls['username'].invalid || creatorForm.controls['pass'].invalid || creatorForm.controls['confirmpass'].invalid  || showLoading " (click)="becomeCreator()">
+                            <svg *ngIf="showLoading === true" role="status" class="inline w-5 h-5 mr-2 text-gray-200 animate-spin dark:text-gray-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                              <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="#D59529"/>
+                              </svg>
+                              <span >{{showLoading === true? 'Wait' : 'Continue'}}  </span>
+                          </button>
+
+                        </div>
+                    </form>
+                    </div>
+
+
+                  <!-- <div class="w-full lg:w-1/2">
+                    <form class="relative w-full mt-6 space-y-8">
+                      <div class="relative">
+                        <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">Full Name</label>
+                        <input appTrim minlength=7 name="name" required
+                        maxlength=15 #name="ngModel" [(ngModel)]="fullname" [ngModelOptions]="{standalone: true}" type="text" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="John">
+                        <div *ngIf="name.invalid && (name.dirty || name.touched)">
+                          <p class="text-xs error-msg error" *ngIf="name.errors?.required">
+                                              Fullname is required.
+                          </p>
+                          <p class="text-xs error-msg error" *ngIf="name.errors.minlength">
+                                              Fullname is required to be at least 7 characters.
+                          </p>
+                          <p class="text-xs error-msg error" *ngIf="name.errors.maxlength">
+                                              Fullname cannot be longer than 15 characters.
+                          </p>
+                        </div>
+                      </div>
+                      <div class="relative">
+                        <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">Email Address</label>
+                        <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  appTrim  name="email" required
+                        [email]="true" #mail="ngModel" [(ngModel)]="email" [ngModelOptions]="{standalone: true}" type="email" class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="janedoe@email.com">
+                        <div *ngIf="mail.touched">
+                          <p class="text-xs error-msg error"  *ngIf="mail.errors?.required">Email is a required.</p>
+                          <p class="text-xs error-msg error"  *ngIf="mail.errors?.pattern">This is not a valid Email.</p>
+                        </div>
+                      </div>
+                      <div class="relative">
+                        <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">Password</label>
+                        <span class="absolute inset-y-0 right-0 flex items-center pl-2" (click)="passwordShowHide()">
+                          <span  class="p-1 focus:outline-none focus:shadow-outline">
+                            <img class="w-4 h-4" src="./assets/icons/password.svg" alt="">
+                          </span>
+                        </span>
+                        <input required minlength="6" [(ngModel)]="password" name="password"    [ngModelOptions]="{standalone: true}" type="{{passwordHide ? 'password' : 'text'}}" placeholder="Password"  class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Password">
+                      </div>
+                      <div class="relative">
+                        <label class="absolute px-2 ml-2 -mt-3 font-medium text-gray-600 bg-white">Confirm Password</label>
+                        <span class="absolute inset-y-0 right-0 flex items-center pl-2" (click)="passwordShowHide()">
+                          <span  class="p-1 focus:outline-none focus:shadow-outline">
+                            <img class="w-4 h-4" src="./assets/icons/password.svg" alt="">
+                          </span>
+                        </span>
+                        <input required [(ngModel)]="confirmPassword"  id="passwordB" name="confirmPassword"     [ngModelOptions]="{standalone: true}" type="{{passwordHide ? 'password' : 'text'}}" placeholder="Password"  class="block w-full px-4 py-4 mt-2 text-base placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-black" placeholder="Confirm password">
+                        <p class="pl-4 error-msg error" *ngIf="password !== confirmPassword">Password must match</p>
+                      </div>
+
+                  </form>
+                  </div> -->
+                </mat-step>
 
             <!--old-->
             <!-- <mat-step>
@@ -469,7 +498,7 @@
                     </div>
                 </form>
             </mat-step> -->
-               <!--firebase-->
+            <!--firebase-->
           </mat-stepper>
         </div>
 
@@ -516,3 +545,12 @@
 
 
 
+<ng-template #formError let-control="control" let-message="message" let-validation="validation">
+  <ng-container *ngIf="control.hasError(validation) && (control.dirty || control.touched)">
+    <div class="fv-plugins-message-container">
+      <div class="text-red-500">
+        {{ message }}
+      </div>
+    </div>
+  </ng-container>
+</ng-template>

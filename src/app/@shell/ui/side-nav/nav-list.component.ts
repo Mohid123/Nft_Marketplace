@@ -5,9 +5,7 @@
 /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup, Validators
+  AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators
 } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
@@ -20,16 +18,16 @@ import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-di
 import { FireAuthService } from '@app/@core/services/fire-auth.service';
 import { MediaService } from '@app/@core/services/media.service';
 import { UserService } from '@app/@core/services/user.service';
-import { environment } from '@environments/environment';
 // firebase imports
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import { ToastrService } from 'ngx-toastr';
-import { combineLatest, of, Subject } from 'rxjs';
-import { exhaustMap, map, take } from 'rxjs/operators';
+import { combineLatest, Observable, of, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, exhaustMap, map, take } from 'rxjs/operators';
 import { ResponseAddMedia } from './../../../@core/models/response-add-media.model';
 import { ROUTER_UTILS } from './../../../@core/utils/router.utils';
+import { ConfirmedValidator } from './password.validator';
 
 
 // export function passwordsMatchValidator(): ValidatorFn {
@@ -56,6 +54,8 @@ const fireConfig = {
 };
 
 
+
+
 @Component({
   selector: 'app-nav-list',
   templateUrl: './nav-list.component.html',
@@ -71,6 +71,14 @@ const fireConfig = {
 })
 export class NavListComponent implements OnInit, AfterViewInit {
   destroy$ = new Subject();
+
+  defaultUser: BecomeCreator = {
+    email: "",
+    name: "",
+    pass: "",
+    phoneNumber: "",
+    creatorDisplayName: ""
+   };
 
   @ViewChild('imgFile') imgFile;
   @ViewChild('stepper') private myStepper: MatStepper;
@@ -114,6 +122,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
 
   constructor( private _formBuilder: FormBuilder,
     private toastr: ToastrService,
+    private fb: FormBuilder,
     private cf: ChangeDetectorRef,
     public fireAuth: FireAuthService,
     private customDialogService: CustomDialogService,
@@ -122,11 +131,11 @@ export class NavListComponent implements OnInit, AfterViewInit {
     private userService: UserService,
     private connService : ConnService,
     private route: Router) {
-      this.creatorForm = this._formBuilder.group({
-        name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(16)]),
-        profileImg: new FormControl(''),
-        profileImage: new FormControl(''),
-      });
+      // this.creatorForm = this._formBuilder.group({
+      //   name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(16)]),
+      //   profileImg: new FormControl(''),
+      //   profileImage: new FormControl(''),
+      // });
 
       this.passwordHide = true;
     }
@@ -144,18 +153,121 @@ export class NavListComponent implements OnInit, AfterViewInit {
     }
   ngOnInit() {
 
-     this.UserForm = this._formBuilder.group( {
-      fullname: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(7)]),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', Validators.required),
-      confirmPassword: new FormControl('', Validators.required),
-    },
-    // { validators: passwordsMatchValidator() }
-    )
-
-    firebase.initializeApp(environment.firebase)
+    this.iniitCreatorForm()
+    firebase.initializeApp(fireConfig)
     this.verify = JSON.parse(localStorage.getItem('verificationId') || '{}')
 
+  }
+
+  emailValidator() {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      if (!control.valueChanges || control.pristine) {
+        return null;
+      }
+      else {
+        return this.userService.emailExists(control.value).pipe(
+          distinctUntilChanged(),
+          debounceTime(600),
+          map((res: ApiResponse<any>) => (res.data.Response == true ? {emailExists: true} : null))
+        )
+      }
+
+    };
+  }
+
+  phoneValidator() {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      if (!control.valueChanges || control.pristine) {
+        return of(null);
+      }
+      else {
+        return this.userService.phoneExists(`+${this.countryCode}${control.value}`).pipe(
+          distinctUntilChanged(),
+          debounceTime(600),
+          map((res: ApiResponse<any>) => (res.data.Response == true ? {phoneExists: true} : null))
+        )
+      }
+    };
+}
+
+  clubValidator() {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      if (!control.valueChanges || control.pristine) {
+        return of(null);
+      }
+      else {
+        return this.userService.creatorExists(control.value).pipe(
+          distinctUntilChanged(),
+          debounceTime(600),
+          map((res: ApiResponse<any>) => (res.data.Response == true ? {clubNameExists: true} : null))
+        )
+      }
+    };
+  }
+
+  iniitCreatorForm() {
+    const emailRegex = new RegExp( '^[A-Za-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$');
+    this.creatorForm = this.fb.group({
+      email: [
+        this.defaultUser.email,
+        Validators.compose([
+          Validators.required,
+          Validators.email,
+          Validators.pattern(emailRegex)
+        ]),
+        this.emailValidator()
+      ],
+      pass: [
+        this.defaultUser.pass,
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(8),
+          Validators.maxLength(128),
+        ]),
+      ],
+      confirmpass: [
+        this.defaultUser.pass,
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(8),
+          Validators.maxLength(128),
+        ]),
+      ],
+      username: [
+        this.defaultUser.name,
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(4),
+          Validators.maxLength(15)
+        ]),
+
+        [this.clubValidator()]
+      ],
+      name: [
+        this.defaultUser.creatorDisplayName,
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(4),
+          Validators.maxLength(16)
+        ]),
+      ],
+      phone: [
+        this.defaultUser.phoneNumber,
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(10)
+        ]),
+        [this.phoneValidator()]
+      ],
+      profileImg: [
+        ''
+      ],
+      profileImage: [
+        ''
+      ],
+    },{
+      validator: ConfirmedValidator('pass', 'confirmpass')
+    })
   }
 
   openNav(){
@@ -171,37 +283,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     // debugger
-    // if(localStorage.getItem('display_name' && 'appPackageId')) {
-    //  this.myStepper.selectedIndex = 2
-    // }
-
   }
-
-  // timer(minute) {
-  //   let minute = 1;
-  //   let seconds: number = minute * 60;
-  //   let textSec: any = "0";
-  //   let statSec: number = 60;
-
-  //   const prefix = minute < 10 ? "0" : "";
-
-  //   const timer = setInterval(() => {
-  //     seconds--;
-  //     if (statSec != 0) statSec--;
-  //     else statSec = 59;
-
-  //     if (statSec < 10) {
-  //       textSec = "0" + statSec;
-  //     } else textSec = statSec;
-
-  //     this.display = `${prefix}${Math.floor(seconds / 60)}:${textSec}`;
-
-  //     if (seconds == 0) {
-  //       console.log("finished");
-  //       clearInterval(timer);
-  //     }
-  //   }, 1000);
-  // }
 
   passwordShowHide(): void {
     this.passwordHide = !this.passwordHide;
@@ -226,22 +308,24 @@ export class NavListComponent implements OnInit, AfterViewInit {
     this.showLoading = true;
     const mediaUpload:any = [];
     if(this.profileImageSrc){
+      debugger
       mediaUpload.push(this.mediaService.uploadMedia('creator', this.profileImg));
     }
     combineLatest(mediaUpload)
     .pipe(take(1),
     exhaustMap((res: ApiResponse<ResponseAddMedia>) => {
       if(!res[0].hasErrors()) {
+        debugger
         const param: BecomeCreator = {
-          creatorDisplayName: this.creatorForm.controls.name.value,
+          creatorDisplayName: this.creatorForm.value.name,
           // appPackageId: (this.creatorForm.controls.name.value).toLowerCase().replace(/\s/g,''),
-          appPackageId: this.email,
+          appPackageId: this.creatorForm.value.email,
           creatorProfileImageURL: res[0].data.url,
           isWithoutApp: true,
-          name: this.fullname,
-          pass: this.password,
-          email: this.email,
-          phoneNumber: `+${this.countryCode}`+this.phoneNumber,
+          name: this.creatorForm.value.username,
+          pass: this.creatorForm.value.pass,
+          email: this.creatorForm.value.email,
+          phoneNumber: `+${this.countryCode}${this.creatorForm.value.phone}`,
           clubName: this.creatorForm.value.name,
         };
         if (res[0] && res[1] && !res[1].hasErrors()) {
@@ -352,7 +436,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
     // this.timer(1);
     debugger
     this.payload = {
-      phoneNumber: `+${this.countryCode}`+this.phoneNumber
+      phoneNumber: `+${this.countryCode}${this.creatorForm.value.phone}`
     }
     firebase
     .auth()
@@ -455,6 +539,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
 
 
   onSelectProfile(event): void {
+    debugger
     if (event.target.files && event.target.files[0]) {
       this.profileImage = event.target.files[0];
       if (event.target.files && event.target.files[0]) {
@@ -496,7 +581,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
   resetProfileImg() {
     this.profileImageSrc = null;
     this.profileImage = null;
-    this.creatorForm.controls.profileImg.setValue(null);
+    this.creatorForm.controls.creatorProfileImageURL.setValue(null);
     this.imgFile.nativeElement.value = '';
   }
 
