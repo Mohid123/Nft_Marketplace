@@ -95,37 +95,21 @@ export class MarketPlacePage implements OnInit ,OnDestroy {
   }
 
   onScroll() {
-    // if (this.isLoading) return
-
-    if(this.nftList?.totalCount >= this.scrollPage * this.nftLimit) {
-
-      this.finished = false
-      debugger
-      this.nftService.getAllNftsByClub(this.clubName, this.scrollPage++, this.nftLimit ,this.searchValu ,this.filterGroup?.id, this.type)
-      .pipe(tap((res: ApiResponse<NFTList> ) => {
+    this.nftService.getAllNftsByClub(this.clubName, this.scrollPage++, this.nftLimit ,this.searchValu ,this.filterGroup?.id, this.type)
+    .pipe(tap((res: ApiResponse<NFTList> ) => {
+      if(this.nftList?.totalCount >= this.scrollPage * this.nftLimit) {
+        debugger
+        this.finished = false
         const initialData =  this.getAllNfts$.value;
         const latestData = [...initialData, ...res.data?.data]
         this.getAllNfts$.next(latestData);
-        // console.log(this.getAllNfts$.value)
-      })).subscribe();
-    }
-    else if(this.nftList?.totalCount <= this.scrollPage * this.nftLimit) {
-      debugger
-      this.finished = true;
-    }
-
-        // if(this.nftList?.totalCount <= this.page * this.nftLimit) {
-        //   this.finished = true;
-        // }
-        // debugger
-        // const completeData = latestData[latestData.length - 1]
-        // const lastItem = res.data?.data[res.data?.data.length - 1]
-        // if(completeData === lastItem){
-
-        //   this.isLoading = false;
-        // }
-
-
+      }
+      else if(this.nftList?.totalCount <= this.scrollPage * this.nftLimit) {
+        debugger
+        this.finished = true;
+      }
+      // console.log(this.getAllNfts$.value)
+    })).subscribe();
   }
 
 
@@ -159,9 +143,13 @@ export class MarketPlacePage implements OnInit ,OnDestroy {
   }
 
   filterBy (group:Group) :void {
+
     this.page = 1;
     this.filterGroup = group;
     this.getNfts();
+    this.scrollPage = 2;
+    debugger
+    this.onScroll();
   }
 
   search(searchValu: string): void {
