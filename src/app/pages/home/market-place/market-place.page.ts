@@ -5,7 +5,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CreatorService } from '@app/@core/services/creator.service';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, takeUntil, tap } from 'rxjs/operators';
+import { distinctUntilChanged, map, takeUntil } from 'rxjs/operators';
 import SwiperCore, { Navigation, Pagination } from "swiper";
 import { Group } from './../../../@core/models/group.model';
 import { NFTList } from './../../../@core/models/NFTList.model';
@@ -96,7 +96,7 @@ export class MarketPlacePage implements OnInit ,OnDestroy {
 
   onScroll() {
     this.nftService.getAllNftsByClub(this.clubName, this.scrollPage++, this.nftLimit ,this.searchValu ,this.filterGroup?.id, this.type)
-    .pipe(tap((res: ApiResponse<NFTList> ) => {
+    .pipe(map((res: ApiResponse<NFTList> ) => {
       if(this.nftList?.totalCount >= this.scrollPage * this.nftLimit) {
         debugger
         this.finished = false
@@ -117,7 +117,7 @@ export class MarketPlacePage implements OnInit ,OnDestroy {
     if (this.isLoading) return
     this.isLoading = true;
     this.nftService.getAllNftsByClub(this.clubName, this.page, this.nftLimit ,this.searchValu ,this.filterGroup?.id, this.type)
-      .pipe(tap((result:ApiResponse<NFTList>) => {
+      .pipe(map((result:ApiResponse<NFTList>) => {
          if (!result.hasErrors()) {
           this.getAllNfts$.next(result.data?.data)
           this.nftList = result.data;

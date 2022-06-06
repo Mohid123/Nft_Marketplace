@@ -9,11 +9,12 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
 import { CoreModule } from './@core/core.module';
 import { AppComponent } from './app.component';
+import { ScrollTopComponent } from './@shell/ui/scroll-top/scroll-top.component';
 
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ScrollTopComponent],
   imports: [
 
 

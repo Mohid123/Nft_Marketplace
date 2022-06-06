@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import { ViewportScroller } from '@angular/common';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { DOCUMENT, ViewportScroller } from '@angular/common';
+import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivationStart, Router } from '@angular/router';
 import { ROLE_TYPE_UTILS } from '@app/@core/utils/role-type.utils';
 import { AuthService } from '@app/pages/auth/services/auth.service';
@@ -9,7 +9,7 @@ import { ThemeService } from '@core/services/theme';
 import { AngularFaviconService } from 'angular-favicon';
 import { ToastrService } from 'ngx-toastr';
 import { fromEvent, Observable, Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { CreatorService } from './@core/services/creator.service';
 import { CustomDialogService } from './@core/services/custom-dialog/custom-dialog.service';
 import { RouteService } from './@core/services/route.service';
@@ -49,7 +49,8 @@ export class AppComponent implements OnInit {
     private ngxFavicon: AngularFaviconService,
     private routeService: RouteService,
     private router: Router,
-    private viewportScroller: ViewportScroller,
+    private readonly viewport: ViewportScroller,
+    @Inject(DOCUMENT) private readonly document: Document,
 
     private toastr: ToastrService,
     // private viewportScroller: ViewportScroller
@@ -113,6 +114,16 @@ deleteAllCookies() {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
+  readonly showScroll$: Observable<boolean> = fromEvent(
+    this.document,
+    'scroll'
+  ).pipe(
+    map(() => this.viewport.getScrollPosition()?.[1] > 0)
+  );
+
+  onScrollToTop(): void {
+    this.viewport.scrollToPosition([0, 0]);
+  }
 
 
   private runGlobalServices(): void {

@@ -1,0 +1,22 @@
+
+:host {
+  position: fixed;
+  float: right;
+  cursor: pointer;
+  right: 14px;
+  bottom: 14px;
+  z-index: 100;
+  opacity: 0.7;
+  cursor: pointer !important;
+}
+
+:host:hover {
+  opacity: 1;
+  cursor: pointer !important;
+}
+
+
+
+.top-btn {
+  @apply w-12 h-12 px-3 py-3 font-bold bg-gray-400 bg-opacity-25 rounded-xl hover:bg-yellow-500 focus:bg-yellow-500 cursor-pointer;
+}

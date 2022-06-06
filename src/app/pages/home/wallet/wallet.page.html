@@ -50,7 +50,7 @@
   </div>
 
   <!--Cards-->
-  <div class="relative cards-container" style="min-height: 360px;">
+  <!-- <div class="relative cards-container" style="min-height: 360px;">
     <ngx-spinner [fullScreen]="false" [showSpinner]="isLoading" [show]="isLoading" bdColor = "rgba(0,0,0,0.05)"  size="medium"
        type="ball-scale-multiple">
       <p style="font-size: 20px; color: white">{{(creator$ | async)?.displayName}}...</p>
@@ -64,9 +64,28 @@
         <app-nft-card [walletPage]="true" [nft]="nftCard"></app-nft-card>
       </ng-container>
     </ng-container>
+  </div> -->
+
+    <div  infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="300" (scrolled)="onScroll()">
+    <div  class="relative cards-container" style="min-height: 360px;">
+
+      <div *ngIf="!isLoading && (!nftList || nftList?.totalCount === 0)" class="absolute w-full text-center"
+        style="top: 40%;">
+        <h3>No Record Found</h3>
+        <p>It seems we can't find any results.</p>
+      </div>
+
+      <ng-container *ngIf="nftList?.totalCount > 0">
+        <ng-container *ngFor="let nftCard of (nfts$ | async); index as i" class="">
+          <app-nft-card [walletPage]="true" [nft]="nftCard"></app-nft-card>
+          <!-- <app-skeleton-loader *ngIf="isLoading"></app-skeleton-loader> -->
+        </ng-container>
+      </ng-container>
+    </div>
+
   </div>
 
-  <div class="w-full px-12 mb-14 ld:px-0 md:px-0">
+  <!-- <div class="w-full px-12 mb-14 ld:px-0 md:px-0">
     <div class="flex justify-between px-4 pt-3 mt-10">
       <div *ngIf="nftList?.totalCount > 0; else noItems" class="inline-flex items-center text-sm text-gray-500">
         Show {{ page === 1 ? 1 : (page-1) * nftLimit }}-{{ page * nftLimit < nftList?.totalCount ? (page * nftLimit) :
@@ -111,7 +130,7 @@
 
 
 
-  </div>
+  </div> -->
   </div>
 
 
