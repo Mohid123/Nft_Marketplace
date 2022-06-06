@@ -4,8 +4,8 @@ import { ViewportScroller } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CreatorService } from '@app/@core/services/creator.service';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
-import { Subject } from 'rxjs';
-import { distinctUntilChanged, take, takeUntil } from 'rxjs/operators';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { distinctUntilChanged, takeUntil, tap } from 'rxjs/operators';
 import SwiperCore, { Navigation, Pagination } from "swiper";
 import { Group } from './../../../@core/models/group.model';
 import { NFTList } from './../../../@core/models/NFTList.model';
@@ -30,6 +30,7 @@ export class MarketPlacePage implements OnInit ,OnDestroy {
 
   creator$ = this.creatorService.Creator$;
   destroy$ = new Subject();
+  finished: boolean;
 
   public isLoading:boolean;
   public type = '';
@@ -39,11 +40,14 @@ export class MarketPlacePage implements OnInit ,OnDestroy {
   public limit = 6 ;
   public nftLimit = 12 ;
   public page:number;
+  public scrollPage: number;
 
   public groups$ = this.groupService.groups$;
   public filterGroup: Group;
   public searchValu = '';
 
+  private getAllNfts$ = new BehaviorSubject<Array<any>>([]);
+  public nfts$: Observable<Array<any>> = this.getAllNfts$.asObservable();
   filterButtons = [
     { text: '', isClicked: true },
     { text: 'Membership Card', isClicked: false },
@@ -61,6 +65,7 @@ export class MarketPlacePage implements OnInit ,OnDestroy {
     private stripeService: StripeService,
   ) {
     this.page = 1;
+    this.scrollPage = 2;
     this.isLoading = false;
     this.routeService.clubName$.pipe(distinctUntilChanged(),takeUntil(this.destroy$)).subscribe((clubName) => {
       this.clubName = clubName;
@@ -89,16 +94,52 @@ export class MarketPlacePage implements OnInit ,OnDestroy {
      button.isClicked = true;
   }
 
+  onScroll() {
+    // if (this.isLoading) return
+
+    if(this.nftList?.totalCount >= this.scrollPage * this.nftLimit) {
+
+      this.finished = false
+      debugger
+      this.nftService.getAllNftsByClub(this.clubName, this.scrollPage++, this.nftLimit ,this.searchValu ,this.filterGroup?.id, this.type)
+      .pipe(tap((res: ApiResponse<NFTList> ) => {
+        const initialData =  this.getAllNfts$.value;
+        const latestData = [...initialData, ...res.data?.data]
+        this.getAllNfts$.next(latestData);
+        // console.log(this.getAllNfts$.value)
+      })).subscribe();
+    }
+    else if(this.nftList?.totalCount <= this.scrollPage * this.nftLimit) {
+      debugger
+      this.finished = true;
+    }
+
+        // if(this.nftList?.totalCount <= this.page * this.nftLimit) {
+        //   this.finished = true;
+        // }
+        // debugger
+        // const completeData = latestData[latestData.length - 1]
+        // const lastItem = res.data?.data[res.data?.data.length - 1]
+        // if(completeData === lastItem){
+
+        //   this.isLoading = false;
+        // }
+
+
+  }
+
 
   getNfts(): void {
     if (this.isLoading) return
     this.isLoading = true;
     this.nftService.getAllNftsByClub(this.clubName, this.page, this.nftLimit ,this.searchValu ,this.filterGroup?.id, this.type)
-      .pipe(take(1))
-      .subscribe((result:ApiResponse<NFTList>) => {
-        if (!result.hasErrors()) {
+      .pipe(tap((result:ApiResponse<NFTList>) => {
+         if (!result.hasErrors()) {
+          this.getAllNfts$.next(result.data?.data)
           this.nftList = result.data;
         }
+      }))
+      .subscribe(() => {
         this.isLoading = false;
       });
   }
@@ -130,10 +171,12 @@ export class MarketPlacePage implements OnInit ,OnDestroy {
   }
 
   setType(type:string): void {
-
+    debugger
     this.type = type;
     this.page = 1;
     this.getNfts();
+    this.scrollPage = 2;
+    this.onScroll();
   }
 
   ngOnDestroy(): void {

@@ -10,6 +10,7 @@ import { CardDetailsModule } from '@app/@shell/ui/card-details/card-details.modu
 import { HistoryModule } from '@app/@shell/ui/history/history.module';
 import { MarketplaceSearchModule } from '@app/@shell/ui/marketplace-search/marketplace-search.module';
 import { QrCodeModule } from 'ng-qrcode';
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SwiperModule } from 'swiper/angular';
 import { AuthGuard } from './../../@core/guards/auth.guard';
@@ -87,8 +88,8 @@ const childRoutes: Routes = [
 @NgModule({
   declarations: [HomePage, MarketPlacePage, CardDetailPage, WalletPage, TradingHistoryPage, PageNotFoundPage],
   imports: [
-
-  CommonModule,
+    InfiniteScrollModule,
+    CommonModule,
     RouterModule.forChild(childRoutes),
     CardModule,
     MarketplaceSearchModule,
