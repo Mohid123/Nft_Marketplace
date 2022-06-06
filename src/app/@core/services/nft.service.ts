@@ -122,6 +122,28 @@ export class NFTService extends ApiService<nftApiData> {
     }));
   }
 
+
+  getAllNftsByUser(clubName: string, userId:string ,page: number, searchValue: string ,groupId?:string,type?:string) : Observable<ApiResponse<nftApiData>> {
+    page--;
+    const param: getNftsByUserId = {
+      clubName: clubName,
+      offset: page ? 12 * page : 0,
+      limit: 12,
+      name: searchValue,
+      type: type,
+    };
+
+    if(groupId) {
+      param.groupID = groupId;
+    }
+
+    return this.get('/nft/getUserNftsByClub/'+ userId, param).pipe(take(1),tap((result:ApiResponse<nftApiData>)=>{
+      if (result.hasErrors()) {
+        this.toastrService.error(result?.errors[0]?.error?.message)
+      }
+    }));;
+  }
+
   getRecentSoldNfts(clubName:string, page: number, limit: number, groupId?:string, type?:string) : Observable<ApiResponse<nftApiData>> {
     page--;
     const param:any = {
@@ -167,26 +189,8 @@ export class NFTService extends ApiService<nftApiData> {
     }));
   }
 
-  getAllNftsByUser(clubName: string, userId:string ,page: number, searchValue: string ,groupId?:string,type?:string) : Observable<ApiResponse<nftApiData>> {
-    page--;
-    const param: getNftsByUserId = {
-      clubName: clubName,
-      offset: page ? environment.limit * page : 0,
-      limit: environment.limit,
-      name: searchValue,
-      type: type,
-    };
 
-    if(groupId) {
-      param.groupID = groupId;
-    }
 
-    return this.get('/nft/getUserNftsByClub/'+ userId, param).pipe(take(1),tap((result:ApiResponse<nftApiData>)=>{
-      if (result.hasErrors()) {
-        this.toastrService.error(result?.errors[0]?.error?.message)
-      }
-    }));;
-  }
 
   getAllNftsAdminPanel (clubName: string, page: number, searchValue: string, data: {
     nftStatus : string,

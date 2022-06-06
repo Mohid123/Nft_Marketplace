@@ -3,7 +3,6 @@ import { CreatorService } from '@app/@core/services/creator.service';
 import { AuthService } from '@app/pages/auth/services/auth.service';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, map, take, takeUntil } from 'rxjs/operators';
-import { environment } from './../../../../environments/environment.prod';
 import { Group } from './../../../@core/models/group.model';
 import { NFTList } from './../../../@core/models/NFTList.model';
 import { ResponseGroupsByClub } from './../../../@core/models/response-groups-by-club.model';
@@ -34,7 +33,7 @@ export class WalletPage implements OnInit, OnDestroy {
   public limit = 6;
   public page: number;
   public scrollPage: number;
-  public nftLimit = environment.limit;
+  public nftLimit = 5;
 
   public isLoading: boolean;
   public filterGroup: Group;
@@ -57,6 +56,7 @@ export class WalletPage implements OnInit, OnDestroy {
     private routeService: RouteService,
   ) {
     this.page = 1;
+    this.scrollPage = 2;
     this.isLoading = false;
     this.routeService.clubName$.pipe(distinctUntilChanged(),takeUntil(this.destroy$)).subscribe((clubName) => {
       this.clubName = clubName;
@@ -77,23 +77,17 @@ export class WalletPage implements OnInit, OnDestroy {
   getNfts(): void {
     if (this.isLoading) return;
     this.isLoading = true;
-    this.nftService
-      .getAllNftsByUser(
-        this.clubName,
-        this.authService?.loggedInUser?.id,
-        this.page,
-        this.searchValue,
-        this.filterGroup?.id,
-        this.type,
-      )
-      .pipe(take(1))
-      .subscribe((result: ApiResponse<NFTList>) => {
-        if (!result.hasErrors()) {
-          this.getAllNftsByUser$.next(result.data?.data)
-          this.nftList = result.data;
-        }
-        this.isLoading = false;
-      });
+    this.nftService.getAllNftsByUser(this.clubName, this.authService?.loggedInUser?.id, this.page, this.searchValue, this.filterGroup?.id, this.type,)
+    .pipe(map((result:ApiResponse<NFTList>) => {
+      if (!result.hasErrors()) {
+       this.getAllNftsByUser$.next(result.data?.data)
+       this.nftList = result.data;
+       console.log(this.nftList)
+     }
+   }))
+   .subscribe(() => {
+     this.isLoading = false;
+   });
   }
 
   onScroll() {
@@ -106,6 +100,8 @@ export class WalletPage implements OnInit, OnDestroy {
         const latestData = [...initialData, ...res.data?.data]
         this.getAllNftsByUser$.next(latestData);
       }
+
+
       else if(this.nftList?.totalCount <= this.scrollPage * this.nftLimit) {
         debugger
         this.finished = true;
@@ -113,6 +109,7 @@ export class WalletPage implements OnInit, OnDestroy {
       // console.log(this.getAllNfts$.value)
     })).subscribe();
   }
+
 
   setActive(button: any): void {
     for(const but of this.filterButtons) {
@@ -151,8 +148,7 @@ export class WalletPage implements OnInit, OnDestroy {
     this.page = 1;
     this.filterGroup = group;
     this.getNfts();
-    this.scrollPage = 2;
-    debugger
+    this.scrollPage = 1;
     this.onScroll();
   }
 
@@ -166,7 +162,7 @@ export class WalletPage implements OnInit, OnDestroy {
     this.type = type;
     this.page = 1;
     this.getNfts();
-    this.scrollPage = 2;
+    this.scrollPage = 1;
     this.onScroll();
   }
 
