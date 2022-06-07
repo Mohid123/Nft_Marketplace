@@ -11,8 +11,12 @@
   <img src="./assets/logo/stripe-logo-blue.png">
   <div class="flex justify-between my-6">
     <h1><span>Ent</span>er Stripe Key</h1>
-    <button class="text-sm text-green-400"><a href="https://support.stripe.com/questions/locate-api-keys-in-the-dashboard" target=_blank>Help</a> </button>
+    <!-- <button class="text-sm text-green-400"><a href="https://support.stripe.com/questions/locate-api-keys-in-the-dashboard" target=_blank>Want to locate API keys in your Dashboard?</a> </button> -->
   </div>
+
+  <button class="mb-3 text-left text-green-400 text-md"><a href="https://support.stripe.com/questions/locate-api-keys-in-the-dashboard" target=_blank>How to locate Stripe API keys in your Dashboard?</a> </button>
+  <p class="mb-5 @apply text-gray-400">Users with <b>Administrator permissions</b> can access a Stripe account’s API keys by navigating to the Developers section of the Stripe dashboard and clicking on <b>API Keys</b>.</p>
+
   <form [formGroup]="stripeForm" class="group-form">
       <p class="mb-9">Enter Club stripe secret key to perform marketplace payments.</p>
       <input class="mb-14" type="text" formControlName="key">

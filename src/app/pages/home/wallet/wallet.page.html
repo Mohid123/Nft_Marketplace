@@ -78,7 +78,15 @@
 
       <ng-container *ngIf="nftList?.totalCount > 0">
         <ng-container *ngFor="let nftCard of (nfts$ | async); index as i" class="">
-          <app-nft-card [walletPage]="true" [nft]="nftCard"></app-nft-card>
+          <!-- <app-nft-card [walletPage]="true" [nft]="nftCard"></app-nft-card> -->
+
+          <ng-container *ngIf="isLoading === false">
+            <app-nft-card [walletPage]="true"  [nft]="nftCard"></app-nft-card>
+          </ng-container>
+
+          <ng-container *ngIf="isLoading === true">
+            <app-skeleton-loader></app-skeleton-loader>
+          </ng-container>
           <!-- <app-skeleton-loader *ngIf="isLoading"></app-skeleton-loader> -->
         </ng-container>
       </ng-container>

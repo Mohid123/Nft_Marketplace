@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-inferrable-types */
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import {
@@ -83,6 +84,7 @@ export class AdminSettingPage implements OnInit, OnDestroy {
     if (
       this.settingForm.controls?.key?.value.length > 0 &&
       this.creator.stripeSecretKey !== this.settingForm.controls?.key?.value
+
     ) {
       this.updateKey();
     } else if (this.profileImage) {
@@ -118,10 +120,12 @@ export class AdminSettingPage implements OnInit, OnDestroy {
           } else {
             this.saveChagesToServer();
           }
+
         } else {
           this.isLoading = false;
           this.toastr.warning('Please enter valid stripe key.', 'Invalid!');
         }
+
       });
   }
 

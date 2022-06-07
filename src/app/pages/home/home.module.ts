@@ -16,6 +16,7 @@ import { SwiperModule } from 'swiper/angular';
 import { AuthGuard } from './../../@core/guards/auth.guard';
 import { LoggedInUserSearchModule } from './../../@shell/ui/logged-in-user-search/logged-in-user-search.module';
 import { CardModule } from './../../@shell/ui/nft-card/card.module';
+import { SkeletonModule } from './../../@shell/ui/skeleton-loader/skeleton-loader.module';
 import { SwipeModule } from './../../@shell/ui/swiper/swiper.module';
 import { CardDetailPage } from './card-detail/card-detail.page';
 import { HomePage } from './home.page';
@@ -34,6 +35,7 @@ const childRoutes: Routes = [
       robots: 'index, follow',
     }
   },
+
   {
     path: ROUTER_UTILS.config.base.detail + '/:nftId',
     component: CardDetailPage,
@@ -88,6 +90,9 @@ const childRoutes: Routes = [
 @NgModule({
   declarations: [HomePage, MarketPlacePage, CardDetailPage, WalletPage, TradingHistoryPage, PageNotFoundPage],
   imports: [
+
+
+    SkeletonModule,
     InfiniteScrollModule,
     CommonModule,
     RouterModule.forChild(childRoutes),

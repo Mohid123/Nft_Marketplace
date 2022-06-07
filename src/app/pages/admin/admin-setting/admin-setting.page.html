@@ -153,7 +153,7 @@
         </div>
         <div class="flex flex-row justify-center w-full">
 
-          <button class="py-2 mt-8 px-7 primary-btn" [disabled]="!settingForm.controls.key.touched" (click)="saveSetting()">
+          <button class="py-2 mt-8 px-7 primary-btn" [disabled]="!settingForm.controls.key.dirty" (click)="saveSetting(); settingForm.controls.key.markAsPristine();">
             Save Setting
           </button>
         </div>

@@ -8,8 +8,8 @@ import { WebShellModule } from '@shell/ft/web-shell.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
 import { CoreModule } from './@core/core.module';
-import { AppComponent } from './app.component';
 import { ScrollTopComponent } from './@shell/ui/scroll-top/scroll-top.component';
+import { AppComponent } from './app.component';
 
 
 
