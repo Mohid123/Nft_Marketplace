@@ -156,17 +156,27 @@
 
 
 .creator-btn {
-  @apply flex items-center text-white justify-center text-center rounded-full h-14 bg-primary-nodechain w-auto px-3 mt-4;
+  @apply flex items-center text-white justify-center text-center rounded-full h-14 w-auto px-3 mt-4;
     // position: absolute;
     // top: 13px;
     // right: 13px;
+    background: transparent linear-gradient(308deg, #D59529 0%, #F1B11D 100%) 0% 0% no-repeat padding-box;
+    &.dark {
+      @apply text-black;
+      background: transparent linear-gradient(109deg, #59C8D1 0%, #75F16D 100%) 0% 0% no-repeat padding-box;
+    }
 
 }
 .creator-btn-sm {
-  @apply flex items-center text-white justify-center text-center rounded-full h-14 bg-primary-nodechain w-auto px-3 mb-4 lg:mb-0;
+  @apply flex items-center text-white justify-center text-center rounded-full h-14 w-auto px-3 mb-4 lg:mb-0;
     // position: absolute;
     // top: 13px;
     // right: 13px;
+    background: transparent linear-gradient(308deg, #D59529 0%, #F1B11D 100%) 0% 0% no-repeat padding-box;
+    &.dark {
+      @apply text-black;
+      background: transparent linear-gradient(109deg, #59C8D1 0%, #75F16D 100%) 0% 0% no-repeat padding-box;
+    }
 
 }
 
