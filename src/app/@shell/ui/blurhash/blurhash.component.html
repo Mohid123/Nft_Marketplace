@@ -1,0 +1,3 @@
+
+<canvas *ngIf="isBrowser"   #canvas [width]="canvasWidth" [height]="canvasHeight"></canvas>
+<img [attr.loading]="loading" [src]="imageSrc" (load)="imageLoad = true" (onloadeddata)="imageLoaded = true" [class.img-loaded]="imageLoad">

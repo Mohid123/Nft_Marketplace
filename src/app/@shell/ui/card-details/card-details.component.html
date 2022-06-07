@@ -24,6 +24,8 @@
 
 
         <div class="container" style="height: 520px;" *ngIf="nft?.mediaType === 'Video'">
+
+
           <video style="
           margin-right: auto;
           background: #f0b01d26;
@@ -51,6 +53,9 @@
         </div>
 
         <div class="container imgcontainer" *ngIf="nft?.mediaType !== 'Video' && nft?.mediaType !== 'Audio'">
+
+          <!-- <app-blurhash [blurHash]="nft?.serverBlurHash"
+          [imageSrc]="nft?.serverCaptureFileUrl" [loading]="'lazy'"  class="relative resImg rounded-2xl"></app-blurhash> -->
           <img [src]="nft?.serverCaptureFileUrl" class="relative resImg rounded-2xl">
         </div>
 

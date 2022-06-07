@@ -1,17 +1,43 @@
 
 <div class="relative card-border">
   <a [routerLink]="['/',clubName,'detail',nft.id]">
-    <div class="nft-img"  >
-      <img *ngIf="nft?.mediaType !== 'Video'" style="object-fit: fill;
+    <div class="nft-img">
+      <app-blurhash *ngIf="nft?.mediaType !== 'Video'" [blurHash]="nft?.serverBlurHash"
+      [imageSrc]="nft?.mediaType === 'Video' ?  nft?.videoThumbnailUrl : (nft?.mediaType === 'Audio' ? '/assets/audio-bg.svg' : nft?.serverCaptureFileUrl)" [loading]="'lazy'"
+      style="object-fit: fill;
       margin-right: auto;
       margin-left: auto;
       height: 300px;
       width: 100%;
       border-radius: 12px;
       /* background: rgba(227, 227, 227, 0.356); */
-      display: block;" [src]="nft?.mediaType === 'Video' ?  nft?.videoThumbnailUrl : (nft?.mediaType === 'Audio' ? '/assets/audio-bg.svg' : nft?.serverCaptureFileUrl)" [alt]="nft.name" />
+      display: block;"
+      ></app-blurhash>
+      <!-- <img *ngIf="nft?.mediaType !== 'Video'" style="object-fit: fill;
+      margin-right: auto;
+      margin-left: auto;
+      height: 300px;
+      width: 100%;
+      border-radius: 12px;
+      /* background: rgba(227, 227, 227, 0.356); */
+      display: block;" [src]="nft?.mediaType === 'Video' ?  nft?.videoThumbnailUrl : (nft?.mediaType === 'Audio' ? '/assets/audio-bg.svg' : nft?.serverCaptureFileUrl)" [alt]="nft.name" /> -->
 
-    <img *ngIf="nft?.mediaType === 'Video'" style="object-fit: cover;
+      <app-blurhash *ngIf="nft?.mediaType === 'Video'"  [blurHash]="nft?.serverBlurHash"
+      [imageSrc]="nft?.mediaType === 'Video' ?  nft?.videoThumbnailUrl : nft?.serverCaptureFileUrl" [loading]="'lazy'"
+      style="object-fit: cover;
+      /* -webkit-filter: brightness(75%);
+      filter: brightness(75%);
+      filter: blur(2px); */
+      margin-right: auto;
+      margin-left: auto;
+      height: 300px;
+      width: 100%;
+      border-radius: 12px;
+      background: rgba(227, 227, 227, 0.356);
+      display: block;"
+      ></app-blurhash>
+
+    <!-- <img *ngIf="nft?.mediaType === 'Video'" style="object-fit: cover;
       /* -webkit-filter: brightness(75%);
                           filter: brightness(75%);
                           filter: blur(2px); */
@@ -21,7 +47,7 @@
       width: 100%;
       border-radius: 12px;
       background: rgba(227, 227, 227, 0.356);
-      display: block;" [src]="nft?.mediaType === 'Video' ?  nft?.videoThumbnailUrl : nft?.serverCaptureFileUrl" [alt]="nft.name" />
+      display: block;" [src]="nft?.mediaType === 'Video' ?  nft?.videoThumbnailUrl : nft?.serverCaptureFileUrl" [alt]="nft.name" /> -->
 
 <h1 *ngIf="nft?.mediaType === 'Video' || nft?.mediaType === 'Audio'" class="playBtn">
 <img src="../../../../assets/icons/node-play.svg" class="w-20 h-20" alt="">
