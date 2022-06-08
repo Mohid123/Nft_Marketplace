@@ -74,15 +74,15 @@
 </table> -->
 
 
-<div class="w-full rounded-xl overflow-x-auto">
+<div class="w-full overflow-x-auto rounded-xl">
   <table class="w-full m-4 rounded-xl spacing-table md:m-0 lg:m-0 ">
     <tr class="mb-4 text-center text-gray-600 border-b-2 border-gray-200 rounded-lg">
-      <th class="font-thin p-7">Token Id</th>
-      <th class="font-thin p-7">Price</th>
-      <th class="font-thin p-7">From</th>
-      <th class="font-thin p-7">To</th>
-      <th class="font-thin p-7">Event</th>
-      <th class="font-thin p-7">Date Created</th>
+      <th class="text-xs font-thin lg:text-sm p-7">Token Id</th>
+      <th class="text-xs font-thin lg:text-sm p-7">Price</th>
+      <th class="text-xs font-thin lg:text-sm p-7">From</th>
+      <th class="text-xs font-thin lg:text-sm p-7">To</th>
+      <th class="text-xs font-thin lg:text-sm p-7">Event</th>
+      <th class="text-xs font-thin lg:text-sm p-7">Date Created</th>
     </tr>
 
     <tbody class="relative " style="min-height: 165px">
@@ -93,36 +93,36 @@
       <ng-container *ngIf="responseEventByNFT?.totalCount > 0">
         <ng-container *ngFor="let nftEvent of responseEventByNFT.data">
       <tr class="z-40 w-full mt-4 text-center text-black bg-white rounded-lg h-14">
-        <td class="p-4 my-4 text-sm font-semibold">
+        <td class="p-4 my-4 text-xs font-semibold lg:text-sm">
           <a href="{{nftEvent?.transactionUrl}}" target=_blank> {{nftEvent?.tokenId}}</a>
         </td>
-        <td class="p-4 text-sm font-medium text-gray-500">
+        <td class="p-4 text-xs font-medium text-gray-500 lg:text-sm">
           {{nftEvent.price}}
         </td>
-        <td class="w-2 p-4 overflow-hidden text-sm font-medium text-gray-500 truncate">
+        <td class="w-2 p-4 overflow-hidden text-xs font-medium text-gray-500 truncate lg:text-sm">
           <a class="w-2 overflow-hidden truncate" href="{{nftEvent.fromAddress}}" target=_blank>{{nftEvent.from}}</a>
         </td>
-        <td class="p-4 text-sm font-medium text-gray-500 truncate">
+        <td class="p-4 text-xs font-medium text-gray-500 truncate lg:text-sm">
           <a href="{{nftEvent.toAddress}}" target=_blank>{{nftEvent.to}}</a>
         </td>
         <td *ngIf="nftEvent.eventType === 'Minted'" >
-          <span class="px-5 py-3 text-sm text-yellow-700 bg-yellow-200 rounded-full">{{nftEvent.eventType}}</span>
+          <span class="px-2 py-2 text-xs text-yellow-700 bg-yellow-200 rounded-full lg:px-3 lg:py-2 lg:text-sm">{{nftEvent.eventType}}</span>
         </td>
         <td *ngIf="nftEvent.eventType === 'Transfer'"  >
-         <span class="px-5 py-3 text-sm text-purple-500 bg-purple-200 rounded-full">{{nftEvent.eventType}}</span>
+         <span class="px-2 py-2 text-xs text-purple-500 bg-purple-200 rounded-full lg:px-3 lg:py-2 lg:text-sm">{{nftEvent.eventType}}</span>
         </td>
         <td *ngIf="nftEvent.eventType === 'Sale'" >
-          <span class="px-5 py-3 text-sm text-blue-500 bg-blue-200 rounded-full">{{nftEvent.eventType}}</span>
+          <span class="px-2 py-2 text-xs text-blue-500 bg-blue-200 rounded-full lg:px-3 lg:py-2 lg:text-sm">{{nftEvent.eventType}}</span>
         </td>
         <td *ngIf="nftEvent.eventType === 'Resale'" >
-         <span class="px-5 py-3 text-sm text-green-700 bg-green-200 rounded-full">{{nftEvent.eventType}}</span>
+         <span class="px-2 py-2 text-xs text-green-700 bg-green-200 rounded-full lg:px-3 lg:py-2 lg:text-sm">{{nftEvent.eventType}}</span>
         </td>
         <td *ngIf="nftEvent.eventType === 'Cancel Resale'" >
 
-          <span class="px-5 py-3 text-sm text-red-700 bg-red-200 rounded-full">{{nftEvent.eventType}}</span>
+          <span class="px-2 py-2 text-xs text-red-700 bg-red-200 rounded-full lg:px-3 lg:py-2 lg:text-sm">{{nftEvent.eventType}}</span>
 
         </td>
-        <td class="p-4 text-sm font-medium text-gray-500">
+        <td class="p-4 text-xs font-medium text-gray-500 lg:text-sm">
           {{nftEvent.createdAt | timeAgo}}
         </td>
       </tr>

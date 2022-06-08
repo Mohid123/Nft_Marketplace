@@ -10,8 +10,7 @@
 
 
 <div class="justify-center custom-container">
-  <div class=""
-    >
+  <div>
     <div class="w-full lg:flex ">
       <!-- Left Section -->
       <div class="flex-col sm:w-full lg:w-5/12 md:w-full lg:flex">
@@ -23,12 +22,24 @@
         </div> -->
 
 
-        <div class="container" style="height: 520px;" *ngIf="nft?.mediaType === 'Video'">
+        <div class="container relative" style="height: 520px;" *ngIf="nft?.mediaType === 'Video'">
 
-
+          <app-blurhash *ngIf="nft?.mediaType !== 'Video'" [blurHash]="nft?.serverBlurHash"
+          [imageSrc]="nft?.mediaType === 'Video' ?  nft?.videoThumbnailUrl : (nft?.mediaType === 'Audio' ? '/assets/audio-bg.svg' : nft?.serverCaptureFileUrl)" [loading]="'lazy'"
+          style="object-fit: cover;
+          position: absolute;
+          top: 0;
+          margin-right: auto;
+          margin-left: auto;
+          height: 300px;
+          width: 100%;
+          /* border-radius: 12px; */
+          /* background: rgba(227, 227, 227, 0.356); */
+          display: block;"
+          ></app-blurhash>
           <video style="
           margin-right: auto;
-          background: #f0b01d26;
+          /* background: #f0b01d26; */
           margin-left: auto;
           height: 100%;
           width: 100%;

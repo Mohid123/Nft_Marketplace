@@ -10,5 +10,5 @@ export interface Group {
   updatedAt:     Date;
   id:            string;
   groupImageUrl: string
-  groupImageBlurHash: string
+  groupImageBlurHash?: string
 }

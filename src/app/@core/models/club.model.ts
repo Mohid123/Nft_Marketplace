@@ -2,7 +2,7 @@ export interface Club {
   coverImageURL:       string;
   coverBlurHash:       string;
   profileImageURL:     string;
-  profileBlurHash:     string;
+  profileBlurHash?:     string;
   displayName:         string;
   description:         string;
   appPackageId:        string;

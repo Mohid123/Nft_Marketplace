@@ -4,12 +4,12 @@
     <div class="nft-img">
       <app-blurhash *ngIf="nft?.mediaType !== 'Video'" [blurHash]="nft?.serverBlurHash"
       [imageSrc]="nft?.mediaType === 'Video' ?  nft?.videoThumbnailUrl : (nft?.mediaType === 'Audio' ? '/assets/audio-bg.svg' : nft?.serverCaptureFileUrl)" [loading]="'lazy'"
-      style="object-fit: fill;
+      style="object-fit: cover;
       margin-right: auto;
       margin-left: auto;
       height: 300px;
       width: 100%;
-      border-radius: 12px;
+      /* border-radius: 12px; */
       /* background: rgba(227, 227, 227, 0.356); */
       display: block;"
       ></app-blurhash>
@@ -33,7 +33,7 @@
       height: 300px;
       width: 100%;
       border-radius: 12px;
-      background: rgba(227, 227, 227, 0.356);
+      /* background: rgba(227, 227, 227, 0.356); */
       display: block;"
       ></app-blurhash>
 

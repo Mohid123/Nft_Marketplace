@@ -65,10 +65,10 @@
     </a>
     <div class="items-center custom-container">
 
-      <h1 class="p-4 text-3xl md:text-4xl  font-light lg:font-extrabold text-center rounded-lg text-dark mb-0 mt-9">A digital trust by blockchain</h1>
-      <p class="text-center font-normal text-gray-500">where you can create a trusted environment to interact on the blockchain</p>
+      <h1 class="p-4 mb-0 text-3xl font-light text-center rounded-lg md:text-4xl lg:font-extrabold text-dark mt-9">A digital trust by blockchain</h1>
+      <p class="font-normal text-center text-gray-500">where you can create a trusted environment to interact on the blockchain</p>
       <button [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
-      [routerLink]="[adminRouteUrl]"class="creator-btn mb-3"> Create Environment</button>
+      [routerLink]="[adminRouteUrl]"class="mb-3 creator-btn"> Create Environment</button>
       <!-- <button [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
       [routerLink]="[adminRouteUrl]"class="visible mb-4 creator-btn-sm lg:hidden lg:mb-0">Create trusted environment</button> -->
      </div>
@@ -169,14 +169,27 @@
       <a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
       [routerLink]="['/',club.redirectUrl]">
       <div class="card">
-        <img style="object-fit: cover;
+
+
+        <!-- <img style="object-fit: cover;
         margin-right: auto;
         margin-left: auto;
         height: 100px;
         width: 100px;
         border-radius: 100%;
         display: block;
-        margin-bottom: 12px;" [src]="club.profileImageURL">
+        margin-bottom: 12px;" [src]="club.profileImageURL"> -->
+           <app-blurhash [blurHash]="club?.profileBlurHash"
+           [imageSrc]="club?.profileImageURL" [loading]="'lazy'" [circle]="true"
+           style="object-fit: cover;
+           margin-right: auto;
+           margin-left: auto;
+           height: 100px;
+           width: 100px;
+           border-radius: 100%;
+           display: block;
+           margin-bottom: 12px;"
+           ></app-blurhash>
         <p style="width: 270px; text-align: center; color:black; font-weight: 500;">{{club.displayName}}</p>
         <a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
         [routerLink]="['/',club.redirectUrl]">Enter Marketplace</a>

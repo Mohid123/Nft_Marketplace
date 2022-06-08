@@ -14,6 +14,7 @@ import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SwiperModule } from 'swiper/angular';
 import { AuthGuard } from './../../@core/guards/auth.guard';
+import { BlurHashModule } from './../../@shell/ui/blurhash/blurhash.module';
 import { LoggedInUserSearchModule } from './../../@shell/ui/logged-in-user-search/logged-in-user-search.module';
 import { CardModule } from './../../@shell/ui/nft-card/card.module';
 import { SkeletonModule } from './../../@shell/ui/skeleton-loader/skeleton-loader.module';
@@ -92,6 +93,7 @@ const childRoutes: Routes = [
   imports: [
 
 
+    BlurHashModule,
     SkeletonModule,
     InfiniteScrollModule,
     CommonModule,

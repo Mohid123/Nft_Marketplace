@@ -9,11 +9,13 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { RouterModule } from '@angular/router';
 import { ROUTER_UTILS } from '@app/@core/utils/router.utils';
 import { SwiperModule } from "swiper/angular";
+import { BlurHashModule } from './../blurhash/blurhash.module';
 import { NotFoundPage } from './not-found.page';
 
 @NgModule({
   declarations: [NotFoundPage],
   imports: [
+    BlurHashModule,
     SwiperModule,
     MatIconModule,
     MatMenuModule,

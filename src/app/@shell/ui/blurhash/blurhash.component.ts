@@ -12,6 +12,7 @@ import { decode } from 'blurhash';
 export class BlurhashComponent implements AfterViewInit {
 
   private blurHashValue!: string;
+  @Input() circle: boolean = false;
   @Input()
   get blurHash(): string {
     return this.blurHashValue;
