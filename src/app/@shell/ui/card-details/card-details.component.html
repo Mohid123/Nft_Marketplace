@@ -24,7 +24,7 @@
 
         <div class="container relative" style="height: 520px;" *ngIf="nft?.mediaType === 'Video'">
 
-          <app-blurhash *ngIf="nft?.mediaType !== 'Video'" [blurHash]="nft?.serverBlurHash"
+          <!-- <app-blurhash *ngIf="nft?.mediaType !== 'Video'" [blurHash]="nft?.serverBlurHash"
           [imageSrc]="nft?.mediaType === 'Video' ?  nft?.videoThumbnailUrl : (nft?.mediaType === 'Audio' ? '/assets/audio-bg.svg' : nft?.serverCaptureFileUrl)" [loading]="'lazy'"
           style="object-fit: cover;
           position: absolute;
@@ -36,10 +36,10 @@
           /* border-radius: 12px; */
           /* background: rgba(227, 227, 227, 0.356); */
           display: block;"
-          ></app-blurhash>
+          ></app-blurhash> -->
           <video style="
           margin-right: auto;
-          /* background: #f0b01d26; */
+          background: #f0b01d26;
           margin-left: auto;
           height: 100%;
           width: 100%;
