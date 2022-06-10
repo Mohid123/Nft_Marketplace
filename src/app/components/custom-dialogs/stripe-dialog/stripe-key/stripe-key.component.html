@@ -18,7 +18,7 @@
   <p class="mb-5 @apply text-gray-400">Users with <b>Administrator permissions</b> can access a Stripe account’s API keys by navigating to the Developers section of the Stripe dashboard and clicking on <b>API Keys</b>.</p>
 
   <form [formGroup]="stripeForm" class="group-form">
-      <p class="mb-9">Enter Club stripe secret key to perform marketplace payments.</p>
+      <p class="mb-9">Enter stripe secret key</p>
       <input class="mb-14" type="text" formControlName="key">
       <p class="error-msg error" *ngIf="stripeForm.controls.key.touched && stripeForm.controls.key.errors?.required">please enter key</p>
       <p class="error-msg error" *ngIf="stripeForm.controls.key.touched && stripeForm.controls.key.errors?.key">please enter valid key</p>
