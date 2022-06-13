@@ -26,15 +26,15 @@ type nftApiData = NFT | NFTList | ResponseEventByNFT | MediaUpload | IsMembershi
 })
 export class NFTService extends ApiService<nftApiData> {
 
-  private _cardCreatedSuccess$ = new BehaviorSubject<string>(null);
-  public readonly cardCreatedSuccess$: Observable<string> =
+  private _cardCreatedSuccess$ = new BehaviorSubject<Array<nftApiData>>([])
+  public readonly cardCreatedSuccess$: Observable<Array<nftApiData>>=
     this._cardCreatedSuccess$.asObservable();
 
   private _nftList = new BehaviorSubject<NFTList>({
     totalCount: 0,
     data: [],
   });
-
+  private limit = environment.limit;
   public createNFTImg = new FormData();
   public createNFTthumbnailImg = new FormData();
   public createNFT:NFT = new NFT();
@@ -310,10 +310,16 @@ export class NFTService extends ApiService<nftApiData> {
             setTimeout(() => {
               this.customDialogService.closeDialogs();
             }, 3000);
+            if(this._cardCreatedSuccess$.getValue().length < this.limit) {
+              const group: Array<nftApiData> = this._cardCreatedSuccess$.getValue();
+              this._cardCreatedSuccess$.next([result?.data,...group])
+            }
           }
-          this._cardCreatedSuccess$.next((<NFT>result?.data)?.id);
+          debugger
+          // this._cardCreatedSuccess$.next((<NFT>result?.data));
         }
       }
+
     }));
   }
 

@@ -154,8 +154,15 @@ export class AdminMarketPlacePage implements OnInit ,OnDestroy {
   ) {
     this.page = 1;
     this.isLoading = false;
-    this.clubName = this.routeService.clubName;
-    this.getNfts();
+    // this.clubName = this.routeService.clubName;
+    // this.getNfts();
+    debugger
+
+    this.routeService.clubName$.pipe(distinctUntilChanged(), takeUntil(this.destroy$))
+    .subscribe((clubName) => {
+      this.clubName = clubName;
+      this.getNfts();
+    });;
 
     this.nftService.cardCreatedSuccess$.pipe(distinctUntilChanged(),takeUntil(this.destroy$)).subscribe((nftId) => {
       debugger
@@ -169,12 +176,14 @@ export class AdminMarketPlacePage implements OnInit ,OnDestroy {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   ngOnInit(): void {
     // console.log('market palce:');
-    // this.nftService.getNft('');
+    this.nftService.getNft('');
     debugger
-    this.creatorService.Creator$.subscribe((res)=>{
-      console.log(this.creatorService.Creator?.stripeSecretKey)
-    })
+    // this.creatorService.Creator$.subscribe((res)=>{
+    //   console.log(this.creatorService.Creator?.stripeSecretKey)
+    // })
   }
+
+
 
   getNfts(): void {
     if (this.isLoading) return
