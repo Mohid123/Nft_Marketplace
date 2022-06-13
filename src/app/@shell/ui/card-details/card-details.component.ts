@@ -1,12 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CreatorService } from '@app/@core/services/creator.service';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { NFTService } from '@app/@core/services/nft.service';
 import { RouteService } from '@app/@core/services/route.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { distinctUntilChanged, take, takeUntil } from 'rxjs/operators';
 import { NFT } from './../../../@core/models/NFT.model';
 import { ApiResponse } from './../../../@core/models/response.model';
 
@@ -15,13 +15,15 @@ import { ApiResponse } from './../../../@core/models/response.model';
   templateUrl: './card-details.component.html',
   styleUrls: ['./card-details.component.scss']
 })
-export class CardDetailsComponent implements OnInit {
+export class CardDetailsComponent implements OnInit, OnDestroy {
 
   isAdminPanel$: Observable<boolean> = this.routeService.isAdminPanel$;
   public userName: any
   public profilePic: any
   public loggedInUser: any;
   creator$ = this.creatorService.Creator$;
+  destroy$ = new Subject();
+  public clubName: string;
 
 
   @Input() nft:NFT;
@@ -35,6 +37,11 @@ export class CardDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    this.routeService.clubName$.pipe(distinctUntilChanged(),takeUntil(this.destroy$)).subscribe((clubName) => {
+      this.clubName = clubName;
+    });
+
     this.spinner.show();
 
     setTimeout(() => {
@@ -104,5 +111,10 @@ export class CardDetailsComponent implements OnInit {
     if(this.nft.mediaType == 'Audio'){
       this.dialog.open(AudioPreviewDialog);
     }
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.complete();
+    this.destroy$.unsubscribe();
   }
 }

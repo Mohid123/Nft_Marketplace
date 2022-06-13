@@ -43,6 +43,7 @@ export class CreateMembershipComponent implements OnInit, AfterViewInit {
   private _page: number;
   private _isLoading: boolean;
   private _lastBgImg: string;
+  public isLoading = false;
 
 
 
@@ -148,6 +149,7 @@ export class CreateMembershipComponent implements OnInit, AfterViewInit {
   }
 
   nextClick(): void {
+    this.isLoading = true;
     const params = {
       appPackageId: this.authService.loggedInUser.appPackageId,
       membershipId: this.createNft.controls.membershipId.value,
@@ -187,9 +189,11 @@ export class CreateMembershipComponent implements OnInit, AfterViewInit {
         })
         .catch((error) => {
           console.error('oops, something went wrong!', error);
+          this.isLoading = false;
         });
       } else {
         this.toastr.error('Membership id already exists!','Create NFT Membership')
+        this.isLoading = false;
       }
     })
   }

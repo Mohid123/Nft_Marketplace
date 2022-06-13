@@ -158,7 +158,8 @@ export class AdminMarketPlacePage implements OnInit ,OnDestroy {
     this.getNfts();
 
     this.nftService.cardCreatedSuccess$.pipe(distinctUntilChanged(),takeUntil(this.destroy$)).subscribe((nftId) => {
-      if(nftId && this.clubName)
+      debugger
+      if(nftId || this.clubName)
         this.getNfts();
     });
 

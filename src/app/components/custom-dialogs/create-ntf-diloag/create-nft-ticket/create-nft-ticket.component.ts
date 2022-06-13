@@ -24,6 +24,7 @@ export class CreateNFTticketComponent implements OnInit, AfterViewInit {
   msg: string
   public group: Group;
 
+  public isLoading = false;
   public imageSrc: any;
   public createNft: FormGroup;
   public imgFormData = new FormData();
@@ -142,6 +143,7 @@ export class CreateNFTticketComponent implements OnInit, AfterViewInit {
 
 
   nextClick(): void {
+    this.isLoading = true;
    this.createPreviewImg().then((dataUrl) => {
         // const img = new Image();
         // img.src = dataUrl;
@@ -173,6 +175,7 @@ export class CreateNFTticketComponent implements OnInit, AfterViewInit {
       })
       .catch((error) => {
         console.error('oops, something went wrong!', error);
+        this.isLoading = false;
       });
   }
 
