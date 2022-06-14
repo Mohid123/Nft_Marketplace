@@ -36,6 +36,7 @@ export class CreateMembershipComponent implements OnInit, AfterViewInit {
   public file: any;
   public format: string;
   public url: string;
+  public currentDate = new Date().toISOString().split("T")[0];
 
   public clubName: string;
   public limit = 100;
@@ -63,6 +64,9 @@ export class CreateMembershipComponent implements OnInit, AfterViewInit {
     private authService: AuthService,
     private toastr: ToastrService,
   ) {
+
+    // this.currentDate.getDate();
+
     this.createNft = this.formBuilder.group({
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
       description: new FormControl('', [Validators.required, Validators.minLength(15), Validators.maxLength(600)]),

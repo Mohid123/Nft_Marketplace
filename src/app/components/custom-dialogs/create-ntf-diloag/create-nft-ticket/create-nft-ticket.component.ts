@@ -42,7 +42,7 @@ export class CreateNFTticketComponent implements OnInit, AfterViewInit {
   private _page: number;
   private _isLoading: boolean;
   private _lastBgImg: string;
-
+  public currentDate = new Date().toISOString().split("T")[0];
   public groupsByClub: ResponseGroupsByClub;
   public groups$ = this.groupService.groups$;
 

@@ -14,7 +14,7 @@
     </div>
 
     <div class="inline-flex">
-      <span (click)="preview()" class="dark:text-green-500 text-yellow-400 cursor-pointer">Preview</span>
+      <span (click)="preview()" class="text-yellow-400 cursor-pointer dark:text-green-500">Preview</span>
     </div>
   </div>
   <!-- <div id="view-img"></div> -->
@@ -87,7 +87,7 @@
             <div class="px-2 font-light text-gray-400">Select Logo to Upload</div>
         </ng-container>
         <ng-template #show>
-          <div class="px-2 font-light truncate w-10">{{file.name}}</div>
+          <div class="w-10 px-2 font-light truncate">{{file.name}}</div>
         </ng-template>
       <div>
           <svg
@@ -108,7 +108,7 @@
         name=""  accept="image/png, image/gif, image/jpeg"
         (change)="onSelectFile($event)"
       />
-      <a *ngIf="imageSrc" class="flex justify-center items-center text-center w-1/3 cursor-pointer" (click)="editImg()"><span class="mr-2">Edit</span> <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
+      <a *ngIf="imageSrc" class="flex items-center justify-center w-1/3 text-center cursor-pointer" (click)="editImg()"><span class="mr-2">Edit</span> <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
         <g id="Group_56289" data-name="Group 56289" transform="translate(11150 -4)">
           <circle id="Ellipse_3170" data-name="Ellipse 3170" cx="12.5" cy="12.5" r="12.5" transform="translate(-11150 4)" fill="#fff"/>
           <path id="Icon_material-edit" data-name="Icon material-edit" d="M4.5,12.486v2.1H6.6l6.2-6.2-2.1-2.1Zm9.928-5.723a.558.558,0,0,0,0-.79L13.116,4.66a.558.558,0,0,0-.79,0L11.3,5.686l2.1,2.1Z" transform="translate(-11146.5 6.504)" fill="#6a6a6a"/>
@@ -137,7 +137,7 @@
      <div class="flex justify-between">
       <div style="margin-right: 60px;" class="inline-flex flex-col">
         <span class="text-xl">Select Date</span><br>
-        <input type="date" class="px-2 font-light text-gray-400 w-44" formControlName="date" placeholder="dd-mm-yyyy" >
+        <input type="date" class="px-2 font-light text-gray-400 w-44" formControlName="date" placeholder="dd-mm-yyyy" [min]="currentDate" >
         <p class="error-msg error" *ngIf="createNft.controls.date.touched && createNft.controls.date.errors?.required">please select date</p>
       </div>
       <div class="inline-flex flex-col">
