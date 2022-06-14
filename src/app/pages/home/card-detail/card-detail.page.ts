@@ -35,6 +35,9 @@ export class CardDetailPage  implements OnInit, OnDestroy {
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   ngOnInit(): void {
+
+    this.getDetails();
+
     this.purchaseSuccess$.pipe(takeUntil(this.destroy$)).subscribe(id => {
       if(id == this.nft?.id) {
         this.getDetails();
