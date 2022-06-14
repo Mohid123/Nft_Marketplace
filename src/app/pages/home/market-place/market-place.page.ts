@@ -77,6 +77,12 @@ export class MarketPlacePage implements OnInit ,OnDestroy {
       if(nftId && this.clubName)
         this.getNfts();
     });
+
+    this.nftService.cardCreatedSuccess$.pipe(distinctUntilChanged(),takeUntil(this.destroy$)).subscribe((nftId) => {
+      debugger
+      if(nftId && this.clubName)
+        this.getNfts();
+    });
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function

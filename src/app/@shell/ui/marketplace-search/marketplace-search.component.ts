@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
-import { BreakpointObserver } from '@angular/cdk/layout';
 import { AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, HostListener, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatSidenav } from '@angular/material/sidenav';
@@ -56,12 +55,13 @@ export class MarketplaceSearchComponent implements OnInit, AfterViewInit, OnDest
     private customDialogService: CustomDialogService,
     private transactionService: TransactionService,
     private routeService: RouteService,
-    private observer: BreakpointObserver,
     private router: Router,
   ) {
     this.routeService.clubName$.pipe(distinctUntilChanged(),takeUntil(this.destroy$)).subscribe((clubName) => {
       this.clubName = clubName;
     });
+
+
    }
 
   ngOnInit(): void {

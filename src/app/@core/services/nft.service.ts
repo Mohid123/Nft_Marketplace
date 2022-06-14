@@ -311,12 +311,10 @@ export class NFTService extends ApiService<nftApiData> {
               this.customDialogService.closeDialogs();
             }, 3000);
             if(this._cardCreatedSuccess$.getValue().length < this.limit) {
-              const group: Array<nftApiData> = this._cardCreatedSuccess$.getValue();
-              this._cardCreatedSuccess$.next([result?.data,...group])
+              const nft: Array<nftApiData> = this._cardCreatedSuccess$.getValue();
+              this._cardCreatedSuccess$.next([result?.data,...nft])
             }
           }
-          debugger
-          // this._cardCreatedSuccess$.next((<NFT>result?.data));
         }
       }
 

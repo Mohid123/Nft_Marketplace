@@ -156,7 +156,7 @@
         <ng-container *ngFor="let nftCard of (nfts$ | async); index as i" class="">
 
           <ng-container *ngIf="isLoading === false">
-            <app-nft-card [nft]="nftCard"></app-nft-card>
+            <app-nft-card [nft]="nftCard" [walletPage]="false"></app-nft-card>
           </ng-container>
 
           <ng-container *ngIf="isLoading === true">
