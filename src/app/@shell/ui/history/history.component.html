@@ -114,14 +114,14 @@
         <td *ngIf="nftEvent.eventType === 'Sale'" >
           <span class="px-2 py-2 text-xs text-blue-500 bg-blue-200 rounded-full lg:px-3 lg:py-2 lg:text-sm">{{nftEvent.eventType}}</span>
         </td>
-        <td *ngIf="nftEvent.eventType === 'Resale'" >
+        <!-- <td *ngIf="nftEvent.eventType === 'Resale'" >
          <span class="px-2 py-2 text-xs text-green-700 bg-green-200 rounded-full lg:px-3 lg:py-2 lg:text-sm">{{nftEvent.eventType}}</span>
         </td>
         <td *ngIf="nftEvent.eventType === 'Cancel Resale'" >
 
           <span class="px-2 py-2 text-xs text-red-700 bg-red-200 rounded-full lg:px-3 lg:py-2 lg:text-sm">{{nftEvent.eventType}}</span>
 
-        </td>
+        </td> -->
         <td class="p-4 text-xs font-medium text-gray-500 truncate lg:text-sm ">
           {{nftEvent.createdAt | timeAgo}}
         </td>
