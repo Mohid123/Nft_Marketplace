@@ -258,7 +258,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
           Validators.required,
           Validators.minLength(10)
         ]),
-        [this.phoneValidator()]
+        // [this.phoneValidator()]
       ],
       profileImg: [
         ''
