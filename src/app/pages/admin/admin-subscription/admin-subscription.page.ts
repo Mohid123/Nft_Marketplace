@@ -3,9 +3,10 @@ import { TransactionStatsWallet } from '@app/@core/models/transaction-stats-wall
 import { TransactionStats } from '@app/@core/models/transaction-stats.model';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { interval, Subject } from 'rxjs';
-import { takeUntil, takeWhile, tap } from 'rxjs/operators';
+import { distinctUntilChanged, takeUntil, takeWhile, tap } from 'rxjs/operators';
 import { ApiResponse } from './../../../@core/models/response.model';
 import { SubscriptionPlan } from './../../../@core/models/subscription-plan.model';
+import { TransactionBalance } from './../../../@core/models/transaction-balance.model';
 import { TransactionStatsResponse } from './../../../@core/models/transaction-stats-response.model';
 import { StripeService } from './../../../@core/services/stripe.service';
 import { TransactionService } from './../../../@core/services/transaction.service';
@@ -18,6 +19,7 @@ import { TransactionService } from './../../../@core/services/transaction.servic
 export class AdminSubscriptionPage implements OnInit, OnDestroy {
 
   destroy$ = new Subject();
+  public balance: number;
 
   public subscriptionInProgress$ = this.stripeService.subscriptionInProgress$;
   public wallet:TransactionStatsWallet;
@@ -45,21 +47,47 @@ export class AdminSubscriptionPage implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+
     this.stripeService.checkSubscriptionProgress();
     this.subscriptionInProgress$.pipe(takeUntil(this.destroy$)).subscribe(stats => {
       if(!stats) {
         this.getTransactionStats();
-      }
+        this.getBalance()
+       }
     })
+    this.stripeService.purchaseSuccess$.pipe(distinctUntilChanged(), takeUntil(this.destroy$))
+      .subscribe((stats)=> {
+        this.stats = stats;
+        this.getTransactionStats();
+        this.getBalance()
+      })
+
+
   }
 
   getTransactionStats():void {
+    debugger
     this.transactionService.getTransactionStats().subscribe((result: ApiResponse<TransactionStatsResponse>)=> {
       if(!result.hasErrors()) {
+        debugger
         this.wallet = result.data.wallet;
         this.stats = result.data.stats;
       }
     })
+  }
+
+  getBalance() {
+    this.transactionService
+    .getBalance()
+    .subscribe((res: ApiResponse<TransactionBalance>) => {
+      if (!res.hasErrors()) {
+        if (res.data.balance > 0) {
+          this.balance = res.data.balance;
+        } else {
+          this.balance = 0;
+        }
+      }
+    });
   }
 
   scrollLeft(el: Element): void {
