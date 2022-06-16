@@ -31,6 +31,14 @@
  @apply bg-black px-4 py-1 text-xs tracking-wide text-white md:h-7 lg:h-7 h-11 bg-gradient-to-r focus:from-blue-400 focus:to-green-400 rounded-full shadow-sm focus:outline-none
 }
 
+.browse-btn {
+  @apply z-50 inline-block w-auto mt-16 font-medium text-center text-white rounded-full cursor-pointer hover:bg-yellow-600;
+  background: transparent linear-gradient(308deg, #D59529 0%, #F1B11D 100%) 0% 0% no-repeat padding-box;
+  width: 190px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
 
 
 .membership-btn{
