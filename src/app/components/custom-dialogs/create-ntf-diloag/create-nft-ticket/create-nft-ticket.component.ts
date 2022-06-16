@@ -67,7 +67,7 @@ export class CreateNFTticketComponent implements OnInit, AfterViewInit {
       bgImg: new FormControl(''),
       date: ['', [Validators.required]],
       address: ['', [Validators.required, Validators.maxLength(32)]],
-      group: [null, [Validators.required]],
+      group: [null],
       mediaType: new FormControl('')
     });
 
