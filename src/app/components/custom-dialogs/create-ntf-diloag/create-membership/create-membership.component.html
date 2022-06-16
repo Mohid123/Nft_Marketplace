@@ -153,6 +153,7 @@
             <option *ngFor="let group of (groups$ | async)" [ngValue]="group">
               {{group.name}}
             </option>
+            <option [ngValue]="null" class="font-medium text-primary-900" >    None </option>
 
           </select>
         </label>

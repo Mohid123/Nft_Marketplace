@@ -149,6 +149,7 @@
             <option *ngFor="let group of (groups$ | async)" [ngValue]="group">
               {{group.name}}
             </option>
+            <option [ngValue]="null" class="font-medium text-primary-900" >    None </option>
           </select>
         </label>
         <p class="error-msg error" *ngIf="createNft.controls.group.touched && createNft.controls.group.errors?.required">please select group</p>
