@@ -180,7 +180,7 @@ export class CreateMembershipComponent implements OnInit, AfterViewInit {
             serverCaptureFileUrl:'',
             name : this.createNft.controls.name.value,
             description : this.createNft.controls.description.value,
-            groupId: this.createNft.controls.group.value.id,
+            groupId: this.createNft.controls.group.value?.id,
             userId: this.authService.loggedInUser.id,
             clubUserId: this.authService.loggedInUser.clubUserId,
             appPackageId: this.authService.loggedInUser.appPackageId,
