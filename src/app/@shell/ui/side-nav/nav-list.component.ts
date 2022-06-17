@@ -120,7 +120,9 @@ export class NavListComponent implements OnInit, AfterViewInit {
   public imageSrc: any;
   public groupimgFormData = new FormData();
 
-  constructor( private _formBuilder: FormBuilder,
+  constructor(
+
+    private _formBuilder: FormBuilder,
     private toastr: ToastrService,
     private fb: FormBuilder,
     private cf: ChangeDetectorRef,
@@ -283,7 +285,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
 
 
   ngAfterViewInit() {
-    // debugger
+    //
   }
 
   passwordShowHide(): void {
@@ -300,8 +302,8 @@ export class NavListComponent implements OnInit, AfterViewInit {
 
   async sign() {
     this.connService.sendUserCredentials({
-      email: this.email,
-      pass: this.password
+      email: this.creatorForm.controls.email.value,
+      pass: this.creatorForm.controls.pass.value
     })
   }
 
@@ -309,14 +311,14 @@ export class NavListComponent implements OnInit, AfterViewInit {
     this.showLoading = true;
     const mediaUpload:any = [];
     if(this.profileImageSrc){
-      debugger
+
       mediaUpload.push(this.mediaService.uploadMedia('creator', this.profileImg));
     }
     combineLatest(mediaUpload)
     .pipe(take(1),
     exhaustMap((res: ApiResponse<ResponseAddMedia>) => {
       if(!res[0].hasErrors()) {
-        debugger
+
         const param: BecomeCreator = {
           creatorDisplayName: this.creatorForm.value.name,
           // appPackageId: (this.creatorForm.controls.name.value).toLowerCase().replace(/\s/g,''),
@@ -410,7 +412,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
     )
     .subscribe()
       // (res:any) => {
-    //   debugger
+    //
     //   console.log(res)
     //   if (res !== null && !res.hasErrors()) {
     //     this.showLoading = false;
@@ -435,7 +437,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
     ('sign-in-button',
     {size: 'invisible'},)
     // this.timer(1);
-    debugger
+
     this.payload = {
       phoneNumber: `+${this.countryCode}${this.creatorForm.value.phone}`
     }
@@ -445,7 +447,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
     .then((res)=> {
       console.log(res);
       localStorage.setItem('verificationId', JSON.stringify(res.verificationId))
-      // debugger
+      //
       this.myStepper.next();
       this.cf.detectChanges();
       this.showPhoneLoading = false;
@@ -464,12 +466,12 @@ export class NavListComponent implements OnInit, AfterViewInit {
   }
 
   handleClick() {
-    debugger
+
     this.showVerifyOtp = true;
-    debugger
+
     const otp = this.otp.replace(/\s/g,'');
     const credentials = firebase.auth.PhoneAuthProvider.credential(this.verify, otp);
-    debugger
+
     firebase
     .auth()
     .signInWithCredential(credentials)
@@ -485,7 +487,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
       localStorage.setItem('user_data',JSON.stringify(res))
     })
     .catch((error) => {
-      debugger
+
       if (error) {
             firebase.auth().signInWithCredential(credentials)
             this.myStepper.next();
@@ -509,7 +511,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
   }
 
   onOtpChange(otpCode: any) {
-    debugger
+
     this.cf.detectChanges();
     this.otp = otpCode
     // console.log(this.otp)
@@ -520,7 +522,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
 
 
   onCountryChange(country) {
-    // debugger
+    //
     this.countryCode = country.dialCode
   }
 
@@ -540,7 +542,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
 
 
   onSelectProfile(event): void {
-    debugger
+
     if (event.target.files && event.target.files[0]) {
       this.profileImage = event.target.files[0];
       if (event.target.files && event.target.files[0]) {
