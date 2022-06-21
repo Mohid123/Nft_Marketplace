@@ -107,7 +107,7 @@
 
   <mat-sidenav-container>
     <mat-toolbar [ngClass]="{'mat-elevation-z5' : true, 'sticky' : isSticky}">
-      <div fxShow="true" fxHide.gt-sm="true" class="flex justify-between md:w-full" >
+      <div fxShow fxHide.xs="false" fxHide.sm="false" fxHide.lg="true" fxHide.xl="true" fxHide.md="false" class="flex justify-between md:w-full" >
         <div class="block w-full h-10 md:w-0 lg:absolute dark:bg-primary-900 " [ngClass]="sidenav.opened ? 'z-0' : 'z-10'">
           <button mat-icon-button *ngIf="sidenav.mode === 'over'"
             (click)="sidenav.toggle()">
@@ -128,7 +128,7 @@
         <div class="justify-center flex-grow ml-4" #searchBar >
           <div>
               <div class="relative">
-               <input type="text" [formControl]="searchControl" class="flex h-8 mx-auto text-sm bg-gray-500 bg-opacity-25 rounded-full md:w-2/3 lg:w-full md:h-9 lg:h-9 focus:outline-none" placeholder="Search NFT...">
+               <input type="text" [formControl]="searchControl" class="flex h-8 mx-auto text-sm bg-gray-500 bg-opacity-25 rounded-full md:w-2/3 lg:w-2/3 md:h-9 lg:h-9 focus:outline-none" placeholder="Search NFT...">
             </div>
           </div>
         </div>
@@ -138,7 +138,7 @@
         <img (click)="gotoHome()"  class="absolute right-0 flex-wrap object-cover object-scale-down w-20 h-12 mt-4 cursor-pointer lg:relative bottom-2 max-h-16 lg:w-auto md:w-auto lg:max-h-16 mg:max-h-16 md:w-42 lg:w-42 sm:rounded-xl" [src]="(creator$ | async)?.profileImageURL" alt="" />
       </a>
       <span class="example-spacer"></span>
-      <div class="flex-grow block w-full lg:flex lg:items-center lg:w-auto" fxHide.lt-md="true">
+      <div class="flex-grow block w-full lg:flex lg:items-center lg:w-auto" fxShow fxHide.xs="true" fxHide.sm="true" fxHide.md="true" fxHide.lg="false" fxHide.xl="false">
         <div class="justify-center flex-grow ml-12" #searchBar>
           <div >
               <div class="relative mt-4 mb-4">
