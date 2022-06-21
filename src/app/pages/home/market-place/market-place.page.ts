@@ -101,6 +101,7 @@ export class MarketPlacePage implements OnInit ,OnDestroy {
   }
 
   onScroll() {
+    console.log('scrolled down!!')
     this.nftService.getAllNftsByClub(this.clubName, this.scrollPage++, this.nftLimit ,this.searchValu ,this.filterGroup?.id, this.type)
     .pipe(map((res: ApiResponse<NFTList> ) => {
       if(this.nftList?.totalCount >= this.scrollPage * this.nftLimit) {
