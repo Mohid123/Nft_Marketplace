@@ -3,6 +3,14 @@
   @apply px-5 py-1 rounded-full text-gray-400 h-12 bg-gray-200 w-28 mr-3;
 }
 
+.is-loading {
+  padding-right: 36px;
+  background-image: url("/assets/spinner.svg");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  width: 20px;
+}
+
 
 
 ::-webkit-file-upload-button {

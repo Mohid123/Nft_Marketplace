@@ -13,7 +13,7 @@
             <mat-stepper labelPosition="bottom" #stepper class="w-full h-full px-0 py-6 lg:px-6 xl:px-6 text-start smallscreen">
 
                   <!--phone-->
-                <mat-step>
+                <!-- <mat-step>
                       <div class="animate__animated animate__fadeInRight">
                         <h3 [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
                         [routerLink]="[adminRouteUrl]" class="flex items-center pt-0 text-xs font-medium tracking-wider text-gray-500 lg:pt-4 lg:text-lg text-start ">
@@ -66,10 +66,10 @@
                           </button>
                         </div>
                       </form>
-                </mat-step>
+                </mat-step> -->
 
                 <!--otp-->
-                <mat-step>
+                <!-- <mat-step>
                   <div class="">
                     <h3 [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
                     [routerLink]="[adminRouteUrl]" class="flex items-center pt-0 text-base font-medium tracking-wider text-gray-500 lg:pt-4 lg:text-lg text-start ">
@@ -110,7 +110,7 @@
                           </button>
                         </div>
                     </form>
-                </mat-step>
+                </mat-step> -->
 
             <!--creator data-->
                 <mat-step>
@@ -124,8 +124,20 @@
                     </h3>
                     <span class="mt-16 mb-16 text-2xl font-medium tracking-wide md:text-xl lg:text-5xl lg:mb-0 xl:mb-0 text-start text-dark">Let's start with Your<br>Marketplace name</span>
                     <form [formGroup]="creatorForm" class="justify-start">
-                      <div class="w-full mt-2 border-b-2 border-teal-500 lg:w-1/2">
-                        <input appTrim class="pl-0 leading-tight tracking-wider text-gray-700 bg-transparent border-none appearance-none w-62 lg:w-62 focus:outline-none" formControlName="name" maxlength="16" required type="text" placeholder="Marketplace">
+                      <div class="w-full mt-2  border-teal-500 lg:w-1/2">
+
+
+                        <div class="relative w-full border-b-2 border-teal-500 ">
+                          <span class="absolute inset-y-0 right-0 flex items-center pl-2">
+                            <span  class="p-1">
+                              <img *ngIf="creatorForm.controls.name.pending"  src="../../../../assets/spinner.svg" alt="">
+                              <img *ngIf="creatorForm.controls.name.valid" class="w-7"  src="../../../../assets/tick.png" alt="">
+                            </span>
+                          </span>
+                          <input appTrim class="pl-0 leading-tight tracking-wider text-gray-700 bg-transparent border-none appearance-none w-62 lg:w-62 focus:outline-none" formControlName="name" maxlength="16" required type="text" placeholder="Marketplace">
+                        </div>
+
+                        <!-- <input [class.is-loading]="creatorForm.controls.name.pending" appTrim class="pl-0 leading-tight tracking-wider text-gray-700 bg-transparent border-none appearance-none w-62 lg:w-62 focus:outline-none" formControlName="name" maxlength="16" required type="text" placeholder="Marketplace"> -->
                         </div>
 
                       <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
@@ -276,11 +288,22 @@
 
                     <div class="mt-4">
                       <form [formGroup]="creatorForm" class="justify-start">
-                        <div class="w-full border-b-2 border-teal-500 lg:w-62">
+
+                        <div class="relative w-full border-b-2 border-teal-500 lg:w-62">
+                          <span class="absolute inset-y-0 right-0 flex items-center pl-2">
+                            <span  class="p-1 focus:outline-none focus:shadow-outline">
+                              <!-- <img *ngIf="creatorForm.controls.username.pending"  src="../../../../assets/spinner.svg" alt=""> -->
+                              <img *ngIf="creatorForm.controls.username.valid" class="w-7"  src="../../../../assets/tick.png" alt="">
+                            </span>
+                          </span>
+                          <input appTrim minlength=4 name="name" required placeholder="John Doe"
+                          maxlength=15 formControlName="username" class="w-full pl-0 leading-tight tracking-wider text-gray-700 bg-transparent border-none appearance-none focus:outline-none" >
+                        </div>
+                        <!-- <div class="w-full border-b-2 border-teal-500 lg:w-62">
                           <input appTrim minlength=4 name="name" required placeholder="John Doe"
                           maxlength=15 formControlName="username" class="w-full pl-0 leading-tight tracking-wider text-gray-700 bg-transparent border-none appearance-none focus:outline-none" >
 
-                        </div>
+                        </div> -->
                         <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
                           validation: 'required',
                           message: 'Full name is required',
@@ -302,11 +325,23 @@
 
                       </form>
                       <form [formGroup]="creatorForm" class="justify-start">
-                        <div class="w-full border-b-2 border-teal-500 lg:w-62">
-                        <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  appTrim  name="email" required
+
+                        <div class="relative w-full border-b-2 border-teal-500 lg:w-62">
+                          <span class="absolute inset-y-0 right-0 flex items-center pl-2">
+                            <span  class="p-1 focus:outline-none focus:shadow-outline">
+                              <img *ngIf="creatorForm.controls.email.pending"  src="../../../../assets/spinner.svg" alt="">
+                              <img *ngIf="creatorForm.controls.email.valid" class="w-7"  src="../../../../assets/tick.png" alt="">
+                            </span>
+                          </span>
+                          <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  appTrim  name="email" required
+                          formControlName="email" class="w-full pl-0 leading-tight tracking-wider text-gray-700 bg-transparent border-none appearance-none focus:outline-none"  placeholder="your@email.com">
+                        </div>
+
+                        <!-- <div class="w-full border-b-2 border-teal-500 lg:w-62">
+                        <input   [class.is-loading]="creatorForm.controls.email.pending" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  appTrim  name="email" required
                         formControlName="email" class="w-full pl-0 leading-tight tracking-wider text-gray-700 bg-transparent border-none appearance-none focus:outline-none"  placeholder="your@email.com">
 
-                      </div>
+                      </div> -->
 
                       <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
                         validation: 'required',
