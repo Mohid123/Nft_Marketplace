@@ -24,7 +24,7 @@ import { ROUTER_UTILS } from './../../../@core/utils/router.utils';
   // encapsulation: ViewEncapsulation.None
 })
 export class MarketplaceSearchComponent implements OnInit, AfterViewInit, OnDestroy {
-
+  searchHide = false;
   testNet = environment.testNet;
   destroy$ = new Subject();
 
@@ -70,6 +70,13 @@ export class MarketplaceSearchComponent implements OnInit, AfterViewInit, OnDest
         this.search.emit(newValue);
       });
   }
+  showSearch() {
+    this.searchHide = true;
+  }
+  hideSearch() {
+    this.searchHide = false;
+  }
+
 
   ngAfterViewInit() {
     // this.observer
