@@ -91,8 +91,8 @@
         </div>
       </div>
     </div>
-    <section class="custom-container">
-      <swiper style="--swiper-navigation-size: 20px;"
+    <section class="custom-container relative">
+      <swiper *ngIf="noData===false" style="--swiper-navigation-size: 20px;"
       [breakpoints]="{
         '@0.00': {
           slidesPerView: 1,
@@ -115,99 +115,59 @@
       [navigation]="true"
     class="mySwiper slider custom-container">
   <ng-container *ngFor="let club of clubs">
+
     <ng-template swiperSlide *ngIf="(club.redirectUrl | lowercase) !== demoCLub && (club.redirectUrl | lowercase) !== demoCLub1">
-      <!-- <div class="x-gap circle" style="  text-align: center;
-      font-size: 18px;
-      height: 212px !important;
-      width: 212px !important;
-      border-radius: 100%;
-      background: transparent radial-gradient(closest-side at 50% 50%, #11143F 0%, #130633 100%) 0% 0% no-repeat padding-box;
-      box-shadow: 0px 15px 40px #329AF540;
 
 
-      /* Center slide text vertically */
-      display: -webkit-box;
-      display: -ms-flexbox;
-      display: -webkit-flex;
-      display: flex;
-      -webkit-box-pack: center;
-      -ms-flex-pack: center;
-      -webkit-justify-content: center;
-      justify-content: center;
-      -webkit-box-align: center;
-      -ms-flex-align: center;
-      -webkit-align-items: center;
-      align-items: center;">
+
+      <ng-container *ngIf="noData===false">
         <a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
         [routerLink]="['/',club.redirectUrl]">
-        <img class="club-logo" [src]="club.profileImageURL"
-        style="object-fit: cover;
-        margin-right: auto;
-        margin-left: auto;
-        height: 100px;
-        width: 100px;
-        border-radius: 100%;
-        display: block;
-        margin-bottom: 12px;"
-        alt="">
-        <span><img class="icon" src="./assets/icons/FOOTBALL.svg" alt="" style=" opacity: 0.3;"></span>
-      </a>
-      </div> -->
 
-      <!-- <div class="cards ">
-        <div class="card" [ngStyle]="{ 'background-image': 'url(' + club.profileImageURL + ')'}">
-          <div class="details">
-            <div class="content">
-              <h2>{{club.displayName}}</h2>
-              <p>This is the description.</p>
-              <a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
-              [routerLink]="['/',club.redirectUrl]" class="button">Visit</a>
-            </div>
-          </div>
+
+        <div class="card">
+             <app-blurhash [blurHash]="club?.profileBlurHash"
+             [imageSrc]="club?.profileImageURL" [loading]="'lazy'" [circle]="true"
+             style="object-fit: cover;
+             margin-right: auto;
+             margin-left: auto;
+             height: 100px;
+             width: 100px;
+             border-radius: 100%;
+             display: block;
+             margin-bottom: 12px;"
+             ></app-blurhash>
+          <p style="width: 270px; text-align: center; color:black; font-weight: 500;">{{club.displayName}}</p>
+          <a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
+          [routerLink]="['/',club.redirectUrl]">Enter Marketplace</a>
         </div>
-      </div> -->
-      <a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
-      [routerLink]="['/',club.redirectUrl]">
-      <div class="card">
 
 
-        <!-- <img style="object-fit: cover;
-        margin-right: auto;
-        margin-left: auto;
-        height: 100px;
-        width: 100px;
-        border-radius: 100%;
-        display: block;
-        margin-bottom: 12px;" [src]="club.profileImageURL"> -->
-           <app-blurhash [blurHash]="club?.profileBlurHash"
-           [imageSrc]="club?.profileImageURL" [loading]="'lazy'" [circle]="true"
-           style="object-fit: cover;
-           margin-right: auto;
-           margin-left: auto;
-           height: 100px;
-           width: 100px;
-           border-radius: 100%;
-           display: block;
-           margin-bottom: 12px;"
-           ></app-blurhash>
-        <p style="width: 270px; text-align: center; color:black; font-weight: 500;">{{club.displayName}}</p>
-        <a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
-        [routerLink]="['/',club.redirectUrl]">Enter Marketplace</a>
-      </div>
-      </a>
+        </a>
+      </ng-container>
+
+
+
 
 
 
     </ng-template>
-
-
-
   </ng-container>
 
 
+
+
   </swiper>
+    <ng-container *ngIf="clubs.length === 0 || noData===true">
+    <div class="w-full text-center flex items-center justify-center flex-col" >
+    <img class="w-28" src="../../../../assets/no-record.png" alt="">
+    <h3 class="mb-4 mt-4">No Record(s) Found</h3>
+    <p>It seems we can't find any results.</p>
+  </div>
+  </ng-container>
 
     </section>
+
 
 
 

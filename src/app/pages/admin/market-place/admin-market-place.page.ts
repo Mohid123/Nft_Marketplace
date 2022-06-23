@@ -156,8 +156,6 @@ export class AdminMarketPlacePage implements OnInit ,OnDestroy {
     this.isLoading = false;
     // this.clubName = this.routeService.clubName;
     // this.getNfts();
-    debugger
-
     this.routeService.clubName$.pipe(distinctUntilChanged(), takeUntil(this.destroy$))
     .subscribe((clubName) => {
       this.clubName = clubName;
@@ -165,7 +163,6 @@ export class AdminMarketPlacePage implements OnInit ,OnDestroy {
     });;
 
     this.nftService.cardCreatedSuccess$.pipe(distinctUntilChanged(),takeUntil(this.destroy$)).subscribe((nftId) => {
-      debugger
       if(nftId || this.clubName)
         this.getNfts();
     });
@@ -177,7 +174,7 @@ export class AdminMarketPlacePage implements OnInit ,OnDestroy {
   ngOnInit(): void {
     // console.log('market palce:');
     this.nftService.getNft('');
-    debugger
+
     // this.creatorService.Creator$.subscribe((res)=>{
     //   console.log(this.creatorService.Creator?.stripeSecretKey)
     // })
@@ -208,7 +205,7 @@ export class AdminMarketPlacePage implements OnInit ,OnDestroy {
     console.log(this.creatorService.Creator)
     this.transactionService.getBalance().subscribe((res:ApiResponse<TransactionBalance>) => {
       if(!res.hasErrors()) {
-        debugger
+
         if (res.data.balance > 0 && this.creatorService.Creator?.stripeSecretKey == "") {
           this.customDialogService.showStripeKeyDialog();
         }
@@ -217,7 +214,7 @@ export class AdminMarketPlacePage implements OnInit ,OnDestroy {
          }
 
          else {
-          debugger
+
           const dialogRef = this.customDialogService.showConfirmationDialog('subscription','subscribe', 'close');
           dialogRef.afterClosed().subscribe((confirmed: boolean) => {
             if (confirmed) {
