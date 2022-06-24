@@ -1,5 +1,5 @@
 .profile-btn {
-  @apply flex items-center justify-center h-12 p-1.5 rounded-3xl bg-gray-200 hover:bg-primary-gray-300 ;
+  @apply flex items-center justify-center h-10 p-1.5 rounded-3xl bg-gray-300 hover:bg-primary-gray-600 ;
 
   &.dark {
     @apply  bg-primary-600 hover:bg-primary-400;
