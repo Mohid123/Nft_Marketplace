@@ -200,6 +200,7 @@ export class NotFoundPage implements OnInit, OnDestroy {
     const params: GetAllClubs = {
       offset: 0,
       sortDisplayName: this.sortBy,
+      limit: 100
     }
 
     if(this.searchControl.value) {
