@@ -8,12 +8,13 @@ import { WebShellModule } from '@shell/ft/web-shell.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
 import { CoreModule } from './@core/core.module';
+import { ScrollTopComponent } from './@shell/ui/scroll-top/scroll-top.component';
 import { AppComponent } from './app.component';
 
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ScrollTopComponent],
   imports: [
 
 

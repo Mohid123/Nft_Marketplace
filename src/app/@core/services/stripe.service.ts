@@ -21,8 +21,8 @@ type StripeApiData = ResponseStripeStatus | NFT | any;
 })
 export class StripeService extends ApiService<StripeApiData> {
 
-  private _purchaseSuccess$ = new BehaviorSubject<string>(null);
-  public readonly purchaseSuccess$: Observable<string> =
+  private _purchaseSuccess$ = new BehaviorSubject<any>(null);
+  public readonly purchaseSuccess$: Observable<any> =
     this._purchaseSuccess$.asObservable();
 
   private _subscriptionInProgress$ = new BehaviorSubject<boolean>(null);
@@ -82,11 +82,18 @@ export class StripeService extends ApiService<StripeApiData> {
   }
 
   stripePay(params:BuyNFT): Observable<ApiResponse<StripeApiData>> {
-    return this.post('/nft/buyNft/'+ params.nftId, params);
+    return this.post('/nft/buyNft/'+ params.nftId, params).pipe(take(1), tap((result: ApiResponse<any>)=> {
+      if(!result.hasErrors()) {
+        this._purchaseSuccess$.next(result)
+      }
+    }));
   }
 
   stripePayForSubscription(params:BuySubscription): Observable<ApiResponse<StripeApiData>> {
     return this.post('/token-transaction/buyNdct/',params);
+
+
+
   }
 
   checkSubscriptionProgress() {

@@ -15,7 +15,8 @@
     <h2 class="px-4 py-8 mb-5 text-lg font-light font-semibold tracking-widest border-b-2 border-gray-200 lg:text-4xl title-font">My NFTs</h2>
     <div class="bottom-0 left-0 flex flex-wrap justify-between w-full px-4 pt-3 leading-none text-center ">
       <span class="inline-flex flex-wrap items-center w-full leading-none md:w-auto lg:w-auto">
-        <button mat-button *ngFor="let button of filterButtons"  class="items-center px-4 py-2 mx-1 mb-3 text-sm font-medium leading-snug tracking-wider text-gray-500 align-middle transition duration-150 ease-in-out bg-gray-100 rounded-full dark:text-white md:mb-0 lg:mb-0" [ngClass]="{'active': button.isClicked}" (click)="setActive(button); setType(button.text)">
+        <button mat-button *ngFor="let button of filterButtons"  class="items-center px-4 py-2 mx-1 mb-3 text-sm font-medium leading-snug tracking-wider text-gray-500 align-middle transition duration-150 ease-in-out bg-gray-100 rounded-full dark:text-white md:mb-0 lg:mb-0" [ngClass]="{'active': button.isClicked}"
+        (click)="setActive(button); setType(button.text)">
           {{ button.text || 'All Items' }}
       </button>
    </span>
@@ -50,7 +51,7 @@
   </div>
 
   <!--Cards-->
-  <div class="relative cards-container" style="min-height: 360px;">
+  <!-- <div class="relative cards-container" style="min-height: 360px;">
     <ngx-spinner [fullScreen]="false" [showSpinner]="isLoading" [show]="isLoading" bdColor = "rgba(0,0,0,0.05)"  size="medium"
        type="ball-scale-multiple">
       <p style="font-size: 20px; color: white">{{(creator$ | async)?.displayName}}...</p>
@@ -64,9 +65,36 @@
         <app-nft-card [walletPage]="true" [nft]="nftCard"></app-nft-card>
       </ng-container>
     </ng-container>
-  </div>
+  </div> -->
 
-  <div class="w-full px-12 mb-14 ld:px-0 md:px-0">
+    <div  infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="500" (scrolled)="onScroll()">
+    <div  class="relative cards-container" style="min-height: 360px;">
+
+      <div *ngIf="!isLoading && (!nftList || nftList?.totalCount === 0)" class="absolute w-full text-center"
+        style="top: 40%;">
+        <h3>No Record Found</h3>
+        <p>It seems we can't find any results.</p>
+      </div>
+
+      <ng-container *ngIf="nftList?.totalCount > 0">
+        <ng-container *ngFor="let nftCard of (nfts$ | async); index as i" class="">
+          <!-- <app-nft-card [walletPage]="true" [nft]="nftCard"></app-nft-card> -->
+
+          <ng-container *ngIf="isLoading === false">
+            <app-nft-card [walletPage]="true"  [nft]="nftCard"></app-nft-card>
+          </ng-container>
+
+          <ng-container *ngIf="isLoading === true">
+            <app-skeleton-loader></app-skeleton-loader>
+          </ng-container>
+          <!-- <app-skeleton-loader *ngIf="isLoading"></app-skeleton-loader> -->
+        </ng-container>
+      </ng-container>
+    </div>
+
+    </div>
+
+  <!-- <div class="w-full px-12 mb-14 ld:px-0 md:px-0">
     <div class="flex justify-between px-4 pt-3 mt-10">
       <div *ngIf="nftList?.totalCount > 0; else noItems" class="inline-flex items-center text-sm text-gray-500">
         Show {{ page === 1 ? 1 : (page-1) * nftLimit }}-{{ page * nftLimit < nftList?.totalCount ? (page * nftLimit) :
@@ -111,7 +139,7 @@
 
 
 
-  </div>
+  </div> -->
   </div>
 
 

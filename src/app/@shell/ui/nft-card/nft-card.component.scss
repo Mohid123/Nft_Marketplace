@@ -14,10 +14,13 @@
  background-color: #2F3157;
 }
 
+
+
 .btn-nft {
   @apply w-24 h-8 text-sm rounded-full text-white;
-  background: #D69729;
+  background: transparent linear-gradient(308deg, #D59529 0%, #F1B11D 100%) 0% 0% no-repeat padding-box;
   &.dark {
+    @apply text-black;
     background: transparent linear-gradient(109deg, #59C8D1 0%, #75F16D 100%) 0% 0% no-repeat padding-box;
   }
 }

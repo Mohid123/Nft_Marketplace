@@ -56,6 +56,8 @@ export class CreateCustomTicketComponent implements OnInit, AfterViewInit {
   public groupsByClub: ResponseGroupsByClub;
   public groups$ = this.groupService.groups$;
 
+  public isLoading = false;
+
   destroy$ = new Subject();
 
   constructor(
@@ -211,12 +213,14 @@ export class CreateCustomTicketComponent implements OnInit, AfterViewInit {
 
 
   nextClick(): void {
+    this.isLoading = true;
     if (this._imgFileExtensions.includes(this.file.type)) {
       this.createPreviewImg().then((dataUrl) => {
          this.setFormParams(dataUrl);
          })
          .catch((error) => {
            console.error('oops, something went wrong!', error);
+           this.isLoading = false;
          });
     } else {
       this.setFormParams();

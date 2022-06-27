@@ -38,7 +38,7 @@
                 <div class="relative dark:text-gray-400 value">
                   <p *ngIf="subscriptionInProgress$ | async; else nftBalance" class="p-3 text-xs bg-yellow-100 rounded-lg spinner"><b>Please wait!</b> NDCT transfer in process</p>
                   <ng-template #nftBalance>
-                    <p >{{stats?.totalNdct || 0 | number: '1.'}} <b class="dark:text-white">NDCT</b></p>
+                    <p >{{balance || 0 | number: '1.'}} <b class="dark:text-white">NDCT</b></p>
                   </ng-template>
                 </div>
 
@@ -152,7 +152,7 @@
 
                   </div>
                   <div class="flex justify-center mt-6">
-                    <button (click)="buySubscription(0)" class="px-6 py-2 text-lg text-white rounded-full btn-nft shrink">Buy Now</button>
+                    <button (click)="buySubscription(0)" class="px-6 py-2 text-lg text-white rounded-full primary-btn shrink">Buy Now</button>
                   </div>
                  </div>
                 <div class="card-border" >
@@ -161,7 +161,7 @@
 
                   </div>
                   <div class="flex justify-center mt-6">
-                    <button (click)="buySubscription(1)" class="px-6 py-2 text-lg text-white rounded-full btn-nft shrink">Buy Now</button>
+                    <button (click)="buySubscription(1)" class="px-6 py-2 text-lg text-white rounded-full primary-btn shrink">Buy Now</button>
                   </div>
                 </div>
                 <div class="card-border" >
@@ -170,7 +170,7 @@
 
                   </div>
                   <div class="flex justify-center mt-6">
-                    <button (click)="buySubscription(2)" class="px-6 py-2 text-lg text-white rounded-full btn-nft shrink">Buy Now</button>
+                    <button (click)="buySubscription(2)" class="px-6 py-2 text-lg text-white rounded-full primary-btn shrink">Buy Now</button>
                   </div>
                 </div>
             </div>

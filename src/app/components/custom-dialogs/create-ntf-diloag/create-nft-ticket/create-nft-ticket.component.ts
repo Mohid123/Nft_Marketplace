@@ -24,6 +24,7 @@ export class CreateNFTticketComponent implements OnInit, AfterViewInit {
   msg: string
   public group: Group;
 
+  public isLoading = false;
   public imageSrc: any;
   public createNft: FormGroup;
   public imgFormData = new FormData();
@@ -41,7 +42,7 @@ export class CreateNFTticketComponent implements OnInit, AfterViewInit {
   private _page: number;
   private _isLoading: boolean;
   private _lastBgImg: string;
-
+  public currentDate = new Date().toISOString().split("T")[0];
   public groupsByClub: ResponseGroupsByClub;
   public groups$ = this.groupService.groups$;
 
@@ -66,7 +67,7 @@ export class CreateNFTticketComponent implements OnInit, AfterViewInit {
       bgImg: new FormControl(''),
       date: ['', [Validators.required]],
       address: ['', [Validators.required, Validators.maxLength(32)]],
-      group: [null, [Validators.required]],
+      group: [null],
       mediaType: new FormControl('')
     });
 
@@ -142,6 +143,7 @@ export class CreateNFTticketComponent implements OnInit, AfterViewInit {
 
 
   nextClick(): void {
+    this.isLoading = true;
    this.createPreviewImg().then((dataUrl) => {
         // const img = new Image();
         // img.src = dataUrl;
@@ -161,7 +163,7 @@ export class CreateNFTticketComponent implements OnInit, AfterViewInit {
           serverCaptureFileUrl:'',
           name : this.createNft.controls.name.value,
           description : this.createNft.controls.description.value,
-          groupId: this.createNft.controls.group.value.id,
+          groupId: this.createNft.controls.group.value?.id,
           userId: this.authService.loggedInUser.id,
           clubUserId: this.authService.loggedInUser.clubUserId,
           appPackageId: this.authService.loggedInUser.appPackageId,
@@ -173,6 +175,7 @@ export class CreateNFTticketComponent implements OnInit, AfterViewInit {
       })
       .catch((error) => {
         console.error('oops, something went wrong!', error);
+        this.isLoading = false;
       });
   }
 

@@ -1,4 +1,4 @@
-<swiper
+<swiper style="--swiper-navigation-size: 20px;"
   [breakpoints]="{
     '@0.00': {
       slidesPerView: 3,
@@ -21,21 +21,36 @@
   [spaceBetween]="30"
   [centeredSlides]="false"
   [navigation]="true"
-  class="mySwiper slider custom-container">
+  class=" slider custom-container">
 <ng-container *ngFor="let group of (groups$ | async);last as isLast">
   <ng-template swiperSlide>
-    <div class="mb-12 text-center md:mb-0">
-      <div class="flex justify-center">
-        <img *ngIf="group.groupImageUrl;" [src]="group.groupImageUrl" class="group-img " />
+    <div class="text-center md:mb-0" style="display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;">
+      <div >
+        <!-- <img *ngIf="group.groupImageUrl;" [src]="group.groupImageUrl" class="group-img " /> -->
+        <app-blurhash [blurHash]="group?.groupImageBlurHash" class="object-cover group-img"
+        [imageSrc]="group.groupImageUrl" [loading]="'lazy'" [circle]="true"
+        style="object-fit: cover;
+        margin-right: auto;
+
+        /* border-radius: 12px; */
+        /* background: rgba(227, 227, 227, 0.356); */
+        display: block;"
+        ></app-blurhash>
       </div>
       <div class="flex justify-center mb-6">
-        <img *ngIf="!group.groupImageUrl;" [src]="(creator$ | async)?.profileImageURL"  class="object-cover group-img" />
+        <!-- <img *ngIf="!group.groupImageUrl;" [src]="(creator$ | async)?.profileImageURL"  class="object-cover group-img" /> -->
+
       </div>
       <h5 class="mb-4 text-xs font-medium lg:text-xl">{{group.name}}</h5>
-      <p class="mx-4 mb-4 text-sm truncate">
+      <p class="w-1/3 mx-4 mb-4 text-sm truncate lg:w-full">
         {{group.description}}
       </p>
     </div>
+
+
 
     <!-- <div class="max-w-md px-8 py-4 mx-auto mt-16 mb-16 bg-white rounded-lg shadow-md dark:bg-gray-800">
       <div class="flex justify-center -mt-16 md:justify-end">

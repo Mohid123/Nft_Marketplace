@@ -14,7 +14,7 @@
     </div>
 
     <div class="inline-flex">
-      <span (click)="preview()" class="dark:text-green-500 text-yellow-400 cursor-pointer">Preview</span>
+      <span (click)="preview()" class="text-yellow-400 cursor-pointer dark:text-green-500">Preview</span>
     </div>
   </div>
   <!-- <div id="view-img"></div> -->
@@ -87,7 +87,7 @@
             <div class="px-2 font-light text-gray-400">Select Logo to Upload</div>
         </ng-container>
         <ng-template #show>
-          <div class="px-2 font-light truncate w-10">{{file.name}}</div>
+          <div class="w-10 px-2 font-light truncate">{{file.name}}</div>
         </ng-template>
       <div>
           <svg
@@ -108,7 +108,7 @@
         name=""  accept="image/png, image/gif, image/jpeg"
         (change)="onSelectFile($event)"
       />
-      <a *ngIf="imageSrc" class="flex justify-center items-center text-center w-1/3 cursor-pointer" (click)="editImg()"><span class="mr-2">Edit</span> <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
+      <a *ngIf="imageSrc" class="flex items-center justify-center w-1/3 text-center cursor-pointer" (click)="editImg()"><span class="mr-2">Edit</span> <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
         <g id="Group_56289" data-name="Group 56289" transform="translate(11150 -4)">
           <circle id="Ellipse_3170" data-name="Ellipse 3170" cx="12.5" cy="12.5" r="12.5" transform="translate(-11150 4)" fill="#fff"/>
           <path id="Icon_material-edit" data-name="Icon material-edit" d="M4.5,12.486v2.1H6.6l6.2-6.2-2.1-2.1Zm9.928-5.723a.558.558,0,0,0,0-.79L13.116,4.66a.558.558,0,0,0-.79,0L11.3,5.686l2.1,2.1Z" transform="translate(-11146.5 6.504)" fill="#6a6a6a"/>
@@ -137,7 +137,7 @@
      <div class="flex justify-between">
       <div style="margin-right: 60px;" class="inline-flex flex-col">
         <span class="text-xl">Select Date</span><br>
-        <input type="date" class="px-2 font-light text-gray-400 w-44" formControlName="date" placeholder="dd-mm-yyyy" >
+        <input type="date" class="px-2 font-light text-gray-400 w-44" formControlName="date" placeholder="dd-mm-yyyy" [min]="currentDate" >
         <p class="error-msg error" *ngIf="createNft.controls.date.touched && createNft.controls.date.errors?.required">please select date</p>
       </div>
       <div class="inline-flex flex-col">
@@ -149,6 +149,7 @@
             <option *ngFor="let group of (groups$ | async)" [ngValue]="group">
               {{group.name}}
             </option>
+            <option [ngValue]="null" class="font-medium text-primary-900" >    None </option>
           </select>
         </label>
         <p class="error-msg error" *ngIf="createNft.controls.group.touched && createNft.controls.group.errors?.required">please select group</p>
@@ -160,8 +161,12 @@
       <input class="font-light" type="text" maxlength="32" placeholder="Building 76-A Block B South West, 79000" formControlName="address">
       <p class="error-msg error" *ngIf="createNft.controls.address.touched && createNft.controls.address.errors?.required">please enter address</p>
     </div>
-    <button class="primary-btn" [disabled]="!createNft.valid" (click)="nextClick();">
-      Next
+    <button  mat-button class="relative inline-flex items-center justify-center mt-20 text-center primary-btn" [disabled]="!createNft.valid || isLoading" (click)="nextClick();">
+      <svg *ngIf="isLoading === true" role="status" class="inline w-5 h-5 mr-2 text-gray-200 animate-spin dark:text-gray-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="#D59529"/>
+        </svg>
+        <span >{{isLoading === true? 'Continue' : 'Continue'}}  </span>
     </button>
 
 

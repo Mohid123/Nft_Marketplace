@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { RouteService } from '@app/@core/services/route.service';
 import { ROUTER_UTILS } from '@app/@core/utils/router.utils';
@@ -65,6 +65,8 @@ export class NotFoundPage implements OnInit, OnDestroy {
   ]
 
   public clubs: Club[];
+  public noData = false;
+
 
   searchControl = new FormControl();
 
@@ -78,29 +80,37 @@ export class NotFoundPage implements OnInit, OnDestroy {
     private toastr: ToastrService,
     private cf: ChangeDetectorRef
   ) {
+    debugger
+
     this.searchControl.valueChanges.pipe(debounceTime(1000))
       .subscribe(newValue => {
         this.getClubs();
       });
 
       // debugger
-      const params: GetAllClubs = {
-        offset: 0,
-        sortDisplayName: this.sortBy,
-        limit: 100
-      }
+      // const params: GetAllClubs = {
+      //   offset: 0,
+      //   sortDisplayName: this.sortBy,
+      //   limit: 100
+      // }
 
-      if(this.searchControl.value) {
-        params.displayName = this.searchControl.value;
-      }
+      // if(this.searchControl.value) {
+      //   debugger
+      //   params.displayName = this.searchControl.value;
+      // }
 
-      this.ClubService.getAllClubs(params).subscribe(res=> {
-        if(!res.hasErrors() && res.data.totalCount > 0) {
-          this.clubs = res.data.data;
-          console.log(this.clubs)
+      // this.ClubService.getAllClubs(params).subscribe(res=> {
 
-        }
-      })
+      //   if(!res.hasErrors() && res.data.totalCount > 0) {
+      //     this.clubs = res.data.data;
+      //     this.noData = false;
+      //     console.log(this.clubs)
+      //     debugger
+      //   } else if(res.data.totalCount === 0 ) {
+      //     debugger
+      //     this.noData = true;
+      //   }
+      // })
 
 
   }
@@ -120,12 +130,6 @@ export class NotFoundPage implements OnInit, OnDestroy {
 
     this.getClubs();
 
-    this.firstFormGroup = this._formBuilder.group({
-      name: ['', Validators.required],
-    });
-    this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required],
-    });
 
   }
 
@@ -192,9 +196,11 @@ export class NotFoundPage implements OnInit, OnDestroy {
   }
 
   getClubs(){
+
     const params: GetAllClubs = {
       offset: 0,
       sortDisplayName: this.sortBy,
+      limit: 100
     }
 
     if(this.searchControl.value) {
@@ -202,8 +208,16 @@ export class NotFoundPage implements OnInit, OnDestroy {
     }
 
     this.ClubService.getAllClubs(params).subscribe(res=> {
-      if(!res.hasErrors() && res.data.totalCount > 0) {
-        this.clubs = res.data.data;
+      if(!res.hasErrors()) {
+        if(res.data.totalCount > 0){
+          debugger
+          this.clubs = res.data.data;
+          this.noData = false;
+        } else {
+          debugger
+          this.noData = true;
+        }
+
 
       }
     })

@@ -9,12 +9,18 @@
 </ngx-spinner> -->
 <app-layout *ngIf="(isAdminPanel$ | async) && (isLoggedIn$ | async) && (role$ | async) === roles.admin; else notAuthorized">
   <router-outlet (activate)="onActivate($event)"></router-outlet>
+  <ng-container *ngIf="showScroll$ | async">
+    <app-scroll-top (scrollToTop)="onScrollToTop()"></app-scroll-top>
+  </ng-container>
 </app-layout>
 
 <ng-template #notAuthorized>
   <!-- <app-nav *ngIf="showHedader$ | async"></app-nav> -->
 <div class="main-bg">
   <router-outlet (activate)="onActivate($event)"></router-outlet>
+  <ng-container *ngIf="showScroll$ | async">
+    <app-scroll-top (scrollToTop)="onScrollToTop()"></app-scroll-top>
+  </ng-container>
 </div>
 
   <app-footer *ngIf="showFooter$ | async"></app-footer>

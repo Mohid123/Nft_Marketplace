@@ -26,15 +26,15 @@ type nftApiData = NFT | NFTList | ResponseEventByNFT | MediaUpload | IsMembershi
 })
 export class NFTService extends ApiService<nftApiData> {
 
-  private _cardCreatedSuccess$ = new BehaviorSubject<string>(null);
-  public readonly cardCreatedSuccess$: Observable<string> =
+  private _cardCreatedSuccess$ = new BehaviorSubject<Array<nftApiData>>([])
+  public readonly cardCreatedSuccess$: Observable<Array<nftApiData>>=
     this._cardCreatedSuccess$.asObservable();
 
   private _nftList = new BehaviorSubject<NFTList>({
     totalCount: 0,
     data: [],
   });
-
+  private limit = environment.limit;
   public createNFTImg = new FormData();
   public createNFTthumbnailImg = new FormData();
   public createNFT:NFT = new NFT();
@@ -122,6 +122,28 @@ export class NFTService extends ApiService<nftApiData> {
     }));
   }
 
+
+  getAllNftsByUser(clubName: string, userId:string ,page: number, searchValue: string ,groupId?:string,type?:string) : Observable<ApiResponse<nftApiData>> {
+    page--;
+    const param: getNftsByUserId = {
+      clubName: clubName,
+      offset: page ? 12 * page : 0,
+      limit: 12,
+      name: searchValue,
+      type: type,
+    };
+
+    if(groupId) {
+      param.groupID = groupId;
+    }
+
+    return this.get('/nft/getUserNftsByClub/'+ userId, param).pipe(take(1),tap((result:ApiResponse<nftApiData>)=>{
+      if (result.hasErrors()) {
+        this.toastrService.error(result?.errors[0]?.error?.message)
+      }
+    }));;
+  }
+
   getRecentSoldNfts(clubName:string, page: number, limit: number, groupId?:string, type?:string) : Observable<ApiResponse<nftApiData>> {
     page--;
     const param:any = {
@@ -167,26 +189,8 @@ export class NFTService extends ApiService<nftApiData> {
     }));
   }
 
-  getAllNftsByUser(clubName: string, userId:string ,page: number, searchValue: string ,groupId?:string,type?:string) : Observable<ApiResponse<nftApiData>> {
-    page--;
-    const param: getNftsByUserId = {
-      clubName: clubName,
-      offset: page ? environment.limit * page : 0,
-      limit: environment.limit,
-      name: searchValue,
-      type: type,
-    };
 
-    if(groupId) {
-      param.groupID = groupId;
-    }
 
-    return this.get('/nft/getUserNftsByClub/'+ userId, param).pipe(take(1),tap((result:ApiResponse<nftApiData>)=>{
-      if (result.hasErrors()) {
-        this.toastrService.error(result?.errors[0]?.error?.message)
-      }
-    }));;
-  }
 
   getAllNftsAdminPanel (clubName: string, page: number, searchValue: string, data: {
     nftStatus : string,
@@ -306,10 +310,14 @@ export class NFTService extends ApiService<nftApiData> {
             setTimeout(() => {
               this.customDialogService.closeDialogs();
             }, 3000);
+            if(this._cardCreatedSuccess$.getValue().length < this.limit) {
+              const nft: Array<nftApiData> = this._cardCreatedSuccess$.getValue();
+              this._cardCreatedSuccess$.next([result?.data,...nft])
+            }
           }
-          this._cardCreatedSuccess$.next((<NFT>result?.data)?.id);
         }
       }
+
     }));
   }
 

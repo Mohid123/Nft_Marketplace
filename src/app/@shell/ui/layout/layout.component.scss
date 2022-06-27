@@ -57,7 +57,7 @@ mat-sidenav {
   }
 
   .menu-link.active {
-    background-color: #e2a10a ;
+   @apply bg-primary-nodechain;
 
     &.dark {
       background-color: #ffffff0f;

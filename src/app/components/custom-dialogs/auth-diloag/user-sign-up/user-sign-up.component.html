@@ -61,6 +61,7 @@
       <input type="email" formControlName="email">
       <p class="error-msg error" *ngIf="signUpForm.controls.email.touched && signUpForm.controls.email.errors?.required">please enter email address</p>
       <p class="error-msg error" *ngIf="signUpForm.controls.email.touched && signUpForm.controls.email.errors?.email">please enter valid email address</p>
+      <p class="error-msg error" *ngIf="signUpForm.controls.email.touched && signUpForm.controls.email.errors?.emailExists">This email is already in use. Please try another.</p>
 
       <label class="font-normal floating-label" for="password">Password</label>
 

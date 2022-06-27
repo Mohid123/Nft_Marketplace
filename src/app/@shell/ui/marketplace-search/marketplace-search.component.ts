@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
-import { BreakpointObserver } from '@angular/cdk/layout';
 import { AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, HostListener, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatSidenav } from '@angular/material/sidenav';
@@ -25,7 +24,7 @@ import { ROUTER_UTILS } from './../../../@core/utils/router.utils';
   // encapsulation: ViewEncapsulation.None
 })
 export class MarketplaceSearchComponent implements OnInit, AfterViewInit, OnDestroy {
-
+  searchHide = false;
   testNet = environment.testNet;
   destroy$ = new Subject();
 
@@ -56,12 +55,13 @@ export class MarketplaceSearchComponent implements OnInit, AfterViewInit, OnDest
     private customDialogService: CustomDialogService,
     private transactionService: TransactionService,
     private routeService: RouteService,
-    private observer: BreakpointObserver,
     private router: Router,
   ) {
     this.routeService.clubName$.pipe(distinctUntilChanged(),takeUntil(this.destroy$)).subscribe((clubName) => {
       this.clubName = clubName;
     });
+
+
    }
 
   ngOnInit(): void {
@@ -70,6 +70,13 @@ export class MarketplaceSearchComponent implements OnInit, AfterViewInit, OnDest
         this.search.emit(newValue);
       });
   }
+  showSearch() {
+    this.searchHide = true;
+  }
+  hideSearch() {
+    this.searchHide = false;
+  }
+
 
   ngAfterViewInit() {
     // this.observer
@@ -107,9 +114,12 @@ export class MarketplaceSearchComponent implements OnInit, AfterViewInit, OnDest
   createNFT():void {
     this.transactionService.getBalance().subscribe((res:ApiResponse<TransactionBalance>) => {
       if(!res.hasErrors()) {
-        if(res.data.balance > 0) {
+        if (res.data.balance > 0 && this.creatorService.Creator?.stripeSecretKey == "") {
+          this.customDialogService.showStripeKeyDialog();
+        }
+       else if (res.data.balance > 0) {
           this.customDialogService.showCreateNFTOptionsDialog();
-        } else {
+         } else {
           const dialogRef = this.customDialogService.showConfirmationDialog('subscription','subscribe', 'close');
           dialogRef.afterClosed().subscribe((confirmed: boolean) => {
             if (confirmed) {

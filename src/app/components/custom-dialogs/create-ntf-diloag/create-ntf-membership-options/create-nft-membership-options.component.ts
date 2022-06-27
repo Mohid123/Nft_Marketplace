@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Group } from './../../../../@core/models/group.model';
 import { NFT } from './../../../../@core/models/NFT.model';
 import { MediaService } from './../../../../@core/services/media.service';
+import { RouteService } from './../../../../@core/services/route.service';
 import { TransactionService } from './../../../../@core/services/transaction.service';
 
 @Component({
@@ -21,6 +22,8 @@ export class CreateNFTMembershipOptionsComponent  {
   disabled = false;
   public createNft: FormGroup;
 
+  public clubName: string;
+
   price: any;
   balance: number;
 
@@ -30,6 +33,7 @@ export class CreateNFTMembershipOptionsComponent  {
     private nftService: NFTService,
     private mediaService: MediaService,
     private toastr: ToastrService,
+    private routeService: RouteService,
     private formBuilder: FormBuilder,
   ) {
 
@@ -42,6 +46,8 @@ export class CreateNFTMembershipOptionsComponent  {
     this.nftForm = this.nftService.createNFT;
 
     this.balance = this.transactionService.checkBalance();
+
+
   }
 
 
@@ -64,6 +70,8 @@ export class CreateNFTMembershipOptionsComponent  {
       this.createNft.controls.mint.enable();
     }
   }
+
+
 
   close(): void {
     this.customDialogService.closeDialogs();

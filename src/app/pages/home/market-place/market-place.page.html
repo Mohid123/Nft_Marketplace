@@ -1,86 +1,12 @@
 <div class="z-0 main-container">
-  <!--top search bar with login button-->
+
   <app-marketplace-search (search)="search($event)"></app-marketplace-search>
-  <!--banner-->
-  <!-- <section class="pt-0 pb-0 m-4 md:pb-10 md:pt-14 lg:m-0 md:m-0">
-    <div class=" md:w-full flex-center md:max-w-full lg:w-full lg:max-w-full">
-      <div class="md:flex-shrink-0">
-        <img class="hidden sm:block" src="../../../../assets/banner/banner-marketplace.svg" alt="banner">
-        <img class="lg:hidden md:hidden" src="../../../../assets/banner/mobile-marketplace.svg" alt="banner">
-      </div>
-    </div>
-  </section> -->
-
-  <!-- This example requires Tailwind CSS v2.0+ -->
-  <!-- <div class="relative overflow-hidden bg-white lg:px-20 sm:px-0 pattern">
-    <div class="pt-16 pb-80 sm:pt-24 sm:pb-40 lg:pt-40 lg:pb-48">
-      <div class="relative px-4 mx-auto lg:max-w-full sm:px-6 lg:px-2 sm:static">
-        <div class="sm:max-w-lg">
-          <h1 class="font-extrabold tracking-wide text-gray-900 lg:text-7xl font sm:text-6xl">Digital Trust with Blockchain</h1>
-          <p class="mt-4 text-xl text-gray-500">Blockchain technology has given rise to a new platform for business relationships that combines ease of use, low cost and high security.</p>
-        </div>
-        <div>
-          <div class="mt-10">
-            <div aria-hidden="true"
-              class="pointer-events-none lg:absolute lg:inset-y-0 lg:max-w-full lg:mx-auto lg:w-full">
-              <div
-                class="absolute transform sm:left-1/2 sm:top-0 sm:translate-x-8 lg:left-1/2 lg:top-1/2 lg:-translate-y-1/2 lg:translate-x-8 xl:left-1/2 custom xl:top-1/2 xl:-translate-y-1/2 xl:translate-x-8 2xl:left-1/2 2xl:top-1/2 2xl:-translate-y-1/2 2xl:translate-x-8">
-                <div class="flex items-center space-x-6 lg:space-x-8">
-                  <div class="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
-                    <div class="h-64 overflow-hidden rounded-lg w-44 sm:opacity-0 lg:opacity-100">
-                      <img src="https://public.nftstatic.com/static/nft/res/a8a00b11a76747d0bdd18175200d1c70.png" alt=""
-                        class="object-cover object-center w-full h-full">
-                    </div>
-                    <div class="h-64 overflow-hidden rounded-lg w-44">
-                      <img
-                        src="https://nftcalendar.io/storage/uploads/events/2022/3/cQ7zCSWKfzmayBQ7eIc3aaxcGirkH6oZO9DD4pOA.gif"
-                        alt="" class="object-cover object-center w-full h-full">
-                    </div>
-                  </div>
-                  <div class="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
-                    <div class="h-64 overflow-hidden rounded-lg w-44">
-                      <img
-                        src="https://nftcalendar.io/storage/uploads/2022/03/23/wos-club-8_03232022234649623bb1692ade2.gif"
-                        alt="" class="object-cover object-center w-full h-full">
-                    </div>
-                    <div class="h-64 overflow-hidden rounded-lg w-44">
-                      <img src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-04.jpg" alt=""
-                        class="object-cover object-center w-full h-full">
-                    </div>
-                    <div class="h-64 overflow-hidden rounded-lg w-44">
-                      <img
-                        src="https://nftcalendar.io/storage/uploads/events/2022/3/9gKic8XvAibUlVhZj1jS9JS3NnMpFhgCp5GIK5E3.gif"
-                        alt="" class="object-cover object-center w-full h-full">
-                    </div>
-                  </div>
-                  <div class="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
-                    <div class="h-64 overflow-hidden rounded-lg w-44">
-                      <img
-                        src="https://lh3.googleusercontent.com/0iJq7j4lB_RO93mbfK3aj93xxmLx1yal9jXXKCZmYlRKgHUKy-VfpZK3fKJ5oOAvKAHwesgWYXMKTshgg8z-M49fH4HDDZKSLT23cw=w286"
-                        alt="" class="object-cover object-center w-full h-full">
-                    </div>
-                    <div class="h-64 overflow-hidden rounded-lg w-44">
-                      <img src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-07.jpg" alt=""
-                        class="object-cover object-center w-full h-full">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <a (click)="goDown1()"
-              class="z-50 inline-block px-8 py-3 font-medium text-center text-white bg-yellow-500 border border-transparent rounded-full cursor-pointer hover:bg-yellow-600">Browse Blockchain</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
-  <section class="h-4/5 pattern" style="height: 100vh; display: flex; align-items:center; z-index: inherit !important" >
-    <div class="p-5 mx-auto text-center md:max-w-xl lg:max-w-3xl">
+   <section class="h-4/5 pattern" style="height: 100vh; display: flex; align-items:center; z-index: inherit !important " >
+    <div class="p-5 mx-auto text-center md:max-w-xl lg:max-w-3xl animate__animated animate__fadeInDown">
       <h1 class="font-extrabold tracking-wide text-gray-900 lg:text-7xl font sm:text-6xl" style="line-height: initial;">Digital Trust with Blockchain</h1>
       <p class="mt-4 text-xl text-gray-500">Blockchain technology has given rise to a new platform for business relationships that combines ease of use, low cost and high security.</p>
-      <a (click)="goDown1()"
-              class="z-50 inline-block px-8 py-3 mt-16 font-medium text-center text-white bg-yellow-500 border border-transparent rounded-full cursor-pointer hover:bg-yellow-600">Browse Blockchain</a>
+      <button (click)="goDown1()"
+              class="browse-btn">Browse Blockchain</button>
     </div>
 
   </section>
@@ -136,12 +62,14 @@
       </div>
     </div>
 
-    <!--nft cards-->
-    <div class="relative cards-container" style="min-height: 360px;">
-      <ngx-spinner [fullScreen]="false" [showSpinner]="isLoading" [show]="isLoading" bdColor = "rgba(0,0,0,0.05)" size="medium"
-        type="ball-scale-multiple">
-        <p style="font-size: 20px; color: white">{{(creator$ | async)?.displayName}}...</p>
-      </ngx-spinner>
+    <!--nft cards--
+      [infiniteScrollDisabled]="isLoading"-->
+
+
+
+  <div  infiniteScroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="200" (scrolled)="onScroll()">
+    <div  class="relative cards-container" style="min-height: 360px;">
+
       <div *ngIf="!isLoading && (!nftList || nftList?.totalCount === 0)" class="absolute w-full text-center"
         style="top: 40%;">
         <h3>No Record Found</h3>
@@ -149,14 +77,49 @@
       </div>
 
       <ng-container *ngIf="nftList?.totalCount > 0">
-        <ng-container *ngFor="let nftCard of nftList.data" class="">
+        <ng-container *ngFor="let nftCard of (nfts$ | async); index as i" class="">
+
+          <ng-container *ngIf="isLoading === false">
+            <app-nft-card [nft]="nftCard" [walletPage]="false"></app-nft-card>
+          </ng-container>
+
+          <ng-container *ngIf="isLoading === true">
+            <app-skeleton-loader></app-skeleton-loader>
+          </ng-container>
+
+
+          <!-- <ng-container *ngIf="!isLoading || !finished; else skeleton">
+
           <app-nft-card [nft]="nftCard"></app-nft-card>
+          </ng-container>
+
+          <ng-template #skeleton>
+            <app-skeleton-loader></app-skeleton-loader>
+          </ng-template> -->
+
+
+
+          <!-- <app-skeleton-loader *ngIf="isLoading"></app-skeleton-loader> -->
         </ng-container>
       </ng-container>
+
+
+
+
+
     </div>
 
+  </div>
+
+
+
+
+
+  <!-- <app-skeleton-loader></app-skeleton-loader> -->
+
+
     <!--pagination-->
-    <div class="w-full px-12 mb-14 lg:px-4 md:px-0">
+    <!-- <div class="w-full px-12 mb-14 lg:px-4 md:px-0">
       <div class="flex justify-between pt-3 mt-10 ">
         <div *ngIf="nftList?.totalCount > 0; else noItems" class="inline-flex items-center text-sm text-gray-500">
           Show {{ page === 1 ? 1 : (page-1) * nftLimit }}-{{ page * nftLimit < nftList?.totalCount ? (page * nftLimit) :
@@ -197,5 +160,5 @@
             </div>
         </div>
       </div>
-    </div>
+    </div> -->
 </div>

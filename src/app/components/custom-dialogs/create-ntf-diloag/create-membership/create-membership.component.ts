@@ -36,6 +36,7 @@ export class CreateMembershipComponent implements OnInit, AfterViewInit {
   public file: any;
   public format: string;
   public url: string;
+  public currentDate = new Date().toISOString().split("T")[0];
 
   public clubName: string;
   public limit = 100;
@@ -43,6 +44,7 @@ export class CreateMembershipComponent implements OnInit, AfterViewInit {
   private _page: number;
   private _isLoading: boolean;
   private _lastBgImg: string;
+  public isLoading = false;
 
 
 
@@ -62,6 +64,9 @@ export class CreateMembershipComponent implements OnInit, AfterViewInit {
     private authService: AuthService,
     private toastr: ToastrService,
   ) {
+
+    // this.currentDate.getDate();
+
     this.createNft = this.formBuilder.group({
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
       description: new FormControl('', [Validators.required, Validators.minLength(15), Validators.maxLength(600)]),
@@ -71,7 +76,7 @@ export class CreateMembershipComponent implements OnInit, AfterViewInit {
       bgImg: new FormControl(''),
       date: ['', [Validators.required]],
       membershipId: new FormControl('', [Validators.required, Validators.min(1000000000000000),Validators.required, Validators.minLength(16), Validators.maxLength(16)]),
-      group: [null, [Validators.required]]
+      group: [null]
     });
 
     this.routeService.clubName$
@@ -148,6 +153,7 @@ export class CreateMembershipComponent implements OnInit, AfterViewInit {
   }
 
   nextClick(): void {
+    this.isLoading = true;
     const params = {
       appPackageId: this.authService.loggedInUser.appPackageId,
       membershipId: this.createNft.controls.membershipId.value,
@@ -174,7 +180,7 @@ export class CreateMembershipComponent implements OnInit, AfterViewInit {
             serverCaptureFileUrl:'',
             name : this.createNft.controls.name.value,
             description : this.createNft.controls.description.value,
-            groupId: this.createNft.controls.group.value.id,
+            groupId: this.createNft.controls.group.value?.id,
             userId: this.authService.loggedInUser.id,
             clubUserId: this.authService.loggedInUser.clubUserId,
             appPackageId: this.authService.loggedInUser.appPackageId,
@@ -187,9 +193,11 @@ export class CreateMembershipComponent implements OnInit, AfterViewInit {
         })
         .catch((error) => {
           console.error('oops, something went wrong!', error);
+          this.isLoading = false;
         });
       } else {
         this.toastr.error('Membership id already exists!','Create NFT Membership')
+        this.isLoading = false;
       }
     })
   }

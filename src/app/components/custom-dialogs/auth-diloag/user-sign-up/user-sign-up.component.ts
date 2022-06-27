@@ -1,17 +1,19 @@
 import { Component, Input } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CreatorService } from '@app/@core/services/creator.service';
 import { CustomDialogService } from '@app/@core/services/custom-dialog/custom-dialog.service';
 import { MediaService } from '@app/@core/services/media.service';
 import { RouteService } from '@app/@core/services/route.service';
 import { ToastrService } from 'ngx-toastr';
-import { take } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, take } from 'rxjs/operators';
 import { ApiResponse } from '../../../../@core/models/response.model';
 import { SignInResponse } from '../../../../@core/models/sign-in-response';
 import { AuthService } from '../../../../pages/auth/services/auth.service';
-import { ResponseAddMedia as ResponseAddMedia } from './../../../../@core/models/response-add-media.model';
+import { ResponseAddMedia } from './../../../../@core/models/response-add-media.model';
 import { SignUpCredentials } from './../../../../@core/models/sign-up-credentials';
+import { UserService } from './../../../../@core/services/user.service';
 
 @Component({
   selector: 'app-user-sign-up',
@@ -42,14 +44,17 @@ export class UserSignUpComponent {
     private routeService: RouteService,
     private mediaService: MediaService,
     private toastrService: ToastrService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private userService: UserService
   ) {
     this.routeService.clubName$.pipe(take(1)).subscribe((clubName) => {
       this.clubName = clubName;
     });
     this.signUpForm = this.formBuilder.group({
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      email: new FormControl('', [Validators.required, Validators.email]),
+      email: new FormControl('', [Validators.required, Validators.email],
+                [this.emailValidator()]
+      ),
       password: new FormControl('', [
         Validators.required,
         Validators.minLength(6),
@@ -59,12 +64,30 @@ export class UserSignUpComponent {
     this.passwordHide = true;
   }
 
+
+
   signUpClick(): void {
     if(this.profileImageSrc) {
       this.uploadProfilePic();
     } else {
       this.createUser();
     }
+  }
+
+  emailValidator() {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      if (!control.valueChanges || control.pristine) {
+        return null;
+      }
+      else {
+        return this.userService.emailExists(control.value).pipe(
+          distinctUntilChanged(),
+          debounceTime(600),
+          map((res: ApiResponse<any>) => (res.data.Response == true ? {emailExists: true} : null))
+        )
+      }
+
+    };
   }
 
   uploadProfilePic():void {

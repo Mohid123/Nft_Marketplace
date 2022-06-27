@@ -40,6 +40,7 @@ export class CreateGroupComponent {
   public groupFileImage: any;
   public groupProfileImage: any;
   public groupProfileImg: any;
+  public groupLoading = false;
 
   constructor(
     private authService: AuthService,
@@ -138,6 +139,7 @@ export class CreateGroupComponent {
 
   addGroup():void {
     this.spinner.show('main');
+    this.groupLoading = true;
     const node = document.getElementById('group-img');
     debugger
     htmlToImage
@@ -205,18 +207,22 @@ export class CreateGroupComponent {
           this.spinner.hide('main');
           if (res !== null && !res.hasErrors()) {
             this.cf.detectChanges();
+            this.groupLoading = false;
             this.toastr.success('New group successfully added.', 'Success!');
             this.getGroup()
             this.close();
           } else {
             this.imgFormData = new FormData();
             this.toastr.error(res.errors[0]?.error?.message, 'Error!');
+            this.groupLoading = false;
+
             // alert('error :' + res.errors[0]?.error?.message);
           }
         });
       })
       .catch((error) => {
         this.toastr.warning(error, 'Error!');
+        this.groupLoading = false;
       });
 
   }

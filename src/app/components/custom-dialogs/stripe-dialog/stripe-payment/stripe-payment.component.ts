@@ -57,6 +57,7 @@ export class StripePaymentComponent  {
   }
 
   purchaseNFT():void {
+    debugger
     const param: BuyNFT = {
       card : {
         number: this.stripeForm.controls.cardNo.value.toString(),
@@ -71,15 +72,19 @@ export class StripePaymentComponent  {
       clubUserId : this.authService.loggedInUser.clubUserId,
     };
     this.isLoading = true;
+    debugger
     this.stripeService.purchaseNFT(param).subscribe((res:ApiResponse<NFT>)=> {
+      debugger
       this.isLoading = false;
       if(!res.hasErrors()) {
+        debugger
         this.customDialogService.showLoadingDialog('Transferring In Process');
         this.stripeService.purchaseNFTSuccess(param.nftId)
          setTimeout(() => {
            this.customDialogService.closeDialogs();
          }, 3000);
        } else {
+        debugger
          this.toastr.warning(res.errors[0]?.error?.message, 'Error!');
        }
      });

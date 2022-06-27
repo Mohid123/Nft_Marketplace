@@ -40,18 +40,19 @@ export class UserSignInComponent {
     private routeService: RouteService,
     private toastr: ToastrService
   ) {
-
     this.connService.getUserCredentials().subscribe((res) => {
       this.userCredentials = res
+      if(this.userCredentials.email == undefined && this.userCredentials.pass == undefined) {
+        return
+      } else {
+        setTimeout(() => {
+          this.signInClick()
+          this.userCredentials.email = "";
+          this.userCredentials.pass = ""
 
-      // setTimeout(() => {
-      //   this.signInClick()
-      // }, 20000)
-
+        })
+      }
     })
-
-
-
 
     this.routeService.clubName$.pipe(take(1)).subscribe((clubName) => {
       this.clubName = clubName;

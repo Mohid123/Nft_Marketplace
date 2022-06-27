@@ -1,0 +1,4 @@
+
+<canvas [class.circle]="circle" *ngIf="isBrowser"   #canvas [width]="canvasWidth" [height]="canvasHeight"></canvas>
+<img  [class.circle]="circle" [attr.loading]="loading" [src]="imageSrc" (load)="imageLoad = true" (onloadeddata)="imageLoaded = true" [class.img-loaded]="imageLoad">
+

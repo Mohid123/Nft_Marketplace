@@ -9,12 +9,16 @@
    </div>
   </div>
   <div class="flex justify-end order-1 w-full h-20 px-3 py-2 lg:order-2 sm:py-3 sm:pr-6 sm:pl-6 xl:pr-9 xl:w-2/5 lg:w-2/5 ">
-    <button  class="profile-btn " (click)="visitMarketplace()">
-      <img class="object-cover w-5 h-5 mr-2 text-sm leading-4 rounded-lg" src="../../../../../assets/icons/market-place.svg" alt=""/>
-      <span class="pl-2 truncate dark:text-white"><p>Marketplace</p></span>
+    <button class="profile-btn" (click)="visitMarketplace()">
+      <img class="object-cover w-5 h-5 text-sm leading-4 rounded-lg lg:mr-2 md:mr-2" src="../../../../../assets/icons/market-place.svg" alt=""/>
+      <span class="flex justify-center hidden truncate dark:text-white md:block"><p>Marketplace</p></span>
     </button>
-    <button *ngIf="!market" class="nft-btn w-40 primary-btn h-10 p-1.5 rounded-3xl mr-2" (click)="createNFT()">
-      <span class="mr-1 text-xl">+</span>  Mint NFT
+
+    <button *ngIf="!market" class="hidden mr-2 nft-btn primary-btn md:block" style="height: 2.5rem !important;" (click)="createNFT()">
+      <span class="mr-1 text-xl">+</span> <span>Mint NFT</span>
+    </button>
+    <button *ngIf="!market" class="nft-btn w-40  h-10 p-1.5 rounded-3xl mr-2 lg:hidden md:hidden xl:hidden 2xl:hidden 3xl:hidden " (click)="createNFT()">
+      <span class="mr-1 text-xl">+ NFT</span>
     </button>
     <app-profile-button></app-profile-button>
   </div>

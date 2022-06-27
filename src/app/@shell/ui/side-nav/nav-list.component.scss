@@ -3,6 +3,14 @@
   @apply px-5 py-1 rounded-full text-gray-400 h-12 bg-gray-200 w-28 mr-3;
 }
 
+.is-loading {
+  padding-right: 36px;
+  background-image: url("/assets/spinner.svg");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  width: 20px;
+}
+
 
 
 ::-webkit-file-upload-button {
@@ -85,18 +93,25 @@
   color: #ffffff;
 }
 
-@media screen and (max-height: 450px) {
+@media screen and (max-width: 450px) {
   .overlay a {font-size: 20px}
   .overlay .closebtn {
   font-size: 40px;
   top: 15px;
   right: 35px;
   }
+
+  // .smallscreen {
+  //   height: 200px;
+  // }
+
 }
 
 .preview {
   @apply object-cover w-24 h-24 ;
 }
+
+
 
 
 .editBtn {
