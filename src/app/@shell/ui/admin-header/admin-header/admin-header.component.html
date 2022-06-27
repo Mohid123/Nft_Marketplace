@@ -14,10 +14,10 @@
       <span class="flex justify-center hidden truncate dark:text-white md:block"><p>Marketplace</p></span>
     </button>
 
-    <button *ngIf="!market" class="nft-btn w-40 primary-btn h-10 p-1.5 rounded-3xl mr-2 hidden md:block" (click)="createNFT()">
+    <button *ngIf="!market" class="hidden mr-2 nft-btn primary-btn md:block" style="height: 2.5rem !important;" (click)="createNFT()">
       <span class="mr-1 text-xl">+</span> <span>Mint NFT</span>
     </button>
-    <button *ngIf="!market" class="nft-btn w-40 primary-btn h-10 p-1.5 rounded-3xl mr-2 lg:hidden md:hidden xl:hidden 2xl:hidden 3xl:hidden " (click)="createNFT()">
+    <button *ngIf="!market" class="nft-btn w-40  h-10 p-1.5 rounded-3xl mr-2 lg:hidden md:hidden xl:hidden 2xl:hidden 3xl:hidden " (click)="createNFT()">
       <span class="mr-1 text-xl">+ NFT</span>
     </button>
     <app-profile-button></app-profile-button>

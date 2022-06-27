@@ -107,6 +107,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
   otp: any;
   verify: any;
   public passwordHide: boolean;
+  public confirmPasswordHide: boolean;
   phoneNumber: any;
   reCaptchaVerifier: any;
   payload: any
@@ -140,6 +141,7 @@ export class NavListComponent implements OnInit, AfterViewInit {
       // });
 
       this.passwordHide = true;
+      this.confirmPasswordHide = true;
     }
     config = {
       allowNumbersOnly: true,
@@ -290,6 +292,9 @@ export class NavListComponent implements OnInit, AfterViewInit {
 
   passwordShowHide(): void {
     this.passwordHide = !this.passwordHide;
+  }
+  confirmPassHide(): void {
+    this.confirmPasswordHide = !this.confirmPasswordHide;
   }
 
  async signup() {
